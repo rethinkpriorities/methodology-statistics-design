@@ -15,7 +15,7 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 - Visualizations: suggested/preferred formats and templates
      - Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads
 
-**Experiments, trials and survey design 
+**Experiments, trials and survey design**
 
 - Experiment and trial design: qualitative issues and guidelines
 - Power analyses for planning experiments and trials
@@ -31,7 +31,7 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 
 - Integrate some content/organization from [Reinstein's "Metrics bookdown"](https://daaronr.github.io/metrics_discussion/introduction.html)
 
-### Using and building this Bookdown (proposed guidlines)
+### Using and building this Bookdown (proposed guidelines)
 
 - Add stuff to the Bookdown in a concise way, once its readable/useable.
 - Non-core material: out-link to standalone pages/gists/blogdowns whatever and/or Bookdown ‘appendix’ sections and folding boxes for the non-core material
