@@ -8,6 +8,8 @@ Proceeding from Slack discussion [here](https://rethinkpriorities.slack.com/arch
 
 ### To contain...
 
+... *Only* things that we use, have used, want to use, or have been requested to address. To keep this manageable, don't add content just because "it's in a typical syllabus'. 
+
 See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examples below
 
 **Data and code** 
@@ -33,11 +35,12 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 
 ### Using and building this Bookdown (proposed guidelines)
 
-- Add stuff to the Bookdown in a concise way, once its readable/useable.
-- Non-core material: out-link to standalone pages/gists/blogdowns whatever and/or Bookdown ‘appendix’ sections and folding boxes for the non-core material
-- Link to these resources in Guru, but don't repeat this content there. 
+- Add stuff to the Bookdown in a concise way, once it's at least minimally readable/useable. (See distinct branches discussed below). 
+- For non-core material: out-link to standalone pages/gists/blogdowns whatever and/or Bookdown ‘appendix’ sections and folding boxes for the non-core material
+- Link to these resources in Guru, but don't repeat this content there.
+- If an ideal guide to 'exactly what we want' exist elsewhere, just 'curate link it', Pete W-style, don't re-write the wheel
 
-*Key links for using 'these tools'* 
+*Key links for tips on using 'these tools'* 
 
 - [Reinstein's tips (from the EA barriers project)](https://daaronr.github.io/ea_giving_barriers/bookdown-appendix.html)
 - [Reinstein's 'bookdown+ template' repo](https://github.com/daaronr/dr-rstuff/tree/master/bookdown_template)
