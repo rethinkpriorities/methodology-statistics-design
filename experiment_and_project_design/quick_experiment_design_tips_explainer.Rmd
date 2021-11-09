@@ -1,0 +1,50 @@
+(Preamble stuff here)
+
+# "How to set up and run an experiment or survey trial" -- FAQ, quick tips, and links
+
+
+DR: I think this has all been fleshed out before by others, like the UK Behavioral Insights Team. Let's link and curate other resources where these fit the bill. Otherwise, we can give our own perspectives, link resources we use, and give EA-relevant examples. Let's also paste in actual questions and situations we get ... names changed to protect the innocent.
+
+
+## QUANTITATIVE
+
+## "How much data/how many participants do I need?"
+
+See
+
+- 'power analysis'
+
+- 'Bayesian inference, updating, and minimized regret'
+
+## "How do I allocate the treatments?"
+
+### 'Randomization and 'blocking'
+
+> These are pledgers, active donors, and contacts that used to be pledgers or active donors that are still in our database.
+
+> I actually had a question about this because ... .  has posed either to make the two groups as even as possible for several donation-related variables OR to just create the two groups randomly. What is best practice here in your opinion?
+
+### What share for each treatment?
+
+## Dynamic adjustments
+
+### Should we adjust the treatments/allocations as we go?
+
+See 'adaptive, sequential and dynamic designs'
+
+### Should we stop early if we 'already know the answer'?
+
+See 'optional stopping rules'
+
+## PROCEDURE, MAJOR ISSUES
+
+### Capturing the outcome data
+
+### Pre-registration and pre-analysis plans
+
+### 'Field experiments' versus 'framed experiments'
+
+
+
+
+
