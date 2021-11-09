@@ -1,6 +1,11 @@
-(Preamble stuff here)
-
 # "How to set up and run an experiment or survey trial" -- FAQ, quick tips, and links
+
+
+(Add Rmd preambly stuff here.)
+
+Note: this is meant to be a 'working space' as in 'FAQs'. Thus, I'm putting it on the main branch.
+
+Not sure if we will use R here -- maybe just make this md and not rmd.
 
 
 DR: I think this has all been fleshed out before by others, like the UK Behavioral Insights Team. Let's link and curate other resources where these fit the bill. Otherwise, we can give our own perspectives, link resources we use, and give EA-relevant examples. Let's also paste in actual questions and situations we get ... names changed to protect the innocent.
@@ -36,7 +41,7 @@ See 'adaptive, sequential and dynamic designs'
 
 See 'optional stopping rules'
 
-## PROCEDURE, MAJOR ISSUES
+## PROCEDURE, DESIGN, MAJOR ISSUES
 
 ### Capturing the outcome data
 
@@ -45,6 +50,17 @@ See 'optional stopping rules'
 ### 'Field experiments' versus 'framed experiments'
 
 
+### Minimal treatment differences
+
+A general rule: If you want to investigate the impact of X, try to *only* vary X between treatments, and keep the rest the same.
+
+Exception: Sometimes, in varying X, it would be seem unnatural to 'keep the rest the same'. In this case, try to *minimize* the variation.
+
+DR, a comment on a recent proposed trial:
+
+> In general, the language/appeal differs in multiple ways. That's OK and sometimes necessary for it to seem natural. However, it may make it difficult to infer what aspect is causing the difference.  I think there are some 'easy, simple, and natural ways' you could make these more similar so as to make it easier to draw inference from differences in outcomes.
+
+### Cleanliness versus naturalness
 
 
 
