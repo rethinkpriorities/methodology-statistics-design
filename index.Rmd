@@ -1,0 +1,103 @@
+---
+title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
+author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein)"
+abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    lib_dir: "book_assets"
+    includes:
+      in_header: support/header.html
+    css: support/tufte_plus.css #formatting stuff, includes code to enable margin notes and folds
+    config:
+      toc:
+        after: |
+          <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+        collapse: section
+        scroll_highlight: yes
+      fontsettings:
+        theme: white
+        size: 2
+      sharing:
+        facebook: yes
+        twitter: yes
+        google: no
+        linkedin: yes
+        weibo: yes
+        instapaper: no
+        vk: no
+        all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
+    highlight: tango
+    download: [pdf, epub, mobi]
+bookdown::pdf_book:
+    keep_tex: yes
+    sharing:
+      github: yes
+      facebook: no
+always_allow_html: yes
+bibliography: "references.bib, packages.bib"
+biblio-style: apalike
+link-citations: yes
+github-repo: daaronr/metrics_discussion_work
+description: ""
+#url: 'https\://daaronr.github.io//'
+tags: [Econometrics, Statistics, Data Science, Experiments, Survey methods, Notes, Methodology]
+---
+
+
+#Basic options used across files and shortcut functions, e.g., 'pp()' for print
+#functions grabbed from web and created by us for analysis/output
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+```{r html, echo=FALSE}
+# globally set chunk options
+
+#This allows building even if errors come along the way
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+```
+
+```{r html, echo=FALSE}
+
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to") #what was this? do we need it?
+
+#inline code -- this should allows building even if errors come along the way
+
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- <html> -->
+
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script> -->
+<!-- <script> -->
+<!--   window.dataLayer = window.dataLayer || []; -->
+<!--   function gtag(){dataLayer.push(arguments);} -->
+<!--   gtag('js', new Date()); -->
+
+<!--   gtag('config', 'G-QLKFNFTGXX'); -->
+<!-- </script> -->
+<!-- </html> -->

@@ -1,0 +1,8 @@
+book_filename: "rp_methods_book"
+delete_merged_file: false
+  #it 'merges the Rmd files first. Keep that for now, because it could be helpful.
+output_dir: "docs" #that's where the htmls etc go; we could host it from there
+rmd_files:
+  html: ["index.Rmd", "presentation_method_discussion.Rmd", README.md]
+clean: ["support"]
+
