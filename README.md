@@ -19,7 +19,7 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 
 **Survey designs and methods**
 
-(How to ask good survey questions, avoiding pitfalls, sampling issues, constructing reliable indices...)
+(How to ask good survey questions, avoiding pitfalls, sampling issues and representativeness, constructing reliable indices...)
 
 **Experiments and trials*
 
