@@ -14,8 +14,14 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 
 **Data and code**
 
+- Coding practice and tools
+
+# Formatting: tables, figures, and numerical content
+
 - Visualizations: suggested/preferred formats and templates
      - Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads
+
+- Methods of 'describing data'
 
 **Survey designs and methods**
 

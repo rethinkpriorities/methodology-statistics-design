@@ -2,7 +2,7 @@
 bibliography: references.bib
 ---
 
-# Presentation, methodology, and code (EA survey posts and more)
+# EA Survey: Presentation, methodology
 
 *Note: this has been moved from the ea-data repo, and is being expanded here*
 
@@ -59,7 +59,7 @@ Use readable but concise labels. "Amount donated" is OK, "GWWC" is OK because we
 **Treemaps**
 
 ```{block2,  type='note'}
-NOTE: The below will not run without data, but we cannot make data 'public' here ... we need to make some choices ... or maybe use simulated data in this discussion 
+NOTE: The below will not run without data, but we cannot make data 'public' here ... we need to make some choices ... or maybe use simulated data in this discussion
 ```
 
 ```{r}

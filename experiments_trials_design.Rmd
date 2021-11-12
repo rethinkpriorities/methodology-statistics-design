@@ -1,0 +1,53 @@
+# EXPERIMENTS AND TRIAL DESIGN
+
+# Experiment and trial design: qualitative issues and guidelines, implementation issues
+
+## Basic design choices and terminology
+
+### Types of experiments: 'lab and field'
+
+## Formulating hypotheses and 'learning and adaptation goals'
+
+## Hypothesis testing versus 'reinforcement learning' goals
+
+## Design concerns and pitfalls
+
+### Confounded designs
+
+### Attrition and failed randomization
+
+### 'Demand effects'
+
+### Naturalness versus cleanliness
+
+## Practical and implementation issues
+
+### Survey and experiment platforms
+
+### Field experiments, A/B and lift tests, and marketing trials
+
+### Designing, coding, and implementing experiments: IT issues
+
+### Failure and success modes
+
+### Capturing outcome data
+
+### Pre-registration and pre-analysis plans
+
+# Experiment and trial design: quantitative issues
+
+## 'Treatment' assignment (blocking, randomization, etc)
+
+### Adaptive, sequential and dynamic designs
+
+## Planning, diagnosing and adjusting a design
+
+### Specifying models, hypotheses, and statistical testing and inference approaches
+
+(Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis
+
+## Power analyses (and other 'diagnosands')
+
+Note: this will very much overlap the discussion of power analysis for *surveys*
+
+
