@@ -1,5 +1,7 @@
-# README: methodology-statistics-design
-Surveys, experiments, data analysis: Methodology, protocols and templates
+# README: methodology-statistics-design, 'Surveys, experiments, data analysis: Methodology, protocols and templates'
+
+**NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
+
 
 Proceeding from Slack discussion [here](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1636393408082200)
 
@@ -12,58 +14,23 @@ Proceeding from Slack discussion [here](https://rethinkpriorities.slack.com/arch
 
 See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examples below
 
-**Data and code**
+### Proposed structure
 
-- Coding practice and tools
 
-# Formatting: tables, figures, and numerical content
+Moved to [introduction chapter here](#outline_sections) (file: introduction_overview.Rmd)
 
-- Visualizations: suggested/preferred formats and templates
-     - Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads
 
-- Methods of 'describing data'
+### Sources
 
-**Survey designs and methods**
+- Integrate some content/organization from [Reinstein's "Metrics bookdown"](https://daaronr.github.io/metrics_discussion/introduction.html)
 
-(How to ask good survey questions, avoiding pitfalls, sampling issues and representativeness, constructing reliable indices...)
+- RP Slack threads
 
-**Experiments and trials*
+- 'Resources' chapters in EA Market testing Gitbook
 
-- Experiment and trial design: qualitative issues and guidelines
-- Power analyses for planning experiments and trials
-- Adaptive designs
+- Textbooks/online resources:  ...
 
-**Basic statistical testing and inference**
-
-- Bayesian, frequentist, and other approaches
-- A 'statistical model'
-- Bayesian updating and inference
-- Hypothesis testing
-- Preferred approaches ('which tests') etc.
-
-**Modeling, prediction, inference, and machine learning**
-
-- "Regression models" and specification choices
-- Interpreting model results
-- Predictive modeling and machine learning
-- Practical Bayesian approaches and interpretations
-- Psychometrics, especially factor analysis
-
-**Causal inference**
-
-- Basic ideas and frameworks (simple, potential outcomes, DAGs)
-- Pitfalls and mistakes (layman's terms)
-- The experimental ideal
-- Non-experimental approaches to causal inference
-- Dealing with attrition
-
-**Monte-Carlo 'Fermi estimation' approaches**
-
-- the basic ideas
-- Causal and Guesstimate
-- code-based tools
-
-*Todo*: Integrate some content/organization from [Reinstein's "Metrics bookdown"](https://daaronr.github.io/metrics_discussion/introduction.html)
+- Articles: ...
 
 ### Using and building this Bookdown (proposed guidelines)
 
@@ -85,9 +52,8 @@ See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examp
 ### Repo branches (proposed)
 
 - ‘main’: Decent looking, go-to
-- ‘public’: same as ‘main’ but censoring anything we need to keep in-house (build a parsing script for that)
-    - This branch can be made public (needs to be mirrored to another repo for that?)
-- ‘work-in-progress’: Work in progress including discussion
+- ‘public’: same as ‘main’ but simplified for public sharing (if we want to)
+- ‘work-in-progress’: Work in progress including discussion that you don't want to add to 'main' yet
 
 ## Folder structure, other resources in this repo
 

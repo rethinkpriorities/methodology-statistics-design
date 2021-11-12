@@ -91,7 +91,7 @@ knitr::knit_hooks$set(
 
 
 <!-- <html> -->
-
+    
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script> -->
 <!-- <script> -->
 <!--   window.dataLayer = window.dataLayer || []; -->
@@ -104,11 +104,136 @@ knitr::knit_hooks$set(
 
 <!--chapter:end:index.Rmd-->
 
----
-bibliography: references.bib
----
+# Introduction and overview
 
-# Presentation, methodology, and code (EA survey posts and more)
+**NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
+
+## Rethink Priorities: Our approach to empirical and quantitative work
+
+## The purpose of this resource
+
+(integrate discussion from Slack thread and readme)
+
+## Sections and organization {#outline_sections}
+(Proposed/discussedbelow -- keep updated with actual structure)
+
+**[DATA, CODE](#data)** \*
+
+<div class="marginnote">
+
+\* Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below
+</div>
+
+**Coding practice and tools**
+
+(Languages, clean code, reproducability, etc.)
+
+**Data practices** 
+
+(Storing, labeling, etc)
+
+**[PRESENTING AND DESCRIBING DATA](#present)**
+
+- Methods of 'describing data'
+
+- Formatting: tables, figures, and numerical content**
+
+- Visualizations: suggested/preferred formats and templates
+     
+
+**SURVEY DESIGNS AND METHODS**
+
+- How to ask good survey questions
+
+- Avoiding pitfalls
+
+- Sampling issues and representativeness
+
+- Constructing reliable indices and scales
+
+- Implementation platforms and issues
+
+- Survey design tools (IT)
+
+**EXPERIMENTS AND TRIALS*
+
+- [Experiment and trial design: qualitative issues and guidelines](#expt-qual-imp)
+
+- [Experiment and trial design: quantitative issues](#expt-quant)
+
+- 'Treatment' assignment (blocking, randomization, etc)
+- Adaptive, sequential and dynamic designs
+- Planning, diagnosing and adjusting a design
+- Power analyses (and other 'diagnosands')
+
+
+**BASIC STATISTICS: MODELING, TESTING AND INFERENCE**
+
+- Bayesian, frequentist, and other approaches
+
+- A 'statistical model'\*
+
+<div class="marginnote">
+\* I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.
+</div>
+
+- Bayesian updating and inference
+- Hypothesis testing
+- Preferred approaches ('which tests') etc.
+
+**[MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING](#modeling)**
+
+- "Multi-variable 'regression' models" and specification choices
+- Interpreting model results
+- Predictive modeling and machine learning
+- Practical Bayesian approaches and interpretations
+- Psychometrics, especially factor analysis
+
+**[CAUSAL INFERENCE](#causal)**
+
+- Basic ideas and frameworks (simple, potential outcomes, DAGs)
+- Pitfalls and mistakes (layman's terms)
+- The experimental ideal
+- Non-experimental approaches to causal inference
+- Dealing with attrition
+
+**[MONTE-CARLO 'FERMI ESTIMATION' APPROACHES](#fermi);**
+
+- The basic ideas
+- Causal and Guesstimate
+- Code-based tools
+
+}
+
+<!--chapter:end:introduction_overview.Rmd-->
+
+# DATA, CODE, AND PRESENTATION {-#data}
+
+# Coding practice and tools {#coding-etc}
+
+# Data practices
+
+
+
+<!--chapter:end:data_and_code.Rmd-->
+
+#PRESENTING AND DESCRIBING DATA {-#present]
+
+# Methods of 'describing data'
+
+# Formatting: tables, figures, and numerical content
+
+# Visualizations
+
+## Suggested/preferred formats and templates
+
+<!-- Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads -->
+
+
+<!--chapter:end:present.Rmd-->
+
+
+# EA Survey: Presentation, methodology
 
 *Note: this has been moved from the ea-data repo, and is being expanded here*
 
@@ -165,7 +290,7 @@ Use readable but concise labels. "Amount donated" is OK, "GWWC" is OK because we
 **Treemaps**
 
 ```{block2,  type='note'}
-NOTE: The below will not run without data, but we cannot make data 'public' here ... we need to make some choices ... or maybe use simulated data in this discussion 
+NOTE: The below will not run without data, but we cannot make data 'public' here ... we need to make some choices ... or maybe use simulated data in this discussion
 ```
 
 ```{r}
@@ -259,64 +384,144 @@ E.g.,
 
 <!--chapter:end:presentation_method_discussion.Rmd-->
 
-# methodology-statistics-design
-Surveys, experiments, data analysis: Methodology, protocols and templates
+---
+bibliography: references.bib
+---
+
+# SURVEY DESIGNS AND METHODS {.unnumbered}
+
+@schwarcz2007
+
+<!--chapter:end:survey_design.Rmd-->
+
+# EXPERIMENTS AND TRIAL DESIGN {-}
+
+# Experiment and trial design: qualitative issues and guidelines, implementation issues {#expt-qual-imp}
+
+## Basic design choices and terminology
+
+### Types of experiments: 'lab and field'
+
+## Formulating hypotheses and 'learning and adaptation goals'
+
+## Hypothesis testing versus 'reinforcement learning' goals
+
+## Design concerns and pitfalls
+
+### Confounded designs
+
+### Attrition and failed randomization
+
+### 'Demand effects'
+
+### Naturalness versus cleanliness
+
+## Practical and implementation issues
+
+Survey and experiment platforms (see 'surveys') chapter
+
+### Field experiments, A/B and lift tests, and marketing trials
+
+### Designing, coding, and implementing experiments: IT issues
+
+### Failure and success modes
+
+### Capturing outcome data
+
+### Pre-registration and pre-analysis plans
+
+# Experiment and trial design: quantitative issues {#expt-quant}
+
+## 'Treatment' assignment (blocking, randomization, etc)
+
+### Adaptive, sequential and dynamic designs
+
+## Planning, diagnosing and adjusting a design
+
+### Specifying models, hypotheses, and statistical testing and inference approaches
+
+(Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis
+
+## Power analyses (and other 'diagnosands')
+
+Note: this will very much overlap the discussion of power analysis for *surveys*
+
+
+
+<!--chapter:end:experiments_trials_design.Rmd-->
+
+# BASIC STATISTICS: MODELING, TESTING AND INFERENCE {-}
+
+<!--chapter:end:basic_stats.Rmd-->
+
+# MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING {-#modeling}
+
+<!--chapter:end:modeling.Rmd-->
+
+# CAUSAL INFERENCE {-#causal} 
+
+<!--chapter:end:causal_inf.Rmd-->
+
+# MONTE-CARLO 'FERMI ESTIMATION' APPROACHES* {-#fermi} 
+
+<!--chapter:end:fermi.Rmd-->
+
+# README: methodology-statistics-design, 'Surveys, experiments, data analysis: Methodology, protocols and templates'
+
+**NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
+
 
 Proceeding from Slack discussion [here](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1636393408082200)
 
 
-## 'Methods and RP Guidelines Bookdown' 
+## 'Methods and RP Guidelines Bookdown'
 
 ### To contain...
 
-... *Only* things that we use, have used, want to use, or have been requested to address. To keep this manageable, don't add content just because "it's in a typical syllabus'. 
+... *Only* things that we use, have used, want to use, or have been requested to address. To keep this manageable, don't add content just because "it's in a typical syllabus'.
 
 See [airtable topic list](https://airtable.com/shrK7Pc0K8JPjmQkN) ... some examples below
 
-**Data and code** 
+### Proposed structure
 
-- Visualizations: suggested/preferred formats and templates
-     - Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads
 
-**Experiments, trials and survey design**
+Moved to [introduction chapter here](#outline_sections) (file: introduction_overview.Rmd)
 
-- Experiment and trial design: qualitative issues and guidelines
-- Power analyses for planning experiments and trials
-- Adaptive designs
 
-**Statistical analysis, inference, and prediction tools**
-
-- Psychometrics, especially factor analysis
-- Dealing with attrition
-- Practical Bayesian approaches
-- Monte-Carlo 'Fermi estimation' approaches
-- Predictive modeling and machine learning
+### Sources
 
 - Integrate some content/organization from [Reinstein's "Metrics bookdown"](https://daaronr.github.io/metrics_discussion/introduction.html)
 
+- RP Slack threads
+
+- 'Resources' chapters in EA Market testing Gitbook
+
+- Textbooks/online resources:  ...
+
+- Articles: ...
+
 ### Using and building this Bookdown (proposed guidelines)
 
-- Add stuff to the Bookdown in a concise way, once it's at least minimally readable/useable. (See distinct branches discussed below). 
+- Add stuff to the Bookdown in a concise way, once it's at least minimally readable/useable. (See distinct branches discussed below).
 - For non-core material: out-link to standalone pages/gists/blogdowns whatever and/or Bookdown ‘appendix’ sections and folding boxes for the non-core material
 - Link to these resources in Guru, but don't repeat this content there.
 - If an ideal guide to 'exactly what we want' exist elsewhere, just 'curate link it', Pete W-style, don't re-write the wheel
 
-*Key links for tips on using 'these tools'* 
+*Key links for tips on using 'these tools'*
 
 - [Reinstein's tips (from the EA barriers project)](https://daaronr.github.io/ea_giving_barriers/bookdown-appendix.html)
 - [Reinstein's 'bookdown+ template' repo](https://github.com/daaronr/dr-rstuff/tree/master/bookdown_template)
 - [Yihui's bookdown bookdown](https://bookdown.org/yihui/bookdown/)
 - [Happy git with R](https://happygitwithr.com/)
-- Pete's walkthroughs: 
+- Pete's walkthroughs:
     - [git 101](https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5)
     - [Advanced R, abridged](https://gist.github.com/peterhurford/72dbd44e0a34e29297485a8cf679cf73)
 
 ### Repo branches (proposed)
 
 - ‘main’: Decent looking, go-to
-- ‘public’: same as ‘main’ but censoring anything we need to keep in-house (build a parsing script for that)
-    - This branch can be made public (needs to be mirrored to another repo for that?)
-- ‘work-in-progress’: Work in progress including discussion
+- ‘public’: same as ‘main’ but simplified for public sharing (if we want to)
+- ‘work-in-progress’: Work in progress including discussion that you don't want to add to 'main' yet
 
 ## Folder structure, other resources in this repo
 

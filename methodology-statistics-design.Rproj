@@ -13,3 +13,5 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
+
+ZoteroLibraries: "Rethink Priorities","reinstein_research_and_impact_collabs"

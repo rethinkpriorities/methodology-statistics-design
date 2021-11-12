@@ -1,6 +1,3 @@
----
-bibliography: references.bib
----
 
 # EA Survey: Presentation, methodology
 

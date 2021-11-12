@@ -1,11 +1,7 @@
-#DATA, CODE, AND PRESENTATION
+# DATA, CODE, AND PRESENTATION {-#data}
 
-# Coding practice and tools
+# Coding practice and tools {#coding-etc}
 
-# Formatting: tables, figures, and numerical content
+# Data practices
 
-# Visualizations
 
-## Suggested/preferred formats and templates
-
-<!-- Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads -->

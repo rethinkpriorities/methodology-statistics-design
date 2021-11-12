@@ -1,9 +1,100 @@
 # Introduction and overview
 
+**NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
+
 ## Rethink Priorities: Our approach to empirical and quantitative work
 
 ## The purpose of this resource
 
 (integrate discussion from Slack thread and readme)
 
-## Sections and organization
+## Sections and organization {#outline_sections}
+(Proposed/discussedbelow -- keep updated with actual structure)
+
+**[DATA, CODE](#data)** \*
+
+<div class="marginnote">
+
+\* Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below
+</div>
+
+**Coding practice and tools**
+
+(Languages, clean code, reproducability, etc.)
+
+**Data practices** 
+
+(Storing, labeling, etc)
+
+**[PRESENTING AND DESCRIBING DATA](#present)**
+
+- Methods of 'describing data'
+
+- Formatting: tables, figures, and numerical content**
+
+- Visualizations: suggested/preferred formats and templates
+     
+
+**SURVEY DESIGNS AND METHODS**
+
+- How to ask good survey questions
+
+- Avoiding pitfalls
+
+- Sampling issues and representativeness
+
+- Constructing reliable indices and scales
+
+- Implementation platforms and issues
+
+- Survey design tools (IT)
+
+**EXPERIMENTS AND TRIALS*
+
+- [Experiment and trial design: qualitative issues and guidelines](#expt-qual-imp)
+
+- [Experiment and trial design: quantitative issues](#expt-quant)
+
+- 'Treatment' assignment (blocking, randomization, etc)
+- Adaptive, sequential and dynamic designs
+- Planning, diagnosing and adjusting a design
+- Power analyses (and other 'diagnosands')
+
+
+**BASIC STATISTICS: MODELING, TESTING AND INFERENCE**
+
+- Bayesian, frequentist, and other approaches
+
+- A 'statistical model'\*
+
+<div class="marginnote">
+\* I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.
+</div>
+
+- Bayesian updating and inference
+- Hypothesis testing
+- Preferred approaches ('which tests') etc.
+
+**[MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING](#modeling)**
+
+- "Multi-variable 'regression' models" and specification choices
+- Interpreting model results
+- Predictive modeling and machine learning
+- Practical Bayesian approaches and interpretations
+- Psychometrics, especially factor analysis
+
+**[CAUSAL INFERENCE](#causal)**
+
+- Basic ideas and frameworks (simple, potential outcomes, DAGs)
+- Pitfalls and mistakes (layman's terms)
+- The experimental ideal
+- Non-experimental approaches to causal inference
+- Dealing with attrition
+
+**[MONTE-CARLO 'FERMI ESTIMATION' APPROACHES](#fermi);**
+
+- The basic ideas
+- Causal and Guesstimate
+- Code-based tools
+
+}

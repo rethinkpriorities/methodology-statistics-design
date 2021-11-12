@@ -1,6 +1,6 @@
-# EXPERIMENTS AND TRIAL DESIGN
+# EXPERIMENTS AND TRIAL DESIGN {-}
 
-# Experiment and trial design: qualitative issues and guidelines, implementation issues
+# Experiment and trial design: qualitative issues and guidelines, implementation issues {#expt-qual-imp}
 
 ## Basic design choices and terminology
 
@@ -22,7 +22,7 @@
 
 ## Practical and implementation issues
 
-### Survey and experiment platforms
+Survey and experiment platforms (see 'surveys') chapter
 
 ### Field experiments, A/B and lift tests, and marketing trials
 
@@ -34,7 +34,7 @@
 
 ### Pre-registration and pre-analysis plans
 
-# Experiment and trial design: quantitative issues
+# Experiment and trial design: quantitative issues {#expt-quant}
 
 ## 'Treatment' assignment (blocking, randomization, etc)
 

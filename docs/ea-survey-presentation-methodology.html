@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
-  <meta name="description" content="Page not found | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <title>7 EA Survey: Presentation, methodology | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+  <meta name="description" content="7 EA Survey: Presentation, methodology | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta property="og:title" content="7 EA Survey: Presentation, methodology | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta name="twitter:title" content="7 EA Survey: Presentation, methodology | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="visualizations.html"/>
+<link rel="next" href="survey-designs-and-methods.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -893,19 +893,154 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="ea-survey-presentation-methodology" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> EA Survey: Presentation, methodology</h1>
+<p><em>Note: this has been moved from the ea-data repo, and is being expanded here</em></p>
+<div id="organisation-collophon-formatting" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Organisation, collophon, formatting</h2>
+<div id="how-this-is-built-how-it-works-how-it-relates-to-ea-forum-posts" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> How this is built, how it works, how it relates to EA Forum posts</h3>
+</div>
+<div id="markdown-formatting-conversion-etc." class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Markdown formatting, conversion, etc.</h3>
+<p>We need to convert this Rmd/html ‘bookdown’ output into a format acceptable for the EA Forum (however, we can also separately link and host this bookdown, or parts of it, as we do <a href="https://rethinkpriorities.github.io/ea_data_public/outline-disc.html">HERE</a>.</p>
+<p>Typically, RP has made these posts first in Google Docs for feedback and then there is some sort of sprocedure to get it into EA forum markdown syntax from there. For some previous posts, we pasted from the Rstudio visual mode pastes into Google docs for narrative, and figures/tables could be manually pasted. But we want to avoid having to do that!</p>
+<p>We hope this can be done through simple script Pandoc plus a simple adjustment script (in Python or Vim etc).</p>
+<p><br />
+</p>
+<p><em>Some formatting adjustments will be necessary, however:</em></p>
+<ul>
+<li>EA Forum doesn’t have margin notes or folding boxes. Margin notes should be made into footnotes. (Or notes in parentheses if they need to be prominent). Folded boxes should probably be retained in the (linked) hosted bookdown only.</li>
+</ul>
+<p>NOTE: remaining content moved to <a href="https://github.com/rethinkpriorities/methodology-statistics-design">methodology</a> repo</p>
+</div>
+</div>
+<div id="coding-and-organisational-issues" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Coding and organisational issues</h2>
+</div>
+<div id="content-and-methods" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Content and methods</h2>
+<div id="visualisations" class="section level3" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Visualisations</h3>
+<p>See also Gdoc: <a href="https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#">visualisation discussions</a></p>
+<div id="ideal-coding-practice-for-visualisations" class="section level4" number="7.3.1.1">
+<h4><span class="header-section-number">7.3.1.1</span> Ideal coding practice for visualisations</h4>
+<p>Use <code>ggplot</code> always unless you’ve a strong reason to do otherwise. Always save the plot as an object in the environment as well as printing it where it belongs.</p>
+<p>Ideally, we will come up with a set of functions and default options for the key sets of plots we use and like.</p>
+<p>Define and reuse lists of labels (or use inherent labeling options where these exist, to exploit existing variable and value labels.)</p>
+<p>Otherwise define sets of common options for plots in one place, and repeated ggplot elements together as a list:</p>
+<ul>
+<li><p>to avoid repetition and clutter</p></li>
+<li><p>to allow easy ‘global’ adjustment</p></li>
+</ul>
+</div>
+<div id="labeling" class="section level4" number="7.3.1.2">
+<h4><span class="header-section-number">7.3.1.2</span> Labeling</h4>
+<p>Use readable but concise labels. “Amount donated” is OK, “GWWC” is OK because we assume people know what GWWC is from context.</p>
+<p><code>amt_don</code> is not OK.</p>
+</div>
+<div id="relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country" class="section level4" number="7.3.1.3">
+<h4><span class="header-section-number">7.3.1.3</span> Relative shares of a total; e.g. ‘shares of EA population by referrer,’ or ‘donation totals by country’</h4>
+<p><strong>Treemaps</strong></p>
+
+<div class="note">
+NOTE: The below will not run without data, but we cannot make data ‘public’ here … we need to make some choices … or maybe use simulated data in this discussion
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ea-survey-presentation-methodology.html#cb1-1" aria-hidden="true" tabindex="-1"></a>geom_treemap_opts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">geom_treemap</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>),</span>
+<span id="cb1-2"><a href="ea-survey-presentation-methodology.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_treemap_text</span>(<span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">place =</span> <span class="st">&quot;centre&quot;</span>,</span>
+<span id="cb1-3"><a href="ea-survey-presentation-methodology.html#cb1-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grow =</span> <span class="cn">TRUE</span>, <span class="at">min.size =</span> <span class="dv">1</span> ),</span>
+<span id="cb1-4"><a href="ea-survey-presentation-methodology.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb1-5"><a href="ea-survey-presentation-methodology.html#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb1-6"><a href="ea-survey-presentation-methodology.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Error in geom_treemap(alpha = 0.7): could not find function &quot;geom_treemap&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ea-survey-presentation-methodology.html#cb3-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb3-2"><a href="ea-survey-presentation-methodology.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  don_share_by_size <span class="ot">&lt;-</span> eas_20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(donation_2019_c, donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="ea-survey-presentation-methodology.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="ea-survey-presentation-methodology.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_don =</span> <span class="fu">sum</span>(donation_2019_c, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="ea-survey-presentation-methodology.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">don_share =</span> <span class="fu">round</span>(total_don<span class="sc">/</span><span class="fu">sum</span>(total_don)<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="ea-survey-presentation-methodology.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(donation_2019_c_split)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="ea-survey-presentation-methodology.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">area =</span> total_don, <span class="at">fill=</span> donation_2019_c_split,</span>
+<span id="cb3-8"><a href="ea-survey-presentation-methodology.html#cb3-8" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Include percentage of total donation</span></span>
+<span id="cb3-9"><a href="ea-survey-presentation-methodology.html#cb3-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(donation_2019_c_split, <span class="fu">paste0</span>(don_share, <span class="st">&quot;%&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="ea-survey-presentation-methodology.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
+<span id="cb3-11"><a href="ea-survey-presentation-methodology.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Share of total 2019 reported donation amount, by donation size&quot;</span>)</span>
+<span id="cb3-12"><a href="ea-survey-presentation-methodology.html#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Error in eas_20 %&gt;% select(donation_2019_c, donation_2019_c_split) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<p>A good alternative to the treemap … conveying both absolute amounts and rates in the same graph?</p>
+</div>
+<div id="likert-scale-individual-items-and-relative-responses-to-these" class="section level4" number="7.3.1.4">
+<h4><span class="header-section-number">7.3.1.4</span> Likert scale (individual items) and relative responses to these</h4>
+</div>
+<div id="dealing-with-scales-and-large-differences-in-magnitudes" class="section level4" number="7.3.1.5">
+<h4><span class="header-section-number">7.3.1.5</span> Dealing with scales and large differences in magnitudes</h4>
+<p>If axes are cut and don’t go to zero, mention this prominently in the plot.</p>
+<p>But what if we have a few values that are way above others, and ‘mess up the scale?’</p>
+<p>Sometimes a logarithmic scale is helpful, but that can also lead to confusion. Otherwise…</p>
+<ul>
+<li><p>“any CI’s or other things that go outside of the limits should just be extended to the edge and not dropped)”</p>
+<ul>
+<li><p>doable with scale_y_continuous( oob = scales::squish) +</p>
+<p>scale_x_continuous( oob = scales::squish)<code>or  `coord_cartesian`</code></p></li>
+</ul></li>
+<li><p>or otherwise allow a clear ‘break’ in the axis?</p></li>
+<li><p>Not possible to break the axis ggplot <a href="https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis" class="uri">https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis</a></p></li>
+<li><p><span class="citation">(<a href="#ref-Oska" role="doc-biblioref"><strong>Oska?</strong></a>)</span> – what about ‘extending to the edge?’</p></li>
+</ul>
+<p>Remove outliers as a last resort; prominently mention this where doing so.</p>
+</div>
+<div id="means-of-continuous-variables-differences-across-groups" class="section level4" number="7.3.1.6">
+<h4><span class="header-section-number">7.3.1.6</span> Means of continuous variables: differences across groups</h4>
+</div>
+<div id="visualizing-regression-model-coefficients-and-confidence-intervals" class="section level4" number="7.3.1.7">
+<h4><span class="header-section-number">7.3.1.7</span> Visualizing (regression) model coefficients and confidence intervals</h4>
+<p>Testing a reference <span class="citation"><a href="#ref-wickham2010" role="doc-biblioref">Wickham</a> (<a href="#ref-wickham2010" role="doc-biblioref">2010</a>)</span></p>
+</div>
+</div>
+<div id="statistical-tests-make-a-new-sections" class="section level3" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Statistical tests (make a new section)s</h3>
+</div>
+<div id="models" class="section level3" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> ‘Models’</h3>
+<p>Contrast:</p>
+<ul>
+<li><p>Descriptive (and perhaps causally suggestive), aka ‘dimension reduction’</p></li>
+<li><p>Predictive</p></li>
+<li><p>Causal</p></li>
+</ul>
+<p>See discussion in Engagement section <a href="#modeling_disc_eng">here</a></p>
+</div>
+<div id="model-coding-and-implementation-practice" class="section level3" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> Model coding and implementation practice</h3>
+<p><strong>Define lists of variables (features) up front</strong> (see, e.g., in engagement post <a href="engage_features">‘Choosing features…’</a>)</p>
+<ul>
+<li>outcomes,</li>
+<li>‘predictors’ or associated variables of interest, (define broad and narrow sets, consider endogeneity of various forms, e.g., ‘colliders,’ consider ‘clean model without leacks’ for specific prediction exercises)</li>
+<li>‘control variables’ (not of direct interest but included because they are believed to improve interpretation of variables of interest; note this can be problematic), ‘robust controls’ for more flexible control</li>
+</ul>
+<p>E.g.,</p>
+<pre><code>cat_out &lt;- &quot;engagement&quot; #categorical outcome
+key_demog &lt;- c(&quot;age_approx_d2sd&quot;, &quot;gender_cat&quot;, &quot;student_cat&quot;, &quot;race_cat&quot;, geog)
+controls &lt;- c(&quot;years_involved_d2sd&quot;)</code></pre>
+<p><strong>Missing values:</strong> Impute or code as separate ‘NA’ category</p>
+<p><strong>Normalize continuous variables</strong> (de-mean, divide continuous variables by 2sd if comparing coefficients to binary variables)</p>
+<p><strong>Categorical/discrete variables</strong>:</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-wickham2010" class="csl-entry">
+Wickham, Hadley. 2010. <span>“A Layered Grammar of Graphics.”</span> <em>Journal of Computational and Graphical Statistics</em> 19 (1): 328. <a href="https://doi.org/10.1198/jcgs.2009.07098">https://doi.org/10.1198/jcgs.2009.07098</a>.
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="survey-designs-and-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
