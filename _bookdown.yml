@@ -1,9 +1,9 @@
 book_filename: "rp_methods_book"
-delete_merged_file: false
-  #it 'merges the Rmd files first. Keep that for now, because it could be helpful.
+delete_merged_file:   
+  #it 'merges the Rmd files first. Normally I keep it as it can be helpful, but I'm having it delete for now to avoid confusion for people new to this
 output_dir: "docs" #that's where the htmls etc go; we could host it from there
 rmd_files:
-  html: ["index.Rmd", "introduction_overview.Rmd", "data_and_code.Rmd", "present.Rmd", "presentation_method_discussion.Rmd", "survey_design.Rmd", "experiments_trials_design.Rmd",  "basic_stats.Rmd", "modeling.Rmd", "causal_inf.Rmd", "fermi.Rmd", "README.md"]
+  html: ["index.Rmd", "introduction_overview.Rmd", "data_and_code.Rmd", "present.Rmd", "presentation_method_discussion.Rmd", "survey_design.Rmd", "experiments_trials_design.Rmd",  "basic_stats.Rmd", "modeling.Rmd", "causal_inf.Rmd", "fermi.Rmd", "power_analysis_framework_2.Rmd", "README.md"]
 clean: ["support"]
 
 

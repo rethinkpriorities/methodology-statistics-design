@@ -25,6 +25,8 @@ try_download <- function(url, path) {
   )
 }
 
+dir.create(here("support"))
+
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/bookdown_template/support/header.html",
   here::here("support", "header.html")
@@ -43,19 +45,4 @@ try_download(
 )
 
 
-# Download R functions and baseoptions
 
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
-  here::here("code", "project_setup.R")
-)
-
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R",
-  here::here("code", "baseoptions.R")
-)
-
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/functions.R",
-  here::here("code", "functions.R")
-)

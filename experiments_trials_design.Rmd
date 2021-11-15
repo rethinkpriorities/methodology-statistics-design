@@ -1,4 +1,28 @@
-# EXPERIMENTS AND TRIAL DESIGN {-}
+# SURVEY DESIGNS AND METHODS {-#surveys}
+
+This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.
+
+More technical and involved discussion of overlapping content will often be deferred to the [experiments and trials](#expt_trial) section, with placeholders and links.
+
+@schwarcz2007
+
+
+## How to ask good survey questions
+
+## Avoiding pitfalls
+
+## Constructing reliable indices and scales
+
+## Sampling issues and representativeness
+
+## Implementation platforms and issues
+
+## Survey design tools (IT)
+
+
+# EXPERIMENTS AND TRIAL DESIGN {-#expt_trial}
+
+Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
 
 # Experiment and trial design: qualitative issues and guidelines, implementation issues {#expt-qual-imp}
 
@@ -48,6 +72,22 @@ Survey and experiment platforms (see 'surveys') chapter
 
 ## Power analyses (and other 'diagnosands')
 
-Note: this will very much overlap the discussion of power analysis for *surveys*
+Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here
+
+### Key resources and explainers
+
+('Curate link' tools we found useful)
 
 
+### See ['Rethink_Priorities_Power_analysis_framework_2' in  appendix](#power-workflow)
+
+This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
+```{block2,  type='note'}
+
+DR: I'm putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.
+
+An alternative to an 'appendix' is a standalone page which we can link here. This can sometimes be helpful; it allows a different format, may save time on knitting, may allow that other page to be better integrated elsewhere.
+
+But for now, I'll make it a bookdown appendix, to help get us all used to the current format and avoid disagregation.
+
+```

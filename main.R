@@ -21,7 +21,13 @@ here <- here::here()
 rename_all <- dplyr::rename_all
 rename <- dplyr::rename
 
+
+
+
 #... Import setup for this project using template from dr-rstuff  ####
+
+dir.create(here("code"))
+
 try_download(
   "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
   here::here("code", "project_setup.R")
@@ -38,7 +44,7 @@ if (!require("devtools")) install.packages("devtools")
 devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
 
 ## You MUST run this for anything else to work ####
-source(here::here("code", "project_setup.R")) 
+source(here::here("code", "project_setup.R"))
 
 ##NOTE: these sourced files seem to need some packages to be installed.
 #Todo -- 'embed' that somehow? (I just used Renv to add these for now)
@@ -58,8 +64,9 @@ dir.create(here("remote"))
 
 #THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))
 
+
 p_load("bettertrace") #better tracking after bugs
-  
+
 #### BUILD the bookdown ####
 #The line below should 'build the bookdown' in the order specified in `_bookdown.yml`
 
