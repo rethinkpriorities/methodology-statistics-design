@@ -1,4 +1,4 @@
-# APPENDIX/SUPPLEMENTS {-}
+# APPENDIX/SUPPLEMENTS
 
 # Power analysis workflow (Jamie Elsey) {#power-workflow}
 
@@ -11,7 +11,7 @@ The purpose of this document is to propose the fundamentals for a workflow for p
 Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach, and I will begin with a standard frequentist analysis.\*
 
 ::: {.marginnote}
-\* This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup),  it may make  sense to run frequentist approaches first,even if you ultimately intend to do a Bayesian analysis. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.
+\* This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.
 :::
 
 The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals. (DR: we might want to incorporate declaredesign for this.) Helpful future additions to the toolkit would include
