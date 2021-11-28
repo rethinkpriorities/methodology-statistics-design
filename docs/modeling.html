@@ -24,7 +24,7 @@
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein)" />
 
 
-<meta name="date" content="2021-11-15" />
+<meta name="date" content="2021-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -820,7 +820,6 @@ div.csl-indent {
 <li class="chapter" data-level="7.3.4" data-path="ea-survey-presentation-methodology.html"><a href="ea-survey-presentation-methodology.html#model-coding-and-implementation-practice"><i class="fa fa-check"></i><b>7.3.4</b> Model coding and implementation practice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="survey-designs-and-methods.html"><a href="survey-designs-and-methods.html"><i class="fa fa-check"></i>SURVEY DESIGNS AND METHODS</a></li>
 <li class="chapter" data-level="" data-path="surveys.html"><a href="surveys.html"><i class="fa fa-check"></i>SURVEY DESIGNS AND METHODS</a>
 <ul>
 <li class="chapter" data-level="7.4" data-path="surveys.html"><a href="surveys.html#how-to-ask-good-survey-questions"><i class="fa fa-check"></i><b>7.4</b> How to ask good survey questions</a></li>
@@ -871,7 +870,10 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="basic-statistics-modeling-testing-and-inference.html"><a href="basic-statistics-modeling-testing-and-inference.html"><i class="fa fa-check"></i>BASIC STATISTICS: MODELING, TESTING AND INFERENCE</a></li>
-<li class="chapter" data-level="" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i>MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</a></li>
+<li class="chapter" data-level="" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i>MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</a>
+<ul>
+<li class="chapter" data-level="9.4" data-path="modeling.html"><a href="modeling.html#classification_model_disc"><i class="fa fa-check"></i><b>9.4</b> Loose discussion: classification models and precision/recall stuff</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i>CAUSAL INFERENCE</a></li>
 <li class="chapter" data-level="" data-path="fermi.html"><a href="fermi.html"><i class="fa fa-check"></i>MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES*</a></li>
 <li class="chapter" data-level="10" data-path="appendixsupplements.html"><a href="appendixsupplements.html"><i class="fa fa-check"></i><b>10</b> APPENDIX/SUPPLEMENTS</a></li>
@@ -927,6 +929,48 @@ div.csl-indent {
 <div id="modeling" class="section level1 unnumbered">
 <h1>MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</h1>
 
+<div id="classification_model_disc" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Loose discussion: classification models and precision/recall stuff</h2>
+<p>THREAD trying to explain “Classification problems”, “Precision and Recall”, and ROC and ROC-AUC (machine learning validation) by analogy …</p>
+<p>This loosely connects to the classification models used in the <a href="">‘EA Survey Donations post/bookdown’</a>, particularly the <a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#model-perf">consideration of model performance</a></p>
+<p><strong>Spy-detection</strong> We have been asked to come up with a method for classifying spies based on observable characteristics of a suspect population (‘population’ in the statistical sense). For example, some of them have mustaches, some wear pointed hats, some have sinister cackles and lapdogs to a greater or less or degree, and some appear to be more wealthy than others… Let us suppose that: We have previous similar suspect populations that we know to be the same in nature (‘drawn from an identical pool’) to the future suspect populations that we will need to make these predictions for We ultimately learned with certainty which of the previous suspect populations turned out to be spies (To keep intuition and calculation simple) suppose that in these populations know that half of all of these people are spies, and half are completely innocent. (This is called ‘balanced classes’).</p>
+<p>We are asked to come up with a method to use the observable characteristics to classify each individual as more or less likely to be a spy. If we are given a group of individuals’ characteristics our method needs to assign a number to each one that might be interpreted as the “likelihood this person is a spy”. For example our ‘model’ we might say “anyone with a mustache is 75% likely to be a spy, and anyone without a mustache is 25% likely to be a spy.” (If half of the population wears mustaches, this would also give us an average prediction in line with the known overall 50% spy rate.) Or, let’s make the ‘model’ a bit more complicated (but to allow ‘ordering’ predictions) … we might say … we give the probability of being a spy as</p>
+<p><span class="math inline">\(0.75 - 0.25*wtdev\)</span></p>
+<p>if they wear a moustache and</p>
+<p><span class="math inline">\(0.25 - 0.25*wtdev\)</span> otherwise.</p>
+<p>where <span class="math inline">\(wtdev\)</span> represents some “normalized” measure of the person’s weight relative to the average weight in the sample, We predict skinnier people are slightly more likely to be spies.</p>
+<p>Note that, since everyone’s weight is slightly different, this will yield a slightly different projected probability for any observed individual. Thus, our model could also be seen as a “ranking” where, for any group of individuals we are given we can order them from least likely to be a spy (the fattest clean-shaven people) to most likely to be a spy (the skinniest moustache-wearer).</p>
+<p>How should we evaluate a model, in absolute terms, or against other models? This depends on how the models predictions will be used and on the cost of getting it right or wrong in either direction.</p>
+<p>Our model might be applied by a very soft judge (think Mr. Van Driessen from B&amp;B) who thinks it is much worse to convict an innocent person then to set free many spies. On the other hand it might be applied by a very tight-ass judge (think the gym coach) who puts almost no cost on convicting the innocent … he just wants to cath spies. How can we conceive of the ‘success’ of our model? (edited)</p>
+<p><img src="https://www.researchgate.net/profile/Bahman-Zohuri/publication/350592160/figure/fig2/AS:1008253420969985@1617397756511/Predictions-Ranked-in-Ascending-order-of-Logistic-Regression-Score.png" /></p>
+<p>We could compare across different models to see if one does ‘universally better or worse’ in a sense to be defined. Suppose each model both gives a probability of being a spy for each person. As noted, this implies that each model “rank-orders” a population of individuals in terms of most to least likely being a spy.</p>
+<p><img src="https://static.wikia.nocookie.net/beavisandbutthead/images/7/72/Beavis_he_said_anus.jpg/revision/latest/top-crop/width/360/height/450?cb=20110922015543" style="width:20.0%" /></p>
+<p><img src="https://static.wikia.nocookie.net/villains/images/8/8d/Buzzcut.png/revision/latest?cb=20130320041141" style="width:20.0%" /></p>
+<p>In a given (test) set of data, we might see something like the number line dots thing above. The person our model claims is most likely to be a spy is on the right and the one predicted least likely is on the left. In application the liberal judge (“vDriessen”) might convict only the “top 1/3” of the distribution, while the tight-ass (“Coach”) might put 2/3 of these ‘dots’ in prison. Each have made different types of mistakes in practice. vDriessen let a bunch of spies free (and falsely convicted only a few), while the Coach put a lot of innocent people in prison (and, in practice, but not in the dots example above, also let a few spies free). (edited)</p>
+<p>We might consider that our model has some probability of being applied by various types of judges. It might be that our model performs “better” than an alternative model when applied by the liberal vDriessen but “worse” when applied by the strict Coach. On the other hand, we can imagine that some models might perform better for nearly all types of judge! How could we measure this? The ROC curve can be helpful:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Roc_curve.svg/440px-Roc_curve.svg.png" /></p>
+<p>Above we see models that are strictly ordered from best to worse … the lines do not cross (this need not always be the case). The blue line to picks or model that is strictly better than the orange line, which is itself strictly better than a “random classifier”. A ‘random classifier’ give us no information. If we use this we can only choose some probability to convict everyone. Using this, if we increase the rate we can convict people by 2 per 100, then on average we are convicting one more spy and one more innocent person, in our example. So, by what measure is the blue classifier ‘better’ than the orange one (and both are better than the random classifier)? (edited)</p>
+<p>Remember, each classifier gives a ‘ranked ordering’ of the population. Suppose that we consider going down the list from the most guilty looking to the most innocent looking, and increasing the number of people that we choose to convict.</p>
+<p>As we go down the ranking in general and decide to convict a larger share of the population we are adding some possibility of convicting and innocent person (the ‘cost’) to gain the ‘benefit’ of convicting some true spies. As depicted in the ROC curves above, as we do this the blue curve (classifier) is achieving a better tradeoff than the orange, green or red curve … (this is because it gives us a ‘better ordered list of who us more likely to be guilty’)…</p>
+<p>As the judge using the blue curve decides to go further down the ‘blue curve list’ (paying the cost of convicting more innocent people) he also catches more spies than if he had used the ‘orange, green, or red curve list’ . The benefit to cost ratio is higher at all ‘rates of conviction’ here. (edited)</p>
+<p>This is fine in a relative sense … we know blue is better here (better than all the others except for the purple ‘perfect classifier’ … which is equivalent to a tool that always ‘perfectly orders’ guilt so there is no tradeoff)</p>
+<p>But:</p>
+<ul>
+<li>What if the curves cross? and</li>
+<li>How do we consider the “overall” success of these classifier models? Maybe they are all doing a terrible job.</li>
+</ul>
+<p>(gotta run now, will try to get back to this … for question 2 the ‘area under the curve’ seems like a decent measure that somehow ‘averages’ the gain in insight over the random classifier for all possible types of judge, if I understand correctly)</p>
+<p>I have been told that the following is the case:</p>
+<blockquote>
+<p>Given randomly chosen examples from class 1 and 2, the AUC is the probability that our classifier gives a larger probability of assigning the class 1 example to class 1 (true positive) than the class 2 example (false positive)</p>
+</blockquote>
+<p>I am reinterpreting this more simply as…</p>
+<blockquote>
+<p>Compare a randomly chosen spy (case <span class="math inline">\(i\)</span> where <span class="math inline">\(y_i=1\)</span>) to a randomly chosen innocent person (case <span class="math inline">\(i\)</span> where <span class="math inline">\(y_i=0\)</span>) … (in the testing data). Recall that a ‘classifier’ (at least typically, e.g., as in a logistic regression) assigns to each case <span class="math inline">\(i\)</span> some probability <span class="math inline">\(\hat(p_i)\)</span> of being a spy, based on its features. The AUC tells me “the <em>probability</em> that my classifier assigns a larger probability of guilt <span class="math inline">\(\hat(p_i)\)</span> to the randomly-chosen spy than to the randomly-chosen innocent person.”</p>
+</blockquote>
+<p>An analogy has also been made to the Wilcoxon Rank-sum measure.</p>
+
+</div>
 </div>
             </section>
 
@@ -990,6 +1034,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

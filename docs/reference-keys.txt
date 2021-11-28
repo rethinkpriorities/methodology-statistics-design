@@ -54,6 +54,7 @@ specifying-models-hypotheses-and-statistical-testing-and-inference-approaches
 power-analyses-and-other-diagnosands
 key-resources-and-explainers
 see-rethink_priorities_power_analysis_framework_2-in-appendix
+classification_model_disc
 appendixsupplements
 power-workflow
 discussion-and-framework

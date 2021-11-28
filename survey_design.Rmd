@@ -1,7 +1,3 @@
----
-bibliography: references.bib
----
-
 # SURVEY DESIGNS AND METHODS {.unnumbered}
 
 @schwarcz2007

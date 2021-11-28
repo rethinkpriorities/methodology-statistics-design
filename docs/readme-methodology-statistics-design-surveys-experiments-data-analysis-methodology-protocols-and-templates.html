@@ -24,7 +24,7 @@
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein)" />
 
 
-<meta name="date" content="2021-11-15" />
+<meta name="date" content="2021-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -820,7 +820,6 @@ div.csl-indent {
 <li class="chapter" data-level="7.3.4" data-path="ea-survey-presentation-methodology.html"><a href="ea-survey-presentation-methodology.html#model-coding-and-implementation-practice"><i class="fa fa-check"></i><b>7.3.4</b> Model coding and implementation practice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="survey-designs-and-methods.html"><a href="survey-designs-and-methods.html"><i class="fa fa-check"></i>SURVEY DESIGNS AND METHODS</a></li>
 <li class="chapter" data-level="" data-path="surveys.html"><a href="surveys.html"><i class="fa fa-check"></i>SURVEY DESIGNS AND METHODS</a>
 <ul>
 <li class="chapter" data-level="7.4" data-path="surveys.html"><a href="surveys.html#how-to-ask-good-survey-questions"><i class="fa fa-check"></i><b>7.4</b> How to ask good survey questions</a></li>
@@ -871,7 +870,10 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="basic-statistics-modeling-testing-and-inference.html"><a href="basic-statistics-modeling-testing-and-inference.html"><i class="fa fa-check"></i>BASIC STATISTICS: MODELING, TESTING AND INFERENCE</a></li>
-<li class="chapter" data-level="" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i>MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</a></li>
+<li class="chapter" data-level="" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i>MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</a>
+<ul>
+<li class="chapter" data-level="9.4" data-path="modeling.html"><a href="modeling.html#classification_model_disc"><i class="fa fa-check"></i><b>9.4</b> Loose discussion: classification models and precision/recall stuff</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i>CAUSAL INFERENCE</a></li>
 <li class="chapter" data-level="" data-path="fermi.html"><a href="fermi.html"><i class="fa fa-check"></i>MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES*</a></li>
 <li class="chapter" data-level="10" data-path="appendixsupplements.html"><a href="appendixsupplements.html"><i class="fa fa-check"></i><b>10</b> APPENDIX/SUPPLEMENTS</a></li>
@@ -932,7 +934,7 @@ div.csl-indent {
 <h2><span class="header-section-number">12.1</span> ‘Methods and RP Guidelines Bookdown’</h2>
 <div id="to-contain" class="section level3" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> To contain…</h3>
-<p>… <em>Only</em> things that we use, have used, want to use, or have been requested to address. To keep this manageable, don’t add content just because "it’s in a typical syllabus’.</p>
+<p>… <em>Only</em> things that we use, have used, want to use, or have been requested to address. To keep this manageable, don’t add content just because “it’s in a typical syllabus’.</p>
 <p>See <a href="https://airtable.com/shrK7Pc0K8JPjmQkN">airtable topic list</a> … some examples below</p>
 </div>
 <div id="proposed-structure" class="section level3" number="12.1.2">
@@ -955,7 +957,7 @@ div.csl-indent {
 <li>Add stuff to the Bookdown in a concise way, once it’s at least minimally readable/useable. (See distinct branches discussed below).</li>
 <li>For non-core material: out-link to standalone pages/gists/blogdowns whatever and/or Bookdown ‘appendix’ sections and folding boxes for the non-core material</li>
 <li>Link to these resources in Guru, but don’t repeat this content there.</li>
-<li>If an ideal guide to ‘exactly what we want’ exist elsewhere, just ‘curate link it,’ Pete W-style, don’t re-write the wheel</li>
+<li>If an ideal guide to ‘exactly what we want’ exist elsewhere, just ‘curate link it’, Pete W-style, don’t re-write the wheel</li>
 </ul>
 <p><em>Key links for tips on using ‘these tools’</em></p>
 <ul>
@@ -1054,6 +1056,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

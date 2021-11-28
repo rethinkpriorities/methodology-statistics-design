@@ -21,9 +21,6 @@ here <- here::here()
 rename_all <- dplyr::rename_all
 rename <- dplyr::rename
 
-
-
-
 #... Import setup for this project using template from dr-rstuff  ####
 
 dir.create(here("code"))
@@ -68,7 +65,6 @@ print("project_setup creates 'code' folder and downloads baseoptions.R, and func
 dir.create(here("remote"))
 
 #THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))s
-
 
 p_load("bettertrace") #better tracking after bugs
 

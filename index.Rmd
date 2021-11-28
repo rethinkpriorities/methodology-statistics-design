@@ -36,7 +36,7 @@ bookdown::pdf_book:
       github: yes
       facebook: no
 always_allow_html: yes
-bibliography: "references.bib, packages.bib"
+bibliography: [references.bib, packages.bib, reinstein_bibtex.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: daaronr/metrics_discussion_work
