@@ -38,7 +38,7 @@ try_download(
 # Note: I used to do the 'install a set of packages thing here' ... but with renv we can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
 
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
+#devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
 
 ## You MUST run this for anything else to work ####
 source(here::here("code", "project_setup.R"))
@@ -66,11 +66,17 @@ dir.create(here("remote"))
 
 #THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))s
 
+options(pkgType = "binary")
+
 p_load("bettertrace") #better tracking after bugs
 
 #### BUILD the bookdown ####
 #The line below should 'build the bookdown' in the order specified in `_bookdown.yml`
 
+#p_load(bookdown)
+
+
+## (Todo) Adjust the gitbook 'hardlinked' content format ####
 #p_load(bookdown)
 
 {
@@ -92,5 +98,8 @@ trackdown::upload_file(
   shared_drive = "Research", #this works -- name looked up with googledrive::shared_drive_find()
   hide_code = FALSE) #hide_code=TRUE is usually better but I want to see it for now
 
-
+trackdown::upload_file(
+  file = here("time_series_application.Rmd"), 
+  shared_drive = "Research", #this works -- name looked up with googledrive::shared_drive_find()
+  hide_code = FALSE) #hide_code=TRUE is usually better but I want to see it for now
 

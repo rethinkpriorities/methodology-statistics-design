@@ -1,1 +1,5 @@
-# BASIC STATISTICS: MODELING, TESTING AND INFERENCE {-}
+# (BASIC STATISTICS: TESTING, INFERENCE, AND 'DESCRIPTIVE REGRESSION MODELS') {-#basicstat}
+
+Aim to integrate content from [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
+
+This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane' 

@@ -1,4 +1,4 @@
-# DATA, CODE, AND PRESENTATION {-#data}
+# (DATA, CODE, AND PRESENTATION) {-#data}
 
 # Coding practice and tools {#coding-etc}
 

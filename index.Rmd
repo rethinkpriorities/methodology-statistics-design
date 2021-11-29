@@ -1,6 +1,6 @@
 ---
 title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
-author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein)"
+author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
 abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -91,7 +91,7 @@ knitr::knit_hooks$set(
 
 
 <!-- <html> -->
-    
+
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script> -->
 <!-- <script> -->
 <!--   window.dataLayer = window.dataLayer || []; -->

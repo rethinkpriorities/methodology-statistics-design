@@ -30,7 +30,7 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 ### Types of experiments: 'lab and field'
 
-## Formulating hypotheses and 'learning and adaptation goals'
+## Formulating hypotheses and 'learning and adaptation goals'
 
 ## Hypothesis testing versus 'reinforcement learning' goals
 
@@ -46,7 +46,7 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 ## Practical and implementation issues
 
-Survey and experiment platforms (see 'surveys') chapter
+Survey and experiment platforms (see '[surveys](#surveys)') chapter
 
 ### Field experiments, A/B and lift tests, and marketing trials
 

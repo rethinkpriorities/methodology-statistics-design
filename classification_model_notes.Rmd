@@ -1,6 +1,10 @@
-## Loose discussion: classification models and precision/recall stuff {#classification_model_disc}
+# Classification models
 
-THREAD trying to explain "Classification problems", "Precision and Recall", and ROC and ROC-AUC (machine learning validation) by analogy ...
+(Fill in or link here)
+
+## Discussion: Assesing classification models and precision/recall  {#classification_model_disc}
+
+Below, I try to explain "Classification problems", "Precision and Recall", and ROC and ROC-AUC (machine learning validation) by analogy ...
 
 This loosely connects to the classification models used in the ['EA Survey Donations post/bookdown'](), particularly the [consideration of model performance](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#model-perf)
 
