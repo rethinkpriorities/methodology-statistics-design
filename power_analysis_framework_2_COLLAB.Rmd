@@ -147,15 +147,15 @@ library(tidyverse)
 ```
 
 ```{r datamaker-function, message = FALSE, warning = FALSE}
-four.group.datamaker <- function(sim = 1, a = 0, b = .1, c = .2, d = .4) {
+four.group.datamaker <- function(sim = 1, a = 0, b = .1, c = .2, d = .4, pop=1500) {
 
   # first a tibble (data frame) with 1500 ppts, with the different groups showing
   # effect sizes in Cohen's d of .1, .2, and .4
-  four.groups <- tibble(a.control = rnorm(1500, a, 1),
-                        b.small = rnorm(1500, b, 1),
-                        c.medsmall = rnorm(1500, c, 1),
-                        d.medium = rnorm(1500, d, 1),
-                        sample.size = 1:1500) %>%
+  four.groups <- tibble(a.control = rnorm(pop, a, 1),
+                        b.small = rnorm(pop, b, 1),
+                        c.medsmall = rnorm(pop, c, 1),
+                        d.medium = rnorm(pop, d, 1),
+                        sample.size = 1:pop) %>%
 
     # turn the data into long form
     pivot_longer(cols = 'a.control':'d.medium', names_to = 'group', values_to = 'response') %>%
