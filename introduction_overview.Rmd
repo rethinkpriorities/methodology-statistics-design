@@ -12,7 +12,7 @@ A github-hosted 'bookdown' for structured in-depth discussion
 
 \
 
-David Reinstein's conception:
+*David Reinstein's conception:*
 
 - Don't share any confidential data or sensitive information
 
@@ -34,7 +34,45 @@ David Reinstein's conception:
 
 \
 
-I also hope to use this to develop 'templates and standard practices' for our work
+I also hope to use this to develop 'templates and standard practices' for our work.
+
+
+\
+
+**What to include and when to dive into the rabbit hole?** (Unfold: the 'second time it comes up' rule)
+
+```{block2,  type='fold'}
+
+In ‘building a knowledge base’, there are some things that are important to include, but others should be excluded.  If we are compulsive and auto-nerd-sniped to go down every rabbit hole it will be wasteful. But some rabbit holes will be worth going down, at least partially. 
+
+*What’s a good rule-of-thumb for knowing if it’s worth a dive?* Maybe the 'second time rule'?
+  
+Mark the issue the first time it comes up, perhaps leave a placeholder and a link to the original notes or discussion.
+
+Then the second time an issue comes up it may be safe to assume its an ‘important issue to dive into and document’?
+
+```
+
+ 
+Below, 'a partial dive into the rabbit hole', for one possible framework.
+
+```{block2,  type='note'}
+
+
+What do I mean by a 'partial dive into the rabbit hole?'
+
+- Explain how it applied to our problem (generically if there is a confidentiality issue)
+
+- Curated links [PeteW-gists](https://gist.github.com/peterhurford/)-eqsue, 
+
+- characterize in our own words (but concisely)
+
+- give a code example in a 'vignette',
+
+- check our understanding through communication and discussion with others, flag key issues
+
+```  
+
 
 
 ## Sections and organization {#outline_sections}
