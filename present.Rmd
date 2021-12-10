@@ -1,12 +1,9 @@
-# (PRESENTING AND DESCRIBING DATA) {-#present]
+# (PRESENTING AND DESCRIBING DATA) {-#present}
 
-# Methods of 'describing data'
+<!--  (Methods of 'describing data')
 
-# Formatting: tables, figures, and numerical content
+ Code style, formatting and presentation of tables, numerical content, and visualizations
 
-# Visualizations
-
-## Suggested/preferred formats and templates
-
-<!-- Integrate/move content from [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/presentation_method_discussion.Rmd and some Gdocs and Slack threads -->
+- Below, we integrate from  [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/]
+-->
 

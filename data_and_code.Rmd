@@ -1,7 +1,17 @@
-# (DATA, CODE, AND PRESENTATION) {-#data}
+# **DATA, CODE, AND PRESENTATION** {-#data}
 
-# Coding practice and tools {#coding-etc}
 
-# Data practices
 
+
+<!-- (Coding practice and tools) {#coding-etc}
+
+# (Data practices) -->
+
+
+<!-- additional section:
+(Methods of 'describing data')
+
+ Code style, formatting and presentation of tables, numerical content, and visualizations
+
+-->
 

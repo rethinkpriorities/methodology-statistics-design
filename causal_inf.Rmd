@@ -1,1 +1,21 @@
-# CAUSAL INFERENCE {-#causal} 
+# **(CAUSAL INFERENCE)** {-#causal}
+
+
+Some stuff to integrate from [here](https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs) perhaps.
+
+
+## Useful resources: {-}
+
+[Causal Inference: What If. R and Stata code for Exercises](https://remlapmot.github.io/cibookex-r/)
+
+[The effect](https://www.theeffectbook.net/) -- bookdown, looks great, love nick HK
+
+[Causal inference: the Mixtape](https://www.scunning.com/mixtape.html)
+
+[Useful R Packages for Causal Inference in the Social Sciences](https://www.dhidalgo.me/post/useful-r-packages-for-causal-inference-in-the-social-sciences/)
+
+[Applied causal analysis with R](https://bookdown.org/paul/applied-causal-analysis/)
+
+Mostly Harmless Econometrics (R code -- where was it?)
+
+

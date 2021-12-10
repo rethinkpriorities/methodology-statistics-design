@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+  <title>2 Coding and data management | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
   <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta property="og:title" content="2 Coding and data management | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta name="twitter:title" content="2 Coding and data management | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   
   <meta name="twitter:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="classification-models.html"/>
-<link rel="next" href="fermi.html"/>
+<link rel="prev" href="data.html"/>
+<link rel="next" href="presentation.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -963,18 +963,54 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="causal" class="section level1 unnumbered">
-<h1><strong>(CAUSAL INFERENCE)</strong></h1>
-<p>Some stuff to integrate from <a href="https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs">here</a> perhaps.</p>
-<div id="useful-resources" class="section level2 unnumbered">
-<h2>Useful resources:</h2>
-<p><a href="https://remlapmot.github.io/cibookex-r/">Causal Inference: What If. R and Stata code for Exercises</a></p>
-<p><a href="https://www.theeffectbook.net/">The effect</a> – bookdown, looks great, love nick HK</p>
-<p><a href="https://www.scunning.com/mixtape.html">Causal inference: the Mixtape</a></p>
-<p><a href="https://www.dhidalgo.me/post/useful-r-packages-for-causal-inference-in-the-social-sciences/">Useful R Packages for Causal Inference in the Social Sciences</a></p>
-<p><a href="https://bookdown.org/paul/applied-causal-analysis/">Applied causal analysis with R</a></p>
-<p>Mostly Harmless Econometrics (R code – where was it?)</p>
+<div id="coding" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Coding and data management</h1>
+<p>Integrate further content from <a href="https://daaronr.github.io/metrics_discussion/data-sci.html">getting, cleaning, and using data</a> (Reinstein,</p>
+<div id="coding-and-organisational-issues" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Coding and organisational issues</h2>
+<ul>
+<li><p>Data protection (e.g., EA Survey data pre-2021 is not publicly shareable!)</p></li>
+<li><p>Good data management</p></li>
+<li><p>Reproducability</p></li>
+<li><p>Git and github</p></li>
+<li><p>R and Rmd</p></li>
+<li><p>How to leave comments and collaborate?</p></li>
+<li><p><code>trackdown</code> to convert to Gdoc for feedback</p></li>
+<li><p>Folder structure, use of packages; esp <code>Renv</code></p></li>
+<li><p>Functions etc pulled from <code>dr-rstuff</code> repo</p></li>
+<li><p>I (DR) love <code>lower_snake_case</code></p></li>
+</ul>
+<p><br />
+</p>
+<div id="automation-and-dynamic-documents" class="section level3 unnumbered">
+<h3>Automation and ‘dynamic documents’</h3>
+<p>‘Soft-code’ as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent</p>
+<p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html">Inline code in Rmd</a> is great but it can be a double-edged sword.</p>
+<p>Sometimes its better to ‘do the important and complicated coding’ in a chunk before this, not in the inline code itself because</p>
+<ul>
+<li><p>the ‘bookdown’ doesn’t show the <em>code</em> generating the inline computation … so a separate chunk makes it more transparent for external readers</p></li>
+<li><p>inline code isn’t spaced well and its hard to read and debug.</p></li>
+</ul>
+</div>
+<div id="data-management" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Data management</h3>
+<ul>
+<li><p>Track it from its ‘source’; use API to grab directly from Qualtrics (etc.) if possible</p></li>
+<li><p>A <code>main.R</code> file in the root directory should run everything</p></li>
+<li><p>Data import; external ‘dictionary’ can be helpful (see, e.g., <a href="https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0">here</a> for EAS integrated with Google sheet; R code <a href="https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R">here</a> brings it in</p></li>
+<li><p>import, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)</p>
+<ul>
+<li>import and cleaning in <code>.R</code> rather than <code>.Rmd</code> perhaps</li>
+</ul></li>
+<li><p>‘raw’ data in separate folder from ‘munged’ data</p></li>
+<li><p><code>codebook</code> package – make a codebook</p></li>
+<li><p>minimize ‘versions’ of the data frames … code and use ‘filter objects’ instead</p>
+<ul>
+<li>see <a href="https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set">‘lists of filters’</a> but actually defining the filter with <code>quo()</code> seems better.</li>
+</ul></li>
+</ul>
 
+</div>
 </div>
 </div>
             </section>
@@ -982,8 +1018,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="classification-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fermi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="presentation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

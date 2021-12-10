@@ -241,7 +241,7 @@ In the example function below, we run a simple linear regression, predicting the
 
 ```{r regression-function, message = FALSE, warning = FALSE}
 
-linear.reg.maker <- function(data, breaks) {
+linear.reg.maker <- function(data, breaks, group = "group") {
 
   # this function cuts the data set it is given into different sample sizes
   cut.samples <- function(break.point, data) {
@@ -260,7 +260,7 @@ linear.reg.maker <- function(data, breaks) {
   # this function runs the regression
   run.reg <- function(data) {
 
-    four.group.form <- as.numeric(ordinal) ~ 1 + group
+    four.group.form <- as.numeric(ordinal) ~ 1 + {{group}}
 
     four.group.reg <-
       lm(formula = four.group.form,
@@ -322,7 +322,8 @@ Now, we wish to ascertain how likely we are to achieve a range of inferential go
 ```{r summarise-output, message = FALSE, warning = FALSE}
 
 # group the data according to group, confidence interval, and size per group
-four.group.lin.summary <- linreg.output %>% group_by(group, interval, cell.size) %>%
+four.group.lin.summary <- linreg.output %>% 
+  group_by(group, interval, cell.size) %>%
   # summarise the amount of times we get a CI greater than 0
   summarise(.groups = 'keep',
             'ci above 0 vs. control' = sum(nonzero)/5)  %>%
@@ -332,26 +333,13 @@ four.group.lin.summary <- linreg.output %>% group_by(group, interval, cell.size)
          'Effect size' = factor(group, levels = c('small', 'medsmall', 'medium'),
                                 labels = c('Very small (.1)', 'Small (.2)', 'Medium (.4)')))
 
+four.group.lin.summary
 ```
 
 And then plotting the resulting power curve:
 
 ```{r plot-power-curve, message=FALSE, warning=FALSE}
-
-ggplot(data = four.group.lin.summary) +
-  scale_x_continuous(limits = c(100, 1550), breaks = seq(from = 150, to = 1500, by = 150)) +
-  scale_y_continuous(limits = c(0, 100), breaks = seq(from = 0, to = 100, by = 20)) +
-  geom_hline(aes(yintercept = 80), linetype = 'dashed', size = .33, alpha = .25) +
-  geom_hline(aes(yintercept = 90), linetype = 'dashed', size = .33, alpha = .25) +
-  geom_path(aes(x = cell.size, y = `ci above 0 vs. control`, color = `Effect size`,
-                group = `Effect size`), size = .66) +
-  geom_point(aes(x = cell.size, y = `ci above 0 vs. control`, color = `Effect size`),
-             size = 1.5) +
-  labs(y = 'Power to detect a non-zero effect',
-       x = 'Number of participants per condition (control group not included)') +
-  scale_color_manual(values = c('#c10d0d', '#7dc3c2', '#dcc55b')) +
-  facet_wrap(~interval) +
-  theme(
+ power_curve_theme <- theme(
     aspect.ratio = 1,
     panel.grid.major = element_line(colour = "white", size = 0.33),
     panel.grid.minor = element_line(colour = "white", size = 0.2),
@@ -363,7 +351,26 @@ ggplot(data = four.group.lin.summary) +
     strip.background = element_blank()
   )
 
+
+(
+power_curve <-  four.group.lin.summary %>%
+ggplot() +
+  scale_x_continuous(limits = c(100, 1550), breaks = seq(from = 150, to = 1500, by = 150)) +
+  scale_y_continuous(limits = c(0, 100), breaks = seq(from = 0, to = 100, by = 20)) +
+  geom_hline(aes(yintercept = 80), linetype = 'dashed', size = .33, alpha = .25) +
+  geom_hline(aes(yintercept = 90), linetype = 'dashed', size = .33, alpha = .25) +
+  geom_path(aes(x = cell.size, y = `ci above 0 vs. control`, color = `Effect size`,
+                group = `Effect size`), size = .66) +
+  geom_point(aes(x = cell.size, y = `ci above 0 vs. control`, color = `Effect size`),
+             size = 1.5) +
+  labs(y = 'Power to detect a non-zero effect',
+       x = 'Number of participants per condition (control group not included)') +
+  scale_color_manual(values = c('#c10d0d', '#7dc3c2', '#dcc55b')) +
+  power_curve_theme
+)
+
 ```
+  facet_wrap(~interval) +
 
 ### Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.
 

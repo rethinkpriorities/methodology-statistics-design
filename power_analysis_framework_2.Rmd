@@ -1,6 +1,6 @@
-# APPENDIX/SUPPLEMENTS
+# **APPENDIX/SUPPLEMENTS** {-}
 
-# Power analysis workflow (Jamie Elsey) {#power-workflow}
+# Power analysis workflow (Jamie Elsey) {-#power-workflow}
 
 ## Discussion and framework
 
@@ -184,13 +184,13 @@ test.data <- four.group.datamaker()
 ggplot(data = test.data) +
   geom_density(aes(x = response, fill = group), alpha = .3) +
   theme(
-    aspect.ratio = 1
+    aspect.ratio = .5
   )
 
 ggplot(data = test.data) +
   geom_histogram(aes(x = as.numeric(ordinal)), alpha = .6,
                  position = position_dodge(), bins = 10) +
-  facet_wrap(~group) +
+  facet_wrap(~group, nrow=1) +
   theme(
     aspect.ratio = 1
   )
@@ -204,6 +204,7 @@ We can see from the plots that the function appears to be working. When developi
 Now we just need to run the function above many times over. This could be done using loops, but a very useful set of R functions in the tidyverse is the purrr package of *map functions*. Even better, a package called furrr is available to run such map functions in parallel to further reduce time. This doesn't matter so much here because this will be quite quick anyway, but is important when we run the analyses over the many data sets. For furrr to do this, we need to tell it to plan for 'multisession', and give it a seed number:
 
 ```{r load-furr, message = FALSE, warning = FALSE}
+p_load(furrr)
 library(furrr)
 
 plan(multisession)
@@ -227,7 +228,7 @@ sim.data <- sim.data %>% group_by(sim) %>% group_split()
 Now, we have 500 simulated data sets representing our hypothetical outcome data, and can perform analyses on them:
 
 ```{r check-data, message = FALSE, warning = FALSE}
-head(sim.data[[1]])
+head(sim.data[[3]])
 ```
 
 ### Step 2: Run the proposed analysis over the many data sets and return the estimands of interest
@@ -246,9 +247,8 @@ linear.reg.maker <- function(data, breaks) {
 
   # this function cuts the data set it is given into different sample sizes
   cut.samples <- function(break.point, data) {
-    cut.data <- filter(data, sample.size <= break.point)
-    cut.data <- mutate(cut.data,
-                       sample.size = break.point)
+    cut.data <- filter(data, sample.size <= break.point) %>%
+      mutate(sample.size = break.point)
     return(cut.data)
   }
 

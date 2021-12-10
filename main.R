@@ -38,9 +38,9 @@ try_download(
 # Note: I used to do the 'install a set of packages thing here' ... but with renv we can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
 
 if (!require("devtools")) install.packages("devtools")
-#devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
+devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
 
-## You MUST run this for anything else to work ####
+1## You MUST run this for anything else to work ####
 source(here::here("code", "project_setup.R"))
 
 ##NOTE: these sourced files seem to need some packages to be installed.

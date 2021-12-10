@@ -1,0 +1,17 @@
+# DESCRIPTION, DIMENSION REDUCTION, PSYCHOMETRIC DECOMPOSITION {-#describedim}
+
+```{block2,  type='note'}
+
+Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/factor-analysis.html), see embed below
+
+```   
+
+
+
+```{r wppage}
+
+knitr::include_url("https://willemsleegers.github.io/how-to-science/factor-analysis.html")
+
+```
+
+

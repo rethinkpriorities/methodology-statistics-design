@@ -1,36 +1,30 @@
-# EA Survey: Presentation, methodology
+# Presentation, labeling and visualisations {#presentation}
 
-*Note: this has been moved from the ea-data repo, and is being expanded here*
+```{block2,  type='note'}
+Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
+```
 
-## Organisation, collophon, formatting
+## Aside: EA Forum organisation, collophon, formatting
 
-### How this is built, how it works, how it relates to EA Forum posts
 
-### Markdown formatting, conversion, etc.
 
-We need to convert this Rmd/html 'bookdown' output into a format acceptable for the EA Forum (however, we can also separately link and host this bookdown, or parts of it, as we do [HERE](https://rethinkpriorities.github.io/ea_data_public/outline-disc.html).
+```{block2,  type='fold'}
+
+We often need to make output into a format acceptable for the EA Forum
 
 Typically, RP has made these posts first in Google Docs for feedback and then there is some sort of sprocedure to get it into EA forum markdown syntax from there. For some previous posts, we pasted from the Rstudio visual mode pastes into Google docs for narrative, and figures/tables could be manually pasted. But we want to avoid having to do that!
 
-We hope this can be done through simple script Pandoc plus a simple adjustment script (in Python or Vim etc).
+David Reinstein has worked with Pete and others on tools to (mostly) automate this conversion and hosting process, but some manual tweaks were needed at the end. See the work on this [here, at bottom](https://github.com/rethinkpriorities/ea-data/blob/master/main_2020.R), and in [this R script](https://github.com/rethinkpriorities/ea-data/blob/master/code/parse_ea_forum_md.R) and [this Python script](https://github.com/rethinkpriorities/ea-data/blob/master/code/fix_eafo_links.py).  Yes, spaghetti code.
 
-\
+Atm, some formatting adjustments are necessary, e.g.,  EA Forum doesn't have margin notes or folding boxes.
 
-*Some formatting adjustments will be necessary, however:*
+```
 
--   EA Forum doesn't have margin notes or folding boxes. Margin notes should be made into footnotes. (Or notes in parentheses if they need to be prominent). Folded boxes should probably be retained in the (linked) hosted bookdown only.
-
-NOTE: remaining content moved to [methodology](https://github.com/rethinkpriorities/methodology-statistics-design) repo
-
-## Coding and organisational issues
-
-## Content and methods
-
-### Visualisations
+## Visualisations
 
 See also Gdoc: [visualisation discussions](https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#)
 
-#### Ideal coding practice for visualisations
+### Ideal coding practice for visualisations {-}
 
 Use `ggplot` always unless you've a strong reason to do otherwise. Always save the plot as an object in the environment as well as printing it where it belongs.
 
@@ -44,18 +38,22 @@ Otherwise define sets of common options for plots in one place, and repeated ggp
 
 -   to allow easy 'global' adjustment
 
-#### Labeling
+### Labeling {-}
 
 Use readable but concise labels. "Amount donated" is OK, "GWWC" is OK because we assume people know what GWWC is from context.
 
-`amt_don` is not OK.
+`amt_don` is not OK. Pete will yell at you.
 
-#### Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country'
+Try to have labels be automated ... either using column attributes or a concise list
+
+
+
+### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {-}
 
 **Treemaps**
 
 ```{block2,  type='note'}
-NOTE: The below will not run without data, but we cannot make data 'public' here ... we need to make some choices ... or maybe use simulated data in this discussion
+NOTE: The below will not run without data, but we cannot make data 'public' here ... we can swap this for built in R or simulated data in this discussion
 ```
 
 ```{r}
@@ -79,13 +77,28 @@ geom_treemap_opts <- list(geom_treemap(alpha = 0.7),
     geom_treemap_opts +
   ggtitle("Share of total 2019 reported donation amount, by donation size")
 )
+
 ```
 
 A good alternative to the treemap ... conveying both absolute amounts and rates in the same graph?
 
-#### Likert scale (individual items) and relative responses to these
+### Case: Likert scale (individual items) and relative responses to these {-}
 
-#### Dealing with scales and large differences in magnitudes
+
+The combination of stacked bar charts and overlayed error/CI bars for some 'middle split' seems informative:
+
+
+```{r wppage}
+
+knitr::include_url("https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts")
+
+```
+
+Above: from [EAS engagement post, bookdown supplement](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts)
+
+
+
+### Issue: Dealing with scales and large differences in magnitudes {-}
 
 If axes are cut and don't go to zero, mention this prominently in the plot.
 
@@ -107,42 +120,49 @@ Sometimes a logarithmic scale is helpful, but that can also lead to confusion. O
 
 Remove outliers as a last resort; prominently mention this where doing so.
 
-#### Means of continuous variables: differences across groups
+### Case: Means of continuous variables: differences across groups {-}
 
-#### Visualizing (regression) model coefficients and confidence intervals
+Some (imperfect) examples from donation post:
 
-Testing a reference @wickham2010
+![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/gap-actual-planned-2019-1.png)
 
-### Statistical tests (make a new section)s
+![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/planned_actual_gwwc-1.png)
 
-### 'Models'
+- Vertical lines for 'medians and means' help put this in context
 
-Contrast:
 
--   Descriptive (and perhaps causally suggestive), aka 'dimension reduction'
+### Case: Categorical outcomes by continuous outcomes (and vice/versa) {-}
 
--   Predictive
 
--   Causal
+```{r wppage}
 
-See discussion in Engagement section [here](#modeling_disc_eng)
+knitr::include_url("https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure")
 
-### Model coding and implementation practice
+```
 
-**Define lists of variables (features) up front** (see, e.g., in engagement post ['Choosing features...'](engage_features))
+Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure), we combine a `geom_point` with a `geom_smooth`.\*
 
--   outcomes,
--   'predictors' or associated variables of interest, (define broad and narrow sets, consider endogeneity of various forms, e.g., 'colliders', consider 'clean model without leacks' for specific prediction exercises)
--   'control variables' (not of direct interest but included because they are believed to improve interpretation of variables of interest; note this can be problematic), 'robust controls' for more flexible control
+<div class="marginnote">
+\* DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
+</div>
 
-E.g.,
+Here, I think the use of `%>% ggplotly` yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'.
 
-    cat_out <- "engagement" #categorical outcome
-    key_demog <- c("age_approx_d2sd", "gender_cat", "student_cat", "race_cat", geog)
-    controls <- c("years_involved_d2sd")
 
-**Missing values:** Impute or code as separate 'NA' category
+### Case: Visualizing (regression) model coefficients and confidence intervals {-}
 
-**Normalize continuous variables** (de-mean, divide continuous variables by 2sd if comparing coefficients to binary variables)
+Forest plots as seen [in donation post here](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)
 
-**Categorical/discrete variables**:
+![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/fp_demog_coefs_qp-1.png)
+
+Our `group_fp_do` function makes this easy to do.
+
+See how we group the coefficients into plots  by 'theme'
+
+\
+
+In some contexts, lines for 'base rates' can be helpful
+
+![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png) ... context, scroll up from [here](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)
+
+

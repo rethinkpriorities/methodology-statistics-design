@@ -5,7 +5,7 @@ description: >-
   inference
 ---
 
-# "Qualitative" design issues (EA market testing)
+# "Qualitative" design issues (From EA market testing) {-#eamt-qual}
 
 ## **Naturalness of setting versus 'pure' treatments**
 
@@ -14,7 +14,6 @@ description: >-
 {% hint style="info" %}
 For example, in my '[give if you win](http://giveifyouwin.org)' (lab) work we had a trial that was (paraphrasing) 'we are asking you to commit to a donation that may or may not be collected. If the coin flips heads, we will collect the amount you commit, otherwise no donation is made'. It was meant to separate the component of the "give if you win effect" driven by the uncertain nature of the commitment rather than the uncertain nature of the _income_. However when we considered bringing this to field experiments, there was no way to do it without it making it obvious that this was an experiment or a very strange exercise.
 {% endhint %}
-
 
 
 When we consider an experiment providing 'real impact information' to potential donors, we might be encouraged to use the exact write-up from Givewell's page, for naturalness. However, this may not present the "lives per dollar" information in exactly the same way between two charities of interest, and the particular write-up may suggest certain "anchors" (e.g., whole numbers that people may want to contribute). Thus if we use the exact GW language we may not be 100% confident that the provision of the impact of information is driving any difference. We might be tempted to change it; but at a possible cost of naturalness and direct applicability.

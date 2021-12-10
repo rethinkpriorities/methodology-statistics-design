@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+  <title>4 Survey design and item development | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
   <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta property="og:title" content="4 Survey design and item development | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta name="twitter:title" content="4 Survey design and item development | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   
   <meta name="twitter:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="classification-models.html"/>
-<link rel="next" href="fermi.html"/>
+<link rel="prev" href="surveys.html"/>
+<link rel="next" href="expt-qual-imp.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -963,18 +963,49 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="causal" class="section level1 unnumbered">
-<h1><strong>(CAUSAL INFERENCE)</strong></h1>
-<p>Some stuff to integrate from <a href="https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs">here</a> perhaps.</p>
-<div id="useful-resources" class="section level2 unnumbered">
-<h2>Useful resources:</h2>
-<p><a href="https://remlapmot.github.io/cibookex-r/">Causal Inference: What If. R and Stata code for Exercises</a></p>
-<p><a href="https://www.theeffectbook.net/">The effect</a> – bookdown, looks great, love nick HK</p>
-<p><a href="https://www.scunning.com/mixtape.html">Causal inference: the Mixtape</a></p>
-<p><a href="https://www.dhidalgo.me/post/useful-r-packages-for-causal-inference-in-the-social-sciences/">Useful R Packages for Causal Inference in the Social Sciences</a></p>
-<p><a href="https://bookdown.org/paul/applied-causal-analysis/">Applied causal analysis with R</a></p>
-<p>Mostly Harmless Econometrics (R code – where was it?)</p>
+<div id="surveydesign" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Survey design and item development</h1>
+<p>This section will cover specific ‘survey’ related content, as well as some content that overlaps with experiments and trials.</p>
+<p>More technical and involved discussion of overlapping content will often be deferred to the <a href="#expt_trial">experiments and trials</a> section, with placeholders and links.</p>
+<p><span class="citation">Schwarcz et al. (<a href="#ref-schwarcz2007" role="doc-biblioref">2007</a>)</span></p>
 
+<div class="note">
+<p>Link or incorporate William Elsey’s work <a href="https://willemsleegers.github.io/how-to-science/survey-design.html#item-development">HERE</a>,</p>
+<p>and <a href="https://daaronr.github.io/metrics_discussion/surveys.html">Reinstein’s sloppy notes</a>; see embeds below</p>
+</div>
+<div id="willem-sleegers-to-incorporate" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> (Willem Sleegers, to incorporate)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="surveydesign.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://willemsleegers.github.io/how-to-science/survey-design.html#item-development&quot;</span>)</span></code></pre></div>
+<iframe src="https://willemsleegers.github.io/how-to-science/survey-design.html#item-development" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+<div id="reinstein-misc-notes-to-incorporate" class="section level2 unnumbered">
+<h2>Reinstein misc notes to incorporate</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="surveydesign.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://daaronr.github.io/metrics_discussion/surveys.html&quot;</span>)</span></code></pre></div>
+<iframe src="https://daaronr.github.io/metrics_discussion/surveys.html" width="80%" height="400px" data-external="1">
+</iframe>
+</div>
+<div id="suggested-sections" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Suggested sections…</h2>
+<ul>
+<li><p>How to ask good survey questions</p></li>
+<li><p>Avoiding pitfalls</p></li>
+<li><p>Constructing reliable indices and scales</p></li>
+<li><p>Sampling issues and representativeness</p>
+<ul>
+<li>Elsey on “Mr P”</li>
+<li>Reinstein on <a href="https://daaronr.github.io/metrics_discussion/surveys.html#survey-samplingintake">‘sampling’</a> and <a href="https://daaronr.github.io/metrics_discussion/surveys.html#jazz-case">‘measuring a rare population’</a> with reference to the EA survey</li>
+</ul></li>
+<li><p>Implementation platforms and issues</p></li>
+<li><p>Survey design tools (IT)</p></li>
+</ul>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-schwarcz2007" class="csl-entry">
+Schwarcz, Sandra, Hilary Spindler, Susan Scheer, Linda Valleroy, and Amy Lansky. 2007. <span>“Assessing Representativeness of Sampling Methods for Reaching Men Who Have Sex with Men: A Direct Comparison of Results Obtained from Convenience and Probability Samples.”</span> <em>AIDS and Behavior</em> 11 (4): 596. <a href="https://doi.org/ctgppb">https://doi.org/ctgppb</a>.
 </div>
 </div>
             </section>
@@ -982,8 +1013,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="classification-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fermi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="surveys.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="expt-qual-imp.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

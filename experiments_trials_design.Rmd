@@ -1,68 +1,69 @@
-# SURVEY DESIGNS AND METHODS {-#surveys}
+# Experiments: Qualitative and implementation design issues {#expt-qual-imp}
 
-This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.
+- See [Reinstein notes on 'why run an experiment'](https://daaronr.github.io/metrics_discussion/why-experiment-design.html#why-run-an-experiment-or-study) (somewhat more relevant to 'lab experiments')
 
-More technical and involved discussion of overlapping content will often be deferred to the [experiments and trials](#expt_trial) section, with placeholders and links.
+- See informal 'practitioners' discussion [below](#eamt-qual), from 'EA market testing'
 
-@schwarcz2007
-
-
-## How to ask good survey questions
-
-## Avoiding pitfalls
-
-## Constructing reliable indices and scales
-
-## Sampling issues and representativeness
-
-## Implementation platforms and issues
-
-## Survey design tools (IT)
-
-
-# EXPERIMENTS AND TRIAL DESIGN {-#expt_trial}
+```{block2,  type='note'}
 
 Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
 
-# Experiment and trial design: qualitative issues and guidelines, implementation issues {#expt-qual-imp}
+```
 
-## Basic design choices and terminology
 
-### Types of experiments: 'lab and field'
+## Proposed structure of section
 
-## Formulating hypotheses and 'learning and adaptation goals'
+- Basic design choices and terminology
 
-## Hypothesis testing versus 'reinforcement learning' goals
+- Types of experiments: 'lab and field'
 
-## Design concerns and pitfalls
+- Formulating hypotheses and 'learning and adaptation goals'
 
-### Confounded designs
+- Hypothesis testing versus 'reinforcement learning' goals
 
-### Attrition and failed randomization
+- Design concerns and pitfalls
 
-### 'Demand effects'
+  - Confounded designs
 
-### Naturalness versus cleanliness
+  - Attrition and failed randomization
 
-## Practical and implementation issues
+  - 'Demand effects'
 
-Survey and experiment platforms (see '[surveys](#surveys)') chapter
+  - Naturalness versus cleanliness
 
-### Field experiments, A/B and lift tests, and marketing trials
+- Practical and implementation issues
 
-### Designing, coding, and implementing experiments: IT issues
+    - Survey and experiment platforms (see '[surveys](#surveys)') chapter
 
-### Failure and success modes
+    - Field experiments, A/B and lift tests, and marketing trials
 
-### Capturing outcome data
+    - Designing, coding, and implementing experiments: IT issues
 
-### Pre-registration and pre-analysis plans
+    - Failure and success modes
 
-# Experiment and trial design: quantitative issues {#expt-quant}
+    - Capturing outcome data
+
+    - Pre-registration and pre-analysis plans
+
+    - ... See Reinstein discussion notes on the benefits and costs [here](https://daaronr.github.io/metrics_discussion/quant-design-power.html#the-benefits-and-costs-of-pre-registration-a-typical-discussion)
+
+# Design: quantitative issues {#expt-quant}
+
+```{block2,  type='note'}
+
+Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
+
+```
 
 ## 'Treatment' assignment (blocking, randomization, etc)
 
+
 ### Adaptive, sequential and dynamic designs
+
+- [Reinstein notes and links here](https://daaronr.github.io/metrics_discussion/quant-design-power.html#quant_design_power)
+
+- Elsey: http://www.sequentialtesting.com/
+
 
 ## Planning, diagnosing and adjusting a design
 
@@ -72,16 +73,23 @@ Survey and experiment platforms (see '[surveys](#surveys)') chapter
 
 ## Power analyses (and other 'diagnosands')
 
-Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here
+<div class="marginnote">
+Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?
+</div>
+
 
 ### Key resources and explainers
 
 ('Curate link' tools we found useful)
 
+[Reinstein notes and code](https://daaronr.github.io/metrics_discussion/power.html)
+
+
 
 ### See ['Rethink_Priorities_Power_analysis_framework_2' in  appendix](#power-workflow)
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
+
 ```{block2,  type='note'}
 
 DR: I'm putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.

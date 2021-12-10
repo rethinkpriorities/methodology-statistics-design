@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+  <title>3 Presentation, labeling and visualisations | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
   <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta property="og:title" content="3 Presentation, labeling and visualisations | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta name="twitter:title" content="3 Presentation, labeling and visualisations | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   
   <meta name="twitter:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="classification-models.html"/>
-<link rel="next" href="fermi.html"/>
+<link rel="prev" href="coding.html"/>
+<link rel="next" href="surveys.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -963,18 +963,128 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="causal" class="section level1 unnumbered">
-<h1><strong>(CAUSAL INFERENCE)</strong></h1>
-<p>Some stuff to integrate from <a href="https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs">here</a> perhaps.</p>
-<div id="useful-resources" class="section level2 unnumbered">
-<h2>Useful resources:</h2>
-<p><a href="https://remlapmot.github.io/cibookex-r/">Causal Inference: What If. R and Stata code for Exercises</a></p>
-<p><a href="https://www.theeffectbook.net/">The effect</a> – bookdown, looks great, love nick HK</p>
-<p><a href="https://www.scunning.com/mixtape.html">Causal inference: the Mixtape</a></p>
-<p><a href="https://www.dhidalgo.me/post/useful-r-packages-for-causal-inference-in-the-social-sciences/">Useful R Packages for Causal Inference in the Social Sciences</a></p>
-<p><a href="https://bookdown.org/paul/applied-causal-analysis/">Applied causal analysis with R</a></p>
-<p>Mostly Harmless Econometrics (R code – where was it?)</p>
+<div id="presentation" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Presentation, labeling and visualisations</h1>
 
+<div class="note">
+Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
+</div>
+<div id="aside-ea-forum-organisation-collophon-formatting" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Aside: EA Forum organisation, collophon, formatting</h2>
+
+<div class="fold">
+<p>We often need to make output into a format acceptable for the EA Forum</p>
+<p>Typically, RP has made these posts first in Google Docs for feedback and then there is some sort of sprocedure to get it into EA forum markdown syntax from there. For some previous posts, we pasted from the Rstudio visual mode pastes into Google docs for narrative, and figures/tables could be manually pasted. But we want to avoid having to do that!</p>
+<p>David Reinstein has worked with Pete and others on tools to (mostly) automate this conversion and hosting process, but some manual tweaks were needed at the end. See the work on this <a href="https://github.com/rethinkpriorities/ea-data/blob/master/main_2020.R">here, at bottom</a>, and in <a href="https://github.com/rethinkpriorities/ea-data/blob/master/code/parse_ea_forum_md.R">this R script</a> and <a href="https://github.com/rethinkpriorities/ea-data/blob/master/code/fix_eafo_links.py">this Python script</a>. Yes, spaghetti code.</p>
+<p>Atm, some formatting adjustments are necessary, e.g., EA Forum doesn’t have margin notes or folding boxes.</p>
+</div>
+</div>
+<div id="visualisations" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Visualisations</h2>
+<p>See also Gdoc: <a href="https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#">visualisation discussions</a></p>
+<div id="ideal-coding-practice-for-visualisations" class="section level3 unnumbered">
+<h3>Ideal coding practice for visualisations</h3>
+<p>Use <code>ggplot</code> always unless you’ve a strong reason to do otherwise. Always save the plot as an object in the environment as well as printing it where it belongs.</p>
+<p>Ideally, we will come up with a set of functions and default options for the key sets of plots we use and like.</p>
+<p>Define and reuse lists of labels (or use inherent labeling options where these exist, to exploit existing variable and value labels.)</p>
+<p>Otherwise define sets of common options for plots in one place, and repeated ggplot elements together as a list:</p>
+<ul>
+<li><p>to avoid repetition and clutter</p></li>
+<li><p>to allow easy ‘global’ adjustment</p></li>
+</ul>
+</div>
+<div id="labeling" class="section level3 unnumbered">
+<h3>Labeling</h3>
+<p>Use readable but concise labels. “Amount donated” is OK, “GWWC” is OK because we assume people know what GWWC is from context.</p>
+<p><code>amt_don</code> is not OK. Pete will yell at you.</p>
+<p>Try to have labels be automated … either using column attributes or a concise list</p>
+</div>
+<div id="case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country" class="section level3 unnumbered">
+<h3>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</h3>
+<p><strong>Treemaps</strong></p>
+
+<div class="note">
+NOTE: The below will not run without data, but we cannot make data ‘public’ here … we can swap this for built in R or simulated data in this discussion
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="presentation.html#cb1-1" aria-hidden="true" tabindex="-1"></a>geom_treemap_opts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">geom_treemap</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>),</span>
+<span id="cb1-2"><a href="presentation.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_treemap_text</span>(<span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">place =</span> <span class="st">&quot;centre&quot;</span>,</span>
+<span id="cb1-3"><a href="presentation.html#cb1-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grow =</span> <span class="cn">TRUE</span>, <span class="at">min.size =</span> <span class="dv">1</span> ),</span>
+<span id="cb1-4"><a href="presentation.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb1-5"><a href="presentation.html#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb1-6"><a href="presentation.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Error in geom_treemap(alpha = 0.7): could not find function &quot;geom_treemap&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="presentation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb3-2"><a href="presentation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  don_share_by_size <span class="ot">&lt;-</span> eas_20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(donation_2019_c, donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="presentation.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="presentation.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_don =</span> <span class="fu">sum</span>(donation_2019_c, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="presentation.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">don_share =</span> <span class="fu">round</span>(total_don<span class="sc">/</span><span class="fu">sum</span>(total_don)<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="presentation.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(donation_2019_c_split)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="presentation.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">area =</span> total_don, <span class="at">fill=</span> donation_2019_c_split,</span>
+<span id="cb3-8"><a href="presentation.html#cb3-8" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Include percentage of total donation</span></span>
+<span id="cb3-9"><a href="presentation.html#cb3-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(donation_2019_c_split, <span class="fu">paste0</span>(don_share, <span class="st">&quot;%&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="presentation.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
+<span id="cb3-11"><a href="presentation.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Share of total 2019 reported donation amount, by donation size&quot;</span>)</span>
+<span id="cb3-12"><a href="presentation.html#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Error in select(., donation_2019_c, donation_2019_c_split): object &#39;eas_20&#39; not found</code></pre>
+<p>A good alternative to the treemap … conveying both absolute amounts and rates in the same graph?</p>
+</div>
+<div id="case-likert-scale-individual-items-and-relative-responses-to-these" class="section level3 unnumbered">
+<h3>Case: Likert scale (individual items) and relative responses to these</h3>
+<p>The combination of stacked bar charts and overlayed error/CI bars for some ‘middle split’ seems informative:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="presentation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts&quot;</span>)</span></code></pre></div>
+<iframe src="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts" width="80%" height="400px" data-external="1">
+</iframe>
+<p>Above: from <a href="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts">EAS engagement post, bookdown supplement</a></p>
+</div>
+<div id="issue-dealing-with-scales-and-large-differences-in-magnitudes" class="section level3 unnumbered">
+<h3>Issue: Dealing with scales and large differences in magnitudes</h3>
+<p>If axes are cut and don’t go to zero, mention this prominently in the plot.</p>
+<p>But what if we have a few values that are way above others, and ‘mess up the scale’?</p>
+<p>Sometimes a logarithmic scale is helpful, but that can also lead to confusion. Otherwise…</p>
+<ul>
+<li><p>“any CI’s or other things that go outside of the limits should just be extended to the edge and not dropped)”</p>
+<ul>
+<li><p>doable with scale_y_continuous( oob = scales::squish) +</p>
+<p>scale_x_continuous( oob = scales::squish)<code>or  `coord_cartesian`</code></p></li>
+</ul></li>
+<li><p>or otherwise allow a clear ‘break’ in the axis?</p></li>
+<li><p>Not possible to break the axis ggplot <a href="https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis" class="uri">https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis</a></p></li>
+<li><p><span class="citation">(<a href="#ref-Oska" role="doc-biblioref"><strong>Oska?</strong></a>)</span> – what about ‘extending to the edge’?</p></li>
+</ul>
+<p>Remove outliers as a last resort; prominently mention this where doing so.</p>
+</div>
+<div id="case-means-of-continuous-variables-differences-across-groups" class="section level3 unnumbered">
+<h3>Case: Means of continuous variables: differences across groups</h3>
+<p>Some (imperfect) examples from donation post:</p>
+<p><img src="https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/gap-actual-planned-2019-1.png" /></p>
+<p><img src="https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/planned_actual_gwwc-1.png" /></p>
+<ul>
+<li>Vertical lines for ‘medians and means’ help put this in context</li>
+</ul>
+</div>
+<div id="case-categorical-outcomes-by-continuous-outcomes-and-viceversa" class="section level3 unnumbered">
+<h3>Case: Categorical outcomes by continuous outcomes (and vice/versa)</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="presentation.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure&quot;</span>)</span></code></pre></div>
+<iframe src="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure" width="80%" height="400px" data-external="1">
+</iframe>
+<p>Above, from the <a href="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure">EAS engagement post bookdown</a>, we combine a <code>geom_point</code> with a <code>geom_smooth</code>.*</p>
+<div class="marginnote">
+<p>* DR: I’m slightly concerned about misinterpretations of the smoothed thing though … those shaded regions maybe should not be interpreted as CI?</p>
+</div>
+<p>Here, I think the use of <code>%&gt;% ggplotly</code> yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand ‘what the heck this is’.</p>
+</div>
+<div id="case-visualizing-regression-model-coefficients-and-confidence-intervals" class="section level3 unnumbered">
+<h3>Case: Visualizing (regression) model coefficients and confidence intervals</h3>
+<p>Forest plots as seen <a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models">in donation post here</a></p>
+<p><img src="https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/fp_demog_coefs_qp-1.png" /></p>
+<p>Our <code>group_fp_do</code> function makes this easy to do.</p>
+<p>See how we group the coefficients into plots by ‘theme’</p>
+<p><br />
+</p>
+<p>In some contexts, lines for ‘base rates’ can be helpful</p>
+<p><img src="https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png" /> … context, scroll up from <a href="https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1">here</a></p>
+
+</div>
 </div>
 </div>
             </section>
@@ -982,8 +1092,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="classification-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fermi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="coding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="surveys.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+  <title>“Qualitative” design issues (From EA market testing) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
   <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta property="og:title" content="“Qualitative” design issues (From EA market testing) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="(CAUSAL INFERENCE) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+  <meta name="twitter:title" content="“Qualitative” design issues (From EA market testing) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
   
   <meta name="twitter:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="classification-models.html"/>
-<link rel="next" href="fermi.html"/>
+<link rel="prev" href="expt-quant.html"/>
+<link rel="next" href="basicstat.html"/>
 <style type="text/css">
 p.abstract{
   text-align: center;
@@ -963,17 +963,33 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="causal" class="section level1 unnumbered">
-<h1><strong>(CAUSAL INFERENCE)</strong></h1>
-<p>Some stuff to integrate from <a href="https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs">here</a> perhaps.</p>
-<div id="useful-resources" class="section level2 unnumbered">
-<h2>Useful resources:</h2>
-<p><a href="https://remlapmot.github.io/cibookex-r/">Causal Inference: What If. R and Stata code for Exercises</a></p>
-<p><a href="https://www.theeffectbook.net/">The effect</a> – bookdown, looks great, love nick HK</p>
-<p><a href="https://www.scunning.com/mixtape.html">Causal inference: the Mixtape</a></p>
-<p><a href="https://www.dhidalgo.me/post/useful-r-packages-for-causal-inference-in-the-social-sciences/">Useful R Packages for Causal Inference in the Social Sciences</a></p>
-<p><a href="https://bookdown.org/paul/applied-causal-analysis/">Applied causal analysis with R</a></p>
-<p>Mostly Harmless Econometrics (R code – where was it?)</p>
+<div id="eamt-qual" class="section level1 unnumbered">
+<h1>“Qualitative” design issues (From EA market testing)</h1>
+<div id="naturalness-of-setting-versus-pure-treatments" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> <strong>Naturalness of setting versus ‘pure’ treatments</strong></h2>
+<p><strong>Academics usually try to make each treatment differ in precisely one dimension</strong>, these treatments are meant to represent the underlying model or construct as purely as possible. This <strong>can lead to setups that appear strange or artificia</strong>l, which itself might bring responses it will not be representative or generalizable. </p>
+<p>{% hint style=“info” %}
+For example, in my ‘<a href="http://giveifyouwin.org">give if you win</a>’ (lab) work we had a trial that was (paraphrasing) ‘we are asking you to commit to a donation that may or may not be collected. If the coin flips heads, we will collect the amount you commit, otherwise no donation is made’. It was meant to separate the component of the “give if you win effect” driven by the uncertain nature of the commitment rather than the uncertain nature of the <em>income</em>. However when we considered bringing this to field experiments, there was no way to do it without it making it obvious that this was an experiment or a very strange exercise.
+{% endhint %}</p>
+<p>When we consider an experiment providing ‘real impact information’ to potential donors, we might be encouraged to use the exact write-up from Givewell’s page, for naturalness. However, this may not present the “lives per dollar” information in exactly the same way between two charities of interest, and the particular write-up may suggest certain “anchors” (e.g., whole numbers that people may want to contribute). Thus if we use the exact GW language we may not be 100% confident that the provision of the impact of information is driving any difference. We might be tempted to change it; but at a possible cost of naturalness and direct applicability.</p>
+<p><em>There are very often tradeoffs of this sort.</em></p>
+</div>
+<div id="awareness-of-testing-can-affect-results" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> <strong>Awareness of testing can affect results</strong></h2>
+<p>In the present context, we have posted about our owrk, in general terms, on a public forum (<a href="../organization-and-overview/our-team-and-resources/overview-ea-forum-post.md#ea-forum-post">EA forum post</a>). Thus the idea that ‘people are running experiments to promote effective giving and EA ideas’ is not a well-kept secret. If participants in our experiments and trials are aware of this it may affect their choices and responses to treatments. This general set of problem is referred to in various ways, referring to different aspects of this; see ‘experimenter demand’, ‘desirability bias’, ‘arbitrary coherence/coherent arbitrariness’, observer bias (?), etc.</p>
+<p>Mitigating this, in our context, most of our experiments will be conducted in subtle ways (e.g., small but meaningful variations in EA-aligned home pages), and individuals will only see one of these (with variation by geography or by IP-linked cookies). Furthermore, we will conduct most of our experiments targeting non-EA-aligned audiences unlikely to read posts like this one. (People reading the EA forum post are probably ‘already converted’.)</p>
+</div>
+<div id="other-issues-to-consider-and-flesh-out" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Other issues to consider and flesh out</h2>
+<ul>
+<li>Universe (population) of interest, representativeness</li>
+<li>Design study to measure ‘cheap’ behavior like ‘clicks’ (easier to observe, quicker feedback) versus meaningful and long-run behavior (like donations and pledges)
+<ul>
+<li> attribution issues</li>
+<li>attrition issues (but also see the <a href="experimental-design-methods-issues.md">quant</a> section)</li>
+</ul></li>
+<li>Choice of impact measure/metric (also see the <a href="experimental-design-methods-issues.md">quant</a> section)</li>
+</ul>
 
 </div>
 </div>
@@ -982,8 +998,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="classification-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="fermi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="expt-quant.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basicstat.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
