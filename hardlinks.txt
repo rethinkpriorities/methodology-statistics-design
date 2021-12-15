@@ -1,0 +1,5 @@
+from_ea_market_testing/adaptive-design-sampling-reinforcement-learning.md
+from_ea_market_testing/experimental-design-methods-issues.md
+from_ea_market_testing/qualitative-design-issues.md
+time_series.md
+reinstein_bibtex.bib

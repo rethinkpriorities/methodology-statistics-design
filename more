@@ -1,0 +1,228 @@
+commit 76d349a32913e6ab4da07c580d45dc9618d2480d
+Merge: e978321 cbc0427
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Dec 9 20:15:55 2021 -0500
+
+    Merge branch 'main' of https://github.com/rethinkpriorities/methodology-statistics-design
+
+commit e978321fd7f7286347d82c207f9e2ccd828e5707
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Dec 9 20:15:53 2021 -0500
+
+    lots of restructuring and cleanup ... embed web pages, etc.
+    
+    @Jimbilben @WillemSleegers
+    
+    I cleaned and organized this quite a bit. Willem, it might make sense for you to 'take over' the 'survey design' and 'factor analysis' sections
+    
+    (not that you have to 'do' anything ... but if you are doing and writing stuff anyways, it might as well be there, I guess)
+    
+    Note esp some work in the 'presentation, labeling, and vis' section. Not saying 'my way is right' ... just trying to get the ball rolling on a consensus/protocol/template on this stuff, to save us time and brainpower later
+
+commit cbc0427d59d560c6e8fdc513bef58683713d13e4
+Author: Jimbilben <56879881+Jimbilben@users.noreply.github.com>
+Date:   Thu Dec 9 18:20:10 2021 +0100
+
+    Uploading rmd file for MRP
+
+commit d703594b4c97b6c452921b2d854232c9fcb78470
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 30 12:10:56 2021 -0500
+
+    rebuild, other very small stuff
+
+commit 5605385ca3d19b7aac535cef3f99b7042c1b84be
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 30 12:10:01 2021 -0500
+
+    add 'ideas on when to dive in'
+
+commit f1e4c0ea2cb180a4c0c4ae086c90f1605bef5257
+Author: @daaronr <daaronr@gmail.com>
+Date:   Mon Nov 29 19:58:58 2021 -0500
+
+    Update renv.lock
+
+commit aa7f9339a80136d51d2a18178eea3d855d454fba
+Author: @daaronr <daaronr@gmail.com>
+Date:   Mon Nov 29 15:23:07 2021 -0500
+
+    add time series, other cleanups (parens), rebuild
+
+commit 69abe2cc042cba84c899a1d06d7c05aae2b5f1c5
+Author: @daaronr <daaronr@gmail.com>
+Date:   Sun Nov 28 18:53:17 2021 -0500
+
+    some discussion of classifications models, build
+
+commit b1d923e5c3afd2b85dd4c7201b8489e9c48f4b94
+Author: @daaronr <daaronr@gmail.com>
+Date:   Mon Nov 22 10:53:19 2021 -0500
+
+    Using local bib file
+    
+    For now, I've moved in a 'local' bibfile with all my references (which is output from Zotero ... atm I can't figure out how to automate that)
+    
+    Having Rstudio 'look up the www Zotero database' was just incredibly slow. Thoughts?
+    
+    @Jimbilben @WillemSleegers
+
+commit b9f97fa66f5fd0ab35202020820f8341ea074f60
+Author: @daaronr <daaronr@gmail.com>
+Date:   Mon Nov 22 10:51:44 2021 -0500
+
+    1. Added 'hardlinked' method content from EA Market testing Gitbook
+    
+    @DMoss123 @Jimbilben @WillemSleegers
+    
+    In the 'EA market testing Gitbook' (which is written in a markdown syntax), we're putting together resources and guidelines on 'how to run experiments, trials, and studies' in this context.
+    
+    I divided this into sections 1. Qualitative, 2. Quantitative, and 3. Design issues ...
+    
+    I also drafted a 'reporting template' for people running these studies to keep the others abreast.
+    
+    But IMO this very much overlaps what *we at RP survey group* want to do in putting together guidance for ourselves and partners ... at least the less technical part.
+    
+    So, I've moved this into our repo as a 'hardlink' ... edit it in one place (on my computer... or if I pull down a change from someone else) and it will be edited in the other place as well.
+    
+    I *haven't* yet integrated it into our Bookdown ... we'll have to think about if and how to do that. ... maybe through a simple external link, if the markdown formats can't be easily reconciled.
+
+commit 3fa5c8832a3d85a5d47b166593bec5830c06975e
+Author: @daaronr <daaronr@gmail.com>
+Date:   Wed Nov 17 11:26:55 2021 -0500
+
+    add trackdown command examples
+    
+    @Jimbilben @WillemSleegers  The commands at bottom of `main.R` worked for me to move the content to the shared google doc
+    
+    (after installing the stuff commented out above)
+    
+    Wonder if it works for you.
+    
+    @kcudding -- you will also dig this trackdown thing!
+
+commit d0c650d0284d3812744ea1c4d854eb97d3c5841e
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 16 10:25:15 2021 -0500
+
+    COLLABORATING on power_analysis_framework_2_COLLAB.Rmd with @Jimbilben
+
+commit 91bf892ab50aad6ad6057f8e88fb5c785499ae8e
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 16 10:22:53 2021 -0500
+
+    Revert "small changes"
+    
+    This reverts commit 05f4060433cbe9b736d729277d8dcfcca91ed24e.
+
+commit 05f4060433cbe9b736d729277d8dcfcca91ed24e
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 16 10:18:27 2021 -0500
+
+    small changes
+
+commit e62dbcb67536e4c9e2edcf285855c8d946d5472b
+Author: @daaronr <daaronr@gmail.com>
+Date:   Mon Nov 15 14:51:28 2021 -0500
+
+    incorporate @Jimbilben's power analysis work into Bookdown
+    
+    @Jimbilben  I incorporated this as an 'appendix', but we might ultimately move (part of?) it into the power analysis section
+    
+    I've read, commented on, and made some adjustments (look on these as suggestions, we can revert back) on the first half. Now I'm hoping to dig into the 'concrete' (code) example.
+    
+    If you open any of the doc/*.html files (in a browser) you can see how it looks. I think the 'cold folding' is a pretty big advantage over the pdf
+
+commit 716a01ae6c2f0b1510c8cb38eeb850594a48c263
+Author: @daaronr <daaronr@gmail.com>
+Date:   Fri Nov 12 17:09:50 2021 -0500
+
+    renv snapshot; move some content
+
+commit 74f068eef991e8ecab393d5a7f139ebe1f26ee5a
+Author: @daaronr <daaronr@gmail.com>
+Date:   Fri Nov 12 16:24:22 2021 -0500
+
+    add a few notes
+
+commit 7303fc0c40f3dd33b9a4434dd3dcab1f71f41641
+Author: @daaronr <daaronr@gmail.com>
+Date:   Fri Nov 12 15:53:51 2021 -0500
+
+    reorganization, fleshing out structure
+
+commit bcb3392025fffc1ae8eb94856148480fa0041a47
+Author: @daaronr <daaronr@gmail.com>
+Date:   Fri Nov 12 10:43:37 2021 -0500
+
+    minor additions, not full integrated into yml yet, not built
+
+commit 4701116d757b1aaed0df290d34df3b48389e7e37
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Nov 11 20:18:46 2021 -0500
+
+    Update README.md
+
+commit a37312df136fae258afd3ebbf20155fc9ddb976b
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Nov 11 20:16:07 2021 -0500
+
+    adjusted readme (new proposed framework/structure)
+
+commit 925717bfd42cde6833d59e02314bb1a5d8d20bb1
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Nov 11 17:11:31 2021 -0500
+
+    first 'build' of bookdown. It's not the structure I want yet, just getting it going
+
+commit 33f5c3a94df7e0ca3a296ea39838f927e9e20fe2
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Nov 11 17:09:35 2021 -0500
+
+    these are the file 'pulled in' from dr-rstuff by running main.R (project_setup.R itself pulls in and sources more stuff)
+
+commit 8e0a86faa01674fe68cbc9f008effbfb5b3f99c5
+Author: @daaronr <daaronr@gmail.com>
+Date:   Thu Nov 11 17:08:16 2021 -0500
+
+    set up rproject, renv, and basic content; files that will 'pull in' formatting files and functions from dr-rstuff
+    
+    @WillemSleegers @jamieelsey -- I'm showing you how I put this together ... one piece at a time. First I set up the space and the key R and Rmd scripts that pull the other stuff in
+
+commit c475d43df50f7e9c083f9fc5098331a161a444d4
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 9 18:39:23 2021 -0500
+
+    Update quick_experiment_design_tips_explainer.Rmd
+
+commit e52147e33b6b5a7acd8c3d411791c119988a6608
+Author: @daaronr <daaronr@gmail.com>
+Date:   Tue Nov 9 13:56:27 2021 -0500
+
+    Create quick_experiment_design_tips_explainer.Rmd
+
+commit 569d8c99b267ceb7dd700d4451ed05444f524fb3
+Author: David Reinstein <daaronr@gmail.com>
+Date:   Mon Nov 8 18:36:28 2021 -0500
+
+    Update issue templates
+
+commit d819b601eec523e8bb61b2aa2c3b6d7cb5bff695
+Author: David Reinstein <daaronr@gmail.com>
+Date:   Mon Nov 8 18:23:25 2021 -0500
+
+    readme, proposed setup, tips
+    
+    @WillemSleegers @DMoss123 @peterhurford  ... proposing a structure (still need to set it up)
+    
+    minor
+    
+    minor
+    
+    Update README.md
+
+commit b8fc23f4ac2afb95a73031d8282da02084336e52
+Author: David Reinstein <daaronr@gmail.com>
+Date:   Mon Nov 8 18:02:00 2021 -0500
+
+    Initial commit
