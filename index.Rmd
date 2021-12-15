@@ -58,7 +58,7 @@ knitr::write_bib(c(
 ```
 
 
-```{r html, echo=FALSE}
+```{r echo=FALSE}
 # globally set chunk options
 
 #This allows building even if errors come along the way
@@ -67,7 +67,7 @@ knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, messag
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 ```
 
-```{r html, echo=FALSE}
+```{r echo=FALSE}
 
 
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to") #what was this? do we need it?
