@@ -68,6 +68,14 @@ step-1-generate-a-large-number-of-data-sets-for-the-analysis
 step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest
 step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals
 step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.
+inference-and-rough-equivalence-testing-with-binomial-outcomes
+input-from-gsheet-wip
+how-likely-is-the-imbalance-of-unique-emails-due-to-chance
+how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes
+difference-between-two-binomial-random-variables.
+applying-this-to-present-data
+adaptation-of-this-magnitude-or-smaller
+dr-discussion-of-this-case-maybe-obsolete
 readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates
 methods-and-rp-guidelines-bookdown
 to-contain

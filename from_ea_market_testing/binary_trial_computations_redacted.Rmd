@@ -282,6 +282,10 @@ E.g., even if one treatment truly lead to ‘twice as many donations as the othe
 We can reasonably ‘rule out’ differences of maybe 2.5x or greater
 
 
+Main point: given the rareness of donations in this context, our sample size doesn’t let us make very strong conclusions in either directions … at least not yet. I hope that combined with other evidence, we will be able to infer more
+
+
+
 ## DR discussion of this case ... maybe obsolete
 
 We get a 0.59% and a 0.50% conversion rate (share of emails who made at least one contribution in response) for control and treatment, respectively.
