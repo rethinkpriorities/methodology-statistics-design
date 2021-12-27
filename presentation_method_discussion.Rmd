@@ -2,23 +2,12 @@
 
 ```{block2,  type='note'}
 Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
+NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/
 ```
 
 ## Aside: EA Forum organisation, collophon, formatting
 
-
-
-```{block2,  type='fold'}
-
-We often need to make output into a format acceptable for the EA Forum
-
-Typically, RP has made these posts first in Google Docs for feedback and then there is some sort of sprocedure to get it into EA forum markdown syntax from there. For some previous posts, we pasted from the Rstudio visual mode pastes into Google docs for narrative, and figures/tables could be manually pasted. But we want to avoid having to do that!
-
-David Reinstein has worked with Pete and others on tools to (mostly) automate this conversion and hosting process, but some manual tweaks were needed at the end. See the work on this [here, at bottom](https://github.com/rethinkpriorities/ea-data/blob/master/main_2020.R), and in [this R script](https://github.com/rethinkpriorities/ea-data/blob/master/code/parse_ea_forum_md.R) and [this Python script](https://github.com/rethinkpriorities/ea-data/blob/master/code/fix_eafo_links.py).  Yes, spaghetti code.
-
-Atm, some formatting adjustments are necessary, e.g.,  EA Forum doesn't have margin notes or folding boxes.
-
-```
+MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
 ## Visualisations
 
@@ -26,26 +15,7 @@ See also Gdoc: [visualisation discussions](https://docs.google.com/document/d/1U
 
 ### Ideal coding practice for visualisations {-}
 
-Use `ggplot` always unless you've a strong reason to do otherwise. Always save the plot as an object in the environment as well as printing it where it belongs.
-
-Ideally, we will come up with a set of functions and default options for the key sets of plots we use and like.
-
-Define and reuse lists of labels (or use inherent labeling options where these exist, to exploit existing variable and value labels.)
-
-Otherwise define sets of common options for plots in one place, and repeated ggplot elements together as a list:
-
--   to avoid repetition and clutter
-
--   to allow easy 'global' adjustment
-
-### Labeling {-}
-
-Use readable but concise labels. "Amount donated" is OK, "GWWC" is OK because we assume people know what GWWC is from context.
-
-`amt_don` is not OK. Pete will yell at you.
-
-Try to have labels be automated ... either using column attributes or a concise list
-
+MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
 
 ### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {-}

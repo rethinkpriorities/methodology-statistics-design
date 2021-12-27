@@ -24,7 +24,7 @@
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
 
-<meta name="date" content="2021-12-16" />
+<meta name="date" content="2021-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -753,28 +753,6 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="support/tufte_plus.css" type="text/css" />
 </head>
@@ -811,7 +789,6 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="presentation.html"><a href="presentation.html#visualisations"><i class="fa fa-check"></i><b>3.2</b> Visualisations</a>
 <ul>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#ideal-coding-practice-for-visualisations"><i class="fa fa-check"></i>Ideal coding practice for visualisations</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#labeling"><i class="fa fa-check"></i>Labeling</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country"><i class="fa fa-check"></i>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-likert-scale-individual-items-and-relative-responses-to-these"><i class="fa fa-check"></i>Case: Likert scale (individual items) and relative responses to these</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#issue-dealing-with-scales-and-large-differences-in-magnitudes"><i class="fa fa-check"></i>Issue: Dealing with scales and large differences in magnitudes</a></li>
@@ -1014,7 +991,7 @@ div.csl-indent {
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
 ## data:  matrix(c(n1, n2, n2, n1), ncol = 2)
-## p-value = 1.512e-05
+## p-value = 0.00001512
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
 ##  1.142247 1.428639
@@ -1141,7 +1118,7 @@ a 0.50% conversion rate for T2 - Emotion/Story
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">*</span>z, <span class="dv">10</span><span class="sc">*</span>z)</span>
 <span id="cb32-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">sapply</span>(s, <span class="cf">function</span>(z) <span class="fu">diffBin</span>(z, n1, p1, n2, p2))</span>
 <span id="cb32-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s,p)</span></code></pre></div>
-<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-31-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see a large likelihood of values in the range of the +2 difference observed, and a low likelihood of a difference of 10 or more in either direction.</p>
 </div>
 <div id="adaptation-of-this-magnitude-or-smaller" class="section level3" number="13.3.3">
@@ -1185,7 +1162,7 @@ I plot</p>
 <span id="cb38-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(B, probmag, <span class="at">log  =</span> <span class="st">&quot;x&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;True relative incidence&quot;</span>, <span class="at">ylab =</span><span class="st">&quot;Prob. of difference this small&quot;</span>)</span></code></pre></div>
-<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb39-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  probmag_plot <span class="ot">&lt;-</span></span>
 <span id="cb39-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -1197,7 +1174,7 @@ I plot</p>
 <span id="cb39-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Prob. diff. as small as obsd&quot;</span>)</span>
 <span id="cb39-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-11"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-34-2.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-33-2.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Hard-coded takeaways 15 Dec 2021 :</p>
 <p>our data is consistent with ‘no difference’ (of course) … but its also consistent with ‘a fairly large difference in incidence’</p>
 <p>E.g., even if one treatment truly lead to ‘twice as many donations as the other’, we still have a 20% chance of seeing a differences as small as the one we see (of 8 versus 6)</p>

@@ -24,7 +24,7 @@
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
 
-<meta name="date" content="2021-12-16" />
+<meta name="date" content="2021-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -753,28 +753,6 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="support/tufte_plus.css" type="text/css" />
 </head>
@@ -811,7 +789,6 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="presentation.html"><a href="presentation.html#visualisations"><i class="fa fa-check"></i><b>3.2</b> Visualisations</a>
 <ul>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#ideal-coding-practice-for-visualisations"><i class="fa fa-check"></i>Ideal coding practice for visualisations</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#labeling"><i class="fa fa-check"></i>Labeling</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country"><i class="fa fa-check"></i>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-likert-scale-individual-items-and-relative-responses-to-these"><i class="fa fa-check"></i>Case: Likert scale (individual items) and relative responses to these</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#issue-dealing-with-scales-and-large-differences-in-magnitudes"><i class="fa fa-check"></i>Issue: Dealing with scales and large differences in magnitudes</a></li>
@@ -980,36 +957,18 @@ div.csl-indent {
 
 <div class="note">
 Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
+NOTE: this is being moved to <a href="https://rethinkpriorities.github.io/how-to-visualize/" class="uri">https://rethinkpriorities.github.io/how-to-visualize/</a>
 </div>
 <div id="aside-ea-forum-organisation-collophon-formatting" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Aside: EA Forum organisation, collophon, formatting</h2>
-
-<div class="fold">
-<p>We often need to make output into a format acceptable for the EA Forum</p>
-<p>Typically, RP has made these posts first in Google Docs for feedback and then there is some sort of sprocedure to get it into EA forum markdown syntax from there. For some previous posts, we pasted from the Rstudio visual mode pastes into Google docs for narrative, and figures/tables could be manually pasted. But we want to avoid having to do that!</p>
-<p>David Reinstein has worked with Pete and others on tools to (mostly) automate this conversion and hosting process, but some manual tweaks were needed at the end. See the work on this <a href="https://github.com/rethinkpriorities/ea-data/blob/master/main_2020.R">here, at bottom</a>, and in <a href="https://github.com/rethinkpriorities/ea-data/blob/master/code/parse_ea_forum_md.R">this R script</a> and <a href="https://github.com/rethinkpriorities/ea-data/blob/master/code/fix_eafo_links.py">this Python script</a>. Yes, spaghetti code.</p>
-<p>Atm, some formatting adjustments are necessary, e.g., EA Forum doesn’t have margin notes or folding boxes.</p>
-</div>
+<p>MOVED to <a href="https://rethinkpriorities.github.io/how-to-visualize/">how-to-visualize</a></p>
 </div>
 <div id="visualisations" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Visualisations</h2>
 <p>See also Gdoc: <a href="https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#">visualisation discussions</a></p>
 <div id="ideal-coding-practice-for-visualisations" class="section level3 unnumbered">
 <h3>Ideal coding practice for visualisations</h3>
-<p>Use <code>ggplot</code> always unless you’ve a strong reason to do otherwise. Always save the plot as an object in the environment as well as printing it where it belongs.</p>
-<p>Ideally, we will come up with a set of functions and default options for the key sets of plots we use and like.</p>
-<p>Define and reuse lists of labels (or use inherent labeling options where these exist, to exploit existing variable and value labels.)</p>
-<p>Otherwise define sets of common options for plots in one place, and repeated ggplot elements together as a list:</p>
-<ul>
-<li><p>to avoid repetition and clutter</p></li>
-<li><p>to allow easy ‘global’ adjustment</p></li>
-</ul>
-</div>
-<div id="labeling" class="section level3 unnumbered">
-<h3>Labeling</h3>
-<p>Use readable but concise labels. “Amount donated” is OK, “GWWC” is OK because we assume people know what GWWC is from context.</p>
-<p><code>amt_don</code> is not OK. Pete will yell at you.</p>
-<p>Try to have labels be automated … either using column attributes or a concise list</p>
+<p>MOVED to <a href="https://rethinkpriorities.github.io/how-to-visualize/">how-to-visualize</a></p>
 </div>
 <div id="case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country" class="section level3 unnumbered">
 <h3>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</h3>
@@ -1037,7 +996,7 @@ NOTE: The below will not run without data, but we cannot make data ‘public’ 
 <span id="cb3-10"><a href="presentation.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
 <span id="cb3-11"><a href="presentation.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Share of total 2019 reported donation amount, by donation size&quot;</span>)</span>
 <span id="cb3-12"><a href="presentation.html#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Error in eas_20 %&gt;% select(donation_2019_c, donation_2019_c_split) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre><code>## Error in select(., donation_2019_c, donation_2019_c_split): object &#39;eas_20&#39; not found</code></pre>
 <p>A good alternative to the treemap … conveying both absolute amounts and rates in the same graph?</p>
 </div>
 <div id="case-likert-scale-individual-items-and-relative-responses-to-these" class="section level3 unnumbered">
@@ -1061,7 +1020,7 @@ NOTE: The below will not run without data, but we cannot make data ‘public’ 
 </ul></li>
 <li><p>or otherwise allow a clear ‘break’ in the axis?</p></li>
 <li><p>Not possible to break the axis ggplot <a href="https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis" class="uri">https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis</a></p></li>
-<li><p><span class="citation">(<a href="#ref-Oska" role="doc-biblioref"><strong>Oska?</strong></a>)</span> – what about ‘extending to the edge’?</p></li>
+<li><p><span class="citation">@Oska</span> – what about ‘extending to the edge’?</p></li>
 </ul>
 <p>Remove outliers as a last resort; prominently mention this where doing so.</p>
 </div>

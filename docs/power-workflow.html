@@ -24,7 +24,7 @@
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
 
-<meta name="date" content="2021-12-16" />
+<meta name="date" content="2021-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -753,28 +753,6 @@ code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="support/tufte_plus.css" type="text/css" />
 </head>
@@ -811,7 +789,6 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="presentation.html"><a href="presentation.html#visualisations"><i class="fa fa-check"></i><b>3.2</b> Visualisations</a>
 <ul>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#ideal-coding-practice-for-visualisations"><i class="fa fa-check"></i>Ideal coding practice for visualisations</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#labeling"><i class="fa fa-check"></i>Labeling</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country"><i class="fa fa-check"></i>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-likert-scale-individual-items-and-relative-responses-to-these"><i class="fa fa-check"></i>Case: Likert scale (individual items) and relative responses to these</a></li>
 <li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#issue-dealing-with-scales-and-large-differences-in-magnitudes"><i class="fa fa-check"></i>Issue: Dealing with scales and large differences in magnitudes</a></li>
@@ -1236,7 +1213,7 @@ We might think of sample size as <em>in</em> our control, which it generally is,
 <span id="cb20-4"><a href="power-workflow.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>))</span>
 <span id="cb20-5"><a href="power-workflow.html#cb20-5" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb20-6"><a href="power-workflow.html#cb20-6" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span></code></pre></div>
-<pre><code>## Time difference of 20.82222 secs</code></pre>
+<pre><code>## Time difference of 15.43437 secs</code></pre>
 <p>The object ‘linreg.output’ is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
 </div>
 <div id="step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="section level3" number="12.2.3">

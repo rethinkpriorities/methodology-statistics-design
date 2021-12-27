@@ -20,6 +20,8 @@ and [Reinstein's sloppy notes](https://daaronr.github.io/metrics_discussion/surv
 
 ## (Willem Sleegers, to incorporate)
 
+[item development](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development)
+
 ```{r wppage}
 
 knitr::include_url("https://willemsleegers.github.io/how-to-science/survey-design.html#item-development")

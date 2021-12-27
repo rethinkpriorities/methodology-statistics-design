@@ -36,7 +36,6 @@ bookdown::pdf_book:
       github: yes
       facebook: no
 always_allow_html: yes
-bibliography: [references.bib, packages.bib, reinstein_bibtex.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: daaronr/metrics_discussion_work
@@ -44,7 +43,6 @@ description: ""
 #url: 'https\://daaronr.github.io//'
 tags: [Econometrics, Statistics, Data Science, Experiments, Survey methods, Notes, Methodology]
 ---
-
 
 #Basic options used across files and shortcut functions, e.g., 'pp()' for print
 #functions grabbed from web and created by us for analysis/output
