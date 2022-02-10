@@ -7,14 +7,27 @@ This work has been moved from the EA market testing repo, with 'identifying' con
 ```
 
 
-*Note*: 'raw data' is a
+The context for this trial is discussed [here (private)](https://app.gitbook.com/o/-MfFk4CTSGwVOPkwnRgx/s/-Mf8cHxdwePMZXRTKnEE/c/0qFJ2AUh7cZzynp3zRjk/contexts-and-environments-for-testing/one-for-the-world/pre-giving-tuesday-email-split-test) and will be publicly shared [here]() when we gain permission.
 
 ## Input from Gsheet (WIP)
 
+```{r}
+library(googlesheets4)
+read_sheet("XXX")
+#Need authorization here; how to do it? Note -- we need those cells to be anonymized 
+```
+
+
+
+Note: subject lines were different ... the impact email got more opens
+
+'Giving Season contributions - website' for donations ... because CtA is a donation button on the website
+
+## Randomization inference approach 
 
 ## How likely is the 'imbalance of unique emails' due to chance?
 
-We've 1345 unique emails for ‘control’ treatment 1 and 1190 unique emails for treatment 2, if I did the quick calculations correctly. (Todo-- integrate the data here.)
+We've 1345 unique emails in the dataset for ‘control’ treatment 1 and 1190 unique emails for treatment 2, if I did the quick calculations correctly. (Todo-- integrate the data here.)
 
 We know some emails are repeated. To analyze this correctly I should bring in the actual distribution of 'number of times an email is in the data' and simulate assignment. (Or maybe this is a 'Poisson' thing?)
 
@@ -37,6 +50,10 @@ n2 <- 1190
 
 If the above tests are reasonable, this imbalance is very unlikely to occur by chance.
 
+
+Note: if we think this is opens, this is a demonstration that one email is opened more. 
+
+    
 
 
 
@@ -231,8 +248,7 @@ This implies there is a `r op(mag_db_0*100)`% chance of getting a difference *no
 Set up an arbitrary vector of 'true differences' (to keep it simple, only change it in one direction for now ...)
 
 
-Below,
-I plot
+Below, I plot
 
 Y-axis: ’how likely would a difference in donations ‘as small or smaller in magnitude’” than we see in the data  against
 
@@ -254,7 +270,7 @@ as.list(ltmag_diffBin(z, n1, p1, n2, p2)*100) %>% format(digits=3, scientific=FA
 probmag <- ltmag_diffBin(z, n1, p1, n2, p2)
 
 
-qplot(B, probmag, log  = "x", xlab = "True relative incidence", ylab ="Prob. of difference this small")
+#qplot(B, probmag, log  = "x", xlab = "True relative incidence", ylab ="Prob. of difference this small")
 
 (
   probmag_plot <-
@@ -272,10 +288,9 @@ qplot(B, probmag, log  = "x", xlab = "True relative incidence", ylab ="Prob. of 
 
 
 
-
 Hard-coded takeaways 15 Dec 2021 :
 
-our data is consistent with ‘no difference’ (of course) ... but its also consistent with ‘a fairly large difference in incidence’
+Our data is consistent with ‘no difference’ (of course) ... but its also consistent with ‘a fairly large difference in incidence’
 
 E.g., even if one treatment truly lead to ‘twice as many donations as the other’, we still have a 20% chance of seeing a differences as small as the one we see (of 8 versus 6)
 
@@ -286,6 +301,7 @@ Main point: given the rareness of donations in this context, our sample size doe
 
 
 
+<!--
 ## DR discussion of this case ... maybe obsolete
 
 We get a 0.59% and a 0.50% conversion rate (share of emails who made at least one contribution in response) for control and treatment, respectively.
@@ -296,6 +312,8 @@ if the true differences in incidence were XXX or larger? (For now, assuming the 
 
 How?
 
-For `num_sim` number of simulations - 'Control': $i=1..N$ draws from a binomial(0.005) - 'Treatment' N draws from a binomial(0.005\*B) where B is the 'considered effect size' - Compute the `effect_i(B)` (the difference in share positive size of the simulated difference' for this simulation) - Compute: 'what share of simulations have a difference smaller in magnitude than the empirical one. I.e., \$\sum\_i(\|ES_i(B)\| \< \|ES\|) \times \frac{1}{N} \$
+For `num_sim` number of simulations - 'Control': $i=1..N$ draws from a binomial(0.005) - 'Treatment' N draws from a binomial(0.005\*B) where B is the 'considered effect size' - Compute the `effect_i(B)` (the difference in share positive size ggof the simulated difference' for this simulation) - Compute: 'what share of simulations have a difference smaller in magnitude than the empirical one. I.e., \$\sum\_i(\|ES_i(B)\| \< \|ES\|) \times \frac{1}{N} \$
 
 Do this for a range of considered effect sizes, e.g., $B \in \{0.5, 0.75, 1, 1.5, 2, 3, 4\}$
+
+-->
