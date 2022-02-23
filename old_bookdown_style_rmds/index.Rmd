@@ -1,64 +1,23 @@
 ---
 title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
 author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
+logo: logo.png
 abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output:
-  bookdown::gitbook:
-    lib_dir: "book_assets"
-    includes:
-      in_header: support/header.html
-    css: support/tufte_plus.css #formatting stuff, includes code to enable margin notes and folds
-    config:
-      toc:
-        after: |
-          <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-        collapse: section
-        scroll_highlight: yes
-      fontsettings:
-        theme: white
-        size: 2
-      sharing:
-        facebook: yes
-        twitter: yes
-        google: no
-        linkedin: yes
-        weibo: yes
-        instapaper: no
-        vk: no
-        all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']
-    highlight: tango
-    download: [pdf, epub, mobi]
-bookdown::pdf_book:
-    keep_tex: yes
-    sharing:
-      github: yes
-      facebook: no
+bibliography: references.bib
+csl: apa.csl
 always_allow_html: yes
-biblio-style: apalike
 link-citations: yes
-github-repo: daaronr/metrics_discussion_work
-description: ""
+site: bookdown::bookdown_siteoutput:
+output: rethinkpriorities::book
+github-repo: /rethinkpriorities/methodology-statistics-design
+description: "Rethink Priorities: Our approach to empirical and quantitative work"
 #url: 'https\://daaronr.github.io//'
 tags: [Econometrics, Statistics, Data Science, Experiments, Survey methods, Notes, Methodology]
 ---
 
-#Basic options used across files and shortcut functions, e.g., 'pp()' for print
-#functions grabbed from web and created by us for analysis/output
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
-
-
 ```{r echo=FALSE}
 # globally set chunk options
-
 #This allows building even if errors come along the way
 knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
 

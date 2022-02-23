@@ -170,3 +170,23 @@ What do I mean by a 'partial dive into the rabbit hole?'
 
 [Pete W's gists](https://gist.github.com/peterhurford/)
 
+## Style and 'collophon'
+
+For more information on how this 'bookdown' was created, see our public template [here](https://rethinkpriorities.github.io/bookdown-template/), and also consult the resources at [bookdown.org](https://bookdown.org/)
+
+## R setup and packages
+
+We are using `Renv` to keep packages aligned. Please install Renv it and snapshot 
+
+`renv::dependencies` should tell us what packages are used/needed
+
+```{r}
+dependencies <- renv::dependencies()
+dependencies[2] %>% unique() %>% as.list()
+
+```
+
+
+
+
+## Git repo, shared files, procedure for editing
