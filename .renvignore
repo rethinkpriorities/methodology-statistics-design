@@ -1,0 +1,8 @@
+# RENVIGNORE
+#
+# files that only 'add functions and packages'
+
+code/*
+
+# and index is causing issues atm too
+index.Rmd

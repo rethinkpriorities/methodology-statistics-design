@@ -2,59 +2,32 @@
 
 #### Setup ####
 
-try_download <- function(url, path) {
-  new_path <- gsub("[.]", "X.", path)
-  tryCatch({
-    download.file(url = url,
-                  destfile = new_path)
-  }, error = function(e) {
-    print("You are not online, so we can't download")
-  })
-  tryCatch(
-    file.rename(new_path, path)
-  )
-}
-
 library(here)
 library(pacman)
 here <- here::here()
 rename_all <- dplyr::rename_all
-rename <- dplyr::rename
+
+filter <- dplyr::filter
 
 #... Import setup for this project using template from dr-rstuff  ####
 
-dir.create(here("code"))
+#source(here("code", "packages.R")) # Install and load packages used in build and analysis (note: these could be cleaned)
 
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/project_setup.R",
-  here::here("code", "project_setup.R")
-)
+#WITH RENV this is not needed! 
+#... add packages as and when needed; note, the file below has been vastly trimmed down, mainly only loading RP's pacakages
+source(here("code", "packages.R"))
 
-try_download(
-  "https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/download_formatting.R",
-  here::here("code", "download_formatting.R")
-)
+#renv::dependencies()
 
-# Note: I used to do the 'install a set of packages thing here' ... but with renv we can just have renv search for and install these (in Rstudio it reminds you; otherwise use call `renv::dependencies()` or `renv::hydrate` I think. )
+#p_load(devtools)
 
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("peterhurford/surveytools2") #installing this here bc renv doesn't detect it
+#Just a bunch of handy shortcuts and precedence of packages 
 
-1## You MUST run this for anything else to work ####
-source(here::here("code", "project_setup.R"))
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
 
-##NOTE: these sourced files seem to need some packages to be installed.
-#Todo -- 'embed' that somehow? (I just used Renv to add these for now)
+#Put these in if and when we need them, 
+#source(here("code", "modeling_functions.R")) #TODO - incorporate rest of these into RP r package
 
-
-#remotes::install_github("claudiozandonella/trackdown", build_vignettes = TRUE)
-# trying 'trackdown' (https://bookdown.org/yihui/rmarkdown-cookbook/google-drive.html) to help collaborate dynamically
-#library(trackdown)
-
-source(here::here("code", "download_formatting.R"))
-
-print("project_setup creates 'support' folder and downloads tufte_plus.css, header.html into it")
-print("project_setup creates 'code' folder and downloads baseoptions.R, and functions.R into it, and sources these")
 
 ### Source model-building tools/functions
 #source(here::here("code","modeling_functions.R"))
@@ -62,13 +35,36 @@ print("project_setup creates 'code' folder and downloads baseoptions.R, and func
 #Pulling in key files from other repos; don't edit them here
 #Just 'pull these in' from the ea-data repo for now; we may re-home them here later
 
-dir.create(here("remote"))
+#dir.create(here("remote"))
 
-#THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))s
+#THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))
+#TODO -- find a good way to move the relevant content over from other repos
 
 options(pkgType = "binary")
-
 p_load("bettertrace") #better tracking after bugs
+
+
+## Parsing tool/parse to 'new formats' (use only once, and carefully!) ####
+
+p_load(rex, readr, magrittr)
+
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_dr_to_ws.R")
+
+rmd_files <- c("index.Rmd", "introduction_overview.Rmd", "data_and_code.Rmd", "coding_data.Rmd", "presentation_method_discussion.Rmd", "survey_designs_methods.Rmd", "experiments_trials_design.Rmd",  "basic_stats.Rmd", "ml_modeling.Rmd", "time_series_predict.Rmd", "time_series_application.Rmd", "classification_model_notes.Rmd", "causal_inf.Rmd", "fermi.Rmd", "other_sections.Rmd", "power_analysis_framework_2.Rmd")
+
+
+#!mv *.Rmd old_bookdown_style_rmds
+
+map2(rmd_files, rmd_files,
+     ~ dr_to_bs4(here::here("old_bookdown_style_rmds", .x), .y))
+
+other_rmd_files <- c("from_ea_market_testing/binary_trial_computations_redacted.Rmd", "from_ea_market_testing/qualitative-design-issues.md")
+
+other_rmd_files_names <- c("from_ea_market_testing/binary_trial_computations_redacted_ed.Rmd", "from_ea_market_testing/qualitative-design-issues_ed.md")
+
+purrr::map2(other_rmd_files, other_rmd_files_names,
+            ~ dr_to_bs4(.x, .y))
+
 
 #### BUILD the bookdown ####
 #The line below should 'build the bookdown' in the order specified in `_bookdown.yml`
@@ -76,13 +72,16 @@ p_load("bettertrace") #better tracking after bugs
 #p_load(bookdown)
 
 
-## (Todo) Adjust the gitbook 'hardlinked' content format ####
 #p_load(bookdown)
-
 {
   options(knitr.duplicate.label = "allow")
-  rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
+  rmarkdown::render_site(output_format = 'rethinkpriorities::book', encoding = 'UTF-8')
 }
+
+#{
+ # options(knitr.duplicate.label = "allow")
+  #rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
+#}
 
 
 # trackdown command examples ####
