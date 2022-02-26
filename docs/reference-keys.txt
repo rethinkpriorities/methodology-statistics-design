@@ -3,6 +3,9 @@ rethink-priorities-our-approach-to-empirical-and-quantitative-work
 the-purpose-of-this-resource
 outline_sections
 favorite-resources-references-tools
+style-and-collophon
+r-setup-and-packages
+git-repo-shared-files-procedure-for-editing
 coding
 coding-and-organisational-issues
 data-management
@@ -70,12 +73,12 @@ step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achiev
 step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.
 inference-and-rough-equivalence-testing-with-binomial-outcomes
 input-from-gsheet-wip
+randomization-inference-approach
 how-likely-is-the-imbalance-of-unique-emails-due-to-chance
 how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes
 difference-between-two-binomial-random-variables.
 applying-this-to-present-data
 adaptation-of-this-magnitude-or-smaller
-dr-discussion-of-this-case-maybe-obsolete
 readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates
 methods-and-rp-guidelines-bookdown
 to-contain

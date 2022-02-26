@@ -46,7 +46,7 @@ p_load("bettertrace") #better tracking after bugs
 
 ## Parsing tool/parse to 'new formats' (use only once, and carefully!) ####
 
-p_load(rex, readr, magrittr)
+p_load(rex, readr, purrr)
 
 source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_dr_to_ws.R")
 
@@ -71,8 +71,6 @@ purrr::map2(other_rmd_files, other_rmd_files_names,
 
 #p_load(bookdown)
 
-
-#p_load(bookdown)
 {
   options(knitr.duplicate.label = "allow")
   rmarkdown::render_site(output_format = 'rethinkpriorities::book', encoding = 'UTF-8')

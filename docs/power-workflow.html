@@ -2,699 +2,40 @@
 <html lang="" xml:lang="">
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Power analysis workflow (Jamie Elsey) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
-  <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Power analysis workflow (Jamie Elsey) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+<meta property="og:type" content="book" />
 
-  <meta property="og:title" content="Power analysis workflow (Jamie Elsey) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
-  <meta name="github-repo" content="daaronr/metrics_discussion_work" />
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Power analysis workflow (Jamie Elsey) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
-  
-  <meta name="twitter:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative’, but are important for gaining clear and useful inference" />
-  
+<meta property="og:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference" />
+<meta name="github-repo" content="/rethinkpriorities/methodology-statistics-design" />
 
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
+<meta name="date" content="2022-02-26" />
 
-<meta name="date" content="2021-12-26" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="appendixsupplements.html"/>
-<link rel="next" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"/>
-<style type="text/css">
-p.abstract{
-  text-align: center;
-  font-weight: bold;
-}
-div.abstract{
-  margin: auto;
-  width: 90%;
-}
-</style>
-<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
-<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
-<!-- font families -->
-
-<link href="https://fonts.googleapis.com/css?family=PT+Sans|Pacifico|Source+Sans+Pro" rel="stylesheet">
-
-<!-- <script src="js/hideOutput.js"></script> -->
-
-<!-- Mathjax -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/default.js"></script>
-
- <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js", "TeX/AMSmath.js"],
-        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
-        jax: ["input/TeX","output/CommonHTML"]
-      });
-      MathJax.Hub.processSectionDelay = 0;
-  </script>
-
-
-
-
-<script async defer src="https://hypothes.is/embed.js"></script>
-
-<!-- Folding text box javascript thing -->
-
-<script type="text/javascript">
-$(document).ready(function() {
-  $folds = $(".fold");
-  $folds.wrapInner("<div class=\"fold-blck\">"); // wrap a div container around content
-  $folds.prepend("<button class=\"fold-btn\">Unfold</button>");  // add a button
-  $(".fold-blck").toggle();  // fold all blocks
-  $(".fold-btn").on("click", function() {  // add onClick event
-    $(this).text($(this).text() === "Fold" ? "Unfold" : "Fold");  // if the text equals "Fold", change it to "Unfold"or else to "Fold"
-    $(this).next(".fold-blck").toggle("linear");  // "swing" is the default easing function. This can be further customized in its speed or the overall animation itself.
-  })
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<!--
-<script type="text/javascript">
+<meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference">
 
-// toggle visibility of R source blocks in R Markdown output
-function toggle_R() {
-  var x = document.getElementsByClassName('r');
-  if (x.length == 0) return;
-  function toggle_vis(o) {
-    var d = o.style.display;
-    o.style.display = (d == 'block' || d == '') ? 'none':'block';
-  }
+<title>Power analysis workflow (Jamie Elsey) | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
 
-  for (i = 0; i < x.length; i++) {
-    var y = x[i];
-    if (y.tagName.toLowerCase() === 'pre') toggle_vis(y);
-  }
 
-    var elem = document.getElementById("myButton1");
-    if (elem.value === "Hide Global") elem.value = "Show Global";
-    else elem.value = "Hide Global";
-}
-
-document.write('<input onclick="toggle_R();" type="button" value="Hide Global" id="myButton1" style="position: absolute; top: 10%; right: 2%; z-index: 200"></input>')
-
-</script> -->
-
-<!-- Global site tag (gtag.js) - Google Analytics
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148137970-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-148137970-3');
-</script>
--->
-
-<!-- FOLDING TEXT BOXES -->
-
-<script>
-/* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-/* jshint latedef: false */
-
-+function ($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
-
-  var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
-    this.transitioning = null
-
-    if (this.options.parent) {
-      this.$parent = this.getParent()
-    } else {
-      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
-    }
-
-    if (this.options.toggle) this.toggle()
-  }
-
-  Collapse.VERSION  = '3.3.7'
-
-  Collapse.TRANSITION_DURATION = 350
-
-  Collapse.DEFAULTS = {
-    toggle: true
-  }
-
-  Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
-  }
-
-  Collapse.prototype.show = function () {
-    if (this.transitioning || this.$element.hasClass('in')) return
-
-    var activesData
-    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
-
-    if (actives && actives.length) {
-      activesData = actives.data('bs.collapse')
-      if (activesData && activesData.transitioning) return
-    }
-
-    var startEvent = $.Event('show.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    if (actives && actives.length) {
-      Plugin.call(actives, 'hide')
-      activesData || actives.data('bs.collapse', null)
-    }
-
-    var dimension = this.dimension()
-
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
-
-    this.$trigger
-      .removeClass('collapsed')
-      .attr('aria-expanded', true)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
-      this.transitioning = 0
-      this.$element
-        .trigger('shown.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
-
-    this.$element
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
-  }
-
-  Collapse.prototype.hide = function () {
-    if (this.transitioning || !this.$element.hasClass('in')) return
-
-    var startEvent = $.Event('hide.bs.collapse')
-    this.$element.trigger(startEvent)
-    if (startEvent.isDefaultPrevented()) return
-
-    var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
-
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
-      .attr('aria-expanded', false)
-
-    this.$trigger
-      .addClass('collapsed')
-      .attr('aria-expanded', false)
-
-    this.transitioning = 1
-
-    var complete = function () {
-      this.transitioning = 0
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse')
-        .trigger('hidden.bs.collapse')
-    }
-
-    if (!$.support.transition) return complete.call(this)
-
-    this.$element
-      [dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
-  }
-
-  Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
-  }
-
-  Collapse.prototype.getParent = function () {
-    return $(this.options.parent)
-      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
-      .each($.proxy(function (i, element) {
-        var $element = $(element)
-        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
-      }, this))
-      .end()
-  }
-
-  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
-    var isOpen = $element.hasClass('in')
-
-    $element.attr('aria-expanded', isOpen)
-    $trigger
-      .toggleClass('collapsed', !isOpen)
-      .attr('aria-expanded', isOpen)
-  }
-
-  function getTargetFromTrigger($trigger) {
-    var href
-    var target = $trigger.attr('data-target')
-      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
-
-    return $(target)
-  }
-
-
-  // COLLAPSE PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
-      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
-      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.collapse
-
-  $.fn.collapse             = Plugin
-  $.fn.collapse.Constructor = Collapse
-
-
-  // COLLAPSE NO CONFLICT
-  // ====================
-
-  $.fn.collapse.noConflict = function () {
-    $.fn.collapse = old
-    return this
-  }
-
-
-  // COLLAPSE DATA-API
-  // =================
-
-  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
-
-    if (!$this.attr('data-target')) e.preventDefault()
-
-    var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
-
-    Plugin.call($target, option)
-  })
-
-}(jQuery);
-</script>
-<script>
-window.initializeCodeFolding = function(show) {
-
-  // handlers for show-all and hide all
-  $("#rmd-show-all-code").click(function() {
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('show');
-    });
-  });
-  $("#rmd-hide-all-code").click(function() {
-    $('div.r-code-collapse').each(function() {
-      $(this).collapse('hide');
-    });
-  });
-
-  // index for unique code element ids
-  var currentIndex = 1;
-
-  // select all R code blocks
-  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.js');
-  rCodeBlocks.each(function() {
-
-    // create a collapsable div to wrap the code in
-    var div = $('<div class="collapse r-code-collapse"></div>');
-    if (show)
-      div.addClass('in');
-    var id = 'rcode-643E0F36' + currentIndex++;
-    div.attr('id', id);
-    $(this).before(div);
-    $(this).detach().appendTo(div);
-
-    // add a show code button right above
-    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
-    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
-    showCodeButton.append(showCodeText);
-    showCodeButton
-        .attr('data-toggle', 'collapse')
-        .attr('data-target', '#' + id)
-        .attr('aria-expanded', show)
-        .attr('aria-controls', id);
-
-    var buttonRow = $('<div class="row"></div>');
-    var buttonCol = $('<div class="col-md-12"></div>');
-
-    buttonCol.append(showCodeButton);
-    buttonRow.append(buttonCol);
-
-    div.before(buttonRow);
-
-    // update state of button on show/hide
-    div.on('hidden.bs.collapse', function () {
-      showCodeText.text('Code');
-    });
-    div.on('show.bs.collapse', function () {
-      showCodeText.text('Hide');
-    });
-  });
-
-}
-</script>
-<script>
-/* ========================================================================
- * Bootstrap: dropdown.js v3.3.7
- * http://getbootstrap.com/javascript/#dropdowns
- * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-+function ($) {
-  'use strict';
-
-  // DROPDOWN CLASS DEFINITION
-  // =========================
-
-  var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle)
-  }
-
-  Dropdown.VERSION = '3.3.7'
-
-  function getParent($this) {
-    var selector = $this.attr('data-target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    var $parent = selector && $(selector)
-
-    return $parent && $parent.length ? $parent : $this.parent()
-  }
-
-  function clearMenus(e) {
-    if (e && e.which === 3) return
-    $(backdrop).remove()
-    $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
-      var relatedTarget = { relatedTarget: this }
-
-      if (!$parent.hasClass('open')) return
-
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
-
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
-    })
-  }
-
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this)
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    clearMenus()
-
-    if (!isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        // if mobile we use a backdrop because click events don't delegate
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus)
-      }
-
-      var relatedTarget = { relatedTarget: this }
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-
-      if (e.isDefaultPrevented()) return
-
-      $this
-        .trigger('focus')
-        .attr('aria-expanded', 'true')
-
-      $parent
-        .toggleClass('open')
-        .trigger($.Event('shown.bs.dropdown', relatedTarget))
-    }
-
-    return false
-  }
-
-  Dropdown.prototype.keydown = function (e) {
-    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
-
-    var $this = $(this)
-
-    e.preventDefault()
-    e.stopPropagation()
-
-    if ($this.is('.disabled, :disabled')) return
-
-    var $parent  = getParent($this)
-    var isActive = $parent.hasClass('open')
-
-    if (!isActive && e.which != 27 || isActive && e.which == 27) {
-      if (e.which == 27) $parent.find(toggle).trigger('focus')
-      return $this.trigger('click')
-    }
-
-    var desc = ' li:not(.disabled):visible a'
-    var $items = $parent.find('.dropdown-menu' + desc)
-
-    if (!$items.length) return
-
-    var index = $items.index(e.target)
-
-    if (e.which == 38 && index > 0)                 index--         // up
-    if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
-
-    $items.eq(index).trigger('focus')
-  }
-
-
-  // DROPDOWN PLUGIN DEFINITION
-  // ==========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.dropdown')
-
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
-      if (typeof option == 'string') data[option].call($this)
-    })
-  }
-
-  var old = $.fn.dropdown
-
-  $.fn.dropdown             = Plugin
-  $.fn.dropdown.Constructor = Dropdown
-
-
-  // DROPDOWN NO CONFLICT
-  // ====================
-
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old
-    return this
-  }
-
-
-  // APPLY TO STANDARD DROPDOWN ELEMENTS
-  // ===================================
-
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
-
-}(jQuery);
-</script>
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-.row { display: flex; }
-.collapse { display: none; }
-.in { display:block }
-.pull-right > .dropdown-menu {
-    right: 0;
-    left: auto;
-}
-.open > .dropdown-menu {
-    display: block;
-}
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-</style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "hide");
-});
-</script>
-
-
-<script>
-document.write('<div class="btn-group pull-right" style="position: absolute; top: 10%; right: 15%; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>')
-</script>
-
-
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -719,239 +60,225 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
 code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
-<link rel="stylesheet" href="support/tufte_plus.css" type="text/css" />
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/littlefoot/dist/littlefoot.css"
+/>
+
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<link href="libs/book-1.0.0/style.css" rel="stylesheet" />
+<script src="libs/book-1.0.0/littlefoot.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
 </head>
 
 <body>
+  <div id="wrapper" class="d-flex">
+    
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="introduction-and-overview.html"><a href="introduction-and-overview.html"><i class="fa fa-check"></i><b>1</b> <strong>Introduction and overview</strong></a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="introduction-and-overview.html"><a href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><i class="fa fa-check"></i><b>1.1</b> Rethink Priorities: Our approach to empirical and quantitative work</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction-and-overview.html"><a href="introduction-and-overview.html#the-purpose-of-this-resource"><i class="fa fa-check"></i><b>1.2</b> The purpose of this resource</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction-and-overview.html"><a href="introduction-and-overview.html#outline_sections"><i class="fa fa-check"></i><b>1.3</b> Sections and organization</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction-and-overview.html"><a href="introduction-and-overview.html#favorite-resources-references-tools"><i class="fa fa-check"></i><b>1.4</b> Favorite resources, references, tools</a></li>
-</ul></li>
-<li><a href="data.html#data"><strong>DATA, CODE, AND PRESENTATION</strong></a></li>
-<li class="chapter" data-level="2" data-path="coding.html"><a href="coding.html"><i class="fa fa-check"></i><b>2</b> Coding and data management</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="coding.html"><a href="coding.html#coding-and-organisational-issues"><i class="fa fa-check"></i><b>2.1</b> Coding and organisational issues</a>
-<ul>
-<li class="chapter" data-level="" data-path="coding.html"><a href="coding.html#automation-and-dynamic-documents"><i class="fa fa-check"></i>Automation and ‘dynamic documents’</a></li>
-<li class="chapter" data-level="2.1.1" data-path="coding.html"><a href="coding.html#data-management"><i class="fa fa-check"></i><b>2.1.1</b> Data management</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>3</b> Presentation, labeling and visualisations</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="presentation.html"><a href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><i class="fa fa-check"></i><b>3.1</b> Aside: EA Forum organisation, collophon, formatting</a></li>
-<li class="chapter" data-level="3.2" data-path="presentation.html"><a href="presentation.html#visualisations"><i class="fa fa-check"></i><b>3.2</b> Visualisations</a>
-<ul>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#ideal-coding-practice-for-visualisations"><i class="fa fa-check"></i>Ideal coding practice for visualisations</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country"><i class="fa fa-check"></i>Case: Relative shares of a total; e.g. ‘shares of EA population by referrer’, or ‘donation totals by country’</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-likert-scale-individual-items-and-relative-responses-to-these"><i class="fa fa-check"></i>Case: Likert scale (individual items) and relative responses to these</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#issue-dealing-with-scales-and-large-differences-in-magnitudes"><i class="fa fa-check"></i>Issue: Dealing with scales and large differences in magnitudes</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-means-of-continuous-variables-differences-across-groups"><i class="fa fa-check"></i>Case: Means of continuous variables: differences across groups</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-categorical-outcomes-by-continuous-outcomes-and-viceversa"><i class="fa fa-check"></i>Case: Categorical outcomes by continuous outcomes (and vice/versa)</a></li>
-<li class="chapter" data-level="" data-path="presentation.html"><a href="presentation.html#case-visualizing-regression-model-coefficients-and-confidence-intervals"><i class="fa fa-check"></i>Case: Visualizing (regression) model coefficients and confidence intervals</a></li>
-</ul></li>
-</ul></li>
-<li><a href="surveys.html#surveys"><strong>SURVEY AND EXPERIMENT DESIGNS AND METHODS</strong></a></li>
-<li class="chapter" data-level="4" data-path="surveydesign.html"><a href="surveydesign.html"><i class="fa fa-check"></i><b>4</b> Survey design and item development</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="surveydesign.html"><a href="surveydesign.html#willem-sleegers-to-incorporate"><i class="fa fa-check"></i><b>4.1</b> (Willem Sleegers, to incorporate)</a></li>
-<li class="chapter" data-level="" data-path="surveydesign.html"><a href="surveydesign.html#reinstein-misc-notes-to-incorporate"><i class="fa fa-check"></i>Reinstein misc notes to incorporate</a></li>
-<li class="chapter" data-level="4.2" data-path="surveydesign.html"><a href="surveydesign.html#suggested-sections"><i class="fa fa-check"></i><b>4.2</b> Suggested sections…</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="expt-qual-imp.html"><a href="expt-qual-imp.html"><i class="fa fa-check"></i><b>5</b> Experiments: Qualitative and implementation design issues</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="expt-qual-imp.html"><a href="expt-qual-imp.html#proposed-structure-of-section"><i class="fa fa-check"></i><b>5.1</b> Proposed structure of section</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="expt-quant.html"><a href="expt-quant.html"><i class="fa fa-check"></i><b>6</b> Design: quantitative issues</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="expt-quant.html"><a href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><i class="fa fa-check"></i><b>6.1</b> ‘Treatment’ assignment (blocking, randomization, etc)</a>
-<ul>
-<li class="chapter" data-level="6.1.1" data-path="expt-quant.html"><a href="expt-quant.html#adaptive-sequential-and-dynamic-designs"><i class="fa fa-check"></i><b>6.1.1</b> Adaptive, sequential and dynamic designs</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="expt-quant.html"><a href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><i class="fa fa-check"></i><b>6.2</b> Planning, diagnosing and adjusting a design</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="expt-quant.html"><a href="expt-quant.html#specifying-models-hypotheses-and-statistical-testing-and-inference-approaches"><i class="fa fa-check"></i><b>6.2.1</b> Specifying models, hypotheses, and statistical testing and inference approaches</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="expt-quant.html"><a href="expt-quant.html#power-analyses-and-other-diagnosands"><i class="fa fa-check"></i><b>6.3</b> Power analyses (and other ‘diagnosands’)</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="expt-quant.html"><a href="expt-quant.html#key-resources-and-explainers"><i class="fa fa-check"></i><b>6.3.1</b> Key resources and explainers</a></li>
-<li class="chapter" data-level="6.3.2" data-path="expt-quant.html"><a href="expt-quant.html#see-rethink_priorities_power_analysis_framework_2-in-appendix"><i class="fa fa-check"></i><b>6.3.2</b> See <span>‘Rethink_Priorities_Power_analysis_framework_2’ in appendix</span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="eamt-qual.html"><a href="eamt-qual.html"><i class="fa fa-check"></i>“Qualitative” design issues (From EA market testing)</a>
-<ul>
-<li class="chapter" data-level="6.4" data-path="eamt-qual.html"><a href="eamt-qual.html#naturalness-of-setting-versus-pure-treatments"><i class="fa fa-check"></i><b>6.4</b> <strong>Naturalness of setting versus ‘pure’ treatments</strong></a></li>
-<li class="chapter" data-level="6.5" data-path="eamt-qual.html"><a href="eamt-qual.html#awareness-of-testing-can-affect-results"><i class="fa fa-check"></i><b>6.5</b> <strong>Awareness of testing can affect results</strong></a></li>
-<li class="chapter" data-level="6.6" data-path="eamt-qual.html"><a href="eamt-qual.html#other-issues-to-consider-and-flesh-out"><i class="fa fa-check"></i><b>6.6</b> Other issues to consider and flesh out</a></li>
-</ul></li>
-<li><a href="basicstat.html#basicstat"><strong>MODELS, TESTING, INFERENCE, DESCRIPTIVES</strong></a></li>
-<li class="chapter" data-level="7" data-path="stat_frame.html"><a href="stat_frame.html"><i class="fa fa-check"></i><b>7</b> Statistical frameworks, ‘models’, and hypothesis testing</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="stat_frame.html"><a href="stat_frame.html#conceptual"><i class="fa fa-check"></i><b>7.1</b> Conceptual discussion of statistics, probability and inference</a></li>
-<li class="chapter" data-level="7.2" data-path="stat_frame.html"><a href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><i class="fa fa-check"></i><b>7.2</b> Hypothesis testing, statistical comparisons and inferences</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="stat_frame.html"><a href="stat_frame.html#common-statistical-tests-are-linear-models"><i class="fa fa-check"></i><b>7.2.1</b> <span>‘Common statistical tests are linear models’</span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="stat_frame.html"><a href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><i class="fa fa-check"></i><b>7.3</b> Randomization and permutation-based tests and inference</a></li>
-<li class="chapter" data-level="7.5" data-path="stat_frame.html"><a href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><i class="fa fa-check"></i><b>7.5</b> ‘Evidence of little or no effect’ - equivalence tests, etc</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="factor-descriptive.html"><a href="factor-descriptive.html"><i class="fa fa-check"></i><b>8</b> Factor analysis, dimension reduction, and ‘carving reality at its joints’</a></li>
-<li><a href="modeling.html#modeling"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="modeling.html"><a href="modeling.html"><i class="fa fa-check"></i><b>8.1</b> Resources and use-cases</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="time-series.html"><a href="time-series.html"><i class="fa fa-check"></i><b>9</b> Time series (predictive) models</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="time-series.html"><a href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><i class="fa fa-check"></i><b>9.1</b> Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="time-series.html"><a href="time-series.html#the-case-at-hand-broad-terms"><i class="fa fa-check"></i><b>9.1.1</b> The case at hand (broad terms)</a></li>
-<li class="chapter" data-level="9.1.2" data-path="time-series.html"><a href="time-series.html#our-proposed-overall-strategy"><i class="fa fa-check"></i><b>9.1.2</b> Our proposed overall strategy</a></li>
-<li class="chapter" data-level="9.1.3" data-path="time-series.html"><a href="time-series.html#niks-approach"><i class="fa fa-check"></i><b>9.1.3</b> Nik’s approach</a></li>
-<li class="chapter" data-level="9.1.4" data-path="time-series.html"><a href="time-series.html#kim-cs-thoughts"><i class="fa fa-check"></i><b>9.1.4</b> Kim C’s thoughts</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="time-series.html"><a href="time-series.html#petes-notes-below"><i class="fa fa-check"></i><b>9.2</b> PETE’S NOTES BELOW</a>
-<ul>
-<li class="chapter" data-level="9.2.1" data-path="time-series.html"><a href="time-series.html#decomposition"><i class="fa fa-check"></i><b>9.2.1</b> Decomposition</a></li>
-<li class="chapter" data-level="9.2.2" data-path="time-series.html"><a href="time-series.html#types-of-decomposition"><i class="fa fa-check"></i><b>9.2.2</b> Types of decomposition</a></li>
-</ul></li>
-<li class="chapter" data-level="9.3" data-path="time-series.html"><a href="time-series.html#stationary-vs.-non-stationarity"><i class="fa fa-check"></i><b>9.3</b> Stationary vs. non-stationarity</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="time-series.html"><a href="time-series.html#converting-to-stationary"><i class="fa fa-check"></i><b>9.3.1</b> Converting to stationary</a></li>
-</ul></li>
-<li class="chapter" data-level="9.4" data-path="time-series.html"><a href="time-series.html#handling-features"><i class="fa fa-check"></i><b>9.4</b> Handling Features</a>
-<ul>
-<li class="chapter" data-level="9.4.1" data-path="time-series.html"><a href="time-series.html#lags"><i class="fa fa-check"></i><b>9.4.1</b> Lags</a></li>
-<li class="chapter" data-level="9.4.2" data-path="time-series.html"><a href="time-series.html#rolling-statistics"><i class="fa fa-check"></i><b>9.4.2</b> Rolling Statistics</a></li>
-<li class="chapter" data-level="9.4.3" data-path="time-series.html"><a href="time-series.html#which-lags-rolling-stats-to-use"><i class="fa fa-check"></i><b>9.4.3</b> Which Lags / Rolling Stats to Use?</a></li>
-<li class="chapter" data-level="9.4.4" data-path="time-series.html"><a href="time-series.html#known-in-advance-vs.-not"><i class="fa fa-check"></i><b>9.4.4</b> Known in Advance vs. Not</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="time-series.html"><a href="time-series.html#validation"><i class="fa fa-check"></i><b>9.5</b> Validation</a></li>
-<li class="chapter" data-level="9.6" data-path="time-series.html"><a href="time-series.html#types-of-models"><i class="fa fa-check"></i><b>9.6</b> Types of Models</a>
-<ul>
-<li class="chapter" data-level="9.6.1" data-path="time-series.html"><a href="time-series.html#arima"><i class="fa fa-check"></i><b>9.6.1</b> ARIMA</a></li>
-</ul></li>
-<li class="chapter" data-level="9.7" data-path="time-series.html"><a href="time-series.html#multiseries"><i class="fa fa-check"></i><b>9.7</b> Multiseries</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="classification-models.html"><a href="classification-models.html"><i class="fa fa-check"></i><b>10</b> Classification models</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="classification-models.html"><a href="classification-models.html#classification_model_disc"><i class="fa fa-check"></i><b>10.1</b> Discussion: Assesing classification models and precision/recall</a></li>
-</ul></li>
-<li><a href="causal.html#causal"><strong>(CAUSAL INFERENCE)</strong></a>
-<ul>
-<li class="chapter" data-level="" data-path="causal.html"><a href="causal.html"><i class="fa fa-check"></i>Useful resources:</a></li>
-</ul></li>
-<li><a href="fermi.html#fermi"><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></a></li>
-<li><a href="meta-and-robust.html#meta-and-robust"><strong>META AND ROBUST</strong></a></li>
-<li class="chapter" data-level="11" data-path="opensci.html"><a href="opensci.html"><i class="fa fa-check"></i><b>11</b> (Open and robust science: RP attitudes, discussions, resources)</a></li>
-<li class="chapter" data-level="12" data-path="meta.html"><a href="meta.html"><i class="fa fa-check"></i><b>12</b> (Meta-analysis)</a></li>
-<li><a href="appendixsupplements.html#appendixsupplements"><strong>APPENDIX/SUPPLEMENTS</strong></a></li>
-<li class="chapter" data-level="" data-path="power-workflow.html"><a href="power-workflow.html"><i class="fa fa-check"></i>Power analysis workflow (Jamie Elsey)</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="power-workflow.html"><a href="power-workflow.html#discussion-and-framework"><i class="fa fa-check"></i><b>12.1</b> Discussion and framework</a>
-<ul>
-<li class="chapter" data-level="12.1.1" data-path="power-workflow.html"><a href="power-workflow.html#introduction-and-goals"><i class="fa fa-check"></i><b>12.1.1</b> Introduction and goals</a></li>
-<li class="chapter" data-level="12.1.2" data-path="power-workflow.html"><a href="power-workflow.html#definition-of-power"><i class="fa fa-check"></i><b>12.1.2</b> Definition of power</a></li>
-<li class="chapter" data-level="12.1.3" data-path="power-workflow.html"><a href="power-workflow.html#general-workflow-for-simulation-based-power-analysis"><i class="fa fa-check"></i><b>12.1.3</b> General workflow for simulation-based power analysis</a></li>
-<li class="chapter" data-level="12.1.4" data-path="power-workflow.html"><a href="power-workflow.html#possible-pitfallsmisunderstandings-of-power-analysis"><i class="fa fa-check"></i><b>12.1.4</b> Possible pitfalls/misunderstandings of power analysis</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="power-workflow.html"><a href="power-workflow.html#concrete-implementation-of-framework"><i class="fa fa-check"></i><b>12.2</b> Concrete implementation of framework</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="power-workflow.html"><a href="power-workflow.html#step-1-generate-a-large-number-of-data-sets-for-the-analysis"><i class="fa fa-check"></i><b>12.2.1</b> Step 1: Generate a large number of data sets for the analysis</a></li>
-<li class="chapter" data-level="12.2.2" data-path="power-workflow.html"><a href="power-workflow.html#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest"><i class="fa fa-check"></i><b>12.2.2</b> Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</a></li>
-<li class="chapter" data-level="12.2.3" data-path="power-workflow.html"><a href="power-workflow.html#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals"><i class="fa fa-check"></i><b>12.2.3</b> Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</a></li>
-<li class="chapter" data-level="12.2.4" data-path="power-workflow.html"><a href="power-workflow.html#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results."><i class="fa fa-check"></i><b>12.2.4</b> Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><i class="fa fa-check"></i><b>13</b> Inference and rough equivalence testing with binomial outcomes</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><i class="fa fa-check"></i><b>13.1</b> Input from Gsheet (WIP)</a></li>
-<li class="chapter" data-level="13.2" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><i class="fa fa-check"></i><b>13.2</b> How likely is the ‘imbalance of unique emails’ due to chance?</a></li>
-<li class="chapter" data-level="13.3" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><i class="fa fa-check"></i><b>13.3</b> How likely are ‘proportions this similar’ under different size ‘true effect sizes’?*</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#difference-between-two-binomial-random-variables."><i class="fa fa-check"></i><b>13.3.1</b> Difference between two binomial random variables.</a></li>
-<li class="chapter" data-level="13.3.2" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#applying-this-to-present-data"><i class="fa fa-check"></i><b>13.3.2</b> Applying this to present data</a></li>
-<li class="chapter" data-level="13.3.3" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#adaptation-of-this-magnitude-or-smaller"><i class="fa fa-check"></i><b>13.3.3</b> Adaptation: ‘of this magnitude or smaller’</a></li>
-</ul></li>
-<li class="chapter" data-level="13.4" data-path="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#dr-discussion-of-this-case-maybe-obsolete"><i class="fa fa-check"></i><b>13.4</b> DR discussion of this case … maybe obsolete</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><i class="fa fa-check"></i><b>14</b> README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><i class="fa fa-check"></i><b>14.1</b> ‘Methods and RP Guidelines Bookdown’</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#to-contain"><i class="fa fa-check"></i><b>14.1.1</b> To contain…</a></li>
-<li class="chapter" data-level="14.1.2" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#proposed-structure"><i class="fa fa-check"></i><b>14.1.2</b> Proposed structure</a></li>
-<li class="chapter" data-level="14.1.3" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#sources"><i class="fa fa-check"></i><b>14.1.3</b> Sources</a></li>
-<li class="chapter" data-level="14.1.4" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#using-and-building-this-bookdown-proposed-guidelines"><i class="fa fa-check"></i><b>14.1.4</b> Using and building this Bookdown (proposed guidelines)</a></li>
-<li class="chapter" data-level="14.1.5" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#repo-branches-proposed"><i class="fa fa-check"></i><b>14.1.5</b> Repo branches (proposed)</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><a href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><i class="fa fa-check"></i><b>14.2</b> Folder structure, other resources in this repo</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</a>
-          </h1>
+<div class="border-end bg-white" id="sidebar-wrapper">
+  <div id="sidebar-heading" class="border-bottom bg-light">
+    <img src="logo.png" width="25px" height="25px"/>
+    <span class="text-nowrap">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</span>
+  </div>
+  <div id="TOC" class="list-group list-group-flush">
+  <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">1</span><span><strong>Introduction and overview</strong></a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">1.1</span><span>Rethink Priorities: Our approach to empirical and quantitative work</a>
+  <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">1.2</span><span>The purpose of this resource</a>
+  <a id="item-outline_sections" class="list-group-item" href="introduction-and-overview.html#outline_sections"><span class="toc-section-number">1.3</span><span>Sections and organization</a>
+  <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">1.4</span><span>Favorite resources, references, tools</a>
+  <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">1.5</span><span>Style and ‘collophon’</a>
+  <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">1.6</span><span>R setup and packages</a>
+  <a id="item-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">1.7</span><span>Git repo, shared files, procedure for editing</a>
+  </div>
+  <a id="item-data" class="list-group-item" href="data.html"><strong>DATA, CODE, AND PRESENTATION</strong></a>
+  <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">2</span><span>Coding and data management</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-coding-and-organisational-issues" class="list-group-item" href="coding.html#coding-and-organisational-issues"><span class="toc-section-number">2.1</span><span>Coding and organisational issues</a>
+  </div>
+  <a id="item-presentation" class="list-group-item" href="presentation.html"><span class="toc-section-number">3</span><span>Presentation, labeling and visualisations</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-aside-ea-forum-organisation-collophon-formatting" class="list-group-item" href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><span class="toc-section-number">3.1</span><span>Aside: EA Forum organisation, collophon, formatting</a>
+  <a id="item-visualisations" class="list-group-item" href="presentation.html#visualisations"><span class="toc-section-number">3.2</span><span>Visualisations</a>
+  </div>
+  <a id="item-surveys" class="list-group-item" href="surveys.html"><strong>SURVEY AND EXPERIMENT DESIGNS AND METHODS</strong></a>
+  <a id="item-surveydesign" class="list-group-item" href="surveydesign.html"><span class="toc-section-number">4</span><span>Survey design and item development</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-willem-sleegers-to-incorporate" class="list-group-item" href="surveydesign.html#willem-sleegers-to-incorporate"><span class="toc-section-number">4.1</span><span>(Willem Sleegers, to incorporate)</a>
+  <a id="item-reinstein-misc-notes-to-incorporate" class="list-group-item" href="surveydesign.html#reinstein-misc-notes-to-incorporate">Reinstein misc notes to incorporate</a>
+  <a id="item-suggested-sections" class="list-group-item" href="surveydesign.html#suggested-sections"><span class="toc-section-number">4.2</span><span>Suggested sections…</a>
+  </div>
+  <a id="item-expt-qual-imp" class="list-group-item" href="expt-qual-imp.html"><span class="toc-section-number">5</span><span>Experiments: Qualitative and implementation design issues</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-proposed-structure-of-section" class="list-group-item" href="expt-qual-imp.html#proposed-structure-of-section"><span class="toc-section-number">5.1</span><span>Proposed structure of section</a>
+  </div>
+  <a id="item-expt-quant" class="list-group-item" href="expt-quant.html"><span class="toc-section-number">6</span><span>Design: quantitative issues</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-treatment-assignment-blocking-randomization-etc" class="list-group-item" href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><span class="toc-section-number">6.1</span><span>‘Treatment’ assignment (blocking, randomization, etc)</a>
+  <a id="item-planning-diagnosing-and-adjusting-a-design" class="list-group-item" href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><span class="toc-section-number">6.2</span><span>Planning, diagnosing and adjusting a design</a>
+  <a id="item-power-analyses-and-other-diagnosands" class="list-group-item" href="expt-quant.html#power-analyses-and-other-diagnosands"><span class="toc-section-number">6.3</span><span>Power analyses (and other ‘diagnosands’)</a>
+  </div>
+  <a id="item-eamt-qual" class="list-group-item" href="eamt-qual.html">“Qualitative” design issues (From EA market testing)</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-naturalness-of-setting-versus-pure-treatments" class="list-group-item" href="eamt-qual.html#naturalness-of-setting-versus-pure-treatments"><span class="toc-section-number">6.4</span><span><strong>Naturalness of setting versus ‘pure’ treatments</strong></a>
+  <a id="item-awareness-of-testing-can-affect-results" class="list-group-item" href="eamt-qual.html#awareness-of-testing-can-affect-results"><span class="toc-section-number">6.5</span><span><strong>Awareness of testing can affect results</strong></a>
+  <a id="item-other-issues-to-consider-and-flesh-out" class="list-group-item" href="eamt-qual.html#other-issues-to-consider-and-flesh-out"><span class="toc-section-number">6.6</span><span>Other issues to consider and flesh out</a>
+  </div>
+  <a id="item-basicstat" class="list-group-item" href="basicstat.html"><strong>MODELS, TESTING, INFERENCE, DESCRIPTIVES</strong></a>
+  <a id="item-stat_frame" class="list-group-item" href="stat_frame.html"><span class="toc-section-number">7</span><span>Statistical frameworks, ‘models,’ and hypothesis testing</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">7.1</span><span>Conceptual discussion of statistics, probability and inference</a>
+  <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">7.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
+  <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">7.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">7.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
+  </div>
+  <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">8</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
+  <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-resources-and-use-cases" class="list-group-item" href="modeling.html#resources-and-use-cases"><span class="toc-section-number">8.1</span><span>Resources and use-cases</a>
+  </div>
+  <a id="item-time-series" class="list-group-item" href="time-series.html"><span class="toc-section-number">9</span><span>Time series (predictive) models</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="list-group-item" href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><span class="toc-section-number">9.1</span><span>Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
+  <a id="item-petes-notes-below" class="list-group-item" href="time-series.html#petes-notes-below"><span class="toc-section-number">9.2</span><span>PETE’S NOTES BELOW</a>
+  <a id="item-stationary-vs.-non-stationarity" class="list-group-item" href="time-series.html#stationary-vs.-non-stationarity"><span class="toc-section-number">9.3</span><span>Stationary vs. non-stationarity</a>
+  <a id="item-handling-features" class="list-group-item" href="time-series.html#handling-features"><span class="toc-section-number">9.4</span><span>Handling Features</a>
+  <a id="item-validation" class="list-group-item" href="time-series.html#validation"><span class="toc-section-number">9.5</span><span>Validation</a>
+  <a id="item-types-of-models" class="list-group-item" href="time-series.html#types-of-models"><span class="toc-section-number">9.6</span><span>Types of Models</a>
+  <a id="item-multiseries" class="list-group-item" href="time-series.html#multiseries"><span class="toc-section-number">9.7</span><span>Multiseries</a>
+  </div>
+  <a id="item-classification-models" class="list-group-item" href="classification-models.html"><span class="toc-section-number">10</span><span>Classification models</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-classification_model_disc" class="list-group-item" href="classification-models.html#classification_model_disc"><span class="toc-section-number">10.1</span><span>Discussion: Assesing classification models and precision/recall</a>
+  </div>
+  <a id="item-causal" class="list-group-item" href="causal.html"><strong>(CAUSAL INFERENCE)</strong></a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-useful-resources" class="list-group-item" href="causal.html#useful-resources">Useful resources:</a>
+  </div>
+  <a id="item-fermi" class="list-group-item" href="fermi.html"><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></a>
+  <a id="item-meta-and-robust" class="list-group-item" href="meta-and-robust.html"><strong>META AND ROBUST</strong></a>
+  <a id="item-opensci" class="list-group-item" href="opensci.html"><span class="toc-section-number">11</span><span>(Open and robust science: RP attitudes, discussions, resources)</a>
+  <a id="item-meta" class="list-group-item" href="meta.html"><span class="toc-section-number">12</span><span>(Meta-analysis)</a>
+  <a id="item-appendixsupplements" class="list-group-item" href="appendixsupplements.html"><strong>APPENDIX/SUPPLEMENTS</strong></a>
+  <a id="item-power-workflow" class="list-group-item" href="power-workflow.html">Power analysis workflow (Jamie Elsey)</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-discussion-and-framework" class="list-group-item" href="power-workflow.html#discussion-and-framework"><span class="toc-section-number">12.1</span><span>Discussion and framework</a>
+  <a id="item-concrete-implementation-of-framework" class="list-group-item" href="power-workflow.html#concrete-implementation-of-framework"><span class="toc-section-number">12.2</span><span>Concrete implementation of framework</a>
+  </div>
+  <a id="item-inference-and-rough-equivalence-testing-with-binomial-outcomes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><span class="toc-section-number">13</span><span>Inference and rough equivalence testing with binomial outcomes</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-input-from-gsheet-wip" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><span class="toc-section-number">13.1</span><span>Input from Gsheet (WIP)</a>
+  <a id="item-randomization-inference-approach" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#randomization-inference-approach"><span class="toc-section-number">13.2</span><span>Randomization inference approach</a>
+  <a id="item-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">13.3</span><span>How likely is the ‘imbalance of unique emails’ due to chance?</a>
+  <a id="item-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><span class="toc-section-number">13.4</span><span>How likely are ‘proportions this similar’ under different size ‘true effect sizes?’</a>
+  </div>
+  <a id="item-readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><span class="toc-section-number">14</span><span>README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
+  <div class="list-group list-group-flush list-subgroup">
+  <a id="item-methods-and-rp-guidelines-bookdown" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><span class="toc-section-number">14.1</span><span>‘Methods and RP Guidelines Bookdown’</a>
+  <a id="item-folder-structure-other-resources-in-this-repo" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><span class="toc-section-number">14.2</span><span>Folder structure, other resources in this repo</a>
+  </div>
+  </div>
+</div>
+<!-- Page content wrapper-->
+    <div id="page-content-wrapper">
+<!-- Top navigation-->
+    <nav 
+      id="navbar" 
+      class="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+    >
+      <div class="container-fluid">
+        <button class="btn btn-primary p-1" id="sidebarToggle">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="26" 
+            height="26" 
+            fill="currentColor" 
+            class="bi bi-list" viewBox="0 0 16 16"
+          >
+            <path 
+              fill-rule="evenodd" 
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+        </button>
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarContent" 
+          aria-controls="navbarContent" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <a 
+                class="nav-link dropdown-toggle" 
+                id="navbarDropdown" 
+                href="#" 
+                role="button" 
+                data-bs-toggle="dropdown" 
+                aria-haspopup="true" 
+                aria-expanded="false">
+                  Settings
+              </a>
+              <div 
+                class="dropdown-menu dropdown-menu-end" 
+                aria-labelledby="navbarDropdown">
+                  <a id="toggleCodeButton" class="dropdown-item" href="#!">Toggle code</a>
+              </div>
+            </li>
+          </ul>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
+      </div>
+    </nav>
+<!-- Page content-->
+    <div id="main-container" class="container-fluid">
+<main>
 <div id="power-workflow" class="section level1 unnumbered">
 <h1>Power analysis workflow (Jamie Elsey)</h1>
 <div id="discussion-and-framework" class="section level2" number="12.1">
@@ -959,10 +286,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="introduction-and-goals" class="section level3" number="12.1.1">
 <h3><span class="header-section-number">12.1.1</span> Introduction and goals</h3>
 <p>The purpose of this document is to propose the fundamentals for a workflow for power analyses.</p>
-<p>Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach, and I will begin with a standard frequentist analysis.*</p>
-<div class="marginnote">
-<p>* This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.</p>
-</div>
+<p>Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach, and I will begin with a standard frequentist analysis.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
 <p>The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals. (DR: we might want to incorporate declaredesign for this.) Helpful future additions to the toolkit would include</p>
 <ul>
 <li><p>clear and flexible ways to generate hypothetical data sets, and</p></li>
@@ -973,84 +297,53 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="definition-of-power" class="section level3" number="12.1.2">
 <h3><span class="header-section-number">12.1.2</span> Definition of power</h3>
-<p>In frequentist null hypothesis significance testing (NHST), power is typically defined as the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true (i.e., power is the ‘true positive rate’).*</p>
-<div class="marginnote">
-<p>* More precisely, we may express this as ‘power against a <em>particular</em> alternative hypothesis’. (DR: may be worth putting maths here at some point, and also give a canonical reference.)</p>
-</div>
-<p>For Bayesian analyses, there is some esoteric discussion about ‘whether power is even a thing we should be discussing’. There is uncertainty about the data-generating process, but there is only one data set.*</p>
-<div class="marginnote">
-<p>*Maybe add ‘and there is no standard ’null hypothesis testing procedure’. Actually, maybe this point needs a bit more fleshing out? What is the implication of ‘there is only one data set’?</p>
-</div>
-<p>Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: <em>‘Given the range of data that I might observe, how likely is it that I can make certain conclusions?’</em>. The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like “there is a non-zero difference between groups”** (although this is probably the most common inference people first consider).</p>
-<div class="marginnote">
-<p>** Or a comparable statement posed in probablistic terms… Frequentist: ‘if there had been a zero difference between these groups (H0), this data is unlikely to have been generated’. Bayesian: ‘the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).’</p>
-</div>
+<p>In frequentist null hypothesis significance testing (NHST), power is typically defined as the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true (i.e., power is the ‘true positive rate’).<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<p>For Bayesian analyses, there is some esoteric discussion about ‘whether power is even a thing we should be discussing.’ There is uncertainty about the data-generating process, but there is only one data set.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p>Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: <em>‘Given the range of data that I might observe, how likely is it that I can make certain conclusions?’</em>. The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like “there is a non-zero difference between groups”** (although this is probably the most common inference people first consider).<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a></p>
 <p>We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.</p>
-<p>These inferences can take many forms, such as:*</p>
-<div class="marginnote">
-<p>DR: Which of these do you consider frequentist and which are Bayesian, and which can be either?</p>
-</div>
+<p>These inferences can take many forms, such as:<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <ul>
 <li>the probability of determining that there is a non-zero difference between two conditions,</li>
 <li>the probability of detecting an effect in a regression model of a specific magnitude (or greater),</li>
-<li>the probability of detecting some ‘smallest effect size of interest’,</li>
-<li>the probability of a ‘false positive’, i.e., the probability of concluding that there is a difference between groups when in fact there is no difference, (DR: I didn’t think this would ever be called ‘power’ .. I thought this would be called the ‘size’ of the test), or</li>
+<li>the probability of detecting some ‘smallest effect size of interest,’</li>
+<li>the probability of a ‘false positive,’ i.e., the probability of concluding that there is a difference between groups when in fact there is no difference, (DR: I didn’t think this would ever be called ‘power’ .. I thought this would be called the ‘size’ of the test), or</li>
 <li>the probability of achieving a desired level of precision around a particular parameter estimate.</li>
 </ul>
 <!-- DR: does this encompass 'equivalence testing', which I think is very relevant? Also, should the first one be framed as ... 'when the true difference is XXX or larger'? Or is that only a frequentist concept?-->
 <p>Hence, a power analysis helps frame our prospective research project in relation to the goals we would like to achieve (DR: cf the ‘diagnosands’ of the declaredesign framework). It provides us us with an estimate (and it is indeed an estimate, not a certainty!) of the probability that we will be able to make the inference we wish to make, given various factors both inside and outside of our control. (See discussion in fold.)</p>
-
-<div class="fold">
-What is ‘in our control’?
-We might think of sample size as <em>in</em> our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered <em>out</em> of our contro;; however we can sometimes increase the ‘dosage’ we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.
-</div>
+<div class="foldable"><a>Show</a><div class="collapse">
+<p>What is ‘in our control?’
+We might think of sample size as <em>in</em> our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered <em>out</em> of our contro;; however we can sometimes increase the ‘dosage’ we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.</p>
+</div></div>
 </div>
 <div id="general-workflow-for-simulation-based-power-analysis" class="section level3" number="12.1.3">
 <h3><span class="header-section-number">12.1.3</span> General workflow for simulation-based power analysis</h3>
 <p>Simulation-based power analysis proceeds in four primary steps:</p>
 <ol style="list-style-type: decimal">
-<li>Generate a large number of ‘simulated data sets’ for the analysis.*</li>
+<li>Generate a large number of ‘simulated data sets’ for the analysis.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></li>
 </ol>
-<div class="marginnote">
-<p>* These may be generated by draws based on a canonical distribution, like the Gaussian (‘normal’) with particular parameters. Alternately, if prior ‘similar’ data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.</p>
-</div>
-<p>The data sets generated should be specific to the goal of the study. E.g., suppose we want to know the ‘power (of a particular design and testing procedure) to detect an effect size of 0.2 SD’. Here we should generate data that reflects this effect size (for considering the true positive and false negative rates). If we also want to measure the rate of type-2 error, the rate of false positives (if the null, e.g., an effect side of 0, holds), we should also generate data reflecting this ‘null effect’.</p>
+<p>The data sets generated should be specific to the goal of the study. E.g., suppose we want to know the ‘power (of a particular design and testing procedure) to detect an effect size of 0.2 SD.’ Here we should generate data that reflects this effect size (for considering the true positive and false negative rates). If we also want to measure the rate of type-2 error, the rate of false positives (if the null, e.g., an effect side of 0, holds), we should also generate data reflecting this ‘null effect.’</p>
 <ol start="2" style="list-style-type: decimal">
-<li>Run the proposed analysis over the many simulated data sets (as efficiently as possible, as this can take a long time). This analysis should either return the estimand of interest, or ensure that we can easily compute it (in Step 3). The output should be kept as flexible as possible (while conserving computer memory). This will allow us to assess multiple inference goals on the same output.*</li>
+<li><p>Run the proposed analysis over the many simulated data sets (as efficiently as possible, as this can take a long time). This analysis should either return the estimand of interest, or ensure that we can easily compute it (in Step 3). The output should be kept as flexible as possible (while conserving computer memory). This will allow us to assess multiple inference goals on the same output.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a></p></li>
+<li><p>Summarize the output returned in Step 2, computing the share of simulated data sets that meet different decision criteria or inference goals. (Example described in fold)</p></li>
 </ol>
-<div class="marginnote">
-<p>*E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.</p>
-</div>
-<ol start="3" style="list-style-type: decimal">
-<li>Summarize the output returned in Step 2, computing the share of simulated data sets that meet different decision criteria or inference goals. (Example described in fold)</li>
-</ol>
-
-<div class="fold">
-<p>E.g., we might simulate 1000 data sets based on an effect size of 0.3 standard deviations and perform a standard t-test of the difference between treatment and control for each of these. We might then find that for 743 of 1000 of these simulated data, the test ‘rejected the null hypothesis’, suggesting a power of 74.3%.</p>
+<div class="foldable"><a>Show</a><div class="collapse">
+<p>E.g., we might simulate 1000 data sets based on an effect size of 0.3 standard deviations and perform a standard t-test of the difference between treatment and control for each of these. We might then find that for 743 of 1000 of these simulated data, the test ‘rejected the null hypothesis,’ suggesting a power of 74.3%.</p>
 <p>(Feel free to add other examples here.)</p>
-</div>
+</div></div>
 <p>This can show the likelihood of achieving a range of goals given various sample sizes and design and testing choices, including the rates of <em>misleading</em> conclusions. In frequentist analyses, it is possible that steps 2 and 3 occur together (e.g., the p-value is returned along with the other output). In my experience with typical Bayesian designs, these stages are best kept separate so that we can first do the more time-consuming Step 2, and then more freely explore the various options in Step 3.</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. If not, one may need to think of alternative design or data-collection choices (including sample sizes, treatments, and treatment assignments) or inference goals, and return to Step 1.*</p>
-<div class="marginnote">
-<p>* DR: I removed ‘ways of generating data’ because I thought it could be misleading. It seems wrong to first say, e.g., ‘we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials’… and then say ‘but that didn’t have enough power so lets assume a more concentrated distribution’. What I think you meant was consider other ways of actually <em>collecting</em> data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this <em>new</em> approach. Note that DD seems to have good tools for comparing and considering design variations.</p>
-</div></li>
+<li>Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. If not, one may need to think of alternative design or data-collection choices (including sample sizes, treatments, and treatment assignments) or inference goals, and return to Step 1.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a></li>
 </ol>
-<p>In the sections that follow, I will present some generally useful packages and functions for power analyses, including annotated code examples with particularly useful aspects highlighted. I will do this in the context of a frequentist power analysis for between-groups (=between-subject?) analysis.**</p>
-<div class="marginnote">
-<p>** We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.</p>
-</div>
+<p>In the sections that follow, I will present some generally useful packages and functions for power analyses, including annotated code examples with particularly useful aspects highlighted. I will do this in the context of a frequentist power analysis for between-groups (=between-subject?) analysis.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 </div>
 <div id="possible-pitfallsmisunderstandings-of-power-analysis" class="section level3" number="12.1.4">
 <h3><span class="header-section-number">12.1.4</span> Possible pitfalls/misunderstandings of power analysis</h3>
-<p>It is important to note that power analyses are not an ‘omniscient oracle’. They might better be termed ‘power projections’ or ‘power estimates’. Even if we estimate that we have 99.9% power for detecting some a particular effect, we may have specified our simulations in an unrealistic way. When we actually run an experiment, we might see (e.g.) far more underlying variation or measurement error than we predicted, leading our analyses to be fairly uninformative. Conversely, we might be overly conservative with our power analysis; perhaps a design we thought was ‘underpowered’ actually has a high probability of producing very compelling results.*</p>
-<div class="marginnote">
-<p>* DR: I changed the wording here because if we diagnose the design as ‘underpowered’ we probably would choose not to run it in that form.</p>
-</div>
+<p>It is important to note that power analyses are not an ‘omniscient oracle.’ They might better be termed ‘power projections’ or ‘power estimates.’ Even if we estimate that we have 99.9% power for detecting some a particular effect, we may have specified our simulations in an unrealistic way. When we actually run an experiment, we might see (e.g.) far more underlying variation or measurement error than we predicted, leading our analyses to be fairly uninformative. Conversely, we might be overly conservative with our power analysis; perhaps a design we thought was ‘underpowered’ actually has a high probability of producing very compelling results.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
 <p>I raise this only to point out that our power analyses might not always be perfect or be something of a blunt instrument. We should recognise they are not guarantees but more a way of determining the basic plausibility of achieving certain goals. Some other things to consider in a similar vein are presented below, and again the intention here is merely to frame our use of power analyses and recognise what sort of things I suspect they can or can’t help us with:</p>
 <ul>
 <li><p>When we see real data and real interesting patterns emerge, we are likely to go further in modeling and investigating these patterns than some of the more simple analyses and comparisons we conduct in the initial power analysis. I suspect power analyses are not so good for determining all the intricate, in-depth things we might plumb in a dataset. They are probably better at assessing the tractability of a broad inference goal.</p></li>
-<li><p>We might want to give some consideration to how far we wish to go in the initial data simulation step to think about all sorts of hypothetical data sets. As models become more complex, the number of different parameters that might vary - with possible effects on power - starts to balloon. E.g., even in a simple repeated-measures example, do we wish to vary not only the effect size but all sorts of different correlations from pre- to post-treatment within subjects? If we are simulating ordinal data, then power might change depending on how we initially suggest binning the outcomes, but there are infinitely many ways we might think the data might look… Discussion and consideration of how far we should go with these things is welcome and could be useful! (DR: I’m not sure what you are getting at here. Are you saying that ‘the space of designs and proposed analyses we can explore is extremely large, and we may need to make some ad-hoc choices to avoid this getting unmanageable’?)</p></li>
+<li><p>We might want to give some consideration to how far we wish to go in the initial data simulation step to think about all sorts of hypothetical data sets. As models become more complex, the number of different parameters that might vary - with possible effects on power - starts to balloon. E.g., even in a simple repeated-measures example, do we wish to vary not only the effect size but all sorts of different correlations from pre- to post-treatment within subjects? If we are simulating ordinal data, then power might change depending on how we initially suggest binning the outcomes, but there are infinitely many ways we might think the data might look… Discussion and consideration of how far we should go with these things is welcome and could be useful! (DR: I’m not sure what you are getting at here. Are you saying that ‘the space of designs and proposed analyses we can explore is extremely large, and we may need to make some ad-hoc choices to avoid this getting unmanageable?’)</p></li>
 </ul>
 </div>
 </div>
@@ -1061,80 +354,80 @@ We might think of sample size as <em>in</em> our control, which it generally is,
 <div id="confirm-that-we-can-generate-the-basic-data-we-want" class="section level4 unnumbered">
 <h4>Confirm that we can generate the basic data we want</h4>
 <p>Because ultimately we might be generating some rather large data files, we increase the memory limit alotted to R first. I don’t believe there is any real cost to increasing this memory limit, so it is wise to do so as to avoid a function iterating many times over for a long time, but ending up without sufficient space to store the outcome:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="power-workflow.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">memory.limit</span>(<span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb14-1"><a href="power-workflow.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">memory.limit</span>(<span class="dv">100000</span>)</span></code></div></pre></div>
 <pre><code>## [1] Inf</code></pre>
 <p>Now we want to generate a hypothetical data set. In this case, we will be comparing 4 groups, each shown a different message in a between-subjects design (3 active vs. a control condition with a neutral message). Willem has some nice procedures for generating repeated-measures data in his walkthrough (<a href="https://www.willemsleegers.com/posts/simulation-based-power-analyses/" class="uri">https://www.willemsleegers.com/posts/simulation-based-power-analyses/</a>) using the library MASS. <strong>I think there are likely to be other useful packages or techniques for generating simulated data for more complex designs or patterns of results that we could look into. Being better able to generate valid and informative data sets is probably one of the things that would improve our capacity for running informative power analyses the most.</strong></p>
 <p>In this example, we will take advantage of the different groups to assess several different possible effect sizes. In a multiple regression, we would then be able to assess whether these different effect sizes come out as significantly different from our control group, and therefore our power to detect different sizes of effects.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="power-workflow.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse simply used for data wrangling and plotting</span></span>
-<span id="cb12-2"><a href="power-workflow.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="power-workflow.html#cb13-1" aria-hidden="true" tabindex="-1"></a>four.group.datamaker <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sim =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">pop=</span><span class="dv">1500</span>) {</span>
-<span id="cb13-2"><a href="power-workflow.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="power-workflow.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first a tibble (data frame) with 1500 ppts, with the different groups showing</span></span>
-<span id="cb13-4"><a href="power-workflow.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># effect sizes in Cohen&#39;s d of .1, .2, and .4</span></span>
-<span id="cb13-5"><a href="power-workflow.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  four.groups <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a.control =</span> <span class="fu">rnorm</span>(pop, a, <span class="dv">1</span>),</span>
-<span id="cb13-6"><a href="power-workflow.html#cb13-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">b.small =</span> <span class="fu">rnorm</span>(pop, b, <span class="dv">1</span>),</span>
-<span id="cb13-7"><a href="power-workflow.html#cb13-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">c.medsmall =</span> <span class="fu">rnorm</span>(pop, c, <span class="dv">1</span>),</span>
-<span id="cb13-8"><a href="power-workflow.html#cb13-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">d.medium =</span> <span class="fu">rnorm</span>(pop, d, <span class="dv">1</span>),</span>
-<span id="cb13-9"><a href="power-workflow.html#cb13-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sample.size =</span> <span class="dv">1</span><span class="sc">:</span>pop) <span class="sc">%&gt;%</span></span>
-<span id="cb13-10"><a href="power-workflow.html#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="power-workflow.html#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># turn the data into long form</span></span>
-<span id="cb13-12"><a href="power-workflow.html#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">&#39;a.control&#39;</span><span class="sc">:</span><span class="st">&#39;d.medium&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;group&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;response&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-13"><a href="power-workflow.html#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="power-workflow.html#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put cutpoints in the data to make it more similar to the ordinal responses we would get</span></span>
-<span id="cb13-15"><a href="power-workflow.html#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ordinal =</span> <span class="fu">case_when</span>(response <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb13-16"><a href="power-workflow.html#cb13-16" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb13-17"><a href="power-workflow.html#cb13-17" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb13-18"><a href="power-workflow.html#cb13-18" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb13-19"><a href="power-workflow.html#cb13-19" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&gt;=</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">5</span>),</span>
-<span id="cb13-20"><a href="power-workflow.html#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="power-workflow.html#cb13-21" aria-hidden="true" tabindex="-1"></a>           <span class="co"># for the purposes of this demo we will not analyse it as ordinal as it takes longer</span></span>
-<span id="cb13-22"><a href="power-workflow.html#cb13-22" aria-hidden="true" tabindex="-1"></a>           <span class="co"># to run the regressions, but if you did so you would also want to make the response</span></span>
-<span id="cb13-23"><a href="power-workflow.html#cb13-23" aria-hidden="true" tabindex="-1"></a>           <span class="co"># a factor</span></span>
-<span id="cb13-24"><a href="power-workflow.html#cb13-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">ordinal =</span> <span class="fu">as.factor</span>(ordinal),</span>
-<span id="cb13-25"><a href="power-workflow.html#cb13-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">sim =</span> sim)</span>
-<span id="cb13-26"><a href="power-workflow.html#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="power-workflow.html#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(four.groups)</span>
-<span id="cb13-28"><a href="power-workflow.html#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-29"><a href="power-workflow.html#cb13-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-30"><a href="power-workflow.html#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-31"><a href="power-workflow.html#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co"># test that the function works to make one data set before making many!</span></span>
-<span id="cb13-32"><a href="power-workflow.html#cb13-32" aria-hidden="true" tabindex="-1"></a>test.data <span class="ot">&lt;-</span> <span class="fu">four.group.datamaker</span>()</span>
-<span id="cb13-33"><a href="power-workflow.html#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-34"><a href="power-workflow.html#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
-<span id="cb13-35"><a href="power-workflow.html#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> response, <span class="at">fill =</span> group), <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb13-36"><a href="power-workflow.html#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb13-37"><a href="power-workflow.html#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> .<span class="dv">5</span></span>
-<span id="cb13-38"><a href="power-workflow.html#cb13-38" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb16-1"><a href="power-workflow.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse simply used for data wrangling and plotting</span></span>
+<span id="cb16-2"><a href="power-workflow.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></div></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb17-1"><a href="power-workflow.html#cb17-1" aria-hidden="true" tabindex="-1"></a>four.group.datamaker <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sim =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">pop=</span><span class="dv">1500</span>) {</span>
+<span id="cb17-2"><a href="power-workflow.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="power-workflow.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first a tibble (data frame) with 1500 ppts, with the different groups showing</span></span>
+<span id="cb17-4"><a href="power-workflow.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># effect sizes in Cohen&#39;s d of .1, .2, and .4</span></span>
+<span id="cb17-5"><a href="power-workflow.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  four.groups <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a.control =</span> <span class="fu">rnorm</span>(pop, a, <span class="dv">1</span>),</span>
+<span id="cb17-6"><a href="power-workflow.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">b.small =</span> <span class="fu">rnorm</span>(pop, b, <span class="dv">1</span>),</span>
+<span id="cb17-7"><a href="power-workflow.html#cb17-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">c.medsmall =</span> <span class="fu">rnorm</span>(pop, c, <span class="dv">1</span>),</span>
+<span id="cb17-8"><a href="power-workflow.html#cb17-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">d.medium =</span> <span class="fu">rnorm</span>(pop, d, <span class="dv">1</span>),</span>
+<span id="cb17-9"><a href="power-workflow.html#cb17-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sample.size =</span> <span class="dv">1</span><span class="sc">:</span>pop) <span class="sc">%&gt;%</span></span>
+<span id="cb17-10"><a href="power-workflow.html#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="power-workflow.html#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># turn the data into long form</span></span>
+<span id="cb17-12"><a href="power-workflow.html#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">&#39;a.control&#39;</span><span class="sc">:</span><span class="st">&#39;d.medium&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;group&#39;</span>, <span class="at">values_to =</span> <span class="st">&#39;response&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-13"><a href="power-workflow.html#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="power-workflow.html#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put cutpoints in the data to make it more similar to the ordinal responses we would get</span></span>
+<span id="cb17-15"><a href="power-workflow.html#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ordinal =</span> <span class="fu">case_when</span>(response <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb17-16"><a href="power-workflow.html#cb17-16" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb17-17"><a href="power-workflow.html#cb17-17" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb17-18"><a href="power-workflow.html#cb17-18" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb17-19"><a href="power-workflow.html#cb17-19" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&gt;=</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb17-20"><a href="power-workflow.html#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="power-workflow.html#cb17-21" aria-hidden="true" tabindex="-1"></a>           <span class="co"># for the purposes of this demo we will not analyse it as ordinal as it takes longer</span></span>
+<span id="cb17-22"><a href="power-workflow.html#cb17-22" aria-hidden="true" tabindex="-1"></a>           <span class="co"># to run the regressions, but if you did so you would also want to make the response</span></span>
+<span id="cb17-23"><a href="power-workflow.html#cb17-23" aria-hidden="true" tabindex="-1"></a>           <span class="co"># a factor</span></span>
+<span id="cb17-24"><a href="power-workflow.html#cb17-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">ordinal =</span> <span class="fu">as.factor</span>(ordinal),</span>
+<span id="cb17-25"><a href="power-workflow.html#cb17-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">sim =</span> sim)</span>
+<span id="cb17-26"><a href="power-workflow.html#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="power-workflow.html#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(four.groups)</span>
+<span id="cb17-28"><a href="power-workflow.html#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="power-workflow.html#cb17-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-30"><a href="power-workflow.html#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="power-workflow.html#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co"># test that the function works to make one data set before making many!</span></span>
+<span id="cb17-32"><a href="power-workflow.html#cb17-32" aria-hidden="true" tabindex="-1"></a>test.data <span class="ot">&lt;-</span> <span class="fu">four.group.datamaker</span>()</span>
+<span id="cb17-33"><a href="power-workflow.html#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-34"><a href="power-workflow.html#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
+<span id="cb17-35"><a href="power-workflow.html#cb17-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> response, <span class="at">fill =</span> group), <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-36"><a href="power-workflow.html#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-37"><a href="power-workflow.html#cb17-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> .<span class="dv">5</span></span>
+<span id="cb17-38"><a href="power-workflow.html#cb17-38" aria-hidden="true" tabindex="-1"></a>  )</span></code></div></pre></div>
 <p><img src="rp_methods_book_files/figure-html/datamaker-function-1.png" width="80%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="power-workflow.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="power-workflow.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(ordinal)), <span class="at">alpha =</span> .<span class="dv">6</span>,</span>
-<span id="cb14-3"><a href="power-workflow.html#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="power-workflow.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="power-workflow.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb14-6"><a href="power-workflow.html#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
-<span id="cb14-7"><a href="power-workflow.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb18-1"><a href="power-workflow.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="power-workflow.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(ordinal)), <span class="at">alpha =</span> .<span class="dv">6</span>,</span>
+<span id="cb18-3"><a href="power-workflow.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="power-workflow.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="power-workflow.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb18-6"><a href="power-workflow.html#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
+<span id="cb18-7"><a href="power-workflow.html#cb18-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></div></pre></div>
 <p><img src="rp_methods_book_files/figure-html/datamaker-function-2.png" width="80%" style="display: block; margin: auto;" /></p>
-<p>We can see from the plots that the function appears to be working. When developing a data set for the first time, one would usually go further with some ‘diagnostic’ checks to confirm that the data is behaving as you intended. For example, in Willem’s examples, he used the mvnorm function with ‘empirical = TRUE’, so that the exact mean diffreences you specified are present in the data. This can then be confirmed wiht descriptive statistics. There might be all sorts of other diagnostics or plots we might check with other types of data that we generate.</p>
+<p>We can see from the plots that the function appears to be working. When developing a data set for the first time, one would usually go further with some ‘diagnostic’ checks to confirm that the data is behaving as you intended. For example, in Willem’s examples, he used the mvnorm function with ‘empirical = TRUE,’ so that the exact mean diffreences you specified are present in the data. This can then be confirmed wiht descriptive statistics. There might be all sorts of other diagnostics or plots we might check with other types of data that we generate.</p>
 </div>
 <div id="efficiently-generate-many-data-sets" class="section level4 unnumbered">
 <h4>Efficiently generate many data sets</h4>
-<p>Now we just need to run the function above many times over. This could be done using loops, but a very useful set of R functions in the tidyverse is the purrr package of <em>map functions</em>. Even better, a package called furrr is available to run such map functions in parallel to further reduce time. This doesn’t matter so much here because this will be quite quick anyway, but is important when we run the analyses over the many data sets. For furrr to do this, we need to tell it to plan for ‘multisession’, and give it a seed number:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="power-workflow.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(furrr)</span>
-<span id="cb15-2"><a href="power-workflow.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
-<span id="cb15-3"><a href="power-workflow.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="power-workflow.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession)</span>
-<span id="cb15-5"><a href="power-workflow.html#cb15-5" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="dv">48238</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="power-workflow.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we will pass N = 500 simulations to the map function</span></span>
-<span id="cb16-2"><a href="power-workflow.html#cb16-2" aria-hidden="true" tabindex="-1"></a>nsims <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
-<span id="cb16-3"><a href="power-workflow.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="power-workflow.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the map function will run our data-making function over 1000 simulations</span></span>
-<span id="cb16-5"><a href="power-workflow.html#cb16-5" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> nsims, <span class="at">.f =</span> four.group.datamaker,</span>
-<span id="cb16-6"><a href="power-workflow.html#cb16-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">.options =</span> options)</span>
-<span id="cb16-7"><a href="power-workflow.html#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="power-workflow.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># split the simulated data into the separate simulations</span></span>
-<span id="cb16-9"><a href="power-workflow.html#cb16-9" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> sim.data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sim) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span></code></pre></div>
+<p>Now we just need to run the function above many times over. This could be done using loops, but a very useful set of R functions in the tidyverse is the purrr package of <em>map functions</em>. Even better, a package called furrr is available to run such map functions in parallel to further reduce time. This doesn’t matter so much here because this will be quite quick anyway, but is important when we run the analyses over the many data sets. For furrr to do this, we need to tell it to plan for ‘multisession,’ and give it a seed number:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb19-1"><a href="power-workflow.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(furrr)</span>
+<span id="cb19-2"><a href="power-workflow.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
+<span id="cb19-3"><a href="power-workflow.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="power-workflow.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession)</span>
+<span id="cb19-5"><a href="power-workflow.html#cb19-5" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="dv">48238</span>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb20-1"><a href="power-workflow.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we will pass N = 500 simulations to the map function</span></span>
+<span id="cb20-2"><a href="power-workflow.html#cb20-2" aria-hidden="true" tabindex="-1"></a>nsims <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb20-3"><a href="power-workflow.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="power-workflow.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the map function will run our data-making function over 1000 simulations</span></span>
+<span id="cb20-5"><a href="power-workflow.html#cb20-5" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> nsims, <span class="at">.f =</span> four.group.datamaker,</span>
+<span id="cb20-6"><a href="power-workflow.html#cb20-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">.options =</span> options)</span>
+<span id="cb20-7"><a href="power-workflow.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="power-workflow.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># split the simulated data into the separate simulations</span></span>
+<span id="cb20-9"><a href="power-workflow.html#cb20-9" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> sim.data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sim) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span></code></div></pre></div>
 <p>Now, we have 500 simulated data sets representing our hypothetical outcome data, and can perform analyses on them:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="power-workflow.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim.data[[<span class="dv">3</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb21-1"><a href="power-workflow.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim.data[[<span class="dv">3</span>]])</span></code></div></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   sample.size group      response ordinal   sim
 ##         &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;fct&gt;   &lt;int&gt;
@@ -1152,108 +445,108 @@ We might think of sample size as <em>in</em> our control, which it generally is,
 <p>For frequentist analyses, there are also a range of estimands we might care about. For example, we might consider returning a p-value, or the upper and lower bounds for confidence intervals, r-squared estimates etc. Again, this depends on the goals one wishes to achieve and what one wants to make inferences about.</p>
 <p>The key point for any kind of analysis here is that you don’t want to forget an estimand that might be of interest and then have to re-run the entire analysis. In addition, you want to have the regression run on different sample sizes of the data, so that you can generate a power curve plot for the analysis, showing how your power changes according to increasing the sample size.</p>
 <p>In the example function below, we run a simple linear regression, predicting the response from group.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="power-workflow.html#cb19-1" aria-hidden="true" tabindex="-1"></a>linear.reg.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(data, breaks) {</span>
-<span id="cb19-2"><a href="power-workflow.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="power-workflow.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function cuts the data set it is given into different sample sizes</span></span>
-<span id="cb19-4"><a href="power-workflow.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  cut.samples <span class="ot">&lt;-</span> <span class="cf">function</span>(break.point, data) {</span>
-<span id="cb19-5"><a href="power-workflow.html#cb19-5" aria-hidden="true" tabindex="-1"></a>    cut.data <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, sample.size <span class="sc">&lt;=</span> break.point) <span class="sc">%&gt;%</span></span>
-<span id="cb19-6"><a href="power-workflow.html#cb19-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">sample.size =</span> break.point)</span>
-<span id="cb19-7"><a href="power-workflow.html#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(cut.data)</span>
-<span id="cb19-8"><a href="power-workflow.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb19-9"><a href="power-workflow.html#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="power-workflow.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(<span class="at">.x =</span> breaks, <span class="at">.f =</span> cut.samples, <span class="at">data =</span> data)</span>
-<span id="cb19-11"><a href="power-workflow.html#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="power-workflow.html#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the data is split according to the sample size</span></span>
-<span id="cb19-13"><a href="power-workflow.html#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to feed to the regression model</span></span>
-<span id="cb19-14"><a href="power-workflow.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> data.cuts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sample.size) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span>
-<span id="cb19-15"><a href="power-workflow.html#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="power-workflow.html#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function runs the regression</span></span>
-<span id="cb19-17"><a href="power-workflow.html#cb19-17" aria-hidden="true" tabindex="-1"></a>  run.reg <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
-<span id="cb19-18"><a href="power-workflow.html#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="power-workflow.html#cb19-19" aria-hidden="true" tabindex="-1"></a>    four.group.form <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ordinal) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> group</span>
-<span id="cb19-20"><a href="power-workflow.html#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="power-workflow.html#cb19-21" aria-hidden="true" tabindex="-1"></a>    four.group.reg <span class="ot">&lt;-</span></span>
-<span id="cb19-22"><a href="power-workflow.html#cb19-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lm</span>(<span class="at">formula =</span> four.group.form,</span>
-<span id="cb19-23"><a href="power-workflow.html#cb19-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> data)</span>
-<span id="cb19-24"><a href="power-workflow.html#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="power-workflow.html#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we extract confidence intervals for the parameters of interest</span></span>
-<span id="cb19-26"><a href="power-workflow.html#cb19-26" aria-hidden="true" tabindex="-1"></a>    ci99 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">99</span>)</span>
-<span id="cb19-27"><a href="power-workflow.html#cb19-27" aria-hidden="true" tabindex="-1"></a>    ci95 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">95</span>)</span>
-<span id="cb19-28"><a href="power-workflow.html#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-29"><a href="power-workflow.html#cb19-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create an output to show the confidence intervals around the effects</span></span>
-<span id="cb19-30"><a href="power-workflow.html#cb19-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and some additional inference info, e.g., &#39;nonzero&#39; indicates whether</span></span>
-<span id="cb19-31"><a href="power-workflow.html#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the lower bound of the CI excludes 0 or not.</span></span>
-<span id="cb19-32"><a href="power-workflow.html#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># &#39;width&#39; indicates the width of the confidence interval,</span></span>
-<span id="cb19-33"><a href="power-workflow.html#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for assessment of precision</span></span>
-<span id="cb19-34"><a href="power-workflow.html#cb19-34" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>,</span>
-<span id="cb19-35"><a href="power-workflow.html#cb19-35" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>),</span>
-<span id="cb19-36"><a href="power-workflow.html#cb19-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">interval =</span> <span class="fu">c</span>(.<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">95</span>, .<span class="dv">95</span>, .<span class="dv">95</span>),</span>
-<span id="cb19-37"><a href="power-workflow.html#cb19-37" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">1</span>]], ci99[[<span class="dv">3</span>,<span class="dv">1</span>]], ci99[[<span class="dv">4</span>,<span class="dv">1</span>]],</span>
-<span id="cb19-38"><a href="power-workflow.html#cb19-38" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">1</span>]], ci95[[<span class="dv">3</span>,<span class="dv">1</span>]], ci95[[<span class="dv">4</span>,<span class="dv">1</span>]]),</span>
-<span id="cb19-39"><a href="power-workflow.html#cb19-39" aria-hidden="true" tabindex="-1"></a>                     <span class="at">upper =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">2</span>]], ci99[[<span class="dv">3</span>,<span class="dv">2</span>]], ci99[[<span class="dv">4</span>,<span class="dv">2</span>]],</span>
-<span id="cb19-40"><a href="power-workflow.html#cb19-40" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">2</span>]], ci95[[<span class="dv">3</span>,<span class="dv">2</span>]], ci95[[<span class="dv">4</span>,<span class="dv">2</span>]])) <span class="sc">%&gt;%</span></span>
-<span id="cb19-41"><a href="power-workflow.html#cb19-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="st">&#39;nonzero&#39;</span> <span class="ot">=</span> <span class="fu">case_when</span>(lower <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb19-42"><a href="power-workflow.html#cb19-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
-<span id="cb19-43"><a href="power-workflow.html#cb19-43" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;width&#39;</span> <span class="ot">=</span> <span class="fu">abs</span>(upper <span class="sc">-</span> lower),</span>
-<span id="cb19-44"><a href="power-workflow.html#cb19-44" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;sim&#39;</span> <span class="ot">=</span> data[[<span class="dv">1</span>, <span class="st">&#39;sim&#39;</span>]],</span>
-<span id="cb19-45"><a href="power-workflow.html#cb19-45" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;cell.size&#39;</span> <span class="ot">=</span> <span class="fu">nrow</span>(data)<span class="sc">/</span><span class="dv">4</span>)</span>
-<span id="cb19-46"><a href="power-workflow.html#cb19-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-47"><a href="power-workflow.html#cb19-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
-<span id="cb19-48"><a href="power-workflow.html#cb19-48" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb19-49"><a href="power-workflow.html#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-50"><a href="power-workflow.html#cb19-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run the regression function over the different sample sizes</span></span>
-<span id="cb19-51"><a href="power-workflow.html#cb19-51" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="at">.x =</span> data.cuts, <span class="at">.f =</span> run.reg)</span>
-<span id="cb19-52"><a href="power-workflow.html#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-53"><a href="power-workflow.html#cb19-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb19-54"><a href="power-workflow.html#cb19-54" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb23-1"><a href="power-workflow.html#cb23-1" aria-hidden="true" tabindex="-1"></a>linear.reg.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(data, breaks) {</span>
+<span id="cb23-2"><a href="power-workflow.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="power-workflow.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function cuts the data set it is given into different sample sizes</span></span>
+<span id="cb23-4"><a href="power-workflow.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  cut.samples <span class="ot">&lt;-</span> <span class="cf">function</span>(break.point, data) {</span>
+<span id="cb23-5"><a href="power-workflow.html#cb23-5" aria-hidden="true" tabindex="-1"></a>    cut.data <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, sample.size <span class="sc">&lt;=</span> break.point) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="power-workflow.html#cb23-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">sample.size =</span> break.point)</span>
+<span id="cb23-7"><a href="power-workflow.html#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(cut.data)</span>
+<span id="cb23-8"><a href="power-workflow.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-9"><a href="power-workflow.html#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="power-workflow.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(<span class="at">.x =</span> breaks, <span class="at">.f =</span> cut.samples, <span class="at">data =</span> data)</span>
+<span id="cb23-11"><a href="power-workflow.html#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="power-workflow.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the data is split according to the sample size</span></span>
+<span id="cb23-13"><a href="power-workflow.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to feed to the regression model</span></span>
+<span id="cb23-14"><a href="power-workflow.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> data.cuts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sample.size) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span>
+<span id="cb23-15"><a href="power-workflow.html#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="power-workflow.html#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function runs the regression</span></span>
+<span id="cb23-17"><a href="power-workflow.html#cb23-17" aria-hidden="true" tabindex="-1"></a>  run.reg <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb23-18"><a href="power-workflow.html#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="power-workflow.html#cb23-19" aria-hidden="true" tabindex="-1"></a>    four.group.form <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ordinal) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> group</span>
+<span id="cb23-20"><a href="power-workflow.html#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="power-workflow.html#cb23-21" aria-hidden="true" tabindex="-1"></a>    four.group.reg <span class="ot">&lt;-</span></span>
+<span id="cb23-22"><a href="power-workflow.html#cb23-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lm</span>(<span class="at">formula =</span> four.group.form,</span>
+<span id="cb23-23"><a href="power-workflow.html#cb23-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> data)</span>
+<span id="cb23-24"><a href="power-workflow.html#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="power-workflow.html#cb23-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we extract confidence intervals for the parameters of interest</span></span>
+<span id="cb23-26"><a href="power-workflow.html#cb23-26" aria-hidden="true" tabindex="-1"></a>    ci99 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">99</span>)</span>
+<span id="cb23-27"><a href="power-workflow.html#cb23-27" aria-hidden="true" tabindex="-1"></a>    ci95 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">95</span>)</span>
+<span id="cb23-28"><a href="power-workflow.html#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="power-workflow.html#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create an output to show the confidence intervals around the effects</span></span>
+<span id="cb23-30"><a href="power-workflow.html#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and some additional inference info, e.g., &#39;nonzero&#39; indicates whether</span></span>
+<span id="cb23-31"><a href="power-workflow.html#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the lower bound of the CI excludes 0 or not.</span></span>
+<span id="cb23-32"><a href="power-workflow.html#cb23-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># &#39;width&#39; indicates the width of the confidence interval,</span></span>
+<span id="cb23-33"><a href="power-workflow.html#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for assessment of precision</span></span>
+<span id="cb23-34"><a href="power-workflow.html#cb23-34" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>,</span>
+<span id="cb23-35"><a href="power-workflow.html#cb23-35" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>),</span>
+<span id="cb23-36"><a href="power-workflow.html#cb23-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">interval =</span> <span class="fu">c</span>(.<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">95</span>, .<span class="dv">95</span>, .<span class="dv">95</span>),</span>
+<span id="cb23-37"><a href="power-workflow.html#cb23-37" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">1</span>]], ci99[[<span class="dv">3</span>,<span class="dv">1</span>]], ci99[[<span class="dv">4</span>,<span class="dv">1</span>]],</span>
+<span id="cb23-38"><a href="power-workflow.html#cb23-38" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">1</span>]], ci95[[<span class="dv">3</span>,<span class="dv">1</span>]], ci95[[<span class="dv">4</span>,<span class="dv">1</span>]]),</span>
+<span id="cb23-39"><a href="power-workflow.html#cb23-39" aria-hidden="true" tabindex="-1"></a>                     <span class="at">upper =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">2</span>]], ci99[[<span class="dv">3</span>,<span class="dv">2</span>]], ci99[[<span class="dv">4</span>,<span class="dv">2</span>]],</span>
+<span id="cb23-40"><a href="power-workflow.html#cb23-40" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">2</span>]], ci95[[<span class="dv">3</span>,<span class="dv">2</span>]], ci95[[<span class="dv">4</span>,<span class="dv">2</span>]])) <span class="sc">%&gt;%</span></span>
+<span id="cb23-41"><a href="power-workflow.html#cb23-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="st">&#39;nonzero&#39;</span> <span class="ot">=</span> <span class="fu">case_when</span>(lower <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb23-42"><a href="power-workflow.html#cb23-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb23-43"><a href="power-workflow.html#cb23-43" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;width&#39;</span> <span class="ot">=</span> <span class="fu">abs</span>(upper <span class="sc">-</span> lower),</span>
+<span id="cb23-44"><a href="power-workflow.html#cb23-44" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;sim&#39;</span> <span class="ot">=</span> data[[<span class="dv">1</span>, <span class="st">&#39;sim&#39;</span>]],</span>
+<span id="cb23-45"><a href="power-workflow.html#cb23-45" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;cell.size&#39;</span> <span class="ot">=</span> <span class="fu">nrow</span>(data)<span class="sc">/</span><span class="dv">4</span>)</span>
+<span id="cb23-46"><a href="power-workflow.html#cb23-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-47"><a href="power-workflow.html#cb23-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
+<span id="cb23-48"><a href="power-workflow.html#cb23-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-49"><a href="power-workflow.html#cb23-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-50"><a href="power-workflow.html#cb23-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run the regression function over the different sample sizes</span></span>
+<span id="cb23-51"><a href="power-workflow.html#cb23-51" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="at">.x =</span> data.cuts, <span class="at">.f =</span> run.reg)</span>
+<span id="cb23-52"><a href="power-workflow.html#cb23-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-53"><a href="power-workflow.html#cb23-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb23-54"><a href="power-workflow.html#cb23-54" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
 <p>Once we have made and tested that our function works as intended and returns the values we want to make inferences from, we can run it over the many simluated data sets:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="power-workflow.html#cb20-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb20-2"><a href="power-workflow.html#cb20-2" aria-hidden="true" tabindex="-1"></a>linreg.output <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> sim.data,</span>
-<span id="cb20-3"><a href="power-workflow.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> linear.reg.maker,</span>
-<span id="cb20-4"><a href="power-workflow.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>))</span>
-<span id="cb20-5"><a href="power-workflow.html#cb20-5" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb20-6"><a href="power-workflow.html#cb20-6" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span></code></pre></div>
-<pre><code>## Time difference of 15.43437 secs</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb24-1"><a href="power-workflow.html#cb24-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb24-2"><a href="power-workflow.html#cb24-2" aria-hidden="true" tabindex="-1"></a>linreg.output <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> sim.data,</span>
+<span id="cb24-3"><a href="power-workflow.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> linear.reg.maker,</span>
+<span id="cb24-4"><a href="power-workflow.html#cb24-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>))</span>
+<span id="cb24-5"><a href="power-workflow.html#cb24-5" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb24-6"><a href="power-workflow.html#cb24-6" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span></code></div></pre></div>
+<pre><code>## Time difference of 11.92885 secs</code></pre>
 <p>The object ‘linreg.output’ is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
 </div>
 <div id="step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="section level3" number="12.2.3">
 <h3><span class="header-section-number">12.2.3</span> Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</h3>
 <p>Now, we wish to ascertain how likely we are to achieve a range of inferential goals, depending on factors such as the sample size, the underlying effect sizes, or whatever else we varied in simulating our data and running our models. For this example, this is as simple as generating a summary of the output from Step 2:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="power-workflow.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group the data according to group, confidence interval, and size per group</span></span>
-<span id="cb22-2"><a href="power-workflow.html#cb22-2" aria-hidden="true" tabindex="-1"></a>four.group.lin.summary <span class="ot">&lt;-</span> linreg.output <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group, interval, cell.size) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="power-workflow.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarise the amount of times we get a CI greater than 0</span></span>
-<span id="cb22-4"><a href="power-workflow.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.groups =</span> <span class="st">&#39;keep&#39;</span>,</span>
-<span id="cb22-5"><a href="power-workflow.html#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;ci above 0 vs. control&#39;</span> <span class="ot">=</span> <span class="fu">sum</span>(nonzero)<span class="sc">/</span><span class="dv">5</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb22-6"><a href="power-workflow.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change some factors for plotting</span></span>
-<span id="cb22-7"><a href="power-workflow.html#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">interval =</span> <span class="fu">factor</span>(interval, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;0.95&#39;</span>, <span class="st">&#39;0.99&#39;</span>),</span>
-<span id="cb22-8"><a href="power-workflow.html#cb22-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;95% CI&#39;</span>, <span class="st">&#39;99% CI&#39;</span>)),</span>
-<span id="cb22-9"><a href="power-workflow.html#cb22-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;Effect size&#39;</span> <span class="ot">=</span> <span class="fu">factor</span>(group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>),</span>
-<span id="cb22-10"><a href="power-workflow.html#cb22-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Very small (.1)&#39;</span>, <span class="st">&#39;Small (.2)&#39;</span>, <span class="st">&#39;Medium (.4)&#39;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb26-1"><a href="power-workflow.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group the data according to group, confidence interval, and size per group</span></span>
+<span id="cb26-2"><a href="power-workflow.html#cb26-2" aria-hidden="true" tabindex="-1"></a>four.group.lin.summary <span class="ot">&lt;-</span> linreg.output <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group, interval, cell.size) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="power-workflow.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarise the amount of times we get a CI greater than 0</span></span>
+<span id="cb26-4"><a href="power-workflow.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.groups =</span> <span class="st">&#39;keep&#39;</span>,</span>
+<span id="cb26-5"><a href="power-workflow.html#cb26-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;ci above 0 vs. control&#39;</span> <span class="ot">=</span> <span class="fu">sum</span>(nonzero)<span class="sc">/</span><span class="dv">5</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb26-6"><a href="power-workflow.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change some factors for plotting</span></span>
+<span id="cb26-7"><a href="power-workflow.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">interval =</span> <span class="fu">factor</span>(interval, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;0.95&#39;</span>, <span class="st">&#39;0.99&#39;</span>),</span>
+<span id="cb26-8"><a href="power-workflow.html#cb26-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;95% CI&#39;</span>, <span class="st">&#39;99% CI&#39;</span>)),</span>
+<span id="cb26-9"><a href="power-workflow.html#cb26-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">&#39;Effect size&#39;</span> <span class="ot">=</span> <span class="fu">factor</span>(group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;small&#39;</span>, <span class="st">&#39;medsmall&#39;</span>, <span class="st">&#39;medium&#39;</span>),</span>
+<span id="cb26-10"><a href="power-workflow.html#cb26-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;Very small (.1)&#39;</span>, <span class="st">&#39;Small (.2)&#39;</span>, <span class="st">&#39;Medium (.4)&#39;</span>)))</span></code></div></pre></div>
 <p>And then plotting the resulting power curve:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="power-workflow.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> four.group.lin.summary) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="power-workflow.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1550</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="power-workflow.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="power-workflow.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">80</span>), <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="power-workflow.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">90</span>), <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="power-workflow.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>,</span>
-<span id="cb23-7"><a href="power-workflow.html#cb23-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">group =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>), <span class="at">size =</span> .<span class="dv">66</span>) <span class="sc">+</span></span>
-<span id="cb23-8"><a href="power-workflow.html#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>),</span>
-<span id="cb23-9"><a href="power-workflow.html#cb23-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb23-10"><a href="power-workflow.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Power to detect a non-zero effect&#39;</span>,</span>
-<span id="cb23-11"><a href="power-workflow.html#cb23-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&#39;Number of participants per condition (control group not included)&#39;</span>) <span class="sc">+</span></span>
-<span id="cb23-12"><a href="power-workflow.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;#c10d0d&#39;</span>, <span class="st">&#39;#7dc3c2&#39;</span>, <span class="st">&#39;#dcc55b&#39;</span>)) <span class="sc">+</span></span>
-<span id="cb23-13"><a href="power-workflow.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>interval) <span class="sc">+</span></span>
-<span id="cb23-14"><a href="power-workflow.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb23-15"><a href="power-workflow.html#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span>,</span>
-<span id="cb23-16"><a href="power-workflow.html#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.33</span>),</span>
-<span id="cb23-17"><a href="power-workflow.html#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>),</span>
-<span id="cb23-18"><a href="power-workflow.html#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;grey96&quot;</span>),</span>
-<span id="cb23-19"><a href="power-workflow.html#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">size =</span> <span class="fl">0.375</span>),</span>
-<span id="cb23-20"><a href="power-workflow.html#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
-<span id="cb23-21"><a href="power-workflow.html#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">family =</span> <span class="st">&#39;Gill Sans MT&#39;</span>, <span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb23-22"><a href="power-workflow.html#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">family =</span> <span class="st">&#39;Gill Sans MT&#39;</span>, <span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb23-23"><a href="power-workflow.html#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb23-24"><a href="power-workflow.html#cb23-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb27-1"><a href="power-workflow.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> four.group.lin.summary) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="power-workflow.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1550</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="power-workflow.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="power-workflow.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">80</span>), <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="power-workflow.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">90</span>), <span class="at">linetype =</span> <span class="st">&#39;dashed&#39;</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="power-workflow.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>,</span>
+<span id="cb27-7"><a href="power-workflow.html#cb27-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">group =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>), <span class="at">size =</span> .<span class="dv">66</span>) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="power-workflow.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>),</span>
+<span id="cb27-9"><a href="power-workflow.html#cb27-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="power-workflow.html#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Power to detect a non-zero effect&#39;</span>,</span>
+<span id="cb27-11"><a href="power-workflow.html#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&#39;Number of participants per condition (control group not included)&#39;</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="power-workflow.html#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;#c10d0d&#39;</span>, <span class="st">&#39;#7dc3c2&#39;</span>, <span class="st">&#39;#dcc55b&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="power-workflow.html#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>interval) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="power-workflow.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb27-15"><a href="power-workflow.html#cb27-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb27-16"><a href="power-workflow.html#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.33</span>),</span>
+<span id="cb27-17"><a href="power-workflow.html#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="fl">0.2</span>),</span>
+<span id="cb27-18"><a href="power-workflow.html#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;grey96&quot;</span>),</span>
+<span id="cb27-19"><a href="power-workflow.html#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">size =</span> <span class="fl">0.375</span>),</span>
+<span id="cb27-20"><a href="power-workflow.html#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb27-21"><a href="power-workflow.html#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">family =</span> <span class="st">&#39;Gill Sans MT&#39;</span>, <span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb27-22"><a href="power-workflow.html#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">family =</span> <span class="st">&#39;Gill Sans MT&#39;</span>, <span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb27-23"><a href="power-workflow.html#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb27-24"><a href="power-workflow.html#cb27-24" aria-hidden="true" tabindex="-1"></a>  )</span></code></div></pre></div>
 <p><img src="rp_methods_book_files/figure-html/plot-power-curve-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." class="section level3" number="12.2.4">
@@ -1264,82 +557,108 @@ We might think of sample size as <em>in</em> our control, which it generally is,
 </div>
 </div>
 </div>
-            </section>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p> This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.<a href="power-workflow.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p> More precisely, we may express this as ‘power against a <em>particular</em> alternative hypothesis.’ (DR: may be worth putting maths here at some point, and also give a canonical reference.)<a href="power-workflow.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>Maybe add ‘and there is no standard ’null hypothesis testing procedure.’ Actually, maybe this point needs a bit more fleshing out? What is the implication of ‘there is only one data set?’<a href="power-workflow.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p> Or a comparable statement posed in probablistic terms… Frequentist: ‘if there had been a zero difference between these groups (H0), this data is unlikely to have been generated.’ Bayesian: ‘the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).’<a href="power-workflow.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>DR: Which of these do you consider frequentist and which are Bayesian, and which can be either?<a href="power-workflow.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p> These may be generated by draws based on a canonical distribution, like the Gaussian (‘normal’) with particular parameters. Alternately, if prior ‘similar’ data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.<a href="power-workflow.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.<a href="power-workflow.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p> DR: I removed ‘ways of generating data’ because I thought it could be misleading. It seems wrong to first say, e.g., ‘we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials’… and then say ‘but that didn’t have enough power so lets assume a more concentrated distribution.’ What I think you meant was consider other ways of actually <em>collecting</em> data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this <em>new</em> approach. Note that DD seems to have good tools for comparing and considering design variations.<a href="power-workflow.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p> We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.<a href="power-workflow.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p> DR: I changed the wording here because if we diagnose the design as ‘underpowered’ we probably would choose not to run it in that form.<a href="power-workflow.html#fnref16" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<div class="text-center m-5">
+<a href="appendixsupplements.html"><button class="btn btn-secondary">Previous</button></a>
+<a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><button class="btn btn-secondary">Next</button></a>
+</div>
+</main>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
-<a href="appendixsupplements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+  crossorigin="anonymous">
+</script>
+
+<!-- Littlefoot -->
+<script type="application/javascript">
+littlefoot.littlefoot()
+</script>
+
 <script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": true,
-"weibo": true,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"],
-"google": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
+// Set the current page to be active in the TOC
+const id = document.getElementsByClassName("level1").item(0).id
+const item = document.getElementById("item-" + id)
+item.classList.toggle("active")
+
+// Add foldable sections
+const foldables = document.getElementsByClassName("foldable")
+
+for (foldable of foldables) {
+  const a = foldable.firstChild
+  
+  a.href = "#"
+  a.onclick = function() {
+
+    if (this.innerHTML === "Show") {
+      this.innerHTML = "Hide"
+    } else {
+      this.innerHTML = "Show"
+    }
+    
+    const bsCollapse = new bootstrap.Collapse(a.nextSibling, {
+      toggle: true
+    })
+  }
 }
-});
-});
+
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-</body>
+// Create toggle code function
+toggleCode = function() {
+  const mainContainer = document.getElementById("main-container")
+  const codes = mainContainer.getElementsByClassName('sourceCode r collapse')
+  
+  for (code of codes) {
+    new bootstrap.Collapse(code, {toggle: true})
+  }
+}
 
+// Add sidebar toggle functionality
+window.addEventListener('DOMContentLoaded', event => {
+  // Toggle the side navigation
+  const sidebarToggle = document.body.querySelector('#sidebarToggle');
+  if (sidebarToggle) {
+    
+    if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+      document.body.classList.toggle('sb-sidenav-toggled');
+    }
+    sidebarToggle.addEventListener('click', event => {
+      event.preventDefault();
+      document.body.classList.toggle('sb-sidenav-toggled');
+      localStorage.setItem(
+        'sb|sidebar-toggle', 
+        document.body.classList.contains('sb-sidenav-toggled')
+      );
+    });
+  }
+  
+  // Add toggle code function to toggle code button
+  const toggleCodeButton = document.getElementById("toggleCodeButton")
+  toggleCodeButton.onclick = toggleCode
+});
+</script>
+
+</body>
 </html>

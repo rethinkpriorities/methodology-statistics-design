@@ -1,0 +1,111 @@
+#  **MODELS, TESTING, INFERENCE, DESCRIPTIVES** {-#basicstat}
+
+Aim to integrate content from [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
+
+This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane'
+
+
+# Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
+
+
+## Conceptual discussion of statistics, probability and inference {#conceptual}
+
+Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'>
+
+::: {.alert .alert-secondary}
+ 
+
+DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.
+ 
+:::
+
+
+## Hypothesis testing, statistical comparisons and inferences
+
+
+### ['Common statistical tests are linear models'](https://lindeloev.github.io/tests-as-linear/)
+
+Many of the 'univariate' tests presented below can be extended to multiple-variable models (e.g., regression coefficients).
+
+Further discussion, examples, and tables comparing the statistics by [Oska Fentem in his Notion here](https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe).
+
+## Randomization and permutation-based tests and inference
+
+Basic description: (still looking for the best source for this)
+
+
+- Discussion of the difference between randomization inference and bootstrapping [here](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)
+
+<!-- ![](picsfigs/clip_permutation_process.png) -->
+
+> Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.
+\
+
+The [infer](https://infer.tidymodels.org/articles/infer.html) package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the `coin` package).^[ See also Reinstein's [notes/work](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r) on the vignette.
+]
+
+
+\
+
+We use this, and give some explanation, in the 2021 [EAS donations post - see bookdown](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all) (see folds within)
+
+> We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). ...
+
+The code we use for these tests is permalinked [here](https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128)
+E
+\
+
+*Why use these techniques?*
+
+- Tractable for testing differences in medians
+
+- Fairly easy to explain, fairly intuitive
+
+- Do not depend on strong assumptions about underlying distributions or 'large sample asymptotics'
+
+- Some statisticians and Econometricians (e.g., [Athey and Imbens](https://arxiv.org/abs/1607.00698)) argue for their value and robustness; it also seems close to what a lot of 'data science' people do (they love simulation)
+
+
+
+> DR concerns about 'population vs super-population', possibly misinformed:
+
+::: {.foldable} 
+ 
+
+... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.
+
+## Particular 'experimetrics' issues
+
+### Should we include controls (covariates) in analyzing 'treatment effects' from randomized experiments? {-}
+
+
+> "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."
+- (?) Athey and Imbens
+
+ 
+:::
+
+
+## 'Evidence of little or no effect' - equivalence tests, etc
+
+- [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+
+
+# Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}
+
+Integrate...
+
+Willem's work:
+
+
+```{r wppage}
+
+knitr::include_url("https://willemsleegers.github.io/how-to-science/factor-analysis.html")
+
+```
+
+<!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->
+
+
+
+

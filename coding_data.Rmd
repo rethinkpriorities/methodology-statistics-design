@@ -1,0 +1,61 @@
+# Coding and data management {#coding}
+
+Integrate further content from [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein,
+
+## Coding and organisational issues
+
+- Data protection (e.g., EA Survey data pre-2021 is not publicly shareable!)
+
+- Good data management
+
+- Reproducability
+
+- Git and github
+
+- R and Rmd
+
+- How to leave comments and collaborate?
+
+- `trackdown` to convert to Gdoc for feedback
+
+- Folder structure, use of packages; esp `Renv`
+
+- Functions etc pulled from `dr-rstuff` repo
+
+- I (DR) love `lower_snake_case`
+
+\
+
+### Automation and 'dynamic documents' {-}
+
+'Soft-code' as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent
+
+[Inline code in Rmd](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html) is great but it can be a double-edged sword.
+
+Sometimes its better to 'do the important and complicated coding' in a chunk before this, not in the inline code itself because
+
+- the 'bookdown' doesn't show the *code* generating the inline computation ... so a separate chunk makes it more transparent for external readers
+
+- inline code isn't spaced well and its hard to read and debug.
+
+
+### Data management
+
+- Track it from its 'source'; use API to grab directly from Qualtrics (etc.) if possible
+
+- A `main.R` file in the root directory should run everything
+
+- Data import; external 'dictionary' can be helpful (see, e.g., [here](https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0) for EAS integrated with Google sheet; R code [here](https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R) brings it in
+
+- import, cleaning, variable creation separate from analysis (unless its a very 'one-off-for-analysis' thing)
+   - import and cleaning in `.R` rather than `.Rmd` perhaps
+
+- 'raw' data in separate folder from 'munged' data
+
+- `codebook` package -- make a codebook
+
+- minimize 'versions' of the data frames ... code and use 'filter objects' instead
+  - see ['lists of filters'](https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set) but actually defining the filter with `quo()` seems better.
+
+
+
