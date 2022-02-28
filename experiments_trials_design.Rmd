@@ -4,11 +4,13 @@
 
 - See informal 'practitioners' discussion [below](#eamt-qual), from 'EA market testing'
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
 
-```
+ 
+:::
 
 
 ## Proposed structure of section
@@ -49,11 +51,13 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 # Design: quantitative issues {#expt-quant}
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
 
-```
+ 
+:::
 
 ## 'Treatment' assignment (blocking, randomization, etc)
 
@@ -71,11 +75,8 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 (Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis
 
-## Power analyses (and other 'diagnosands')
-
-<div class="marginnote">
-Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?
-</div>
+## Power analyses (and other 'diagnosands')^[Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?
+]
 
 
 ### Key resources and explainers
@@ -90,7 +91,8 @@ Note: this will very much overlap the discussion of power analysis for *surveys*
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 DR: I'm putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.
 
@@ -98,4 +100,6 @@ An alternative to an 'appendix' is a standalone page which we can link here. Thi
 
 But for now, I'll make it a bookdown appendix, to help get us all used to the current format and avoid disagregation.
 
-```
+ 
+:::
+

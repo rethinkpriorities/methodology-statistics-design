@@ -1,0 +1,60 @@
+---
+title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
+author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
+logo: logo.png
+abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
+date: "`r Sys.Date()`"
+bibliography: references.bib
+csl: apa.csl
+always_allow_html: yes
+link-citations: yes
+site: bookdown::bookdown_siteoutput:
+output: rethinkpriorities::book
+github-repo: /rethinkpriorities/methodology-statistics-design
+description: "Rethink Priorities: Our approach to empirical and quantitative work"
+#url: 'https\://daaronr.github.io//'
+tags: [Econometrics, Statistics, Data Science, Experiments, Survey methods, Notes, Methodology]
+---
+
+```{r echo=FALSE}
+# globally set chunk options
+#This allows building even if errors come along the way
+knitr::opts_chunk$set(fig.align='center', out.width='80%', warning=FALSE, message = FALSE, error=TRUE)
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+```
+
+```{r echo=FALSE}
+
+
+my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to") #what was this? do we need it?
+
+#inline code -- this should allows building even if errors come along the way
+
+knitr::knit_hooks$set(
+  evaluate.inline = function (code, envir = knit_global()) {
+    v = try(eval(xfun::parse_only(code), envir = envir))
+    knitr::knit_print(v, inline = TRUE, options = knitr::opts_chunk$get())
+  },
+  inline = function(x) {
+  if (any(class(x) == "try-error")) {
+    as.vector(x)
+  } else x
+})
+```
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- <html> -->
+
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script> -->
+<!-- <script> -->
+<!--   window.dataLayer = window.dataLayer || []; -->
+<!--   function gtag(){dataLayer.push(arguments);} -->
+<!--   gtag('js', new Date()); -->
+
+<!--   gtag('config', 'G-QLKFNFTGXX'); -->
+<!-- </script> -->
+<!-- </html> -->

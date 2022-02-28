@@ -11,10 +11,12 @@ Modeling what drives/effects/predicts ...
 
 Particularly in response to discrete events, media coverage, etc.\*
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 \* DR: The latter makes this seem more like a causal inference problem (‘what works to boost good applications’) …
 than a ‘predict the future to plan around it’ problem (as in Pete’s ML notes).
-```
+ 
+:::
 
 
 - "Did any of these events (at different times) seem to increase numbers?*"
@@ -26,10 +28,8 @@ From which they aim to infer (more loosely)
 ### Our proposed overall strategy
 
 Essentially, this is 'time series data' (although there may be some panel and cross-sectional elements).
-We want to model this in a way that allows for overall trends (possibly nonlinear(, seasonality, and possibly autocorrelation (AR and MA terms?).\*
-<div class="marginnote">
-\* Do we need to test for stationarity (and then difference and test it again?)
-</div>
+We want to model this in a way that allows for overall trends (possibly nonlinear(, seasonality, and possibly autocorrelation (AR and MA terms?).^[ Do we need to test for stationarity (and then difference and test it again?)
+]
 
 ... and maybe also 'structural breaks'.
 
@@ -100,11 +100,13 @@ If you think the trends are nonlinear, I've  done a similar thing using GAMs, an
 
 ## PETE'S NOTES BELOW
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 DR: Not sure what/how to adapt this
 
-```
+ 
+:::
 
 In Machine Learning,  **Time series** problems are problems that involve forecasting (extrapolating) the future based on the information of the past. Typically we have to make a chain of non-independent predictions rather than predict discrete, independent events.
 
@@ -226,3 +228,4 @@ For metrics, it's good to compare the evaluation metric to a **naive baseline mo
 ## Multiseries
 
 Predict a different time series for each unit (e.g., sales by store). Can use features across series (**cross series features**).
+

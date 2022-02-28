@@ -1,9 +1,11 @@
 # Presentation, labeling and visualisations {#presentation}
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
 NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/
-```
+ 
+:::
 
 ## Aside: EA Forum organisation, collophon, formatting
 
@@ -22,9 +24,11 @@ MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize
 
 **Treemaps**
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 NOTE: The below will not run without data, but we cannot make data 'public' here ... we can swap this for built in R or simulated data in this discussion
-```
+ 
+:::
 
 ```{r}
 
@@ -110,11 +114,8 @@ knitr::include_url("https://rethinkpriorities.github.io/ea_data_public/eas-engag
 
 ```
 
-Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure), we combine a `geom_point` with a `geom_smooth`.\*
-
-<div class="marginnote">
-\* DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
-</div>
+Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure), we combine a `geom_point` with a `geom_smooth`.^[ DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
+]
 
 Here, I think the use of `%>% ggplotly` yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'.
 
@@ -134,5 +135,6 @@ See how we group the coefficients into plots  by 'theme'
 In some contexts, lines for 'base rates' can be helpful
 
 ![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png) ... context, scroll up from [here](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)
+
 
 

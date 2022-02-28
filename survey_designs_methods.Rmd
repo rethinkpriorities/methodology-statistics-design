@@ -9,13 +9,15 @@ More technical and involved discussion of overlapping content will often be defe
 @schwarcz2007
 
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development),
 
 and [Reinstein's sloppy notes](https://daaronr.github.io/metrics_discussion/surveys.html); see embeds below
 
-```
+ 
+:::
 
 
 ## (Willem Sleegers, to incorporate)
@@ -52,4 +54,5 @@ knitr::include_url("https://daaronr.github.io/metrics_discussion/surveys.html")
 - Implementation platforms and issues
 
 - Survey design tools (IT)
+
 

@@ -58,3 +58,4 @@ Sometimes its better to 'do the important and complicated coding' in a chunk bef
   - see ['lists of filters'](https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set) but actually defining the filter with `quo()` seems better.
 
 
+

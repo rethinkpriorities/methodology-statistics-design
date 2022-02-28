@@ -12,10 +12,12 @@ This should *not* include extensive discussion of causality (which is later), on
 
 Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'>
 
-```{block2,  type='note'}
+::: {.alert .alert-secondary}
+ 
 
 DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.
-```
+ 
+:::
 
 
 ## Hypothesis testing, statistical comparisons and inferences
@@ -39,11 +41,8 @@ Basic description: (still looking for the best source for this)
 > Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.
 \
 
-The [infer](https://infer.tidymodels.org/articles/infer.html) package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the `coin` package).\*
-
-<div class="marginnote">
-\* See also Reinstein's [notes/work](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r) on the vignette.
-</div>
+The [infer](https://infer.tidymodels.org/articles/infer.html) package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the `coin` package).^[ See also Reinstein's [notes/work](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r) on the vignette.
+]
 
 
 \
@@ -70,7 +69,8 @@ E
 
 > DR concerns about 'population vs super-population', possibly misinformed:
 
-```{block2,  type='fold'}
+::: {.foldable} 
+ 
 
 ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.
 
@@ -82,7 +82,8 @@ E
 > "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."
 - (?) Athey and Imbens
 
-```
+ 
+:::
 
 
 ## 'Evidence of little or no effect' - equivalence tests, etc
@@ -104,6 +105,7 @@ knitr::include_url("https://willemsleegers.github.io/how-to-science/factor-analy
 ```
 
 <!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->
+
 
 
 
