@@ -5,16 +5,16 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+<meta property="og:title" content="Rethink Priorities on ‘quantitative/social science methods’" />
 <meta property="og:type" content="book" />
 
 
 <meta property="og:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference" />
 <meta name="github-repo" content="/rethinkpriorities/methodology-statistics-design" />
 
-<meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
+<meta name="author" content="RP researchers, esp. the ‘Survey team’ (project ‘owner’ = Reinstein)" />
 
-<meta name="date" content="2022-02-26" />
+<meta name="date" content="2022-02-27" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -25,7 +25,7 @@ MathJax.Hub.Config({
 
 <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference">
 
-<title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+<title>Rethink Priorities on ‘quantitative/social science methods’</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -121,18 +121,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="border-end bg-white" id="sidebar-wrapper">
   <div id="sidebar-heading" class="border-bottom bg-light">
     <img src="logo.png" width="25px" height="25px"/>
-    <span class="text-nowrap">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</span>
+    <span class="text-nowrap">Rethink Priorities on ‘quantitative/social science methods’</span>
   </div>
   <div id="TOC" class="list-group list-group-flush">
   <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">1</span><span><strong>Introduction and overview</strong></a>
   <div class="list-group list-group-flush list-subgroup">
   <a id="item-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">1.1</span><span>Rethink Priorities: Our approach to empirical and quantitative work</a>
   <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">1.2</span><span>The purpose of this resource</a>
-  <a id="item-outline_sections" class="list-group-item" href="introduction-and-overview.html#outline_sections"><span class="toc-section-number">1.3</span><span>Sections and organization</a>
+  <a id="item-sections-and-organization-outline_sections" class="list-group-item" href="introduction-and-overview.html#sections-and-organization-outline_sections"><span class="toc-section-number">1.3</span><span>Sections and organization {#outline_sections}</a>
   <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">1.4</span><span>Favorite resources, references, tools</a>
   <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">1.5</span><span>Style and ‘collophon’</a>
   <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">1.6</span><span>R setup and packages</a>
-  <a id="item-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">1.7</span><span>Git repo, shared files, procedure for editing</a>
+  <a id="item-to-explain-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#to-explain-git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">1.7</span><span>(To explain: Git repo, shared files, procedure for editing)</a>
   </div>
   <a id="item-data" class="list-group-item" href="data.html"><strong>DATA, CODE, AND PRESENTATION</strong></a>
   <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">2</span><span>Coding and data management</a>
@@ -280,9 +280,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div id="main-container" class="container-fluid">
 <main>
 <div id="header">
-<h1 class="title">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</h1>
-<h4 class="author"><em>Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook</em></h4>
-<h4 class="date"><em>2022-02-26</em></h4>
+<h1 class="title">Rethink Priorities on ‘quantitative/social science methods’</h1>
+<h4 class="author"><em>RP researchers, esp. the ‘Survey team’ (project ‘owner’ = Reinstein)</em></h4>
+<h4 class="date"><em>2022-02-27</em></h4>
 </div>
 <div class="abstract">
 <p class="abstract">Abstract</p>
@@ -290,7 +290,8 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 </div>
 <div id="introduction-and-overview" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> <strong>Introduction and overview</strong></h1>
-<p><strong>NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.</strong></p>
+<p><em>This is public!</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p><em>Some sections shared shared with the <a href="https://effective-giving-marketing.gitbook.io/untitled/">EA Marketing Team Gitbook</a></em></p>
 <div id="rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Rethink Priorities: Our approach to empirical and quantitative work</h2>
 </div>
@@ -300,36 +301,36 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 <p>A github-hosted ‘bookdown’ for structured in-depth discussion</p>
 <p><br />
 </p>
-<div class="alert alert-secondary">
-<p><em>David Reinstein’s conception:</em></p>
-<ul>
-<li><p>Don’t share any confidential data or sensitive information</p></li>
-<li><p>Don’t feel compelled to flesh out all sections with original content. Don’t add content just because “it’s in a typical syllabus’.</p></li>
-<li><p>Focus on things that we use, have used, want to use, or have been requested to address.</p>
+<p><em>Reinstein’s conception: what (not) to put in, and how :</em></p>
+<div class="foldable"><a>Show</a><div class="collapse">
+<p>Don’t share any confidential data or sensitive information</p>
+<p>Don’t feel compelled to flesh out all sections with original content. Don’t add content just because “it’s in a typical syllabus’.</p>
+<p>Focus on things that we use, have used, want to use, or have been requested to address.</p>
 <ul>
 <li>Secondarily, on things relevant to Effective Altruism-related research in general</li>
-</ul></li>
-<li><p>Do curate link, and embed resources from elsewhere</p></li>
-<li><p>Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)</p></li>
-<li><p>Do put in content that is more in-depth and technical, or involving R-code and tools</p>
-<ul>
-<li>Still, do try to ‘offset’ details (in folding blocks, appendix sections, margin notes), where it would otherwise clutter the book</li>
-</ul></li>
-<li><p>Start with ‘plain language’ explanations of technical content; for ourselves, and potentially to share with partners in future</p></li>
 </ul>
-<p>I also hope to use this to develop ‘templates and standard practices’ for our work.</p>
-</div>
+<p>Do curate-link, and embed resources from elsewhere</p>
+<p>Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)</p>
+<p>Do put in content that is more in-depth and technical, or involving R-code and tools</p>
+<ul>
+<li>Still, try to ‘offset’ details (in folding blocks, appendix sections, margin notes), where it would otherwise clutter the book</li>
+</ul>
+<p>Start with ‘plain language’ explanations of technical content; for ourselves, and potentially to share with partners in future</p>
+<p>I also hope to use this to develop ‘templates and standard practices’ for our work (although these may be moved to separate bookdowns).</p>
+</div></div>
 <p><br />
 </p>
-<p><strong>What to include and when to dive into the rabbit hole?</strong> (Unfold: the ‘second time it comes up’ rule)</p>
+<p><em>When to dive into the rabbit hole?… the ‘second time it comes up’ rule:</em></p>
 <div class="foldable"><a>Show</a><div class="collapse">
 <p>In ‘building a knowledge base,’ there are some things that are important to include, but others should be excluded. If we are compulsive and auto-nerd-sniped to go down every rabbit hole it will be wasteful. But some rabbit holes will be worth going down, at least partially.</p>
 <p><em>What’s a good rule-of-thumb for knowing if it’s worth a dive?</em> Maybe the ‘second time rule?’</p>
 <p>Mark the issue the first time it comes up, perhaps leave a placeholder and a link to the original notes or discussion.</p>
 <p>Then the second time an issue comes up it may be safe to assume its an ‘important issue to dive into and document?’</p>
 </div></div>
-<p>Below, ‘a partial dive into the rabbit hole,’ for one possible framework.</p>
-<div class="alert alert-secondary">
+<p><br />
+</p>
+<p><em>A ‘partial dive into the rabbit hole,’ for one possible framework.</em></p>
+<div class="foldable"><a>Show</a><div class="collapse">
 <p>What do I mean by a ‘partial dive into the rabbit hole?’</p>
 <ul>
 <li><p>Explain how it applied to our problem (generically if there is a confidentiality issue)</p></li>
@@ -338,22 +339,23 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 <li><p>give a code example in a ‘vignette,’</p></li>
 <li><p>check our understanding through communication and discussion with others, flag key issues</p></li>
 </ul>
+</div></div>
 </div>
-</div>
-<div id="outline_sections" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Sections and organization</h2>
-<p>(Proposed/discussed below – keep updated with actual structure)</p>
-<p><strong><a href="data.html#data">DATA, CODE</a></strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div id="sections-and-organization-outline_sections" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Sections and organization {#outline_sections}<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></h2>
+<p><strong><a href="data.html#data">DATA, CODE</a></strong><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p><strong>Coding practice and tools</strong></p>
 <p>(Languages, clean code, reproducability, etc.)</p>
 <p><strong>Data practices</strong></p>
 <p>(Storing, labeling, etc)</p>
 <p><strong><a href="#present">PRESENTING AND DESCRIBING DATA</a></strong></p>
 <ul>
-<li><p>Methods of ‘describing data’</p></li>
-<li><p>Formatting: tables, figures, and numerical content**</p></li>
-<li><p>Visualizations: suggested/preferred formats and templates</p></li>
+<li>Methods of ‘describing data’</li>
+<li>Formatting: tables, figures, and numerical content**</li>
+<li>Visualizations: suggested/preferred formats and templates</li>
 </ul>
+<p><br />
+</p>
 <p><strong>SURVEY DESIGNS AND METHODS</strong></p>
 <ul>
 <li><p>How to ask good survey questions</p></li>
@@ -363,23 +365,29 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 <li><p>Implementation platforms and issues</p></li>
 <li><p>Survey design tools (IT)</p></li>
 </ul>
-<p>**EXPERIMENTS AND TRIALS*</p>
+<p><br />
+</p>
+<p><strong>EXPERIMENTS AND TRIALS</strong></p>
 <ul>
-<li><p><a href="expt-qual-imp.html#expt-qual-imp">Experiment and trial design: qualitative issues and guidelines</a></p></li>
-<li><p><a href="expt-quant.html#expt-quant">Experiment and trial design: quantitative issues</a></p></li>
-<li><p>‘Treatment’ assignment (blocking, randomization, etc)</p></li>
-<li><p>Adaptive, sequential and dynamic designs</p></li>
-<li><p>Planning, diagnosing and adjusting a design</p></li>
-<li><p>Power analyses (and other ‘diagnosands’)</p></li>
+<li><a href="expt-qual-imp.html#expt-qual-imp">Experiment and trial design: qualitative issues and guidelines</a></li>
+<li><a href="expt-quant.html#expt-quant">Experiment and trial design: quantitative issues</a></li>
+<li>‘Treatment’ assignment (blocking, randomization, etc)</li>
+<li>Adaptive, sequential and dynamic designs</li>
+<li>Planning, diagnosing and adjusting a design</li>
+<li>Power analyses (and other ‘diagnosands’)</li>
 </ul>
+<p><br />
+</p>
 <p><strong>BASIC STATISTICS: MODELING, TESTING AND INFERENCE</strong></p>
 <ul>
-<li><p>Bayesian, frequentist, and other approaches</p></li>
-<li><p>A ‘statistical model’<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p></li>
-<li><p>Bayesian updating and inference</p></li>
-<li><p>Hypothesis testing</p></li>
-<li><p>Preferred approaches (‘which tests’) etc.</p></li>
+<li>Bayesian, frequentist, and other approaches</li>
+<li>A ‘statistical model’<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></li>
+<li>Bayesian updating and inference</li>
+<li>Hypothesis testing</li>
+<li>Preferred approaches (‘which tests’) etc.</li>
 </ul>
+<p><br />
+</p>
 <p><strong><a href="modeling.html#modeling">MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING</a></strong></p>
 <ul>
 <li>“Multi-variable ‘regression’ models” and specification choices</li>
@@ -388,6 +396,8 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 <li>Practical Bayesian approaches and interpretations</li>
 <li>Psychometrics, especially factor analysis</li>
 </ul>
+<p><br />
+</p>
 <p><strong><a href="causal.html#causal">CAUSAL INFERENCE</a></strong></p>
 <ul>
 <li>Basic ideas and frameworks (simple, potential outcomes, DAGs)</li>
@@ -396,6 +406,8 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 <li>Non-experimental approaches to causal inference</li>
 <li>Dealing with attrition</li>
 </ul>
+<p><br />
+</p>
 <p><strong><a href="fermi.html#fermi">MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES</a>;</strong></p>
 <ul>
 <li>The basic ideas</li>
@@ -414,10 +426,10 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 </div>
 <div id="r-setup-and-packages" class="section level2" number="1.6">
 <h2><span class="header-section-number">1.6</span> R setup and packages</h2>
-<p>We are using <code>Renv</code> to keep packages aligned. Please install Renv it and snapshot</p>
+<p>We are using <code>Renv</code> to keep packages aligned. Please install Renv and snapshot as you add/adjust packages</p>
 <p><code>renv::dependencies</code> should tell us what packages are used/needed</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb1-1"><a href="introduction-and-overview.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dependencies <span class="ot">&lt;-</span> renv<span class="sc">::</span><span class="fu">dependencies</span>()</span></code></div></pre></div>
-<pre><code>## Finding R package dependencies ... [48/48] Done!</code></pre>
+<pre><code>## Finding R package dependencies ... [47/48] [48/48] Done!</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb3-1"><a href="introduction-and-overview.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dependencies[<span class="dv">2</span>] <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">as.list</span>()</span></code></div></pre></div>
 <pre><code>## $Package
 ##  [1] &quot;bookdown&quot;          &quot;rmarkdown&quot;         &quot;tidyverse&quot;         &quot;furrr&quot;             &quot;knitr&quot;             &quot;googlesheets4&quot;    
@@ -425,16 +437,18 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 ## [13] &quot;readr&quot;             &quot;rex&quot;               &quot;trackdown&quot;         &quot;MASS&quot;              &quot;brms&quot;              &quot;tidybayes&quot;        
 ## [19] &quot;rethinkpriorities&quot; &quot;xfun&quot;</code></pre>
 </div>
-<div id="git-repo-shared-files-procedure-for-editing" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Git repo, shared files, procedure for editing</h2>
+<div id="to-explain-git-repo-shared-files-procedure-for-editing" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> (To explain: Git repo, shared files, procedure for editing)</h2>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p> Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below<a href="introduction-and-overview.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p> I put in the first discussion of ‘models’ here because, at least in one perspective, all of the below is based on models.<a href="introduction-and-overview.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.<a href="introduction-and-overview.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Proposed/discussed below – keep updated with actual structure<a href="introduction-and-overview.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p> Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below<a href="introduction-and-overview.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p> I put in the first discussion of ‘models’ here because, at least in one perspective, all of the below is based on models.<a href="introduction-and-overview.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div class="text-center m-5">

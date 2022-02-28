@@ -1,11 +1,11 @@
 introduction-and-overview
 rethink-priorities-our-approach-to-empirical-and-quantitative-work
 the-purpose-of-this-resource
-outline_sections
+sections-and-organization-outline_sections
 favorite-resources-references-tools
 style-and-collophon
 r-setup-and-packages
-git-repo-shared-files-procedure-for-editing
+to-explain-git-repo-shared-files-procedure-for-editing
 coding
 coding-and-organisational-issues
 data-management

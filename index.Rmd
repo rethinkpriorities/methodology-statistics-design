@@ -1,6 +1,6 @@
 ---
-title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
-author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
+title: "Rethink Priorities on 'quantitative/social science methods'"
+author: "RP researchers, esp. the 'Survey team' (project 'owner' = Reinstein)"
 logo: logo.png
 abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
 date: "`r Sys.Date()`"
