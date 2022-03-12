@@ -1,25 +1,24 @@
-# **Introduction and overview**
+# Introduction and overview
 
 *This is public!*^[NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.]
 
-*Some sections shared shared with the [EA Marketing Team Gitbook](https://effective-giving-marketing.gitbook.io/untitled/)*
+*Some sections are shared with the [EA Marketing Team Gitbook](https://effective-giving-marketing.gitbook.io/untitled/)*
 
-## Rethink Priorities: Our approach to empirical and quantitative work
+## Rethink Priorities: Considering our approach to empirical and quantitative work
 
 ## The purpose of this resource
 
 <!-- (integrate discussion from Slack thread and readme) -->
 
-A github-hosted 'bookdown' for structured in-depth discussion
+A github-hosted 'bookdown' for structured in-depth discussion and coalescing our ideas for best-practices
 
 \
 
 
- 
 
 *Reinstein's conception: what (not) to put in, and how :*
 
-::: {.foldable} 
+::: {.foldable}
 
 Don't share any confidential data or sensitive information
 
@@ -42,15 +41,15 @@ Do put in content that is more in-depth and technical, or involving R-code and t
 Start with 'plain language' explanations of technical content; for ourselves, and potentially to share with partners in future
 
 I also hope to use this to develop 'templates and standard practices' for our work (although these may be moved to separate bookdowns).
- 
+
 :::
 
 \
 
 *When to dive into the rabbit hole?... the 'second time it comes up' rule:*
 
-::: {.foldable} 
- 
+::: {.foldable}
+
 
 In ‘building a knowledge base’, there are some things that are important to include, but others should be excluded.  If we are compulsive and auto-nerd-sniped to go down every rabbit hole it will be wasteful. But some rabbit holes will be worth going down, at least partially.
 
@@ -67,13 +66,13 @@ Then the second time an issue comes up it may be safe to assume its an ‘import
 
 *A 'partial dive into the rabbit hole', for one possible framework.*
 
-::: {.foldable} 
+::: {.foldable}
 
 What do I mean by a 'partial dive into the rabbit hole?'
 
 - Explain how it applied to our problem (generically if there is a confidentiality issue)
 
-- Curated links [PeteW-gists](https://gist.github.com/peterhurford/)-eqsue,
+- Curated links like [PeteW-gists](https://gist.github.com/peterhurford/),
 
 - characterize in our own words (but concisely)
 
@@ -81,22 +80,18 @@ What do I mean by a 'partial dive into the rabbit hole?'
 
 - check our understanding through communication and discussion with others, flag key issues
 
- 
 :::
 
 
+*The 'sections and organizations' bit is folded below.*^[This, unfortunately, overlaps the content in section header pages... we should try to find a way to remove this duplication.]
 
-## Sections and organization {#outline_sections}^[Proposed/discussed below -- keep updated with actual structure]
-
-**[DATA, CODE](#data)** ^[ Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below
-]
+::: {.foldable}
+ 
+**[DATA, CODE](#data)** 
 
 **Coding practice and tools**
-
 (Languages, clean code, reproducability, etc.)
-
 **Data practices**
-
 (Storing, labeling, etc)
 
 **[PRESENTING AND DESCRIBING DATA](#present)**
@@ -117,6 +112,8 @@ What do I mean by a 'partial dive into the rabbit hole?'
 
 - Survey design tools (IT)
 
+- From Sample to Population: Multilevel Regression and Poststratification (MRP) and Survey Weighting (linked Gdoc)
+
 \
 
 **EXPERIMENTS AND TRIALS**
@@ -134,8 +131,7 @@ What do I mean by a 'partial dive into the rabbit hole?'
 **BASIC STATISTICS: MODELING, TESTING AND INFERENCE**
 
 - Bayesian, frequentist, and other approaches
-- A 'statistical model'^[ I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.
-]
+- A 'statistical model' (I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.)
 - Bayesian updating and inference
 - Hypothesis testing
 - Preferred approaches ('which tests') etc.
@@ -168,6 +164,9 @@ What do I mean by a 'partial dive into the rabbit hole?'
 - Causal and Guesstimate
 - Code-based tools
 
+:::
+
+
 ## Favorite resources, references, tools
 
 ["Research tools" Reinstein airtable, data relevant view](https://airtable.com/shrIWaF4UsQ92CavA)
@@ -180,7 +179,7 @@ For more information on how this 'bookdown' was created, see our public template
 
 ## R setup and packages
 
-We are using `Renv` to keep packages aligned. Please install Renv and snapshot as you add/adjust packages 
+We are using `Renv` to keep packages aligned. Please install Renv and snapshot as you add/adjust packages
 
 `renv::dependencies` should tell us what packages are used/needed
 

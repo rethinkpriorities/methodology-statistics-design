@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="3 Coding and data management | Rethink Priorities on ‘quantitative/social science methods’" />
+<meta property="og:title" content="6 [From Sample to Population: Multilevel Regression and Poststratification (MRP) and Survey Weighting](https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit | Rethink Priorities on ‘quantitative/social science methods’" />
 <meta property="og:type" content="book" />
 
 
@@ -25,7 +25,7 @@ MathJax.Hub.Config({
 
 <meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference">
 
-<title>3 Coding and data management | Rethink Priorities on ‘quantitative/social science methods’</title>
+<title>6 [From Sample to Population: Multilevel Regression and Poststratification (MRP) and Survey Weighting](https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit | Rethink Priorities on ‘quantitative/social science methods’</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -496,59 +496,16 @@ blockquote p {
 <!-- Page content-->
     <div id="main-container" class="container-fluid">
 <main>
-<div id="coding" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Coding and data management</h1>
-<p>Integrate further content from <a href="https://daaronr.github.io/metrics_discussion/data-sci.html">getting, cleaning, and using data</a> (Reinstein,</p>
-<div id="coding-and-organisational-issues" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Coding and organisational issues</h2>
-<ul>
-<li><p>Data protection (e.g., EA Survey data pre-2021 is not publicly shareable!)</p></li>
-<li><p>Good data management</p></li>
-<li><p>Reproducability</p></li>
-<li><p>Git and github</p></li>
-<li><p>R and Rmd</p></li>
-<li><p>How to leave comments and collaborate?</p></li>
-<li><p><code>trackdown</code> to convert to Gdoc for feedback</p></li>
-<li><p>Folder structure, use of packages; esp <code>Renv</code></p></li>
-<li><p>Functions etc pulled from <code>dr-rstuff</code> repo</p></li>
-<li><p>I (DR) love <code>lower_snake_case</code></p></li>
-</ul>
-<p><br />
-</p>
-<div id="automation-and-dynamic-documents" class="section level3 unnumbered">
-<h3>Automation and ‘dynamic documents’</h3>
-<p>‘Soft-code’ as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent</p>
-<p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html">Inline code in Rmd</a> is great but it can be a double-edged sword.</p>
-<p>Sometimes its better to ‘do the important and complicated coding’ in a chunk before this, not in the inline code itself because</p>
-<ul>
-<li><p>the ‘bookdown’ doesn’t show the <em>code</em> generating the inline computation … so a separate chunk makes it more transparent for external readers</p></li>
-<li><p>inline code isn’t spaced well and its hard to read and debug.</p></li>
-</ul>
-</div>
-<div id="data-management" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Data management</h3>
-<ul>
-<li><p>Track it from its ‘source’; use API to grab directly from Qualtrics (etc.) if possible</p></li>
-<li><p>A <code>main.R</code> file in the root directory should run everything</p></li>
-<li><p>Data import; external ‘dictionary’ can be helpful (see, e.g., <a href="https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0">here</a> for EAS integrated with Google sheet; R code <a href="https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R">here</a> brings it in</p></li>
-<li><p>import, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)</p>
-<ul>
-<li>import and cleaning in <code>.R</code> rather than <code>.Rmd</code> perhaps</li>
-</ul></li>
-<li><p>‘raw’ data in separate folder from ‘munged’ data</p></li>
-<li><p><code>codebook</code> package – make a codebook</p></li>
-<li><p>minimize ‘versions’ of the data frames … code and use ‘filter objects’ instead</p>
-<ul>
-<li>see <a href="https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set">‘lists of filters’</a> but actually defining the filter with <code>quo()</code> seems better.</li>
-</ul></li>
-</ul>
+<div id="from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> [From Sample to Population: Multilevel Regression and Poststratification (MRP) and Survey Weighting](<a href="https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit" class="uri">https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit</a></h1>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb13-1"><a href="from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit.html#cb13-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit&quot;</span>)</span></code></div></pre></div>
+<iframe src="https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit" width="80%" height="400px" data-external="1">
+</iframe>
 
 </div>
-</div>
-</div>
 <div class="text-center m-5">
-<a href="data.html"><button class="btn btn-secondary">Previous</button></a>
-<a href="presentation.html"><button class="btn btn-secondary">Next</button></a>
+<a href="surveydesign.html"><button class="btn btn-secondary">Previous</button></a>
+<a href="expt-qual-imp.html"><button class="btn btn-secondary">Next</button></a>
 </div>
 </main>
 </div>

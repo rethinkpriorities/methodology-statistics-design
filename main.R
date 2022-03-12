@@ -14,7 +14,7 @@ filter <- dplyr::filter
 #source(here("code", "packages.R")) # Install and load packages used in build and analysis (note: these could be cleaned)
 
 #WITH RENV this is not needed! 
-#... add packages as and when needed; note, the file below has been vastly trimmed down, mainly only loading RP's pacakages
+#... add packages as and when needed; note, the file below has been vastly trimmed down, mainly only loading RP's packages
 source(here("code", "packages.R"))
 
 #renv::dependencies()
@@ -44,7 +44,7 @@ options(pkgType = "binary")
 p_load("bettertrace") #better tracking after bugs
 
 
-## Parsing tool/parse to 'new formats' (use only once, and carefully!) ####
+## Parsing tool/parse to 'new formats' (USE ONLY ONCE, AND CAREFULLY!) ####
 
 p_load(rex, readr, purrr)
 

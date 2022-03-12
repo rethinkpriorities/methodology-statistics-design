@@ -1,7 +1,7 @@
+skip-this-top-bit
 introduction-and-overview
-rethink-priorities-our-approach-to-empirical-and-quantitative-work
+rethink-priorities-considering-our-approach-to-empirical-and-quantitative-work
 the-purpose-of-this-resource
-sections-and-organization-outline_sections
 favorite-resources-references-tools
 style-and-collophon
 r-setup-and-packages
@@ -15,6 +15,7 @@ visualisations
 surveydesign
 willem-sleegers-to-incorporate
 suggested-sections
+from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit
 expt-qual-imp
 proposed-structure-of-section
 expt-quant

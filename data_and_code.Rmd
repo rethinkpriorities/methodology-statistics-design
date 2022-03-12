@@ -15,4 +15,16 @@
 
 -->
 
+**[DATA, CODE](#data)**
+
+
+
+**Coding practice and tools**
+
+(Languages, clean code, reproducability, etc.)
+
+**Data practices**
+
+(Storing, labeling, etc)
+
 
