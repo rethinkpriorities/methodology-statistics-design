@@ -1,11 +1,11 @@
-skip-this-top-bit
 introduction-and-overview
-rethink-priorities-considering-our-approach-to-empirical-and-quantitative-work
+rethink-priorities-our-approach-to-empirical-and-quantitative-work
 the-purpose-of-this-resource
+outline_sections
 favorite-resources-references-tools
 style-and-collophon
 r-setup-and-packages
-to-explain-git-repo-shared-files-procedure-for-editing
+git-repo-shared-files-procedure-for-editing
 coding
 coding-and-organisational-issues
 data-management
@@ -15,7 +15,6 @@ visualisations
 surveydesign
 willem-sleegers-to-incorporate
 suggested-sections
-from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit
 expt-qual-imp
 proposed-structure-of-section
 expt-quant
@@ -26,9 +25,8 @@ specifying-models-hypotheses-and-statistical-testing-and-inference-approaches
 power-analyses-and-other-diagnosands
 key-resources-and-explainers
 see-rethink_priorities_power_analysis_framework_2-in-appendix
-naturalness-of-setting-versus-pure-treatments
-awareness-of-testing-can-affect-results
-other-issues-to-consider-and-flesh-out
+ea-market-testing-resource-on-qualitative-design-issues
+further-technical-discussion-and-code-can-be-added-here
 stat_frame
 conceptual
 hypothesis-testing-statistical-comparisons-and-inferences
@@ -36,6 +34,7 @@ common-statistical-tests-are-linear-models
 randomization-and-permutation-based-tests-and-inference
 particular-experimetrics-issues
 evidence-of-little-or-no-effect---equivalence-tests-etc
+simulation_to_bayes
 factor-descriptive
 resources-and-use-cases
 time-series

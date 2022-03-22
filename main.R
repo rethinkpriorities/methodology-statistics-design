@@ -13,7 +13,7 @@ filter <- dplyr::filter
 
 #source(here("code", "packages.R")) # Install and load packages used in build and analysis (note: these could be cleaned)
 
-#WITH RENV this is not needed! 
+#WITH RENV this is not needed!
 #... add packages as and when needed; note, the file below has been vastly trimmed down, mainly only loading RP's packages
 source(here("code", "packages.R"))
 
@@ -21,12 +21,29 @@ source(here("code", "packages.R"))
 
 #p_load(devtools)
 
-#Just a bunch of handy shortcuts and precedence of packages 
+#Just a bunch of handy shortcuts and precedence of packages
 
 source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
 
-#Put these in if and when we need them, 
+#Put these in if and when we need them,
 #source(here("code", "modeling_functions.R")) #TODO - incorporate rest of these into RP r package
+
+
+# Bring in 'static' content, not to edit here but used ####
+# ... from EAMT public ####
+
+
+try_download("https://raw.githubusercontent.com/daaronr/effective_giving_market_testing/make_publicable/methodological-discussion/adaptive-design-sampling-reinforcement-learning.md?token=GHSAT0AAAAAABRYX5UTORNLOBY242VHQSBAYRWNPPA", here::here("from_ea_market_testing/","adaptive-design-sampling-reinforcement-learning.md"))
+
+# ... this might should go the other way -- we work on it here and we embed it there instead
+
+try_download('https://dl.dropbox.com/s/24ndb3p9aa0tfv2/reinstein_references.bib', here::here("reinstein_bibtex.bib"))
+
+
+#from_ea_market_testing/experimental-design-methods-issues.md
+#from_ea_market_testing/qualitative-design-issues.md
+#time_series.md
+
 
 
 ### Source model-building tools/functions
@@ -42,6 +59,29 @@ source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions
 
 options(pkgType = "binary")
 p_load("bettertrace") #better tracking after bugs
+
+
+# Get EA survey data (only for those with access), used in examples in this methods book #####
+
+
+print("NOTE: You need to follow steps at https://stackoverflow.com/questions/62336550/source-data-r-from-private-repository for this import to work, and you need access")
+
+
+eas_all <- read_file_from_repo(
+  repo = "ea-data",
+  path = "data/edited_data/eas_all.Rdata",
+  user = "rethinkpriorities",
+  token_key = "github-API",
+  private = TRUE
+)
+
+eas_20 <- read_file_from_repo("ea-data",  "data/edited_data/eas_20.Rdata", "github-API", private = TRUE )
+
+
+# cheesy workaround in case the above fails or you are not online 
+
+#eas_all <- readRDS("../ea-data/data/edited_data/eas_all.Rdata")
+#eas_20 <- readRDS("../ea-data/data/edited_data/eas_20.Rdata")
 
 
 ## Parsing tool/parse to 'new formats' (USE ONLY ONCE, AND CAREFULLY!) ####
@@ -91,12 +131,12 @@ purrr::map2(other_rmd_files, other_rmd_files_names,
 #see https://app.getguru.com/card/cd469abi/collab-writing-sessions-working-this-into-Github-and-Rmarkdown and https://rethinkpriorities.slack.com/archives/C027CUXNQTD/p1637074537043600 and https://claudiozandonella.github.io/trackdown/
 
 trackdown::upload_file(
-  file = here("power_analysis_framework_2_COLLAB.Rmd"), 
+  file = here("power_analysis_framework_2_COLLAB.Rmd"),
   shared_drive = "Research", #this works -- name looked up with googledrive::shared_drive_find()
   hide_code = FALSE) #hide_code=TRUE is usually better but I want to see it for now
 
 trackdown::upload_file(
-  file = here("time_series_application.Rmd"), 
+  file = here("time_series_application.Rmd"),
   shared_drive = "Research", #this works -- name looked up with googledrive::shared_drive_find()
   hide_code = FALSE) #hide_code=TRUE is usually better but I want to see it for now
 

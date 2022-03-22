@@ -5,16 +5,16 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="11 Time series (predictive) models | Rethink Priorities on ‘quantitative/social science methods’" />
+<meta property="og:title" content="9 Time series (predictive) models | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
 <meta property="og:type" content="book" />
 
 
-<meta property="og:description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference" />
+<meta property="og:description" content="Rethink Priorities: Our approach to empirical and quantitative work" />
 <meta name="github-repo" content="/rethinkpriorities/methodology-statistics-design" />
 
-<meta name="author" content="RP researchers, esp. the ‘Survey team’ (project ‘owner’ = Reinstein)" />
+<meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
-<meta name="date" content="2022-03-12" />
+<meta name="date" content="2022-03-22" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -23,9 +23,9 @@ MathJax.Hub.Config({
 </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="description" content="Discussion of issues in designing experiments/studies that are not specifically ‘quantitative,’ but are important for gaining clear and useful inference">
+<meta name="description" content="Rethink Priorities: Our approach to empirical and quantitative work">
 
-<title>11 Time series (predictive) models | Rethink Priorities on ‘quantitative/social science methods’</title>
+<title>9 Time series (predictive) models | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <style>
   
 :root {
-  --sidebar-width: 250px;
+  --sidebar-width: ;
   --primary-color: #43718f;
 }
 
@@ -336,80 +336,79 @@ blockquote p {
 
 <div class="border-end bg-white" id="sidebar-wrapper">
   <div id="sidebar-heading" class="border-bottom bg-light">
-    <img src="assets/logo.png" width="25px" height="25px"/>
-    <span class="text-nowrap">Rethink Priorities on ‘quantitative/social science methods’</span>
+    <img src="logo.png" width="25px" height="25px"/>
+    <span class="text-nowrap">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</span>
   </div>
   <div id="TOC" class="list-group list-group-flush">
-  <a id="item-skip-this-top-bit" class="list-group-item" href="index.html"><span class="toc-section-number">1</span><span>(Skip this top bit)</a>
-  <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">2</span><span>Introduction and overview</a>
+  <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">1</span><span><strong>Introduction and overview</strong></a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-rethink-priorities-considering-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-considering-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">2.1</span><span>Rethink Priorities: Considering our approach to empirical and quantitative work</a>
-  <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">2.2</span><span>The purpose of this resource</a>
-  <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">2.3</span><span>Favorite resources, references, tools</a>
-  <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">2.4</span><span>Style and ‘collophon’</a>
-  <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">2.5</span><span>R setup and packages</a>
-  <a id="item-to-explain-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#to-explain-git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">2.6</span><span>(To explain: Git repo, shared files, procedure for editing)</a>
+  <a id="item-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">1.1</span><span>Rethink Priorities: Our approach to empirical and quantitative work</a>
+  <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">1.2</span><span>The purpose of this resource</a>
+  <a id="item-outline_sections" class="list-group-item" href="introduction-and-overview.html#outline_sections"><span class="toc-section-number">1.3</span><span>Sections and organization</a>
+  <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">1.4</span><span>Favorite resources, references, tools</a>
+  <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">1.5</span><span>Style and ‘collophon’</a>
+  <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">1.6</span><span>R setup and packages</a>
+  <a id="item-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">1.7</span><span>Git repo, shared files, procedure for editing</a>
   </div>
   <a id="item-data" class="list-group-item" href="data.html"><strong>DATA, CODE, AND PRESENTATION</strong></a>
-  <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">3</span><span>Coding and data management</a>
+  <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">2</span><span>Coding and data management</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-coding-and-organisational-issues" class="list-group-item" href="coding.html#coding-and-organisational-issues"><span class="toc-section-number">3.1</span><span>Coding and organisational issues</a>
+  <a id="item-coding-and-organisational-issues" class="list-group-item" href="coding.html#coding-and-organisational-issues"><span class="toc-section-number">2.1</span><span>Coding and organisational issues</a>
   </div>
-  <a id="item-presentation" class="list-group-item" href="presentation.html"><span class="toc-section-number">4</span><span>Presentation, labeling and visualisations</a>
+  <a id="item-presentation" class="list-group-item" href="presentation.html"><span class="toc-section-number">3</span><span>Presentation, labeling and visualisations</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-aside-ea-forum-organisation-collophon-formatting" class="list-group-item" href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><span class="toc-section-number">4.1</span><span>Aside: EA Forum organisation, collophon, formatting</a>
-  <a id="item-visualisations" class="list-group-item" href="presentation.html#visualisations"><span class="toc-section-number">4.2</span><span>Visualisations</a>
+  <a id="item-aside-ea-forum-organisation-collophon-formatting" class="list-group-item" href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><span class="toc-section-number">3.1</span><span>Aside: EA Forum organisation, collophon, formatting</a>
+  <a id="item-visualisations" class="list-group-item" href="presentation.html#visualisations"><span class="toc-section-number">3.2</span><span>Visualisations</a>
   </div>
   <a id="item-surveys" class="list-group-item" href="surveys.html"><strong>SURVEY AND EXPERIMENT DESIGNS AND METHODS</strong></a>
-  <a id="item-surveydesign" class="list-group-item" href="surveydesign.html"><span class="toc-section-number">5</span><span>Survey design and item development</a>
+  <a id="item-surveydesign" class="list-group-item" href="surveydesign.html"><span class="toc-section-number">4</span><span>Survey design and item development</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-willem-sleegers-to-incorporate" class="list-group-item" href="surveydesign.html#willem-sleegers-to-incorporate"><span class="toc-section-number">5.1</span><span>(Willem Sleegers, to incorporate)</a>
+  <a id="item-willem-sleegers-to-incorporate" class="list-group-item" href="surveydesign.html#willem-sleegers-to-incorporate"><span class="toc-section-number">4.1</span><span>(Willem Sleegers, to incorporate)</a>
   <a id="item-reinstein-misc-notes-to-incorporate" class="list-group-item" href="surveydesign.html#reinstein-misc-notes-to-incorporate">Reinstein misc notes to incorporate</a>
-  <a id="item-suggested-sections" class="list-group-item" href="surveydesign.html#suggested-sections"><span class="toc-section-number">5.2</span><span>Suggested sections…</a>
+  <a id="item-suggested-sections" class="list-group-item" href="surveydesign.html#suggested-sections"><span class="toc-section-number">4.2</span><span>Suggested sections…</a>
   </div>
-  <a id="item-from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit" class="list-group-item" href="from-sample-to-population-multilevel-regression-and-poststratification-mrp-and-survey-weightinghttpsdocs.google.comdocumentd14utzqopnkak8_orwgqlahexfyqpqukk9edit.html"><span class="toc-section-number">6</span><span>[From Sample to Population: Multilevel Regression and Poststratification (MRP) and Survey Weighting](<span>https://docs.google.com/document/d/14uTZqOpnKAK8_oRwgqlAhEXfyQPQUKK9/edit</span></a>
-  <a id="item-expt-qual-imp" class="list-group-item" href="expt-qual-imp.html"><span class="toc-section-number">7</span><span>Experiments: Qualitative and implementation design issues</a>
+  <a id="item-expt-qual-imp" class="list-group-item" href="expt-qual-imp.html"><span class="toc-section-number">5</span><span>Experiments: Qualitative and implementation design issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-proposed-structure-of-section" class="list-group-item" href="expt-qual-imp.html#proposed-structure-of-section"><span class="toc-section-number">7.1</span><span>Proposed structure of section</a>
+  <a id="item-proposed-structure-of-section" class="list-group-item" href="expt-qual-imp.html#proposed-structure-of-section"><span class="toc-section-number">5.1</span><span>Proposed structure of section</a>
   </div>
-  <a id="item-expt-quant" class="list-group-item" href="expt-quant.html"><span class="toc-section-number">8</span><span>Design: quantitative issues</a>
+  <a id="item-expt-quant" class="list-group-item" href="expt-quant.html"><span class="toc-section-number">6</span><span>Design: quantitative issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-treatment-assignment-blocking-randomization-etc" class="list-group-item" href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><span class="toc-section-number">8.1</span><span>‘Treatment’ assignment (blocking, randomization, etc)</a>
-  <a id="item-planning-diagnosing-and-adjusting-a-design" class="list-group-item" href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><span class="toc-section-number">8.2</span><span>Planning, diagnosing and adjusting a design</a>
-  <a id="item-power-analyses-and-other-diagnosands" class="list-group-item" href="expt-quant.html#power-analyses-and-other-diagnosands"><span class="toc-section-number">8.3</span><span>Power analyses (and other ‘diagnosands’)</a>
+  <a id="item-treatment-assignment-blocking-randomization-etc" class="list-group-item" href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><span class="toc-section-number">6.1</span><span>‘Treatment’ assignment (blocking, randomization, etc)</a>
+  <a id="item-planning-diagnosing-and-adjusting-a-design" class="list-group-item" href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><span class="toc-section-number">6.2</span><span>Planning, diagnosing and adjusting a design</a>
+  <a id="item-power-analyses-and-other-diagnosands" class="list-group-item" href="expt-quant.html#power-analyses-and-other-diagnosands"><span class="toc-section-number">6.3</span><span>Power analyses (and other ‘diagnosands’)</a>
   </div>
-  <a id="item-eamt-qual" class="list-group-item" href="eamt-qual.html">“Qualitative” design issues (From EA market testing)</a>
+  <a id="item-eamt-qual" class="list-group-item" href="eamt-qual.html">“Qualitative” design issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-naturalness-of-setting-versus-pure-treatments" class="list-group-item" href="eamt-qual.html#naturalness-of-setting-versus-pure-treatments"><span class="toc-section-number">8.4</span><span><strong>Naturalness of setting versus ‘pure’ treatments</strong></a>
-  <a id="item-awareness-of-testing-can-affect-results" class="list-group-item" href="eamt-qual.html#awareness-of-testing-can-affect-results"><span class="toc-section-number">8.5</span><span><strong>Awareness of testing can affect results</strong></a>
-  <a id="item-other-issues-to-consider-and-flesh-out" class="list-group-item" href="eamt-qual.html#other-issues-to-consider-and-flesh-out"><span class="toc-section-number">8.6</span><span>Other issues to consider and flesh out</a>
+  <a id="item-ea-market-testing-resource-on-qualitative-design-issues" class="list-group-item" href="eamt-qual.html#ea-market-testing-resource-on-qualitative-design-issues"><span class="toc-section-number">6.4</span><span>‘EA market testing’ resource on qualitative design issues</a>
+  <a id="item-further-technical-discussion-and-code-can-be-added-here" class="list-group-item" href="eamt-qual.html#further-technical-discussion-and-code-can-be-added-here"><span class="toc-section-number">6.5</span><span>Further technical discussion and code can be added here</a>
   </div>
   <a id="item-basicstat" class="list-group-item" href="basicstat.html"><strong>MODELS, TESTING, INFERENCE, DESCRIPTIVES</strong></a>
-  <a id="item-stat_frame" class="list-group-item" href="stat_frame.html"><span class="toc-section-number">9</span><span>Statistical frameworks, ‘models,’ and hypothesis testing</a>
+  <a id="item-stat_frame" class="list-group-item" href="stat_frame.html"><span class="toc-section-number">7</span><span>Statistical frameworks, ‘models,’ and hypothesis testing</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">9.1</span><span>Conceptual discussion of statistics, probability and inference</a>
-  <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">9.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
-  <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">9.3</span><span>Randomization and permutation-based tests and inference</a>
-  <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">9.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
+  <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">7.1</span><span>Conceptual discussion of statistics, probability and inference</a>
+  <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">7.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
+  <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">7.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">7.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
+  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">7.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
   </div>
-  <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">10</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
+  <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">8</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
   <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-resources-and-use-cases" class="list-group-item" href="modeling.html#resources-and-use-cases"><span class="toc-section-number">10.1</span><span>Resources and use-cases</a>
+  <a id="item-resources-and-use-cases" class="list-group-item" href="modeling.html#resources-and-use-cases"><span class="toc-section-number">8.1</span><span>Resources and use-cases</a>
   </div>
-  <a id="item-time-series" class="list-group-item" href="time-series.html"><span class="toc-section-number">11</span><span>Time series (predictive) models</a>
+  <a id="item-time-series" class="list-group-item" href="time-series.html"><span class="toc-section-number">9</span><span>Time series (predictive) models</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="list-group-item" href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><span class="toc-section-number">11.1</span><span>Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
-  <a id="item-petes-notes-below" class="list-group-item" href="time-series.html#petes-notes-below"><span class="toc-section-number">11.2</span><span>PETE’S NOTES BELOW</a>
-  <a id="item-stationary-vs.-non-stationarity" class="list-group-item" href="time-series.html#stationary-vs.-non-stationarity"><span class="toc-section-number">11.3</span><span>Stationary vs. non-stationarity</a>
-  <a id="item-handling-features" class="list-group-item" href="time-series.html#handling-features"><span class="toc-section-number">11.4</span><span>Handling Features</a>
-  <a id="item-validation" class="list-group-item" href="time-series.html#validation"><span class="toc-section-number">11.5</span><span>Validation</a>
-  <a id="item-types-of-models" class="list-group-item" href="time-series.html#types-of-models"><span class="toc-section-number">11.6</span><span>Types of Models</a>
-  <a id="item-multiseries" class="list-group-item" href="time-series.html#multiseries"><span class="toc-section-number">11.7</span><span>Multiseries</a>
+  <a id="item-time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="list-group-item" href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><span class="toc-section-number">9.1</span><span>Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
+  <a id="item-petes-notes-below" class="list-group-item" href="time-series.html#petes-notes-below"><span class="toc-section-number">9.2</span><span>PETE’S NOTES BELOW</a>
+  <a id="item-stationary-vs.-non-stationarity" class="list-group-item" href="time-series.html#stationary-vs.-non-stationarity"><span class="toc-section-number">9.3</span><span>Stationary vs. non-stationarity</a>
+  <a id="item-handling-features" class="list-group-item" href="time-series.html#handling-features"><span class="toc-section-number">9.4</span><span>Handling Features</a>
+  <a id="item-validation" class="list-group-item" href="time-series.html#validation"><span class="toc-section-number">9.5</span><span>Validation</a>
+  <a id="item-types-of-models" class="list-group-item" href="time-series.html#types-of-models"><span class="toc-section-number">9.6</span><span>Types of Models</a>
+  <a id="item-multiseries" class="list-group-item" href="time-series.html#multiseries"><span class="toc-section-number">9.7</span><span>Multiseries</a>
   </div>
-  <a id="item-classification-models" class="list-group-item" href="classification-models.html"><span class="toc-section-number">12</span><span>Classification models</a>
+  <a id="item-classification-models" class="list-group-item" href="classification-models.html"><span class="toc-section-number">10</span><span>Classification models</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-classification_model_disc" class="list-group-item" href="classification-models.html#classification_model_disc"><span class="toc-section-number">12.1</span><span>Discussion: Assesing classification models and precision/recall</a>
+  <a id="item-classification_model_disc" class="list-group-item" href="classification-models.html#classification_model_disc"><span class="toc-section-number">10.1</span><span>Discussion: Assesing classification models and precision/recall</a>
   </div>
   <a id="item-causal" class="list-group-item" href="causal.html"><strong>(CAUSAL INFERENCE)</strong></a>
   <div class="list-group list-group-flush list-subgroup">
@@ -417,25 +416,25 @@ blockquote p {
   </div>
   <a id="item-fermi" class="list-group-item" href="fermi.html"><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></a>
   <a id="item-meta-and-robust" class="list-group-item" href="meta-and-robust.html"><strong>META AND ROBUST</strong></a>
-  <a id="item-opensci" class="list-group-item" href="opensci.html"><span class="toc-section-number">13</span><span>(Open and robust science: RP attitudes, discussions, resources)</a>
-  <a id="item-meta" class="list-group-item" href="meta.html"><span class="toc-section-number">14</span><span>(Meta-analysis)</a>
+  <a id="item-opensci" class="list-group-item" href="opensci.html"><span class="toc-section-number">11</span><span>(Open and robust science: RP attitudes, discussions, resources)</a>
+  <a id="item-meta" class="list-group-item" href="meta.html"><span class="toc-section-number">12</span><span>(Meta-analysis)</a>
   <a id="item-appendixsupplements" class="list-group-item" href="appendixsupplements.html"><strong>APPENDIX/SUPPLEMENTS</strong></a>
   <a id="item-power-workflow" class="list-group-item" href="power-workflow.html">Power analysis workflow (Jamie Elsey)</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-discussion-and-framework" class="list-group-item" href="power-workflow.html#discussion-and-framework"><span class="toc-section-number">14.1</span><span>Discussion and framework</a>
-  <a id="item-concrete-implementation-of-framework" class="list-group-item" href="power-workflow.html#concrete-implementation-of-framework"><span class="toc-section-number">14.2</span><span>Concrete implementation of framework</a>
+  <a id="item-discussion-and-framework" class="list-group-item" href="power-workflow.html#discussion-and-framework"><span class="toc-section-number">12.1</span><span>Discussion and framework</a>
+  <a id="item-concrete-implementation-of-framework" class="list-group-item" href="power-workflow.html#concrete-implementation-of-framework"><span class="toc-section-number">12.2</span><span>Concrete implementation of framework</a>
   </div>
-  <a id="item-inference-and-rough-equivalence-testing-with-binomial-outcomes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><span class="toc-section-number">15</span><span>Inference and rough equivalence testing with binomial outcomes</a>
+  <a id="item-inference-and-rough-equivalence-testing-with-binomial-outcomes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><span class="toc-section-number">13</span><span>Inference and rough equivalence testing with binomial outcomes</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-input-from-gsheet-wip" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><span class="toc-section-number">15.1</span><span>Input from Gsheet (WIP)</a>
-  <a id="item-randomization-inference-approach" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#randomization-inference-approach"><span class="toc-section-number">15.2</span><span>Randomization inference approach</a>
-  <a id="item-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">15.3</span><span>How likely is the ‘imbalance of unique emails’ due to chance?</a>
-  <a id="item-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><span class="toc-section-number">15.4</span><span>How likely are ‘proportions this similar’ under different size ‘true effect sizes?’</a>
+  <a id="item-input-from-gsheet-wip" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><span class="toc-section-number">13.1</span><span>Input from Gsheet (WIP)</a>
+  <a id="item-randomization-inference-approach" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#randomization-inference-approach"><span class="toc-section-number">13.2</span><span>Randomization inference approach</a>
+  <a id="item-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">13.3</span><span>How likely is the ‘imbalance of unique emails’ due to chance?</a>
+  <a id="item-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><span class="toc-section-number">13.4</span><span>How likely are ‘proportions this similar’ under different size ‘true effect sizes?’</a>
   </div>
-  <a id="item-readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><span class="toc-section-number">16</span><span>README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
+  <a id="item-readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><span class="toc-section-number">14</span><span>README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-methods-and-rp-guidelines-bookdown" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><span class="toc-section-number">16.1</span><span>‘Methods and RP Guidelines Bookdown’</a>
-  <a id="item-folder-structure-other-resources-in-this-repo" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><span class="toc-section-number">16.2</span><span>Folder structure, other resources in this repo</a>
+  <a id="item-methods-and-rp-guidelines-bookdown" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><span class="toc-section-number">14.1</span><span>‘Methods and RP Guidelines Bookdown’</a>
+  <a id="item-folder-structure-other-resources-in-this-repo" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><span class="toc-section-number">14.2</span><span>Folder structure, other resources in this repo</a>
   </div>
   </div>
 </div>
@@ -496,13 +495,13 @@ blockquote p {
 <!-- Page content-->
     <div id="main-container" class="container-fluid">
 <main>
-<div id="time-series" class="section level1" number="11">
-<h1><span class="header-section-number">11</span> Time series (predictive) models</h1>
+<div id="time-series" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Time series (predictive) models</h1>
 
-<div id="time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="section level2" number="11.1">
-<h2><span class="header-section-number">11.1</span> Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</h2>
-<div id="the-case-at-hand-broad-terms" class="section level3" number="11.1.1">
-<h3><span class="header-section-number">11.1.1</span> The case at hand (broad terms)</h3>
+<div id="time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</h2>
+<div id="the-case-at-hand-broad-terms" class="section level3" number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> The case at hand (broad terms)</h3>
 <p>Modeling what drives/effects/predicts …</p>
 <ul>
 <li><p>‘traffic and number of conversions over the days/weeks of this year’ (count data)</p></li>
@@ -520,8 +519,8 @@ From which they aim to infer (more loosely)</li>
 <em>obviously this involves also assessing what normal variation is, where there’s a trend, seasonality etc. </em></li>
 </ul>
 </div>
-<div id="our-proposed-overall-strategy" class="section level3" number="11.1.2">
-<h3><span class="header-section-number">11.1.2</span> Our proposed overall strategy</h3>
+<div id="our-proposed-overall-strategy" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Our proposed overall strategy</h3>
 <p>Essentially, this is ‘time series data’ (although there may be some panel and cross-sectional elements).
 We want to model this in a way that allows for overall trends (possibly nonlinear(, seasonality, and possibly autocorrelation (AR and MA terms?).<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
 <p>… and maybe also ‘structural breaks.’</p>
@@ -536,8 +535,8 @@ Is it:
 </blockquote>
 <p>DR: I think a simple model ‘adjusted to trends (and maybe seasonality)’ might be good enough as a first pass. I’m not sure the data is rich enough to justify much more.</p>
 </div>
-<div id="niks-approach" class="section level3" number="11.1.3">
-<h3><span class="header-section-number">11.1.3</span> Nik’s approach</h3>
+<div id="niks-approach" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Nik’s approach</h3>
 <p>so I don’t have a huge amount of familiarity here :confused: but from past cursory reads of the lit my impression’s been that there are lots of equivalencies to areas I’m more familiar with,</p>
 <p>e.g. an ARIMA(0,1,0) model is a Brownian motion is a GP with Gaussian kernel <span class="math inline">\(min(x_1,x_2)\)</span></p>
 <p>so from your description of them problem, there are a few salient properties / complexities:</p>
@@ -560,8 +559,8 @@ Is it:
 <p>This would sorta be like ‘kriging’ / using GPs to model temporal autocorrelation and I think should satisfy 1-3 above. And then if that works focus on trying to build out to cover more nuanced dynamics. But there might be better / more established ways to treat problems like this!</p>
 <p>(I don’t know what ‘kriging’ means; does anyone else understand it?)</p>
 </div>
-<div id="kim-cs-thoughts" class="section level3" number="11.1.4">
-<h3><span class="header-section-number">11.1.4</span> Kim C’s thoughts</h3>
+<div id="kim-cs-thoughts" class="section level3" number="9.1.4">
+<h3><span class="header-section-number">9.1.4</span> Kim C’s thoughts</h3>
 <ol style="list-style-type: decimal">
 <li>structural change analysis (e.g., like that implemented in the R package <a href="https://cran.r-project.org/web/packages/strucchange/strucchange.pdf">strucchange</a>).</li>
 </ol>
@@ -569,8 +568,8 @@ Is it:
 <p>If you think the trends are nonlinear, I’ve done a similar thing using GAMs, and then taking the 1st derivative of the fitted curves and checking if it intersects zero. Explained pretty well <a href="https://www.frontiersin.org/articles/10.3389/fevo.2018.00149/full">here</a>.</p>
 </div>
 </div>
-<div id="petes-notes-below" class="section level2" number="11.2">
-<h2><span class="header-section-number">11.2</span> PETE’S NOTES BELOW</h2>
+<div id="petes-notes-below" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> PETE’S NOTES BELOW</h2>
 <div class="alert alert-secondary">
 <p>DR: Not sure what/how to adapt this</p>
 </div>
@@ -580,8 +579,8 @@ Is it:
 </blockquote>
 <p>Most machine learning problems assume that the order of rows don’t matter and that each row is independent of each other. Since time series problems involve time-ordered rows where past events may influence future events, the rows are not independent and this independence assumption is violated.</p>
 <p>Another key assumption of ML is that the training data is similar to the data being predicted (in this case, future data). This assumption must be true for time series as well.</p>
-<div id="decomposition" class="section level3" number="11.2.1">
-<h3><span class="header-section-number">11.2.1</span> Decomposition</h3>
+<div id="decomposition" class="section level3" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Decomposition</h3>
 <p>You can <strong>decompose</strong> a time series into four key parts:</p>
 <ul>
 <li>The <strong>trend</strong> (T), where the mean is changing over time (e.g., sales generally keep increasing over time)</li>
@@ -593,14 +592,14 @@ Is it:
 <p>DR: The ‘random component’ could be distinguised or described further; there are various types of ‘random’ terms … shifts, changes in trends, ‘moving average’ one-off terms, ‘autoregressive’ error terms</p>
 </blockquote>
 </div>
-<div id="types-of-decomposition" class="section level3" number="11.2.2">
-<h3><span class="header-section-number">11.2.2</span> Types of decomposition</h3>
+<div id="types-of-decomposition" class="section level3" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Types of decomposition</h3>
 <p>There are two basic types of decomposition – <strong>addititive</strong>, where <code>y = T + S + C + e</code> and <strong>multiplicative</strong>, where <code>y = T * S * C * e</code>.</p>
 <!-- DR: I think this needs a bit more explanation. Why choose either?  Can't we have a model that combines aspects of each? -->
 </div>
 </div>
-<div id="stationary-vs.-non-stationarity" class="section level2" number="11.3">
-<h2><span class="header-section-number">11.3</span> Stationary vs. non-stationarity</h2>
+<div id="stationary-vs.-non-stationarity" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Stationary vs. non-stationarity</h2>
 <p><strong>Stationary</strong> time series (a) do not have a trend and also (b) do not have variance that changes over time. <strong>Non-stationary</strong> time series’ do have (a) and/or (b). Typically (a) and (b) create problems for modeling, as models have trouble extrapolating these and they tend to violate the assumption that the training data is similar to the data being predicted.</p>
 <blockquote>
 <p>DR: There can be <em>trend-stationary</em> series, that are stationary after including a trend. These are pretty easy to deal with.
@@ -609,8 +608,8 @@ Note also that nonstationary series can be described as following a ‘random wa
 <blockquote>
 <p>But I’m also not convinced that this should necessarily be a problem in a prediction problem. If the series is a random walk/nonstationary … we can still use that knowledge to make a decent prediction of where the outcome will be at time T+t given it’s value at time T.</p>
 </blockquote>
-<div id="converting-to-stationary" class="section level3" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Converting to stationary</h3>
+<div id="converting-to-stationary" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Converting to stationary</h3>
 <p>We can resolve these issues by converting a non-stationary series to a stationary series. This is done by <strong>differencing</strong>, where we look at the differences in the target over time rather than the actual target (y[t]-&gt; y[t] - y[t-1]).</p>
 <blockquote>
 <p>DR: Most economic time series are in fact stationary after first-differencing. However, this is not guaranteed. You may still want to test for stationarity after first-differencing. (But my memory is that the whole tests for stationarity thing is a huge can of worms).</p>
@@ -618,21 +617,21 @@ Note also that nonstationary series can be described as following a ‘random wa
 <p>We can also handle exponential trends using techniques like log transformations.</p>
 </div>
 </div>
-<div id="handling-features" class="section level2" number="11.4">
-<h2><span class="header-section-number">11.4</span> Handling Features</h2>
-<div id="lags" class="section level3" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> Lags</h3>
+<div id="handling-features" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Handling Features</h2>
+<div id="lags" class="section level3" number="9.4.1">
+<h3><span class="header-section-number">9.4.1</span> Lags</h3>
 <p>Lagging is pretty key to time series. A <strong>lag</strong> is when you use the value from the previous series to forecast the next series. You can lag the target variable (e.g., use last month’s sales to predict next month’s sales) and/or you can lag independent variables. Lagged target variables often have strong explanatory power because the real world has delays (e.g., it takes a few weeks for marketing to transition to sales so marketing spend from three weeks ago may be more predictive than marketing spend of the same week) and causations that occur over time (e.g., sales from last year show that the store is more popular so there is more word of mouth and it is even more popular the next year).</p>
 <p>Lagging always involves losing some data, as if you are using data from the previous month you won’t be able to use the first month in your training data (because there’s no previous month data for month -1). If you are using data from the three previous months, you won’t be able to train on the first three months. This may not be an issue though, because unlike with non-time series problems, more data in time series isn’t always better (since you might prefer to only be modeling the most recent trend).</p>
 <p>We can mix lags of different lengths.</p>
 </div>
-<div id="rolling-statistics" class="section level3" number="11.4.2">
-<h3><span class="header-section-number">11.4.2</span> Rolling Statistics</h3>
+<div id="rolling-statistics" class="section level3" number="9.4.2">
+<h3><span class="header-section-number">9.4.2</span> Rolling Statistics</h3>
 <p>Lags aren’t the only thing we can do - we can also calculate <strong>rolling statistics</strong>, like the mean of a variable over the past 14 days. You can also do rolling stats on differences.</p>
 <!-- DR: I think this has something to do with the choice between autoregressive and 'moving average' terms in Econometrics, but I'm not sure -->
 </div>
-<div id="which-lags-rolling-stats-to-use" class="section level3" number="11.4.3">
-<h3><span class="header-section-number">11.4.3</span> Which Lags / Rolling Stats to Use?</h3>
+<div id="which-lags-rolling-stats-to-use" class="section level3" number="9.4.3">
+<h3><span class="header-section-number">9.4.3</span> Which Lags / Rolling Stats to Use?</h3>
 <ul>
 <li>Assess with <strong>cross correlation function</strong>, which tests correlation of many different lags.</li>
 </ul>
@@ -643,30 +642,30 @@ Note also that nonstationary series can be described as following a ‘random wa
 <li><p>compare by backtesting</p></li>
 </ul>
 </div>
-<div id="known-in-advance-vs.-not" class="section level3" number="11.4.4">
-<h3><span class="header-section-number">11.4.4</span> Known in Advance vs. Not</h3>
+<div id="known-in-advance-vs.-not" class="section level3" number="9.4.4">
+<h3><span class="header-section-number">9.4.4</span> Known in Advance vs. Not</h3>
 <p>When we are trying to predict in the future, we run into an issue that the features we are using for prediction might also be unknown at prediction time. For example, our historical data might contain information about rainfall and how that connects to sales, but we can’t reliably know the rainfall three months in the future to predict future sales.</p>
 <p>However, some features are known in advance - like Christmas time may also have a big impact on sales and we always know exactly when Christmas will be.</p>
 <p>For features that are not known in advance, we can still use them by either explicitly forecasting them, extrapolating them out using lags / rolling stats of sufficient size, or extrapolating from current values using differing forecast differences.</p>
 <!-- DR: maybe this 'features not known in advance' thing needs a linked example? -->
 </div>
 </div>
-<div id="validation" class="section level2" number="11.5">
-<h2><span class="header-section-number">11.5</span> Validation</h2>
+<div id="validation" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Validation</h2>
 <p>Normally for ML problems we use cross validation, where we randomly partition the data and then predict one partition using data from all the other partitions. The problem with this for time series is that this will involve using future data to predict the past, which will make for unrealistically good predictions.</p>
 <p>Instead, we can use <strong>backtesting</strong> where we predict a future time using a window of past times (e.g., predict Year 6 using Years 3-5, predict Year 5 using Years 2-4, predict Year 4 using Years 1-3).</p>
 <p>For metrics, it’s good to compare the evaluation metric to a <strong>naive baseline model</strong>, or an intentionally minimal extrapolation.</p>
 </div>
-<div id="types-of-models" class="section level2" number="11.6">
-<h2><span class="header-section-number">11.6</span> Types of Models</h2>
+<div id="types-of-models" class="section level2" number="9.6">
+<h2><span class="header-section-number">9.6</span> Types of Models</h2>
 <ul>
 <li><strong>Integrated model</strong> - move model one step at a time, e.g., ARIMA, exponential smoothing - univariate</li>
 <li><strong>Forecast distance model</strong> - predict fixed distances, e.g., XGB</li>
 <li><strong>Trend and decomposition model</strong> - predict a different model for each distance, e.g., FB Prophet</li>
 </ul>
 <!-- DR: the above is opaque ... e.g., what does 'move model one step at a time' mean? -->
-<div id="arima" class="section level3" number="11.6.1">
-<h3><span class="header-section-number">11.6.1</span> ARIMA</h3>
+<div id="arima" class="section level3" number="9.6.1">
+<h3><span class="header-section-number">9.6.1</span> ARIMA</h3>
 <p><strong>Autoregressive process</strong>: AR(p): fit coefficients to p lags</p>
 <p><strong>Moving average process</strong>: MA(q): fit coefficients to q previous errors</p>
 <p><strong>ARMA model</strong>: X = f(AR, MA)</p>
@@ -676,8 +675,8 @@ Note also that nonstationary series can be described as following a ‘random wa
 'A Guide to Econometrics'  treatment is the most practical one I know -->
 </div>
 </div>
-<div id="multiseries" class="section level2" number="11.7">
-<h2><span class="header-section-number">11.7</span> Multiseries</h2>
+<div id="multiseries" class="section level2" number="9.7">
+<h2><span class="header-section-number">9.7</span> Multiseries</h2>
 <p>Predict a different time series for each unit (e.g., sales by store). Can use features across series (<strong>cross series features</strong>).</p>
 
 </div>
@@ -707,13 +706,6 @@ Note also that nonstationary series can be described as following a ‘random wa
 </script>
 
 <!-- Littlefoot -->
-<script
-  src="https://unpkg.com/littlefoot/dist/littlefoot.js"
-  type="application/javascript"
-></script>
-<script type="application/javascript">
-  littlefoot.littlefoot() // Pass any littlefoot settings here.
-</script>
 
 <script>
 // Set the current page to be active in the TOC

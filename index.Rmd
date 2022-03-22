@@ -1,15 +1,13 @@
 ---
-title: "Rethink Priorities on 'quantitative/social science methods'"
-author: "RP researchers, esp. the 'Survey team' (project 'owner' = Reinstein)"
-logo: assets/logo.png
-bibliography: [references.bib, reinstein_bibtex.bib]
-csl: assets/apa.csl
+title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
+author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
+logo: logo.png
 abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
 date: "`r Sys.Date()`"
+bibliography: references.bib
+csl: apa.csl
+always_allow_html: yes
 link-citations: yes
-always_allow_html: true
-use_littlefoot: true
-sidebar_width: "250px"
 site: bookdown::bookdown_site
 output:
   rethinkpriorities::book:
@@ -30,6 +28,7 @@ my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 ```{r echo=FALSE}
 
+
 my_output <- knitr::opts_knit$get("rmarkdown.pandoc.to") #what was this? do we need it?
 
 #inline code -- this should allows building even if errors come along the way
@@ -46,6 +45,19 @@ knitr::knit_hooks$set(
 })
 ```
 
-# (Skip this top bit)
 
-It seems the index file needs a header?
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+<!-- <html> -->
+
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QLKFNFTGXX"></script> -->
+<!-- <script> -->
+<!--   window.dataLayer = window.dataLayer || []; -->
+<!--   function gtag(){dataLayer.push(arguments);} -->
+<!--   gtag('js', new Date()); -->
+
+<!--   gtag('config', 'G-QLKFNFTGXX'); -->
+<!-- </script> -->
+<!-- </html> -->
+

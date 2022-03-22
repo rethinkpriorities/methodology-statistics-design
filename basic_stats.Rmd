@@ -13,10 +13,10 @@ This should *not* include extensive discussion of causality (which is later), on
 Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'>
 
 ::: {.alert .alert-secondary}
- 
+
 
 DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.
- 
+
 :::
 
 
@@ -69,8 +69,8 @@ E
 
 > DR concerns about 'population vs super-population', possibly misinformed:
 
-::: {.foldable} 
- 
+::: {.foldable}
+
 
 ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.
 
@@ -82,13 +82,71 @@ E
 > "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."
 - (?) Athey and Imbens
 
- 
+
 :::
 
 
 ## 'Evidence of little or no effect' - equivalence tests, etc
 
 - [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+
+
+## A single framework? "Significance and equivalence testing" with randomization inference/simulation; building to Bayes {#simulation_to_bayes}
+
+
+```{block2,  type='note'}
+
+Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package
+
+```
+
+We see a 'small difference' between treatment groups and it is 'not significant in standard tests' (tests not shown here yet). But can we put meaningful bounds on this? Can we statistically 'rule out large effects'?
+
+(This parallels the analysis done in  [HERE](https://rethinkpriorities.github.io/methodology-statistics-design/inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes), which includes dome further explanation of the methods)
+
+\
+
+We take the following approach:
+
+1. Construct (by simulation or analytical formulae) the 'probability of "some function of our data" given a range of true parameters, i.e., given a range of relevant 'true rates of (relative) incidence' under each treatment (1/2, 3/4, equal, 4/3, 2, etc). This includes (and perhaps focuses on) the case where 'the true rates of incidence are equal to one another and equal to the average empirical incidence in our sample.'
+
+What "function of our data"?
+
+- The exact proportional difference in incidence rates that we see
+- A proportional difference in incidence rates as large as we see (in absolute value) or larger (I believe this is the 'two-tailed frequentist p-value')
+- A proportional difference in incidence rates as large as we see (in absolute value) or smaller (this gives us a sense of 'how unlikely is a large true effect ... can we probabilistically rule out a big difference')
+- A proportional difference in incidence rates as large or larger in favor of the Treatment
+- A proportional difference in incidence rates as large as we see in favor of the Control
+
+- ... Perhaps similar measures for other statistics such as  'difference in counts (not proportional), or 'average amount (donated)' (for the latter, we'd need to consider distinct true *distributions* of contributions)
+
+2. Plot the above over the parameter range to get a visual picture of the maximum likelihood parameter, and (eyeballing) the relative probability of different ranges
+
+3.  For a few important elements of the above, consider the 'relative likelihood of the data' under different true rates of incidence (or distributions of donations), for important comparisons such as
+
+- A relative incidence of 1.5 versus a relative incidence of 1
+
+... If the ratio is very small we might suspect that 'no difference is far more likely than a strong difference in favor of the treatment.
+
+4. Implicitly considering a 'flat prior', integrate (average) and compare important ranges of the above
+
+E.g.,
+
+- the probability mass of the parameter 'the incidence is 1.25x or higher in favor of the Treatment' , versus  1.25x or lower (closer to zero, or higher incidence under the Control)...
+- ... If the ratio is very small, then, given a fairly flat prior, our posterior should put a low probability on 'a large difference in favor of the treatment' ...
+- And similarly, reversing the control and treatment
+
+- And similarly, for both extremes relative to a middle incidence range...
+- ... here, if the ratio is very small, we will say "we can probablistically rule out an effect of 1.5x or larger in either direction"
+
+Question: Is it ever meaningful (or better) to compare regions that are not adjacent one another, and regions that do not add up to the entire space, e.g., compare [2, infinity] to  [-1,1] or something?
+
+
+5. Optionally, repeat the above with a Bayesian tool, considering more than one 'explicit prior'.
+
+Ongoing question: Do we need or want a separate prior for 'incidence under treatment' and 'incidence under control', or can our prior simply focus on the relative incidence rates?
+
+
 
 
 # Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}
