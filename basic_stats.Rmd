@@ -96,7 +96,9 @@ E
 
 ```{block2,  type='note'}
 
-Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package
+This is an outline/discussion. I (DR) try to implement and demonstrate this in `eamt_data_analysis/oftw_giving_season_upsell_2021_trial/oftw_upsell_input_first_analysis.Rmd`
+
+Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package or `BayesianFirstAid`
 
 ```
 

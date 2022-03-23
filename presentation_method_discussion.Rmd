@@ -90,7 +90,7 @@ Sometimes a logarithmic scale is helpful, but that can also lead to confusion. O
 
 -   Not possible to break the axis ggplot <https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis>
 
--   @Oska -- what about 'extending to the edge'?
+-  ... what about 'extending to the edge'?
 
 Remove outliers as a last resort; prominently mention this where doing so.
 
