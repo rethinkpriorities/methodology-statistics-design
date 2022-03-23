@@ -1,13 +1,15 @@
 ---
 title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
 author: "Rethink Priorities researchers, especially the 'Survey team' (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook"
-logo: logo.png
 abstract: "A set of curated resources tied to use-cases, and a space to organize our discussion"
-date: "`r Sys.Date()`"
+logo: assets/logo.png
 bibliography: references.bib
-csl: apa.csl
-always_allow_html: yes
-link-citations: yes
+csl: assets/apa.csl
+date: "`r Sys.Date()`"
+always_allow_html: true
+link-citations: true
+use_littlefoot: true
+sidebar_width: "350px"
 site: bookdown::bookdown_site
 output:
   rethinkpriorities::book:
@@ -45,6 +47,7 @@ knitr::knit_hooks$set(
 })
 ```
 
+# Maybe it needs a first chapter?
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 

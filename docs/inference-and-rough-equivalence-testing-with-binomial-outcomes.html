@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="13 Inference and rough equivalence testing with binomial outcomes | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
+<meta property="og:title" content="14 Inference and rough equivalence testing with binomial outcomes | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates" />
 <meta property="og:type" content="book" />
 
 
@@ -14,7 +14,7 @@
 
 <meta name="author" content="Rethink Priorities researchers, especially the ‘Survey team’ (project started by David Reinstein); Some sections are shared with the EA Marketing Team Gitbook" />
 
-<meta name="date" content="2022-03-22" />
+<meta name="date" content="2022-03-23" />
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -25,7 +25,7 @@ MathJax.Hub.Config({
 
 <meta name="description" content="Rethink Priorities: Our approach to empirical and quantitative work">
 
-<title>13 Inference and rough equivalence testing with binomial outcomes | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
+<title>14 Inference and rough equivalence testing with binomial outcomes | Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</title>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <style>
   
 :root {
-  --sidebar-width: ;
+  --sidebar-width: 350px;
   --primary-color: #43718f;
 }
 
@@ -336,79 +336,80 @@ blockquote p {
 
 <div class="border-end bg-white" id="sidebar-wrapper">
   <div id="sidebar-heading" class="border-bottom bg-light">
-    <img src="logo.png" width="25px" height="25px"/>
+    <img src="assets/logo.png" width="25px" height="25px"/>
     <span class="text-nowrap">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</span>
   </div>
   <div id="TOC" class="list-group list-group-flush">
-  <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">1</span><span><strong>Introduction and overview</strong></a>
+  <a id="item-maybe-it-needs-a-first-chapter" class="list-group-item" href="index.html"><span class="toc-section-number">1</span><span>Maybe it needs a first chapter?</a>
+  <a id="item-introduction-and-overview" class="list-group-item" href="introduction-and-overview.html"><span class="toc-section-number">2</span><span><strong>Introduction and overview</strong></a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">1.1</span><span>Rethink Priorities: Our approach to empirical and quantitative work</a>
-  <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">1.2</span><span>The purpose of this resource</a>
-  <a id="item-outline_sections" class="list-group-item" href="introduction-and-overview.html#outline_sections"><span class="toc-section-number">1.3</span><span>Sections and organization</a>
-  <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">1.4</span><span>Favorite resources, references, tools</a>
-  <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">1.5</span><span>Style and ‘collophon’</a>
-  <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">1.6</span><span>R setup and packages</a>
-  <a id="item-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">1.7</span><span>Git repo, shared files, procedure for editing</a>
+  <a id="item-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="list-group-item" href="introduction-and-overview.html#rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="toc-section-number">2.1</span><span>Rethink Priorities: Our approach to empirical and quantitative work</a>
+  <a id="item-the-purpose-of-this-resource" class="list-group-item" href="introduction-and-overview.html#the-purpose-of-this-resource"><span class="toc-section-number">2.2</span><span>The purpose of this resource</a>
+  <a id="item-outline_sections" class="list-group-item" href="introduction-and-overview.html#outline_sections"><span class="toc-section-number">2.3</span><span>Sections and organization</a>
+  <a id="item-favorite-resources-references-tools" class="list-group-item" href="introduction-and-overview.html#favorite-resources-references-tools"><span class="toc-section-number">2.4</span><span>Favorite resources, references, tools</a>
+  <a id="item-style-and-collophon" class="list-group-item" href="introduction-and-overview.html#style-and-collophon"><span class="toc-section-number">2.5</span><span>Style and ‘collophon’</a>
+  <a id="item-r-setup-and-packages" class="list-group-item" href="introduction-and-overview.html#r-setup-and-packages"><span class="toc-section-number">2.6</span><span>R setup and packages</a>
+  <a id="item-git-repo-shared-files-procedure-for-editing" class="list-group-item" href="introduction-and-overview.html#git-repo-shared-files-procedure-for-editing"><span class="toc-section-number">2.7</span><span>Git repo, shared files, procedure for editing</a>
   </div>
   <a id="item-data" class="list-group-item" href="data.html"><strong>DATA, CODE, AND PRESENTATION</strong></a>
-  <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">2</span><span>Coding and data management</a>
+  <a id="item-coding" class="list-group-item" href="coding.html"><span class="toc-section-number">3</span><span>Coding and data management</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-coding-and-organisational-issues" class="list-group-item" href="coding.html#coding-and-organisational-issues"><span class="toc-section-number">2.1</span><span>Coding and organisational issues</a>
+  <a id="item-coding-and-organisational-issues" class="list-group-item" href="coding.html#coding-and-organisational-issues"><span class="toc-section-number">3.1</span><span>Coding and organisational issues</a>
   </div>
-  <a id="item-presentation" class="list-group-item" href="presentation.html"><span class="toc-section-number">3</span><span>Presentation, labeling and visualisations</a>
+  <a id="item-presentation" class="list-group-item" href="presentation.html"><span class="toc-section-number">4</span><span>Presentation, labeling and visualisations</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-aside-ea-forum-organisation-collophon-formatting" class="list-group-item" href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><span class="toc-section-number">3.1</span><span>Aside: EA Forum organisation, collophon, formatting</a>
-  <a id="item-visualisations" class="list-group-item" href="presentation.html#visualisations"><span class="toc-section-number">3.2</span><span>Visualisations</a>
+  <a id="item-aside-ea-forum-organisation-collophon-formatting" class="list-group-item" href="presentation.html#aside-ea-forum-organisation-collophon-formatting"><span class="toc-section-number">4.1</span><span>Aside: EA Forum organisation, collophon, formatting</a>
+  <a id="item-visualisations" class="list-group-item" href="presentation.html#visualisations"><span class="toc-section-number">4.2</span><span>Visualisations</a>
   </div>
   <a id="item-surveys" class="list-group-item" href="surveys.html"><strong>SURVEY AND EXPERIMENT DESIGNS AND METHODS</strong></a>
-  <a id="item-surveydesign" class="list-group-item" href="surveydesign.html"><span class="toc-section-number">4</span><span>Survey design and item development</a>
+  <a id="item-surveydesign" class="list-group-item" href="surveydesign.html"><span class="toc-section-number">5</span><span>Survey design and item development</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-willem-sleegers-to-incorporate" class="list-group-item" href="surveydesign.html#willem-sleegers-to-incorporate"><span class="toc-section-number">4.1</span><span>(Willem Sleegers, to incorporate)</a>
+  <a id="item-willem-sleegers-to-incorporate" class="list-group-item" href="surveydesign.html#willem-sleegers-to-incorporate"><span class="toc-section-number">5.1</span><span>(Willem Sleegers, to incorporate)</a>
   <a id="item-reinstein-misc-notes-to-incorporate" class="list-group-item" href="surveydesign.html#reinstein-misc-notes-to-incorporate">Reinstein misc notes to incorporate</a>
-  <a id="item-suggested-sections" class="list-group-item" href="surveydesign.html#suggested-sections"><span class="toc-section-number">4.2</span><span>Suggested sections…</a>
+  <a id="item-suggested-sections" class="list-group-item" href="surveydesign.html#suggested-sections"><span class="toc-section-number">5.2</span><span>Suggested sections…</a>
   </div>
-  <a id="item-expt-qual-imp" class="list-group-item" href="expt-qual-imp.html"><span class="toc-section-number">5</span><span>Experiments: Qualitative and implementation design issues</a>
+  <a id="item-expt-qual-imp" class="list-group-item" href="expt-qual-imp.html"><span class="toc-section-number">6</span><span>Experiments: Qualitative and implementation design issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-proposed-structure-of-section" class="list-group-item" href="expt-qual-imp.html#proposed-structure-of-section"><span class="toc-section-number">5.1</span><span>Proposed structure of section</a>
+  <a id="item-proposed-structure-of-section" class="list-group-item" href="expt-qual-imp.html#proposed-structure-of-section"><span class="toc-section-number">6.1</span><span>Proposed structure of section</a>
   </div>
-  <a id="item-expt-quant" class="list-group-item" href="expt-quant.html"><span class="toc-section-number">6</span><span>Design: quantitative issues</a>
+  <a id="item-expt-quant" class="list-group-item" href="expt-quant.html"><span class="toc-section-number">7</span><span>Design: quantitative issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-treatment-assignment-blocking-randomization-etc" class="list-group-item" href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><span class="toc-section-number">6.1</span><span>‘Treatment’ assignment (blocking, randomization, etc)</a>
-  <a id="item-planning-diagnosing-and-adjusting-a-design" class="list-group-item" href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><span class="toc-section-number">6.2</span><span>Planning, diagnosing and adjusting a design</a>
-  <a id="item-power-analyses-and-other-diagnosands" class="list-group-item" href="expt-quant.html#power-analyses-and-other-diagnosands"><span class="toc-section-number">6.3</span><span>Power analyses (and other ‘diagnosands’)</a>
+  <a id="item-treatment-assignment-blocking-randomization-etc" class="list-group-item" href="expt-quant.html#treatment-assignment-blocking-randomization-etc"><span class="toc-section-number">7.1</span><span>‘Treatment’ assignment (blocking, randomization, etc)</a>
+  <a id="item-planning-diagnosing-and-adjusting-a-design" class="list-group-item" href="expt-quant.html#planning-diagnosing-and-adjusting-a-design"><span class="toc-section-number">7.2</span><span>Planning, diagnosing and adjusting a design</a>
+  <a id="item-power-analyses-and-other-diagnosands" class="list-group-item" href="expt-quant.html#power-analyses-and-other-diagnosands"><span class="toc-section-number">7.3</span><span>Power analyses (and other ‘diagnosands’)</a>
   </div>
   <a id="item-eamt-qual" class="list-group-item" href="eamt-qual.html">“Qualitative” design issues</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-ea-market-testing-resource-on-qualitative-design-issues" class="list-group-item" href="eamt-qual.html#ea-market-testing-resource-on-qualitative-design-issues"><span class="toc-section-number">6.4</span><span>‘EA market testing’ resource on qualitative design issues</a>
-  <a id="item-further-technical-discussion-and-code-can-be-added-here" class="list-group-item" href="eamt-qual.html#further-technical-discussion-and-code-can-be-added-here"><span class="toc-section-number">6.5</span><span>Further technical discussion and code can be added here</a>
+  <a id="item-ea-market-testing-resource-on-qualitative-design-issues" class="list-group-item" href="eamt-qual.html#ea-market-testing-resource-on-qualitative-design-issues"><span class="toc-section-number">7.4</span><span>‘EA market testing’ resource on qualitative design issues</a>
+  <a id="item-further-technical-discussion-and-code-can-be-added-here" class="list-group-item" href="eamt-qual.html#further-technical-discussion-and-code-can-be-added-here"><span class="toc-section-number">7.5</span><span>Further technical discussion and code can be added here</a>
   </div>
   <a id="item-basicstat" class="list-group-item" href="basicstat.html"><strong>MODELS, TESTING, INFERENCE, DESCRIPTIVES</strong></a>
-  <a id="item-stat_frame" class="list-group-item" href="stat_frame.html"><span class="toc-section-number">7</span><span>Statistical frameworks, ‘models,’ and hypothesis testing</a>
+  <a id="item-stat_frame" class="list-group-item" href="stat_frame.html"><span class="toc-section-number">8</span><span>Statistical frameworks, ‘models,’ and hypothesis testing</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">7.1</span><span>Conceptual discussion of statistics, probability and inference</a>
-  <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">7.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
-  <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">7.3</span><span>Randomization and permutation-based tests and inference</a>
-  <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">7.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
-  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">7.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
+  <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">8.1</span><span>Conceptual discussion of statistics, probability and inference</a>
+  <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">8.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
+  <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">8.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">8.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
+  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
   </div>
-  <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">8</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
+  <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">9</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
   <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-resources-and-use-cases" class="list-group-item" href="modeling.html#resources-and-use-cases"><span class="toc-section-number">8.1</span><span>Resources and use-cases</a>
+  <a id="item-resources-and-use-cases" class="list-group-item" href="modeling.html#resources-and-use-cases"><span class="toc-section-number">9.1</span><span>Resources and use-cases</a>
   </div>
-  <a id="item-time-series" class="list-group-item" href="time-series.html"><span class="toc-section-number">9</span><span>Time series (predictive) models</a>
+  <a id="item-time-series" class="list-group-item" href="time-series.html"><span class="toc-section-number">10</span><span>Time series (predictive) models</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="list-group-item" href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><span class="toc-section-number">9.1</span><span>Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
-  <a id="item-petes-notes-below" class="list-group-item" href="time-series.html#petes-notes-below"><span class="toc-section-number">9.2</span><span>PETE’S NOTES BELOW</a>
-  <a id="item-stationary-vs.-non-stationarity" class="list-group-item" href="time-series.html#stationary-vs.-non-stationarity"><span class="toc-section-number">9.3</span><span>Stationary vs. non-stationarity</a>
-  <a id="item-handling-features" class="list-group-item" href="time-series.html#handling-features"><span class="toc-section-number">9.4</span><span>Handling Features</a>
-  <a id="item-validation" class="list-group-item" href="time-series.html#validation"><span class="toc-section-number">9.5</span><span>Validation</a>
-  <a id="item-types-of-models" class="list-group-item" href="time-series.html#types-of-models"><span class="toc-section-number">9.6</span><span>Types of Models</a>
-  <a id="item-multiseries" class="list-group-item" href="time-series.html#multiseries"><span class="toc-section-number">9.7</span><span>Multiseries</a>
+  <a id="item-time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc" class="list-group-item" href="time-series.html#time-series-application-to-predict-the-influence-of-discrete-events-and-more-on-web-traffic-signups-etc"><span class="toc-section-number">10.1</span><span>Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</a>
+  <a id="item-petes-notes-below" class="list-group-item" href="time-series.html#petes-notes-below"><span class="toc-section-number">10.2</span><span>PETE’S NOTES BELOW</a>
+  <a id="item-stationary-vs.-non-stationarity" class="list-group-item" href="time-series.html#stationary-vs.-non-stationarity"><span class="toc-section-number">10.3</span><span>Stationary vs. non-stationarity</a>
+  <a id="item-handling-features" class="list-group-item" href="time-series.html#handling-features"><span class="toc-section-number">10.4</span><span>Handling Features</a>
+  <a id="item-validation" class="list-group-item" href="time-series.html#validation"><span class="toc-section-number">10.5</span><span>Validation</a>
+  <a id="item-types-of-models" class="list-group-item" href="time-series.html#types-of-models"><span class="toc-section-number">10.6</span><span>Types of Models</a>
+  <a id="item-multiseries" class="list-group-item" href="time-series.html#multiseries"><span class="toc-section-number">10.7</span><span>Multiseries</a>
   </div>
-  <a id="item-classification-models" class="list-group-item" href="classification-models.html"><span class="toc-section-number">10</span><span>Classification models</a>
+  <a id="item-classification-models" class="list-group-item" href="classification-models.html"><span class="toc-section-number">11</span><span>Classification models</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-classification_model_disc" class="list-group-item" href="classification-models.html#classification_model_disc"><span class="toc-section-number">10.1</span><span>Discussion: Assesing classification models and precision/recall</a>
+  <a id="item-classification_model_disc" class="list-group-item" href="classification-models.html#classification_model_disc"><span class="toc-section-number">11.1</span><span>Discussion: Assesing classification models and precision/recall</a>
   </div>
   <a id="item-causal" class="list-group-item" href="causal.html"><strong>(CAUSAL INFERENCE)</strong></a>
   <div class="list-group list-group-flush list-subgroup">
@@ -416,25 +417,25 @@ blockquote p {
   </div>
   <a id="item-fermi" class="list-group-item" href="fermi.html"><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></a>
   <a id="item-meta-and-robust" class="list-group-item" href="meta-and-robust.html"><strong>META AND ROBUST</strong></a>
-  <a id="item-opensci" class="list-group-item" href="opensci.html"><span class="toc-section-number">11</span><span>(Open and robust science: RP attitudes, discussions, resources)</a>
-  <a id="item-meta" class="list-group-item" href="meta.html"><span class="toc-section-number">12</span><span>(Meta-analysis)</a>
+  <a id="item-opensci" class="list-group-item" href="opensci.html"><span class="toc-section-number">12</span><span>(Open and robust science: RP attitudes, discussions, resources)</a>
+  <a id="item-meta" class="list-group-item" href="meta.html"><span class="toc-section-number">13</span><span>(Meta-analysis)</a>
   <a id="item-appendixsupplements" class="list-group-item" href="appendixsupplements.html"><strong>APPENDIX/SUPPLEMENTS</strong></a>
   <a id="item-power-workflow" class="list-group-item" href="power-workflow.html">Power analysis workflow (Jamie Elsey)</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-discussion-and-framework" class="list-group-item" href="power-workflow.html#discussion-and-framework"><span class="toc-section-number">12.1</span><span>Discussion and framework</a>
-  <a id="item-concrete-implementation-of-framework" class="list-group-item" href="power-workflow.html#concrete-implementation-of-framework"><span class="toc-section-number">12.2</span><span>Concrete implementation of framework</a>
+  <a id="item-discussion-and-framework" class="list-group-item" href="power-workflow.html#discussion-and-framework"><span class="toc-section-number">13.1</span><span>Discussion and framework</a>
+  <a id="item-concrete-implementation-of-framework" class="list-group-item" href="power-workflow.html#concrete-implementation-of-framework"><span class="toc-section-number">13.2</span><span>Concrete implementation of framework</a>
   </div>
-  <a id="item-inference-and-rough-equivalence-testing-with-binomial-outcomes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><span class="toc-section-number">13</span><span>Inference and rough equivalence testing with binomial outcomes</a>
+  <a id="item-inference-and-rough-equivalence-testing-with-binomial-outcomes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html"><span class="toc-section-number">14</span><span>Inference and rough equivalence testing with binomial outcomes</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-input-from-gsheet-wip" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><span class="toc-section-number">13.1</span><span>Input from Gsheet (WIP)</a>
-  <a id="item-randomization-inference-approach" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#randomization-inference-approach"><span class="toc-section-number">13.2</span><span>Randomization inference approach</a>
-  <a id="item-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">13.3</span><span>How likely is the ‘imbalance of unique emails’ due to chance?</a>
-  <a id="item-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><span class="toc-section-number">13.4</span><span>How likely are ‘proportions this similar’ under different size ‘true effect sizes?’</a>
+  <a id="item-input-from-gsheet-wip" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#input-from-gsheet-wip"><span class="toc-section-number">14.1</span><span>Input from Gsheet (WIP)</a>
+  <a id="item-randomization-inference-approach" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#randomization-inference-approach"><span class="toc-section-number">14.2</span><span>Randomization inference approach</a>
+  <a id="item-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">14.3</span><span>How likely is the ‘imbalance of unique emails’ due to chance?</a>
+  <a id="item-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="list-group-item" href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes"><span class="toc-section-number">14.4</span><span>How likely are ‘proportions this similar’ under different size ‘true effect sizes?’</a>
   </div>
-  <a id="item-readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><span class="toc-section-number">14</span><span>README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
+  <a id="item-readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html"><span class="toc-section-number">15</span><span>README: methodology-statistics-design, ‘Surveys, experiments, data analysis: Methodology, protocols and templates’</a>
   <div class="list-group list-group-flush list-subgroup">
-  <a id="item-methods-and-rp-guidelines-bookdown" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><span class="toc-section-number">14.1</span><span>‘Methods and RP Guidelines Bookdown’</a>
-  <a id="item-folder-structure-other-resources-in-this-repo" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><span class="toc-section-number">14.2</span><span>Folder structure, other resources in this repo</a>
+  <a id="item-methods-and-rp-guidelines-bookdown" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#methods-and-rp-guidelines-bookdown"><span class="toc-section-number">15.1</span><span>‘Methods and RP Guidelines Bookdown’</a>
+  <a id="item-folder-structure-other-resources-in-this-repo" class="list-group-item" href="readme-methodology-statistics-design-surveys-experiments-data-analysis-methodology-protocols-and-templates.html#folder-structure-other-resources-in-this-repo"><span class="toc-section-number">15.2</span><span>Folder structure, other resources in this repo</a>
   </div>
   </div>
 </div>
@@ -495,14 +496,14 @@ blockquote p {
 <!-- Page content-->
     <div id="main-container" class="container-fluid">
 <main>
-<div id="inference-and-rough-equivalence-testing-with-binomial-outcomes" class="section level1" number="13">
-<h1><span class="header-section-number">13</span> Inference and rough equivalence testing with binomial outcomes</h1>
+<div id="inference-and-rough-equivalence-testing-with-binomial-outcomes" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> Inference and rough equivalence testing with binomial outcomes</h1>
 <div class="alert alert-secondary">
 <p>This work has been moved from the EA market testing repo, with ‘identifying’ content redacted</p>
 </div>
 <p>The context for this trial is discussed <a href="https://app.gitbook.com/o/-MfFk4CTSGwVOPkwnRgx/s/-Mf8cHxdwePMZXRTKnEE/c/0qFJ2AUh7cZzynp3zRjk/contexts-and-environments-for-testing/one-for-the-world/pre-giving-tuesday-email-split-test">here (private)</a> and will be publicly shared <a href="">here</a> when we gain permission.</p>
-<div id="input-from-gsheet-wip" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Input from Gsheet (WIP)</h2>
+<div id="input-from-gsheet-wip" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Input from Gsheet (WIP)</h2>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb28-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
 <span id="cb28-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_sheet</span>(<span class="st">&quot;XXX&quot;</span>)</span></code></div></pre></div>
 <pre><code>## Error: Client error: (403) PERMISSION_DENIED
@@ -514,18 +515,17 @@ blockquote p {
 ## Error details:
 ## • reason: ACCESS_TOKEN_SCOPE_INSUFFICIENT
 ## • domain: googleapis.com
-## • metadata.method:
-##   google.apps.sheets.v4.SpreadsheetsService.GetSpreadsheet
-## • metadata.service: sheets.googleapis.com</code></pre>
+## • metadata.service: sheets.googleapis.com
+## • metadata.method: google.apps.sheets.v4.SpreadsheetsService.GetSpreadsheet</code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb30-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Need authorization here; how to do it? Note -- we need those cells to be anonymized </span></span></code></div></pre></div>
 <p>Note: subject lines were different … the impact email got more opens</p>
 <p>‘Giving Season contributions - website’ for donations … because CtA is a donation button on the website</p>
 </div>
-<div id="randomization-inference-approach" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Randomization inference approach</h2>
+<div id="randomization-inference-approach" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Randomization inference approach</h2>
 </div>
-<div id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="section level2" number="13.3">
-<h2><span class="header-section-number">13.3</span> How likely is the ‘imbalance of unique emails’ due to chance?</h2>
+<div id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> How likely is the ‘imbalance of unique emails’ due to chance?</h2>
 <p>We’ve 1345 unique emails in the dataset for ‘control’ treatment 1 and 1190 unique emails for treatment 2, if I did the quick calculations correctly. (Todo– integrate the data here.)</p>
 <p>We know some emails are repeated. To analyze this correctly I should bring in the actual distribution of ‘number of times an email is in the data’ and simulate assignment. (Or maybe this is a ‘Poisson’ thing?)</p>
 <p>As a (perhaps incorrect) first pass I could consider ‘legitimate unique email shows up in the treatment group’ as a random binomial event. (I guess the event is something like ’email is (not) duplicated?) Then we can do the standard binomial (Chi-sq) and Fisher’s exact tests.</p>
@@ -553,7 +553,7 @@ blockquote p {
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
 ## data:  matrix(c(n1, n2, n2, n1), ncol = 2)
-## p-value = 0.00001512
+## p-value = 1.512e-05
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
 ##  1.142247 1.428639
@@ -563,11 +563,11 @@ blockquote p {
 <p>If the above tests are reasonable, this imbalance is very unlikely to occur by chance.</p>
 <p>Note: if we think this is opens, this is a demonstration that one email is opened more.</p>
 </div>
-<div id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="section level2" number="13.4">
-<h2><span class="header-section-number">13.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes?’<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></h2>
+<div id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes?’<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></h2>
 <p>In the next section I started an off-the-cuff simulation approach, in folded code. But I believe that the <em>analytical</em> form <a href="https://math.stackexchange.com/questions/562119/difference-of-two-binomial-random-variables">here</a> with code and a simulation <a href="https://gist.github.com/coppeliaMLA/9681819">here</a> should be applicable.</p>
-<div id="difference-between-two-binomial-random-variables." class="section level3" number="13.4.1">
-<h3><span class="header-section-number">13.4.1</span> Difference between two binomial random variables.</h3>
+<div id="difference-between-two-binomial-random-variables." class="section level3" number="14.4.1">
+<h3><span class="header-section-number">14.4.1</span> Difference between two binomial random variables.</h3>
 <p><strong>Reprinting and discussing from <a href="https://math.stackexchange.com/questions/562119/difference-of-two-binomial-random-variables">Stackexchange post</a></strong></p>
 <p>“derive the distribution of the difference between two binomial random variables.”</p>
 <blockquote>
@@ -635,8 +635,8 @@ blockquote p {
 <span id="cb35-19"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
 <span id="cb35-20"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-20" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
 </div>
-<div id="applying-this-to-present-data" class="section level3" number="13.4.2">
-<h3><span class="header-section-number">13.4.2</span> Applying this to present data</h3>
+<div id="applying-this-to-present-data" class="section level3" number="14.4.2">
+<h3><span class="header-section-number">14.4.2</span> Applying this to present data</h3>
 <p>Rather than using their example, I’ll dive right in to the present case.</p>
 <p>My notes on the outcomes as of 15 Dec 2021</p>
 <div class="foldable"><a>Show</a><div class="collapse">
@@ -680,8 +680,8 @@ a 0.50% conversion rate for T2 - Emotion/Story</p>
 <p><img src="rp_methods_book_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see a large likelihood of values in the range of the +2 difference observed, and a low likelihood of a difference of 10 or more in either direction.</p>
 </div>
-<div id="adaptation-of-this-magnitude-or-smaller" class="section level3" number="13.4.3">
-<h3><span class="header-section-number">13.4.3</span> Adaptation: ‘of this magnitude or smaller’</h3>
+<div id="adaptation-of-this-magnitude-or-smaller" class="section level3" number="14.4.3">
+<h3><span class="header-section-number">14.4.3</span> Adaptation: ‘of this magnitude or smaller’</h3>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb40-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-1" aria-hidden="true" tabindex="-1"></a>ltmag_diffBin <span class="ot">&lt;-</span> <span class="cf">function</span>(z, n1, p1, n2, p2){</span>
 <span id="cb40-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb40-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  z_n <span class="ot">&lt;-</span> <span class="sc">-</span>z <span class="co">#negative value</span></span>
@@ -783,6 +783,13 @@ Do this for a range of considered effect sizes, e.g., $B \in \{0.5, 0.75, 1, 1.5
 </script>
 
 <!-- Littlefoot -->
+<script
+  src="https://unpkg.com/littlefoot/dist/littlefoot.js"
+  type="application/javascript"
+></script>
+<script type="application/javascript">
+  littlefoot.littlefoot() // Pass any littlefoot settings here.
+</script>
 
 <script>
 // Set the current page to be active in the TOC
