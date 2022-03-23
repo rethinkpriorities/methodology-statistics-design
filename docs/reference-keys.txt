@@ -35,6 +35,7 @@ common-statistical-tests-are-linear-models
 randomization-and-permutation-based-tests-and-inference
 particular-experimetrics-issues
 evidence-of-little-or-no-effect---equivalence-tests-etc
+simple-bayes
 simulation_to_bayes
 factor-descriptive
 resources-and-use-cases

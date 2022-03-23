@@ -389,8 +389,10 @@ blockquote p {
   <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">8.1</span><span>Conceptual discussion of statistics, probability and inference</a>
   <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">8.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
   <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">8.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-particular-experimetrics-issues" class="list-group-item" href="stat_frame.html#particular-experimetrics-issues"><span class="toc-section-number">8.4</span><span>Particular ‘experimetrics’ issues</a>
   <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">8.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
-  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
+  <a id="item-simple-bayes" class="list-group-item" href="stat_frame.html#simple-bayes"><span class="toc-section-number">8.6</span><span>Some simple Bayesian testing examples</a>
+  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.7</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
   </div>
   <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">9</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
   <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
@@ -498,6 +500,17 @@ blockquote p {
 <main>
 <div id="fermi" class="section level1 unnumbered">
 <h1><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></h1>
+<p>‘BOTEC’: Back of the envelope calculations are central to RP’s work</p>
+<p>‘Fermi estimation’ is essentially a more formal approach to this, carefully defining and explaining each element of the ‘model’ equation</p>
+<p>When we explicitly define (and justify) a probability distribution over each variable in the model, and compute (often through simulation) the overall uncertainty of the outputs (predictions, estimates, etc), we call this “Monte Carlo Fermi Estimation” (at least David Reinstein thinks this is what it’s called).</p>
+<p>David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, lay out some building blocks,</p>
+<p>… and embed some tools and work-in-progress on this <a href="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/">HERE</a>, also embedded below.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb14-1"><a href="fermi.html#cb14-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/&quot;</span>)</span></code></div></pre></div>
+<iframe src="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/" width="80%" height="400px" data-external="1">
+</iframe>
+<p>::: {.alert .alert-secondary}</p>
+<p>DR: We may want to look for ways to explicitly incorporate and integrate these approaches into our data analysis work in R, etc.</p>
+<p>w:::</p>
 
 </div>
 <div class="text-center m-5">

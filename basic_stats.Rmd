@@ -31,8 +31,9 @@ Further discussion, examples, and tables comparing the statistics by [Oska Fente
 
 ## Randomization and permutation-based tests and inference
 
-Basic description: (still looking for the best source for this)
+^[Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches ... see ['single framework'](#simulation_to_bayes)]
 
+Basic description: (still looking for the best source for this)
 
 - Discussion of the difference between randomization inference and bootstrapping [here](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)
 
@@ -71,13 +72,18 @@ E
 
 ::: {.foldable}
 
-
 ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.
+
+:::
+
+
+\
+
+
 
 ## Particular 'experimetrics' issues
 
 ### Should we include controls (covariates) in analyzing 'treatment effects' from randomized experiments? {-}
-
 
 > "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."
 - (?) Athey and Imbens
@@ -89,6 +95,45 @@ E
 ## 'Evidence of little or no effect' - equivalence tests, etc
 
 - [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+
+
+## Some simple Bayesian testing examples {#simple-bayes}
+
+We return to consider a very simple and common case of interest:
+
+-  We have a population divided into two treatment conditions (e.g., 'Impact' vs 'Emotion' language in an email donation appeal)
+
+-  We wish to focus on a binary outcome (e.g., 'whether clicked to donate'), which may be rare in each treatment. 
+    - We want to understand the impact of the treatment condition on the binary outcome, putting probability bounds on our belief about this
+    
+\
+
+This is a classic example for Bayesian inference. Some good discussions and vignettes:
+
+*Discussions and walk-throughs*
+
+- I have a memory that McElreath goes through this, but I cannot find it
+
+- [Jamie Elsey's code example](bayes_odds_ratio.R): `bayes_odds_ratio.R`
+
+- [Reinstein and Dickerson's work using `bayesian_test_me`](https://daaronr.github.io/dualprocess/analysis-questions-and-tests.html#bayes_prop) on 'dual process' donation data
+
+\
+
+
+
+*Ready packages* 
+
+- `bayesAB` is easy to apply, allows flexible specification of priors (and has tools to help you decide on these), and generates very clear output and graphs. See  [vignette](http://frankportman.github.io/bayesAB/)
+    - It (seems to) save the simulation data for you to summarize as you like
+    - Limitations: Requires raw data for each treatment (not just summarized data), cannot address more than two groups, does not (?) share the 'raw code doing the work' for tweaking
+    
+- `BayesianFirstAid::bayes.prop.test` is also easy to use  (see [vignette](https://www.sumsar.net/blog/2014/06/bayesian-first-aid-prop-test/)), and it works with either vectors or counts. 
+    - It uses a uniform prior, but you can get it to spit out the `rjags` code and then adjust this
+    - ... or adjust to multiple groups
+    - The plots it give you by default are pretty messy, but it also preserves the simulation data, so you could make your own plots
+
+
 
 
 ## A single framework? "Significance and equivalence testing" with randomization inference/simulation; building to Bayes {#simulation_to_bayes}
@@ -155,12 +200,12 @@ Ongoing question: Do we need or want a separate prior for 'incidence under treat
 
 Integrate...
 
-Willem's work:
+Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)
 
 
 ```{r wppage}
 
-knitr::include_url("https://willemsleegers.github.io/how-to-science/factor-analysis.html")
+knitr::include_url("https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html")
 
 ```
 

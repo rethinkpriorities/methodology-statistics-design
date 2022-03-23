@@ -389,8 +389,10 @@ blockquote p {
   <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">8.1</span><span>Conceptual discussion of statistics, probability and inference</a>
   <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">8.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
   <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">8.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-particular-experimetrics-issues" class="list-group-item" href="stat_frame.html#particular-experimetrics-issues"><span class="toc-section-number">8.4</span><span>Particular ‘experimetrics’ issues</a>
   <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">8.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
-  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
+  <a id="item-simple-bayes" class="list-group-item" href="stat_frame.html#simple-bayes"><span class="toc-section-number">8.6</span><span>Some simple Bayesian testing examples</a>
+  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.7</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
   </div>
   <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">9</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
   <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
@@ -538,7 +540,7 @@ NOTE: this is being moved to <a href="https://rethinkpriorities.github.io/how-to
 <span id="cb7-10"><a href="presentation.html#cb7-10" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
 <span id="cb7-11"><a href="presentation.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Share of total 2019 reported donation amount, by donation size&quot;</span>)</span>
 <span id="cb7-12"><a href="presentation.html#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
-<pre><code>## Error in ggplot(., aes(area = total_don, fill = donation_2019_c_split, : could not find function &quot;ggplot&quot;</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;geom_treemap_opts&#39; not found</code></pre>
 <p>A good alternative to the treemap … conveying both absolute amounts and rates in the same graph?</p>
 </div>
 <div id="case-likert-scale-individual-items-and-relative-responses-to-these" class="section level3 unnumbered">
@@ -562,7 +564,7 @@ NOTE: this is being moved to <a href="https://rethinkpriorities.github.io/how-to
 </ul></li>
 <li><p>or otherwise allow a clear ‘break’ in the axis?</p></li>
 <li><p>Not possible to break the axis ggplot <a href="https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis" class="uri">https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis</a></p></li>
-<li><p><span class="citation">(<a href="#ref-Oska" role="doc-biblioref"><strong>Oska?</strong></a>)</span> – what about ‘extending to the edge?’</p></li>
+<li><p>… what about ‘extending to the edge?’</p></li>
 </ul>
 <p>Remove outliers as a last resort; prominently mention this where doing so.</p>
 </div>

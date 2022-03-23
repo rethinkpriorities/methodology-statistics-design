@@ -116,7 +116,7 @@ purrr::map2(other_rmd_files, other_rmd_files_names,
   rmarkdown::render_site(output_format = 'rethinkpriorities::book', encoding = 'UTF-8')
 }
 
-{
+#{
  # options(knitr.duplicate.label = "allow")
   #rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
 #}

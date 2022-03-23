@@ -389,8 +389,10 @@ blockquote p {
   <a id="item-conceptual" class="list-group-item" href="stat_frame.html#conceptual"><span class="toc-section-number">8.1</span><span>Conceptual discussion of statistics, probability and inference</a>
   <a id="item-hypothesis-testing-statistical-comparisons-and-inferences" class="list-group-item" href="stat_frame.html#hypothesis-testing-statistical-comparisons-and-inferences"><span class="toc-section-number">8.2</span><span>Hypothesis testing, statistical comparisons and inferences</a>
   <a id="item-randomization-and-permutation-based-tests-and-inference" class="list-group-item" href="stat_frame.html#randomization-and-permutation-based-tests-and-inference"><span class="toc-section-number">8.3</span><span>Randomization and permutation-based tests and inference</a>
+  <a id="item-particular-experimetrics-issues" class="list-group-item" href="stat_frame.html#particular-experimetrics-issues"><span class="toc-section-number">8.4</span><span>Particular ‘experimetrics’ issues</a>
   <a id="item-evidence-of-little-or-no-effect---equivalence-tests-etc" class="list-group-item" href="stat_frame.html#evidence-of-little-or-no-effect---equivalence-tests-etc"><span class="toc-section-number">8.5</span><span>‘Evidence of little or no effect’ - equivalence tests, etc</a>
-  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.6</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
+  <a id="item-simple-bayes" class="list-group-item" href="stat_frame.html#simple-bayes"><span class="toc-section-number">8.6</span><span>Some simple Bayesian testing examples</a>
+  <a id="item-simulation_to_bayes" class="list-group-item" href="stat_frame.html#simulation_to_bayes"><span class="toc-section-number">8.7</span><span>A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a>
   </div>
   <a id="item-factor-descriptive" class="list-group-item" href="factor-descriptive.html"><span class="toc-section-number">9</span><span>Factor analysis, dimension reduction, and ‘carving reality at its joints’</a>
   <a id="item-modeling" class="list-group-item" href="modeling.html"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></a>
@@ -504,20 +506,22 @@ blockquote p {
 <p>The context for this trial is discussed <a href="https://app.gitbook.com/o/-MfFk4CTSGwVOPkwnRgx/s/-Mf8cHxdwePMZXRTKnEE/c/0qFJ2AUh7cZzynp3zRjk/contexts-and-environments-for-testing/one-for-the-world/pre-giving-tuesday-email-split-test">here (private)</a> and will be publicly shared <a href="">here</a> when we gain permission.</p>
 <div id="input-from-gsheet-wip" class="section level2" number="14.1">
 <h2><span class="header-section-number">14.1</span> Input from Gsheet (WIP)</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb28-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
-<span id="cb28-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_sheet</span>(<span class="st">&quot;XXX&quot;</span>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb29-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(googlesheets4)</span>
+<span id="cb29-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_sheet</span>(<span class="st">&quot;XXX&quot;</span>)</span></code></div></pre></div>
 <pre><code>## Error: Client error: (403) PERMISSION_DENIED
-## • Client does not have sufficient permission. This can happen because the
-##   OAuth token does not have the right scopes, the client doesn&#39;t have
-##   permission, or the API has not been enabled for the client project.
+## • Client does not have sufficient permission. This can happen
+##   because the OAuth token does not have the right scopes, the
+##   client doesn&#39;t have permission, or the API has not been enabled
+##   for the client project.
 ## • Request had insufficient authentication scopes.
 ## 
 ## Error details:
 ## • reason: ACCESS_TOKEN_SCOPE_INSUFFICIENT
 ## • domain: googleapis.com
-## • metadata.service: sheets.googleapis.com
-## • metadata.method: google.apps.sheets.v4.SpreadsheetsService.GetSpreadsheet</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb30-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Need authorization here; how to do it? Note -- we need those cells to be anonymized </span></span></code></div></pre></div>
+## • metadata.method:
+##   google.apps.sheets.v4.SpreadsheetsService.GetSpreadsheet
+## • metadata.service: sheets.googleapis.com</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb31-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Need authorization here; how to do it? Note -- we need those cells to be anonymized </span></span></code></div></pre></div>
 <p>Note: subject lines were different … the impact email got more opens</p>
 <p>‘Giving Season contributions - website’ for donations … because CtA is a donation button on the website</p>
 </div>
@@ -529,12 +533,12 @@ blockquote p {
 <p>We’ve 1345 unique emails in the dataset for ‘control’ treatment 1 and 1190 unique emails for treatment 2, if I did the quick calculations correctly. (Todo– integrate the data here.)</p>
 <p>We know some emails are repeated. To analyze this correctly I should bring in the actual distribution of ‘number of times an email is in the data’ and simulate assignment. (Or maybe this is a ‘Poisson’ thing?)</p>
 <p>As a (perhaps incorrect) first pass I could consider ‘legitimate unique email shows up in the treatment group’ as a random binomial event. (I guess the event is something like ’email is (not) duplicated?) Then we can do the standard binomial (Chi-sq) and Fisher’s exact tests.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb31-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
-<span id="cb31-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
-<span id="cb31-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-4" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb31-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-5" aria-hidden="true" tabindex="-1"></a>  binom_emails <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(n1, n1<span class="sc">+</span>n2, <span class="at">correct=</span><span class="cn">FALSE</span>)</span>
-<span id="cb31-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb32-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
+<span id="cb32-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
+<span id="cb32-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-4" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb32-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  binom_emails <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(n1, n1<span class="sc">+</span>n2, <span class="at">correct=</span><span class="cn">FALSE</span>)</span>
+<span id="cb32-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb32-6" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
 <pre><code>## 
 ##  1-sample proportions test without continuity correction
 ## 
@@ -546,14 +550,14 @@ blockquote p {
 ## sample estimates:
 ##        p 
 ## 0.530572</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb33-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb33-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb33-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  fisher_emails <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(n1, n2, n2, n1), <span class="at">ncol=</span><span class="dv">2</span>))</span>
-<span id="cb33-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb33-3" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb34-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb34-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb34-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  fisher_emails <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(n1, n2, n2, n1), <span class="at">ncol=</span><span class="dv">2</span>))</span>
+<span id="cb34-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb34-3" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
 <pre><code>## 
 ##  Fisher&#39;s Exact Test for Count Data
 ## 
 ## data:  matrix(c(n1, n2, n2, n1), ncol = 2)
-## p-value = 1.512e-05
+## p-value = 0.00001512
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
 ##  1.142247 1.428639
@@ -564,7 +568,7 @@ blockquote p {
 <p>Note: if we think this is opens, this is a demonstration that one email is opened more.</p>
 </div>
 <div id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes" class="section level2" number="14.4">
-<h2><span class="header-section-number">14.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes?’<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></h2>
+<h2><span class="header-section-number">14.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes?’<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></h2>
 <p>In the next section I started an off-the-cuff simulation approach, in folded code. But I believe that the <em>analytical</em> form <a href="https://math.stackexchange.com/questions/562119/difference-of-two-binomial-random-variables">here</a> with code and a simulation <a href="https://gist.github.com/coppeliaMLA/9681819">here</a> should be applicable.</p>
 <div id="difference-between-two-binomial-random-variables." class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Difference between two binomial random variables.</h3>
@@ -614,26 +618,26 @@ blockquote p {
 </blockquote>
 <p>Let me try to apply it…</p>
 <p>Defining their code for this function:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb35-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-1" aria-hidden="true" tabindex="-1"></a>modBin <span class="ot">&lt;-</span>dbinom <span class="co">#DR: I just do this renaming here for consistency with the rest ... but the modBin they defined was redundant</span></span>
-<span id="cb35-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-3" aria-hidden="true" tabindex="-1"></a>diffBin<span class="ot">&lt;-</span><span class="cf">function</span>(z, n1, p1, n2, p2){</span>
-<span id="cb35-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb35-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (z<span class="sc">&gt;=</span><span class="dv">0</span>){</span>
-<span id="cb35-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n1){</span>
-<span id="cb35-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-9" aria-hidden="true" tabindex="-1"></a>      prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1) <span class="sc">*</span> <span class="fu">modBin</span>(i, n2, p2)</span>
-<span id="cb35-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb35-11"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-13"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb35-14"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-14" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb35-15"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n2){</span>
-<span id="cb35-16"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-16" aria-hidden="true" tabindex="-1"></a>      prob<span class="ot">&lt;-</span>prob<span class="sc">+</span><span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1)<span class="sc">*</span><span class="fu">modBin</span>(i, n2, p2)</span>
-<span id="cb35-17"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-17" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb35-18"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-19"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
-<span id="cb35-20"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb35-20" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb36-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-1" aria-hidden="true" tabindex="-1"></a>modBin <span class="ot">&lt;-</span>dbinom <span class="co">#DR: I just do this renaming here for consistency with the rest ... but the modBin they defined was redundant</span></span>
+<span id="cb36-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-3" aria-hidden="true" tabindex="-1"></a>diffBin<span class="ot">&lt;-</span><span class="cf">function</span>(z, n1, p1, n2, p2){</span>
+<span id="cb36-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb36-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (z<span class="sc">&gt;=</span><span class="dv">0</span>){</span>
+<span id="cb36-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n1){</span>
+<span id="cb36-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-9" aria-hidden="true" tabindex="-1"></a>      prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1) <span class="sc">*</span> <span class="fu">modBin</span>(i, n2, p2)</span>
+<span id="cb36-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-11"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-12"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-13"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb36-14"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb36-15"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n2){</span>
+<span id="cb36-16"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-16" aria-hidden="true" tabindex="-1"></a>      prob<span class="ot">&lt;-</span>prob<span class="sc">+</span><span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1)<span class="sc">*</span><span class="fu">modBin</span>(i, n2, p2)</span>
+<span id="cb36-17"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb36-18"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-19"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
+<span id="cb36-20"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-20" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
 </div>
 <div id="applying-this-to-present-data" class="section level3" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Applying this to present data</h3>
@@ -655,47 +659,47 @@ an 0.59% ‘conversion’ rate for T1 - Control
 a 0.50% conversion rate for T2 - Emotion/Story</p>
 </div></div>
 <p>Putting the observations into defined objects (later: do from data)</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb36-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
-<span id="cb36-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
-<span id="cb36-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb36-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-4" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb36-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb36-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> d1<span class="sc">-</span>d2</span></code></div></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb37-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
+<span id="cb37-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
+<span id="cb37-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb37-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-4" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb37-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> d1<span class="sc">-</span>d2</span></code></div></pre></div>
 <p>Computation for a few ‘ad-hoc cases’ (later explore the space with vectors of values)</p>
 <ol style="list-style-type: decimal">
 <li>Suppose truly equal incidence, at the mean level</li>
 </ol>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb37-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> (d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2)</span>
-<span id="cb37-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1</span>
-<span id="cb37-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-5" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb37-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  db_0 <span class="ot">&lt;-</span> <span class="fu">diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb37-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb38-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> (d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2)</span>
+<span id="cb38-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1</span>
+<span id="cb38-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-5" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb38-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  db_0 <span class="ot">&lt;-</span> <span class="fu">diffBin</span>(z, n1, p1, n2, p2)</span>
+<span id="cb38-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb38-7" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
 <pre><code>## [1] 0.1024599</code></pre>
 <p>This implies there is a 10.2% chance of getting this <em>exact</em> difference of +2 incidences between the treatments (in one direction), if the true incidence rates were equal.</p>
 <p>Let’s plot this for a range of ‘incidence rate differences’ in this region. (Sorry, using the traditional plot, ggplot is better).</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb39-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">*</span>z, <span class="dv">10</span><span class="sc">*</span>z)</span>
-<span id="cb39-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">sapply</span>(s, <span class="cf">function</span>(z) <span class="fu">diffBin</span>(z, n1, p1, n2, p2))</span>
-<span id="cb39-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s,p)</span></code></div></pre></div>
-<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb40-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">*</span>z, <span class="dv">10</span><span class="sc">*</span>z)</span>
+<span id="cb40-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">sapply</span>(s, <span class="cf">function</span>(z) <span class="fu">diffBin</span>(z, n1, p1, n2, p2))</span>
+<span id="cb40-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s,p)</span></code></div></pre></div>
+<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>We see a large likelihood of values in the range of the +2 difference observed, and a low likelihood of a difference of 10 or more in either direction.</p>
 </div>
 <div id="adaptation-of-this-magnitude-or-smaller" class="section level3" number="14.4.3">
 <h3><span class="header-section-number">14.4.3</span> Adaptation: ‘of this magnitude or smaller’</h3>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb40-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-1" aria-hidden="true" tabindex="-1"></a>ltmag_diffBin <span class="ot">&lt;-</span> <span class="cf">function</span>(z, n1, p1, n2, p2){</span>
-<span id="cb40-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb40-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  z_n <span class="ot">&lt;-</span> <span class="sc">-</span>z <span class="co">#negative value</span></span>
-<span id="cb40-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> z_n<span class="sc">:</span>z){     <span class="co">#sum for all integer differences between observed value and its negative, inclusive</span></span>
-<span id="cb40-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-6" aria-hidden="true" tabindex="-1"></a>    prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">diffBin</span>(i, n1, p1, n2, p2)</span>
-<span id="cb40-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb40-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
-<span id="cb40-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb40-10" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb41-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-1" aria-hidden="true" tabindex="-1"></a>ltmag_diffBin <span class="ot">&lt;-</span> <span class="cf">function</span>(z, n1, p1, n2, p2){</span>
+<span id="cb41-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb41-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  z_n <span class="ot">&lt;-</span> <span class="sc">-</span>z <span class="co">#negative value</span></span>
+<span id="cb41-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> z_n<span class="sc">:</span>z){     <span class="co">#sum for all integer differences between observed value and its negative, inclusive</span></span>
+<span id="cb41-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-6" aria-hidden="true" tabindex="-1"></a>    prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">diffBin</span>(i, n1, p1, n2, p2)</span>
+<span id="cb41-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb41-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
+<span id="cb41-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-10" aria-hidden="true" tabindex="-1"></a>}</span></code></div></pre></div>
 <p>Now, a similar computation as above, but for ‘this big or smaller in magnitude’:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb41-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-1" aria-hidden="true" tabindex="-1"></a>  (</span>
-<span id="cb41-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-2" aria-hidden="true" tabindex="-1"></a>    mag_db_0 <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb41-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></div></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb42-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb42-1" aria-hidden="true" tabindex="-1"></a>  (</span>
+<span id="cb42-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb42-2" aria-hidden="true" tabindex="-1"></a>    mag_db_0 <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
+<span id="cb42-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></div></pre></div>
 <pre><code>## [1] 0.4908031</code></pre>
 <p>This implies there is a 49.1% chance of getting a difference <em>no larger than this one in magnitude</em> of +/-2 incidences between the treatments if the true incidence rates were equal.</p>
 <p><br />
@@ -705,34 +709,34 @@ a 0.50% conversion rate for T2 - Emotion/Story</p>
 <p>Below, I plot</p>
 <p>Y-axis: ’how likely would a difference in donations ‘as small or smaller in magnitude’” than we see in the data against</p>
 <p>X-axis: if the “true difference in incidence rates” were of these magnitudes</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb43-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
-<span id="cb43-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
-<span id="cb43-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">rep</span>((d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2), <span class="fu">length</span>(B))</span>
-<span id="cb43-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1<span class="sc">*</span>B</span>
-<span id="cb43-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(<span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">format</span>(<span class="at">digits=</span><span class="dv">3</span>, <span class="at">scientific=</span><span class="cn">FALSE</span>)</span></code></div></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb44-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
+<span id="cb44-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
+<span id="cb44-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">rep</span>((d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2), <span class="fu">length</span>(B))</span>
+<span id="cb44-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1<span class="sc">*</span>B</span>
+<span id="cb44-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(<span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">format</span>(<span class="at">digits=</span><span class="dv">3</span>, <span class="at">scientific=</span><span class="cn">FALSE</span>)</span></code></div></pre></div>
 <pre><code>## [1] &quot;49.1&quot;             &quot;39.4&quot;             &quot;20.6&quot;             &quot;8.02&quot;            
 ## [5] &quot;2.51&quot;             &quot;0.153&quot;            &quot;0.00000000000855&quot;</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb45-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-1" aria-hidden="true" tabindex="-1"></a>probmag <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb45-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#qplot(B, probmag, log  = &quot;x&quot;, xlab = &quot;True relative incidence&quot;, ylab =&quot;Prob. of difference this small&quot;)</span></span>
-<span id="cb45-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-6" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb45-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  probmag_plot <span class="ot">&lt;-</span></span>
-<span id="cb45-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb45-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>B, <span class="at">y=</span>probmag) <span class="sc">+</span></span>
-<span id="cb45-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb45-11"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">&#39;log2&#39;</span>) <span class="sc">+</span></span>
-<span id="cb45-12"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>,.<span class="dv">51</span>) <span class="sc">+</span></span>
-<span id="cb45-13"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;True relative incidence rate&quot;</span>) <span class="sc">+</span></span>
-<span id="cb45-14"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Prob. diff. as small as obsd&quot;</span>)</span>
-<span id="cb45-15"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-16"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb45-16" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
-<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r collapse"><div><code class="sourceCode r"><span id="cb46-1"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-1" aria-hidden="true" tabindex="-1"></a>probmag <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
+<span id="cb46-2"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co">#qplot(B, probmag, log  = &quot;x&quot;, xlab = &quot;True relative incidence&quot;, ylab =&quot;Prob. of difference this small&quot;)</span></span>
+<span id="cb46-5"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-6" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb46-7"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  probmag_plot <span class="ot">&lt;-</span></span>
+<span id="cb46-8"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb46-9"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>B, <span class="at">y=</span>probmag) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb46-11"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">&#39;log2&#39;</span>) <span class="sc">+</span></span>
+<span id="cb46-12"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>,.<span class="dv">51</span>) <span class="sc">+</span></span>
+<span id="cb46-13"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;True relative incidence rate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-14"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Prob. diff. as small as obsd&quot;</span>)</span>
+<span id="cb46-15"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-16"><a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#cb46-16" aria-hidden="true" tabindex="-1"></a>)</span></code></div></pre></div>
+<p><img src="rp_methods_book_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Hard-coded takeaways 15 Dec 2021 :</p>
 <p>Our data is consistent with ‘no difference’ (of course) … but its also consistent with ‘a fairly large difference in incidence’</p>
 <p>E.g., even if one treatment truly lead to ‘twice as many donations as the other,’ we still have a 20% chance of seeing a differences as small as the one we see (of 8 versus 6)</p>
@@ -760,8 +764,8 @@ Do this for a range of considered effect sizes, e.g., $B \in \{0.5, 0.75, 1, 1.5
 </div>
 <div class="footnotes">
 <hr />
-<ol start="17">
-<li id="fn17"><p> I think this is relates to a ‘power calculation,’ but reporting <span class="math inline">\(1-power\)</span>.<a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<ol start="18">
+<li id="fn18"><p> I think this is relates to a ‘power calculation,’ but reporting <span class="math inline">\(1-power\)</span>.<a href="inference-and-rough-equivalence-testing-with-binomial-outcomes.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div class="text-center m-5">
