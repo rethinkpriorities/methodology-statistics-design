@@ -4,14 +4,19 @@ library(tidyverse)
 library(brms)
 library(tidybayes)
 
+
+#https://mc-stan.org/users/interfaces/brms
+#The brms package provides a flexible interface to fit Bayesian generalized (non)linear multivariate multilevel models using Stan.
+
+
 mock_data <- tibble(condition = c(rep("A", 1000), rep("B", 1000)),
                     outcome = c(rep(1, 11), rep(0, 989), rep(1, 14), rep(0, 986)))
 
-form <- outcome ~ condition
+formX <- outcome ~ condition
 
 form <- outcome ~ 0 + condition
 
-get_prior(formula = form,
+brms::get_prior(formula = formX,
           data = mock_data,
           family = bernoulli)
 

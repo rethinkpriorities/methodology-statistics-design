@@ -114,7 +114,7 @@ This is a classic example for Bayesian inference. Some good discussions and vign
 
 - I have a memory that McElreath goes through this, but I cannot find it
 
-- [Jamie Elsey's code example](bayes_odds_ratio.R): `bayes_odds_ratio.R`
+- [Jamie Elsey's code example](bayes_odds_ratio.R): `bayes_odds_ratio.R`, which uses the [brms interface to Stan](https://mc-stan.org/users/interfaces/brms)
 
 - [Reinstein and Dickerson's work using `bayesian_test_me`](https://daaronr.github.io/dualprocess/analysis-questions-and-tests.html#bayes_prop) on 'dual process' donation data
 
