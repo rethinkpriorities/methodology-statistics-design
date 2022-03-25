@@ -1,4 +1,7 @@
-# Code written by Jamie Elsey in response to Slack thread: https://rethinkpriorities.slack.com/archives/G01BDCD2QPR/p1647970569265519
+# Bayes odds ratio modeling example (Elsey) ####
+# ...Code written by Jamie Elsey in response to Slack thread: #### 
+
+# https://rethinkpriorities.slack.com/archives/G01BDCD2QPR/p1647970569265519
 
 library(tidyverse)
 library(brms)
@@ -12,7 +15,10 @@ library(tidybayes)
 mock_data <- tibble(condition = c(rep("A", 1000), rep("B", 1000)),
                     outcome = c(rep(1, 11), rep(0, 989), rep(1, 14), rep(0, 986)))
 
-formX <- outcome ~ condition
+#formX <- outcome ~ condition
+#DR: This version would allow you to explicitly specify the prior over the *differences*, I guess
+
+# Setup ... or something (?) ####
 
 form <- outcome ~ 0 + condition
 
@@ -144,21 +150,6 @@ posterior <- tibble("A" = posterior[ , 1],
          oddsB = B / (1 - B),
          odds_ratio = oddsB/oddsA)
 
-posterior_summary <- posterior %>% summarise(mean_or = mean(odds_ratio),
-                                             lower = hdi(odds_ratio)[1],
-                                             upper = hdi(odds_ratio)[2],
-                                             perc5 = quantile(odds_ratio, .05),
-                                             perc10 = quantile(odds_ratio, .1),
-                                             perc15 = quantile(odds_ratio, .15),
-                                             perc20 = quantile(odds_ratio, .2),
-                                             perc25 = quantile(odds_ratio, .25),
-                                             perc75 = quantile(odds_ratio, .75),
-                                             perc8 = quantile(odds_ratio, .8),
-                                             perc85 = quantile(odds_ratio, .85),
-                                             perc9 = quantile(odds_ratio, .9),
-                                             perc95 = quantile(odds_ratio, .95),
-                                             perc995 = quantile(odds_ratio, .995),
-                                             perc005 = quantile(odds_ratio, .005))
 
 png(filename = "posterior odds ratio 2.png", width = 6, height = 3, units = "in", res = 1000, type = "cairo")
 ggplot(data = posterior) +
