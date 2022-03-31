@@ -2,7 +2,8 @@
 #
 # files that only 'add functions and packages'
 
-code/*
+code/* # Would you not want to keep track of the dependencies in code/functions.R? Given that these are required to run these functions.
+archive/
 
 # and index is causing issues atm too
 index.Rmd

@@ -13,11 +13,13 @@ comments:
     hypothesis: true
 ---
 
-# Setup 
+# Setup
 
 ## Packages and functions
 
-Reinstall key packages so this can be standalone?^[Note: not all these packages may be needed; let's search only the ones that are and drop the rest]
+Reinstall key packages so this can be standalone?[^1]
+
+[^1]: Note: not all these packages may be needed; let's search only the ones that are and drop the rest
 
 ```{r, include=FALSE}
 
@@ -25,8 +27,8 @@ library(here)
 library(pacman)
 library(dplyr)
 
-p_load(rsample)
-p_load(parsnip, tune, dials)
+p_load(rsample) # Why p_load these? (Can create issues with dependencies)
+p_load(parsnip, tune, dials) # If loading multiple packages, better to use p_load with install = FALSE option
 p_load(conflicted)
 conflicted::conflict_prefer("set_label", "sjlabelled")
 conflicted::conflict_prefer("add_footnote", "kableExtra")
@@ -53,32 +55,27 @@ library(rnoodling)
 
 ```
 
-
-:::{.callout-note collapse="true"}
-
-## Skipping here, for now; parallel cores, etc. 
+::: {.callout-note collapse="true"}
+## Skipping here, for now; parallel cores, etc.
 
 Skipping here, for now; this may help processing larger jobs, so we may want to revisit it.
 
-```
-cores <- parallel::detectCores()
-if (!grepl("mingw32", R.Version()$platform)) {
-  library(doMC)
-  registerDoMC(cores = cores)
-} else {
-  library(doParallel)
-  cl <- makePSOCKcluster(cores)
-  registerDoParallel(cl)
-}
-```
-
+    cores <- parallel::detectCores()
+    if (!grepl("mingw32", R.Version()$platform)) {
+      library(doMC)
+      registerDoMC(cores = cores)
+    } else {
+      library(doParallel)
+      cl <- makePSOCKcluster(cores)
+      registerDoParallel(cl)
+    }
 :::
-
-
 
 ## Reading in data from a repo
 
-The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.^[Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files']
+The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.[^2]
+
+[^2]: Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'
 
 ```{r input, include=FALSE}
 
@@ -92,7 +89,6 @@ df <- rethinkpriorities::read_file_from_repo(
 
 ```
 
-
 Next we sample from this data and remove labels, to make it process quicker and easier
 
 ```{r simplify_for_tidymodel}
@@ -104,7 +100,6 @@ dplyr::sample_n(2000)
 
 ```
 
-
 ```{r}
 
 df
@@ -113,9 +108,15 @@ df
 
 ## Some ad-hoc data cleaning and filtering, to enable modeling
 
-Normally, we should do the main data manipulation steps separate from the analysis.^[In the present case this would be in `build/eas_cross_year_harmonisation.R`.] However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.^[This does not include data-based imputation and standardizing variables, which are done with the `recipe` package below.]
+Normally, we should do the main data manipulation steps separate from the analysis.[^3] However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.[^4] <!-- I think it may be worth expanding on this. In that that we want to perform processing steps which are going to be long and will not vary during modelling. But where we might wish to (for example) impute data we may wish to include this as a part of the modelling process to allow testing of various imputation methods. Also things like normalizing variables should obviously be done as part of the modelling stage because of data leakage. -->
 
-First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.^[However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.]
+[^3]: In the present case this would be in `build/eas_cross_year_harmonisation.R`.
+
+[^4]: This does not include data-based imputation and standardizing variables, which are done with the `recipe` package below.
+
+First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.[^5]
+
+[^5]: However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.
 
 ```{r}
 
@@ -125,8 +126,11 @@ df <- df %>% dplyr::select(where( ~!all(is.na(.x)) ))  %>%
 
 ```
 
+Next, another 'Big global filtering step' ... .[^6], [^7]
 
-Next, another 'Big global filtering step' ... .^[This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it], ^[Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.]
+[^6]: This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it
+
+[^7]: Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.
 
 ```{r no-missing-don}
 
@@ -134,8 +138,11 @@ df <- df %>%
   dplyr::filter(!is.na(d_don_1k))
 ```
 
+Next, I define an 'optional filter', which we may use below.[^8] `income_filter` will remove individuals with an income below 500000.[^9]
 
-Next, I define an 'optional filter', which we may use below.^[I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.] `income_filter` will remove individuals with an income below 500000.^[`income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.]
+[^8]: I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.
+
+[^9]: `income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.
 
 ```{r}
 
@@ -143,26 +150,24 @@ income_filter <- quo(income_c_imp_bc5k < 500000)
 
 ```
 
+::: {.callout-note collapse="true"}
+## I often like to 'set modeling choice objects up top'
 
-:::{.callout-note collapse="true"}
-
-## I often like to 'set modeling choice objects up top' 
-
-Specifying character vectors or list objects (or doing this in sourced scripts). 
+Specifying character vectors or list objects (or doing this in sourced scripts).
 
 This usually includes...
 
-- 'filters' or slices of the data, and 
-- choices of variables (columns) to include in different specifications of models ... perhaps as a list object.
+-   'filters' or slices of the data, and
+-   choices of variables (columns) to include in different specifications of models ... perhaps as a list object.
 
-Why 'do this up top'? It makes it clearer what 'all the messy code below does', and it gives you 'central control', allowing you to change everything in one place.  And you can also refer to these objects in many ways, including in inline text an in visualizations, to communicate what is being done. 
+Why 'do this up top'? It makes it clearer what 'all the messy code below does', and it gives you 'central control', allowing you to change everything in one place. And you can also refer to these objects in many ways, including in inline text an in visualizations, to communicate what is being done.
 
-Aside: The 'choices of variables' thing is more important in models based on a particular theoretical structure, where we have different sets of pre and post variables and are worried about 'leakage' ... or where we are aiming at a causal interpretation and are worried about things like  'bad controls/colliders'. 
+Aside: The 'choices of variables' thing is more important in models based on a particular theoretical structure, where we have different sets of pre and post variables and are worried about 'leakage' ... or where we are aiming at a causal interpretation and are worried about things like 'bad controls/colliders'.
 :::
 
+Finally, for factor variables, we set base categories to the most common values.[^10]
 
-Finally, for factor variables, we set base categories to the most common values.^[This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.]
-
+[^10]: This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.
 
 ```{r}
 
@@ -174,8 +179,7 @@ df <- df %>% mutate(
 
 # Machine learning environment 'splits' {#mlsplits}
 
-## Create training and test data 
-
+## Create training and test data
 
 Before we start, a 'seed' so we get the same 'random draw' whenever we run this stuff.
 
@@ -184,8 +188,9 @@ seed <- 1
 set.seed(seed)
 ```
 
+For ML modeling, we need to setaside some data to test our model's ultimate performance. We thus 'split' our data sets using the `rsample` package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.[^11]
 
-For ML modeling, we need to setaside some data to test our model's ultimate performance. We thus 'split' our data sets using the `rsample` package tools.   3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.^[Why this particular split? I'm not sure, maybe it's a rule of thumb.]
+[^11]: Why this particular split? I'm not sure, maybe it's a rule of thumb.
 
 ```{r init_split}
 
@@ -193,21 +198,18 @@ init_split <- rsample::initial_split(df, prop = 3/4) #3/4 of data goes for train
 
 ```
 
+::: {.callout-note collapse="true"}
+## What kind of object is `init_split`?
 
-:::{.callout-note collapse="true"}
+Typing it into the console just reports the counts of observations in the training and testing sets. If we look into its structure with `init_split %>% str()` we see a list of four things;
 
-## What kind of object is `init_split`? 
+`data` is the dataframe itself,
 
-Typing it into the console just reports the counts of observations in the training and testing sets. If we look into its structure with `init_split %>% str()` we see a list of four things; 
+`in_id` seems to keep an indexing record of the training data,
 
-`data`  is the dataframe itself, 
-  
-`in_id` seems to keep an indexing record of the training data, 
-  
-`out_id` is empty, and 
+`out_id` is empty, and
 
 `id` seems to keep track of 'what this thing is' (but I'm not sure)
-
 :::
 
 Next, we assign the training data and testing data objects
@@ -219,7 +221,9 @@ test <- rsample::testing(init_split)
 
 ```
 
-I next create the 'non-highest-income' subset of the data, using the `income_filter` quosure object defined above to the testing and training data.^[Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons] 
+I next create the 'non-highest-income' subset of the data, using the `income_filter` quosure object defined above to the testing and training data.[^12]
+
+[^12]: Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons
 
 ```{r train-test_filter}
 
@@ -228,10 +232,19 @@ test_filter <- test %>% filter(!!income_filter)
 
 ```
 
-In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.^[Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.] 
+In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.[^13]
+
+[^13]: Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.
 
 ## Create partitions (folds) for validation 'tuning' step
 
+<!--
+(Perhaps relevant to below discussion instead)
+- We use CV to optimize hyperparameters
+- Testing the performance of different parameter combinations on the test set rather than validation set is *cheating* and a bit leaky
+- Worth noting that if you specify good defaults for hyperparameters, then optimizing via randomised search/Bayesian opt or grid search is likely to only net a very minor performance improvement. For more complex methods (NN's) it definitely isn't worth trying to optimise parameters this way and is much better to think properly about good parameters/parameter ranges
+
+-->
 
 ```{r}
 # Cross validation splits ####
@@ -241,30 +254,29 @@ cv_filter <- vfold_cv(train_filter)
 
 ```
 
-
 In a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' ... as long as these represent pre-outcome data and not a 'leak'.
 
-:::{.callout-note collapse="true"}
-
+::: {.callout-note collapse="true"}
 ## ML, overfitting, regularization, tuning
 
-In standard econometrics 'OLS' approaches, we learn that including more variables may *worsen* a model's predictive power (out-of-sample fit). However, in  ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the  (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving athe model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
+In standard econometrics 'OLS' approaches, we learn that including more variables may *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving athe model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
 :::
 
 So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitting'.
 
-:::{.callout-note collapse="true"}
+::: {.callout-note collapse="true"}
+## But how much of this regularization is optimal, and what is the best way of doing it?
 
-## But how much of this regularization is optimal, and what is the best way of doing it? 
+It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. **n-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold.
 
-It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. **n-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold. 
-
-This is iterated many times until we are getting good enough performance, i.e., we converge (?) on what seems to be the near-best set of tuning hyperparameters,
+This is iterated many times through different regularization specifications. The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance. 
 :::
 
 So, we use this n-fold cross-validation to 'tune our parameters' to achieve the best tradeoffs between complexity and overfitting, to optimize our prediction. To enable this, we also need to define 'folds' to split up the training data, which we do below.
 
-The `rsample::vfold_cv` function does this resampling (with a default of ten folds).^[Why ten? Maybe that's a conventional rule of thumb?] 
+The `rsample::vfold_cv` function does this resampling (with a default of ten folds).[^14]
+
+[^14]: Why ten? Maybe that's a conventional rule of thumb? <!-- This seems to be standard in ML, in cases where LOOCV isn't feasible (which is most of the time) -->
 
 ```{r}
 
@@ -285,11 +297,13 @@ cv[[1,1]]
 
 Each of these classes 90% of the data for 'analysis' and about 10% for 'assessment':
 
-
-
 # Defining and creating the formula objects ('equations' to model)
 
-First I make a list of 'right hand side variables' here,^[I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars`] columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.^[I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.]
+First I make a list of 'right hand side variables' here,[^15] columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.[^16]
+
+[^15]: I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars`
+
+[^16]: I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.
 
 ```{r rhs_vars}
 
@@ -299,20 +313,18 @@ rhs_vars <- c("ln_years_involved", "year_f", "ln_age", "not_male_cat", "student_
 
 ```
 
+Next we create three formula objects,[^17] each with the same set of rhs variables, but a different 'outcome' variable.[^18]
 
+[^17]: It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later.
 
-Next we create three formula objects,^[It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later.] each with the same set of rhs variables, but a different 'outcome' variable.^[`make_formula` uses `stats::reformulate` to collapse lists into a formula object.] 
+[^18]: `make_formula` uses `stats::reformulate` to collapse lists into a formula object.
 
-:::{.callout-note collapse="true"}
+::: {.callout-note collapse="true"}
 ## Outcomes and models
 
-Each of these outcomes has a different character:
-`l_don_av_2yr_f`: a strictly positive continuous variable (log average donation) 
-`don_share_inc_imp_f`: donation as a share of (imputed) income, between 0 and 1
-`d_don_1k`: A binary for 'whether donated \$1000 or more. 
+Each of these outcomes has a different character: `l_don_av_2yr_f`: a strictly positive continuous variable (log average donation) `don_share_inc_imp_f`: donation as a share of (imputed) income, between 0 and 1 `d_don_1k`: A binary for 'whether donated \$1000 or more.
 
 These will suggest different modeling approaches and interpretations.
-
 :::
 
 ```{r}
@@ -328,8 +340,7 @@ d_don_1k_f <- make_formula("d_don_1k", rhs_vars)
 
 ```
 
-
-These look like ... 
+These look like ...
 
 ```{r}
 l_don_av_2yr_f
@@ -337,12 +348,15 @@ l_don_av_2yr_f
 
 etc.
 
-## 'Recipes' for imputing and standardizing data in an ML environment 
+## 'Recipes' for imputing and standardizing data in an ML environment
 
-As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help'  Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.^[Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.] This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
+As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.[^19] This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
 
-For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.^[This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later.]
+[^19]: Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.
 
+For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.[^20] <!-- Really depends on the type of model, for very popular tree-based models standardization isn't required -->
+
+[^20]: This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later.
 
 **Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once'; this would not yield valid metrics for our tuning. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').
 
@@ -366,7 +380,3 @@ preprocess_func <- function(formula, data = train){
     recipes::step_dummy(all_nominal_predictors())
 }
 ```
-
-
-
-
