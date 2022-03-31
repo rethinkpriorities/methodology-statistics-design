@@ -89,3 +89,9 @@ sources
 using-and-building-this-bookdown-proposed-guidelines
 repo-branches-proposed
 folder-structure-other-resources-in-this-repo
+power-analyses-and-other-diagnosandsnote-this-will-very-much-overlap-the-discussion-of-power-analysis-for-surveys.-perhaps-we-put-the-simpler-introduction-there-and-the-more-involved-details-here
+empirical-bayes
+step-1-estimate-a-beta-prior-from-all-your-data
+step-2-use-that-distribution-as-a-prior-for-each-individual-estimate
+how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power.
+dr-discussion-of-this-case-maybe-obsolete
