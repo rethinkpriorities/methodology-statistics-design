@@ -1,0 +1,14 @@
+project:
+  output-dir: ../docs
+  title: "Vignette: Modeling donations in EA Survey data with Tidymodels and workflow"
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    toc: true
+    number-sections: true
+    citations-hover: true
+    footnotes-hover: true
+comments:
+    hypothesis: true
