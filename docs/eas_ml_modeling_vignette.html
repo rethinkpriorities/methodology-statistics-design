@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.153">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>eas_ml_modeling_vignette</title>
+  <title>Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -116,6 +116,9 @@
 </nav>
 </div>
 <main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title"><h1 class="title">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</h1></div></header>
 
 <section id="setup" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Setup</h1>
@@ -170,16 +173,16 @@ if (!grepl("mingw32", R.Version()$platform)) {
 <pre><code># A tibble: 2,000 × 48
    donation_usd don_av2_yr l_don_usd l_don_av_2yr don_share_inc_imp_bc5k
           &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;                  &lt;dbl&gt;
- 1           0         0        0            0                    0     
- 2         260.      260.       5.56         5.56                 0.0520
- 3       14000      7000        9.55         8.85                 0.104 
- 4           0       173.       0            5.16                 0     
- 5           0         0        0            0                    0     
- 6           0        55.1      0            4.03                 0     
- 7       13453     13226.       9.51         9.49                 0.103 
- 8         289.      289.       5.67         5.67                 0.0578
- 9           0         0        0            0                    0     
-10        8000      9000        8.99         9.11                 0.0941
+ 1           0          0       0            0                   0      
+ 2      130000     130000      11.8         11.8                 0.1    
+ 3           0          0       0            0                   0      
+ 4           0          0       0            0                   0      
+ 5       21000      13000       9.95         9.47                0.169  
+ 6       16187.     16765.      9.69         9.73                0.208  
+ 7         118.       118.      4.78         4.78                0.00200
+ 8        1711.      2224.      7.45         7.71                0.0250 
+ 9         300       1150       5.71         7.05                0.025  
+10        2400       3700       7.78         8.22                0.0428 
 # … with 1,990 more rows, and 43 more variables: donation_plan_usd &lt;dbl&gt;,
 #   d_don_1k &lt;fct&gt;, d_don_10pct &lt;dbl&gt;, ln_years_involved &lt;dbl&gt;, year_f &lt;fct&gt;,
 #   ln_age &lt;dbl&gt;, not_male_cat &lt;fct&gt;, student_cat &lt;fct&gt;, race_cat &lt;fct&gt;,
@@ -192,7 +195,7 @@ if (!grepl("mingw32", R.Version()$platform)) {
 </section>
 <section id="some-ad-hoc-data-cleaning-and-filtering-to-enable-modeling" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="some-ad-hoc-data-cleaning-and-filtering-to-enable-modeling"><span class="header-section-number">1.3</span> Some ad-hoc data cleaning and filtering, to enable modeling</h2>
-<p>Normally, we should do the main data manipulation steps separate from the analysis.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Normally, we should do the main data manipulation steps separate from the analysis.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <!-- I think it may be worth expanding on this. In that that we want to perform processing steps which are going to be long and will not vary during modelling. But where we might wish to (for example) impute data we may wish to include this as a part of the modelling process to allow testing of various imputation methods. Also things like normalizing variables should obviously be done as part of the modelling stage because of data leakage. --></p>
 <p>First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
 <details>
@@ -310,6 +313,13 @@ What kind of object is <code>init_split</code>?
 </section>
 <section id="create-partitions-folds-for-validation-tuning-step" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="create-partitions-folds-for-validation-tuning-step"><span class="header-section-number">2.2</span> Create partitions (folds) for validation ‘tuning’ step</h2>
+<!--
+(Perhaps relevant to below discussion instead)
+- We use CV to optimize hyperparameters
+- Testing the performance of different parameter combinations on the test set rather than validation set is *cheating* and a bit leaky
+- Worth noting that if you specify good defaults for hyperparameters, then optimizing via randomised search/Bayesian opt or grid search is likely to only net a very minor performance improvement. For more complex methods (NN's) it definitely isn't worth trying to optimise parameters this way and is much better to think properly about good parameters/parameter ranges
+
+-->
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -350,7 +360,7 @@ But how much of this regularization is optimal, and what is the best way of doin
 <div id="callout-5" class="callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization ‘hyperparameters’ <em>using the data</em>. But (again because of the overfitting issue) we can’t judge the performance of an approach by predicting on the same data that it fit the model on. <strong>n-fold cross-validation</strong> tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on ‘all but one fold’, and then testing it’s performance on that left-out fold.</p>
-<p>This is iterated many times until we are getting good enough performance, i.e., we converge (?) on what seems to be the near-best set of tuning hyperparameters,</p>
+<p>This is iterated many times through different regularization specifications. The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance.</p>
 </div>
 </div>
 </div>
@@ -374,16 +384,16 @@ But how much of this regularization is optimal, and what is the best way of doin
 # A tibble: 10 × 2
    splits             id    
    &lt;list&gt;             &lt;chr&gt; 
- 1 &lt;split [1342/150]&gt; Fold01
- 2 &lt;split [1342/150]&gt; Fold02
- 3 &lt;split [1343/149]&gt; Fold03
- 4 &lt;split [1343/149]&gt; Fold04
- 5 &lt;split [1343/149]&gt; Fold05
- 6 &lt;split [1343/149]&gt; Fold06
- 7 &lt;split [1343/149]&gt; Fold07
- 8 &lt;split [1343/149]&gt; Fold08
- 9 &lt;split [1343/149]&gt; Fold09
-10 &lt;split [1343/149]&gt; Fold10</code></pre>
+ 1 &lt;split [1340/149]&gt; Fold01
+ 2 &lt;split [1340/149]&gt; Fold02
+ 3 &lt;split [1340/149]&gt; Fold03
+ 4 &lt;split [1340/149]&gt; Fold04
+ 5 &lt;split [1340/149]&gt; Fold05
+ 6 &lt;split [1340/149]&gt; Fold06
+ 7 &lt;split [1340/149]&gt; Fold07
+ 8 &lt;split [1340/149]&gt; Fold08
+ 9 &lt;split [1340/149]&gt; Fold09
+10 &lt;split [1341/148]&gt; Fold10</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -392,7 +402,7 @@ But how much of this regularization is optimal, and what is the best way of doin
 <div class="cell-output-stdout">
 <pre><code>[[1]]
 &lt;Analysis/Assess/Total&gt;
-&lt;1342/150/1492&gt;</code></pre>
+&lt;1340/149/1489&gt;</code></pre>
 </div>
 </div>
 <p>Each of these classes 90% of the data for ‘analysis’ and about 10% for ‘assessment’:</p>
@@ -457,7 +467,7 @@ Outcomes and models
 <section id="recipes-for-imputing-and-standardizing-data-in-an-ml-environment" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="recipes-for-imputing-and-standardizing-data-in-an-ml-environment"><span class="header-section-number">3.1</span> ‘Recipes’ for imputing and standardizing data in an ML environment</h2>
 <p>As noted, in a machine learning context, especially if we care only about prediction for its own sake, ‘more features (columns) always help’ Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> This should get us the model that ‘predicts best out of sample’. However we <em>need to be very careful in interpreting these coefficients</em>.</p>
-<p>For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it’s estimated standard deviation.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></p>
+<p>For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it’s estimated standard deviation.<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> <!-- Really depends on the type of model, for very popular tree-based models standardization isn't required --></p>
 <p><strong>Recipe package:</strong> We can’t merely ‘do all the imputing and standardation on the full data set once’; this would not yield valid metrics for our tuning. Because of the nature of the cross-validation procedure, we need to do the above steps <em>separately for each iteration</em>, imputing and standardizing <em>using only the non-excluded observations in the partition</em> (or ‘fold’).</p>
 <div class="cell">
 <details>
@@ -483,354 +493,380 @@ Outcomes and models
 
 <!-- -->
 <div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title anchored" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Setup </span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Packages and functions</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Reinstall key packages so this can be standalone?^<span class="co">[</span><span class="ot">Note: not all these packages may be needed; let's search only the ones that are and drop the rest</span><span class="co">]</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(rsample)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(parsnip, tune, dials)</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(conflicted)</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"set_label"</span>, <span class="st">"sjlabelled"</span>)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"add_footnote"</span>, <span class="st">"kableExtra"</span>)</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"sample_n"</span>, <span class="st">"tidylog"</span>)</span>
+<div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Vignette: Modeling donations in EA Survey data with Tidymodels and workflow"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">    citations-hover: true</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">    footnotes-hover: true</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="an">comments:</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">    hypothesis: true</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Setup</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## Packages and functions</span></span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>set_label <span class="ot">&lt;-</span> sjlabelled<span class="sc">::</span>set_label</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>Reinstall key packages so this can be standalone?<span class="ot">[^1]</span></span>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>ungroup <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>ungroup</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>mutate <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>mutate</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Note: not all these packages may be needed; let's search only the ones that are and drop the rest</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, include=FALSE}</span></span>
 <span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"packages.R"</span>))</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="co">#github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rethinkpriorities/rp-r-package"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rethinkpriorities/r-noodling-package"</span>)</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnoodling)</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co"># No longer needed because it's all in RP nowsource(here("code", "modeling_functions.R")) </span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(rsample) <span class="co"># Why p_load these? (Can create issues with dependencies)</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(parsnip, tune, dials) <span class="co"># If loading multiple packages, better to use p_load with install = FALSE option</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(conflicted)</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"set_label"</span>, <span class="st">"sjlabelled"</span>)</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"add_footnote"</span>, <span class="st">"kableExtra"</span>)</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>conflicted<span class="sc">::</span><span class="fu">conflict_prefer</span>(<span class="st">"sample_n"</span>, <span class="st">"tidylog"</span>)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>set_label <span class="ot">&lt;-</span> sjlabelled<span class="sc">::</span>set_label</span>
 <span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skipping here, for now; parallel cores, etc. </span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>ungroup <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>ungroup</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>mutate <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>mutate</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"packages.R"</span>))</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="co">#github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421</span></span>
 <span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>Skipping here, for now; this may help processing larger jobs, so we may want to revisit it.</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="in">cores &lt;- parallel::detectCores()</span></span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="in">if (!grepl("mingw32", R.Version()$platform)) {</span></span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="in">  library(doMC)</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="in">  registerDoMC(cores = cores)</span></span>
-<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="in">  library(doParallel)</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="in">  cl &lt;- makePSOCKcluster(cores)</span></span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="in">  registerDoParallel(cl)</span></span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rethinkpriorities/rp-r-package"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rethinkpriorities/r-noodling-package"</span>)</span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnoodling)</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="co"># No longer needed because it's all in RP nowsource(here("code", "modeling_functions.R")) </span></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skipping here, for now; parallel cores, etc.</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>Skipping here, for now; this may help processing larger jobs, so we may want to revisit it.</span>
 <span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading in data from a repo</span></span>
-<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.^<span class="co">[</span><span class="ot">Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'</span><span class="co">]</span></span>
-<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r input, include=FALSE}</span></span>
-<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> rethinkpriorities<span class="sc">::</span><span class="fu">read_file_from_repo</span>(</span>
-<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">repo =</span> <span class="st">"ea-data"</span>,</span>
-<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/edited_data/eas_all_s_rl_imp.Rdata"</span>,</span>
-<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">"rethinkpriorities"</span>,</span>
-<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">token_key =</span> <span class="st">"github-API"</span>,</span>
-<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">private =</span> <span class="cn">TRUE</span></span>
-<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="in">    cores &lt;- parallel::detectCores()</span></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!grepl("mingw32", R.Version()$platform)) {</span></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="in">      library(doMC)</span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="in">      registerDoMC(cores = cores)</span></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="in">      library(doParallel)</span></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="in">      cl &lt;- makePSOCKcluster(cores)</span></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="in">      registerDoParallel(cl)</span></span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading in data from a repo</span></span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a>The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.<span class="ot">[^2]</span></span>
 <span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'</span>
 <span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a>Next we sample from this data and remove labels, to make it process quicker and easier</span>
-<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r simplify_for_tidymodel}</span></span>
-<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">remove_attributes</span>(<span class="st">"label"</span>) <span class="sc">%&gt;%</span>  <span class="co"># Labels don't work with tidymodels :/, sadly</span></span>
-<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">sample_n</span>(<span class="dv">2000</span>)</span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r input, include=FALSE}</span></span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> rethinkpriorities<span class="sc">::</span><span class="fu">read_file_from_repo</span>(</span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a>  <span class="at">repo =</span> <span class="st">"ea-data"</span>,</span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> <span class="st">"data/edited_data/eas_all_s_rl_imp.Rdata"</span>,</span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">user =</span> <span class="st">"rethinkpriorities"</span>,</span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">token_key =</span> <span class="st">"github-API"</span>,</span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">private =</span> <span class="cn">TRUE</span></span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some ad-hoc data cleaning and filtering, to enable modeling</span></span>
-<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a>Normally, we should do the main data manipulation steps separate from the analysis.^<span class="co">[</span><span class="ot">In the present case this would be in `build/eas_cross_year_harmonisation.R`.</span><span class="co">]</span> However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.^<span class="co">[</span><span class="ot">This does not include data-based imputation and standardizing variables, which are done with the `recipe` package below.</span><span class="co">]</span></span>
-<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a>First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.^<span class="co">[</span><span class="ot">However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.</span><span class="co">]</span></span>
-<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove variables (columns) that are all missing</span></span>
-<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">where</span>( <span class="sc">~!</span><span class="fu">all</span>(<span class="fu">is.na</span>(.x)) ))  <span class="sc">%&gt;%</span></span>
-<span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() </span>
-<span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a>Next we sample from this data and remove labels, to make it process quicker and easier</span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r simplify_for_tidymodel}</span></span>
+<span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">remove_attributes</span>(<span class="st">"label"</span>) <span class="sc">%&gt;%</span>  <span class="co"># Labels don't work with tidymodels :/, sadly</span></span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">sample_n</span>(<span class="dv">2000</span>)</span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb24-107"><a href="#cb24-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-109"><a href="#cb24-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-110"><a href="#cb24-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some ad-hoc data cleaning and filtering, to enable modeling</span></span>
+<span id="cb24-111"><a href="#cb24-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-112"><a href="#cb24-112" aria-hidden="true" tabindex="-1"></a>Normally, we should do the main data manipulation steps separate from the analysis.<span class="ot">[^3]</span> However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.<span class="ot">[^4]</span> <span class="co">&lt;!-- I think it may be worth expanding on this. In that that we want to perform processing steps which are going to be long and will not vary during modelling. But where we might wish to (for example) impute data we may wish to include this as a part of the modelling process to allow testing of various imputation methods. Also things like normalizing variables should obviously be done as part of the modelling stage because of data leakage. --&gt;</span></span>
+<span id="cb24-113"><a href="#cb24-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-114"><a href="#cb24-114" aria-hidden="true" tabindex="-1"></a><span class="ot">[^3]: </span>In the present case this would be in <span class="in">`build/eas_cross_year_harmonisation.R`</span>.</span>
 <span id="cb24-115"><a href="#cb24-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a>Next, another 'Big global filtering step' ... .^<span class="co">[</span><span class="ot">This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it</span><span class="co">]</span>, ^<span class="co">[</span><span class="ot">Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.</span><span class="co">]</span></span>
+<span id="cb24-116"><a href="#cb24-116" aria-hidden="true" tabindex="-1"></a><span class="ot">[^4]: </span>This does not include data-based imputation and standardizing variables, which are done with the <span class="in">`recipe`</span> package below.</span>
 <span id="cb24-117"><a href="#cb24-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r no-missing-don}</span></span>
+<span id="cb24-118"><a href="#cb24-118" aria-hidden="true" tabindex="-1"></a>First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.<span class="ot">[^5]</span></span>
 <span id="cb24-119"><a href="#cb24-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
-<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(d_don_1k))</span>
-<span id="cb24-122"><a href="#cb24-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-123"><a href="#cb24-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a>Next, I define an 'optional filter', which we may use below.^<span class="co">[</span><span class="ot">I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.</span><span class="co">]</span> <span class="in">`income_filter`</span> will remove individuals with an income below 500000.^<span class="co">[</span><span class="ot">`income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.</span><span class="co">]</span></span>
-<span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a>income_filter <span class="ot">&lt;-</span> <span class="fu">quo</span>(income_c_imp_bc5k <span class="sc">&lt;</span> <span class="dv">500000</span>)</span>
-<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-120"><a href="#cb24-120" aria-hidden="true" tabindex="-1"></a><span class="ot">[^5]: </span>However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.</span>
+<span id="cb24-121"><a href="#cb24-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-124"><a href="#cb24-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-125"><a href="#cb24-125" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove variables (columns) that are all missing</span></span>
+<span id="cb24-126"><a href="#cb24-126" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">where</span>( <span class="sc">~!</span><span class="fu">all</span>(<span class="fu">is.na</span>(.x)) ))  <span class="sc">%&gt;%</span></span>
+<span id="cb24-127"><a href="#cb24-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() </span>
+<span id="cb24-128"><a href="#cb24-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-129"><a href="#cb24-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-130"><a href="#cb24-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-131"><a href="#cb24-131" aria-hidden="true" tabindex="-1"></a>Next, another 'Big global filtering step' ... .<span class="ot">[^6]</span>, <span class="ot">[^7]</span></span>
+<span id="cb24-132"><a href="#cb24-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-133"><a href="#cb24-133" aria-hidden="true" tabindex="-1"></a><span class="ot">[^6]: </span>This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it</span>
 <span id="cb24-134"><a href="#cb24-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-135"><a href="#cb24-135" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
+<span id="cb24-135"><a href="#cb24-135" aria-hidden="true" tabindex="-1"></a><span class="ot">[^7]: </span>Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.</span>
 <span id="cb24-136"><a href="#cb24-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-137"><a href="#cb24-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## I often like to 'set modeling choice objects up top' </span></span>
+<span id="cb24-137"><a href="#cb24-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r no-missing-don}</span></span>
 <span id="cb24-138"><a href="#cb24-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a>Specifying character vectors or list objects (or doing this in sourced scripts). </span>
-<span id="cb24-140"><a href="#cb24-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a>This usually includes...</span>
+<span id="cb24-139"><a href="#cb24-139" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb24-140"><a href="#cb24-140" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(d_don_1k))</span>
+<span id="cb24-141"><a href="#cb24-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-142"><a href="#cb24-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'filters' or slices of the data, and </span>
-<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>choices of variables (columns) to include in different specifications of models ... perhaps as a list object.</span>
-<span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a>Why 'do this up top'? It makes it clearer what 'all the messy code below does', and it gives you 'central control', allowing you to change everything in one place.  And you can also refer to these objects in many ways, including in inline text an in visualizations, to communicate what is being done. </span>
-<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a>Aside: The 'choices of variables' thing is more important in models based on a particular theoretical structure, where we have different sets of pre and post variables and are worried about 'leakage' ... or where we are aiming at a causal interpretation and are worried about things like  'bad controls/colliders'. </span>
-<span id="cb24-149"><a href="#cb24-149" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb24-150"><a href="#cb24-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a>Finally, for factor variables, we set base categories to the most common values.^<span class="co">[</span><span class="ot">This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.</span><span class="co">]</span></span>
+<span id="cb24-143"><a href="#cb24-143" aria-hidden="true" tabindex="-1"></a>Next, I define an 'optional filter', which we may use below.<span class="ot">[^8]</span> <span class="in">`income_filter`</span> will remove individuals with an income below 500000.<span class="ot">[^9]</span></span>
+<span id="cb24-144"><a href="#cb24-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-145"><a href="#cb24-145" aria-hidden="true" tabindex="-1"></a><span class="ot">[^8]: </span>I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.</span>
+<span id="cb24-146"><a href="#cb24-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-147"><a href="#cb24-147" aria-hidden="true" tabindex="-1"></a><span class="ot">[^9]: </span><span class="in">`income_c_imp_bc5k`</span> actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.</span>
+<span id="cb24-148"><a href="#cb24-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-151"><a href="#cb24-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-152"><a href="#cb24-152" aria-hidden="true" tabindex="-1"></a>income_filter <span class="ot">&lt;-</span> <span class="fu">quo</span>(income_c_imp_bc5k <span class="sc">&lt;</span> <span class="dv">500000</span>)</span>
 <span id="cb24-153"><a href="#cb24-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-154"><a href="#cb24-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
-<span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="co">#note the `across(where...` means 'do the function for all columns where the condition holds, and change the value, keeping the column name constant'</span></span>
-<span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(.x))) <span class="co"># here's the abbreviated notation for a function, with a tilde ... hte `.x` refers to the object that is the function argument, here a column (name)</span></span>
-<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-164"><a href="#cb24-164" aria-hidden="true" tabindex="-1"></a><span class="fu"># Machine learning environment 'splits' {#mlsplits}</span></span>
+<span id="cb24-154"><a href="#cb24-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-155"><a href="#cb24-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-156"><a href="#cb24-156" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-157"><a href="#cb24-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## I often like to 'set modeling choice objects up top'</span></span>
+<span id="cb24-158"><a href="#cb24-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-159"><a href="#cb24-159" aria-hidden="true" tabindex="-1"></a>Specifying character vectors or list objects (or doing this in sourced scripts).</span>
+<span id="cb24-160"><a href="#cb24-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-161"><a href="#cb24-161" aria-hidden="true" tabindex="-1"></a>This usually includes...</span>
+<span id="cb24-162"><a href="#cb24-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-163"><a href="#cb24-163" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>'filters' or slices of the data, and</span>
+<span id="cb24-164"><a href="#cb24-164" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>choices of variables (columns) to include in different specifications of models ... perhaps as a list object.</span>
 <span id="cb24-165"><a href="#cb24-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-166"><a href="#cb24-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create training and test data </span></span>
+<span id="cb24-166"><a href="#cb24-166" aria-hidden="true" tabindex="-1"></a>Why 'do this up top'? It makes it clearer what 'all the messy code below does', and it gives you 'central control', allowing you to change everything in one place. And you can also refer to these objects in many ways, including in inline text an in visualizations, to communicate what is being done.</span>
 <span id="cb24-167"><a href="#cb24-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a>Before we start, a 'seed' so we get the same 'random draw' whenever we run this stuff.</span>
+<span id="cb24-168"><a href="#cb24-168" aria-hidden="true" tabindex="-1"></a>Aside: The 'choices of variables' thing is more important in models based on a particular theoretical structure, where we have different sets of pre and post variables and are worried about 'leakage' ... or where we are aiming at a causal interpretation and are worried about things like 'bad controls/colliders'.</span>
+<span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-175"><a href="#cb24-175" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
-<span id="cb24-176"><a href="#cb24-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-179"><a href="#cb24-179" aria-hidden="true" tabindex="-1"></a>For ML modeling, we need to setaside some data to test our model's ultimate performance. We thus 'split' our data sets using the <span class="in">`rsample`</span> package tools.   3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.^<span class="co">[</span><span class="ot">Why this particular split? I'm not sure, maybe it's a rule of thumb.</span><span class="co">]</span></span>
-<span id="cb24-180"><a href="#cb24-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r init_split}</span></span>
-<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a>init_split <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">initial_split</span>(df, <span class="at">prop =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>) <span class="co">#3/4 of data goes for training, rest for testing</span></span>
-<span id="cb24-184"><a href="#cb24-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-185"><a href="#cb24-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a>Finally, for factor variables, we set base categories to the most common values.<span class="ot">[^10]</span></span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a><span class="ot">[^10]: </span>This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.</span>
+<span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-177"><a href="#cb24-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-178"><a href="#cb24-178" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb24-179"><a href="#cb24-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="co">#note the `across(where...` means 'do the function for all columns where the condition holds, and change the value, keeping the column name constant'</span></span>
+<span id="cb24-180"><a href="#cb24-180" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(.x))) <span class="co"># here's the abbreviated notation for a function, with a tilde ... hte `.x` refers to the object that is the function argument, here a column (name)</span></span>
+<span id="cb24-181"><a href="#cb24-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-182"><a href="#cb24-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-183"><a href="#cb24-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-184"><a href="#cb24-184" aria-hidden="true" tabindex="-1"></a><span class="fu"># Machine learning environment 'splits' {#mlsplits}</span></span>
+<span id="cb24-185"><a href="#cb24-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-186"><a href="#cb24-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create training and test data</span></span>
 <span id="cb24-187"><a href="#cb24-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-188"><a href="#cb24-188" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
+<span id="cb24-188"><a href="#cb24-188" aria-hidden="true" tabindex="-1"></a>Before we start, a 'seed' so we get the same 'random draw' whenever we run this stuff.</span>
 <span id="cb24-189"><a href="#cb24-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-190"><a href="#cb24-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## What kind of object is `init_split`? </span></span>
-<span id="cb24-191"><a href="#cb24-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a>Typing it into the console just reports the counts of observations in the training and testing sets. If we look into its structure with <span class="in">`init_split %&gt;% str()`</span> we see a list of four things; </span>
-<span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span>  is the dataframe itself, </span>
-<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a><span class="in">`in_id`</span> seems to keep an indexing record of the training data, </span>
-<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a><span class="in">`out_id`</span> is empty, and </span>
-<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a><span class="in">`id`</span> seems to keep track of 'what this thing is' (but I'm not sure)</span>
-<span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>Next, we assign the training data and testing data objects</span>
-<span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r train-test}</span></span>
-<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">training</span>(init_split)</span>
-<span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">testing</span>(init_split)</span>
-<span id="cb24-210"><a href="#cb24-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-211"><a href="#cb24-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a>I next create the 'non-highest-income' subset of the data, using the <span class="in">`income_filter`</span> quosure object defined above to the testing and training data.^<span class="co">[</span><span class="ot">Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons</span><span class="co">]</span> </span>
-<span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r train-test_filter}</span></span>
-<span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a>train_filter <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span>income_filter)</span>
-<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a>test_filter <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span>income_filter)</span>
-<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a>In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.^<span class="co">[</span><span class="ot">Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.</span><span class="co">]</span> </span>
-<span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create partitions (folds) for validation 'tuning' step</span></span>
-<span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validation splits ####</span></span>
+<span id="cb24-192"><a href="#cb24-192" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-193"><a href="#cb24-193" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-194"><a href="#cb24-194" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
+<span id="cb24-195"><a href="#cb24-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-196"><a href="#cb24-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-197"><a href="#cb24-197" aria-hidden="true" tabindex="-1"></a>For ML modeling, we need to setaside some data to test our model's ultimate performance. We thus 'split' our data sets using the <span class="in">`rsample`</span> package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.<span class="ot">[^11]</span></span>
+<span id="cb24-198"><a href="#cb24-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-199"><a href="#cb24-199" aria-hidden="true" tabindex="-1"></a><span class="ot">[^11]: </span>Why this particular split? I'm not sure, maybe it's a rule of thumb.</span>
+<span id="cb24-200"><a href="#cb24-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-201"><a href="#cb24-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r init_split}</span></span>
+<span id="cb24-202"><a href="#cb24-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a>init_split <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">initial_split</span>(df, <span class="at">prop =</span> <span class="dv">3</span><span class="sc">/</span><span class="dv">4</span>) <span class="co">#3/4 of data goes for training, rest for testing</span></span>
+<span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## What kind of object is `init_split`?</span></span>
+<span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-210"><a href="#cb24-210" aria-hidden="true" tabindex="-1"></a>Typing it into the console just reports the counts of observations in the training and testing sets. If we look into its structure with <span class="in">`init_split %&gt;% str()`</span> we see a list of four things;</span>
+<span id="cb24-211"><a href="#cb24-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-212"><a href="#cb24-212" aria-hidden="true" tabindex="-1"></a><span class="in">`data`</span> is the dataframe itself,</span>
+<span id="cb24-213"><a href="#cb24-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-214"><a href="#cb24-214" aria-hidden="true" tabindex="-1"></a><span class="in">`in_id`</span> seems to keep an indexing record of the training data,</span>
+<span id="cb24-215"><a href="#cb24-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-216"><a href="#cb24-216" aria-hidden="true" tabindex="-1"></a><span class="in">`out_id`</span> is empty, and</span>
+<span id="cb24-217"><a href="#cb24-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-218"><a href="#cb24-218" aria-hidden="true" tabindex="-1"></a><span class="in">`id`</span> seems to keep track of 'what this thing is' (but I'm not sure)</span>
+<span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a>Next, we assign the training data and testing data objects</span>
+<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r train-test}</span></span>
+<span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">training</span>(init_split)</span>
+<span id="cb24-226"><a href="#cb24-226" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">testing</span>(init_split)</span>
+<span id="cb24-227"><a href="#cb24-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-228"><a href="#cb24-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-229"><a href="#cb24-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-230"><a href="#cb24-230" aria-hidden="true" tabindex="-1"></a>I next create the 'non-highest-income' subset of the data, using the <span class="in">`income_filter`</span> quosure object defined above to the testing and training data.<span class="ot">[^12]</span></span>
 <span id="cb24-231"><a href="#cb24-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-232"><a href="#cb24-232" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">vfold_cv</span>(train) <span class="co"># 10 fold</span></span>
-<span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a>cv_filter <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_filter)</span>
-<span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-235"><a href="#cb24-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-236"><a href="#cb24-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a>In a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' ... as long as these represent pre-outcome data and not a 'leak'.</span>
-<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
-<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a><span class="fu">## ML, overfitting, regularization, tuning</span></span>
-<span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a>In standard econometrics 'OLS' approaches, we learn that including more variables may *worsen* a model's predictive power (out-of-sample fit). However, in  ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the  (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving athe model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.</span>
-<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-232"><a href="#cb24-232" aria-hidden="true" tabindex="-1"></a><span class="ot">[^12]: </span>Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons</span>
+<span id="cb24-233"><a href="#cb24-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-234"><a href="#cb24-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r train-test_filter}</span></span>
+<span id="cb24-235"><a href="#cb24-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-236"><a href="#cb24-236" aria-hidden="true" tabindex="-1"></a>train_filter <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span>income_filter)</span>
+<span id="cb24-237"><a href="#cb24-237" aria-hidden="true" tabindex="-1"></a>test_filter <span class="ot">&lt;-</span> test <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!!</span>income_filter)</span>
+<span id="cb24-238"><a href="#cb24-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-239"><a href="#cb24-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-240"><a href="#cb24-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-241"><a href="#cb24-241" aria-hidden="true" tabindex="-1"></a>In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.<span class="ot">[^13]</span></span>
+<span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a><span class="ot">[^13]: </span>Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.</span>
+<span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create partitions (folds) for validation 'tuning' step</span></span>
 <span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a>So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitting'.</span>
-<span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
-<span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a><span class="fu">## But how much of this regularization is optimal, and what is the best way of doing it? </span></span>
+<span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a><span class="co">(Perhaps relevant to below discussion instead)</span></span>
+<span id="cb24-249"><a href="#cb24-249" aria-hidden="true" tabindex="-1"></a><span class="co">- We use CV to optimize hyperparameters</span></span>
+<span id="cb24-250"><a href="#cb24-250" aria-hidden="true" tabindex="-1"></a><span class="co">- Testing the performance of different parameter combinations on the test set rather than validation set is *cheating* and a bit leaky</span></span>
+<span id="cb24-251"><a href="#cb24-251" aria-hidden="true" tabindex="-1"></a><span class="co">- Worth noting that if you specify good defaults for hyperparameters, then optimizing via randomised search/Bayesian opt or grid search is likely to only net a very minor performance improvement. For more complex methods (NN's) it definitely isn't worth trying to optimise parameters this way and is much better to think properly about good parameters/parameter ranges</span></span>
 <span id="cb24-252"><a href="#cb24-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a>It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. **n-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold. </span>
+<span id="cb24-253"><a href="#cb24-253" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
 <span id="cb24-254"><a href="#cb24-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-255"><a href="#cb24-255" aria-hidden="true" tabindex="-1"></a>This is iterated many times until we are getting good enough performance, i.e., we converge (?) on what seems to be the near-best set of tuning hyperparameters,</span>
-<span id="cb24-256"><a href="#cb24-256" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-258"><a href="#cb24-258" aria-hidden="true" tabindex="-1"></a>So, we use this n-fold cross-validation to 'tune our parameters' to achieve the best tradeoffs between complexity and overfitting, to optimize our prediction. To enable this, we also need to define 'folds' to split up the training data, which we do below.</span>
+<span id="cb24-257"><a href="#cb24-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-258"><a href="#cb24-258" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validation splits ####</span></span>
 <span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a>The <span class="in">`rsample::vfold_cv`</span> function does this resampling (with a default of ten folds).^<span class="co">[</span><span class="ot">Why ten? Maybe that's a conventional rule of thumb?</span><span class="co">]</span> </span>
-<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">vfold_cv</span>(train) <span class="co"># 10 fold</span></span>
-<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a>cv_filter <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_filter)</span>
-<span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">vfold_cv</span>(train) <span class="co"># 10 fold</span></span>
+<span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a>cv_filter <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_filter)</span>
+<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-263"><a href="#cb24-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a>In a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' ... as long as these represent pre-outcome data and not a 'leak'.</span>
+<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a><span class="fu">## ML, overfitting, regularization, tuning</span></span>
 <span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a>It creates ten partitions (data frames with some indexing objects and meta-data on the process)</span>
-<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cv-show}</span></span>
-<span id="cb24-273"><a href="#cb24-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-274"><a href="#cb24-274" aria-hidden="true" tabindex="-1"></a>cv</span>
-<span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a>cv[[<span class="dv">1</span>,<span class="dv">1</span>]]</span>
+<span id="cb24-270"><a href="#cb24-270" aria-hidden="true" tabindex="-1"></a>In standard econometrics 'OLS' approaches, we learn that including more variables may *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving athe model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.</span>
+<span id="cb24-271"><a href="#cb24-271" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb24-272"><a href="#cb24-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-273"><a href="#cb24-273" aria-hidden="true" tabindex="-1"></a>So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitting'.</span>
+<span id="cb24-274"><a href="#cb24-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-275"><a href="#cb24-275" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-276"><a href="#cb24-276" aria-hidden="true" tabindex="-1"></a><span class="fu">## But how much of this regularization is optimal, and what is the best way of doing it?</span></span>
 <span id="cb24-277"><a href="#cb24-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-278"><a href="#cb24-278" aria-hidden="true" tabindex="-1"></a>It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. **n-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold.</span>
 <span id="cb24-279"><a href="#cb24-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a>Each of these classes 90% of the data for 'analysis' and about 10% for 'assessment':</span>
-<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-280"><a href="#cb24-280" aria-hidden="true" tabindex="-1"></a>This is iterated many times through different regularization specifications. The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance. </span>
+<span id="cb24-281"><a href="#cb24-281" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb24-282"><a href="#cb24-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a><span class="fu"># Defining and creating the formula objects ('equations' to model)</span></span>
-<span id="cb24-285"><a href="#cb24-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-286"><a href="#cb24-286" aria-hidden="true" tabindex="-1"></a>First I make a list of 'right hand side variables' here,^<span class="co">[</span><span class="ot">I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars`</span><span class="co">]</span> columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.^<span class="co">[</span><span class="ot">I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.</span><span class="co">]</span></span>
-<span id="cb24-287"><a href="#cb24-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-288"><a href="#cb24-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rhs_vars}</span></span>
-<span id="cb24-289"><a href="#cb24-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-290"><a href="#cb24-290" aria-hidden="true" tabindex="-1"></a>rhs_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ln_years_involved"</span>, <span class="st">"year_f"</span>, <span class="st">"ln_age"</span>, <span class="st">"not_male_cat"</span>, <span class="st">"student_cat"</span>, <span class="st">"race_cat"</span>, <span class="st">"where_live_cat"</span>,</span>
-<span id="cb24-291"><a href="#cb24-291" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"city_cat"</span>, <span class="st">"d_pt_employment"</span>, <span class="st">"d_not_employed"</span>, <span class="st">"d_career_etg"</span>, <span class="st">"ln_years_involved_post_med"</span>, <span class="st">"ln_income_c_imp_bc5k"</span>,</span>
-<span id="cb24-292"><a href="#cb24-292" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"first_hear_ea_lump"</span>)</span>
-<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-283"><a href="#cb24-283" aria-hidden="true" tabindex="-1"></a>So, we use this n-fold cross-validation to 'tune our parameters' to achieve the best tradeoffs between complexity and overfitting, to optimize our prediction. To enable this, we also need to define 'folds' to split up the training data, which we do below.</span>
+<span id="cb24-284"><a href="#cb24-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-285"><a href="#cb24-285" aria-hidden="true" tabindex="-1"></a>The <span class="in">`rsample::vfold_cv`</span> function does this resampling (with a default of ten folds).<span class="ot">[^14]</span></span>
+<span id="cb24-286"><a href="#cb24-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-287"><a href="#cb24-287" aria-hidden="true" tabindex="-1"></a><span class="ot">[^14]: </span>Why ten? Maybe that's a conventional rule of thumb? <span class="co">&lt;!-- This seems to be standard in ML, in cases where LOOCV isn't feasible (which is most of the time) --&gt;</span></span>
+<span id="cb24-288"><a href="#cb24-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-291"><a href="#cb24-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-292"><a href="#cb24-292" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">vfold_cv</span>(train) <span class="co"># 10 fold</span></span>
+<span id="cb24-293"><a href="#cb24-293" aria-hidden="true" tabindex="-1"></a>cv_filter <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_filter)</span>
+<span id="cb24-294"><a href="#cb24-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-295"><a href="#cb24-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-296"><a href="#cb24-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-297"><a href="#cb24-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-298"><a href="#cb24-298" aria-hidden="true" tabindex="-1"></a>Next we create three formula objects,^<span class="co">[</span><span class="ot">It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later.</span><span class="co">]</span> each with the same set of rhs variables, but a different 'outcome' variable.^<span class="co">[</span><span class="ot">`make_formula` uses `stats::reformulate` to collapse lists into a formula object.</span><span class="co">]</span> </span>
-<span id="cb24-299"><a href="#cb24-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-300"><a href="#cb24-300" aria-hidden="true" tabindex="-1"></a>:::{.callout-note collapse="true"}</span>
-<span id="cb24-301"><a href="#cb24-301" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outcomes and models</span></span>
+<span id="cb24-297"><a href="#cb24-297" aria-hidden="true" tabindex="-1"></a>It creates ten partitions (data frames with some indexing objects and meta-data on the process)</span>
+<span id="cb24-298"><a href="#cb24-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-299"><a href="#cb24-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cv-show}</span></span>
+<span id="cb24-300"><a href="#cb24-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-301"><a href="#cb24-301" aria-hidden="true" tabindex="-1"></a>cv</span>
 <span id="cb24-302"><a href="#cb24-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-303"><a href="#cb24-303" aria-hidden="true" tabindex="-1"></a>Each of these outcomes has a different character:</span>
-<span id="cb24-304"><a href="#cb24-304" aria-hidden="true" tabindex="-1"></a><span class="in">`l_don_av_2yr_f`</span>: a strictly positive continuous variable (log average donation) </span>
-<span id="cb24-305"><a href="#cb24-305" aria-hidden="true" tabindex="-1"></a><span class="in">`don_share_inc_imp_f`</span>: donation as a share of (imputed) income, between 0 and 1</span>
-<span id="cb24-306"><a href="#cb24-306" aria-hidden="true" tabindex="-1"></a><span class="in">`d_don_1k`</span>: A binary for 'whether donated \$1000 or more. </span>
-<span id="cb24-307"><a href="#cb24-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-308"><a href="#cb24-308" aria-hidden="true" tabindex="-1"></a>These will suggest different modeling approaches and interpretations.</span>
-<span id="cb24-309"><a href="#cb24-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-310"><a href="#cb24-310" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb24-311"><a href="#cb24-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a><span class="do">##Consider: -- Medium importance: Consider constructing this starting with lists defined in donations_20 and adding/subtracting things (but could this cause problems?)</span></span>
+<span id="cb24-303"><a href="#cb24-303" aria-hidden="true" tabindex="-1"></a>cv[[<span class="dv">1</span>,<span class="dv">1</span>]]</span>
+<span id="cb24-304"><a href="#cb24-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-305"><a href="#cb24-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-306"><a href="#cb24-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-307"><a href="#cb24-307" aria-hidden="true" tabindex="-1"></a>Each of these classes 90% of the data for 'analysis' and about 10% for 'assessment':</span>
+<span id="cb24-308"><a href="#cb24-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-309"><a href="#cb24-309" aria-hidden="true" tabindex="-1"></a><span class="fu"># Defining and creating the formula objects ('equations' to model)</span></span>
+<span id="cb24-310"><a href="#cb24-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-311"><a href="#cb24-311" aria-hidden="true" tabindex="-1"></a>First I make a list of 'right hand side variables' here,<span class="ot">[^15]</span> columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.<span class="ot">[^16]</span></span>
+<span id="cb24-312"><a href="#cb24-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-313"><a href="#cb24-313" aria-hidden="true" tabindex="-1"></a><span class="ot">[^15]: </span>I previously labeled these <span class="in">`control_vars`</span>. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate <span class="in">`control_vars`</span> from the key variable of (causal) interest. But here 'they are all equal' so I just call it <span class="in">`rhs_vars`</span></span>
+<span id="cb24-314"><a href="#cb24-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-315"><a href="#cb24-315" aria-hidden="true" tabindex="-1"></a><span class="ot">[^16]: </span>I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.</span>
 <span id="cb24-316"><a href="#cb24-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-317"><a href="#cb24-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-318"><a href="#cb24-318" aria-hidden="true" tabindex="-1"></a>l_don_av_2yr_f <span class="ot">&lt;-</span> rethinkpriorities<span class="sc">::</span><span class="fu">make_formula</span>(<span class="st">"l_don_av_2yr"</span>, rhs_vars) <span class="co">#shortcut for stats::reformulate to make a formal out of rhs and lhs</span></span>
-<span id="cb24-319"><a href="#cb24-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-320"><a href="#cb24-320" aria-hidden="true" tabindex="-1"></a>don_share_inc_imp_f <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(<span class="st">"don_share_inc_imp_bc5k"</span>, rhs_vars)</span>
-<span id="cb24-321"><a href="#cb24-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-322"><a href="#cb24-322" aria-hidden="true" tabindex="-1"></a>d_don_1k_f <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(<span class="st">"d_don_1k"</span>, rhs_vars)</span>
-<span id="cb24-323"><a href="#cb24-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-324"><a href="#cb24-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-325"><a href="#cb24-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-317"><a href="#cb24-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rhs_vars}</span></span>
+<span id="cb24-318"><a href="#cb24-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-319"><a href="#cb24-319" aria-hidden="true" tabindex="-1"></a>rhs_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ln_years_involved"</span>, <span class="st">"year_f"</span>, <span class="st">"ln_age"</span>, <span class="st">"not_male_cat"</span>, <span class="st">"student_cat"</span>, <span class="st">"race_cat"</span>, <span class="st">"where_live_cat"</span>,</span>
+<span id="cb24-320"><a href="#cb24-320" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"city_cat"</span>, <span class="st">"d_pt_employment"</span>, <span class="st">"d_not_employed"</span>, <span class="st">"d_career_etg"</span>, <span class="st">"ln_years_involved_post_med"</span>, <span class="st">"ln_income_c_imp_bc5k"</span>,</span>
+<span id="cb24-321"><a href="#cb24-321" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"first_hear_ea_lump"</span>)</span>
+<span id="cb24-322"><a href="#cb24-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-323"><a href="#cb24-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-324"><a href="#cb24-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-325"><a href="#cb24-325" aria-hidden="true" tabindex="-1"></a>Next we create three formula objects,<span class="ot">[^17]</span> each with the same set of rhs variables, but a different 'outcome' variable.<span class="ot">[^18]</span></span>
 <span id="cb24-326"><a href="#cb24-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-327"><a href="#cb24-327" aria-hidden="true" tabindex="-1"></a>These look like ... </span>
+<span id="cb24-327"><a href="#cb24-327" aria-hidden="true" tabindex="-1"></a><span class="ot">[^17]: </span>It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later.</span>
 <span id="cb24-328"><a href="#cb24-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-331"><a href="#cb24-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-332"><a href="#cb24-332" aria-hidden="true" tabindex="-1"></a>l_don_av_2yr_f</span>
-<span id="cb24-333"><a href="#cb24-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-334"><a href="#cb24-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-335"><a href="#cb24-335" aria-hidden="true" tabindex="-1"></a>etc.</span>
-<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Recipes' for imputing and standardizing data in an ML environment </span></span>
+<span id="cb24-329"><a href="#cb24-329" aria-hidden="true" tabindex="-1"></a><span class="ot">[^18]: </span><span class="in">`make_formula`</span> uses <span class="in">`stats::reformulate`</span> to collapse lists into a formula object.</span>
+<span id="cb24-330"><a href="#cb24-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-331"><a href="#cb24-331" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb24-332"><a href="#cb24-332" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outcomes and models</span></span>
+<span id="cb24-333"><a href="#cb24-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-334"><a href="#cb24-334" aria-hidden="true" tabindex="-1"></a>Each of these outcomes has a different character: <span class="in">`l_don_av_2yr_f`</span>: a strictly positive continuous variable (log average donation) <span class="in">`don_share_inc_imp_f`</span>: donation as a share of (imputed) income, between 0 and 1 <span class="in">`d_don_1k`</span>: A binary for 'whether donated \$1000 or more.</span>
+<span id="cb24-335"><a href="#cb24-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-336"><a href="#cb24-336" aria-hidden="true" tabindex="-1"></a>These will suggest different modeling approaches and interpretations.</span>
+<span id="cb24-337"><a href="#cb24-337" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb24-338"><a href="#cb24-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-339"><a href="#cb24-339" aria-hidden="true" tabindex="-1"></a>As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help'  Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.^<span class="co">[</span><span class="ot">Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.</span><span class="co">]</span> This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.</span>
-<span id="cb24-340"><a href="#cb24-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-341"><a href="#cb24-341" aria-hidden="true" tabindex="-1"></a>For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.^<span class="co">[</span><span class="ot">This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later.</span><span class="co">]</span></span>
-<span id="cb24-342"><a href="#cb24-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-341"><a href="#cb24-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-342"><a href="#cb24-342" aria-hidden="true" tabindex="-1"></a><span class="do">##Consider: -- Medium importance: Consider constructing this starting with lists defined in donations_20 and adding/subtracting things (but could this cause problems?)</span></span>
 <span id="cb24-343"><a href="#cb24-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-344"><a href="#cb24-344" aria-hidden="true" tabindex="-1"></a>**Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once'; this would not yield valid metrics for our tuning. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').</span>
-<span id="cb24-345"><a href="#cb24-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-348"><a href="#cb24-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb24-349"><a href="#cb24-349" aria-hidden="true" tabindex="-1"></a>preprocess_func <span class="ot">&lt;-</span> <span class="cf">function</span>(formula, <span class="at">data =</span> train){</span>
-<span id="cb24-350"><a href="#cb24-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(recipes)</span>
-<span id="cb24-351"><a href="#cb24-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-352"><a href="#cb24-352" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to save time in creating recipes for different outcomes</span></span>
-<span id="cb24-353"><a href="#cb24-353" aria-hidden="true" tabindex="-1"></a>  <span class="co">#? Todo -- add to rethinkpriorities package</span></span>
-<span id="cb24-354"><a href="#cb24-354" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-355"><a href="#cb24-355" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">recipe</span>(formula, <span class="at">data=</span>data) <span class="sc">%&gt;%</span> <span class="co">#formula is a 'y~x1+x2` thing, defining rhs and lhs variables</span></span>
-<span id="cb24-356"><a href="#cb24-356" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_impute_median</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">%&gt;%</span> <span class="co">#rem: replaces missing values with medians</span></span>
-<span id="cb24-357"><a href="#cb24-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-358"><a href="#cb24-358" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create NA feature</span></span>
-<span id="cb24-359"><a href="#cb24-359" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_unknown</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb24-360"><a href="#cb24-360" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>(), <span class="at">factor=</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co">#the 2sd Gelman adjustment</span></span>
-<span id="cb24-361"><a href="#cb24-361" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Removing because redundant: step_impute_mode(all_nominal_predictors(), -all_outcomes()) %&gt;%</span></span>
-<span id="cb24-362"><a href="#cb24-362" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span> <span class="co">#cut any predictors with zero variance</span></span>
-<span id="cb24-363"><a href="#cb24-363" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>())</span>
-<span id="cb24-364"><a href="#cb24-364" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-365"><a href="#cb24-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-344"><a href="#cb24-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-345"><a href="#cb24-345" aria-hidden="true" tabindex="-1"></a>l_don_av_2yr_f <span class="ot">&lt;-</span> rethinkpriorities<span class="sc">::</span><span class="fu">make_formula</span>(<span class="st">"l_don_av_2yr"</span>, rhs_vars) <span class="co">#shortcut for stats::reformulate to make a formal out of rhs and lhs</span></span>
+<span id="cb24-346"><a href="#cb24-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-347"><a href="#cb24-347" aria-hidden="true" tabindex="-1"></a>don_share_inc_imp_f <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(<span class="st">"don_share_inc_imp_bc5k"</span>, rhs_vars)</span>
+<span id="cb24-348"><a href="#cb24-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-349"><a href="#cb24-349" aria-hidden="true" tabindex="-1"></a>d_don_1k_f <span class="ot">&lt;-</span> <span class="fu">make_formula</span>(<span class="st">"d_don_1k"</span>, rhs_vars)</span>
+<span id="cb24-350"><a href="#cb24-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-351"><a href="#cb24-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-352"><a href="#cb24-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-353"><a href="#cb24-353" aria-hidden="true" tabindex="-1"></a>These look like ...</span>
+<span id="cb24-354"><a href="#cb24-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-357"><a href="#cb24-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-358"><a href="#cb24-358" aria-hidden="true" tabindex="-1"></a>l_don_av_2yr_f</span>
+<span id="cb24-359"><a href="#cb24-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb24-360"><a href="#cb24-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-361"><a href="#cb24-361" aria-hidden="true" tabindex="-1"></a>etc.</span>
+<span id="cb24-362"><a href="#cb24-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-363"><a href="#cb24-363" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Recipes' for imputing and standardizing data in an ML environment</span></span>
+<span id="cb24-364"><a href="#cb24-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-365"><a href="#cb24-365" aria-hidden="true" tabindex="-1"></a>As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.<span class="ot">[^19]</span> This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.</span>
 <span id="cb24-366"><a href="#cb24-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-367"><a href="#cb24-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-367"><a href="#cb24-367" aria-hidden="true" tabindex="-1"></a><span class="ot">[^19]: </span>Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.</span>
 <span id="cb24-368"><a href="#cb24-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-369"><a href="#cb24-369" aria-hidden="true" tabindex="-1"></a>For ML procedures to work, we almost always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.<span class="ot">[^20]</span> <span class="co">&lt;!-- Really depends on the type of model, for very popular tree-based models standardization isn't required --&gt;</span></span>
+<span id="cb24-370"><a href="#cb24-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-371"><a href="#cb24-371" aria-hidden="true" tabindex="-1"></a><span class="ot">[^20]: </span>This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later.</span>
+<span id="cb24-372"><a href="#cb24-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-373"><a href="#cb24-373" aria-hidden="true" tabindex="-1"></a>**Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once'; this would not yield valid metrics for our tuning. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').</span>
+<span id="cb24-374"><a href="#cb24-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-377"><a href="#cb24-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb24-378"><a href="#cb24-378" aria-hidden="true" tabindex="-1"></a>preprocess_func <span class="ot">&lt;-</span> <span class="cf">function</span>(formula, <span class="at">data =</span> train){</span>
+<span id="cb24-379"><a href="#cb24-379" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(recipes)</span>
+<span id="cb24-380"><a href="#cb24-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-381"><a href="#cb24-381" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to save time in creating recipes for different outcomes</span></span>
+<span id="cb24-382"><a href="#cb24-382" aria-hidden="true" tabindex="-1"></a>  <span class="co">#? Todo -- add to rethinkpriorities package</span></span>
+<span id="cb24-383"><a href="#cb24-383" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-384"><a href="#cb24-384" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">recipe</span>(formula, <span class="at">data=</span>data) <span class="sc">%&gt;%</span> <span class="co">#formula is a 'y~x1+x2` thing, defining rhs and lhs variables</span></span>
+<span id="cb24-385"><a href="#cb24-385" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_impute_median</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">%&gt;%</span> <span class="co">#rem: replaces missing values with medians</span></span>
+<span id="cb24-386"><a href="#cb24-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-387"><a href="#cb24-387" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create NA feature</span></span>
+<span id="cb24-388"><a href="#cb24-388" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_unknown</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb24-389"><a href="#cb24-389" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>(), <span class="at">factor=</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="co">#the 2sd Gelman adjustment</span></span>
+<span id="cb24-390"><a href="#cb24-390" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Removing because redundant: step_impute_mode(all_nominal_predictors(), -all_outcomes()) %&gt;%</span></span>
+<span id="cb24-391"><a href="#cb24-391" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_zv</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span> <span class="co">#cut any predictors with zero variance</span></span>
+<span id="cb24-392"><a href="#cb24-392" aria-hidden="true" tabindex="-1"></a>    recipes<span class="sc">::</span><span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>())</span>
+<span id="cb24-393"><a href="#cb24-393" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-394"><a href="#cb24-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </section>
@@ -852,7 +888,7 @@ Outcomes and models
 <li id="fn11" role="doc-endnote"><p>Why this particular split? I’m not sure, maybe it’s a rule of thumb.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12" role="doc-endnote"><p>Consider: in some cases we might want to filter <em>before</em> making training/test, but there are pros and cons<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13" role="doc-endnote"><p>Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the <em>method</em> of course, considering the real criteria of interest. This may be just an interim solution.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14" role="doc-endnote"><p>Why ten? Maybe that’s a conventional rule of thumb?<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14" role="doc-endnote"><p>Why ten? Maybe that’s a conventional rule of thumb? <!-- This seems to be standard in ML, in cases where LOOCV isn't feasible (which is most of the time) --><a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn15" role="doc-endnote"><p>I previously labeled these <code>control_vars</code>. But ‘control variables’ has a particular meaning in the context of causal inference and interpretation. In other work that <em>is</em> aiming at causal interpretation, I separate <code>control_vars</code> from the key variable of (causal) interest. But here ‘they are all equal’ so I just call it <code>rhs_vars</code><a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16" role="doc-endnote"><p>I know I said this is good to do ‘at the top’, but this is the part where we are starting to actually get into the modeling, so it seems OK.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17" role="doc-endnote"><p>It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
