@@ -1,0 +1,198 @@
+# RP Rethink priorities 'methods book': Introduction and overview
+
+A set of curated resources tied to use-cases, and a space to organize our discussion"
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+**NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
+
+## Rethink Priorities: Our approach to empirical and quantitative work
+
+## The purpose of this resource
+
+<!-- (integrate discussion from Slack thread and readme) -->
+
+A github-hosted 'bookdown' for structured in-depth discussion
+
+\
+
+::: {.alert .alert-secondary}
+
+
+*David Reinstein's conception:*
+
+- Don't share any confidential data or sensitive information
+
+- Don't feel compelled to flesh out all sections with original content. Don’t add content just because "it’s in a typical syllabus’.
+
+- Focus on things that we use, have used, want to use, or have been requested to address.
+     - Secondarily, on things relevant to Effective Altruism-related research in general
+- Do curate link, and embed resources from elsewhere
+
+- Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)
+
+
+- Do put in content that is more in-depth and technical, or involving R-code and tools
+    - Still, do try to 'offset' details (in folding blocks, appendix sections, margin notes), where it would otherwise clutter the book
+- Start with 'plain language' explanations of technical content; for ourselves, and potentially to share with partners in future
+
+
+I also hope to use this to develop 'templates and standard practices' for our work.
+
+
+
+:::
+
+\
+
+**What to include and when to dive into the rabbit hole?** (Unfold: the 'second time it comes up' rule)
+
+::: {.callout-note collapse='true'}
+ In ‘building a knowledge base’, there are some things that are important to include, but others should be excluded.  If we are compulsive and auto-nerd-sniped to go down every rabbit hole it will be wasteful. But some rabbit holes will be worth going down, at least partially.
+
+*What’s a good rule-of-thumb for knowing if it’s worth a dive?* Maybe the 'second time rule'?
+
+Mark the issue the first time it comes up, perhaps leave a placeholder and a link to the original notes or discussion.
+
+Then the second time an issue comes up it may be safe to assume its an ‘important issue to dive into and document’?
+
+
+
+:::
+
+
+Below, 'a partial dive into the rabbit hole', for one possible framework.
+
+::: {.alert .alert-secondary}
+
+
+
+What do I mean by a 'partial dive into the rabbit hole?'
+
+- Explain how it applied to our problem (generically if there is a confidentiality issue)
+
+- Curated links [PeteW-gists](https://gist.github.com/peterhurford/)-eqsue,
+
+- characterize in our own words (but concisely)
+
+- give a code example in a 'vignette',
+
+- check our understanding through communication and discussion with others, flag key issues
+
+
+:::
+
+
+
+## Sections and organization {#outline_sections}
+(Proposed/discussed below -- keep updated with actual structure)
+
+**[DATA, CODE](#data)** ^[ Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below
+]
+
+**Coding practice and tools**
+
+(Languages, clean code, reproducability, etc.)
+
+**Data practices**
+
+(Storing, labeling, etc)
+
+**[PRESENTING AND DESCRIBING DATA](#present)**
+
+- Methods of 'describing data'
+
+- Formatting: tables, figures, and numerical content**
+
+- Visualizations: suggested/preferred formats and templates
+
+
+**SURVEY DESIGNS AND METHODS**
+
+- How to ask good survey questions
+
+- Avoiding pitfalls
+
+- Sampling issues and representativeness
+
+- Constructing reliable indices and scales
+
+- Implementation platforms and issues
+
+- Survey design tools (IT)
+
+**EXPERIMENTS AND TRIALS*
+
+- [Experiment and trial design: qualitative issues and guidelines](#expt-qual-imp)
+
+- [Experiment and trial design: quantitative issues](#expt-quant)
+
+- 'Treatment' assignment (blocking, randomization, etc)
+- Adaptive, sequential and dynamic designs
+- Planning, diagnosing and adjusting a design
+- Power analyses (and other 'diagnosands')
+
+
+**BASIC STATISTICS: MODELING, TESTING AND INFERENCE**
+
+- Bayesian, frequentist, and other approaches
+
+- A 'statistical model'^[ I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.
+]
+
+- Bayesian updating and inference
+- Hypothesis testing
+- Preferred approaches ('which tests') etc.
+
+**[MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING](#modeling)**
+
+- "Multi-variable 'regression' models" and specification choices
+- Interpreting model results
+- Predictive modeling and machine learning
+- Practical Bayesian approaches and interpretations
+- Psychometrics, especially factor analysis
+
+**[CAUSAL INFERENCE](#causal)**
+
+- Basic ideas and frameworks (simple, potential outcomes, DAGs)
+- Pitfalls and mistakes (layman's terms)
+- The experimental ideal
+- Non-experimental approaches to causal inference
+- Dealing with attrition
+
+**[MONTE-CARLO 'FERMI ESTIMATION' APPROACHES](#fermi);**
+
+- The basic ideas
+- Causal and Guesstimate
+- Code-based tools
+
+## Favorite resources, references, tools
+
+["Research tools" Reinstein airtable, data relevant view](https://airtable.com/shrIWaF4UsQ92CavA)
+
+[Pete W's gists](https://gist.github.com/peterhurford/)
+
+## Style and 'collophon'
+
+For more information on how this 'bookdown' was created, see our public template [here](https://rethinkpriorities.github.io/bookdown-template/), and also consult the resources at [bookdown.org](https://bookdown.org/)
+
+## R setup and packages
+
+We are using `Renv` to keep packages aligned. Please install Renv it and snapshot
+
+`renv::dependencies` should tell us what packages are used/needed
+
+```{r}
+
+library(dplyr)
+
+dependencies <- renv::dependencies()
+dependencies[2] %>% unique() %>% as.list()
+
+```
+
+
+
+## Git repo, shared files, procedure for editing
+

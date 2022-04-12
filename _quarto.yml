@@ -1,0 +1,59 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
+  author: "David Reinstein (most content atm), Willem Sleegers, Jamey Elsey"
+  repo-url: https://github.com/ /rethinkpriorities/methodology-statistics-design
+  execute:
+    freeze: auto # re-render only when source changes
+    warning: false
+    message: false
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - part: "Basics, presentation"
+      chapters:
+        - chapters/coding_data.qmd
+        - chapters/presentation_method_discussion.qmd
+    - part: "Designing surveys and trials"
+      chapters:
+        - chapters/survey_designs_methods.qmd
+        - chapters/experiments_trials_design.qmd
+        - chapters/qualitative-design-issues_plus.md
+    - part: "Statistics and modeling"
+      chapters:
+        - chapters/basic_stats.qmd
+        - chapters/ml_modeling.qmd
+        - chapters/time_series_predict.qmd
+        - chapters/time_series_application.qmd
+        - chapters/classification_model_notes.qmd
+        - chapters/causal_inf.qmd
+  appendices:
+    - chapters/fermi.qmd
+    - chapters/other_sections.qmd
+    - chapters/power_analysis_framework_2.qmd
+    - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd
+  reader-mode: true
+
+comments:
+    hypothesis: true
+
+bibliography: references.bib
+
+format:
+  html:
+    code-fold: true
+    code-link: true #note: this isn't working for me
+    code-tools: true
+    theme: cosmo
+    citations-hover: true
+    footnotes-hover: true
+
+ # pdf:
+  #  documentclass: scrreprt
+
+
+#editor: visual
+

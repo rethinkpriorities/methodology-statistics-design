@@ -1,33 +1,16 @@
 # 'main.R': this single file should (ideally) source and build all data, build codebooks, run all analysis, and build bookdown and other output
 
-#### Setup ####
+#### Setup -- this does nothing here because it's not preserved
 
-library(here)
-library(pacman)
-here <- here::here()
-rename_all <- dplyr::rename_all
+## PUT THESE at the beginning of each qmd (second one only if needs EAS data)!####
 
-filter <- dplyr::filter
+# 1.  Load packages, some setup definitions -- need to run it in every qmd
+source(here("code", "methods_setup.R"))
 
-#... Import setup for this project using template from dr-rstuff  ####
+# 2. Get EAS data
+source(here("code", "get_eas_data.R"))
 
-#source(here("code", "packages.R")) # Install and load packages used in build and analysis (note: these could be cleaned)
-
-#WITH RENV this is not needed!
-#... add packages as and when needed; note, the file below has been vastly trimmed down, mainly only loading RP's packages
-source(here("code", "packages.R"))
-
-#renv::dependencies()
-
-#p_load(devtools)
-
-#Just a bunch of handy shortcuts and precedence of packages
-
-source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
-
-#Put these in if and when we need them,
 #source(here("code", "modeling_functions.R")) #TODO - incorporate rest of these into RP r package
-
 
 # Bring in 'static' content, not to edit here but used ####
 # ... from EAMT public ####
@@ -39,88 +22,74 @@ try_download("https://raw.githubusercontent.com/daaronr/effective_giving_market_
 
 try_download('https://dl.dropbox.com/s/24ndb3p9aa0tfv2/reinstein_references.bib', here::here("reinstein_bibtex.bib"))
 
-
 #from_ea_market_testing/experimental-design-methods-issues.md
 #from_ea_market_testing/qualitative-design-issues.md
 #time_series.md
 
-
-
-### Source model-building tools/functions
-#source(here::here("code","modeling_functions.R"))
-
-#Pulling in key files from other repos; don't edit them here
-#Just 'pull these in' from the ea-data repo for now; we may re-home them here later
-
-#dir.create(here("remote"))
-
-#THIS fails, probably because its a private repo: try_download("https://raw.githubusercontent.com/rethinkpriorities/ea-data/master/Rmd/methods_interaction_sharing.Rmd?token=AB6ZCMD4HRHLJCFNLBKYO5LBRWHLY", here::here("remote", "methods_interaction_sharing_remote.Rmd"))
-#TODO -- find a good way to move the relevant content over from other repos
-
-options(pkgType = "binary")
-p_load("bettertrace") #better tracking after bugs
-
-
-# Get EA survey data (only for those with access), used in examples in this methods book #####
-
-
-print("NOTE: You need to follow steps at https://stackoverflow.com/questions/62336550/source-data-r-from-private-repository for this import to work, and you need access")
-
-
-eas_all <- read_file_from_repo(
-  repo = "ea-data",
-  path = "data/edited_data/eas_all.Rdata",
-  user = "rethinkpriorities",
-  token_key = "github-API",
-  private = TRUE
-)
-
-eas_20 <- read_file_from_repo("ea-data",  "data/edited_data/eas_20.Rdata", "github-API", private = TRUE )
-
-
-# cheesy workaround in case the above fails or you are not online 
-
-#eas_all <- readRDS("../ea-data/data/edited_data/eas_all.Rdata")
-#eas_20 <- readRDS("../ea-data/data/edited_data/eas_20.Rdata")
-
-
-## Parsing tool/parse to 'new formats' (USE ONLY ONCE, AND CAREFULLY!) ####
-
-p_load(rex, readr, purrr)
-
-source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_dr_to_ws.R")
-
-rmd_files <- c("index.Rmd", "introduction_overview.Rmd", "data_and_code.Rmd", "coding_data.Rmd", "presentation_method_discussion.Rmd", "survey_designs_methods.Rmd", "experiments_trials_design.Rmd",  "basic_stats.Rmd", "ml_modeling.Rmd", "time_series_predict.Rmd", "time_series_application.Rmd", "classification_model_notes.Rmd", "causal_inf.Rmd", "fermi.Rmd", "other_sections.Rmd", "power_analysis_framework_2.Rmd")
+## Previously used -- converting to bs4 format
+#source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_dr_to_ws.R")
+#source(here("code", "dr_to_ws_work.R"))
 
 
 #!mv *.Rmd old_bookdown_style_rmds
 
+
+# Moving to Quarto (should only need to be done once)####
+
+# list of files taken from _bookdown.yml
+
+rmd_files <-  c(
+  "introduction_overview.Rmd",
+  "data_and_code.Rmd", "coding_data.Rmd",
+  "presentation_method_discussion.Rmd",
+  "survey_designs_methods.Rmd",
+  "experiments_trials_design.Rmd",
+  "basic_stats.Rmd",
+  "ml_modeling.Rmd",
+  "time_series_predict.Rmd",
+  "time_series_application.Rmd",
+  "classification_model_notes.Rmd",
+  "causal_inf.Rmd",
+  "fermi.Rmd",
+  "other_sections.Rmd",
+  "power_analysis_framework_2.Rmd"
+  )
+
+
+# Parsing command
+
+library(pacman)
+p_load(rex, readr, purrr, devtools, install=FALSE)
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/parse_rp_bookdown_to_quarto.R")
+
+# apply all parsing commands and put it into 'chapters' folder
+system("mkdir chapters")
 map2(rmd_files, rmd_files,
-     ~ dr_to_bs4(here::here("old_bookdown_style_rmds", .x), .y))
+  ~ rp_rmd_to_quarto(.y, here::here("chapters", .y)))
 
-other_rmd_files <- c("from_ea_market_testing/binary_trial_computations_redacted.Rmd", "from_ea_market_testing/qualitative-design-issues.md")
+newName <- sub(".Rmd", ".qmd", here::here("chapters", rmd_files))
+file.rename(here::here("chapters", rmd_files), newName)
 
-other_rmd_files_names <- c("from_ea_market_testing/binary_trial_computations_redacted_ed.Rmd", "from_ea_market_testing/qualitative-design-issues_ed.md")
+rp_rmd_to_quarto("index.Rmd", "index.qmd")
 
-purrr::map2(other_rmd_files, other_rmd_files_names,
-            ~ dr_to_bs4(.x, .y))
+rp_rmd_to_quarto("from_ea_market_testing/binary_trial_computations_redacted_ed.Rmd", "from_ea_market_testing/binary_trial_computations_redacted_ed.qmd")
 
 
-#### BUILD the bookdown ####
-#The line below should 'build the bookdown' in the order specified in `_bookdown.yml`
+#print to screen ... output to put into chapters list in _quarto.yml
+cat(
+  "- index.qmd",
+paste("\n- chapters/", stringr::str_replace_all(
+  rmd_files, ".Rmd", ".qmd"),
+  sep=""),
+  "\n - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd"
+)
 
-#p_load(bookdown)
+#Also get rid of 'format_with_col' everywhere (alternative?)
 
-{
-  options(knitr.duplicate.label = "allow")
-  rmarkdown::render_site(output_format = 'rethinkpriorities::book', encoding = 'UTF-8')
-}
 
-#{
- # options(knitr.duplicate.label = "allow")
-  #rmarkdown::render_site(output_format = 'bookdown::gitbook', encoding = 'UTF-8')
-#}
+### Build Quarto book ####
 
+system("quarto render") #takes a long time!
 
 # trackdown command examples ####
 
@@ -139,4 +108,6 @@ trackdown::upload_file(
   file = here("time_series_application.Rmd"),
   shared_drive = "Research", #this works -- name looked up with googledrive::shared_drive_find()
   hide_code = FALSE) #hide_code=TRUE is usually better but I want to see it for now
+
+
 
