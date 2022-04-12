@@ -1,6 +1,8 @@
 # Inference and rough equivalence testing with binomial outcomes
 
 ```{r}
+#| include: false
+
 
 library(here)
 

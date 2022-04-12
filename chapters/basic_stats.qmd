@@ -1,6 +1,7 @@
-#  MODELS, TESTING, INFERENCE, DESCRIPTIVES {-#basicstat}
+#  Models, Testing, Inference, Descriptives {-#basicstat}
 
 ```{r}
+#| include: false
 
 library(here)
 

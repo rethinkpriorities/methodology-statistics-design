@@ -1,6 +1,9 @@
-# **APPENDIX/SUPPLEMENTS** {-}
+
+# Power analysis workflow (Jamie Elsey) {-#power-workflow}
+
 
 ```{r}
+#| include: false
 
 library(here)
 
@@ -9,8 +12,6 @@ source(here("code", "methods_setup.R"))
 
 ```
 
-
-# Power analysis workflow (Jamie Elsey) {-#power-workflow}
 
 ## Discussion and framework
 

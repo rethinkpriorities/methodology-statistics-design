@@ -1,4 +1,6 @@
-# **PREDICTION, MACHINE LEARNING, AND 'ML-STYLE MODELING'** {-#modeling}
+# Prediction, machine learning, and 'ml-style modeling' {-#modeling}
+
+See [Vignette: Modeling donations in EA Survey data with Tidymodels and workflow](modeling_vignettes/eas_ml_modeling_vignette.html) 
 
 ## Resources and use-cases
 

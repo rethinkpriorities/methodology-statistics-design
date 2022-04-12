@@ -1,4 +1,4 @@
-# **(CAUSAL INFERENCE)** {-#causal}
+# Causal Inference {-#causal}
 
 
 Some stuff to integrate from [here](https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs) perhaps.

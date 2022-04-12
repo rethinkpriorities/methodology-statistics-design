@@ -1,6 +1,7 @@
-# **META AND ROBUST** {-}
+# Other suggested sections
 
-# (Open and robust science: RP attitudes, discussions, resources) {#opensci}
+
+## (Open and robust science: RP attitudes, discussions, resources) {#opensci}
 
 Integrate from:
 
@@ -9,7 +10,7 @@ Integrate from:
 
 
 
-# (Meta-analysis) {#meta}
+## (Meta-analysis) {#meta}
 
 Incorporate and consolidate from [Reinsteins meta notes](https://daaronr.github.io/metrics_discussion/metaanalysis.html) and more
 

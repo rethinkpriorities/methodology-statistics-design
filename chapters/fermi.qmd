@@ -1,4 +1,4 @@
-# **(MONTE-CARLO 'FERMI ESTIMATION' APPROACHES)** {-#fermi}
+# Monte-Carlo 'Fermi Estimation' Approaches {-#fermi}
 
 
 'BOTEC': Back of the envelope calculations are central to RP's work
@@ -23,5 +23,5 @@ knitr::include_url("https://effective-giving-marketing.gitbook.io/innovations-in
 
 DR: We may want to look for ways to explicitly incorporate and integrate these approaches into our data analysis work in R, etc.
 
-w:::
+:::
 

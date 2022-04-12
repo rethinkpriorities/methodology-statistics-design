@@ -17,13 +17,13 @@ comments:
 
 ## Packages and functions
 
-Reinstall key packages so this can be standalone?[^1]
+Reinstall key packages so this can be standalone?[^eas_ml_modeling_vignette-1]
 
-[^1]: Note: not all these packages may be needed; let's search only the ones that are and drop the rest
+[^eas_ml_modeling_vignette-1]: Note: not all these packages may be needed; let's search only the ones that are and drop the rest
 
-[^2]
+[^eas_ml_modeling_vignette-2]
 
-[^2]: another footnote in non-visual mode
+[^eas_ml_modeling_vignette-2]: another footnote in non-visual mode
 
 ```{r, include=FALSE}
 
@@ -44,7 +44,10 @@ filter <- dplyr::filter
 ungroup <- dplyr::ungroup
 mutate <- dplyr::mutate
 
-source(here("code", "packages.R"))
+
+p_load(devtools)
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
+
 #github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421
 
 
@@ -53,8 +56,6 @@ library(rethinkpriorities)
 
 devtools::install_github("rethinkpriorities/r-noodling-package")
 library(rnoodling)
-
-# No longer needed because it's all in RP nowsource(here("code", "modeling_functions.R")) 
 
 
 ```
@@ -77,9 +78,9 @@ Skipping here, for now; this may help processing larger jobs, so we may want to 
 
 ## Reading in data from a repo
 
-The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.[^3]
+The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.[^eas_ml_modeling_vignette-3]
 
-[^3]: Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'
+[^eas_ml_modeling_vignette-3]: Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'
 
 ```{r input, include=FALSE}
 
@@ -112,41 +113,41 @@ df
 
 ## Some ad-hoc data cleaning and filtering, to enable modeling
 
-Normally, we should do the main data manipulation steps separately from the analysis.[^4] However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.[^5] <!-- I think it may be worth expanding on this. In that that we want to perform processing steps which are going to be long and will not vary during modelling. But where we might wish to (for example) impute data we may wish to include this as a part of the modelling process to allow testing of various imputation methods. Also things like normalizing variables should obviously be done as part of the modelling stage because of data leakage. -->
+Normally, we should do the main data manipulation steps separately from the analysis.[^eas_ml_modeling_vignette-4] However, if there are processing steps that are very specific to a modeling exercise, it seems OK to do them at this stage; but we should remain vigilant.[^eas_ml_modeling_vignette-5] <!-- I think it may be worth expanding on this. In that that we want to perform processing steps which are going to be long and will not vary during modelling. But where we might wish to (for example) impute data we may wish to include this as a part of the modelling process to allow testing of various imputation methods. Also things like normalizing variables should obviously be done as part of the modelling stage because of data leakage. -->
 
-[^4]: In the present case this would be in `build/eas_cross_year_harmonisation.R`.
+[^eas_ml_modeling_vignette-4]: In the present case this would be in `build/eas_cross_year_harmonisation.R`.
 
-[^5]: Furthermore, data-based imputation and standardizing variables must be done *later,* at the modeling stage; we do this with the `recipe` package below.
+[^eas_ml_modeling_vignette-5]: Furthermore, data-based imputation and standardizing variables must be done *later,* at the modeling stage; we do this with the `recipe` package below.
 
-First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.[^6]
+First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.[^eas_ml_modeling_vignette-6]
 
-[^6]: However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.
+[^eas_ml_modeling_vignette-6]: However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.
 
 ```{r}
 
 # Remove variables (columns) that are all missing
 df <- df %>% dplyr::select(where( ~!all(is.na(.x)) ))  %>%
-  ungroup() 
+  ungroup()
 
 ```
 
-Next, another 'Big global filtering step' ... .[^7], [^8]
+Next, another 'Big global filtering step' ... .[^eas_ml_modeling_vignette-7], [^eas_ml_modeling_vignette-8]
 
-[^7]: This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it
+[^eas_ml_modeling_vignette-7]: This should remove any people who did not answer the donation question... on which (all our) outcome variables are based. But actually, something is weird here -- it removes very few observations, so I'm not sure what is going on, need to doublecheck it
 
-[^8]: Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.
+[^eas_ml_modeling_vignette-8]: Of course, as the decision to answer the donation question is nonrandom, this is not uncontroversial. There may be some selection issues here. Alternate models could consider, e.g., 1. Non-responses as zeroes, 2. The binary outcome 'reported a positive donation', 3. Some explicit selection model.
 
 ```{r no-missing-don}
 
-df <- df %>% 
+df <- df %>%
   dplyr::filter(!is.na(d_don_1k))
 ```
 
-Next, I define an 'optional filter', which we may use below.[^9] `income_filter` will remove individuals with an income below 500000.[^10]
+Next, I define an 'optional filter', which we may use below.[^eas_ml_modeling_vignette-9] `income_filter` will remove individuals with an income below 500000.[^eas_ml_modeling_vignette-10]
 
-[^9]: I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.
+[^eas_ml_modeling_vignette-9]: I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.
 
-[^10]: `income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.
+[^eas_ml_modeling_vignette-10]: `income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.
 
 ```{r}
 
@@ -169,9 +170,9 @@ Why 'do this up top'? It makes it clearer what 'all the messy code below does', 
 Aside: The 'choices of variables' thing is more important in models based on a particular theoretical structure, where we have different sets of pre and post variables and are worried about 'leakage' ... or where we are aiming at a causal interpretation and are worried about things like 'bad controls/colliders'.
 :::
 
-Finally, for factor variables, we set base categories to the most common values.[^11]
+Finally, for factor variables, we set base categories to the most common values.[^eas_ml_modeling_vignette-11]
 
-[^11]: This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.
+[^eas_ml_modeling_vignette-11]: This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.
 
 ```{r}
 
@@ -192,9 +193,9 @@ seed <- 1
 set.seed(seed)
 ```
 
-For ML modeling, we need to set aside some data to test our model's ultimate performance. We thus 'split' our data sets using the `rsample` package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.[^12]
+For ML modeling, we need to set aside some data to test our model's ultimate performance. We thus 'split' our data sets using the `rsample` package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.[^eas_ml_modeling_vignette-12]
 
-[^12]: Why this particular split? I'm not sure, maybe it's a rule of thumb.
+[^eas_ml_modeling_vignette-12]: Why this particular split? I'm not sure, maybe it's a rule of thumb.
 
 ```{r init_split}
 
@@ -225,9 +226,9 @@ test <- rsample::testing(init_split)
 
 ```
 
-I next create the 'non-highest-income' subset of the data, using the `income_filter` quosure object defined above to the testing and training data.[^13]
+I next create the 'non-highest-income' subset of the data, using the `income_filter` quosure object defined above to the testing and training data.[^eas_ml_modeling_vignette-13]
 
-[^13]: Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons
+[^eas_ml_modeling_vignette-13]: Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons
 
 ```{r train-test_filter}
 
@@ -236,9 +237,9 @@ test_filter <- test %>% filter(!!income_filter)
 
 ```
 
-In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.[^14]
+In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.[^eas_ml_modeling_vignette-14]
 
-[^14]: Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.
+[^eas_ml_modeling_vignette-14]: Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.
 
 ## Create partitions (folds) for validation 'tuning' step
 
@@ -271,18 +272,18 @@ So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitti
 
 It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. (And fitting on the set-aside test data would yield other 'data leak' problems.) **N-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold.
 
-This is iterated many times through different regularization specifications (hyper-parameters). The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance.[^15]
+This is iterated many times through different regularization specifications (hyper-parameters). The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance.[^eas_ml_modeling_vignette-15]
 :::
 
-[^15]: This may not always be necessary. There are some claims that \[Oska ... ref?\]
+[^eas_ml_modeling_vignette-15]: This may not always be necessary. There are some claims that \[Oska ... ref?\]
 
     > if you specify good defaults for hyperparameters, then optimizing via randomised search/Bayesian opt or grid search is likely to only net a very minor performance improvement. For more complex methods (NN's) it definitely isn't worth trying to optimise parameters this way and is much better to think properly about good parameters/parameter ranges
 
 So, we use this *n-fold cross-validation* to 'tune our hyperparameters' to achieve the best tradeoffs between complexity and overfitting, to optimize our prediction. To enable this, we also need to define 'folds' to split up the training data, which we do below.
 
-The `rsample::vfold_cv` function does this resampling (with a default of ten folds).[^16]
+The `rsample::vfold_cv` function does this resampling (with a default of ten folds).[^eas_ml_modeling_vignette-16]
 
-[^16]: Why ten? Maybe that's a conventional rule of thumb? *Oska:* This seems to be standard in ML, in cases where leave-one-out cross-validation isn't feasible (which is most of the time).
+[^eas_ml_modeling_vignette-16]: Why ten? Maybe that's a conventional rule of thumb? *Oska:* This seems to be standard in ML, in cases where leave-one-out cross-validation isn't feasible (which is most of the time).
 
 ```{r}
 
@@ -305,11 +306,11 @@ Each of these particions classes 90% of the data for 'analysis' and about 10% fo
 
 # Defining and creating the formula objects ('equations' to model)
 
-First I make a list of 'right hand side variables' here,[^17] the columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.[^18]
+First I make a list of 'right hand side variables' here,[^eas_ml_modeling_vignette-17] the columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.[^eas_ml_modeling_vignette-18]
 
-[^17]: I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars.` "Right hand side variables" obviously refers to the position on the right hand side of a stated modeling equation
+[^eas_ml_modeling_vignette-17]: I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars.` "Right hand side variables" obviously refers to the position on the right hand side of a stated modeling equation
 
-[^18]: I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.
+[^eas_ml_modeling_vignette-18]: I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.
 
 ```{r rhs_vars}
 
@@ -319,11 +320,11 @@ rhs_vars <- c("ln_years_involved", "year_f", "ln_age", "not_male_cat", "student_
 
 ```
 
-Next we create three formula objects,[^19] each with the same set of rhs variables, but a different 'outcome' variable.[^20]
+Next we create three formula objects,[^eas_ml_modeling_vignette-19] each with the same set of rhs variables, but a different 'outcome' variable.[^eas_ml_modeling_vignette-20]
 
-[^19]: It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later. Leaving this as a 'to do'.
+[^eas_ml_modeling_vignette-19]: It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later. Leaving this as a 'to do'.
 
-[^20]: `make_formula` uses `stats::reformulate` to collapse lists into a formula object.
+[^eas_ml_modeling_vignette-20]: `make_formula` uses `stats::reformulate` to collapse lists into a formula object.
 
 ::: {.callout-note collapse="true"}
 ## Outcomes and models
@@ -362,13 +363,13 @@ etc.
 
 ## 'Recipes' for imputing and standardizing data in an ML environment
 
-As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.[^21] This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
+As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.[^eas_ml_modeling_vignette-21] This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
 
-[^21]: Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.
+[^eas_ml_modeling_vignette-21]: Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.
 
-For ML procedures to work, we often always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.[^22]
+For ML procedures to work, we often always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.[^eas_ml_modeling_vignette-22]
 
-[^22]: This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later. (This may only be the case for regression-based approaches.) Oska: "Really depends on the type of model, for very popular tree-based models standardization isn't required."
+[^eas_ml_modeling_vignette-22]: This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later. (This may only be the case for regression-based approaches.) Oska: "Really depends on the type of model, for very popular tree-based models standardization isn't required."
 
 **Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once'; this would not yield valid metrics for our tuning because of the 'data leakage' issue. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').
 
@@ -380,7 +381,7 @@ preprocess_func <- function(formula, data = train){
 
   # Function to save time in creating recipes for different outcomes
   #? Todo -- add to rethinkpriorities package
-  
+
   recipes::recipe(formula, data=data) %>% #formula is a 'y~x1+x2` thing, defining rhs and lhs variables
     recipes::step_impute_median(all_numeric_predictors()) %>% #rem: replaces missing values with medians
 
