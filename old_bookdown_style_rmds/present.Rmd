@@ -1,9 +1,0 @@
-# (PRESENTING AND DESCRIBING DATA) {-#present}
-
-<!--  (Methods of 'describing data')
-
- Code style, formatting and presentation of tables, numerical content, and visualizations
-
-- Below, we integrate from  [ea-data 'presentation and method discussion'](https://github.com/rethinkpriorities/ea-data/blob/master/Rmd/]
--->
-

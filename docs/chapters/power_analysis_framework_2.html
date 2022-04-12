@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.153">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - APPENDIX/SUPPLEMENTS</title>
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><link href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" rel="next">
+<link href="../chapters/other_sections.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+    "location": "sidebar",
+    "copy-button": false,
+    "collapse-after": 3,
+    "panel-placement": "start",
+    "type": "textbox",
+    "limit": 20,
+    "language": {
+      "search-no-results-text": "No results",
+      "search-matching-documents-text": "matching documents",
+      "search-copy-link-title": "Copy link to search",
+      "search-hide-matches-text": "Hide additional matches",
+      "search-more-match-text": "more match in this document",
+      "search-more-matches-text": "more matches in this document",
+      "search-clear-button-title": "Clear",
+      "search-detached-cancel-button-title": "Cancel",
+      "search-submit-button-title": "Submit"
+    }
+  }</script><script async="" src="https://hypothes.is/embed.js"></script><!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="floating">
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><strong>APPENDIX/SUPPLEMENTS</strong></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/%20/rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP Rethink priorities ‘methods book’: Introduction and overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Basics, presentation</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/coding_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding and data management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/presentation_method_discussion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Presentation, labeling and visualisations</span></a>
+  </div>
+</li>
+    </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Designing surveys and trials</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design and item development</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiments_trials_design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
+  </div>
+</li>
+    </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics and modeling</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">MODELS, TESTING, INFERENCE, DESCRIPTIVES</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>PREDICTION, MACHINE LEARNING, AND ‘ML-STYLE MODELING’</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time_series_predict.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time series (predictive) models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>(CAUSAL INFERENCE)</strong></span></a>
+  </div>
+</li>
+    </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Appendices</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title"><strong>(MONTE-CARLO ‘FERMI ESTIMATION’ APPROACHES)</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><strong>META AND ROBUST</strong></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link active"><strong>APPENDIX/SUPPLEMENTS</strong></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
+  </div>
+</li>
+    </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+<ul>
+<li>
+<a href="#power-workflow" class="nav-link active" data-scroll-target="#power-workflow">Power analysis workflow (Jamie Elsey)</a>
+<ul class="collapse">
+<li>
+<a href="#discussion-and-framework" class="nav-link" data-scroll-target="#discussion-and-framework">Discussion and framework</a>
+<ul class="collapse">
+<li><a href="#introduction-and-goals" class="nav-link" data-scroll-target="#introduction-and-goals">Introduction and goals</a></li>
+<li><a href="#definition-of-power" class="nav-link" data-scroll-target="#definition-of-power">Definition of power</a></li>
+<li><a href="#general-workflow-for-simulation-based-power-analysis" class="nav-link" data-scroll-target="#general-workflow-for-simulation-based-power-analysis">General workflow for simulation-based power analysis</a></li>
+<li><a href="#possible-pitfallsmisunderstandings-of-power-analysis" class="nav-link" data-scroll-target="#possible-pitfallsmisunderstandings-of-power-analysis">Possible pitfalls/misunderstandings of power analysis</a></li>
+</ul>
+</li>
+<li>
+<a href="#concrete-implementation-of-framework" class="nav-link" data-scroll-target="#concrete-implementation-of-framework">Concrete implementation of framework</a>
+<ul class="collapse">
+<li><a href="#step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="nav-link" data-scroll-target="#step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</a></li>
+<li><a href="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" class="nav-link" data-scroll-target="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest">Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</a></li>
+<li><a href="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="nav-link" data-scroll-target="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals">Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</a></li>
+<li><a href="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." class="nav-link" data-scroll-target="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.">Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/edit/main/chapters/power_analysis_framework_2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title"><h1 class="title d-none d-lg-block"><strong>APPENDIX/SUPPLEMENTS</strong></h1></div></header><div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-stderr">
+<pre><code>here() starts at /Users/yosemite/githubs/methodology-statistics-design</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span>
+<span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"code"</span>, <span class="st">"methods_setup.R"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-stderr">
+<pre><code>Loading required package: devtools</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Loading required package: usethis</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>
+Attaching package: 'usethis'</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>The following object is masked from 'package:sjlabelled':
+
+    tidy_labels</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Installing package into '/Users/yosemite/Library/R/x86_64/4.1/library'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output-stdout">
+<pre><code>
+The downloaded binary packages are in
+    /var/folders/nh/gsssbvt5463b77hrh0_gtmnh0000gq/T//Rtmpgyx0cY/downloaded_packages</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Using github PAT from envvar GITHUB_PAT</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Skipping install of 'bettertrace' from a github remote, the SHA1 (00b72d72) has not changed since last install.
+  Use `force = TRUE` to force installation</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Package 'bettertrace' overwriting 'options("error")'</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Using github PAT from envvar GITHUB_PAT</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Skipping install of 'rethinkpriorities' from a github remote, the SHA1 (412755f8) has not changed since last install.
+  Use `force = TRUE` to force installation</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Using github PAT from envvar GITHUB_PAT</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>Skipping install of 'rnoodling' from a github remote, the SHA1 (e5d436b4) has not changed since last install.
+  Use `force = TRUE` to force installation</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>
+Attaching package: 'rnoodling'</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>The following object is masked from 'package:rethinkpriorities':
+
+    XXX</code></pre>
+</div>
+<div class="cell-output-stderr">
+<pre><code>ℹ SHA-1 hash of file is c8b456c7f6bda375da90695dc8056d74e8dfe67c</code></pre>
+</div>
+</div>
+<section id="power-workflow" class="level1 unnumbered"><h1 class="unnumbered">Power analysis workflow (Jamie Elsey)</h1>
+<section id="discussion-and-framework" class="level2"><h2 class="anchored" data-anchor-id="discussion-and-framework">Discussion and framework</h2>
+<section id="introduction-and-goals" class="level3"><h3 class="anchored" data-anchor-id="introduction-and-goals">Introduction and goals</h3>
+<p>The purpose of this document is to propose the fundamentals for a workflow for power analyses.</p>
+<p>Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach, and I will begin with a standard frequentist analysis.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Helpful future additions to the toolkit would include</p>
+<ul>
+<li><p>clear and flexible ways to generate hypothetical data sets, and</p></li>
+<li><p>adding further analytic designs.</p></li>
+</ul>
+<p>This is not intended as an exhaustive introduction to the fundamentals of statistical power - I assume you are reasonably well-versed in some general principles of statistical inference and hypothesis testing, as well as in the basic idea of what power analysis is.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>We will focus solely on ‘simulation-based’ power analysis, and not on ways of mathematically (analytically) deriving power.</p>
+</section><section id="definition-of-power" class="level3"><h3 class="anchored" data-anchor-id="definition-of-power">Definition of power</h3>
+<p>In frequentist null hypothesis significance testing (NHST), power is typically defined as the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true (i.e., power is the ‘true positive rate’). More precisely, we may express this as ‘power against a <em>particular</em> alternative hypothesis’.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> ]</p>
+<p>For Bayesian analyses, there is some esoteric discussion about ‘whether power is even a thing we should be discussing’. There is uncertainty about the data-generating process, but there is only one data set.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: <em>‘Given the range of data that I might observe, how likely is it that I can make certain conclusions?’</em>. The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like “there is a non-zero difference between groups”(although this is probably the most common inference people first consider).<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.</p>
+<p>These inferences can take many forms, such as:<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
+<ul>
+<li>the probability of determining that there is a non-zero difference between two conditions,</li>
+<li>the probability of detecting an effect in a regression model of a specific magnitude (or greater),</li>
+<li>the probability of detecting some ‘smallest effect size of interest’,</li>
+<li>the probability of a ‘false positive’, i.e., the probability of concluding that there is a difference between groups when in fact there is no difference, (DR: I didn’t think this would ever be called ‘power’ .. I thought this would be called the ‘size’ of the test), or</li>
+<li>the probability of achieving a desired level of precision around a particular parameter estimate.</li>
+</ul>
+<!-- DR: does this encompass 'equivalence testing', which I think is very relevant? Also, should the first one be framed as ... 'when the true difference is XXX or larger'? Or is that only a frequentist concept?--><p>Hence, a power analysis helps frame our prospective research project in relation to the goals we would like to achieve (DR: cf the ‘diagnosands’ of the declaredesign framework). It provides us us with an estimate (and it is indeed an estimate, not a certainty!) of the probability that we will be able to make the inference we wish to make, given various factors both inside and outside of our control. (See discussion in fold.)</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>What is ‘in our control’? We might think of sample size as <em>in</em> our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered <em>out</em> of our contro;; however we can sometimes increase the ‘dosage’ we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.</p>
+</div>
+</div>
+</div>
+</section><section id="general-workflow-for-simulation-based-power-analysis" class="level3"><h3 class="anchored" data-anchor-id="general-workflow-for-simulation-based-power-analysis">General workflow for simulation-based power analysis</h3>
+<p>Simulation-based power analysis proceeds in four primary steps:</p>
+<ol type="1">
+<li>Generate a large number of ‘simulated data sets’ for the analysis.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>
+</li>
+</ol>
+<p>The data sets generated should be specific to the goal of the study. E.g., suppose we want to know the ‘power (of a particular design and testing procedure) to detect an effect size of 0.2 SD’. Here we should generate data that reflects this effect size (for considering the true positive and false negative rates). If we also want to measure the rate of type-2 error, the rate of false positives (if the null, e.g., an effect side of 0, holds), we should also generate data reflecting this ‘null effect’.</p>
+<ol start="2" type="1">
+<li><p>Run the proposed analysis over the many simulated data sets (as efficiently as possible, as this can take a long time). This analysis should either return the estimand of interest, or ensure that we can easily compute it (in Step 3). The output should be kept as flexible as possible (while conserving computer memory). This will allow us to assess multiple inference goals on the same output.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p></li>
+<li><p>Summarize the output returned in Step 2, computing the share of simulated data sets that meet different decision criteria or inference goals. (Example described in fold)</p></li>
+</ol>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-2" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>E.g., we might simulate 1000 data sets based on an effect size of 0.3 standard deviations and perform a standard t-test of the difference between treatment and control for each of these. We might then find that for 743 of 1000 of these simulated data, the test ‘rejected the null hypothesis’, suggesting a power of 74.3%.</p>
+<p>(Feel free to add other examples here.)</p>
+</div>
+</div>
+</div>
+<p>This can show the likelihood of achieving a range of goals given various sample sizes and design and testing choices, including the rates of <em>misleading</em> conclusions. In frequentist analyses, it is possible that steps 2 and 3 occur together (e.g., the p-value is returned along with the other output). In my experience with typical Bayesian designs, these stages are best kept separate so that we can first do the more time-consuming Step 2, and then more freely explore the various options in Step 3.</p>
+<ol start="4" type="1">
+<li>Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. If not, one may need to think of alternative design or data-collection choices (including sample sizes, treatments, and treatment assignments) or inference goals, and return to Step 1.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>
+</li>
+</ol>
+<p>In the sections that follow, I will present some generally useful packages and functions for power analyses, including annotated code examples with particularly useful aspects highlighted. I will do this in the context of a frequentist power analysis for between-groups (=between-subject?) analysis.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+</section><section id="possible-pitfallsmisunderstandings-of-power-analysis" class="level3"><h3 class="anchored" data-anchor-id="possible-pitfallsmisunderstandings-of-power-analysis">Possible pitfalls/misunderstandings of power analysis</h3>
+<p>It is important to note that power analyses are not an ‘omniscient oracle’. They might better be termed ‘power projections’ or ‘power estimates’. Even if we estimate that we have 99.9% power for detecting some a particular effect, we may have specified our simulations in an unrealistic way. When we actually run an experiment, we might see (e.g.) far more underlying variation or measurement error than we predicted, leading our analyses to be fairly uninformative. Conversely, we might be overly conservative with our power analysis; perhaps a design we thought was ‘underpowered’ actually has a high probability of producing very compelling results.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>I raise this only to point out that our power analyses might not always be perfect or be something of a blunt instrument. We should recognise they are not guarantees but more a way of determining the basic plausibility of achieving certain goals. Some other things to consider in a similar vein are presented below, and again the intention here is merely to frame our use of power analyses and recognise what sort of things I suspect they can or can’t help us with:</p>
+<ul>
+<li><p>When we see real data and real interesting patterns emerge, we are likely to go further in modeling and investigating these patterns than some of the more simple analyses and comparisons we conduct in the initial power analysis. I suspect power analyses are not so good for determining all the intricate, in-depth things we might plumb in a dataset. They are probably better at assessing the tractability of a broad inference goal.</p></li>
+<li><p>We might want to give some consideration to how far we wish to go in the initial data simulation step to think about all sorts of hypothetical data sets. As models become more complex, the number of different parameters that might vary - with possible effects on power - starts to balloon. E.g., even in a simple repeated-measures example, do we wish to vary not only the effect size but all sorts of different correlations from pre- to post-treatment within subjects? If we are simulating ordinal data, then power might change depending on how we initially suggest binning the outcomes, but there are infinitely many ways we might think the data might look… Discussion and consideration of how far we should go with these things is welcome and could be useful! (DR: I’m not sure what you are getting at here. Are you saying that ‘the space of designs and proposed analyses we can explore is extremely large, and we may need to make some ad-hoc choices to avoid this getting unmanageable’?)</p></li>
+</ul></section></section><section id="concrete-implementation-of-framework" class="level2"><h2 class="anchored" data-anchor-id="concrete-implementation-of-framework">Concrete implementation of framework</h2>
+<section id="step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="level3"><h3 class="anchored" data-anchor-id="step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</h3>
+<section id="confirm-that-we-can-generate-the-basic-data-we-want" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="confirm-that-we-can-generate-the-basic-data-we-want">Confirm that we can generate the basic data we want</h4>
+<p>Because ultimately we might be generating some rather large data files, we increase the memory limit alotted to R first. I don’t believe there is any real cost to increasing this memory limit, so it is wise to do so as to avoid a function iterating many times over for a long time, but ending up without sufficient space to store the outcome:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/memory.size.html">memory.limit</a></span><span class="op">(</span><span class="fl">100000</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-stdout">
+<pre><code>[1] Inf</code></pre>
+</div>
+</div>
+<p>Now we want to generate a hypothetical data set. In this case, we will be comparing 4 groups, each shown a different message in a between-subjects design (3 active vs.&nbsp;a control condition with a neutral message). Willem has some nice procedures for generating repeated-measures data in his walkthrough (<a href="https://www.willemsleegers.com/posts/simulation-based-power-analyses/" class="uri">https://www.willemsleegers.com/posts/simulation-based-power-analyses/</a>) using the library MASS. <strong>I think there are likely to be other useful packages or techniques for generating simulated data for more complex designs or patterns of results that we could look into. Being better able to generate valid and informative data sets is probably one of the things that would improve our capacity for running informative power analyses the most.</strong></p>
+<p>In this example, we will take advantage of the different groups to assess several different possible effect sizes. In a multiple regression, we would then be able to assess whether these different effect sizes come out as significantly different from our control group, and therefore our power to detect different sizes of effects.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># tidyverse simply used for data wrangling and plotting</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">four.group.datamaker</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sim</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">a</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">b</span> <span class="op">=</span> <span class="fl">.1</span>, <span class="va">c</span> <span class="op">=</span> <span class="fl">.2</span>, <span class="va">d</span> <span class="op">=</span> <span class="fl">.4</span>, <span class="va">pop</span><span class="op">=</span><span class="fl">1500</span><span class="op">)</span> <span class="op">{</span>
+
+  <span class="co"># first a tibble (data frame) with 1500 ppts, with the different groups showing</span>
+  <span class="co"># effect sizes in Cohen's d of .1, .2, and .4</span>
+  <span class="va">four.groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>a.control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">pop</span>, <span class="va">a</span>, <span class="fl">1</span><span class="op">)</span>,
+                        b.small <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">pop</span>, <span class="va">b</span>, <span class="fl">1</span><span class="op">)</span>,
+                        c.medsmall <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">pop</span>, <span class="va">c</span>, <span class="fl">1</span><span class="op">)</span>,
+                        d.medium <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">pop</span>, <span class="va">d</span>, <span class="fl">1</span><span class="op">)</span>,
+                        sample.size <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">pop</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+
+    <span class="co"># turn the data into long form</span>
+    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="st">'a.control'</span><span class="op">:</span><span class="st">'d.medium'</span>, names_to <span class="op">=</span> <span class="st">'group'</span>, values_to <span class="op">=</span> <span class="st">'response'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+
+    <span class="co"># put cutpoints in the data to make it more similar to the ordinal responses we would get</span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ordinal <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">response</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.5</span> <span class="op">~</span> <span class="fl">1</span>,
+                               <span class="va">response</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">.5</span> <span class="op">~</span> <span class="fl">2</span>,
+                               <span class="va">response</span> <span class="op">&lt;</span> <span class="fl">.5</span> <span class="op">~</span> <span class="fl">3</span>,
+                               <span class="va">response</span> <span class="op">&lt;</span> <span class="fl">1.5</span> <span class="op">~</span> <span class="fl">4</span>,
+                               <span class="va">response</span> <span class="op">&gt;=</span> <span class="fl">1.5</span> <span class="op">~</span> <span class="fl">5</span><span class="op">)</span>,
+
+           <span class="co"># for the purposes of this demo we will not analyse it as ordinal as it takes longer</span>
+           <span class="co"># to run the regressions, but if you did so you would also want to make the response</span>
+           <span class="co"># a factor</span>
+           ordinal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">ordinal</span><span class="op">)</span>,
+           sim <span class="op">=</span> <span class="va">sim</span><span class="op">)</span>
+
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">four.groups</span><span class="op">)</span>
+
+<span class="op">}</span>
+
+<span class="co"># test that the function works to make one data set before making many!</span>
+<span class="va">test.data</span> <span class="op">&lt;-</span> <span class="fu">four.group.datamaker</span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">test.data</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">response</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    aspect.ratio <span class="op">=</span> <span class="fl">.5</span>
+  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="power_analysis_framework_2_files/figure-html/datamaker-function-1.png" class="img-fluid" width="672"></p>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">test.data</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">ordinal</span><span class="op">)</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.6</span>,
+                 position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">group</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    aspect.ratio <span class="op">=</span> <span class="fl">1</span>
+  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="power_analysis_framework_2_files/figure-html/datamaker-function-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can see from the plots that the function appears to be working. When developing a data set for the first time, one would usually go further with some ‘diagnostic’ checks to confirm that the data is behaving as you intended. For example, in Willem’s examples, he used the mvnorm function with ‘empirical = TRUE’, so that the exact mean diffreences you specified are present in the data. This can then be confirmed wiht descriptive statistics. There might be all sorts of other diagnostics or plots we might check with other types of data that we generate.</p>
+</section><section id="efficiently-generate-many-data-sets" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="efficiently-generate-many-data-sets">Efficiently generate many data sets</h4>
+<p>Now we just need to run the function above many times over. This could be done using loops, but a very useful set of R functions in the tidyverse is the purrr package of <em>map functions</em>. Even better, a package called furrr is available to run such map functions in parallel to further reduce time. This doesn’t matter so much here because this will be quite quick anyway, but is important when we run the analyses over the many data sets. For furrr to do this, we need to tell it to plan for ‘multisession’, and give it a seed number:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">p_load</span><span class="op">(</span><span class="va">furrr</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr">furrr</a></span><span class="op">)</span>
+
+<span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span>
+<span class="va">options</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/furrr/man/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">48238</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># we will pass N = 500 simulations to the map function</span>
+<span class="va">nsims</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">500</span>
+
+<span class="co"># the map function will run our data-making function over 1000 simulations</span>
+<span class="va">sim.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/furrr/man/future_map.html">future_map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">nsims</span>, .f <span class="op">=</span> <span class="va">four.group.datamaker</span>,
+                           a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">.1</span>, c <span class="op">=</span> <span class="fl">.2</span>, d <span class="op">=</span> <span class="fl">.4</span>, .options <span class="op">=</span> <span class="va">options</span><span class="op">)</span>
+
+<span class="co"># split the simulated data into the separate simulations</span>
+<span class="va">sim.data</span> <span class="op">&lt;-</span> <span class="va">sim.data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now, we have 500 simulated data sets representing our hypothetical outcome data, and can perform analyses on them:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sim.data</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p></p>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:check-data">
+<colgroup><col>
+<col>
+<col>
+<col>
+<col>
+</colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">sample.size</th>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">group</th>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">response</th>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">ordinal</th>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">sim</th>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">a.control</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.395&nbsp;</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">b.small</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.396&nbsp;</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">c.medsmall</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.0762</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">3</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">d.medium</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.994&nbsp;</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">a.control</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">-0.931&nbsp;</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(242, 242, 242); font-weight: normal;">3</td>
+</tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0.4pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">b.small</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.58&nbsp;&nbsp;</td>
+<td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1</td>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0.4pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</section></section><section id="step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" class="level3"><h3 class="anchored" data-anchor-id="step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest">Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</h3>
+<p>Before we run an analysis over the many data sets, we need to check that our models will return the estimands that we wish to make inferences from. For a Bayesian analysis, this step might involve dropping parts of the posterior that are not relevant (e.g., estimates of every participant intercept, which take too much space for what they are worth) and ensuring we get the parts we care about (e.g., we might insert some additional code to retrieve a posterior distribution for Cohen’s d, or simply the parameter estimate for the interaction). For Bayesian analyses I err on the side of getting as many of the main parameters as possible, because this is a very time consuming step.</p>
+<p>For frequentist analyses, there are also a range of estimands we might care about. For example, we might consider returning a p-value, or the upper and lower bounds for confidence intervals, r-squared estimates etc. Again, this depends on the goals one wishes to achieve and what one wants to make inferences about.</p>
+<p>The key point for any kind of analysis here is that you don’t want to forget an estimand that might be of interest and then have to re-run the entire analysis. In addition, you want to have the regression run on different sample sizes of the data, so that you can generate a power curve plot for the analysis, showing how your power changes according to increasing the sample size.</p>
+<p>In the example function below, we run a simple linear regression, predicting the response from group.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">linear.reg.maker</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">breaks</span><span class="op">)</span> <span class="op">{</span>
+
+  <span class="co"># this function cuts the data set it is given into different sample sizes</span>
+  <span class="va">cut.samples</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">break.point</span>, <span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">cut.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">sample.size</span> <span class="op">&lt;=</span> <span class="va">break.point</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sample.size <span class="op">=</span> <span class="va">break.point</span><span class="op">)</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">cut.data</span><span class="op">)</span>
+  <span class="op">}</span>
+
+  <span class="va">data.cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">breaks</span>, .f <span class="op">=</span> <span class="va">cut.samples</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+
+  <span class="co"># the data is split according to the sample size</span>
+  <span class="co"># to feed to the regression model</span>
+  <span class="va">data.cuts</span> <span class="op">&lt;-</span> <span class="va">data.cuts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sample.size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="op">)</span>
+
+  <span class="co"># this function runs the regression</span>
+  <span class="va">run.reg</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span>
+
+    <span class="va">four.group.form</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">ordinal</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">group</span>
+
+    <span class="va">four.group.reg</span> <span class="op">&lt;-</span>
+      <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">four.group.form</span>,
+           data <span class="op">=</span> <span class="va">data</span><span class="op">)</span>
+
+    <span class="co"># we extract confidence intervals for the parameters of interest</span>
+    <span class="va">ci99</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">four.group.reg</span>, level <span class="op">=</span> <span class="fl">.99</span><span class="op">)</span>
+    <span class="va">ci95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">four.group.reg</span>, level <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span>
+
+    <span class="co"># we create an output to show the confidence intervals around the effects</span>
+    <span class="co"># and some additional inference info, e.g., 'nonzero' indicates whether</span>
+    <span class="co"># the lower bound of the CI excludes 0 or not.</span>
+    <span class="co"># 'width' indicates the width of the confidence interval,</span>
+    <span class="co"># for assessment of precision</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span>,
+                               <span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span><span class="op">)</span>,
+                     interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.99</span>, <span class="fl">.99</span>, <span class="fl">.99</span>, <span class="fl">.95</span>, <span class="fl">.95</span>, <span class="fl">.95</span><span class="op">)</span>,
+                     lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ci99</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci99</span><span class="op">[[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci99</span><span class="op">[[</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>,
+                               <span class="va">ci95</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci95</span><span class="op">[[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci95</span><span class="op">[[</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+                     upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ci99</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci99</span><span class="op">[[</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci99</span><span class="op">[[</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span>,
+                               <span class="va">ci95</span><span class="op">[[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci95</span><span class="op">[[</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="va">ci95</span><span class="op">[[</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="st">'nonzero'</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">lower</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="fl">1</span>,
+                                   <span class="cn">TRUE</span> <span class="op">~</span> <span class="fl">0</span><span class="op">)</span>,
+             <span class="st">'width'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span><span class="op">)</span>,
+             <span class="st">'sim'</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span>, <span class="st">'sim'</span><span class="op">]</span><span class="op">]</span>,
+             <span class="st">'cell.size'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>
+
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>
+  <span class="op">}</span>
+
+  <span class="co"># run the regression function over the different sample sizes</span>
+  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">data.cuts</span>, .f <span class="op">=</span> <span class="va">run.reg</span><span class="op">)</span>
+
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span>
+<span class="op">}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Once we have made and tested that our function works as intended and returns the values we want to make inferences from, we can run it over the many simluated data sets:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">linreg.output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/furrr/man/future_map.html">future_map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sim.data</span>,
+                                .f <span class="op">=</span> <span class="va">linear.reg.maker</span>,
+                                breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">150</span>, to <span class="op">=</span> <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">150</span><span class="op">)</span><span class="op">)</span>
+<span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-stdout">
+<pre><code>Time difference of 16.66375 secs</code></pre>
+</div>
+</div>
+<p>The object ‘linreg.output’ is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
+</section><section id="step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="level3"><h3 class="anchored" data-anchor-id="step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals">Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</h3>
+<p>Now, we wish to ascertain how likely we are to achieve a range of inferential goals, depending on factors such as the sample size, the underlying effect sizes, or whatever else we varied in simulating our data and running our models. For this example, this is as simple as generating a summary of the output from Step 2:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># group the data according to group, confidence interval, and size per group</span>
+<span class="va">four.group.lin.summary</span> <span class="op">&lt;-</span> <span class="va">linreg.output</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">group</span>, <span class="va">interval</span>, <span class="va">cell.size</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="co"># summarise the amount of times we get a CI greater than 0</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>.groups <span class="op">=</span> <span class="st">'keep'</span>,
+            <span class="st">'ci above 0 vs. control'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">nonzero</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="co"># change some factors for plotting</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">interval</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'0.95'</span>, <span class="st">'0.99'</span><span class="op">)</span>,
+                           labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'95% CI'</span>, <span class="st">'99% CI'</span><span class="op">)</span><span class="op">)</span>,
+         <span class="st">'Effect size'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">group</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span><span class="op">)</span>,
+                                labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Very small (.1)'</span>, <span class="st">'Small (.2)'</span>, <span class="st">'Medium (.4)'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>And then plotting the resulting power curve:</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">four.group.lin.summary</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1550</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">150</span>, to <span class="op">=</span> <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">150</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">80</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">'dashed'</span>, size <span class="op">=</span> <span class="fl">.33</span>, alpha <span class="op">=</span> <span class="fl">.25</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">90</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">'dashed'</span>, size <span class="op">=</span> <span class="fl">.33</span>, alpha <span class="op">=</span> <span class="fl">.25</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_path</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cell.size</span>, y <span class="op">=</span> <span class="va">`ci above 0 vs. control`</span>, color <span class="op">=</span> <span class="va">`Effect size`</span>,
+                group <span class="op">=</span> <span class="va">`Effect size`</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">.66</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cell.size</span>, y <span class="op">=</span> <span class="va">`ci above 0 vs. control`</span>, color <span class="op">=</span> <span class="va">`Effect size`</span><span class="op">)</span>,
+             size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">'Power to detect a non-zero effect'</span>,
+       x <span class="op">=</span> <span class="st">'Number of participants per condition (control group not included)'</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#c10d0d'</span>, <span class="st">'#7dc3c2'</span>, <span class="st">'#dcc55b'</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">interval</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>
+    aspect.ratio <span class="op">=</span> <span class="fl">1</span>,
+    panel.grid.major <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.33</span><span class="op">)</span>,
+    panel.grid.minor <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span>,
+    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"grey96"</span><span class="op">)</span>,
+    axis.line <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, size <span class="op">=</span> <span class="fl">0.375</span><span class="op">)</span>,
+    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,
+    text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, family <span class="op">=</span> <span class="st">'Gill Sans MT'</span>, size <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>,
+    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">'black'</span>, family <span class="op">=</span> <span class="st">'Gill Sans MT'</span>, size <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,
+    strip.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="power_analysis_framework_2_files/figure-html/plot-power-curve-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." class="level3"><h3 class="anchored" data-anchor-id="step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.">Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</h3>
+<p>In Step 4, we use the information we have generated above to make substantive conclusions about the projected power of our experiment to detect certain effects, given certain underlying parameters. From this we can make recommendations as to experimental design.</p>
+<p>Based on the power curve plotted above, we can conclude that we would have a very high likelihood of detecting effects of .4 vs.&nbsp;a control group at even quite low sample sizes, and also a good possibility of detecting effect sizes of .2 at quite modest sample sizes. On the other hand, for the very small effect size, we would not be confident in detecting such a difference vs.&nbsp;a control group even at 1500 participants per group. If effect sizes of this size we what was expected in such an experiment, and it was crucial that they were detected if present, then we might consider going back to Step 1 and reconsidering our experimental design to include even more participants.</p>
+
+
+
+<!-- -->
+<div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title anchored" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># **APPENDIX/SUPPLEMENTS** {-}</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"methods_setup.R"</span>))</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># Power analysis workflow (Jamie Elsey) {-#power-workflow}</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion and framework</span></span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="fu">### Introduction and goals</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>The purpose of this document is to propose the fundamentals for a workflow for power analyses.</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach, and I will begin with a standard frequentist analysis.^[ This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals.^<span class="co">[</span><span class="ot">DR: we might want to incorporate declaredesign for this.</span><span class="co">]</span> Helpful future additions to the toolkit would include</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>clear and flexible ways to generate hypothetical data sets, and</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>adding further analytic designs.</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>This is not intended as an exhaustive introduction to the fundamentals of statistical power - I assume you are reasonably well-versed in some general principles of statistical inference and hypothesis testing, as well as in the basic idea of what power analysis is.^<span class="co">[</span><span class="ot">DR: We can cover this in the earlier section, or link relevant explanations.</span><span class="co">]</span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>We will focus solely on 'simulation-based' power analysis, and not on ways of mathematically (analytically) deriving power.</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### Definition of power</span></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>In frequentist null hypothesis significance testing (NHST), power is typically defined as the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.^<span class="co">[</span><span class="ot">DR: may be worth putting maths here at some point, and also give a canonical reference.</span><span class="co">]</span></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>For Bayesian analyses, there is some esoteric discussion about 'whether power is even a thing we should be discussing'. There is uncertainty about the data-generating process, but there is only one data set.^[Maybe add 'and there is no standard 'null hypothesis testing procedure'. Actually, maybe this point needs a bit more fleshing out? What is the implication of 'there is only one data set'?</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: *'Given the range of data that I might observe, how likely is it that I can make certain conclusions?'*. The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like "there is a non-zero difference between groups"(although this is probably the most common inference people first consider).^[ Or a comparable statement posed in probablistic terms... Frequentist: 'if there had been a zero difference between these groups (H0), this data is unlikely to have been generated'. Bayesian: 'the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).'</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>These inferences can take many forms, such as:^<span class="co">[</span><span class="ot">DR: Which of these do you consider frequentist and which are Bayesian, and which can be either? </span><span class="co">]</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>the probability of determining that there is a non-zero difference between two conditions,</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>the probability of detecting an effect in a regression model of a specific magnitude (or greater),</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>the probability of detecting some 'smallest effect size of interest',</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>the probability of a 'false positive', i.e., the probability of concluding that there is a difference between groups when in fact there is no difference, (DR: I didn't think this would ever be called 'power' .. I thought this would be called the 'size' of the test), or</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>the probability of achieving a desired level of precision around a particular parameter estimate.</span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- DR: does this encompass 'equivalence testing', which I think is very relevant? Also, should the first one be framed as ... 'when the true difference is XXX or larger'? Or is that only a frequentist concept?--&gt;</span></span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>Hence, a power analysis helps frame our prospective research project in relation to the goals we would like to achieve (DR: cf the 'diagnosands' of the declaredesign framework). It provides us us with an estimate (and it is indeed an estimate, not a certainty!) of the probability that we will be able to make the inference we wish to make, given various factors both inside and outside of our control. (See discussion in fold.)</span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a> What is 'in our control'?</span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>We might think of sample size as *in* our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered *out* of our contro;; however we can sometimes increase the 'dosage' we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.</span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a><span class="fu">### General workflow for simulation-based power analysis</span></span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>Simulation-based power analysis proceeds in four primary steps:</span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Generate a large number of 'simulated data sets' for the analysis.^[ These may be generated by draws based on a canonical distribution, like the Gaussian ('normal') with particular parameters. Alternately, if prior 'similar' data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.</span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a>The data sets generated should be specific to the goal of the study. E.g., suppose we want to know the 'power (of a particular design and testing procedure) to detect an effect size of 0.2 SD'. Here we should generate data that reflects this effect size (for considering the true positive and false negative rates). If we also want to measure the rate of type-2 error, the rate of false positives (if the null, e.g., an effect side of 0, holds), we should also generate data reflecting this 'null effect'.</span>
+<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Run the proposed analysis over the many simulated data sets (as efficiently as possible, as this can take a long time). This analysis should either return the estimand of interest, or ensure that we can easily compute it (in Step 3). The output should be kept as flexible as possible (while conserving computer memory). This will allow us to assess multiple inference goals on the same output.^[E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.</span>
+<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Summarize the output returned in Step 2, computing the share of simulated data sets that meet different decision criteria or inference goals. (Example described in fold)</span>
+<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a> E.g., we might simulate 1000 data sets based on an effect size of 0.3 standard deviations and perform a standard t-test of the difference between treatment and control for each of these. We might then find that for 743 of 1000 of these simulated data, the test 'rejected the null hypothesis', suggesting a power of 74.3%.</span>
+<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a>(Feel free to add other examples here.)</span>
+<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a>This can show the likelihood of achieving a range of goals given various sample sizes and design and testing choices, including the rates of *misleading* conclusions. In frequentist analyses, it is possible that steps 2 and 3 occur together (e.g., the p-value is returned along with the other output). In my experience with typical Bayesian designs, these stages are best kept separate so that we can first do the more time-consuming Step 2, and then more freely explore the various options in Step 3.</span>
+<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. If not, one may need to think of alternative design or data-collection choices (including sample sizes, treatments, and treatment assignments) or inference goals, and return to Step 1.^[ DR: I removed 'ways of generating data' because I thought it could be misleading. It seems wrong to first say, e.g., 'we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials'... and then say 'but that didn't have enough power so lets assume a more concentrated distribution'. What I think you meant was consider other ways of actually *collecting* data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this *new* approach. Note that DD seems to have good tools for comparing and considering design variations.</span>
+<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>In the sections that follow, I will present some generally useful packages and functions for power analyses, including annotated code examples with particularly useful aspects highlighted. I will do this in the context of a frequentist power analysis for between-groups (=between-subject?) analysis.^[ We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.</span>
+<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Possible pitfalls/misunderstandings of power analysis</span></span>
+<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a>It is important to note that power analyses are not an 'omniscient oracle'. They might better be termed 'power projections' or 'power estimates'. Even if we estimate that we have 99.9% power for detecting some a particular effect, we may have specified our simulations in an unrealistic way. When we actually run an experiment, we might see (e.g.) far more underlying variation or measurement error than we predicted, leading our analyses to be fairly uninformative. Conversely, we might be overly conservative with our power analysis; perhaps a design we thought was 'underpowered' actually has a high probability of producing very compelling results.^[ DR: I changed the wording here because if we diagnose the design as 'underpowered' we probably would choose not to run it in that form.</span>
+<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a>I raise this only to point out that our power analyses might not always be perfect or be something of a blunt instrument. We should recognise they are not guarantees but more a way of determining the basic plausibility of achieving certain goals. Some other things to consider in a similar vein are presented below, and again the intention here is merely to frame our use of power analyses and recognise what sort of things I suspect they can or can't help us with:</span>
+<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>When we see real data and real interesting patterns emerge, we are likely to go further in modeling and investigating these patterns than some of the more simple analyses and comparisons we conduct in the initial power analysis. I suspect power analyses are not so good for determining all the intricate, in-depth things we might plumb in a dataset. They are probably better at assessing the tractability of a broad inference goal.</span>
+<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>We might want to give some consideration to how far we wish to go in the initial data simulation step to think about all sorts of hypothetical data sets. As models become more complex, the number of different parameters that might vary - with possible effects on power - starts to balloon. E.g., even in a simple repeated-measures example, do we wish to vary not only the effect size but all sorts of different correlations from pre- to post-treatment within subjects? If we are simulating ordinal data, then power might change depending on how we initially suggest binning the outcomes, but there are infinitely many ways we might think the data might look... Discussion and consideration of how far we should go with these things is welcome and could be useful! (DR: I'm not sure what you are getting at here. Are you saying that 'the space of designs and proposed analyses we can explore is extremely large, and we may need to make some ad-hoc choices to avoid this getting unmanageable'?)</span>
+<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concrete implementation of framework</span></span>
+<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1: Generate a large number of data sets for the analysis</span></span>
+<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Confirm that we can generate the basic data we want {.unnumbered}</span></span>
+<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a>Because ultimately we might be generating some rather large data files, we increase the memory limit alotted to R first. I don't believe there is any real cost to increasing this memory limit, so it is wise to do so as to avoid a function iterating many times over for a long time, but ending up without sufficient space to store the outcome:</span>
+<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r change-memory-limit, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a><span class="fu">memory.limit</span>(<span class="dv">100000</span>)</span>
+<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>Now we want to generate a hypothetical data set. In this case, we will be comparing 4 groups, each shown a different message in a between-subjects design (3 active vs. a control condition with a neutral message). Willem has some nice procedures for generating repeated-measures data in his walkthrough (<span class="ot">&lt;https://www.willemsleegers.com/posts/simulation-based-power-analyses/&gt;</span>) using the library MASS. **I think there are likely to be other useful packages or techniques for generating simulated data for more complex designs or patterns of results that we could look into. Being better able to generate valid and informative data sets is probably one of the things that would improve our capacity for running informative power analyses the most.**</span>
+<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a>In this example, we will take advantage of the different groups to assess several different possible effect sizes. In a multiple regression, we would then be able to assess whether these different effect sizes come out as significantly different from our control group, and therefore our power to detect different sizes of effects.</span>
+<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-tidyverse, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-124"><a href="#cb33-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-125"><a href="#cb33-125" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse simply used for data wrangling and plotting</span></span>
+<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r datamaker-function, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a>four.group.datamaker <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">sim =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">pop=</span><span class="dv">1500</span>) {</span>
+<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first a tibble (data frame) with 1500 ppts, with the different groups showing</span></span>
+<span id="cb33-135"><a href="#cb33-135" aria-hidden="true" tabindex="-1"></a>  <span class="co"># effect sizes in Cohen's d of .1, .2, and .4</span></span>
+<span id="cb33-136"><a href="#cb33-136" aria-hidden="true" tabindex="-1"></a>  four.groups <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a.control =</span> <span class="fu">rnorm</span>(pop, a, <span class="dv">1</span>),</span>
+<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a>                        <span class="at">b.small =</span> <span class="fu">rnorm</span>(pop, b, <span class="dv">1</span>),</span>
+<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a>                        <span class="at">c.medsmall =</span> <span class="fu">rnorm</span>(pop, c, <span class="dv">1</span>),</span>
+<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a>                        <span class="at">d.medium =</span> <span class="fu">rnorm</span>(pop, d, <span class="dv">1</span>),</span>
+<span id="cb33-140"><a href="#cb33-140" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sample.size =</span> <span class="dv">1</span><span class="sc">:</span>pop) <span class="sc">%&gt;%</span></span>
+<span id="cb33-141"><a href="#cb33-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a>    <span class="co"># turn the data into long form</span></span>
+<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="st">'a.control'</span><span class="sc">:</span><span class="st">'d.medium'</span>, <span class="at">names_to =</span> <span class="st">'group'</span>, <span class="at">values_to =</span> <span class="st">'response'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put cutpoints in the data to make it more similar to the ordinal responses we would get</span></span>
+<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">ordinal =</span> <span class="fu">case_when</span>(response <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="sc">-</span>.<span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> .<span class="dv">5</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&lt;</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a>                               response <span class="sc">&gt;=</span> <span class="fl">1.5</span> <span class="sc">~</span> <span class="dv">5</span>),</span>
+<span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-152"><a href="#cb33-152" aria-hidden="true" tabindex="-1"></a>           <span class="co"># for the purposes of this demo we will not analyse it as ordinal as it takes longer</span></span>
+<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a>           <span class="co"># to run the regressions, but if you did so you would also want to make the response</span></span>
+<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a>           <span class="co"># a factor</span></span>
+<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a>           <span class="at">ordinal =</span> <span class="fu">as.factor</span>(ordinal),</span>
+<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a>           <span class="at">sim =</span> sim)</span>
+<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(four.groups)</span>
+<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a><span class="co"># test that the function works to make one data set before making many!</span></span>
+<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a>test.data <span class="ot">&lt;-</span> <span class="fu">four.group.datamaker</span>()</span>
+<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
+<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> response, <span class="at">fill =</span> group), <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> .<span class="dv">5</span></span>
+<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> test.data) <span class="sc">+</span></span>
+<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(ordinal)), <span class="at">alpha =</span> .<span class="dv">6</span>,</span>
+<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a>                 <span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
+<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a>We can see from the plots that the function appears to be working. When developing a data set for the first time, one would usually go further with some 'diagnostic' checks to confirm that the data is behaving as you intended. For example, in Willem's examples, he used the mvnorm function with 'empirical = TRUE', so that the exact mean diffreences you specified are present in the data. This can then be confirmed wiht descriptive statistics. There might be all sorts of other diagnostics or plots we might check with other types of data that we generate.</span>
+<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Efficiently generate many data sets {.unnumbered}</span></span>
+<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a>Now we just need to run the function above many times over. This could be done using loops, but a very useful set of R functions in the tidyverse is the purrr package of *map functions*. Even better, a package called furrr is available to run such map functions in parallel to further reduce time. This doesn't matter so much here because this will be quite quick anyway, but is important when we run the analyses over the many data sets. For furrr to do this, we need to tell it to plan for 'multisession', and give it a seed number:</span>
+<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-furr, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(furrr)</span>
+<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(furrr)</span>
+<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a><span class="fu">plan</span>(multisession)</span>
+<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>options <span class="ot">&lt;-</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="dv">48238</span>)</span>
+<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r run-datamaker-function, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="co"># we will pass N = 500 simulations to the map function</span></span>
+<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a>nsims <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb33-199"><a href="#cb33-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-200"><a href="#cb33-200" aria-hidden="true" tabindex="-1"></a><span class="co"># the map function will run our data-making function over 1000 simulations</span></span>
+<span id="cb33-201"><a href="#cb33-201" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> nsims, <span class="at">.f =</span> four.group.datamaker,</span>
+<span id="cb33-202"><a href="#cb33-202" aria-hidden="true" tabindex="-1"></a>                           <span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> .<span class="dv">1</span>, <span class="at">c =</span> .<span class="dv">2</span>, <span class="at">d =</span> .<span class="dv">4</span>, <span class="at">.options =</span> options)</span>
+<span id="cb33-203"><a href="#cb33-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-204"><a href="#cb33-204" aria-hidden="true" tabindex="-1"></a><span class="co"># split the simulated data into the separate simulations</span></span>
+<span id="cb33-205"><a href="#cb33-205" aria-hidden="true" tabindex="-1"></a>sim.data <span class="ot">&lt;-</span> sim.data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sim) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span>
+<span id="cb33-206"><a href="#cb33-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-207"><a href="#cb33-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-208"><a href="#cb33-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-209"><a href="#cb33-209" aria-hidden="true" tabindex="-1"></a>Now, we have 500 simulated data sets representing our hypothetical outcome data, and can perform analyses on them:</span>
+<span id="cb33-210"><a href="#cb33-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-211"><a href="#cb33-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r check-data, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-212"><a href="#cb33-212" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim.data[[<span class="dv">3</span>]])</span>
+<span id="cb33-213"><a href="#cb33-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-214"><a href="#cb33-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-215"><a href="#cb33-215" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</span></span>
+<span id="cb33-216"><a href="#cb33-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-217"><a href="#cb33-217" aria-hidden="true" tabindex="-1"></a>Before we run an analysis over the many data sets, we need to check that our models will return the estimands that we wish to make inferences from. For a Bayesian analysis, this step might involve dropping parts of the posterior that are not relevant (e.g., estimates of every participant intercept, which take too much space for what they are worth) and ensuring we get the parts we care about (e.g., we might insert some additional code to retrieve a posterior distribution for Cohen's d, or simply the parameter estimate for the interaction). For Bayesian analyses I err on the side of getting as many of the main parameters as possible, because this is a very time consuming step.</span>
+<span id="cb33-218"><a href="#cb33-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-219"><a href="#cb33-219" aria-hidden="true" tabindex="-1"></a>For frequentist analyses, there are also a range of estimands we might care about. For example, we might consider returning a p-value, or the upper and lower bounds for confidence intervals, r-squared estimates etc. Again, this depends on the goals one wishes to achieve and what one wants to make inferences about.</span>
+<span id="cb33-220"><a href="#cb33-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-221"><a href="#cb33-221" aria-hidden="true" tabindex="-1"></a>The key point for any kind of analysis here is that you don't want to forget an estimand that might be of interest and then have to re-run the entire analysis. In addition, you want to have the regression run on different sample sizes of the data, so that you can generate a power curve plot for the analysis, showing how your power changes according to increasing the sample size.</span>
+<span id="cb33-222"><a href="#cb33-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-223"><a href="#cb33-223" aria-hidden="true" tabindex="-1"></a>In the example function below, we run a simple linear regression, predicting the response from group.</span>
+<span id="cb33-224"><a href="#cb33-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-225"><a href="#cb33-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r regression-function, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-226"><a href="#cb33-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-227"><a href="#cb33-227" aria-hidden="true" tabindex="-1"></a>linear.reg.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(data, breaks) {</span>
+<span id="cb33-228"><a href="#cb33-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-229"><a href="#cb33-229" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function cuts the data set it is given into different sample sizes</span></span>
+<span id="cb33-230"><a href="#cb33-230" aria-hidden="true" tabindex="-1"></a>  cut.samples <span class="ot">&lt;-</span> <span class="cf">function</span>(break.point, data) {</span>
+<span id="cb33-231"><a href="#cb33-231" aria-hidden="true" tabindex="-1"></a>    cut.data <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, sample.size <span class="sc">&lt;=</span> break.point) <span class="sc">%&gt;%</span></span>
+<span id="cb33-232"><a href="#cb33-232" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">sample.size =</span> break.point)</span>
+<span id="cb33-233"><a href="#cb33-233" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(cut.data)</span>
+<span id="cb33-234"><a href="#cb33-234" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-235"><a href="#cb33-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-236"><a href="#cb33-236" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(<span class="at">.x =</span> breaks, <span class="at">.f =</span> cut.samples, <span class="at">data =</span> data)</span>
+<span id="cb33-237"><a href="#cb33-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-238"><a href="#cb33-238" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the data is split according to the sample size</span></span>
+<span id="cb33-239"><a href="#cb33-239" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to feed to the regression model</span></span>
+<span id="cb33-240"><a href="#cb33-240" aria-hidden="true" tabindex="-1"></a>  data.cuts <span class="ot">&lt;-</span> data.cuts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(sample.size) <span class="sc">%&gt;%</span> <span class="fu">group_split</span>()</span>
+<span id="cb33-241"><a href="#cb33-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-242"><a href="#cb33-242" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this function runs the regression</span></span>
+<span id="cb33-243"><a href="#cb33-243" aria-hidden="true" tabindex="-1"></a>  run.reg <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb33-244"><a href="#cb33-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-245"><a href="#cb33-245" aria-hidden="true" tabindex="-1"></a>    four.group.form <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(ordinal) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> group</span>
+<span id="cb33-246"><a href="#cb33-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-247"><a href="#cb33-247" aria-hidden="true" tabindex="-1"></a>    four.group.reg <span class="ot">&lt;-</span></span>
+<span id="cb33-248"><a href="#cb33-248" aria-hidden="true" tabindex="-1"></a>      <span class="fu">lm</span>(<span class="at">formula =</span> four.group.form,</span>
+<span id="cb33-249"><a href="#cb33-249" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> data)</span>
+<span id="cb33-250"><a href="#cb33-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-251"><a href="#cb33-251" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we extract confidence intervals for the parameters of interest</span></span>
+<span id="cb33-252"><a href="#cb33-252" aria-hidden="true" tabindex="-1"></a>    ci99 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">99</span>)</span>
+<span id="cb33-253"><a href="#cb33-253" aria-hidden="true" tabindex="-1"></a>    ci95 <span class="ot">&lt;-</span> <span class="fu">confint</span>(four.group.reg, <span class="at">level =</span> .<span class="dv">95</span>)</span>
+<span id="cb33-254"><a href="#cb33-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-255"><a href="#cb33-255" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we create an output to show the confidence intervals around the effects</span></span>
+<span id="cb33-256"><a href="#cb33-256" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and some additional inference info, e.g., 'nonzero' indicates whether</span></span>
+<span id="cb33-257"><a href="#cb33-257" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the lower bound of the CI excludes 0 or not.</span></span>
+<span id="cb33-258"><a href="#cb33-258" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'width' indicates the width of the confidence interval,</span></span>
+<span id="cb33-259"><a href="#cb33-259" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for assessment of precision</span></span>
+<span id="cb33-260"><a href="#cb33-260" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span>,</span>
+<span id="cb33-261"><a href="#cb33-261" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span>),</span>
+<span id="cb33-262"><a href="#cb33-262" aria-hidden="true" tabindex="-1"></a>                     <span class="at">interval =</span> <span class="fu">c</span>(.<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">99</span>, .<span class="dv">95</span>, .<span class="dv">95</span>, .<span class="dv">95</span>),</span>
+<span id="cb33-263"><a href="#cb33-263" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">1</span>]], ci99[[<span class="dv">3</span>,<span class="dv">1</span>]], ci99[[<span class="dv">4</span>,<span class="dv">1</span>]],</span>
+<span id="cb33-264"><a href="#cb33-264" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">1</span>]], ci95[[<span class="dv">3</span>,<span class="dv">1</span>]], ci95[[<span class="dv">4</span>,<span class="dv">1</span>]]),</span>
+<span id="cb33-265"><a href="#cb33-265" aria-hidden="true" tabindex="-1"></a>                     <span class="at">upper =</span> <span class="fu">c</span>(ci99[[<span class="dv">2</span>,<span class="dv">2</span>]], ci99[[<span class="dv">3</span>,<span class="dv">2</span>]], ci99[[<span class="dv">4</span>,<span class="dv">2</span>]],</span>
+<span id="cb33-266"><a href="#cb33-266" aria-hidden="true" tabindex="-1"></a>                               ci95[[<span class="dv">2</span>,<span class="dv">2</span>]], ci95[[<span class="dv">3</span>,<span class="dv">2</span>]], ci95[[<span class="dv">4</span>,<span class="dv">2</span>]])) <span class="sc">%&gt;%</span></span>
+<span id="cb33-267"><a href="#cb33-267" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="st">'nonzero'</span> <span class="ot">=</span> <span class="fu">case_when</span>(lower <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
+<span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a>             <span class="st">'width'</span> <span class="ot">=</span> <span class="fu">abs</span>(upper <span class="sc">-</span> lower),</span>
+<span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a>             <span class="st">'sim'</span> <span class="ot">=</span> data[[<span class="dv">1</span>, <span class="st">'sim'</span>]],</span>
+<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a>             <span class="st">'cell.size'</span> <span class="ot">=</span> <span class="fu">nrow</span>(data)<span class="sc">/</span><span class="dv">4</span>)</span>
+<span id="cb33-272"><a href="#cb33-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-273"><a href="#cb33-273" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>
+<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-276"><a href="#cb33-276" aria-hidden="true" tabindex="-1"></a>  <span class="co"># run the regression function over the different sample sizes</span></span>
+<span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="at">.x =</span> data.cuts, <span class="at">.f =</span> run.reg)</span>
+<span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-279"><a href="#cb33-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb33-280"><a href="#cb33-280" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-281"><a href="#cb33-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-282"><a href="#cb33-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-283"><a href="#cb33-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-284"><a href="#cb33-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-285"><a href="#cb33-285" aria-hidden="true" tabindex="-1"></a>Once we have made and tested that our function works as intended and returns the values we want to make inferences from, we can run it over the many simluated data sets:</span>
+<span id="cb33-286"><a href="#cb33-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-287"><a href="#cb33-287" aria-hidden="true" tabindex="-1"></a><span class="in">```{r run-regression, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-288"><a href="#cb33-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-289"><a href="#cb33-289" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb33-290"><a href="#cb33-290" aria-hidden="true" tabindex="-1"></a>linreg.output <span class="ot">&lt;-</span> <span class="fu">future_map_dfr</span>(<span class="at">.x =</span> sim.data,</span>
+<span id="cb33-291"><a href="#cb33-291" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> linear.reg.maker,</span>
+<span id="cb33-292"><a href="#cb33-292" aria-hidden="true" tabindex="-1"></a>                                <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>))</span>
+<span id="cb33-293"><a href="#cb33-293" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb33-294"><a href="#cb33-294" aria-hidden="true" tabindex="-1"></a>t2 <span class="sc">-</span> t1</span>
+<span id="cb33-295"><a href="#cb33-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-296"><a href="#cb33-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-297"><a href="#cb33-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-298"><a href="#cb33-298" aria-hidden="true" tabindex="-1"></a>The object 'linreg.output' is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</span>
+<span id="cb33-299"><a href="#cb33-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-300"><a href="#cb33-300" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</span></span>
+<span id="cb33-301"><a href="#cb33-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-302"><a href="#cb33-302" aria-hidden="true" tabindex="-1"></a>Now, we wish to ascertain how likely we are to achieve a range of inferential goals, depending on factors such as the sample size, the underlying effect sizes, or whatever else we varied in simulating our data and running our models. For this example, this is as simple as generating a summary of the output from Step 2:</span>
+<span id="cb33-303"><a href="#cb33-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-304"><a href="#cb33-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r summarise-output, message = FALSE, warning = FALSE}</span></span>
+<span id="cb33-305"><a href="#cb33-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-306"><a href="#cb33-306" aria-hidden="true" tabindex="-1"></a><span class="co"># group the data according to group, confidence interval, and size per group</span></span>
+<span id="cb33-307"><a href="#cb33-307" aria-hidden="true" tabindex="-1"></a>four.group.lin.summary <span class="ot">&lt;-</span> linreg.output <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group, interval, cell.size) <span class="sc">%&gt;%</span></span>
+<span id="cb33-308"><a href="#cb33-308" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarise the amount of times we get a CI greater than 0</span></span>
+<span id="cb33-309"><a href="#cb33-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">.groups =</span> <span class="st">'keep'</span>,</span>
+<span id="cb33-310"><a href="#cb33-310" aria-hidden="true" tabindex="-1"></a>            <span class="st">'ci above 0 vs. control'</span> <span class="ot">=</span> <span class="fu">sum</span>(nonzero)<span class="sc">/</span><span class="dv">5</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb33-311"><a href="#cb33-311" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change some factors for plotting</span></span>
+<span id="cb33-312"><a href="#cb33-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">interval =</span> <span class="fu">factor</span>(interval, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'0.95'</span>, <span class="st">'0.99'</span>),</span>
+<span id="cb33-313"><a href="#cb33-313" aria-hidden="true" tabindex="-1"></a>                           <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'95% CI'</span>, <span class="st">'99% CI'</span>)),</span>
+<span id="cb33-314"><a href="#cb33-314" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Effect size'</span> <span class="ot">=</span> <span class="fu">factor</span>(group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'small'</span>, <span class="st">'medsmall'</span>, <span class="st">'medium'</span>),</span>
+<span id="cb33-315"><a href="#cb33-315" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">'Very small (.1)'</span>, <span class="st">'Small (.2)'</span>, <span class="st">'Medium (.4)'</span>)))</span>
+<span id="cb33-316"><a href="#cb33-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-317"><a href="#cb33-317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-318"><a href="#cb33-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-319"><a href="#cb33-319" aria-hidden="true" tabindex="-1"></a>And then plotting the resulting power curve:</span>
+<span id="cb33-320"><a href="#cb33-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-321"><a href="#cb33-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-power-curve, message=FALSE, warning=FALSE}</span></span>
+<span id="cb33-322"><a href="#cb33-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-323"><a href="#cb33-323" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> four.group.lin.summary) <span class="sc">+</span></span>
+<span id="cb33-324"><a href="#cb33-324" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">1550</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">150</span>, <span class="at">to =</span> <span class="dv">1500</span>, <span class="at">by =</span> <span class="dv">150</span>)) <span class="sc">+</span></span>
+<span id="cb33-325"><a href="#cb33-325" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb33-326"><a href="#cb33-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">80</span>), <span class="at">linetype =</span> <span class="st">'dashed'</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb33-327"><a href="#cb33-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="dv">90</span>), <span class="at">linetype =</span> <span class="st">'dashed'</span>, <span class="at">size =</span> .<span class="dv">33</span>, <span class="at">alpha =</span> .<span class="dv">25</span>) <span class="sc">+</span></span>
+<span id="cb33-328"><a href="#cb33-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>,</span>
+<span id="cb33-329"><a href="#cb33-329" aria-hidden="true" tabindex="-1"></a>                <span class="at">group =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>), <span class="at">size =</span> .<span class="dv">66</span>) <span class="sc">+</span></span>
+<span id="cb33-330"><a href="#cb33-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell.size, <span class="at">y =</span> <span class="st">`</span><span class="at">ci above 0 vs. control</span><span class="st">`</span>, <span class="at">color =</span> <span class="st">`</span><span class="at">Effect size</span><span class="st">`</span>),</span>
+<span id="cb33-331"><a href="#cb33-331" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb33-332"><a href="#cb33-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'Power to detect a non-zero effect'</span>,</span>
+<span id="cb33-333"><a href="#cb33-333" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'Number of participants per condition (control group not included)'</span>) <span class="sc">+</span></span>
+<span id="cb33-334"><a href="#cb33-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">'#c10d0d'</span>, <span class="st">'#7dc3c2'</span>, <span class="st">'#dcc55b'</span>)) <span class="sc">+</span></span>
+<span id="cb33-335"><a href="#cb33-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>interval) <span class="sc">+</span></span>
+<span id="cb33-336"><a href="#cb33-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb33-337"><a href="#cb33-337" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb33-338"><a href="#cb33-338" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.33</span>),</span>
+<span id="cb33-339"><a href="#cb33-339" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.2</span>),</span>
+<span id="cb33-340"><a href="#cb33-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"grey96"</span>),</span>
+<span id="cb33-341"><a href="#cb33-341" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">size =</span> <span class="fl">0.375</span>),</span>
+<span id="cb33-342"><a href="#cb33-342" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">size =</span> <span class="fl">0.5</span>),</span>
+<span id="cb33-343"><a href="#cb33-343" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">family =</span> <span class="st">'Gill Sans MT'</span>, <span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb33-344"><a href="#cb33-344" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">'black'</span>, <span class="at">family =</span> <span class="st">'Gill Sans MT'</span>, <span class="at">size =</span> <span class="dv">7</span>),</span>
+<span id="cb33-345"><a href="#cb33-345" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb33-346"><a href="#cb33-346" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-347"><a href="#cb33-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-348"><a href="#cb33-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-349"><a href="#cb33-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-350"><a href="#cb33-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</span></span>
+<span id="cb33-351"><a href="#cb33-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-352"><a href="#cb33-352" aria-hidden="true" tabindex="-1"></a>In Step 4, we use the information we have generated above to make substantive conclusions about the projected power of our experiment to detect certain effects, given certain underlying parameters. From this we can make recommendations as to experimental design.</span>
+<span id="cb33-353"><a href="#cb33-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-354"><a href="#cb33-354" aria-hidden="true" tabindex="-1"></a>Based on the power curve plotted above, we can conclude that we would have a very high likelihood of detecting effects of .4 vs. a control group at even quite low sample sizes, and also a good possibility of detecting effect sizes of .2 at quite modest sample sizes. On the other hand, for the very small effect size, we would not be confident in detecting such a difference vs. a control group even at 1500 participants per group. If effect sizes of this size we what was expected in such an experiment, and it was crucial that they were detected if present, then we might consider going back to Step 1 and reconsidering our experimental design to include even more participants.</span>
+<span id="cb33-355"><a href="#cb33-355" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</section></section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p> This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>DR: we might want to incorporate declaredesign for this.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>DR: We can cover this in the earlier section, or link relevant explanations.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>DR: may be worth putting maths here at some point, and also give a canonical reference.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Maybe add ‘and there is no standard ’null hypothesis testing procedure’. Actually, maybe this point needs a bit more fleshing out? What is the implication of ‘there is only one data set’?<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p> Or a comparable statement posed in probablistic terms… Frequentist: ‘if there had been a zero difference between these groups (H0), this data is unlikely to have been generated’. Bayesian: ‘the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).’<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>DR: Which of these do you consider frequentist and which are Bayesian, and which can be either? <a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p> These may be generated by draws based on a canonical distribution, like the Gaussian (‘normal’) with particular parameters. Alternately, if prior ‘similar’ data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote"><p>E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10" role="doc-endnote"><p> DR: I removed ‘ways of generating data’ because I thought it could be misleading. It seems wrong to first say, e.g., ‘we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials’… and then say ‘but that didn’t have enough power so lets assume a more concentrated distribution’. What I think you meant was consider other ways of actually <em>collecting</em> data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this <em>new</em> approach. Note that DD seems to have good tools for comparing and considering design variations.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11" role="doc-endnote"><p> We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12" role="doc-endnote"><p> DR: I changed the wording here because if we diagnose the design as ‘underpowered’ we probably would choose not to run it in that form.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/other_sections.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><strong>META AND ROBUST</strong></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+</body></html>

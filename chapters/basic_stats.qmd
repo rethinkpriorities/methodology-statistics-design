@@ -1,0 +1,351 @@
+#  MODELS, TESTING, INFERENCE, DESCRIPTIVES {-#basicstat}
+
+```{r}
+
+library(here)
+
+# 1.  Load packages, some setup definitions -- need to run it in every qmd
+source(here("code", "methods_setup.R"))
+
+# 2. Get EAS data
+source(here("code", "get_eas_data.R"))
+```
+
+
+Aim to integrate content from [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
+
+This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane'
+
+
+# Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
+
+
+## Conceptual discussion of statistics, probability and inference {#conceptual}
+
+Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'>
+
+::: {.alert .alert-secondary}
+
+
+DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.
+
+:::
+
+
+## Hypothesis testing, statistical comparisons and inferences
+
+
+### ['Common statistical tests are linear models'](https://lindeloev.github.io/tests-as-linear/)
+
+Many of the 'univariate' tests presented below can be extended to multiple-variable models (e.g., regression coefficients).
+
+Further discussion, examples, and tables comparing the statistics by [Oska Fentem in his Notion here](https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe).
+
+## Randomization and permutation-based tests and inference
+
+^[Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches ... see ['single framework'](#simulation_to_bayes)]
+
+Basic description: (still looking for the best source for this)
+
+- Discussion of the difference between randomization inference and bootstrapping [here](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)
+
+<!-- ![](picsfigs/clip_permutation_process.png) -->
+
+> Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.
+\
+
+The [infer](https://infer.tidymodels.org/articles/infer.html) package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the `coin` package).^[ See also Reinstein's [notes/work](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r) on the vignette.
+]
+
+
+\
+
+We use this, and give some explanation, in the 2021 [EAS donations post - see bookdown](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all) (see folds within)
+
+> We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). ...
+
+The code we use for these tests is permalinked [here](https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128)
+E
+\
+
+*Why use these techniques?*
+
+- Tractable for testing differences in medians
+
+- Fairly easy to explain, fairly intuitive
+
+- Do not depend on strong assumptions about underlying distributions or 'large sample asymptotics'
+
+- Some statisticians and Econometricians (e.g., [Athey and Imbens](https://arxiv.org/abs/1607.00698)) argue for their value and robustness; it also seems close to what a lot of 'data science' people do (they love simulation)
+
+
+
+> DR concerns about 'population vs super-population', possibly misinformed:
+
+::: {.callout-note collapse='true'}
+ ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.
+
+
+:::
+
+
+\
+
+
+
+## Particular 'experimetrics' issues
+
+### Should we include controls (covariates) in analyzing 'treatment effects' from randomized experiments? {-}
+
+> "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."
+- (?) Athey and Imbens
+
+
+:::
+
+
+# Equivalence tests and Bayesian approaches
+
+
+- [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+
+
+## Some simple Bayesian testing examples {#simple-bayes}
+
+We return to consider a very simple and common case of interest:
+
+-  We have a population divided into two treatment conditions (e.g., 'Impact' vs 'Emotion' language in an email donation appeal)
+
+-  We wish to focus on a binary outcome (e.g., 'whether clicked to donate'), which may be rare in each treatment.
+    - We want to understand the impact of the treatment condition on the binary outcome, putting probability bounds on our belief about this
+
+\
+
+This is a classic example for Bayesian inference. Some good discussions and vignettes:
+
+*Discussions and walk-throughs*
+
+- I have a memory that McElreath goes through this, but I cannot find it
+
+- [Jamie Elsey's code example](bayes_odds_ratio.R): `bayes_odds_ratio.R`, which uses the [brms interface to Stan](https://mc-stan.org/users/interfaces/brms)
+
+- [Reinstein and Dickerson's work using `bayesian_test_me`](https://daaronr.github.io/dualprocess/analysis-questions-and-tests.html#bayes_prop) on 'dual process' donation data
+
+\
+
+
+
+*Ready packages*
+
+- `bayesAB` is easy to apply, allows flexible specification of priors (and has tools to help you visualize these), and generates very clear output and graphs. See  [vignette](http://frankportman.github.io/bayesAB/)
+    - It (seems to) save the simulation data for you to summarize as you like
+    - Limitations: Requires raw data for each treatment (not just summarized data), cannot address more than two groups, does not (?) share the 'raw code doing the work' for tweaking
+
+- `BayesianFirstAid::bayes.prop.test` is also easy to use  (see [vignette](https://www.sumsar.net/blog/2014/06/bayesian-first-aid-prop-test/)), and it works with either vectors or counts.
+    - It uses a uniform prior, but you can get it to spit out the `rjags` code and then adjust this
+    - ... or adjust to multiple groups
+    - The plots it give you by default are pretty messy, but it also preserves the simulation data, so you could make your own plots
+
+
+
+## A single framework? "Significance and equivalence testing" with randomization inference/simulation; building to Bayes {#simulation_to_bayes}
+
+
+```{block2,  type='note'}
+
+This is an outline/discussion. I (DR) try to implement and demonstrate this in `eamt_data_analysis/oftw_giving_season_upsell_2021_trial/oftw_upsell_input_first_analysis.Rmd`
+
+Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package or `BayesianFirstAid`
+
+```
+
+Suppose we see a 'small difference' between treatment groups and it is 'not significant in standard tests' (tests not shown here yet).
+
+*How can we:*
+- Put meaningful bounds on this?
+- Statistically 'rule out large effects'?
+- Do this in the same context as our 'null hypothesis tests'?
+- Do and communicate this in a way that is acceptable to a range of audiences?
+
+(This parallels the analysis done in  [HERE](https://rethinkpriorities.github.io/methodology-statistics-design/inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes), which includes dome further explanation of the methods)
+
+\
+
+I (David) propose taking the following approach:
+
+1. Construct (by simulation or analytical formulae) the 'probability of "some function of our data" given a range of true parameters, i.e., given a range of relevant 'true rates of (relative) incidence' under each treatment (1/2, 3/4, equal, 4/3, 2, etc). This includes (and perhaps focuses on) the case where 'the true rates of incidence are equal to one another and equal to the average empirical incidence in our sample.'
+
+
+*What "function of our data"?*
+
+::: {.callout-note collapse='true'}
+ - The exact proportional difference in incidence rates that we see
+- A proportional difference in incidence rates as large as we see (in absolute value) or larger (I believe this is the 'two-tailed frequentist p-value')
+- A proportional difference in incidence rates as large as we see (in absolute value) or smaller (this gives us a sense of 'how unlikely is a large true effect ... can we probabilistically rule out a big difference')
+- A proportional difference in incidence rates as large or larger in favor of the Treatment
+- A proportional difference in incidence rates as large as we see in favor of the Control
+
+- ... Perhaps similar measures for other statistics such as  'difference in counts (not proportional), or 'average amount (donated)' (for the latter, we'd need to consider distinct true *distributions* of contributions)
+
+
+:::
+
+2. Plot the above over the parameter range to get a visual picture of the maximum likelihood parameter, and (eyeballing) the relative probability of different ranges
+
+3.  For a few important elements of the above, consider the 'relative likelihood of the data' under different true rates of incidence (or distributions of donations), for important comparisons such as
+
+- A relative incidence of 1.5 versus a relative incidence of 1
+
+... If the ratio is very small we might suspect that 'no difference is far more likely than a strong difference in favor of the treatment.
+
+4. Implicitly considering a 'flat prior', integrate (average) and compare important ranges of the above
+
+E.g....
+
+
+::: {.callout-note collapse='true'}
+ - the probability mass of the parameter 'the incidence is 1.25x or higher in favor of the Treatment' , versus  1.25x or lower (closer to zero, or higher incidence under the Control)...
+- ... If the ratio is very small, then, given a fairly flat prior, our posterior should put a low probability on 'a large difference in favor of the treatment' ...
+- And similarly, reversing the control and treatment
+
+- And similarly, for both extremes relative to a middle incidence range...
+- ... here, if the ratio is very small, we will say "we can probablistically rule out an effect of 1.5x or larger in either direction"
+
+
+:::
+
+<!-- Question: Is it ever meaningful (or better) to compare regions that are not adjacent one another, and regions that do not add up to the entire space, e.g., compare [2, infinity] to  [-1,1] or something? -->
+
+
+Note:
+
+::: {.callout-note collapse='true'}
+ Jamie:
+
+"To put simply, likelihood is "the likelihood of $\theta$ having generated D" and posterior is essentially "the likelihood of θ having generated D" further multiplied by the prior distribution of θ. If the prior distribution is flat (or non-informative), likelihood is exactly the same as posterior."
+
+So in essence, if you wanted, you could just put a prior distribution on the differences over which you have simulated differences, and multiply it with your likelihood. To get a proper posterior you would need a continuous distribution for the prior over the parameter space, and probably more simulations across the parameter space as well, to fill in the shape of the posterior. I guess the key difference between what you are suggesting and just running it as a Bayesian binomial regression is that your likelihood function is produced by simulation, whereas the one in the Bayesian regression would be generated through the model assumptions of the regression.
+
+
+:::
+
+
+5. Optionally, repeat the above with a Bayesian tool, considering more than one 'explicit prior'.
+
+Ongoing question: Do we need or want a separate prior for 'incidence under treatment' and 'incidence under control', or can our prior simply focus on the relative incidence rates?
+
+::: {.alert .alert-secondary}
+
+Jamie suggests: Just do a Bayesian analysis and consider the posterior distribution. You can test the sensitivity to different priors.
+
+:::
+
+## 'Empirical Bayes'
+
+Reference: David Robinson "Introduction to empirical bayes examples from baseball statistics" downloaded 28 Mar 2022
+
+> Empirical Bayes estimation, where a beta distribution fit
+on all observations is then used to improve each individually. What’s
+great about this method is that as long as you have a lot of examples,
+you don’t need to bring in prior expectations.
+
+
+Some data cleaning
+
+```{r setup-baseball-stats}
+
+p_load(Lahman)
+# Filter out pitchers
+career <- Batting %>%
+filter(AB > 0) %>%
+anti_join(Pitching, by = "playerID") %>%
+group_by(playerID) %>%
+summarize(H = sum(H), AB = sum(AB)) %>%
+mutate(average = H / AB)
+# Include names along with the player IDs
+career <- Master %>%
+tbl_df() %>%
+dplyr::select(playerID, nameFirst, nameLast) %>%
+unite(name, nameFirst, nameLast, sep = " ") %>%
+inner_join(career, by = "playerID") %>%
+dplyr::select(-playerID)
+
+
+career_filtered <- career %>%
+filter(AB > 100) #he uses 500, I think 100 is enough
+
+
+```
+
+## Step 1: Estimate a [Beta] prior from all your data
+
+We set up a likelihood function... probability of the data given different parameters.  It sums the log of 'how likely is each row (batter) given that batting averages are drawn particular true beta distribution, and hits are drawn from this'. At bats are taken as a constant, I guess
+
+```{r}
+library(stats4)
+p_load(VGAM)
+
+ll <- function(alpha, beta) {
+x <- career_filtered$H
+total <- career_filtered$AB
+
+-sum(VGAM::dbetabinom.ab(x, total, alpha, beta, log = TRUE)) #Note this is outputting the negative Log likelihood (not subtracting it from the last line)
+# 'how likely
+}
+
+```
+
+
+Next we search for the 'most likely parameters' ... the alpha and beta that maximize the above (using a particular algorithm).
+
+```{r}
+
+# maximum likelihood estimation
+m <- mle(ll, start = list(alpha = 1, beta = 10), method = "L-BFGS-B",
+lower = c(0.0001, .1))
+ab <- coef(m)
+alpha0 <- ab[1]
+beta0 <- ab[2]
+
+```
+
+## Step 2: Use that distribution as a prior for each individual estimate
+
+With the Beta prior and Binomial distribution, it turns out there is a simple rule for finding the midpoint (MAP?) of the posterior for the mean.  Adjust the 'average' formula by ... taking the numerator (hits) and add $\alpha_0$ from the Beta prior. Take the denominator (at-bats) and add $\alpha_0 + \beta_0$.
+
+So if someone got 30 hits out of 100, our midpoint estimate for their true 'data generating' batting average is  $\frac{30+\alpha_0}{100+\alpha_0+\beta_0}$
+
+We can do this across all the data, and find the 'best and worst' batters:
+
+```{r}
+career_eb <- career %>%
+mutate(eb_estimate = (H + alpha0) / (AB + alpha0 + beta0))
+
+
+career_eb %>% arrange(eb_estimate) %>% head(5)
+
+career_eb %>% arrange(-eb_estimate) %>% head(5)
+
+```
+
+As noted (and plotted) in the book, this method tends to 'shrink' the averages towards the overall midpoint. The lowest averages are raised a bit, and the highest averages are reduced a bit ... with more 'shrinkage' where there are fewer observations (at-bats).
+
+# Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}
+
+Integrate...
+
+Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)
+
+
+```{r }
+
+knitr::include_url("https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html")
+
+```
+
+<!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->
+
+
+
+
+
