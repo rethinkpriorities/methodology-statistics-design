@@ -9,7 +9,16 @@
 
 Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
 
- 
+:::
+
+::: {.callout-note collapse="true"}
+## Some quantitative issues
+
+- 'Treatment' assignment (blocking, randomization, etc)
+- Adaptive, sequential and dynamic designs
+- Planning, diagnosing and adjusting a design
+- Power analyses (and other 'diagnosands')
+
 :::
 
 

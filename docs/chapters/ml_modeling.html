@@ -161,7 +161,7 @@
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Basics, presentation</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Presentation, code organization</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -259,12 +259,12 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Power analysis workflow (Jamie Elsey)</span></a>
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link">Power analysis workflow (Jamie Elsey)</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
   </div>
 </li>
     </ul>
@@ -306,18 +306,19 @@
 <div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title anchored" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prediction, machine learning, and 'ml-style modeling' {-#modeling}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>See <span class="co">[</span><span class="ot">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</span><span class="co">](modeling_vignettes/eas_ml_modeling_vignette.html)</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources and use-cases</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oska ML notes (Notion)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Predictive models of donations in EA Survey</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Code to fit models in <span class="co">[</span><span class="ot">this folder</span><span class="co">](https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive)</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>... uses <span class="co">[</span><span class="ot">tidymodels</span><span class="co">](https://www.tidymodels.org/)</span> including <span class="co">[</span><span class="ot">workflow_set</span><span class="co">](https://workflowsets.tidymodels.org/)</span> and 'recipes' and the <span class="co">[</span><span class="ot">parsnip</span><span class="co">](https://www.tidyverse.org/blog/2018/11/parsnip-0-0-1/)</span> package</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>General intuitive discussion: "Data Science for Business by Foster Provost and Tom Fawcett (2013)"; DR notes <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/n-ds4bs.html)</span> and <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/control-ml.html)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>See <span class="co">[</span><span class="ot">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</span><span class="co">](modeling_vignettes/eas_ml_modeling_vignette.html)</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources and use-cases</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oska ML notes (Notion)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Predictive models of donations in EA Survey</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Code to fit models in <span class="co">[</span><span class="ot">this folder</span><span class="co">](https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>... uses <span class="co">[</span><span class="ot">tidymodels</span><span class="co">](https://www.tidymodels.org/)</span> including <span class="co">[</span><span class="ot">workflow_set</span><span class="co">](https://workflowsets.tidymodels.org/)</span> and 'recipes' and the <span class="co">[</span><span class="ot">parsnip</span><span class="co">](https://www.tidyverse.org/blog/2018/11/parsnip-0-0-1/)</span> package</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>General intuitive discussion: "Data Science for Business by Foster Provost and Tom Fawcett (2013)"; DR notes <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/n-ds4bs.html)</span> and <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/control-ml.html)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </section>
 </main> <!-- /main -->

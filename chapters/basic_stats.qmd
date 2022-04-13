@@ -13,9 +13,8 @@ source(here("code", "get_eas_data.R"))
 ```
 
 
-Aim to integrate content from [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
-
-This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane'
+^[Aim to integrate content from [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
+This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']
 
 
 # Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
@@ -108,7 +107,18 @@ E
 # Equivalence tests and Bayesian approaches
 
 
-- [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+## Equivalence tests and simple frequentist approaches
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Equivalence_test) (accessed 12 Apr 2022)
+
+> In equivalence tests, the null hypothesis is defined as an effect large enough to be deemed interesting, specified by an equivalence bound. The alternative hypothesis is any effect that is less extreme than said equivalence bound. The observed data is statistically compared against the equivalence bounds. If the statistical test indicates the observed data is surprising, assuming that true effects are at least as extreme as the equivalence bounds, a Neyman-Pearson approach to statistical inferences can be used to reject effect sizes larger than the equivalence bounds with a pre-specified Type 1 error rate.
+
+> Several tests exist for equivalence analyses; however, more recently the Two-one-sided t-tests (TOST) procedure has been garnering considerable attention. As outlined below, this approach is an adaptation of the widely known t-test.
+
+> "A very simple equivalence testing approach is the ‘two-one-sided t-tests’ (TOST) procedure. [Schuirmann, 1987] In the TOST procedure an upper ($\Delta U$) and lower (-$\Delta L$) equivalence bound is specified based on the smallest effect size of interest (e.g., a positive or negative difference of $d = 0.3$). Two composite null hypotheses are tested: $H_{01}: \Delta \leq –\Delta L$ and $H_{02}: \Delta \geq \Delta U$   When both these one-sided tests can be statistically rejected, we can conclude that $–\Delta L < \Delta < \Delta U$, or that the observed effect falls within the equivalence bounds ... .[Searman et al, 1998]" [Lakens 2017] 
+
+
+Semi-aside: [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
 
 
 ## Some simple Bayesian testing examples {#simple-bayes}

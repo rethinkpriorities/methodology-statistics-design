@@ -88,78 +88,46 @@ What do I mean by a 'partial dive into the rabbit hole?'
 ## Sections and organization {#outline_sections}
 (Proposed/discussed below -- keep updated with actual structure)
 
-**[DATA, CODE](#data)** ^[ Note that the capital letters denote the highest-level sections, but in the markdown these are at the same level as the sections below
-]
+Major 'parts':
 
-**Coding practice and tools**
+1. **Presentation, code, organization:**
 
-(Languages, clean code, reproducability, etc.)
-
-**Data practices**
-
-(Storing, labeling, etc)
-
-**[PRESENTING AND DESCRIBING DATA](#present)**
-
-- Methods of 'describing data'
-
-- Formatting: tables, figures, and numerical content**
-
-- Visualizations: suggested/preferred formats and templates
+Our guidelines, style, approaches to doing and presenting coding and data work (discussions in progress). Discuss things like reproduceability, use of Tidy syntax (or not), Quarto, storing and labeling data, separating build and analysis, etc. Guides to presnting tables, visuals (moving that to ['how to visualize'](https://rethinkpriorities.github.io/how-to-visualize/), reporting results in text.
 
 
-**SURVEY DESIGNS AND METHODS**
+2. **Designing surveys and trials**
 
-- How to ask good survey questions
-
-- Avoiding pitfalls
-
-- Sampling issues and representativeness
-
-- Constructing reliable indices and scales
-
-- Implementation platforms and issues
-
-- Survey design tools (IT)
-
-**EXPERIMENTS AND TRIALS*
-
-- [Experiment and trial design: qualitative issues and guidelines](#expt-qual-imp)
-
-- [Experiment and trial design: quantitative issues](#expt-quant)
-
-- 'Treatment' assignment (blocking, randomization, etc)
-- Adaptive, sequential and dynamic designs
-- Planning, diagnosing and adjusting a design
-- Power analyses (and other 'diagnosands')
+Quantitative, 'qualitative', and practical implementation issues in running surveys and various types of experiments. Some overlap with EAMT methods gitbook. 
 
 
-**BASIC STATISTICS: MODELING, TESTING AND INFERENCE**
 
-- Bayesian, frequentist, and other approaches
+3. **Statistics and modeling**
 
-- A 'statistical model'^[ I put in the first discussion of 'models' here because, at least in one perspective, all of the below is based on models.
-]
+A range of frameworks: Bayesian, frequentist, descriptive
 
-- Bayesian updating and inference
-- Hypothesis testing
-- Preferred approaches ('which tests') etc.
+and cases: prediction, causal inference, statistical inference and updating, dimension reduction and recovering 'factors'...^[As always, focus on 'what repeatedly comes up in our work', linking the practical cases]
 
-**[MODELING, PREDICTION, INFERENCE, AND MACHINE LEARNING](#modeling)**
+Aiming at 'preferred approaches' (e.g., 'which tests') with justifications and code vignettes and 
+
+
+::: {.callout-note collapse="true"}
+## Modeling, Prediction, inference, and machine learning .. some key topics
 
 - "Multi-variable 'regression' models" and specification choices
 - Interpreting model results
 - Predictive modeling and machine learning
 - Practical Bayesian approaches and interpretations
 - Psychometrics, especially factor analysis
+:::
 
-**[CAUSAL INFERENCE](#causal)**
+4. **Other topics and worked examples**
 
-- Basic ideas and frameworks (simple, potential outcomes, DAGs)
-- Pitfalls and mistakes (layman's terms)
-- The experimental ideal
-- Non-experimental approaches to causal inference
-- Dealing with attrition
+- Stuff that didn't fit in previous sections
+- Practical tools like Fermi Monte-carlo
+- Worked examples linked in previous sections
+
+
+
 
 **[MONTE-CARLO 'FERMI ESTIMATION' APPROACHES](#fermi);**
 
@@ -191,7 +159,6 @@ dependencies <- renv::dependencies()
 dependencies[2] %>% unique() %>% as.list()
 
 ```
-
 
 
 ## Git repo, shared files, procedure for editing

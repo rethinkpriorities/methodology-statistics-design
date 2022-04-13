@@ -13,7 +13,7 @@ book:
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
-    - part: "Basics, presentation"
+    - part: "Presentation, code organization"
       chapters:
         - chapters/coding_data.qmd
         - chapters/presentation_method_discussion.qmd

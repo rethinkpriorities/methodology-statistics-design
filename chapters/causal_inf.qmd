@@ -1,6 +1,13 @@
 # Causal Inference {-#causal}
 
 
+- Basic ideas and frameworks (simple, potential outcomes, DAGs)
+- Pitfalls and mistakes (layman's terms)
+- The experimental ideal
+- Non-experimental approaches to causal inference
+- Dealing with attrition
+
+
 Some stuff to integrate from [here](https://daaronr.github.io/metrics_discussion/caus-inf-obs.html#caus_inf_obs) perhaps.
 
 
