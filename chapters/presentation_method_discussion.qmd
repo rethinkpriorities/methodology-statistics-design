@@ -1,6 +1,6 @@
 # Presentation, labeling and visualisations {#presentation}
-#
 
+# 
 
 ```{r}
 #| include: false
@@ -14,38 +14,30 @@ source(here("code", "methods_setup.R"))
 source(here("code", "get_eas_data.R"))
 ```
 
-
 ::: {.alert .alert-secondary}
-
-Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here*
-NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/
-... more still needs to be moved
-
+Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here\* NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/ ... more still needs to be moved
 :::
 
 ## Aside: EA Forum organisation, collophon, formatting
 
 MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
-## Visualisations
+## Visualizations
 
 See also Gdoc: [visualisation discussions](https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#)
 
-### Ideal coding practice for visualisations {-}
+### Ideal coding practice for visualisations {.unnumbered}
 
 MOVED much content to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
 Will move the below over as well
 
-
-### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {-}
+### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {.unnumbered}
 
 **Treemaps**
 
 ::: {.alert .alert-secondary}
-
 NOTE: The below will not run without data, but we cannot make data 'public' here ... we can swap this for built in R or simulated data in this discussion
-
 :::
 
 ```{r}
@@ -74,11 +66,9 @@ geom_treemap_opts <- list(geom_treemap(alpha = 0.7),
 
 A good alternative to the treemap ... conveying both absolute amounts and rates in the same graph?
 
-### Case: Likert scale (individual items) and relative responses to these {-}
-
+### Case: Likert scale (individual items) and relative responses to these {.unnumbered}
 
 The combination of stacked bar charts and overlayed error/CI bars for some 'middle split' seems informative:
-
 
 ```{r }
 
@@ -88,9 +78,7 @@ knitr::include_url("https://rethinkpriorities.github.io/ea_data_public/eas-engag
 
 Above: from [EAS engagement post, bookdown supplement](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts)
 
-
-
-### Issue: Dealing with scales and large differences in magnitudes {-}
+### Issue: Dealing with scales and large differences in magnitudes {.unnumbered}
 
 If axes are cut and don't go to zero, mention this prominently in the plot.
 
@@ -108,11 +96,11 @@ Sometimes a logarithmic scale is helpful, but that can also lead to confusion. O
 
 -   Not possible to break the axis ggplot <https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis>
 
--  ... what about 'extending to the edge'?
+-   ... what about 'extending to the edge'?
 
 Remove outliers as a last resort; prominently mention this where doing so.
 
-### Case: Means of continuous variables: differences across groups {-}
+### Case: Means of continuous variables: differences across groups {.unnumbered}
 
 Some (imperfect) examples from donation post:
 
@@ -120,11 +108,9 @@ Some (imperfect) examples from donation post:
 
 ![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/planned_actual_gwwc-1.png)
 
-- Vertical lines for 'medians and means' help put this in context
+-   Vertical lines for 'medians and means' help put this in context
 
-
-### Case: Categorical outcomes by continuous outcomes (and vice/versa) {-}
-
+### Case: Categorical outcomes by continuous outcomes (and vice/versa) {.unnumbered}
 
 ```{r }
 
@@ -132,13 +118,13 @@ knitr::include_url("https://rethinkpriorities.github.io/ea_data_public/eas-engag
 
 ```
 
-Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure), we combine a `geom_point` with a `geom_smooth`.^[ DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
-]
+Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure), we combine a `geom_point` with a `geom_smooth`.[^presentation_method_discussion-1]
+
+[^presentation_method_discussion-1]: DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
 
 Here, I think the use of `%>% ggplotly` yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'.
 
-
-### Case: Visualizing (regression) model coefficients and confidence intervals {-}
+### Case: Visualizing (regression) model coefficients and confidence intervals {.unnumbered}
 
 Forest plots as seen [in donation post here](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)
 
@@ -146,14 +132,10 @@ Forest plots as seen [in donation post here](https://rethinkpriorities.github.io
 
 Our `group_fp_do` function makes this easy to do.
 
-See how we group the coefficients into plots  by 'theme'
+See how we group the coefficients into plots by 'theme'
 
 \
 
 In some contexts, lines for 'base rates' can be helpful
 
 ![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png) ... context, scroll up from [here](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)
-
-
-
-

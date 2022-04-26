@@ -11,5 +11,3 @@ Encoding: UTF-8
 
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
-
-ZoteroLibraries: "Rethink Priorities","reinstein_research_and_impact_collabs"

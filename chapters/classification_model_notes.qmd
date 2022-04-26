@@ -2,7 +2,7 @@
 
 (Fill in or link here)
 
-## Discussion: Assessing classification models and precision/recall  {#classification_model_disc}
+## Discussion: Assessing classification models and precision/recall {#classification_model_disc}
 
 Below, I try to explain "Classification problems", "Precision and Recall", and ROC and ROC-AUC (machine learning validation) by analogy ...
 
@@ -30,9 +30,9 @@ Our model might be applied by a very soft judge (think Mr. Van Driessen from B&B
 
 We could compare across different models to see if one does 'universally better or worse' in a sense to be defined. Suppose each model both gives a probability of being a spy for each person. As noted, this implies that each model "rank-orders" a population of individuals in terms of most to least likely being a spy.
 
-![](https://static.wikia.nocookie.net/beavisandbutthead/images/7/72/Beavis_he_said_anus.jpg/revision/latest/top-crop/width/360/height/450?cb=20110922015543){width="20%"}
+![](http://assets.sbnation.com/assets/1072548/DavidVanDriessen.jpg)
 
-![](https://static.wikia.nocookie.net/villains/images/8/8d/Buzzcut.png/revision/latest?cb=20130320041141){width="20%"}
+![](https://static.tvtropes.org/pmwiki/pub/images/buzzcut_2906.jpg)
 
 In a given (test) set of data, we might see something like the number line dots thing above. The person our model claims is most likely to be a spy is on the right and the one predicted least likely is on the left. In application the liberal judge ("vDriessen") might convict only the "top 1/3" of the distribution, while the tight-ass ("Coach") might put 2/3 of these 'dots' in prison. Each have made different types of mistakes in practice. vDriessen let a bunch of spies free (and falsely convicted only a few), while the Coach put a lot of innocent people in prison (and, in practice, but not in the dots example above, also let a few spies free). (edited)
 
@@ -66,6 +66,3 @@ I am reinterpreting this more simply as...
 > Compare a randomly chosen spy (case $i$ where $y_i=1$) to a randomly chosen innocent person (case $i$ where $y_i=0$) ... (in the testing data). Recall that a 'classifier' (at least typically, e.g., as in a logistic regression) assigns to each case $i$ some probability $\hat(p_i)$ of being a spy, based on its features. The AUC tells me "the *probability* that my classifier assigns a larger probability of guilt $\hat(p_i)$ to the randomly-chosen spy than to the randomly-chosen innocent person."
 
 An analogy has also been made to the Wilcoxon Rank-sum measure.
-
-
-

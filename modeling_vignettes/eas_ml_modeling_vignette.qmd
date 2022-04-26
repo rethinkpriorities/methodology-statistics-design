@@ -1,5 +1,5 @@
 ---
-title: "Vignette: Modeling donations in EA Survey data with Tidymodels and workflow"
+title: "Vignette: Predictive/ML modeling of donations in EA Survey data with Tidymodels and workflow"
 format:
   html:
     theme: cosmo
@@ -12,6 +12,17 @@ format:
 comments:
     hypothesis: true
 ---
+
+# Introduction
+
+This vignette shows how to use a set of `Tidymodels` tools and other tools, to do a machine learning prediction and validation exercise. We use the EA Survey 'donation data' for our example, covering much of the analysis that was done for the comparable section of the 2020 EA Forum post/chapter. Most of that code was written by Oska Fentem in consultation with David Reinstein. This vignette is written by David Reinstein. 
+
+I try to show:
+
+- How the computation works and 'what is producing what' ... so that you can recreate it in your own context
+- That the machine learning models do, and why
+- Why we made specific modeling choices 
+
 
 # Setup
 
@@ -34,9 +45,15 @@ library(dplyr)
 p_load(rsample) # Why p_load these? (Can create issues with dependencies)
 p_load(parsnip, tune, dials, install = FALSE) # If loading multiple packages, better to use p_load with install = FALSE option
 p_load(conflicted)
+p_load(workflowsets)
+library(stringr)
+
+p_load(dynverse)
+
 conflicted::conflict_prefer("set_label", "sjlabelled")
 conflicted::conflict_prefer("add_footnote", "kableExtra")
 conflicted::conflict_prefer("sample_n", "tidylog")
+
 
 set_label <- sjlabelled::set_label
 
@@ -119,7 +136,7 @@ Normally, we should do the main data manipulation steps separately from the anal
 
 [^eas_ml_modeling_vignette-5]: Furthermore, data-based imputation and standardizing variables must be done *later,* at the modeling stage; we do this with the `recipe` package below.
 
-First we remove columns with only missing values, to clean up what we have to consider, and because this may mess up processing.[^eas_ml_modeling_vignette-6]
+First we remove columns with only missing values, to better focus on the interested data, and because this may mess up processing.[^eas_ml_modeling_vignette-6]
 
 [^eas_ml_modeling_vignette-6]: However, this is a case where this 'might as well have been done at the 'build the data' stage ... so I'll move it there.
 
@@ -145,7 +162,7 @@ df <- df %>%
 
 Next, I define an 'optional filter', which we may use below.[^eas_ml_modeling_vignette-9] `income_filter` will remove individuals with an income below 500000.[^eas_ml_modeling_vignette-10]
 
-[^eas_ml_modeling_vignette-9]: I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. This is in part to avoid clutter.
+[^eas_ml_modeling_vignette-9]: I define this 'filter object' using fancy 'quosure' syntax here, rather than actually creating another slice of the data as an object. I did this to avoid clutter in the environment while still making a clear definition up top.
 
 [^eas_ml_modeling_vignette-10]: `income_c_imp_bc5k` actually does a particular imputation for missing or near-zero incomes. I use this imputed variable here for consistency, but it is not important here, as we are removing the *highest* income people only.
 
@@ -172,7 +189,7 @@ Aside: The 'choices of variables' thing is more important in models based on a p
 
 Finally, for factor variables, we set base categories to the most common values.[^eas_ml_modeling_vignette-11]
 
-[^eas_ml_modeling_vignette-11]: This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it in the moment.
+[^eas_ml_modeling_vignette-11]: This could have been done in the building process, but different procedures and reporting may want to use these categories differently, so it's OK to do it "in the moment" here.
 
 ```{r}
 
@@ -193,7 +210,7 @@ seed <- 1
 set.seed(seed)
 ```
 
-For ML modeling, we need to set aside some data to test our model's ultimate performance. We thus 'split' our data sets using the `rsample` package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.[^eas_ml_modeling_vignette-12]
+For ML modeling, we need to set aside some data to test our model's ultimate performance. We thus *split* our data sets using the `rsample` package tools. 3/4 of data is used for 'training' (fitting the parameters of our model), and the rest for testing.[^eas_ml_modeling_vignette-12]
 
 [^eas_ml_modeling_vignette-12]: Why this particular split? I'm not sure, maybe it's a rule of thumb.
 
@@ -228,7 +245,7 @@ test <- rsample::testing(init_split)
 
 I next create the 'non-highest-income' subset of the data, using the `income_filter` quosure object defined above to the testing and training data.[^eas_ml_modeling_vignette-13]
 
-[^eas_ml_modeling_vignette-13]: Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons
+[^eas_ml_modeling_vignette-13]: Consider: in some cases we might want to filter *before* making training/test, but there are pros and cons.
 
 ```{r train-test_filter}
 
@@ -237,32 +254,18 @@ test_filter <- test %>% filter(!!income_filter)
 
 ```
 
-In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here.[^eas_ml_modeling_vignette-14]
+In the full model we compare both the unfiltered and filtered data. For simplicity, I'll use only the latter here when considering the log donation outcomes.[^eas_ml_modeling_vignette-14]
 
 [^eas_ml_modeling_vignette-14]: Why this filter? I suspected that our methods may be sensitive to outliers, particularly with some of the functional forms. I could instead try to adjust the *method* of course, considering the real criteria of interest. This may be just an interim solution.
 
 ## Create partitions (folds) for validation 'tuning' step
-
-```{=html}
-<!--
-(Perhaps relevant to below discussion instead)
-- Testing the performance of different parameter combinations on the test set rather than validation set is *cheating* and a bit leaky
--->
-```
-```{r}
-# Cross validation splits ####
-
-cv <- rsample::vfold_cv(train) # 10 fold
-cv_filter <- vfold_cv(train_filter)
-
-```
 
 In a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' ... as long as these represent pre-outcome data and not a 'leak'.
 
 ::: {.callout-note collapse="true"}
 ## ML, overfitting, regularization, tuning
 
-In standard econometrics 'OLS' approaches, we learn that including too many variables will *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving athe model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
+In standard econometrics 'OLS' approaches, we learn that including too many variables will *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*; they are not 'unbiased', they may not have a causal interpretation, and statistical inference (standard errors, etc.) is also not straightforward.
 :::
 
 So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitting'.
@@ -272,7 +275,7 @@ So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitti
 
 It seems to depend on the situation and structure of the data generating process. ML procedures try to compute the best-performing regularization 'hyperparameters' *using the data*. But (again because of the overfitting issue) we can't judge the performance of an approach by predicting on the same data that it fit the model on. (And fitting on the set-aside test data would yield other 'data leak' problems.) **N-fold cross-validation** tries to get around this problem by splitting the data up into a number of partitions, fitting the model, with a certain tuning parameter, on 'all but one fold', and then testing it's performance on that left-out fold.
 
-This is iterated many times through different regularization specifications (hyper-parameters). The cross-validation results allow one to estimate the level of regularization which provides the best out-of-sample predictive performance.[^eas_ml_modeling_vignette-15]
+This is iterated many times through different regularization specifications (hyper-parameters). The cross-validation results allow one to estimate 'the level of regularization which provides the best out-of-sample predictive performance'.[^eas_ml_modeling_vignette-15]
 :::
 
 [^eas_ml_modeling_vignette-15]: This may not always be necessary. There are some claims that \[Oska ... ref?\]
@@ -292,23 +295,32 @@ cv_filter <- vfold_cv(train_filter)
 
 ```
 
-It creates ten partitions (data frames with some indexing objects and meta-data on the process):
+It creates ten partitions (data frames with some indexing objects and meta-data on the process).
 
 ```{r cv-show}
 
 cv
 
+```
+
+And a single partition:
+
+```{r}
+
+
 cv[[1,1]]
 
 ```
 
-Each of these particions classes 90% of the data for 'analysis' and about 10% for 'assessment'.
+Each of these partitions classes 90% of the data for 'analysis' and about 10% for 'assessment'.
 
-# Defining and creating the formula objects ('equations' to model)
+# Defining and creating 'elements of the modeling'
 
-First I make a list of 'right hand side variables' here,[^eas_ml_modeling_vignette-17] the columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.[^eas_ml_modeling_vignette-18]
+## Defining the formula objects ('equations' to model)
 
-[^eas_ml_modeling_vignette-17]: I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars.` "Right hand side variables" obviously refers to the position on the right hand side of a stated modeling equation
+First I make a list of 'right hand side' (rhs) variables here,[^eas_ml_modeling_vignette-17] the columns being used in prediction, to shorten later code, avoiding duplication, and centralize things.[^eas_ml_modeling_vignette-18]
+
+[^eas_ml_modeling_vignette-17]: I previously labeled these `control_vars`. But 'control variables' has a particular meaning in the context of causal inference and interpretation. In other work that *is* aiming at causal interpretation, I separate `control_vars` from the key variable of (causal) interest. But here 'they are all equal' so I just call it `rhs_vars.` "Right hand side variables" obviously refers to the position on the right hand side of a stated modeling equation.
 
 [^eas_ml_modeling_vignette-18]: I know I said this is good to do 'at the top', but this is the part where we are starting to actually get into the modeling, so it seems OK.
 
@@ -322,7 +334,7 @@ rhs_vars <- c("ln_years_involved", "year_f", "ln_age", "not_male_cat", "student_
 
 Next we create three formula objects,[^eas_ml_modeling_vignette-19] each with the same set of rhs variables, but a different 'outcome' variable.[^eas_ml_modeling_vignette-20]
 
-[^eas_ml_modeling_vignette-19]: It might be more tidy to do this imputting a list of outcome variables too, and generating a list of formulas to use later. Leaving this as a 'to do'.
+[^eas_ml_modeling_vignette-19]: It might be more tidy to do this by inputting a list of *outcome* variables too, and generating a list of formulas to use later. Leaving this as a 'to do'.
 
 [^eas_ml_modeling_vignette-20]: `make_formula` uses `stats::reformulate` to collapse lists into a formula object.
 
@@ -335,7 +347,7 @@ Each of these outcomes has a different character:
 
 `don_share_inc_imp_f`: donation as a share of (imputed) income, between 0 and 1
 
-`d_don_1k`: A binary for 'whether donated \$1000 or more.
+`d_don_1k`: A binary for 'whether donated \$1000 or more.'
 
 These will suggest different modeling approaches and interpretations.
 :::
@@ -353,7 +365,7 @@ d_don_1k_f <- make_formula("d_don_1k", rhs_vars)
 
 ```
 
-These look like ...
+These formulas look like ...
 
 ```{r}
 l_don_av_2yr_f
@@ -361,20 +373,24 @@ l_don_av_2yr_f
 
 etc.
 
-## 'Recipes' for imputing and standardizing data in an ML environment
+## 'Recipes' for imputing & standardizing data in a ML context
 
-As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help' Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.[^eas_ml_modeling_vignette-21] This should get us the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*.
+As noted, in a machine learning context, especially if we care only about prediction for its own sake, 'more features (columns) always help'. Thus, we try to fit a model that allows many, many variables, imputing these where there are missing values.[^eas_ml_modeling_vignette-21] This should get us the model that 'predicts best out-of-sample'.^[But once again,  we *need to be very careful in interpreting these coefficients*.]
 
 [^eas_ml_modeling_vignette-21]: Imputing them based on non-leaky variables only, of course, not based on any post-outcome measures.
 
-For ML procedures to work, we often always need to standardize each continuous (predictor) column, subtracting its mean and dividing by it's estimated standard deviation.[^eas_ml_modeling_vignette-22]
+For ML procedures to work, we often always need to standardize each continuous (predictor) column, subtracting its mean and dividing by its estimated standard deviation.[^eas_ml_modeling_vignette-22]
 
-[^eas_ml_modeling_vignette-22]: This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later. (This may only be the case for regression-based approaches.) Oska: "Really depends on the type of model, for very popular tree-based models standardization isn't required."
+[^eas_ml_modeling_vignette-22]: This is basically because we need to 'penalize each coefficient fairly'. Note that we can also divide by any scalar for interpretation, as long as we do this the same for all columns. This comes up later. (This may only be the case for regression-based approaches.)
 
-**Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once'; this would not yield valid metrics for our tuning because of the 'data leakage' issue. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').
+Oska notes: This "really depends on the type of model, for very popular tree-based models standardization isn't required."
 
-```{r}
+**Recipe package:** We can't merely 'do all the imputing and standardation on the full data set once.' This would not yield valid metrics for our tuning because of the 'data leakage' issue. Because of the nature of the cross-validation procedure, we need to do the above steps *separately for each iteration*, imputing and standardizing *using only the non-excluded observations in the partition* (or 'fold').
 
+
+In the code below, we define a function to do a series of pre-processing steps that seem appropriate for our case at hand.
+
+```{r preprocess_func}
 
 preprocess_func <- function(formula, data = train){
   require(recipes)
@@ -393,3 +409,443 @@ preprocess_func <- function(formula, data = train){
     recipes::step_dummy(all_nominal_predictors())
 }
 ```
+
+
+::: {.callout-note collapse="true"}
+## In the code above, the `preprocess_func` function defines a recipe that:
+
+- Is applied to a particular formula and data set
+- For all numeric rhs variables:
+    - imputes them at their median values, where missing
+    - de-means them scales them by a factor of 2 standard deviations (see Gelman)
+- Removes any rhs variables with zero variance
+- Makes standard dummy variables out of all 'nominal' (categorical) rhs variables 
+:::
+
+
+Next, in the code below, we apply the above `preprocess_func` to actually create the recipes.^[Note that this is still not modifying any *data*, as we are not *applying* the recipes yet.]
+
+```{r create_recipes}
+# Create recipes (defined above in preprocess_func) (with 'formulas') attached to data objects (default is 'train')
+
+l_don_av_2yr_rec <- preprocess_func(l_don_av_2yr_f, data=train) #used preprocess_func to define a recipe
+#`data=train` as a reminder that this is a data thing
+
+don_share_inc_imp_rec <- preprocess_func(don_share_inc_imp_f)
+d_don_1k_rec <- preprocess_func(d_don_1k_f)
+
+l_don_av_2yr_rec_filter <- preprocess_func(l_don_av_2yr_f, data = train_filter)
+
+```
+
+For example, 
+
+`l_don_av_2yr_rec_filter <- preprocess_func(l_don_av_2yr_f, data = train_filter)`
+
+creates a recipe object that is summarized as
+
+```{r}
+
+l_don_av_2yr_rec_filter
+
+```
+
+
+
+## Defining machine learning models (procedures)
+
+We defined the data 'environment', the formula objects, and the 'recipes'.  Now we define the 'ML models', i.e., the procedures for 'what sort of predictive models do we want to build, and how'?
+
+
+::: {.callout-note collapse="true"}
+## I will skip the 'decision tree' model here
+
+A regression/decision tree is a rather simple approach, easy to understand and interpret. However, I suspect it is not great for prediction in our example here. IIRC it is dominated by the Random Forest approach. Thus, I skip it, for brevity.
+
+:::
+
+### Random forest model
+
+Briefly, the random forest approach tries to predict outcomes through building a number of independent "trees", and averaging over these. 
+
+::: {.callout-note collapse="true"}
+## Trees?
+
+I'm not going to explain this whole procedure here. We flesh this out a bit more [here](https://daaronr.github.io/metrics_discussion/control-ml.html#tree-models), but note others can  do a better job of explaining it than us.  Still, a few notes, possibly with incorrect terminology. 
+
+Just think of splitting up the data first by one category, then by another category. E.g., we could split it by gender, and then by income being over some threshold, to give us four categories or 'leaf nodes'. For each category at the bottom of each tree (leaf node), you make a single prediction for the outcome variable. We try to build these trees in away so that there is as much homogeneity as possible within each leaf node, and as much difference between leaf nods as possible... So that our predictions are as good as possible.  We fit this in a way that maximize its prediction power within the training sample, obviously, but subject to a 'penalty for more branchings' ...  with the goal of predicting well on data we didn't use to fit the model. 
+
+How do you choose 'what to split it by first' and 'then by what'? There are algorithms. Essentially, you try each variable and see which variable and which split of that variable reduces the "entropy" the most at a particular node.
+
+Why might this approach be better than regression approaches? Trees seem to force you to use each feature rather bluntly, in a sequence of splits at single cutoff points only (for continuous variables). In contrast, regressions allow you to weigh a different features against each other and have different relative strengths. On the other hand, tree models seem to allow intricate patterns of interactions between different features in ways that would be difficult to accommodate in a regression model. 
+:::
+
+
+::: {.callout-note collapse="true"}
+## Random forests?
+
+Above, I basically described the creation of an individual tree you could use to predict outcomes with. But it seems the creation of such trees is rather sensitive to initial conditions, and maybe it's sensitive to the particular date are you are using to fit the model. Random forest does something like... "build a bunch of tree models and average them". But you can't build a bunch of different independent tree models unless you make some restrictions to each one, so for each tree it randomly samples a set of features from the full set, and leaves others out of the model.
+
+:::
+
+Below, we define `rf_model_reg` as a `parsnip` object. 
+
+```{r}
+
+rf_model_reg <- parsnip::rand_forest(
+  mtry = tune(), #number of predictors to randomly sample at each 'split'
+  trees = tune(), #how many trees in the 'ensemble'
+  min_n = tune()) %>%
+  parsnip::set_engine("ranger", importance = "impurity") %>% 
+  parsnip::set_mode("regression")
+
+```
+
+We specify, 
+
+`mtry = tune()`: How many predictors should we randomly sample for each split (tree?). We set this to `tune`; that means we allow the cross-fold validation process to tell us what seems to work best.
+
+We also set it to 'tune':
+- `trees`: how many trees in the 'ensemble' (the 'forest'?)
+- `min_n`: how few observations each (leaf) node is allowed to contain
+
+^[`set_mode("regression")` indicates that the outcome is continuous, rather than 'classification', I believe.  I am not sure what exactly  the `set_engine` options mean here.]
+
+
+## Glmnet penalized regression
+
+This is simply a regression approach with 'penalization' or 'shrinkage' ... but done in a sophisticated way. 
+
+The GLMnet approach combines 'ridge (L2 norm) and lasso (L2 norm)', tuning the mix of each, as well as tuning the penalization parameters *within* each. Both the sum of absolute value coefficients (L1 norm) and the summed square of these (L2 norm) maty be penalized. Thus, these will be 'shrunk towards zero' relative to a comparable OLS (standard linear model)
+ estimate. How much do we 'charge' for the absolute or squared sums? This is 'tuned', i.e., we see what combinations perform best in the cross-validation exercise.  
+ 
+In some cases (because of the L1 norm), coefficients may be dropped entirely, i.e., 'shrunk all the way to zero'.^[Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more 'parsimonious', thus perhaps easier to describe and use. But the Lasso is *not* specifically designed as a 'variable selection procedure'. Running Lasso and then naively using the 'variables not shrunk to zero' in further standard linear models or other procedures is not optimal.]
+
+
+```{r linear_model_reg}
+
+linear_model_reg <- linear_reg(penalty = tune(), 
+                               mixture = tune()) %>%
+            set_engine("glmnet")
+
+```
+
+In the code above, we define the `linear_model_reg` `linear_reg` object. We specify the 'engine' we use, and, as noted, that we are using cross-validation tuning to determine how much to penalize coefficient sizes overall, and for each norm (with what 'mixture' of L1 and L2 norms).
+
+Next we make a list of both of the above defined 'regression models'
+
+```{r}
+# Create list of 'regression models' (i.e., continuous outcomes)
+regression_models <- list(random_forest = rf_model_reg,
+                          linear_reg = linear_model_reg)
+
+```
+
+## Classification models (Forest and Logistic  Regression)
+
+We do the same as above, but defining the models/modeling procedures for 'classification models', i.e., for those cases where we have a non-continuous outcome; in our case 'whether they donated 1000 USD or more`. We define a random forest 'classification' as well as an elastic net version of a logistic (logit) model, and then a list combining both.s
+
+```{r rf_model_class}
+
+# Random forest model
+rf_model_class <- rand_forest(mtry = tune(), #number of predictors to randomly sample at each 'split'
+                              trees = tune(), #how many trees in the 'ensemble'
+                              min_n = tune()) %>%
+  set_engine("ranger", importance = "impurity") %>%
+  set_mode("classification")
+```
+
+
+```{r logistic_model_reg}
+
+# Logistic regression
+logistic_model_reg <- logistic_reg(penalty = tune(),
+                                   mixture = tune()) %>% #DR, @OS -- what is the 'mixture' here? -- is it a mixture of L1 and L2 norms (ridge and lasso?)
+  set_engine("glmnet")
+
+```
+
+```{r}
+classification_models <- list(
+                              random_forest = rf_model_class,
+                              logistic_reg = logistic_model_reg)
+
+```
+
+## Create workflows
+
+> A workflow is an object that can bundle together your pre-processing, modeling, and post-processing requests.
+
+This should make the flow 'tidy' and the output easy to use (I hope this becomes obvious below). ^[While we tend to do only 'one of each thing' below (a single recipe step tied to a single modeling step), the package is designed to enable lists of each, to enable all, or some combinations to be produced. See the authors' vignette [here](https://workflowsets.tidymodels.org/reference/workflow_set.html)]
+
+
+
+Next, we create a workflow set for the 'log of 2 year averaged donation' outcome (with the income filtered data):^[Also, as a preparation for this we 'fit random forest parameter ranges to data'. I am not conpletely sure what is going on here. We should also find a cleaner way to do this.]
+
+
+```{r l_don_av_2yr_wf_filter}
+
+#pre-step ... not sure how it works
+rf_params <- tune::parameters(rf_model_reg) %>%
+  recipes::update(mtry = mtry(c(0, nrow(d_don_1k_rec$var_info)-1))) 
+#Note that 'mtry' is 'number of sampled predictors'
+
+
+l_don_av_2yr_wf_filter <-
+  workflow_set(
+    preproc = list(preprocess = l_don_av_2yr_rec_filter),
+               #'preprocessing objects' ... here 'recipes'
+               models = regression_models) %>% #'parsnip model specifications'
+  option_add_parameters() %>% #'adds a parameter object to the 'option' column'
+  option_add(param_info = rf_params, #this is the restriction defined above
+             id = "preprocess_random_forest")
+#'add options saved in a workflow set' esp in the 'option column'
+
+l_don_av_2yr_wf_filter
+
+l_don_av_2yr_wf_filter$info
+
+```
+
+
+This has a lot of 'stuff in it'. We give it the preprocessing recipe `l_don_av_2yr_rec` (and the formula?)  as discussed above, and the set of modeling procedures  we defined under `regression_models`,
+ 
+ We do similarly for the 'donate over 1k' binary outcome and associated modeling approach.^[I will skip the 'donation share' outcome here for brevity]
+ 
+ 
+```{r d_don_1k_wf}
+
+d_don_1k_wf <-
+  workflow_set(
+    preproc = list(preprocess = d_don_1k_rec),
+               models = classification_models) %>%
+  option_add(param_info = rf_params, id = "preprocess_random_forest")
+
+
+```
+ 
+
+# Fitting models 
+
+
+::: {.callout-note collapse="true"}
+## Bayesian optimization
+
+We have a large space to explore. We use 'Bayesian optimization', presumably, for the *tuning parameters* only, i.e., the combinations of 'hyper-parameters' (the penalization parameters). It iterates towards what seems to be an optimum (maximum posterior?) in this 'structured space'. This is claimed to be "quicker than grid search and more effective than random search." 
+
+Note that the underlying procedures are not Bayesian (as far as I know). We are not assigning a prior over (e.g.) the coefficients/'weights' on the variables/features in the linear models. Conditional on the tuning parameters are computed according to a simple algorithm (linear models: minimized least squares subject to the penalization, or some such).
+::: 
+
+
+Options for Bayesian optimization (for tuning parameters?)
+
+```{r bayes_ctrl}
+
+bayes_ctrl <- control_bayes(parallel_over = "everything",
+                      verbose = TRUE,
+                      # no_improve = 1,
+                      save_pred = TRUE,
+                      save_workflow = TRUE,
+                      seed = seed)
+
+#max_iter <- 30
+
+max_iter <- 4
+```
+
+Normally we would set a large number of iterations, but as this is a vignette we set it to 4 iterations only. It still takes a few minutes
+
+
+## Actual fitting
+
+We now 'map the workflow' to actually estimate the model, using `workflow_map`. 
+
+It takes the workflow object (below `l_don_av_2yr_wf`) and 'runs the function', here ... 
+
+> tune_bayes() uses models to generate new candidate tuning parameter combinations based on previous results.
+
+
+```{r l_don_av_2yr_results_filter}
+
+l_don_av_2yr_results_filter <- l_don_av_2yr_wf_filter %>%
+  workflow_map("tune_bayes",
+               seed = seed,
+               resamples = cv,
+               iter = max_iter,
+               # metrics = metric_set(mae),
+               control = bayes_ctrl) #'control' how the function works
+
+```
+
+
+<!-- @Oska -- do you know if there is a way to recover those iteration results in the output without having it verbose? -->
+
+Sorry for all the output above ... that is because we set `verbose=TRUE`. It is considering the tuning parameters to minimize root-mean-squared error of the prediction. The random forest seems to swing widely in some dimensions, e.g., first considering about 400 trees, then 4 tree. then a few hundred trees again. It probably needs more iterations to really converge. 
+
+The elastic net also seems to have substantially adjusted (reduced) the level of penalization over these few iterations, and moved much more towards the ridge approach (L2 norm) and away from the lasso (L1).
+
+<!-- produces a tibble of fit workflows, has not yet been applied to the testing data  -->
+
+We next fit the models with binary (1k donation) outcome, for the random forest and logistic regression 'classifiers'.
+
+```{r d_don_1k_results}
+d_don_1k_results <- d_don_1k_wf %>%
+  workflow_map("tune_bayes",
+               seed = seed,
+               resamples = cv,
+               iter = max_iter,
+               control = bayes_ctrl)
+
+```
+
+Above the iterations are tuning the parameters, as in the 'regression' models. Here they focus on a classification measure called the 'area under the receiver operating curve'; 0 is worst and 1 is best.^[This considers both types of error (false negatives and positive; i.e., precision and recall). This metric equals with the area above the diagonal in a plot of the true positive rate against the false positive rate.],^[For the elastic-net, it looks like the penalization rate is extremely low; I would want to dig more deeply into this.]
+
+
+# Working with results 
+
+So we fit a bunch of models and we have some workflow set/tibble objects. Now what do we do with them?
+
+We may want to 
+
+1. Assess their performance on the testing data (set aside)
+
+2. "Interpret them" (Carefully! This can be dangerous/misleading)
+
+3. Use them for actual prediction and 'profit' when we have future data^[We could also use them for loose predictions for hypothetical scases or groups of people we expect to have certain characteristics.]
+
+
+To enable 1 and 2, we do some cleanup and renaming below.^[To save time in later work, we might try to build a function or something to automatically rename this stuff.]
+
+```{r}
+
+# Char vector for renaming of models from workflowset defaults (for display)
+
+pred_model_names <- c(
+  "preprocess_random_forest" = "Random Forest",
+  "preprocess_linear_reg" = "Linear Regression (glmnet)",
+  "preprocess_logistic_reg" = "Logistic Regression (glmnet)")
+
+
+rename_metrics <- c("Workflow" = "wflow_id",
+                    "Iteration" = ".config",
+                    "Iteration Number" = ".iter",
+                    "Preprocessing" = "preproc",
+                    "Model" = "model",
+                    "Metric" = ".metric",
+                    "Estimator" = ".estimator",
+                    "Mean" = "mean",
+                    "N" = "n",
+                    "Standard error" = "std_err")
+
+rename_models <- function(df, new_names = pred_model_names){
+  df <- df %>% 
+    mutate(model = stringr::str_replace_all(model, pred_model_names))
+  return(df)
+}
+
+```
+
+Next we use the `best_wflow_preds_vi` helper to extract the 'optimized' parameters and values from the above workflow set/tibble objects, and generate some metrics of fit with the appropriate training data. 
+
+
+```{r best_wflow_preds_vi_extract}
+
+
+l_don_av_2yr_best_params_filter <- best_wflow_preds_vi(l_don_av_2yr_results_filter,
+  outcome_var = "l_don_av_2yr", 
+  train_sample = train_filter,
+  test_sample = test_filter)
+
+d_don_1k_best_params <- best_wflow_preds_vi(d_don_1k_results,
+  outcome_var = "d_don_1k",
+  classification = TRUE, 
+  metric = "roc_auc")
+
+```
+
+The 'vi', a measure of 'variable importance', may be an object of particular interest:
+
+```{r}
+
+d_don_1k_best_params$vi
+
+```
+
+For the random forest model we can't give a 'sign' because each variable enters in a complicated way ... at lower nodes across multiple averaged trees.
+
+## Metrics of fit (performance)
+
+We want to know how good our models are predicting the training data (the data that was not used to fit these models). 
+
+For the continuous outcomes we consider the 'regression metrics', and define these in a list below.
+
+1. root mean-squared error and
+2. mean absolute error
+
+```{r regress_metrics}
+regress_metrics <- list(rmse = yardstick::rmse_vec,
+                        mae = yardstick::mae_vec)
+```
+
+For the binary (or categorical outcomes we consider a range of 'classification metrics^[I discuss these issues at length [here](https://rethinkpriorities.github.io/methodology-statistics-design/chapters/classification_model_notes.html). However this is a fairly mainstream topic, and thereare a range of other, more precise or more intuitive discussions throughout the web.]
+
+1. Accuracy: 'the proportion predicted correctly'
+2. Recall: The share of positive (or 'relevant') results that were predicted to be positive. (aka sensitivity ^[1 - the rate of false negative]
+3. Precision: Share of positive predictions that are truly positive^[1- rate of false positive]
+4. F1 score: A weighted (default: harmonic mean) of precision and recall
+
+```{r}
+
+class_metrics <- list(accuracy = yardstick::accuracy_vec,
+                      recall = yardstick::recall_vec,
+                      precision = yardstick::precision_vec,
+                      f1_score = f_meas_vec)
+
+```
+
+
+
+First we define a little helper function to help calculate the performance metrics.
+
+```{r calculate_metrics}
+
+calculate_metrics <- function(df, metrics, preds = preds, true_y = true_y){
+  df %>% mutate(purrr::map2_dfr({{true_y}}, {{preds}}, 
+    ~ purrr::map_dfc(
+      metrics,
+      do.call,
+      list(.x, .y))))
+}
+
+```
+
+Next, we apply it to the fit models tied to the training data: 
+
+```{r}
+
+l_don_av_2yr_best_params_filter <- l_don_av_2yr_best_params_filter %>% 
+  mutate(across(c(preds, true_y), ~map(.x, exp))) %>%
+  calculate_metrics(regress_metrics)
+d_don_1k_best_params <- calculate_metrics(d_don_1k_best_params, class_metrics)
+
+```
+
+Note that for the continuous outcomes, we first converted from logs to levels before calculating RMSE and MAE
+
+
+```{r}
+# Change model names
+
+d_don_1k_best_params <- rename_models(d_don_1k_best_params)
+l_don_av_2yr_best_params_filter <- rename_models(l_don_av_2yr_best_params_filter)
+
+```
+
+## Illustrate metrics of fit 
+
+...
+
+## Illustrate variable importance
+
+... 
+
