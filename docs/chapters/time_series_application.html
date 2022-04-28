@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
   <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.153">
+  <meta name="generator" content="quarto-0.9.243">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - 9&nbsp; Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</title>
   <style>
@@ -278,40 +278,40 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#the-case-at-hand-broad-terms" class="nav-link active" data-scroll-target="#the-case-at-hand-broad-terms"> <span class="header-section-number">9.0.1</span> The case at hand (broad terms)</a></li>
-<li><a href="#our-proposed-overall-strategy" class="nav-link" data-scroll-target="#our-proposed-overall-strategy"> <span class="header-section-number">9.0.2</span> Our proposed overall strategy</a></li>
-<li><a href="#niks-approach" class="nav-link" data-scroll-target="#niks-approach"> <span class="header-section-number">9.0.3</span> Nik’s approach</a></li>
-<li><a href="#kim-cs-thoughts" class="nav-link" data-scroll-target="#kim-cs-thoughts"> <span class="header-section-number">9.0.4</span> Kim C’s thoughts</a></li>
-<li><a href="#petes-notes-below" class="nav-link" data-scroll-target="#petes-notes-below"> <span class="header-section-number">9.1</span> PETE’S NOTES BELOW</a>
+<li><a href="#the-case-at-hand-broad-terms" id="toc-the-case-at-hand-broad-terms" class="nav-link active" data-scroll-target="#the-case-at-hand-broad-terms"> <span class="header-section-number">9.0.1</span> The case at hand (broad terms)</a></li>
+<li><a href="#our-proposed-overall-strategy" id="toc-our-proposed-overall-strategy" class="nav-link" data-scroll-target="#our-proposed-overall-strategy"> <span class="header-section-number">9.0.2</span> Our proposed overall strategy</a></li>
+<li><a href="#niks-approach" id="toc-niks-approach" class="nav-link" data-scroll-target="#niks-approach"> <span class="header-section-number">9.0.3</span> Nik’s approach</a></li>
+<li><a href="#kim-cs-thoughts" id="toc-kim-cs-thoughts" class="nav-link" data-scroll-target="#kim-cs-thoughts"> <span class="header-section-number">9.0.4</span> Kim C’s thoughts</a></li>
+<li><a href="#petes-notes-below" id="toc-petes-notes-below" class="nav-link" data-scroll-target="#petes-notes-below"> <span class="header-section-number">9.1</span> PETE’S NOTES BELOW</a>
 <ul class="collapse">
-<li><a href="#decomposition" class="nav-link" data-scroll-target="#decomposition"> <span class="header-section-number">9.1.1</span> Decomposition</a></li>
-<li><a href="#types-of-decomposition" class="nav-link" data-scroll-target="#types-of-decomposition"> <span class="header-section-number">9.1.2</span> Types of decomposition</a></li>
+<li><a href="#decomposition" id="toc-decomposition" class="nav-link" data-scroll-target="#decomposition"> <span class="header-section-number">9.1.1</span> Decomposition</a></li>
+<li><a href="#types-of-decomposition" id="toc-types-of-decomposition" class="nav-link" data-scroll-target="#types-of-decomposition"> <span class="header-section-number">9.1.2</span> Types of decomposition</a></li>
 </ul></li>
-<li><a href="#stationary-vs.-non-stationarity" class="nav-link" data-scroll-target="#stationary-vs.-non-stationarity"> <span class="header-section-number">9.2</span> Stationary vs.&nbsp;non-stationarity</a>
+<li><a href="#stationary-vs.-non-stationarity" id="toc-stationary-vs.-non-stationarity" class="nav-link" data-scroll-target="#stationary-vs.-non-stationarity"> <span class="header-section-number">9.2</span> Stationary vs.&nbsp;non-stationarity</a>
 <ul class="collapse">
-<li><a href="#converting-to-stationary" class="nav-link" data-scroll-target="#converting-to-stationary"> <span class="header-section-number">9.2.1</span> Converting to stationary</a></li>
+<li><a href="#converting-to-stationary" id="toc-converting-to-stationary" class="nav-link" data-scroll-target="#converting-to-stationary"> <span class="header-section-number">9.2.1</span> Converting to stationary</a></li>
 </ul></li>
-<li><a href="#handling-features" class="nav-link" data-scroll-target="#handling-features"> <span class="header-section-number">9.3</span> Handling Features</a>
+<li><a href="#handling-features" id="toc-handling-features" class="nav-link" data-scroll-target="#handling-features"> <span class="header-section-number">9.3</span> Handling Features</a>
 <ul class="collapse">
-<li><a href="#lags" class="nav-link" data-scroll-target="#lags"> <span class="header-section-number">9.3.1</span> Lags</a></li>
-<li><a href="#rolling-statistics" class="nav-link" data-scroll-target="#rolling-statistics"> <span class="header-section-number">9.3.2</span> Rolling Statistics</a></li>
-<li><a href="#which-lags-rolling-stats-to-use" class="nav-link" data-scroll-target="#which-lags-rolling-stats-to-use"> <span class="header-section-number">9.3.3</span> Which Lags / Rolling Stats to Use?</a></li>
-<li><a href="#known-in-advance-vs.-not" class="nav-link" data-scroll-target="#known-in-advance-vs.-not"> <span class="header-section-number">9.3.4</span> Known in Advance vs.&nbsp;Not</a></li>
+<li><a href="#lags" id="toc-lags" class="nav-link" data-scroll-target="#lags"> <span class="header-section-number">9.3.1</span> Lags</a></li>
+<li><a href="#rolling-statistics" id="toc-rolling-statistics" class="nav-link" data-scroll-target="#rolling-statistics"> <span class="header-section-number">9.3.2</span> Rolling Statistics</a></li>
+<li><a href="#which-lags-rolling-stats-to-use" id="toc-which-lags-rolling-stats-to-use" class="nav-link" data-scroll-target="#which-lags-rolling-stats-to-use"> <span class="header-section-number">9.3.3</span> Which Lags / Rolling Stats to Use?</a></li>
+<li><a href="#known-in-advance-vs.-not" id="toc-known-in-advance-vs.-not" class="nav-link" data-scroll-target="#known-in-advance-vs.-not"> <span class="header-section-number">9.3.4</span> Known in Advance vs.&nbsp;Not</a></li>
 </ul></li>
-<li><a href="#validation" class="nav-link" data-scroll-target="#validation"> <span class="header-section-number">9.4</span> Validation</a></li>
-<li><a href="#types-of-models" class="nav-link" data-scroll-target="#types-of-models"> <span class="header-section-number">9.5</span> Types of Models</a>
+<li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"> <span class="header-section-number">9.4</span> Validation</a></li>
+<li><a href="#types-of-models" id="toc-types-of-models" class="nav-link" data-scroll-target="#types-of-models"> <span class="header-section-number">9.5</span> Types of Models</a>
 <ul class="collapse">
-<li><a href="#arima" class="nav-link" data-scroll-target="#arima"> <span class="header-section-number">9.5.1</span> ARIMA</a></li>
+<li><a href="#arima" id="toc-arima" class="nav-link" data-scroll-target="#arima"> <span class="header-section-number">9.5.1</span> ARIMA</a></li>
 </ul></li>
-<li><a href="#multiseries" class="nav-link" data-scroll-target="#multiseries"> <span class="header-section-number">9.6</span> Multiseries</a></li>
+<li><a href="#multiseries" id="toc-multiseries" class="nav-link" data-scroll-target="#multiseries"> <span class="header-section-number">9.6</span> Multiseries</a></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/edit/main/chapters/time_series_application.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/time_series_application.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<div class="quarto-title"><h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></h1></div></header>
+
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div></div></header>
 
 <section id="the-case-at-hand-broad-terms" class="level3" data-number="9.0.1">
 <h3 data-number="9.0.1" class="anchored" data-anchor-id="the-case-at-hand-broad-terms"><span class="header-section-number">9.0.1</span> The case at hand (broad terms)</h3>
@@ -484,7 +484,154 @@
 
 
 <!-- -->
-<div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title anchored" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p> Do we need to test for stationarity (and then difference and test it again?)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/ml_modeling.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/classification_model_notes.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Classification models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Time Series -- application to 'predict the influence of discrete events' (and more) on web traffic, signups, etc</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -717,153 +864,6 @@
 <span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>Predict a different time series for each unit (e.g., sales by store). Can use features across series (**cross series features**).</span>
 <span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
-</section>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1" role="doc-endnote"><p> Do we need to test for stationarity (and then difference and test it again?)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-</main> <!-- /main -->
-<script type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    setTimeout(function() {
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
-      });
-      return popup.innerHTML;
-    });
-  }
-});
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../chapters/ml_modeling.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../chapters/classification_model_notes.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Classification models</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 

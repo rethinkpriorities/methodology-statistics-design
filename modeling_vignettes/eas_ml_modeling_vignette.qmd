@@ -9,6 +9,11 @@ format:
     number-sections: true
     citations-hover: true
     footnotes-hover: true
+execute:
+    freeze: auto # re-render only when source changes
+    warning: false
+    message: false
+    error: true
 comments:
     hypothesis: true
 ---
@@ -24,6 +29,9 @@ I try to show:
 - Why we made specific modeling choices 
 
 
+
+See also: ['Fitting Models with parsnip'](https://www.tmwr.org/models.html)
+
 # Setup
 
 ## Packages and functions
@@ -32,17 +40,19 @@ Reinstall key packages so this can be standalone?[^eas_ml_modeling_vignette-1]
 
 [^eas_ml_modeling_vignette-1]: Note: not all these packages may be needed; let's search only the ones that are and drop the rest
 
-[^eas_ml_modeling_vignette-2]
 
-[^eas_ml_modeling_vignette-2]: another footnote in non-visual mode
 
 ```{r, include=FALSE}
+
+
+#or instead source(here("code", "methods_setup.R"))
 
 library(here)
 library(pacman)
 library(dplyr)
 
-p_load(rsample) # Why p_load these? (Can create issues with dependencies)
+p_load(rsample, install = FALSE) # Why p_load these? (Can create issues with dependencies)
+p_load(ggplot2, forcats, install = FALSE)
 p_load(parsnip, tune, dials, install = FALSE) # If loading multiple packages, better to use p_load with install = FALSE option
 p_load(conflicted)
 p_load(workflowsets)
@@ -64,6 +74,8 @@ mutate <- dplyr::mutate
 
 p_load(devtools)
 source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
+
+
 
 #github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421
 
@@ -265,7 +277,7 @@ In a machine learning context, especially if we care only about prediction for i
 ::: {.callout-note collapse="true"}
 ## ML, overfitting, regularization, tuning
 
-In standard econometrics 'OLS' approaches, we learn that including too many variables will *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a 'penalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*; they are not 'unbiased', they may not have a causal interpretation, and statistical inference (standard errors, etc.) is also not straightforward.
+In standard econometrics 'OLS' approaches, we learn that including too many variables will *worsen* a model's predictive power (out-of-sample fit). However, in ML contexts, to avoid this 'overfitting', we impose a Zpenalty' on the (normalized) coefficient magnitudes (absolute value, squared or both). We also 'tune' this penalty to achieve the best performance in the cross-validation partitions. If this is done right, more columns can only help our predictive power, achieving the model that 'predicts best out of sample'. However we *need to be very careful in interpreting these coefficients*; they are not 'unbiased', they may not have a causal interpretation, and statistical inference (standard errors, etc.) is also not straightforward.
 :::
 
 So we do 'regularization' ('trimming', 'penalization', etc.) to avoid 'overfitting'.
@@ -307,7 +319,6 @@ And a single partition:
 
 ```{r}
 
-
 cv[[1,1]]
 
 ```
@@ -331,6 +342,21 @@ rhs_vars <- c("ln_years_involved", "year_f", "ln_age", "not_male_cat", "student_
                   "first_hear_ea_lump")
 
 ```
+
+::: {.callout-note collapse="true"}
+## How did we choose these features (rhs variables?)
+
+The choice of features is one of the most important things in doing any modeling or prediction exercise. 
+
+Suppose we were strictly doing this 'how to fit a model to predict future outcomes'. Then I believe we should include all features that we expect to be able to observe in the future in the settings where we want to apply our model. Considering donations, maybe I would want to predict at the time someone first joins EA, how much they would donate a year later. Why? Perhaps to do some sort of budgeting, or perhaps if we were trying to select 'whom to target' with a particular promotion, or who to recommend to take a particular path and we expected that those who tend to donate more would respond better. 
+
+But this is not what we were trying to do here. We were aiming at different goals here, not prediction per se.  See our discussion under [Prediction models for insights?](#pred-insights).
+
+Essentially, I was looking to generate a set of useful strictly-data-driven insights about 'what is important in predicting donations', deriving non-rigorous implications from this. So I focused on a subset off features that seemed directly interesting or relevant (such as 'earn to give career') and others that seemed helpful interpreting this (like the year dummies).
+
+I was somewhat thinking of this as a causal model, or at least I wanted to allow the possibility of causal interpretation. Thus the 'Giving What we Can' pledge was not included here, because this seemed to be too close to the outcome of interest (i.e., it seems to be a very strong collider).
+
+:::
 
 Next we create three formula objects,[^eas_ml_modeling_vignette-19] each with the same set of rhs variables, but a different 'outcome' variable.[^eas_ml_modeling_vignette-20]
 
@@ -450,8 +476,6 @@ l_don_av_2yr_rec_filter
 
 ```
 
-
-
 ## Defining machine learning models (procedures)
 
 We defined the data 'environment', the formula objects, and the 'recipes'.  Now we define the 'ML models', i.e., the procedures for 'what sort of predictive models do we want to build, and how'?
@@ -516,10 +540,12 @@ We also set it to 'tune':
 
 This is simply a regression approach with 'penalization' or 'shrinkage' ... but done in a sophisticated way. 
 
-The GLMnet approach combines 'ridge (L2 norm) and lasso (L2 norm)', tuning the mix of each, as well as tuning the penalization parameters *within* each. Both the sum of absolute value coefficients (L1 norm) and the summed square of these (L2 norm) maty be penalized. Thus, these will be 'shrunk towards zero' relative to a comparable OLS (standard linear model)
- estimate. How much do we 'charge' for the absolute or squared sums? This is 'tuned', i.e., we see what combinations perform best in the cross-validation exercise.  
- 
-In some cases (because of the L1 norm), coefficients may be dropped entirely, i.e., 'shrunk all the way to zero'.^[Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more 'parsimonious', thus perhaps easier to describe and use. But the Lasso is *not* specifically designed as a 'variable selection procedure'. Running Lasso and then naively using the 'variables not shrunk to zero' in further standard linear models or other procedures is not optimal.]
+The GLMnet approach combines 'ridge (L2 norm) and lasso (L2 norm)', tuning the mix of each, as well as tuning the penalization parameters *within* each.
+
+
+We discuss this further under ['penalized regression models'](#penalized-reg) in our machine learning modeling section. 
+
+
 
 
 ```{r linear_model_reg}
@@ -653,7 +679,7 @@ bayes_ctrl <- control_bayes(parallel_over = "everything",
 max_iter <- 4
 ```
 
-Normally we would set a large number of iterations, but as this is a vignette we set it to 4 iterations only. It still takes a few minutes
+Normally we would set a large number of iterations, but as this is a vignette we set it to 4 iterations only. It still takes a few minutes.^[I wonder if there is a way to speed it up further, for demo purposes. It generates a lot of 'candidates' -- maybe this can be reduced.s]
 
 
 ## Actual fitting
@@ -689,6 +715,10 @@ The elastic net also seems to have substantially adjusted (reduced) the level of
 We next fit the models with binary (1k donation) outcome, for the random forest and logistic regression 'classifiers'.
 
 ```{r d_don_1k_results}
+
+
+bayes_ctrl$verbose <- FALSE
+
 d_don_1k_results <- d_don_1k_wf %>%
   workflow_map("tune_bayes",
                seed = seed,
@@ -698,7 +728,34 @@ d_don_1k_results <- d_don_1k_wf %>%
 
 ```
 
-Above the iterations are tuning the parameters, as in the 'regression' models. Here they focus on a classification measure called the 'area under the receiver operating curve'; 0 is worst and 1 is best.^[This considers both types of error (false negatives and positive; i.e., precision and recall). This metric equals with the area above the diagonal in a plot of the true positive rate against the false positive rate.],^[For the elastic-net, it looks like the penalization rate is extremely low; I would want to dig more deeply into this.]
+
+::: {.callout-note collapse="true"}
+## Iteration 4 ... classification models
+
+Random forest:
+```
+i Current best:		roc_auc=0.8441 (@iter 2)
+i Gaussian process model
+i Generating 4994 candidates
+i Predicted candidates
+i mtry=8, trees=106, min_n=40
+i Estimating performance
+Newest results:	roc_auc=0.8424 (+/-0.00992)
+```
+
+Logistic Elastic net:
+```
+i Current best:		roc_auc=0.852 (@iter 2)
+i Gaussian process model
+i Generating 5000 candidates
+i Predicted candidates
+i penalty=1.75e-06, mixture=0.605
+ Estimating performance
+ Newest results:	roc_auc=0.8474 (+/-0.0087)
+```
+:::
+
+Above (pasted into fold) the iterations are tuning the parameters, as in the 'regression' models. Here they focus on a classification measure called the 'area under the receiver operating curve'; 0 is worst and 1 is best.^[This considers both types of error (false negatives and positive; i.e., precision and recall). This metric equals with the area above the diagonal in a plot of the true positive rate against the false positive rate. For the elastic-net, it looks like the penalization rate is extremely low; I would want to dig more deeply into this.]
 
 
 # Working with results 
@@ -709,7 +766,7 @@ We may want to
 
 1. Assess their performance on the testing data (set aside)
 
-2. "Interpret them" (Carefully! This can be dangerous/misleading)
+2. "Interpret them" (Carefully! This can be dangerous/misleading.)
 
 3. Use them for actual prediction and 'profit' when we have future data^[We could also use them for loose predictions for hypothetical scases or groups of people we expect to have certain characteristics.]
 
@@ -750,7 +807,6 @@ Next we use the `best_wflow_preds_vi` helper to extract the 'optimized' paramete
 
 ```{r best_wflow_preds_vi_extract}
 
-
 l_don_av_2yr_best_params_filter <- best_wflow_preds_vi(l_don_av_2yr_results_filter,
   outcome_var = "l_don_av_2yr", 
   train_sample = train_filter,
@@ -783,6 +839,7 @@ For the continuous outcomes we consider the 'regression metrics', and define the
 2. mean absolute error
 
 ```{r regress_metrics}
+
 regress_metrics <- list(rmse = yardstick::rmse_vec,
                         mae = yardstick::mae_vec)
 ```
@@ -833,6 +890,7 @@ d_don_1k_best_params <- calculate_metrics(d_don_1k_best_params, class_metrics)
 Note that for the continuous outcomes, we first converted from logs to levels before calculating RMSE and MAE
 
 
+Some tidying up and renaming below.
 ```{r}
 # Change model names
 
@@ -841,11 +899,102 @@ l_don_av_2yr_best_params_filter <- rename_models(l_don_av_2yr_best_params_filter
 
 ```
 
-## Illustrate metrics of fit 
+```{r tidyparams}
 
-...
+recode_params <- function(df){
+    # Shortcut function to tidy up variable names in parameter df
+    df <- df %>% dplyr::select(model, vi) %>%
+    tidyr::unnest(vi) %>%
+    mutate(model = str_replace_all(model,
+                                   c("preprocess_" = "", "_"  = " ")),
+           #Variable =  str_replace_all(Variable, key_eas_all_labels),
+           Variable =  str_replace_all(Variable,
+                                       c("_"  = " ", "_Student" ="", "ln" = "log")),
+           Sign = if_else(is.na(Sign), "NA", Sign))
+}
+
+# Tidy up parameters
+l_don_av_2yr_best_params_recode_filter <- l_don_av_2yr_best_params_filter %>% 
+  #filter(is.na(filter_name)) %>%
+  recode_params
+
+d_don_1k_best_params_recode <- d_don_1k_best_params %>% recode_params
+```
+
 
 ## Illustrate variable importance
 
-... 
+Some renaming/recoding and helper functions in the code below:S
+
+```{r plot_vi}
+
+plot_vi <- function(df, shapes = shape_colours){
+  # Shortcut function for plotting normalized variable importance (output of norm_vi)
+  df %>% ggplot(aes(y = Variable, x = Norm, colour = model, shape = Sign)) +
+    scale_shape_manual(values = shapes) +
+    geom_point(size = 4, stroke = 5) +
+    xlab("Normalised feature importance") + ylab("")
+}
+
+#specific changing of variable and signs for the below.
+mutate_labels_sign_snip <- function(df) {
+  df %>%
+     mutate(
+  Variable = str_replace_all(Variable,
+    c("First-heard EA"="Heard EA:",
+      "response" = "resp.",
+      "Gender Gender" = "Gender",
+      "unknown" = "No resp.",
+      "Student Student" = "Student",
+      "X80000" = "80000")),
+  Sign = if_else(is.na(Sign), "NA", Sign)
+    )
+}
+
+# Set colors for shapes as a named vector
+shape_colours <- c("NA" = 120, "NEG" = 95, "POS" = 43)
+```
+
+
+^[adding content from `modeling_vignettes/based_off_of/donations_20.Rmd`]
+
+
+Below, we plot the variable importance. But this takes a long time to run. Why? 
+
+```{r iplot_l_don_av_2yr_best_params_filter}
+
+(
+iplot_l_don_av_2yr_best_params_filter <-
+  l_don_av_2yr_best_params_recode_filter %>%
+      filter(!grepl("tree", model, ignore.case = TRUE)) %>%
+    norm_vi(slice_top = 10) %>%
+    mutate_labels_sign_snip %>%
+  slice_max(Total_Norm, n = 10) %>%
+  mutate(Variable = fct_reorder(Variable, Norm)) %>%
+  ggplot(aes(y = Variable, x = Norm, colour = model, shape = Sign)) +
+    scale_shape_manual(values = c(120, 95, 43)) +
+  geom_point(
+    position = position_jitter(seed = 42,  width = 0.1, height = 0.1),
+    size = 4, stroke = 5) +
+  xlab("Normalised feature importance") +
+  ggtitle("Importance: predict log(don.) (filter: income < 500k)")
+)
+```
+
+Above, we report the 'importance scores' for the ten most important features ('variables') for two distinct approaches to predicting log (average) donation.^[Note that (as is common in machine learning modeling) all features have been normalized to be on the same scale; for continuous features such as age and income we take the natural log of each, and divide each by two standard deviations of the logged feature, following @gelmanScalingRegressionInputs2008.
+]
+```{r}
+
+```
+
+These importance scores are technically defined [here](https://topepo.github.io/caret/variable-importance.html#model-specific-metrics). For the elastic net ("linear reg") approzach, we depict the coefficients' signs with a "+" or "-"; for tree/forest-based modeling this is less straightforward.
+
+Income (normalized, bottom-coded at 5000 USD, and logged) is the most important predictor for each model, by a wide margin. After this, the relative importances vary.^[Note that 'student category non-response' is the second most important predictor in the linear model. This doesn't seem to have a clear interpretation, but including this may help us better interpret other features like student status. To the extent that it is predictive, we might also expect it to be predictive in future cases, and it should go into useful predictions. On the other hand this non-reporting isn't the sort of feature we could apply to predictions and policy judgements for broad groups in the wild, absent a similar survey. We can't say "let's target our program to people who are unlikely to indicate student status in a survey'. 
+... We might expect non-response to be associated with lower engagement, and perhaps lower donation rates. However, we are considering non-responses to particular questions *among* those who did report a donation amount. We could speculate about why non-response to the 'where heard of EA' question seems to be associated with donating more.]
+
+
+
+## Illustrate metrics of fit 
+
+
 

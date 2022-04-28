@@ -158,7 +158,6 @@ This is a classic example for Bayesian inference. Some good discussions and vign
 \
 
 
-
 *Ready packages*
 
 - `bayesAB` is easy to apply, allows flexible specification of priors (and has tools to help you visualize these), and generates very clear output and graphs. See  [vignette](http://frankportman.github.io/bayesAB/)

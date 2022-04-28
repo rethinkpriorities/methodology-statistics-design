@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.153">
+<meta name="generator" content="quarto-0.9.243">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - Power analysis workflow (Jamie Elsey)</title>
 <style>
@@ -256,28 +256,28 @@
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
 <li>
-<a href="#discussion-and-framework" class="nav-link active" data-scroll-target="#discussion-and-framework">Discussion and framework</a>
+<a href="#discussion-and-framework" id="toc-discussion-and-framework" class="nav-link active" data-scroll-target="#discussion-and-framework">Discussion and framework</a>
 <ul class="collapse">
-<li><a href="#introduction-and-goals" class="nav-link" data-scroll-target="#introduction-and-goals">Introduction and goals</a></li>
-<li><a href="#definition-of-power" class="nav-link" data-scroll-target="#definition-of-power">Definition of power</a></li>
-<li><a href="#general-workflow-for-simulation-based-power-analysis" class="nav-link" data-scroll-target="#general-workflow-for-simulation-based-power-analysis">General workflow for simulation-based power analysis</a></li>
-<li><a href="#possible-pitfallsmisunderstandings-of-power-analysis" class="nav-link" data-scroll-target="#possible-pitfallsmisunderstandings-of-power-analysis">Possible pitfalls/misunderstandings of power analysis</a></li>
+<li><a href="#introduction-and-goals" id="toc-introduction-and-goals" class="nav-link" data-scroll-target="#introduction-and-goals">Introduction and goals</a></li>
+<li><a href="#definition-of-power" id="toc-definition-of-power" class="nav-link" data-scroll-target="#definition-of-power">Definition of power</a></li>
+<li><a href="#general-workflow-for-simulation-based-power-analysis" id="toc-general-workflow-for-simulation-based-power-analysis" class="nav-link" data-scroll-target="#general-workflow-for-simulation-based-power-analysis">General workflow for simulation-based power analysis</a></li>
+<li><a href="#possible-pitfallsmisunderstandings-of-power-analysis" id="toc-possible-pitfallsmisunderstandings-of-power-analysis" class="nav-link" data-scroll-target="#possible-pitfallsmisunderstandings-of-power-analysis">Possible pitfalls/misunderstandings of power analysis</a></li>
 </ul>
 </li>
 <li>
-<a href="#concrete-implementation-of-framework" class="nav-link" data-scroll-target="#concrete-implementation-of-framework">Concrete implementation of framework</a>
+<a href="#concrete-implementation-of-framework" id="toc-concrete-implementation-of-framework" class="nav-link" data-scroll-target="#concrete-implementation-of-framework">Concrete implementation of framework</a>
 <ul class="collapse">
-<li><a href="#step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="nav-link" data-scroll-target="#step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</a></li>
-<li><a href="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" class="nav-link" data-scroll-target="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest">Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</a></li>
-<li><a href="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="nav-link" data-scroll-target="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals">Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</a></li>
-<li><a href="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." class="nav-link" data-scroll-target="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.">Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</a></li>
+<li><a href="#step-1-generate-a-large-number-of-data-sets-for-the-analysis" id="toc-step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="nav-link" data-scroll-target="#step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</a></li>
+<li><a href="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" id="toc-step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" class="nav-link" data-scroll-target="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest">Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</a></li>
+<li><a href="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" id="toc-step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals" class="nav-link" data-scroll-target="#step-3-summarise-the-output-returned-in-step-2-to-determine-likelihood-of-achieving-various-inferential-goals">Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals</a></li>
+<li><a href="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." id="toc-step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results." class="nav-link" data-scroll-target="#step-4.-assess-the-output-and-determine-whether-the-proposed-analyses-and-inference-goals-are-realistic-and-likely-to-yield-informative-results.">Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.</a></li>
 </ul>
 </li>
-</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/edit/main/chapters/power_analysis_framework_2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/power_analysis_framework_2.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title-block d-none d-lg-block"><div><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-<div class="quarto-title"><h1 class="title"><span id="power-workflow" class="quarto-section-identifier d-none d-lg-block">Power analysis workflow (Jamie Elsey)</span></h1></div></header><p><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="power-workflow" class="quarto-section-identifier d-none d-lg-block">Power analysis workflow (Jamie Elsey)</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><p><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="discussion-and-framework" class="level2"><h2 class="anchored" data-anchor-id="discussion-and-framework">Discussion and framework</h2>
 <section id="introduction-and-goals" class="level3"><h3 class="anchored" data-anchor-id="introduction-and-goals">Introduction and goals</h3>
 <p>The purpose of this document is to propose the fundamentals for a workflow for power analyses.</p>
@@ -384,7 +384,7 @@ Note
 <p>Because ultimately we might be generating some rather large data files, we increase the memory limit alotted to R first. I don’t believe there is any real cost to increasing this memory limit, so it is wise to do so as to avoid a function iterating many times over for a long time, but ending up without sufficient space to store the outcome:</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/memory.size.html">memory.limit</a></span><span class="op">(</span><span class="fl">100000</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-stdout">
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] Inf</code></pre>
 </div>
 </div>
@@ -604,8 +604,8 @@ Note
                                 breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">150</span>, to <span class="op">=</span> <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">150</span><span class="op">)</span><span class="op">)</span>
 <span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-stdout">
-<pre><code>Time difference of 15.23544 secs</code></pre>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 13.19664 secs</code></pre>
 </div>
 </div>
 <p>The object ‘linreg.output’ is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
@@ -661,7 +661,175 @@ Note
 
 
 <!-- -->
-<div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title anchored" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+
+</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>By Jamie Elsley, incorporating some comments and suggestions from David Reinstein.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>DR: we might want to incorporate declaredesign for this.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>DR: We can cover this in the earlier section, or link relevant explanations.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>DR: may be worth putting maths here at some point, and also give a canonical reference.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote">
+<p>This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - ‘the true parameter is fixed and the data varies’. In Bayesian reasoning you note that you have ‘uncertainty about the underlying parameter’ but you&nbsp; ‘consider the data as fixed’. A Bayesian approach does not tend to&nbsp; consider ‘the probability that the data arises in a particular way under a null hypothesis’; however ‘Bayesian hypothesis testing’ is discussed in the literature. (Presumably, it envisions ‘rejecting a hypothesis’ where the posterior probability that the hypothesis holds is sufficiently small).</p>
+<p><br><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p>
+</li>
+<li id="fn7" role="doc-endnote">
+<p>The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like “there is a non-zero difference between groups” (although this is probably the most common inference people first consider). Or a comparable statement posed in probabilistic terms…</p>
+<p>Frequentist: ‘if there had been a zero difference between these groups (H0), this data is unlikely to have been generated’.</p>
+<p>Bayesian: ‘the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).’<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p>
+</li>
+<li id="fn8" role="doc-endnote"><p>Note that these could all be either Bayesian or frequentist, depending on&nbsp;how you specify your goals/inferences.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote">
+<p>.’Determining’ is in scare quotes; ultimately, we are making probabilistic statements, either about the ‘true effect size’ (‘we make the decision that, most probably, there is a non-zero difference’) or about the likelihood of observing data like this under some conditions (frequentist: ‘this data would be very unlikely if there were a zero effect’).</p>
+<p><br><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p>
+</li>
+<li id="fn10" role="doc-endnote">
+<p>This is sometimes called ‘equivalence testing’. In Bayesian estimation, you can consider a ‘range of practical equivalence’ (ROPE). Here, if a large enough proportion of the posterior (of the difference between two groups, say) falls in this range, you conclude that ‘to all intents and purposes these groups are equivalent.’</p>
+<p><br><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p>
+</li>
+<li id="fn11" role="doc-endnote"><p>See the ‘diagnosands’ of the <code>declaredesign</code> framework.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12" role="doc-endnote"><p>These may be generated by draws based on a canonical distribution, like the Gaussian (‘normal’) with particular parameters. Alternately, if prior ‘similar’ data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13" role="doc-endnote"><p>E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14" role="doc-endnote"><p>DR: I removed ‘ways of generating data’ because I thought it could be misleading. It seems wrong to first say, e.g., ‘we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials’… and then say ‘but that didn’t have enough power so lets assume a more concentrated distribution’. What I think you meant was consider other ways of actually <em>collecting</em> data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this <em>new</em> approach. Note that DD seems to have good tools for comparing and considering design variations.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15" role="doc-endnote"><p>We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16" role="doc-endnote"><p>DR: I changed the wording here because if we diagnose the design as ‘underpowered’ we probably would choose not to run it in that form.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/other_sections.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Other suggested sections</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Power analysis workflow (Jamie Elsey) {#power-workflow .unnumbered}</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^power_analysis_framework_2-1]</span></span>
@@ -1054,174 +1222,6 @@ Note
 <span id="cb14-392"><a href="#cb14-392" aria-hidden="true" tabindex="-1"></a>Based on the power curve plotted above, we can conclude that we would have a very high likelihood of detecting effects of .4 vs. a control group at even quite low sample sizes, and also a good possibility of detecting effect sizes of .2 at quite modest sample sizes. On the other hand, for the very small effect size, we would not be confident in detecting such a difference vs. a control group even at 1500 participants per group. If effect sizes of this size we what was expected in such an experiment, and it was crucial that they were detected if present, then we might consider going back to Step 1 and reconsidering our experimental design to include even more participants.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
-</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
-<ol>
-<li id="fn1" role="doc-endnote"><p>By Jamie Elsley, incorporating some comments and suggestions from David Reinstein.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>This will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>DR: we might want to incorporate declaredesign for this.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>DR: We can cover this in the earlier section, or link relevant explanations.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>DR: may be worth putting maths here at some point, and also give a canonical reference.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote">
-<p>This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - ‘the true parameter is fixed and the data varies’. In Bayesian reasoning you note that you have ‘uncertainty about the underlying parameter’ but you&nbsp; ‘consider the data as fixed’. A Bayesian approach does not tend to&nbsp; consider ‘the probability that the data arises in a particular way under a null hypothesis’; however ‘Bayesian hypothesis testing’ is discussed in the literature. (Presumably, it envisions ‘rejecting a hypothesis’ where the posterior probability that the hypothesis holds is sufficiently small).</p>
-<p><br><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p>
-</li>
-<li id="fn7" role="doc-endnote">
-<p>The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like “there is a non-zero difference between groups” (although this is probably the most common inference people first consider). Or a comparable statement posed in probabilistic terms…</p>
-<p>Frequentist: ‘if there had been a zero difference between these groups (H0), this data is unlikely to have been generated’.</p>
-<p>Bayesian: ‘the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).’<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p>
-</li>
-<li id="fn8" role="doc-endnote"><p>Note that these could all be either Bayesian or frequentist, depending on&nbsp;how you specify your goals/inferences.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9" role="doc-endnote">
-<p>.’Determining’ is in scare quotes; ultimately, we are making probabilistic statements, either about the ‘true effect size’ (‘we make the decision that, most probably, there is a non-zero difference’) or about the likelihood of observing data like this under some conditions (frequentist: ‘this data would be very unlikely if there were a zero effect’).</p>
-<p><br><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p>
-</li>
-<li id="fn10" role="doc-endnote">
-<p>This is sometimes called ‘equivalence testing’. In Bayesian estimation, you can consider a ‘range of practical equivalence’ (ROPE). Here, if a large enough proportion of the posterior (of the difference between two groups, say) falls in this range, you conclude that ‘to all intents and purposes these groups are equivalent.’</p>
-<p><br><a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p>
-</li>
-<li id="fn11" role="doc-endnote"><p>See the ‘diagnosands’ of the <code>declaredesign</code> framework.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12" role="doc-endnote"><p>These may be generated by draws based on a canonical distribution, like the Gaussian (‘normal’) with particular parameters. Alternately, if prior ‘similar’ data is available (e.g., from outcomes in the year prior to a field experiment), we may prefer to generate it by resampling from this.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13" role="doc-endnote"><p>E.g., in a Bayesian analysis, we can get the full posterior distribution for an analysis so it can be assessed and summarised in many ways in step 3.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14" role="doc-endnote"><p>DR: I removed ‘ways of generating data’ because I thought it could be misleading. It seems wrong to first say, e.g., ‘we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials’… and then say ‘but that didn’t have enough power so lets assume a more concentrated distribution’. What I think you meant was consider other ways of actually <em>collecting</em> data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this <em>new</em> approach. Note that DD seems to have good tools for comparing and considering design variations.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15" role="doc-endnote"><p>We give this example is primarily because between-groups analyses run much more quickly than within- subjects analyses. Thus, these can be run without a timewasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn16" role="doc-endnote"><p>DR: I changed the wording here because if we diagnose the design as ‘underpowered’ we probably would choose not to run it in that form.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></main><!-- /main --><script type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    setTimeout(function() {
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
-      });
-      return popup.innerHTML;
-    });
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../chapters/other_sections.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Other suggested sections</span></span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
