@@ -1,7 +1,9 @@
 # Prediction, machine learning, and 'ml-style modeling' {-#modeling}
+    
 
+## Consult modeling vignette(s)
 
-See [Vignette: Modeling donations in EA Survey data with Tidymodels and workflow](modeling_vignettes/eas_ml_modeling_vignette.html)
+See [Vignette: Modeling donations in EA Survey data with Tidymodels and workflow](../vignettes/eas_ml_modeling_vignette.html)
 
 
 ## Prediction models for insights? {#pred-insights}
@@ -20,9 +22,7 @@ The insights from these models should also be treated with caution. Again, they 
 Still, the benefit of this exercise may be considered 'the derivation of robust and predictive relationships in the data that are mainly driven by the data itself, rather than our preconcieved ideas.' These models may also be useful building blocks towards future predictive work.
 :::
 
-:::
-
-
+        
 ## Penalized regression models {#penalized-reg}
 
 ::: {.callout-note collapse="true"}
