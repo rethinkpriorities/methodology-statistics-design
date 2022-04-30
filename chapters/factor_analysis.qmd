@@ -1,0 +1,19 @@
+# Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}
+
+Integrate...
+
+Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)
+
+
+```{r }
+
+knitr::include_url("https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html")
+
+```
+
+<!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->
+
+
+
+
+

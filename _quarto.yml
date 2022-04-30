@@ -6,10 +6,6 @@ book:
   title: "Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates"
   author: "David Reinstein (most content atm), Willem Sleegers, Jamey Elsey"
   repo-url: https://github.com/ /rethinkpriorities/methodology-statistics-design
-  execute:
-    freeze: auto # re-render only when source changes
-    warning: false
-    message: false
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
@@ -25,6 +21,7 @@ book:
     - part: "Statistics and modeling"
       chapters:
         - chapters/basic_stats.qmd
+        - chapters/factor_analysis.qmd
         - chapters/ml_modeling.qmd
         #- chapters/time_series_predict.qmd
         - chapters/time_series_application.qmd
@@ -37,6 +34,12 @@ book:
         - chapters/power_analysis_framework_2.qmd
         - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd
   reader-mode: true
+
+execute:
+  freeze: auto # re-render only when source changes
+  warning: false
+  message: false
+  error: true
 
 comments:
     hypothesis: true

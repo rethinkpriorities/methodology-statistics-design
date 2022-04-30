@@ -1,0 +1,30 @@
+---
+title: "Vignette: General (non-ML 'regression') modeling workflow"
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    toc: true
+    number-sections: true
+    citations-hover: true
+    footnotes-hover: true
+execute:
+    freeze: auto # re-render only when source changes
+    warning: false
+    message: false
+    error: true
+comments:
+    hypothesis: true
+---
+
+# Introduction
+
+This vignette shows how to use a set of `Tidymodels` tools and other tools, to do a machine learning prediction and validation exercise. We use the EA Survey 'donation data' for our example, covering much of the analysis that was done for the comparable section of the 2020 EA Forum post/chapter. Most of that code was written by Oska Fentem in consultation with David Reinstein. This vignette is written by David Reinstein.
+
+I try to show:
+
+- How the computation works and 'what is producing what' ... so that you can recreate it in your own context
+- That the machine learning models do, and why
+- Why we made specific modeling choices
+

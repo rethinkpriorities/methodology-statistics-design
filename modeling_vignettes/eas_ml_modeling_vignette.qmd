@@ -1,5 +1,10 @@
 ---
 title: "Vignette: Predictive/ML modeling of donations in EA Survey data with Tidymodels and workflow"
+
+project:
+  type: website
+  output-dir: docs/vignettes
+  
 format:
   html:
     theme: cosmo
@@ -54,38 +59,32 @@ library(dplyr)
 p_load(rsample, install = FALSE) # Why p_load these? (Can create issues with dependencies)
 p_load(ggplot2, forcats, install = FALSE)
 p_load(parsnip, tune, dials, install = FALSE) # If loading multiple packages, better to use p_load with install = FALSE option
-p_load(conflicted)
-p_load(workflowsets)
+p_load(conflicted, workflowsets,  install=FALSE)
 library(stringr)
 
-p_load(dynverse)
+p_load(dynverse, install=FALSE)
 
 conflicted::conflict_prefer("set_label", "sjlabelled")
 conflicted::conflict_prefer("add_footnote", "kableExtra")
 conflicted::conflict_prefer("sample_n", "tidylog")
-
 
 set_label <- sjlabelled::set_label
 
 filter <- dplyr::filter
 ungroup <- dplyr::ungroup
 mutate <- dplyr::mutate
-
-
+  
 p_load(devtools)
 source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
 
 
-
 #github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421
-
 
 devtools::install_github("rethinkpriorities/rp-r-package", force = TRUE)
 library(rethinkpriorities)
 
 devtools::install_github("rethinkpriorities/r-noodling-package")
 library(rnoodling)
-
 
 ```
 
@@ -518,7 +517,8 @@ Below, we define `rf_model_reg` as a `parsnip` object.
 
 rf_model_reg <- parsnip::rand_forest(
   mtry = tune(), #number of predictors to randomly sample at each 'split'
-  trees = tune(), #how many trees in the 'ensemble'
+  #trees = tune(), #how many trees in the 'ensemble'
+  trees = 50, #how many trees in the 'ensemble'
   min_n = tune()) %>%
   parsnip::set_engine("ranger", importance = "impurity") %>% 
   parsnip::set_mode("regression")
@@ -530,8 +530,12 @@ We specify,
 `mtry = tune()`: How many predictors should we randomly sample for each split (tree?). We set this to `tune`; that means we allow the cross-fold validation process to tell us what seems to work best.
 
 We also set it to 'tune':
-- `trees`: how many trees in the 'ensemble' (the 'forest'?)
 - `min_n`: how few observations each (leaf) node is allowed to contain
+
+We normally would also tune the 
+
+- `trees`: how many trees in the 'ensemble' (the 'forest'?)
+... but here I set it to only use 50 trees to save processing time ... for this example
 
 ^[`set_mode("regression")` indicates that the outcome is continuous, rather than 'classification', I believe.  I am not sure what exactly  the `set_engine` options mean here.]
 
@@ -831,7 +835,7 @@ For the random forest model we can't give a 'sign' because each variable enters 
 
 ## Metrics of fit (performance)
 
-We want to know how good our models are predicting the training data (the data that was not used to fit these models). 
+We want to know how good our models are predicting the training data (the data that was not used to fit these models).  We may want to consider 'how successful' our predictive models are at making practically useful predictions. In other words, 'how far off' are the predictions and classifications on average, from the actual outcomes. This procedure considers the fit on randomly-drawn *set-aside* 'testing data', data that has not been used in 'training' (or 'fitting') the model. Below, we consider some commonly-used metrics.
 
 For the continuous outcomes we consider the 'regression metrics', and define these in a list below.
 
@@ -839,7 +843,7 @@ For the continuous outcomes we consider the 'regression metrics', and define the
 2. mean absolute error
 
 ```{r regress_metrics}
-
+  
 regress_metrics <- list(rmse = yardstick::rmse_vec,
                         mae = yardstick::mae_vec)
 ```
@@ -883,6 +887,7 @@ Next, we apply it to the fit models tied to the training data:
 l_don_av_2yr_best_params_filter <- l_don_av_2yr_best_params_filter %>% 
   mutate(across(c(preds, true_y), ~map(.x, exp))) %>%
   calculate_metrics(regress_metrics)
+
 d_don_1k_best_params <- calculate_metrics(d_don_1k_best_params, class_metrics)
 
 ```
@@ -891,6 +896,7 @@ Note that for the continuous outcomes, we first converted from logs to levels be
 
 
 Some tidying up and renaming below.
+
 ```{r}
 # Change model names
 
@@ -921,10 +927,198 @@ l_don_av_2yr_best_params_recode_filter <- l_don_av_2yr_best_params_filter %>%
 d_don_1k_best_params_recode <- d_don_1k_best_params %>% recode_params
 ```
 
+####  Regression Model Pertformance: RMSE and MAE {.unnumbered}
+
+In order to assess the usefulness of each predictive regression model we consider both root-mean-square-error (RMSE) and mean-absolute-error (MAE). 
+
+::: {.callout-note collapse="true"}
+## Interpretation and construction of RMSE
+
+
+RMSE (aka [RMSD](https://en.wikipedia.org/wiki/Root-mean-square_deviation)) can be interpreted as the average 'Euclidean distance' between the actual values and the model's prediction. For each observation (in the set-aside 'testing sample'), to construct RMSE we:
+
+1.  Measure the differences between the actual and predicted outcome (e.g., donation)
+2.  Square these differences
+3.  Take the average of these squared differences across all observations
+4.  Take the square root of this
+
+::: 
+
+
+::: {.callout-note collapse="true"}
+## Interpretation and construction of mean-absolute-error (MAE)
+
+To construct mean-absolute-error (MAE) we simply
+
+1.  Measure the *absolute-value* differences between the actual and predicted outcome (e.g., donation) for each observation
+2.  Take the average of these across all observations
+
+MAE has a much more straightforward interpretation: it simply asks 'how far off are we, on average?'
+
+:::
+
+
+
+::: {.callout-note collapse="true"}
+## RMSE vs MAE
+
+While the RMSE is used in the model *fitting* for various reasons, it is arguably less-interpretable and less-relevant than MAE in *judging* the model's fit in cases like this one. RMSE error negatively assesses the model fit based on *squared* deviations, and is thus very sensitive to 'large mistakes'. This may be relevant where 'large errors are much much worse than small ones' -- here, this is not so clearly the case. In the presence of data with large outlying observations, prediction will tend to be poor by this measure.
+
+:::
+
+
+**Transformations:** Note that when considering models where the outcome is transformed (e.g., log(donations)) we construct the RMSE and MAE by exponentiating to generate predictions for the *level* outcomes, and then measure the deviations on the level scale.^[ When considering predicted outcomes on the *logarithmic* scale, both RMSE and MAE indicate roughly 'how many exponential orders of magnitude our predictions for the *non-logged outcomes* are off. E.g., a MSE of 1.5 for 'log donation' suggests an we are off by about $exp(1.5) =$ `r op(exp(1.5))` times in terms of donations, getting them off by a factor of about 5. This conversion avoid such complications.
+]
+
+### Our regression models' performance
+
+
+^[Code note: I am using a purrrr:map below but I think it is pointless because it is a 'list of 1' ... I previously had also included the donation share models ]
+
+```{r regression-model-performance}
+
+l_don_av_2yr_best_params_filter <- l_don_av_2yr_best_params_filter %>%
+  mutate(dv = "Donation amount*")
+
+
+(
+  reg_model_performance <- purrr::map(list(l_don_av_2yr_best_params_filter), ~.x %>%
+      dplyr::select(dv, rmse, mae, model)
+      ) %>%
+  bind_rows() %>%
+  rename("Dependent variable" = dv,
+         "RMSE" = rmse,
+         "MAE aka MAD" = mae,
+         "Model" = model) %>%
+  kable(caption = "Regression model performance",
+        digits = 2) %>%
+  kable_styling() %>%
+  add_footnote("Note: While the model was trained using logs of the dependent variable, RMSE and MAD/MAE were calculated in levels", notation = "symbol")
+)
+
+
+p_load(ie2misc)
+
+mad_naive <- ie2misc::madstat(df$donation_usd, na.rm=TRUE)
+
+sd_naive <- round((sd(df$donation_usd, na.rm=TRUE)), 0)
+
+```
+How does this compare to a 'naive model' in which we predict the average donation for everyone? Note that for the comparable unfiltered data, the mean absolute deviation is `r mad_naive` and the standard deviation^[I.e., the 'standard error' of a model that predicts the mean every time] is `r sd_naive`. The predictive model reduces this uncertainty substantially.
+
+### Our classification models'  performance
+
+There are a variety of metrics for the performance of a classifications model; I discuss the basic concepts of precision, recall, and the ROC curve [here](https://rethinkpriorities.github.io/methodology-statistics-design/chapters/classification_model_notes.html). The 'performance of a classifier' is not easy to reduce to a single number; it depends on how you are going to use it, and on the relative the costs and benefits of each type of classifications error  
+
+The ROC curve allows us to compare the predictive power of the various models, and to compare it to an uninformed classifier^[which would simply predict a positive outcome with some random probability $p$; thus this maps out the 45 degree line.]
+
+```{r roc-curves}
+# Add column for ROC curve
+
+roc_curve <- yardstick::roc_curve
+unnest <- tidyr::unnest
+pr_curve <- yardstick::pr_curve
+
+# Calculate ROC curve
+d_don_1k_best_params$roc_curve <- d_don_1k_best_params %>% select(true_y, preds, pred_prob, model) %>%
+  unnest(cols = everything()) %>%
+  group_by(model) %>%
+  group_map(~ roc_curve(., true_y, .pred_FALSE))
+
+# Calculate AUC
+d_don_1k_best_params$auc <- d_don_1k_best_params %>% select(true_y, preds, pred_prob, model) %>%
+  unnest(cols = everything()) %>%
+  group_by(model) %>%
+  group_map(~ yardstick::roc_auc(., truth = true_y, estimate = .pred_FALSE))
+
+# Extract AUC
+d_don_1k_best_params <- d_don_1k_best_params %>%
+  unnest_wider(., col = auc) %>%
+  select(-c(.metric, .estimator)) %>%
+  rename(auc = .estimate)
+
+# Plot ROC curve
+(roc_curve_d_don_1k <- d_don_1k_best_params %>% select(roc_curve, model) %>%
+  unnest(cols = everything()) %>%
+  rename_with(snakecase::to_title_case) %>%
+  ggplot(aes(x = 1-Specificity, y = Sensitivity, colour = Model)) +
+  geom_line() +
+  geom_abline(slope=1, intercept = 0, linetype = "dotted") +
+  theme_bw()
+)
+```
+
+An ROC curve plots the true positive rate (sensitivity) as a function of the false positive rate (1-specificity). Here the true positive rate gives the rate at which our model correctly predicts a respondent to donate over \$1000, with the false positive rate giving the rate at which these predictions are incorrect.    
+
+Better classifiers will have an ROC curve that is further North-West, with the perfect classifier being an L-shaped curve passing through $(0,0) \rightarrow(0,1) \rightarrow(1,1)$. Where classifiers ROC curves do not cross, it is clear that one will be performing better than another. That is not the case here. Both models seem to be performing relatively similarly, with the ROC curves overlapping somewhat. It is difficult to discern which model is performing the best, and this will depend on our criterion.
+
+However, both models yield curves substantially above the 45 degree line, thus substantially outperforming an uninformed classifier. For example, if we are willing to accept about a 25% rate of false positives (falsely predicting a 1k+ donation), the logistic regression model correctly predicts about 75% of true positives (and the random forest model about 73%).
+
+We can use the area under the curve (AUC) measure to compare classifiers for all costs of misclassification. This is one measure of 'how close the ROC curve is to the optimal L-shaped curve.'
+
+^[Note: the code below is a bit messy; we can probably do better or use some existing package.]
+
+```{r auc-values}
+
+
+calculate_metrics <-
+  function(df,
+    metrics,
+    preds = preds,
+    true_y = true_y) {
+    df %>% mutate(purrr::map2_dfr({
+      {
+        true_y
+      }
+    }, {
+      {
+        preds
+      }
+    },
+      ~ purrr::map_dfc(metrics,
+        do.call,
+        list(.x, .y))))
+  }
+
+class_metrics <- list(accuracy = yardstick::accuracy_vec,
+                      recall = yardstick::recall_vec,
+                      precision = yardstick::precision_vec,
+                      f1_score = yardstick::f_meas_vec)
+
+# Adding a no skill classifier to d_don_1k
+## Messy code
+truth <- d_don_1k_best_params$true_y[[1]]
+majority <- tail(names(sort(table(truth))), 1)
+
+pred_majority <- as.logical(rep(majority, length(truth)))
+
+.pred_FALSE <- 1 - pred_majority
+.pred_TRUE <- 1 - .pred_FALSE
+
+pred_prob <- tibble(.pred_FALSE, .pred_TRUE, truth)
+
+no_skill <- tibble(model = "No Skill",
+                   true_y = list(truth),
+                   pred_prob = list(pred_prob),
+                   preds = list(factor(pred_majority, levels = levels(truth)))) %>%
+  calculate_metrics(class_metrics)
+
+no_skill$auc <- yardstick::roc_auc_vec(truth, .pred_TRUE)
+
+purrr::map_df(list(no_skill, d_don_1k_best_params), ~.x %>%
+             select(model, auc, accuracy)) %>%
+  rename_with(snakecase::to_title_case) %>%
+  rename(AUC = Auc) %>%
+  kable(digits = 3) %>%
+  kable_styling()
+```
+
+Here the tuned logistic regression performs better in terms of the AUC metric, and both perform much better than the no-skill classifier.
+
 
 ## Illustrate variable importance
 
-Some renaming/recoding and helper functions in the code below:S
+^[Some renaming/recoding and helper functions in the code below:]
 
 ```{r plot_vi}
 
@@ -959,7 +1153,9 @@ shape_colours <- c("NA" = 120, "NEG" = 95, "POS" = 43)
 ^[adding content from `modeling_vignettes/based_off_of/donations_20.Rmd`]
 
 
-Below, we plot the variable importance. But this takes a long time to run. Why? 
+### Log donation outcome ('regression')
+
+Below, we plot the variable importance. 
 
 ```{r iplot_l_don_av_2yr_best_params_filter}
 
@@ -983,18 +1179,53 @@ iplot_l_don_av_2yr_best_params_filter <-
 
 Above, we report the 'importance scores' for the ten most important features ('variables') for two distinct approaches to predicting log (average) donation.^[Note that (as is common in machine learning modeling) all features have been normalized to be on the same scale; for continuous features such as age and income we take the natural log of each, and divide each by two standard deviations of the logged feature, following @gelmanScalingRegressionInputs2008.
 ]
-```{r}
 
-```
 
 These importance scores are technically defined [here](https://topepo.github.io/caret/variable-importance.html#model-specific-metrics). For the elastic net ("linear reg") approzach, we depict the coefficients' signs with a "+" or "-"; for tree/forest-based modeling this is less straightforward.
 
 Income (normalized, bottom-coded at 5000 USD, and logged) is the most important predictor for each model, by a wide margin. After this, the relative importances vary.^[Note that 'student category non-response' is the second most important predictor in the linear model. This doesn't seem to have a clear interpretation, but including this may help us better interpret other features like student status. To the extent that it is predictive, we might also expect it to be predictive in future cases, and it should go into useful predictions. On the other hand this non-reporting isn't the sort of feature we could apply to predictions and policy judgements for broad groups in the wild, absent a similar survey. We can't say "let's target our program to people who are unlikely to indicate student status in a survey'. 
-... We might expect non-response to be associated with lower engagement, and perhaps lower donation rates. However, we are considering non-responses to particular questions *among* those who did report a donation amount. We could speculate about why non-response to the 'where heard of EA' question seems to be associated with donating more.]
+... We might expect non-response to be associated with lower engagement, and perhaps lower donation rates. However, we are considering non-responses to particular questions *among* those who did report a donation amount.]
+
+We next focus specifically on the elastic-net regression-based model.
 
 
+```{r enet-coefs-plot}
 
-## Illustrate metrics of fit 
+
+(
+enet_coefs_ldon <- l_don_av_2yr_best_params_recode_filter %>%
+      filter(
+        grepl("regression", model, ignore.case = TRUE)  & Importance!=0) %>%
+  mutate_labels_sign_snip %>%
+  #mutate(Norm = scale_var(Importance)) %>%
+    mutate(Variable = fct_reorder(Variable, Importance)) %>%
+
+  ggplot(aes(y = Variable, x = Importance, shape = Sign)) +
+      scale_shape_manual(values = c(95, 43)) +
+  geom_point(size = 2, stroke = 4) +
+  xlab("Feature importance") +
+  ggtitle("Importance scores: predicting log(don.)")
+)
+
+```
+
+The graph above presents the overall ranking of importance scores within the elastic-net linear regression model, with symbols depicting whether these features take on a positive or negative sign.
+
+###  Donated 1k USD or more outcome (classification)
+
+```{r}
+
+(
+  iplot_don_1k_best_params <- d_don_1k_best_params_recode %>%
+      filter(!grepl("tree", model, ignore.case = TRUE)) %>%
+    mutate_labels_sign_snip %>%
+    norm_vi(slice_top = 10) %>%
+  plot_vi() +
+  ggtitle("Importance scores: predicting donation > 1k USD ")
+)
+```
+
+Again, both approaches deem (logged, imputed, bottom-coded) income to be the most important predictor of donating 1k USD or more. 
 
 
 

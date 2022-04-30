@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-  <meta charset="utf-8">
-  <meta name="generator" content="quarto-0.9.243">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - 8&nbsp; Prediction, machine learning, and ‘ml-style modeling’</title>
-  <style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.243">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - 9&nbsp; Prediction, machine learning, and ‘ml-style modeling’</title>
+<style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -75,26 +76,14 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-
-  <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-  <script src="../site_libs/quarto-nav/headroom.min.js"></script>
-  <script src="../site_libs/clipboard/clipboard.min.js"></script>
-  <meta name="quarto:offset" content="../">
-  <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-  <script src="../site_libs/quarto-search/fuse.min.js"></script>
-  <script src="../site_libs/quarto-search/quarto-search.js"></script>
-  <link href="../chapters/time_series_application.html" rel="next">
-  <link href="../chapters/basic_stats.html" rel="prev">
-  <script src="../site_libs/quarto-html/quarto.js"></script>
-  <script src="../site_libs/quarto-html/popper.min.js"></script>
-  <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-  <script src="../site_libs/quarto-html/anchor.min.js"></script>
-  <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-  <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-  <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-  <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-  <script id="quarto-search-options" type="application/json">{
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><link href="../chapters/time_series_application.html" rel="next">
+<link href="../chapters/factor_analysis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
     "location": "sidebar",
     "copy-button": false,
     "collapse-after": 3,
@@ -112,33 +101,27 @@
       "search-detached-cancel-button-title": "Cancel",
       "search-submit-button-title": "Submit"
     }
-  }</script>
-  <script async="" src="https://hypothes.is/embed.js"></script>
-  <!--[if lt IE 9]>
+  }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body class="floating">
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/ /rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/%20/rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -154,7 +137,7 @@
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP Rethink priorities ‘methods book’: Introduction and overview</span></a>
   </div>
@@ -166,8 +149,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/coding_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding and data management</span></a>
   </div>
@@ -178,7 +161,7 @@
   </div>
 </li>
     </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Designing surveys and trials</a>
@@ -186,8 +169,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design and item development</span></a>
   </div>
@@ -203,7 +186,7 @@
   </div>
 </li>
     </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics and modeling</a>
@@ -211,34 +194,39 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, Testing, Inference, Descriptives</span></a>
+  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical frameworks, ‘models’, and hypothesis testing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></a>
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></a>
+  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
   </div>
 </li>
     </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other topics and worked examples</a>
@@ -246,15 +234,15 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-        <li class="sidebar-item">
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
+  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -264,38 +252,36 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
   </div>
 </li>
     </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-<h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#consult-modeling-vignettes" id="toc-consult-modeling-vignettes" class="nav-link active" data-scroll-target="#consult-modeling-vignettes"> <span class="header-section-number">8.1</span> Consult modeling vignette(s)</a></li>
-<li><a href="#pred-insights" id="toc-pred-insights" class="nav-link" data-scroll-target="#pred-insights"> <span class="header-section-number">8.2</span> Prediction models for insights?</a></li>
-<li><a href="#penalized-reg" id="toc-penalized-reg" class="nav-link" data-scroll-target="#penalized-reg"> <span class="header-section-number">8.3</span> Penalized regression models</a></li>
-<li><a href="#resources-and-use-cases" id="toc-resources-and-use-cases" class="nav-link" data-scroll-target="#resources-and-use-cases"> <span class="header-section-number">8.4</span> Resources and use-cases</a></li>
-</ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/ml_modeling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<li><a href="#consult-modeling-vignettes" id="toc-consult-modeling-vignettes" class="nav-link active" data-scroll-target="#consult-modeling-vignettes"> <span class="header-section-number">9.1</span> Consult modeling vignette(s)</a></li>
+<li><a href="#pred-insights" id="toc-pred-insights" class="nav-link" data-scroll-target="#pred-insights"> <span class="header-section-number">9.2</span> Prediction models for insights?</a></li>
+<li><a href="#penalized-reg" id="toc-penalized-reg" class="nav-link" data-scroll-target="#penalized-reg"> <span class="header-section-number">9.3</span> Penalized regression models</a></li>
+<li><a href="#metrics-of-fit" id="toc-metrics-of-fit" class="nav-link" data-scroll-target="#metrics-of-fit"> <span class="header-section-number">9.4</span> Metrics of fit</a></li>
+<li><a href="#resources-and-use-cases" id="toc-resources-and-use-cases" class="nav-link" data-scroll-target="#resources-and-use-cases"> <span class="header-section-number">9.5</span> Resources and use-cases</a></li>
+</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/ml_modeling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-<header id="title-block-header" class="quarto-title-block default">
-
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div></div></header>
-
-<section id="consult-modeling-vignettes" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="consult-modeling-vignettes"><span class="header-section-number">8.1</span> Consult modeling vignette(s)</h2>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title d-none d-lg-block">
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span>
+</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="consult-modeling-vignettes" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="consult-modeling-vignettes">
+<span class="header-section-number">9.1</span> Consult modeling vignette(s)</h2>
 <p>See <a href="../vignettes/eas_ml_modeling_vignette.html">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</a></p>
-</section>
-<section id="pred-insights" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="pred-insights"><span class="header-section-number">8.2</span> Prediction models for insights?</h2>
+</section><section id="pred-insights" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="pred-insights">
+<span class="header-section-number">9.2</span> Prediction models for insights?</h2>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -315,9 +301,8 @@ Discussion: why build ‘predictive models of donations’, for example?
 </div>
 </div>
 </div>
-</section>
-<section id="penalized-reg" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="penalized-reg"><span class="header-section-number">8.3</span> Penalized regression models</h2>
+</section><section id="penalized-reg" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="penalized-reg">
+<span class="header-section-number">9.3</span> Penalized regression models</h2>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-2" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -337,16 +322,37 @@ Discussion: ‘elastic net’ models:
 </div>
 </div>
 </div>
-</section>
-<section id="resources-and-use-cases" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="resources-and-use-cases"><span class="header-section-number">8.4</span> Resources and use-cases</h2>
+</section><section id="metrics-of-fit" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="metrics-of-fit">
+<span class="header-section-number">9.4</span> Metrics of fit</h2>
+<p>We may want to consider ‘how successful’ our predictive models are at making practically useful predictions. In other words, ‘how far off’ are the predictions and classifications on average, from the actual outcomes. This procedure considers the fit on randomly-drawn <em>set-aside</em> ‘testing data’, data that has not been used in ‘training’ (or ‘fitting’) the model.</p>
+<p>In the vignette <a href="https://rethinkpriorities.github.io/methodology-statistics-design/vignettes/eas_ml_modeling_vignette.html#illustrate-metrics-of-fit">here</a> we consider and discuss the root-mean-square-error (RMSE) and mean-absolute-error (MAE) metrics in the context of predicting donatino outcomes.</p>
+<p>In order to assess the usefulness of each predictive regression model we consider both root-mean-square-error (RMSE) and mean-absolute-error (MAE). RMSE (aka <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">RMSD</a>) can be interpreted as the average ‘Euclidean distance’ between the actual values and the model’s prediction. For each observation (in the set-aside ‘testing sample’), to construct RMSE we:</p>
+<ol type="1">
+<li>Measure the differences between the actual and predicted outcome (e.g., donation)</li>
+<li>Square these differences</li>
+<li>Take the average of these squared differences across all observations</li>
+<li>Take the square root of this</li>
+</ol>
+<p>To construct mean-absolute-error (MAE) we simply</p>
+<ol type="1">
+<li>Measure the <em>absolute-value</em> differences between the actual and predicted outcome (e.g., donation) for each observation</li>
+<li>Take the average of these across all observations</li>
+</ol>
+<p>MAE has a much more straightforward interpretation: it simply asks ‘how far off are we, on average?’</p>
+<p>While the RMSE is used in the model <em>fitting</em> for various reasons, it is arguably less-interpretable and less-relevant than MAE in <em>judging</em> the model’s fit in cases like this one. RMSE error negatively assesses the model fit based on <em>squared</em> deviations, and is thus very sensitive to ‘large mistakes’. This may be relevant where ‘large errors are much much worse than small ones’ – here, this is not so clearly the case. In the presence of data with large outlying observations, prediction will tend to be poor by this measure.</p>
+<p>Note that when considering models where the outcome is transformed (e.g., log(donations)) we construct the RMSE and MAE by exponentiating to generate predictions for the <em>level</em> outcomes, and then measure the deviations on the level scale.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+</section><section id="resources-and-use-cases" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="resources-and-use-cases">
+<span class="header-section-number">9.5</span> Resources and use-cases</h2>
 <ul>
 <li><p>Oska ML notes (Notion)</p></li>
-<li><p><a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models">Predictive models of donations in EA Survey</a></p>
+<li>
+<p><a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models">Predictive models of donations in EA Survey</a></p>
 <ul>
-<li>Code to fit models in <a href="https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive">this folder</a></li>
+<li>Code to fit models in <a href="https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive">this folder</a>
+</li>
 <li>… uses <a href="https://www.tidymodels.org/">tidymodels</a> including <a href="https://workflowsets.tidymodels.org/">workflow_set</a> and ‘recipes’ and the <a href="https://www.tidyverse.org/blog/2018/11/parsnip-0-0-1/">parsnip</a> package</li>
-</ul></li>
+</ul>
+</li>
 <li><p>General intuitive discussion: “Data Science for Business by Foster Provost and Tom Fawcett (2013)”; DR notes <a href="https://daaronr.github.io/metrics_discussion/n-ds4bs.html">here</a> and <a href="https://daaronr.github.io/metrics_discussion/control-ml.html">here</a></p></li>
 </ul>
 
@@ -354,16 +360,12 @@ Discussion: ‘elastic net’ models:
 
 <!-- -->
 
-</section>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>An alternate project might try to predict future total EA donations in total in subsequent years and decades. This could embody both a prediction problem for individuals and uncertainties at the aggregate level. This is even further from what we are doing here, but seems worthwhile for future work, combining the EA survey with other measures and assessments.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more ‘parsimonious’, thus perhaps easier to describe and use. But the Lasso is <em>not</em> specifically designed as a ‘variable selection procedure’. Running Lasso and then naively using the ‘variables not shrunk to zero’ in further standard linear models or other procedures may not be optimal. But see the ‘lazy lasso’ approach.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-</main> <!-- /main -->
-<script type="application/javascript">
+<li id="fn3" role="doc-endnote"><p> When considering predicted outcomes on the <em>logarithmic</em> scale, both RMSE and MAE indicate roughly ‘how many exponential orders of magnitude our predictions for the <em>non-logged outcomes</em> are off. E.g., a MSE of 1.5 for ’log donation’ suggests an we are off by about <span class="math inline">\(exp(1.5) =\)</span> 4.48 times in terms of donations, getting them off by a factor of about 5. This conversion avoid such complications.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
@@ -489,83 +491,114 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../chapters/basic_stats.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, Testing, Inference, Descriptives</span></span>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/factor_analysis.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/time_series_application.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prediction, machine learning, and 'ml-style modeling' {-#modeling}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consult modeling vignette(s)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>See <span class="co">[</span><span class="ot">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</span><span class="co">](../vignettes/eas_ml_modeling_vignette.html)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prediction models for insights? {#pred-insights}</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion: why build 'predictive models of donations', for example?</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>We focus on predicting the individual's donation in a year, focusing on the same set of outcomes used in the previous section. For this model to be useful for an *actual* prediction problem going forward, it would need to rely on 'ex-ante' characteristic that were already observable at the time of a career/EtG/pledge decision.^<span class="co">[</span><span class="ot">An alternate project might try to predict future total EA donations in total in subsequent years and decades. This could embody both a prediction problem for individuals and uncertainties at the aggregate level. This is even further from what we are doing here, but seems worthwhile for future work, combining the EA survey with other measures and assessments.</span><span class="co">]</span>  These might include immutable demographics, career plans, and pledges previously taken, and consider year and trend effects.</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Although we have these models in mind, this is not what we are doing here. We are not posing a specific 'prediction problem' per se. Instead we are using machine learning tools built for prediction problems to generate 'data-driven insights' about factors related to EA donation behavior. Here, we do not than directly specifying all of the included components of the model (features, interaction terms, etc.). Instead we provide a large set of possible 'inputs' and use ML techniques to train models that should predict well *outside of the data they are trained on*. These models should do a good job of accomplishing the task: 'if you gave me a set of features of an EA, I should have a fairly accurate guess at what they will donate.'</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>The insights from these models should also be treated with caution. Again, they may not be deriving causal relationships. Furthermore, the parameters derived from model-fitting ML procedures are not in general unbiased or consistent, and it is difficult to derive proper confidence intervals for these parameters.</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Still, the benefit of this exercise may be considered 'the derivation of robust and predictive relationships in the data that are mainly driven by the data itself, rather than our preconcieved ideas.' These models may also be useful building blocks towards future predictive work.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="in">        </span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Penalized regression models {#penalized-reg}</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion: 'elastic net' models:</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>In brief, the *elastic net* models involve linear models (log-linear in</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>our case), i.e., '*regressions*', that carefully 'penalize' the</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>(squared) magnitude of coefficients, in effect shrinking these towards</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>zero. The penalties are specifically 'tuned' and 'validated' to maximize</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>the predictive power of the model. As these are essentially regression</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>approaches, we can report the sign and magnitude of the coefficients</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>used in the 'optimally tuned' predictive model. (However, we should be</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>careful about interpreting these parameters, and statistical inference</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>is challenging. See e.g., @Mullainathan2017 for a detailed discussion.)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>The GLMnet approach combines 'ridge (L2 norm) and lasso (L2 norm)', tuning the mix of each, as well as tuning the penalization parameters *within* each.</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>Both the sum of absolute value coefficients (L1 norm) and the summed square of these (L2 norm) ma   y be penalized. Thus, these will be 'shrunk towards zero' relative to a comparable OLS (standard linear model)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a> estimate. How much do we 'charge' for the absolute or squared sums? This is 'tuned', i.e., we see what combinations perform best in the cross-validation exercise.</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>In some cases (because of the L1 norm), coefficients may be dropped entirely, i.e., 'shrunk all the way to zero'.^<span class="co">[</span><span class="ot">Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more 'parsimonious', thus perhaps easier to describe and use. But the Lasso is *not* specifically designed as a 'variable selection procedure'. Running Lasso and then naively using the 'variables not shrunk to zero' in further standard linear models or other procedures may not be optimal. But see the 'lazy lasso' approach.</span><span class="co">]</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources and use-cases</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oska ML notes (Notion)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Predictive models of donations in EA Survey</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Code to fit models in <span class="co">[</span><span class="ot">this folder</span><span class="co">](https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive)</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>... uses <span class="co">[</span><span class="ot">tidymodels</span><span class="co">](https://www.tidymodels.org/)</span> including <span class="co">[</span><span class="ot">workflow_set</span><span class="co">](https://workflowsets.tidymodels.org/)</span> and 'recipes' and the <span class="co">[</span><span class="ot">parsnip</span><span class="co">](https://www.tidyverse.org/blog/2018/11/parsnip-0-0-1/)</span> package</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>General intuitive discussion: "Data Science for Business by Foster Provost and Tom Fawcett (2013)"; DR notes <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/n-ds4bs.html)</span> and <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/control-ml.html)</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prediction, machine learning, and 'ml-style modeling' {-#modeling}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consult modeling vignette(s)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>See <span class="co">[</span><span class="ot">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</span><span class="co">](../vignettes/eas_ml_modeling_vignette.html)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prediction models for insights? {#pred-insights}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion: why build 'predictive models of donations', for example?</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>We focus on predicting the individual's donation in a year, focusing on the same set of outcomes used in the previous section. For this model to be useful for an *actual* prediction problem going forward, it would need to rely on 'ex-ante' characteristic that were already observable at the time of a career/EtG/pledge decision.^<span class="co">[</span><span class="ot">An alternate project might try to predict future total EA donations in total in subsequent years and decades. This could embody both a prediction problem for individuals and uncertainties at the aggregate level. This is even further from what we are doing here, but seems worthwhile for future work, combining the EA survey with other measures and assessments.</span><span class="co">]</span>  These might include immutable demographics, career plans, and pledges previously taken, and consider year and trend effects.</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>Although we have these models in mind, this is not what we are doing here. We are not posing a specific 'prediction problem' per se. Instead we are using machine learning tools built for prediction problems to generate 'data-driven insights' about factors related to EA donation behavior. Here, we do not than directly specifying all of the included components of the model (features, interaction terms, etc.). Instead we provide a large set of possible 'inputs' and use ML techniques to train models that should predict well *outside of the data they are trained on*. These models should do a good job of accomplishing the task: 'if you gave me a set of features of an EA, I should have a fairly accurate guess at what they will donate.'</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>The insights from these models should also be treated with caution. Again, they may not be deriving causal relationships. Furthermore, the parameters derived from model-fitting ML procedures are not in general unbiased or consistent, and it is difficult to derive proper confidence intervals for these parameters.</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>Still, the benefit of this exercise may be considered 'the derivation of robust and predictive relationships in the data that are mainly driven by the data itself, rather than our preconcieved ideas.' These models may also be useful building blocks towards future predictive work.</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="in">        </span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Penalized regression models {#penalized-reg}</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion: 'elastic net' models:</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>In brief, the *elastic net* models involve linear models (log-linear in</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>our case), i.e., '*regressions*', that carefully 'penalize' the</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>(squared) magnitude of coefficients, in effect shrinking these towards</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>zero. The penalties are specifically 'tuned' and 'validated' to maximize</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>the predictive power of the model. As these are essentially regression</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>approaches, we can report the sign and magnitude of the coefficients</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>used in the 'optimally tuned' predictive model. (However, we should be</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>careful about interpreting these parameters, and statistical inference</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>is challenging. See e.g., @Mullainathan2017 for a detailed discussion.)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>The GLMnet approach combines 'ridge (L2 norm) and lasso (L2 norm)', tuning the mix of each, as well as tuning the penalization parameters *within* each.</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>Both the sum of absolute value coefficients (L1 norm) and the summed square of these (L2 norm) ma   y be penalized. Thus, these will be 'shrunk towards zero' relative to a comparable OLS (standard linear model)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a> estimate. How much do we 'charge' for the absolute or squared sums? This is 'tuned', i.e., we see what combinations perform best in the cross-validation exercise.</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>In some cases (because of the L1 norm), coefficients may be dropped entirely, i.e., 'shrunk all the way to zero'.^<span class="co">[</span><span class="ot">Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more 'parsimonious', thus perhaps easier to describe and use. But the Lasso is *not* specifically designed as a 'variable selection procedure'. Running Lasso and then naively using the 'variables not shrunk to zero' in further standard linear models or other procedures may not be optimal. But see the 'lazy lasso' approach.</span><span class="co">]</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Metrics of fit </span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>We may want to consider 'how successful' our predictive models are at making practically useful predictions. In other words, 'how far off' are the predictions and classifications on average, from the actual outcomes. This procedure considers the fit on randomly-drawn *set-aside* 'testing data', data that has not been used in 'training' (or 'fitting') the model. </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>In the vignette <span class="co">[</span><span class="ot">here</span><span class="co">](https://rethinkpriorities.github.io/methodology-statistics-design/vignettes/eas_ml_modeling_vignette.html#illustrate-metrics-of-fit)</span> we consider and discuss the root-mean-square-error (RMSE) and mean-absolute-error (MAE) metrics in the context of predicting donatino outcomes.</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>In order to assess the usefulness of each predictive regression model we consider both root-mean-square-error (RMSE) and mean-absolute-error (MAE). RMSE (aka <span class="co">[</span><span class="ot">RMSD</span><span class="co">](https://en.wikipedia.org/wiki/Root-mean-square_deviation)</span>) can be interpreted as the average 'Euclidean distance' between the actual values and the model's prediction. For each observation (in the set-aside 'testing sample'), to construct RMSE we:</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Measure the differences between the actual and predicted outcome (e.g., donation)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Square these differences</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Take the average of these squared differences across all observations</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Take the square root of this</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>To construct mean-absolute-error (MAE) we simply</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Measure the *absolute-value* differences between the actual and predicted outcome (e.g., donation) for each observation</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Take the average of these across all observations</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>MAE has a much more straightforward interpretation: it simply asks 'how far off are we, on average?'</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>While the RMSE is used in the model *fitting* for various reasons, it is arguably less-interpretable and less-relevant than MAE in *judging* the model's fit in cases like this one. RMSE error negatively assesses the model fit based on *squared* deviations, and is thus very sensitive to 'large mistakes'. This may be relevant where 'large errors are much much worse than small ones' -- here, this is not so clearly the case. In the presence of data with large outlying observations, prediction will tend to be poor by this measure.</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>Note that when considering models where the outcome is transformed (e.g., log(donations)) we construct the RMSE and MAE by exponentiating to generate predictions for the *level* outcomes, and then measure the deviations on the level scale.^[ When considering predicted outcomes on the *logarithmic* scale, both RMSE and MAE indicate roughly 'how many exponential orders of magnitude our predictions for the *non-logged outcomes* are off. E.g., a MSE of 1.5 for 'log donation' suggests an we are off by about $exp(1.5) =$ <span class="in">`r op(exp(1.5))`</span> times in terms of donations, getting them off by a factor of about 5. This conversion avoid such complications.</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources and use-cases</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oska ML notes (Notion)</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Predictive models of donations in EA Survey</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Code to fit models in <span class="co">[</span><span class="ot">this folder</span><span class="co">](https://github.com/rethinkpriorities/ea-data/tree/master/analysis/predictive)</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>... uses <span class="co">[</span><span class="ot">tidymodels</span><span class="co">](https://www.tidymodels.org/)</span> including <span class="co">[</span><span class="ot">workflow_set</span><span class="co">](https://workflowsets.tidymodels.org/)</span> and 'recipes' and the <span class="co">[</span><span class="ot">parsnip</span><span class="co">](https://www.tidyverse.org/blog/2018/11/parsnip-0-0-1/)</span> package</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>General intuitive discussion: "Data Science for Business by Foster Provost and Tom Fawcett (2013)"; DR notes <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/n-ds4bs.html)</span> and <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/control-ml.html)</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

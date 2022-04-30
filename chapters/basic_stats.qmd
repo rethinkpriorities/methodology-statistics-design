@@ -1,4 +1,19 @@
-#  Models, Testing, Inference, Descriptives {-#basicstat}
+# Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
+
+
+::: {.callout-note collapse='true'}
+
+## Aim to integrate content from
+
+- Willem's blog and vignettes
+- [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
+    - This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']
+
+- [Lakens on statistical inference](https://lakens.github.io/statistical_inferences/)
+- McElreath
+-
+
+:::
 
 ```{r}
 #| include: false
@@ -12,28 +27,65 @@ source(here("code", "methods_setup.R"))
 source(here("code", "get_eas_data.R"))
 ```
 
-::: {.callout-note collapse='true'}
 
-## Aim to integrate content from 
+## Types of 'statistical models' goals {#what_models}
 
-- Willem's blog and vignettes
-- [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
-    - This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']
-    
-- [Lakens on statistical inference](https://lakens.github.io/statistical_inferences/)
-- McElreath
-- 
 
+As discussed in our posts [and linked material](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#modeling-engagement), we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)
+
+
+1.  Descriptive modeling: Essentially, offering a "dimension reduction" of the data, presenting 'which features relate to donation behavior'?
+2.  Predictive modeling: Training a model to produce the best out-of-sample (or out-of-time) fit for current (or future) donations based on individual characteristics. This model should not include 'leaks', i.e., it should excluding individual characteristics and outcomes that occur after the time we would be 'doing the prediction'.
+3.  Causal: Consider identification of 'causal paths', i.e., 'what actually determines amounts donated'.^[However causal inference requires strong assumptions and/or exogenous and random shifts in potential determinants of donation behavior.]
+
+
+<!-- MOVE TO METHODS: WHY DO WE CARE ABOUT CAUSALITY?
+
+::: {.callout-note collapse="true"}
+## Why do we care about causality? ('donations post' context)
+
+
+We may care about causality
+
+i.  because we see potential to intervene and boost those variables that
+    cause greater giving, and/or because
+
+ii. a better understanding of what actually *drives* donation behavior
+    may yield additional insights, helping us understand the world
+    better.
+
+
+Consider factors of potential interest, including those we could
+influence as a movement (e.g., 'recommended career paths') and those of
+fundamental interest (perhaps income, age or initial cause
+prioritization). Simply looking at differences in donation by these
+measures will not tell us their actual *impact* on donation; nor will a
+'controlled regression': each of these are likely to be related to, and
+influenced by (observable and) unobserved components which may also
+drive donations.
+
+E.g., suppose people who first went to an elite university tended to
+donate more. This would *not* this mean that attending an elite
+university causes greater donations. Individuals who attend elite
+university may have greater exposure to EA charitable appeals, or
+greater (unobserved wealth) or lifetime income, which may independently
+cause greater giving. Even age cannot be given an obvious causal
+interpretation, given our sample selection; e.g., in any sample we look
+at the older people will tend to have joined EA at a younger age, and
+people may have been driven to join at a younger age *because* they were
+more altruistic, or because they had a stronger EA peer network, etc.
+
+For these reasons, we general look for sources of experimental or
+quasi-experimental variation in the factors of interest to justify
+causal inference.
 :::
 
 
 
-# Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
 
+## Discussion: statistics, probability and inference {#conceptual}
 
-## Conceptual discussion of statistics, probability and inference {#conceptual}
-
-Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'>
+Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'
 
 ::: {.alert .alert-secondary}
 
@@ -126,10 +178,10 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Equivalence_test) (accessed 12 Ap
 
 > Several tests exist for equivalence analyses; however, more recently the Two-one-sided t-tests (TOST) procedure has been garnering considerable attention. As outlined below, this approach is an adaptation of the widely known t-test.
 
-> "A very simple equivalence testing approach is the ‘two-one-sided t-tests’ (TOST) procedure. [Schuirmann, 1987] In the TOST procedure an upper ($\Delta U$) and lower (-$\Delta L$) equivalence bound is specified based on the smallest effect size of interest (e.g., a positive or negative difference of $d = 0.3$). Two composite null hypotheses are tested: $H_{01}: \Delta \leq –\Delta L$ and $H_{02}: \Delta \geq \Delta U$   When both these one-sided tests can be statistically rejected, we can conclude that $–\Delta L < \Delta < \Delta U$, or that the observed effect falls within the equivalence bounds ... .[Searman et al, 1998]" [Lakens 2017] 
+> "A very simple equivalence testing approach is the ‘two-one-sided t-tests’ (TOST) procedure. [Schuirmann, 1987] In the TOST procedure an upper ($\Delta U$) and lower (-$\Delta L$) equivalence bound is specified based on the smallest effect size of interest (e.g., a positive or negative difference of $d = 0.3$). Two composite null hypotheses are tested: $H_{01}: \Delta \leq –\Delta L$ and $H_{02}: \Delta \geq \Delta U$   When both these one-sided tests can be statistically rejected, we can conclude that $–\Delta L < \Delta < \Delta U$, or that the observed effect falls within the equivalence bounds ... .[Searman et al, 1998]" [Lakens 2017]
 
 
-[Lakens](http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html) offers pointers, and TOSTER package, for this approach. 
+[Lakens](http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html) offers pointers, and TOSTER package, for this approach.
 
 Semi-aside: [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
 

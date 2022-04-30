@@ -1,5 +1,9 @@
 # Prediction, machine learning, and 'ml-style modeling' {-#modeling}
-    
+
+```{r}
+library(rethinkpriorities)
+
+```
 
 ## Consult modeling vignette(s)
 
@@ -50,6 +54,34 @@ Both the sum of absolute value coefficients (L1 norm) and the summed square of t
 In some cases (because of the L1 norm), coefficients may be dropped entirely, i.e., 'shrunk all the way to zero'.^[Note that the Lasso is often chosen because it sometimes drops coefficients, making the model more 'parsimonious', thus perhaps easier to describe and use. But the Lasso is *not* specifically designed as a 'variable selection procedure'. Running Lasso and then naively using the 'variables not shrunk to zero' in further standard linear models or other procedures may not be optimal. But see the 'lazy lasso' approach.]
 
 :::
+
+## Metrics of fit 
+
+We may want to consider 'how successful' our predictive models are at making practically useful predictions. In other words, 'how far off' are the predictions and classifications on average, from the actual outcomes. This procedure considers the fit on randomly-drawn *set-aside* 'testing data', data that has not been used in 'training' (or 'fitting') the model. 
+
+In the vignette [here](https://rethinkpriorities.github.io/methodology-statistics-design/vignettes/eas_ml_modeling_vignette.html#illustrate-metrics-of-fit) we consider and discuss the root-mean-square-error (RMSE) and mean-absolute-error (MAE) metrics in the context of predicting donatino outcomes.
+
+
+
+
+In order to assess the usefulness of each predictive regression model we consider both root-mean-square-error (RMSE) and mean-absolute-error (MAE). RMSE (aka [RMSD](https://en.wikipedia.org/wiki/Root-mean-square_deviation)) can be interpreted as the average 'Euclidean distance' between the actual values and the model's prediction. For each observation (in the set-aside 'testing sample'), to construct RMSE we:
+
+1.  Measure the differences between the actual and predicted outcome (e.g., donation)
+2.  Square these differences
+3.  Take the average of these squared differences across all observations
+4.  Take the square root of this
+
+To construct mean-absolute-error (MAE) we simply
+
+1.  Measure the *absolute-value* differences between the actual and predicted outcome (e.g., donation) for each observation
+2.  Take the average of these across all observations
+
+MAE has a much more straightforward interpretation: it simply asks 'how far off are we, on average?'
+
+While the RMSE is used in the model *fitting* for various reasons, it is arguably less-interpretable and less-relevant than MAE in *judging* the model's fit in cases like this one. RMSE error negatively assesses the model fit based on *squared* deviations, and is thus very sensitive to 'large mistakes'. This may be relevant where 'large errors are much much worse than small ones' -- here, this is not so clearly the case. In the presence of data with large outlying observations, prediction will tend to be poor by this measure.
+
+Note that when considering models where the outcome is transformed (e.g., log(donations)) we construct the RMSE and MAE by exponentiating to generate predictions for the *level* outcomes, and then measure the deviations on the level scale.^[ When considering predicted outcomes on the *logarithmic* scale, both RMSE and MAE indicate roughly 'how many exponential orders of magnitude our predictions for the *non-logged outcomes* are off. E.g., a MSE of 1.5 for 'log donation' suggests an we are off by about $exp(1.5) =$ `r op(exp(1.5))` times in terms of donations, getting them off by a factor of about 5. This conversion avoid such complications.
+]
 
 
 ## Resources and use-cases
