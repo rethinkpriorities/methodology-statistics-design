@@ -20,11 +20,149 @@ comments:
 
 # Introduction
 
-This vignette shows how to use a set of `Tidymodels` tools and other tools, to do a machine learning prediction and validation exercise. We use the EA Survey 'donation data' for our example, covering much of the analysis that was done for the comparable section of the 2020 EA Forum post/chapter. Most of that code was written by Oska Fentem in consultation with David Reinstein. This vignette is written by David Reinstein.
 
-I try to show:
+This vignette 
 
-- How the computation works and 'what is producing what' ... so that you can recreate it in your own context
-- That the machine learning models do, and why
-- Why we made specific modeling choices
+- shows how I define, build, and report (tables and plots) a set of 'models' in a (fairly) tidy, organized way  ...  
+
+-  for the simple intuitive/ad-hoc descriptive and causally suggestive models I did for the of the 2020 [EA Forum post](https://forum.effectivealtruism.org/posts/nb6tQ5MRRpXydJQFq/ea-survey-2020-series-donation-data) and [chapter](https://rethinkpriorities.github.io/ea_data_public/eas_rps_own_style/eas_donations.html)  and other EA forum posts posts
+
+
+- As a code example 
+     - How the computation works and 'what is producing what' ... so that you can recreate it in your own context
+
+
+- To give a little bit of insight into the modeling choices and approaches.
+
+
+## Reading in data from a repo
+
+The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.
+
+```{r input, include=FALSE}
+
+df <- rethinkpriorities::read_file_from_repo(
+  repo = "ea-data",
+  path = "data/edited_data/eas_all_s_rl_imp.Rdata",
+  user = "rethinkpriorities",
+  token_key = "github-API",
+  private = TRUE
+)
+
+```
+
+Next we sample from this data and remove labels, to make it process quicker and easier
+
+```{r simplify_for_tidymodel}
+
+df <- df %>%
+  labelled::remove_attributes("label") %>%  # Labels don't work with tidymodels :/, sadly
+  ungroup() %>%
+dplyr::sample_n(2000)
+
+```
+
+
+# Modeling discussion 
+
+
+
+::: {.callout-note collapse="true"}
+
+## Brief: our descriptive model 'selection'
+
+In our *descriptive* modeling we do *not* remove 'insignificant' features from the model (as in stepwise regression), nor do we shrink the coefficients towards zero (as in Ridge and Lasso models). Under the assumptions of the classical linear model and its simple extensions the coefficients we present here would be unbiased or consistent. (However, we admit that the strong assumptions of this model, particularly those embodying exogeneity, are likely to fail in important ways in the current non-experimental setting.)
+:::
+
+::: {.callout-note collapse="true"}
+
+## We retain those features of most direct interest
+
+... (such as 'how introduced to EA') and/or theoretical importance (such as income),^[Classical economic theory suggests that most goods are 'normal', with the amount consumed increasing in income. Empirical evidence supports this for charitable giving; [recent work](https://econofact.org/are-rich-people-really-less-generous) suggests that *share of income* is relatively constant across the income distribution, implying that wealthier people give more in absolute terms.] and 'controls' (especially time-in-EA and survey-year) that might allow us to better interpret the features of interest.^[See further discussion in post.]
+
+:::
+
+### Choosing features and modeling targets, defining these lists/objects {.unnumbered}
+
+
+**We focus on three key outcomes:**
+
+1.  Amount donated (converted to US dollars)^[Here we focus on the average of last-year's and next year's donation for each individual, where both are present, and otherwise we use whichever one is present.... Further discussion in post.]
+
+2.  Donation as a share of income^[Where income is missing or where income was reported as 0 we impute it based on student status and country.]
+
+3.  Whether donated more than 1000 USD
+
+
+**We construct several 'feature sets':**
+
+-   "Key demographics, student status, and geography", used in all models 
+-   "Career/Economics": (Income, employment status, top-6 university)
+
+<!-- ^["Top-6 university" refers to whether the individual lists any of the six universities (Oxford, Stanford, Harvard, CalTech, MIT, Cambridge) appearing in the top-10 of all of USNWR, QS, and THE rankings. However, university was not asked in the 2018 survey ] -->
+    <!-- feat_income_employ -- -->
+-   "Pledges/commitments:" Whether ever taken a 'Giving What We Can
+    Pledge', whether 'Earning to Give' <!-- feat_gwwc_etg -->
+-   "Controls" for age, time-in-EA, and survey-year (used in all
+    models)^[We refer to the latter as "controls" because they aid our
+    interpretation of other features of interest, as noted above.
+    However, these are *also* of independent interest.]
+
+    
+:::
+
+
+**In the code below, we define these objects!**
+
+We define the lists of the different 'features' we care about as character vectors, to put into the models later. The idea is 'all decisions are specified and discussed up top', for better organization and control.
+
+First we define the 'targets': the binary outcomes, numerical outcomes, all outcomes, and a subset of these outcomes for more involved analyses. 
+
+```{r targets, echo=FALSE, warning=FALSE}
+
+#targets:
+bin_out <- c("d_don_1k", "d_don_10pct")
+
+num_out <- c('donation_c', 'don_av2_yr', 'l_don_c', "l_don_av_2yr", "don_share_inc_imp_bc5k", "donation_plan_c")
+targets <- c(bin_out, num_out)
+targets_short <- c("don_av2_yr", "don_share_inc_imp_bc5k", "d_don_1k") 
+
+#Note -- don_av2_yr is the right one for qpoisson as it already expresses things in exponents. l_don_av2_yr was the one to use in the loglinear model, which we are not emphasizing
+
+targets_short_names <- c("Log (Avg don +1)", "Don/Income", "Donated 1k+")
+```
+
+Next, we define  the 'features of interest' and the 'controls'
+
+```{r}
+
+#features and controls
+geog <- c("where_live_cat", "city_cat")
+key_demog <- c("ln_age", "not_male_cat", "student_cat", "race_cat", geog)
+key_demog_n <- c("age_d2sd", "not_male_cat", "student_cat", "race_cat", geog)
+
+feat_income_employ <- c("ln_income_c_imp_bc5k", "d_pt_employment", "d_not_employed", "d_top6_uni")
+
+#Note -income_c_imp_diqr has been adjusted to  with 5k minimum
+
+feat_income_employ_n <- c("income_c_imp_diqr", "d_pt_employment", "d_not_employed", "d_top6_uni")
+
+
+feat_gwwc_etg <- c("d_gwwc_ever_0", "d_career_etg")
+
+controls <- c("ln_years_involved", "year_f") #note this assumes those 2009 or earlier started in 2009
+
+controls_n <- c("years_involved_d2sd", "year_f") #note this assumes those 2009 or earlier started in 2009
+
+robust_controls <- c("ln_years_involved_post_med",  "ln_age_if_older", "ln_income_c_imp_if_richer")
+
+robust_controls_n <- c("years_inv_d2sd_post_med",  "age_d2sd_post_med", "income_c_imp_diqr_if_richer")
+
+#note -- I swapped "age_ranges" for "gender_d2sd" because this will allow us a decent measure of 'is the age effect nonlinear' (see datacolada on the superiority of this over a quadratic)
+
+#contrasts(normtimeBP02$Nasality) = contr.treatment(4)
+#DR; I was never able to get the contrasts thing to work so I went with 'base group is most common group'
+
+```
+
 

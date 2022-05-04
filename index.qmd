@@ -12,7 +12,39 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 
 <!-- (integrate discussion from Slack thread and readme) -->
 
-A github-hosted 'bookdown' for structured in-depth discussion
+A github-hosted 'quarto' for structured in-depth discussion
+
+::: {.callout-note collapse="true"}
+## But why do we want or need this?
+
+But I often question 'why do I have a sense this is useful'? When a concept comes up that one doesn't understand we all have resources we can go to, and our tutorials could feel like 'reinventing the wheel'.
+
+-our situations are sometimes particular - explaining it in our own words is helpful - keeping track of what we have done,
+
+-   build a protocol and have a 'go-to procedure'
+
+-   to understand which things we value and how they relate to our work
+
+-   and there isn't always good applicable material on each topic
+
+-   this is helpful for onboarding, helpful for showing experts outside of RP to get feedback.
+
+And *Common knowledge and language* (see next fold).
+:::
+
+::: {.callout-note collapse="true"}
+## Common knowledge and language
+
+In working together we need to know what each of us knows, understands, and believes about these tools, and how each of us interprets them.
+
+For example, with Factor Analysis, I know little about it and have never actually run it. But I thought it was seen as useful as a dimension reduction descriptive exercise. But William, who knows more about it, seems to disagree.
+
+With Principle Component Analysis, I think/thought I have a good understanding of what it does, and the math and geometry of it. But I do have some nagging questions like ... "what is the role and meaning of the different 'rotations'"?
+
+"I know the components are set to be orthogonal ... but how does that relate to the fact that they 'mainly, but not always' have non-overlapping variables"? It may be that others do know the answer to this and could easily explain it to me. Or maybe no one knows and there is a gap in our understanding, and perhaps we might miss when 'things go wrong'. Or perhaps one of us interprets it in one way (like "it is bad when there are overlapping variables in a factor") and another has a different idea ... and we are working at cross-purposes.
+
+Having the "conversation in an organized place" should help us establish common knowledge and fix gaps like these. ... hopefully without interminable back and forths, and in a way that we do not 'forget and return to the same discussion in 6 months
+:::
 
 \
 
@@ -30,6 +62,8 @@ A github-hosted 'bookdown' for structured in-depth discussion
 -   Do curate link, and embed resources from elsewhere
 
 -   Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)
+
+    -   Top of each chapter/section: A 'where do we use this' section or box.
 
 -   Do put in content that is more in-depth and technical, or involving R-code and tools
 

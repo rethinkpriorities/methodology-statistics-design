@@ -25,14 +25,13 @@ comments:
 
 # Introduction
 
-This vignette shows how to use a set of `Tidymodels` tools and other tools, to do a machine learning prediction and validation exercise. We use the EA Survey 'donation data' for our example, covering much of the analysis that was done for the comparable section of the 2020 EA Forum post/chapter. Most of that code was written by Oska Fentem in consultation with David Reinstein. This vignette is written by David Reinstein. 
+This vignette shows how to use a set of `Tidymodels` tools and other tools, to do a machine learning prediction and validation exercise. We use the EA Survey 'donation data' for our example, covering much of the analysis that was done for the comparable section of the 2020 [EA Forum post](https://forum.effectivealtruism.org/posts/nb6tQ5MRRpXydJQFq/ea-survey-2020-series-donation-data) and [chapter](https://rethinkpriorities.github.io/ea_data_public/eas_rps_own_style/eas_donations.html). Most of that code was written by Oska Fentem in consultation with David Reinstein. This vignette is written by David Reinstein. 
 
 I try to show:
 
 - How the computation works and 'what is producing what' ... so that you can recreate it in your own context
 - That the machine learning models do, and why
 - Why we made specific modeling choices 
-
 
 
 See also: ['Fitting Models with parsnip'](https://www.tmwr.org/models.html)
@@ -897,7 +896,9 @@ Note that for the continuous outcomes, we first converted from logs to levels be
 
 Some tidying up and renaming below.
 
+
 ```{r}
+
 # Change model names
 
 d_don_1k_best_params <- rename_models(d_don_1k_best_params)
