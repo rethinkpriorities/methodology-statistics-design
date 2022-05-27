@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.243">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - 7&nbsp; Statistical frameworks, ‘models’, and hypothesis testing</title>
+<title>Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates - 8&nbsp; Frameworks, ‘models’, inference, tests</title>
 <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@
 <body class="floating">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical frameworks, ‘models’, and hypothesis testing</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -117,7 +117,7 @@
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</a> 
+      <a href="../">Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/%20/rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -135,20 +135,20 @@
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP Rethink priorities ‘methods book’: Introduction and overview</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Presentation, code organization</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction, protocols/style</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP ‘methods book’: Introduction/overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/coding_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding and data management</span></a>
   </div>
@@ -162,7 +162,7 @@
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Designing surveys and trials</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -180,7 +180,17 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
+  <a href="../chapters/exp_design_quant.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link">Power analysis workflow (Jamie Elsey)</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
   </div>
 </li>
     </ul>
@@ -195,39 +205,39 @@
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical frameworks, ‘models’, and hypothesis testing</span></a>
+  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></a>
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), principle components (PCA),</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></a>
+  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Prediction, machine learning/modeling</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></a>
+  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time Series – application</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Classification models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
   </div>
 </li>
     </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other topics and worked examples</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -235,22 +245,17 @@
     <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
+  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link">Power analysis workflow (Jamie Elsey)</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Inference/equivalence testing w. binomial outcomes</span></a>
   </div>
 </li>
     </ul>
@@ -260,30 +265,30 @@
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#what_models" id="toc-what_models" class="nav-link active" data-scroll-target="#what_models"> <span class="header-section-number">7.1</span> Types of ‘statistical models’ goals</a></li>
+<li><a href="#what_models" id="toc-what_models" class="nav-link active" data-scroll-target="#what_models"> <span class="header-section-number">8.1</span> Types of ‘statistical models’ goals</a></li>
 <li>
-<a href="#particular-experimetrics-issues" id="toc-particular-experimetrics-issues" class="nav-link" data-scroll-target="#particular-experimetrics-issues"> <span class="header-section-number">7.2</span> Particular ‘experimetrics’ issues</a>
+<a href="#particular-experimetrics-issues" id="toc-particular-experimetrics-issues" class="nav-link" data-scroll-target="#particular-experimetrics-issues"> <span class="header-section-number">8.2</span> Particular ‘experimetrics’ issues</a>
 <ul class="collapse">
 <li><a href="#should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" id="toc-should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" class="nav-link" data-scroll-target="#should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments">Should we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?</a></li>
 </ul>
 </li>
 <li>
-<a href="#equivalence-tests-and-bayesian-approaches" id="toc-equivalence-tests-and-bayesian-approaches" class="nav-link" data-scroll-target="#equivalence-tests-and-bayesian-approaches"> <span class="header-section-number">8</span> Equivalence tests and Bayesian approaches</a>
+<a href="#equivalence-tests-and-bayesian-approaches" id="toc-equivalence-tests-and-bayesian-approaches" class="nav-link" data-scroll-target="#equivalence-tests-and-bayesian-approaches"> <span class="header-section-number">9</span> Equivalence tests and Bayesian approaches</a>
 <ul class="collapse">
-<li><a href="#equivalence-tests-and-simple-frequentist-approaches" id="toc-equivalence-tests-and-simple-frequentist-approaches" class="nav-link" data-scroll-target="#equivalence-tests-and-simple-frequentist-approaches"> <span class="header-section-number">8.1</span> Equivalence tests and simple frequentist approaches</a></li>
-<li><a href="#simple-bayes" id="toc-simple-bayes" class="nav-link" data-scroll-target="#simple-bayes"> <span class="header-section-number">8.2</span> Some simple Bayesian testing examples</a></li>
-<li><a href="#simulation_to_bayes" id="toc-simulation_to_bayes" class="nav-link" data-scroll-target="#simulation_to_bayes"> <span class="header-section-number">8.3</span> A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a></li>
-<li><a href="#empirical-bayes" id="toc-empirical-bayes" class="nav-link" data-scroll-target="#empirical-bayes"> <span class="header-section-number">8.4</span> ‘Empirical Bayes’</a></li>
-<li><a href="#step-1-estimate-a-beta-prior-from-all-your-data" id="toc-step-1-estimate-a-beta-prior-from-all-your-data" class="nav-link" data-scroll-target="#step-1-estimate-a-beta-prior-from-all-your-data"> <span class="header-section-number">8.5</span> Step 1: Estimate a [Beta] prior from all your data</a></li>
-<li><a href="#step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" id="toc-step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" class="nav-link" data-scroll-target="#step-2-use-that-distribution-as-a-prior-for-each-individual-estimate"> <span class="header-section-number">8.6</span> Step 2: Use that distribution as a prior for each individual estimate</a></li>
+<li><a href="#equivalence-tests-and-simple-frequentist-approaches" id="toc-equivalence-tests-and-simple-frequentist-approaches" class="nav-link" data-scroll-target="#equivalence-tests-and-simple-frequentist-approaches"> <span class="header-section-number">9.1</span> Equivalence tests and simple frequentist approaches</a></li>
+<li><a href="#simple-bayes" id="toc-simple-bayes" class="nav-link" data-scroll-target="#simple-bayes"> <span class="header-section-number">9.2</span> Some simple Bayesian testing examples</a></li>
+<li><a href="#simulation_to_bayes" id="toc-simulation_to_bayes" class="nav-link" data-scroll-target="#simulation_to_bayes"> <span class="header-section-number">9.3</span> A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</a></li>
+<li><a href="#empirical-bayes" id="toc-empirical-bayes" class="nav-link" data-scroll-target="#empirical-bayes"> <span class="header-section-number">9.4</span> ‘Empirical Bayes’</a></li>
+<li><a href="#step-1-estimate-a-beta-prior-from-all-your-data" id="toc-step-1-estimate-a-beta-prior-from-all-your-data" class="nav-link" data-scroll-target="#step-1-estimate-a-beta-prior-from-all-your-data"> <span class="header-section-number">9.5</span> Step 1: Estimate a [Beta] prior from all your data</a></li>
+<li><a href="#step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" id="toc-step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" class="nav-link" data-scroll-target="#step-2-use-that-distribution-as-a-prior-for-each-individual-estimate"> <span class="header-section-number">9.6</span> Step 2: Use that distribution as a prior for each individual estimate</a></li>
 </ul>
 </li>
-<li><a href="#factor-descriptive" id="toc-factor-descriptive" class="nav-link" data-scroll-target="#factor-descriptive"> <span class="header-section-number">9</span> Factor analysis, dimension reduction, and ‘carving reality at its joints’</a></li>
+<li><a href="#factor-descriptive" id="toc-factor-descriptive" class="nav-link" data-scroll-target="#factor-descriptive"> <span class="header-section-number">10</span> Factor analysis, dimension reduction, and ‘carving reality at its joints’</a></li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/basic_stats.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="stat_frame" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical frameworks, ‘models’, and hypothesis testing</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="callout-note callout callout-style-default callout-captioned">
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="stat_frame" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -310,8 +315,8 @@ Aim to integrate content from
 </div>
 </div>
 </div>
-<section id="what_models" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="what_models">
-<span class="header-section-number">7.1</span> Types of ‘statistical models’ goals</h2>
+<section id="what_models" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="what_models">
+<span class="header-section-number">8.1</span> Types of ‘statistical models’ goals</h2>
 <p>As discussed in our posts <a href="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#modeling-engagement">and linked material</a>, we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)</p>
 <ol type="1">
 <li>Descriptive modeling: Essentially, offering a “dimension reduction” of the data, presenting ‘which features relate to donation behavior’?</li>
@@ -429,17 +434,17 @@ Note
 </div>
 </div>
 <p><br></p>
-</section><section id="particular-experimetrics-issues" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="particular-experimetrics-issues">
-<span class="header-section-number">7.2</span> Particular ‘experimetrics’ issues</h2>
+</section><section id="particular-experimetrics-issues" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="particular-experimetrics-issues">
+<span class="header-section-number">8.2</span> Particular ‘experimetrics’ issues</h2>
 <section id="should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments">Should we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?</h3>
 <blockquote class="blockquote">
 <p>“in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model” is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results.” - (?) Athey and Imbens</p>
 </blockquote>
 <p>:::</p>
-</section></section><section id="equivalence-tests-and-bayesian-approaches" class="level1" data-number="8"><h1 data-number="8">
-<span class="header-section-number">8</span> Equivalence tests and Bayesian approaches</h1>
-<section id="equivalence-tests-and-simple-frequentist-approaches" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="equivalence-tests-and-simple-frequentist-approaches">
-<span class="header-section-number">8.1</span> Equivalence tests and simple frequentist approaches</h2>
+</section></section><section id="equivalence-tests-and-bayesian-approaches" class="level1" data-number="9"><h1 data-number="9">
+<span class="header-section-number">9</span> Equivalence tests and Bayesian approaches</h1>
+<section id="equivalence-tests-and-simple-frequentist-approaches" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="equivalence-tests-and-simple-frequentist-approaches">
+<span class="header-section-number">9.1</span> Equivalence tests and simple frequentist approaches</h2>
 <p>From <a href="https://en.wikipedia.org/wiki/Equivalence_test">Wikipedia</a> (accessed 12 Apr 2022)</p>
 <blockquote class="blockquote">
 <p>In equivalence tests, the null hypothesis is defined as an effect large enough to be deemed interesting, specified by an equivalence bound. The alternative hypothesis is any effect that is less extreme than said equivalence bound. The observed data is statistically compared against the equivalence bounds. If the statistical test indicates the observed data is surprising, assuming that true effects are at least as extreme as the equivalence bounds, a Neyman-Pearson approach to statistical inferences can be used to reject effect sizes larger than the equivalence bounds with a pre-specified Type 1 error rate.</p>
@@ -452,8 +457,8 @@ Note
 </blockquote>
 <p><a href="http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html">Lakens</a> offers pointers, and TOSTER package, for this approach.</p>
 <p>Semi-aside: <a href="https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor">Unresolved discussion of ‘Bayes factors’ (Nik and Reinstein)</a></p>
-</section><section id="simple-bayes" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="simple-bayes">
-<span class="header-section-number">8.2</span> Some simple Bayesian testing examples</h2>
+</section><section id="simple-bayes" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="simple-bayes">
+<span class="header-section-number">9.2</span> Some simple Bayesian testing examples</h2>
 <p>We return to consider a very simple and common case of interest:</p>
 <ul>
 <li><p>We have a population divided into two treatment conditions (e.g., ‘Impact’ vs ‘Emotion’ language in an email donation appeal)</p></li>
@@ -490,8 +495,8 @@ Note
 <li>The plots it give you by default are pretty messy, but it also preserves the simulation data, so you could make your own plots</li>
 </ul>
 </li>
-</ul></section><section id="simulation_to_bayes" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="simulation_to_bayes">
-<span class="header-section-number">8.3</span> A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</h2>
+</ul></section><section id="simulation_to_bayes" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="simulation_to_bayes">
+<span class="header-section-number">9.3</span> A single framework? “Significance and equivalence testing” with randomization inference/simulation; building to Bayes</h2>
 <div class="cell" type="note">
 
 <div class="note">
@@ -592,8 +597,8 @@ Note
 <div class="alert alert-secondary">
 <p>Jamie suggests: Just do a Bayesian analysis and consider the posterior distribution. You can test the sensitivity to different priors.</p>
 </div>
-</section><section id="empirical-bayes" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="empirical-bayes">
-<span class="header-section-number">8.4</span> ‘Empirical Bayes’</h2>
+</section><section id="empirical-bayes" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="empirical-bayes">
+<span class="header-section-number">9.4</span> ‘Empirical Bayes’</h2>
 <p>Reference: David Robinson “Introduction to empirical bayes examples from baseball statistics” downloaded 28 Mar 2022</p>
 <blockquote class="blockquote">
 <p>Empirical Bayes estimation, where a beta distribution fit on all observations is then used to improve each individually. What’s great about this method is that as long as you have a lot of examples, you don’t need to bring in prior expectations.</p>
@@ -621,8 +626,8 @@ Note
 <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">AB</span> <span class="op">&gt;</span> <span class="fl">100</span><span class="op">)</span> <span class="co">#he uses 500, I think 100 is enough</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="step-1-estimate-a-beta-prior-from-all-your-data" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="step-1-estimate-a-beta-prior-from-all-your-data">
-<span class="header-section-number">8.5</span> Step 1: Estimate a [Beta] prior from all your data</h2>
+</section><section id="step-1-estimate-a-beta-prior-from-all-your-data" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="step-1-estimate-a-beta-prior-from-all-your-data">
+<span class="header-section-number">9.5</span> Step 1: Estimate a [Beta] prior from all your data</h2>
 <p>We set up a likelihood function… probability of the data given different parameters. It sums the log of ‘how likely is each row (batter) given that batting averages are drawn particular true beta distribution, and hits are drawn from this’. At bats are taken as a constant, I guess</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats4</span><span class="op">)</span>
@@ -647,8 +652,8 @@ lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base
 <span class="va">beta0</span> <span class="op">&lt;-</span> <span class="va">ab</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section><section id="step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="step-2-use-that-distribution-as-a-prior-for-each-individual-estimate">
-<span class="header-section-number">8.6</span> Step 2: Use that distribution as a prior for each individual estimate</h2>
+</section><section id="step-2-use-that-distribution-as-a-prior-for-each-individual-estimate" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="step-2-use-that-distribution-as-a-prior-for-each-individual-estimate">
+<span class="header-section-number">9.6</span> Step 2: Use that distribution as a prior for each individual estimate</h2>
 <p>With the Beta prior and Binomial distribution, it turns out there is a simple rule for finding the midpoint (MAP?) of the posterior for the mean. Adjust the ‘average’ formula by … taking the numerator (hits) and add <span class="math inline">\(\alpha_0\)</span> from the Beta prior. Take the denominator (at-bats) and add <span class="math inline">\(\alpha_0 + \beta_0\)</span>.</p>
 <p>So if someone got 30 hits out of 100, our midpoint estimate for their true ‘data generating’ batting average is <span class="math inline">\(\frac{30+\alpha_0}{100+\alpha_0+\beta_0}\)</span></p>
 <p>We can do this across all the data, and find the ‘best and worst’ batters:</p>
@@ -765,8 +770,8 @@ lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base
 </div>
 </div>
 <p>As noted (and plotted) in the book, this method tends to ‘shrink’ the averages towards the overall midpoint. The lowest averages are raised a bit, and the highest averages are reduced a bit … with more ‘shrinkage’ where there are fewer observations (at-bats).</p>
-</section></section><section id="factor-descriptive" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Factor analysis, dimension reduction, and ‘carving reality at its joints’</h1>
+</section></section><section id="factor-descriptive" class="level1" data-number="10"><h1 data-number="10">
+<span class="header-section-number">10</span> Factor analysis, dimension reduction, and ‘carving reality at its joints’</h1>
 <p>Integrate…</p>
 <p>Willem’s work <a href="https://willemsleegers.github.io/how-to-science/chapters/statistics/">link: ‘How to Science’</a></p>
 <div class="cell">
@@ -912,16 +917,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/qualitative-design-issues_plus.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/factor_analysis.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), principle components (PCA),</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical frameworks, 'models', and hypothesis testing {#stat_frame}</span></span>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Frameworks, 'models', inference, tests {#stat_frame}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>

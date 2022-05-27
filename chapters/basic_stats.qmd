@@ -1,4 +1,4 @@
-# Statistical frameworks, 'models', and hypothesis testing {#stat_frame}
+# Frameworks, 'models', inference, tests {#stat_frame}
 
 
 ::: {.callout-note collapse='true'}

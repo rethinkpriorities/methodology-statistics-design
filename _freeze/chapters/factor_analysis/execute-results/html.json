@@ -1,8 +1,10 @@
 {
-  "hash": "27813687e1cd7df7d5cd09aa8cfad15a",
+  "hash": "bb9af392569bcb88e44123aae8fed23d",
   "result": {
-    "markdown": "# Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}\n\nIntegrate...\n\nWillem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)\n\n\n::: {.cell}\n\n```{.r .cell-code}\nknitr::include_url(\"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html\")\n```\n\n<iframe src=\"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html\" width=\"672\" height=\"400px\" data-external=\"1\"></iframe>\n:::\n\n<!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->\n\n\n\n\n",
-    "supporting": [],
+    "markdown": "#  Factor analysis (EFA, CFA), principle components (PCA), {#factor-descriptive}\n\nDimension reduction, and 'carving reality at its joints', uncovering structural parameters?\n\n\n## Where have we used this/where do we anticipate using it?\n\n## The idea\n\n## PCA\n\n## Factor analysis \n\nIntegrate...\n\nWillem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)\n\n\n::: {.cell}\n\n```{.r .cell-code}\nknitr::include_url(\"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html\")\n```\n\n<iframe src=\"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html\" width=\"672\" height=\"400px\" data-external=\"1\"></iframe>\n:::\n\n<!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->\n\n\n\n\n",
+    "supporting": [
+      "factor_analysis_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

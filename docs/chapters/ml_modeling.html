@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.243">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates - 9&nbsp; Prediction, machine learning, and ‘ml-style modeling’</title>
+<title>Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates - 10&nbsp; Prediction, machine learning/modeling</title>
 <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span>
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Prediction, machine learning/modeling</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -119,7 +119,7 @@
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Rethink Priorities on surveys, experiments, and data analysis; methodology, protocols and templates</a> 
+      <a href="../">Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/%20/rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -137,20 +137,20 @@
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP Rethink priorities ‘methods book’: Introduction and overview</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Presentation, code organization</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Introduction, protocols/style</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">RP ‘methods book’: Introduction/overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/coding_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding and data management</span></a>
   </div>
@@ -164,7 +164,7 @@
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Designing surveys and trials</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -182,7 +182,17 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
+  <a href="../chapters/exp_design_quant.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link">Power analysis workflow (Jamie Elsey)</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
   </div>
 </li>
     </ul>
@@ -197,39 +207,39 @@
     <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistical frameworks, ‘models’, and hypothesis testing</span></a>
+  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></a>
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), principle components (PCA),</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span></a>
+  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Prediction, machine learning/modeling</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></a>
+  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time Series – application</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Classification models</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
   </div>
 </li>
     </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other topics and worked examples</a>
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -237,22 +247,17 @@
     <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
+  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link">Power analysis workflow (Jamie Elsey)</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Inference and rough equivalence testing with binomial outcomes</span></a>
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Inference/equivalence testing w. binomial outcomes</span></a>
   </div>
 </li>
     </ul>
@@ -262,26 +267,26 @@
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#consult-modeling-vignettes" id="toc-consult-modeling-vignettes" class="nav-link active" data-scroll-target="#consult-modeling-vignettes"> <span class="header-section-number">9.1</span> Consult modeling vignette(s)</a></li>
-<li><a href="#pred-insights" id="toc-pred-insights" class="nav-link" data-scroll-target="#pred-insights"> <span class="header-section-number">9.2</span> Prediction models for insights?</a></li>
-<li><a href="#penalized-reg" id="toc-penalized-reg" class="nav-link" data-scroll-target="#penalized-reg"> <span class="header-section-number">9.3</span> Penalized regression models</a></li>
-<li><a href="#metrics-of-fit" id="toc-metrics-of-fit" class="nav-link" data-scroll-target="#metrics-of-fit"> <span class="header-section-number">9.4</span> Metrics of fit</a></li>
-<li><a href="#resources-and-use-cases" id="toc-resources-and-use-cases" class="nav-link" data-scroll-target="#resources-and-use-cases"> <span class="header-section-number">9.5</span> Resources and use-cases</a></li>
+<li><a href="#consult-modeling-vignettes" id="toc-consult-modeling-vignettes" class="nav-link active" data-scroll-target="#consult-modeling-vignettes"> <span class="header-section-number">10.1</span> Consult modeling vignette(s)</a></li>
+<li><a href="#pred-insights" id="toc-pred-insights" class="nav-link" data-scroll-target="#pred-insights"> <span class="header-section-number">10.2</span> Prediction models for insights?</a></li>
+<li><a href="#penalized-reg" id="toc-penalized-reg" class="nav-link" data-scroll-target="#penalized-reg"> <span class="header-section-number">10.3</span> Penalized regression models</a></li>
+<li><a href="#metrics-of-fit" id="toc-metrics-of-fit" class="nav-link" data-scroll-target="#metrics-of-fit"> <span class="header-section-number">10.4</span> Metrics of fit</a></li>
+<li><a href="#resources-and-use-cases" id="toc-resources-and-use-cases" class="nav-link" data-scroll-target="#resources-and-use-cases"> <span class="header-section-number">10.5</span> Resources and use-cases</a></li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/ml_modeling.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title d-none d-lg-block">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Prediction, machine learning, and ‘ml-style modeling’</span>
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Prediction, machine learning/modeling</span>
 </h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="consult-modeling-vignettes" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="consult-modeling-vignettes">
-<span class="header-section-number">9.1</span> Consult modeling vignette(s)</h2>
+<section id="consult-modeling-vignettes" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="consult-modeling-vignettes">
+<span class="header-section-number">10.1</span> Consult modeling vignette(s)</h2>
 <p>See <a href="../vignettes/eas_ml_modeling_vignette.html">Vignette: Modeling donations in EA Survey data with Tidymodels and workflow</a></p>
-</section><section id="pred-insights" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="pred-insights">
-<span class="header-section-number">9.2</span> Prediction models for insights?</h2>
+</section><section id="pred-insights" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="pred-insights">
+<span class="header-section-number">10.2</span> Prediction models for insights?</h2>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -301,8 +306,8 @@ Discussion: why build ‘predictive models of donations’, for example?
 </div>
 </div>
 </div>
-</section><section id="penalized-reg" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="penalized-reg">
-<span class="header-section-number">9.3</span> Penalized regression models</h2>
+</section><section id="penalized-reg" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="penalized-reg">
+<span class="header-section-number">10.3</span> Penalized regression models</h2>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-2" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -322,8 +327,8 @@ Discussion: ‘elastic net’ models:
 </div>
 </div>
 </div>
-</section><section id="metrics-of-fit" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="metrics-of-fit">
-<span class="header-section-number">9.4</span> Metrics of fit</h2>
+</section><section id="metrics-of-fit" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="metrics-of-fit">
+<span class="header-section-number">10.4</span> Metrics of fit</h2>
 <p>We may want to consider ‘how successful’ our predictive models are at making practically useful predictions. In other words, ‘how far off’ are the predictions and classifications on average, from the actual outcomes. This procedure considers the fit on randomly-drawn <em>set-aside</em> ‘testing data’, data that has not been used in ‘training’ (or ‘fitting’) the model.</p>
 <p>In the vignette <a href="https://rethinkpriorities.github.io/methodology-statistics-design/vignettes/eas_ml_modeling_vignette.html#illustrate-metrics-of-fit">here</a> we consider and discuss the root-mean-square-error (RMSE) and mean-absolute-error (MAE) metrics in the context of predicting donatino outcomes.</p>
 <p>In order to assess the usefulness of each predictive regression model we consider both root-mean-square-error (RMSE) and mean-absolute-error (MAE). RMSE (aka <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation">RMSD</a>) can be interpreted as the average ‘Euclidean distance’ between the actual values and the model’s prediction. For each observation (in the set-aside ‘testing sample’), to construct RMSE we:</p>
@@ -341,8 +346,8 @@ Discussion: ‘elastic net’ models:
 <p>MAE has a much more straightforward interpretation: it simply asks ‘how far off are we, on average?’</p>
 <p>While the RMSE is used in the model <em>fitting</em> for various reasons, it is arguably less-interpretable and less-relevant than MAE in <em>judging</em> the model’s fit in cases like this one. RMSE error negatively assesses the model fit based on <em>squared</em> deviations, and is thus very sensitive to ‘large mistakes’. This may be relevant where ‘large errors are much much worse than small ones’ – here, this is not so clearly the case. In the presence of data with large outlying observations, prediction will tend to be poor by this measure.</p>
 <p>Note that when considering models where the outcome is transformed (e.g., log(donations)) we construct the RMSE and MAE by exponentiating to generate predictions for the <em>level</em> outcomes, and then measure the deviations on the level scale.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-</section><section id="resources-and-use-cases" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="resources-and-use-cases">
-<span class="header-section-number">9.5</span> Resources and use-cases</h2>
+</section><section id="resources-and-use-cases" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="resources-and-use-cases">
+<span class="header-section-number">10.5</span> Resources and use-cases</h2>
 <ul>
 <li><p>Oska ML notes (Notion)</p></li>
 <li>
@@ -493,16 +498,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/factor_analysis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Factor analysis, dimension reduction, and ‘carving reality at its joints’</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), principle components (PCA),</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/time_series_application.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Time Series – application to ‘predict the influence of discrete events’ (and more) on web traffic, signups, etc</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Time Series – application</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prediction, machine learning, and 'ml-style modeling' {-#modeling}</span></span>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Prediction, machine learning/modeling {-#modeling}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>

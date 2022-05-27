@@ -1,0 +1,14 @@
+{
+  "hash": "37b47deb2a52b4f865c030e7e50ff2c4",
+  "result": {
+    "markdown": "# Monte-Carlo 'Fermi Estimation' Approaches {-#fermi}\n\n\n\n'BOTEC': Back of the envelope calculations are central to RP's work\n\n'Fermi estimation' is essentially a more formal approach to this, carefully defining and explaining each element of the 'model' equation\n\nWhen we explicitly define (and justify) a probability distribution over each variable in the model, and compute (often through simulation) the overall uncertainty of the outputs (predictions, estimates, etc), we call this \"Monte Carlo Fermi Estimation\" (at least David Reinstein thinks this is what it's called).\n\n\nDavid Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, lay out some building blocks,\n\n... and embed some tools and work-in-progress on this [HERE](https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/),  also embedded below.\n\n\n**Overview**\n\n- The basic ideas\n- Causal and Guesstimate\n- Code-based tools\n\n\n::: {.cell}\n\n```{.r .cell-code}\nknitr::include_url(\"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/\")\n```\n\n<iframe src=\"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/\" width=\"672\" height=\"400px\" data-external=\"1\"></iframe>\n:::\n\n::: {.alert .alert-secondary}\n\nDR: We may want to look for ways to explicitly incorporate and integrate these approaches into our data analysis work in R, etc.\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

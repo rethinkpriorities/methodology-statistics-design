@@ -1,4 +1,4 @@
-# Prediction, machine learning, and 'ml-style modeling' {-#modeling}
+# Prediction, machine learning/modeling {-#modeling}
 
 ```{r}
 library(rethinkpriorities)

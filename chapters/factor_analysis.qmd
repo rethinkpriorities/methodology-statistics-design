@@ -1,4 +1,6 @@
-# dimension reduction, and 'carving reality at its joints': Factor analysis, principle components analysis, {#factor-descriptive}
+#  Factor analysis (EFA, CFA), principle components (PCA), {#factor-descriptive}
+
+Dimension reduction, and 'carving reality at its joints', uncovering structural parameters?
 
 
 ## Where have we used this/where do we anticipate using it?

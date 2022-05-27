@@ -1,7 +1,6 @@
 # Power analysis workflow (Jamie Elsey) {#power-workflow .unnumbered}
 
 [^power_analysis_framework_2-1]
-
 [^power_analysis_framework_2-1]: By Jamie Elsley, incorporating some comments and suggestions from David Reinstein.
 
 ```{r}
@@ -30,7 +29,7 @@ The general approach laid out here can be the basis for developing and build a l
 
 -   clear and flexible ways to generate hypothetical data sets, and
 
--   adding further analytic designs.
+-   adding further analytic designs.^[DR: I think tools like DeclareDesign can help wiht this.]
 
 This is not intended as an exhaustive introduction to the fundamentals of statistical power--I assume you are reasonably well-versed in some general principles of statistical inference and hypothesis testing, as well as in the basic idea of what power analysis is.[^power_analysis_framework_2-4]
 
@@ -40,14 +39,14 @@ We will focus solely on 'simulation-based' power analysis, and not on ways of ma
 
 ### Definition of power
 
-In frequentist null hypothesis significance testing (NHST), power is typically defined as the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.[^power_analysis_framework_2-5]
+In frequentist null hypothesis significance testing (NHST), power is typically defined as 'the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true' (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.[^power_analysis_framework_2-5]
 
 [^power_analysis_framework_2-5]: DR: may be worth putting maths here at some point, and also give a canonical reference.
 
 ::: {.callout-note collapse="true"}
 ## From wikipedia: The statistical power of a binary hypothesis test...
 
-The statistical power of a binary hypothesis test is the probability that the test correctly rejects the null hypothesis \$H\_{0}\$ when a specific alternative hypothesis \$H\_{1}\$ is true. It is commonly denoted by \$1-\beta\$, and represents the chances of a "true positive" detection conditional on the actual existence of an effect to detect. ... as the power of a test increases, the probability \$\beta\$ of making a type II error by wrongly failing to reject the null hypothesis decreases.
+The statistical power of a binary hypothesis test is the probability that the test correctly rejects the null hypothesis $H_0$ when a specific alternative hypothesis $H_{1}$ is true. It is commonly denoted by $1-\beta$, and represents the chances of a "true positive" detection conditional on the actual existence of an effect to detect. ... as the power of a test increases, the probability $\beta$ of making a type II error by wrongly failing to reject the null hypothesis decreases.
 
 [link accessed 12 Apr 2022](https://en.wikipedia.org/wiki/Power_of_a_test)
 :::
@@ -93,7 +92,10 @@ Hence, a power analysis helps frame our prospective research project in relation
 [^power_analysis_framework_2-11]: See the 'diagnosands' of the `declaredesign` framework.
 
 ::: {.callout-note collapse="true"}
-What is 'in our control'? We might think of sample size as *in* our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered *out* of our contro;; however we can sometimes increase the 'dosage' we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.
+
+## What is 'in our control'? 
+
+We might think of sample size as *in* our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered *out* of our control    ; however we can sometimes increase the 'dosage' we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.
 :::
 
 ### General workflow for simulation-based power analysis

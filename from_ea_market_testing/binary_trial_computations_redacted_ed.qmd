@@ -1,4 +1,4 @@
-# Inference and rough equivalence testing with binomial outcomes
+# Inference/equivalence testing w. binomial outcomes
 
 ```{r}
 #| include: false

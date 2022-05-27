@@ -1,0 +1,14 @@
+{
+  "hash": "690591873549af5548146b948d4fcb72",
+  "result": {
+    "markdown": "# Survey design and item development {#surveydesign}\n\nThis section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.\n\nMore technical and involved discussion of overlapping content will often be deferred to the [experiments and trials](#expt_trial) section, with placeholders and links.\n\n@schwarcz2007\n\n\n::: {.alert .alert-secondary}\n\n\nLink or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development),\n\nand [Reinstein's sloppy notes](https://daaronr.github.io/metrics_discussion/surveys.html); see embeds below\n\n\n:::\n\n\n## (Willem Sleegers, to incorporate)\n\n[item development](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development)\n\n::: {.cell}\n\n```{.r .cell-code}\nknitr::include_url(\"https://willemsleegers.github.io/how-to-science/survey-design.html#item-development\")\n```\n\n<iframe src=\"https://willemsleegers.github.io/how-to-science/survey-design.html#item-development\" width=\"672\" height=\"400px\" data-external=\"1\"></iframe>\n:::\n\n## Reinstein misc notes to incorporate {-}\n\n::: {.cell}\n\n```{.r .cell-code}\nknitr::include_url(\"https://daaronr.github.io/metrics_discussion/surveys.html\")\n```\n\n<iframe src=\"https://daaronr.github.io/metrics_discussion/surveys.html\" width=\"672\" height=\"400px\" data-external=\"1\"></iframe>\n:::\n\n## Suggested sections...\n\n- How to ask good survey questions\n\n- Avoiding pitfalls\n\n- Constructing reliable indices and scales\n\n- Sampling issues and representativeness\n   - Elsey on \"Mr P\"\n   - Reinstein on ['sampling'](https://daaronr.github.io/metrics_discussion/surveys.html#survey-samplingintake) and ['measuring a rare population'](https://daaronr.github.io/metrics_discussion/surveys.html#jazz-case) with reference to the EA survey\n\n\n- Implementation platforms and issues\n\n- Survey design tools (IT)\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": [],
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

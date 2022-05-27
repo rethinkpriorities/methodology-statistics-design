@@ -1,4 +1,4 @@
-# RP Rethink priorities 'methods book': Introduction and overview
+# RP 'methods book': Introduction/overview
 
 A set of curated resources tied to use-cases, and a space to organize our discussion"
 
@@ -12,7 +12,7 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 
 <!-- (integrate discussion from Slack thread and readme) -->
 
-A github-hosted 'quarto' for structured in-depth discussion
+A github-hosted '[quarto](https://quarto.org/)' for structured in-depth discussion
 
 ::: {.callout-note collapse="true"}
 ## But why do we want or need this?
@@ -33,7 +33,7 @@ And *Common knowledge and language* (see next fold).
 :::
 
 ::: {.callout-note collapse="true"}
-## Common knowledge and language
+## Another reason: Common knowledge and language
 
 In working together we need to know what each of us knows, understands, and believes about these tools, and how each of us interprets them.
 
@@ -48,8 +48,9 @@ Having the "conversation in an organized place" should help us establish common 
 
 \
 
-::: {.alert .alert-secondary}
-*David Reinstein's conception:*
+::: {.callout-note collapse="true"}
+
+## What to include, and how (Reinstein's thoughts)
 
 -   Don't share any confidential data or sensitive information
 
@@ -73,6 +74,7 @@ Having the "conversation in an organized place" should help us establish common 
 
 I also hope to use this to develop 'templates and standard practices' for our work.
 :::
+
 
 \
 
@@ -116,7 +118,7 @@ Our guidelines, style, approaches to doing and presenting coding and data work (
 
 2.  **Designing surveys and trials**
 
-Quantitative, 'qualitative', and practical implementation issues in running surveys and various types of experiments. Some overlap with EAMT methods gitbook.
+Quantitative, 'qualitative', and practical implementation issues in running surveys and various types of experiments. Some overlap with [EAMT gitbook methods section](https://effective-giving-marketing.gitbook.io/untitled/methodological-discussion/section-introduction-wip).
 
 3.  **Statistics and modeling**
 

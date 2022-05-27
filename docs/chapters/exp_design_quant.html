@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.243">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates - 5&nbsp; Experiments: Qualitative and implementation design issues</title>
+  <title>Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates - 6&nbsp; Design: quantitative issues</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -83,8 +83,8 @@
   <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
   <script src="../site_libs/quarto-search/fuse.min.js"></script>
   <script src="../site_libs/quarto-search/quarto-search.js"></script>
-  <link href="../chapters/exp_design_quant.html" rel="next">
-  <link href="../chapters/survey_designs_methods.html" rel="prev">
+  <link href="../chapters/power_analysis_framework_2.html" rel="next">
+  <link href="../chapters/experiments_trials_design.html" rel="prev">
   <script src="../site_libs/quarto-html/quarto.js"></script>
   <script src="../site_libs/quarto-html/popper.min.js"></script>
   <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,7 +123,7 @@
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -194,12 +194,12 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/experiments_trials_design.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></a>
+  <a href="../chapters/experiments_trials_design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/exp_design_quant.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></a>
+  <a href="../chapters/exp_design_quant.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -287,53 +287,96 @@
         <nav id="TOC" role="doc-toc">
 <h2 id="toc-title">Table of contents</h2>
 <ul>
-<li><a href="#proposed-structure-of-section" id="toc-proposed-structure-of-section" class="nav-link active" data-scroll-target="#proposed-structure-of-section"> <span class="header-section-number">5.1</span> Proposed structure of section</a></li>
+<li><a href="#treatment-assignment-blocking-randomization-etc" id="toc-treatment-assignment-blocking-randomization-etc" class="nav-link active" data-scroll-target="#treatment-assignment-blocking-randomization-etc"> <span class="header-section-number">6.1</span> ‘Treatment’ assignment (blocking, randomization, etc)</a>
+<ul class="collapse">
+<li><a href="#adaptive-sequential-and-dynamic-designs" id="toc-adaptive-sequential-and-dynamic-designs" class="nav-link" data-scroll-target="#adaptive-sequential-and-dynamic-designs"> <span class="header-section-number">6.1.1</span> Adaptive, sequential and dynamic designs</a></li>
+</ul></li>
+<li><a href="#planning-diagnosing-and-adjusting-a-design" id="toc-planning-diagnosing-and-adjusting-a-design" class="nav-link" data-scroll-target="#planning-diagnosing-and-adjusting-a-design"> <span class="header-section-number">6.2</span> Planning, diagnosing and adjusting a design</a>
+<ul class="collapse">
+<li><a href="#specifying-models-hypotheses-and-statistical-testing-and-inference-approaches" id="toc-specifying-models-hypotheses-and-statistical-testing-and-inference-approaches" class="nav-link" data-scroll-target="#specifying-models-hypotheses-and-statistical-testing-and-inference-approaches"> <span class="header-section-number">6.2.1</span> Specifying models, hypotheses, and statistical testing and inference approaches</a></li>
+</ul></li>
+<li><a href="#power-analyses-and-other-diagnosands" id="toc-power-analyses-and-other-diagnosands" class="nav-link" data-scroll-target="#power-analyses-and-other-diagnosands"> <span class="header-section-number">6.3</span> Power analyses (and other ‘diagnosands’)</a>
+<ul class="collapse">
+<li><a href="#key-resources-and-explainers" id="toc-key-resources-and-explainers" class="nav-link" data-scroll-target="#key-resources-and-explainers"> <span class="header-section-number">6.3.1</span> Key resources and explainers</a></li>
+<li><a href="#see-rethink_priorities_power_analysis_framework_2-in-appendix" id="toc-see-rethink_priorities_power_analysis_framework_2-in-appendix" class="nav-link" data-scroll-target="#see-rethink_priorities_power_analysis_framework_2-in-appendix"> <span class="header-section-number">6.3.2</span> See <span>‘Rethink_Priorities_Power_analysis_framework_2’ in appendix</span></a></li>
+</ul></li>
 </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/experiments_trials_design.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ /rethinkpriorities/edit/main/methodology-statistics-design/chapters/exp_design_quant.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/ /rethinkpriorities/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <header id="title-block-header" class="quarto-title-block default">
 
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="expt-qual-imp" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div></div></header>
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="expt-quant" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div></div></header>
 
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Some quantitative issues
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>See <a href="https://daaronr.github.io/metrics_discussion/why-experiment-design.html#why-run-an-experiment-or-study">Reinstein notes on ‘why run an experiment’</a> (somewhat more relevant to ‘lab experiments’)</p></li>
-<li><p>See informal ‘practitioners’ discussion <a href="#eamt-qual">below</a>, from ‘EA market testing’</p></li>
+<li>‘Treatment’ assignment (blocking, randomization, etc)</li>
+<li>Adaptive, sequential and dynamic designs</li>
+<li>Planning, diagnosing and adjusting a design</li>
+<li>Power analyses (and other ‘diagnosands’)</li>
 </ul>
+</div>
+</div>
+</div>
 <div class="alert alert-secondary">
 <p>Note that much ‘experiment and trial’ relevant content is covered in the <a href="#surveys">surveys</a> section. We will put in placeholders and cross-link.</p>
 </div>
-<section id="proposed-structure-of-section" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="proposed-structure-of-section"><span class="header-section-number">5.1</span> Proposed structure of section</h2>
+<section id="treatment-assignment-blocking-randomization-etc" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="treatment-assignment-blocking-randomization-etc"><span class="header-section-number">6.1</span> ‘Treatment’ assignment (blocking, randomization, etc)</h2>
+<section id="adaptive-sequential-and-dynamic-designs" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="adaptive-sequential-and-dynamic-designs"><span class="header-section-number">6.1.1</span> Adaptive, sequential and dynamic designs</h3>
 <ul>
-<li><p>Basic design choices and terminology</p></li>
-<li><p>Types of experiments: ‘lab and field’</p></li>
-<li><p>Formulating hypotheses and ‘learning and adaptation goals’</p></li>
-<li><p>Hypothesis testing versus ‘reinforcement learning’ goals</p></li>
-<li><p>Design concerns and pitfalls</p>
-<ul>
-<li><p>Confounded designs</p></li>
-<li><p>Attrition and failed randomization</p></li>
-<li><p>‘Demand effects’</p></li>
-<li><p>Naturalness versus cleanliness</p></li>
-</ul></li>
-<li><p>Practical and implementation issues</p>
-<ul>
-<li><p>Survey and experiment platforms (see ‘<a href="#surveys">surveys</a>’) chapter</p></li>
-<li><p>Field experiments, A/B and lift tests, and marketing trials</p></li>
-<li><p>Designing, coding, and implementing experiments: IT issues</p></li>
-<li><p>Failure and success modes</p></li>
-<li><p>Capturing outcome data</p></li>
-<li><p>Pre-registration and pre-analysis plans</p></li>
-<li><p>… See Reinstein discussion notes on the benefits and costs <a href="https://daaronr.github.io/metrics_discussion/quant-design-power.html#the-benefits-and-costs-of-pre-registration-a-typical-discussion">here</a></p></li>
-</ul></li>
+<li><p><a href="https://daaronr.github.io/metrics_discussion/quant-design-power.html#quant_design_power">Reinstein notes and links here</a></p></li>
+<li><p>Elsey: http://www.sequentialtesting.com/</p></li>
 </ul>
+</section>
+</section>
+<section id="planning-diagnosing-and-adjusting-a-design" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="planning-diagnosing-and-adjusting-a-design"><span class="header-section-number">6.2</span> Planning, diagnosing and adjusting a design</h2>
+<section id="specifying-models-hypotheses-and-statistical-testing-and-inference-approaches" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="specifying-models-hypotheses-and-statistical-testing-and-inference-approaches"><span class="header-section-number">6.2.1</span> Specifying models, hypotheses, and statistical testing and inference approaches</h3>
+<p>(Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis</p>
+</section>
+</section>
+<section id="power-analyses-and-other-diagnosands" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="power-analyses-and-other-diagnosands"><span class="header-section-number">6.3</span> Power analyses (and other ‘diagnosands’)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="key-resources-and-explainers" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="key-resources-and-explainers"><span class="header-section-number">6.3.1</span> Key resources and explainers</h3>
+<p>(‘Curate link’ tools we found useful)</p>
+<p><a href="https://daaronr.github.io/metrics_discussion/power.html">Reinstein notes and code</a></p>
+</section>
+<section id="see-rethink_priorities_power_analysis_framework_2-in-appendix" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="see-rethink_priorities_power_analysis_framework_2-in-appendix"><span class="header-section-number">6.3.2</span> See <a href="power_analysis_framework_2.html">‘Rethink_Priorities_Power_analysis_framework_2’ in appendix</a></h3>
+<p>This is a proposal and tools for a ‘path to do’ power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it’s likely to also introduce a Bayesian approach.</p>
+<div class="alert alert-secondary">
+<p>DR: I’m putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.</p>
+<p>An alternative to an ‘appendix’ is a standalone page which we can link here. This can sometimes be helpful; it allows a different format, may save time on knitting, may allow that other page to be better integrated elsewhere.</p>
+<p>But for now, I’ll make it a bookdown appendix, to help get us all used to the current format and avoid disagregation.</p>
+</div>
 
 
 
 <!-- -->
 
+</section>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Note: this will very much overlap the discussion of power analysis for <em>surveys</em>. Perhaps we put the simpler introduction there, and the more involved details here?<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 </main> <!-- /main -->
 <script type="application/javascript">
@@ -465,65 +508,82 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/survey_designs_methods.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design and item development</span></span>
+      <a href="../chapters/experiments_trials_design.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative and implementation design issues</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/exp_design_quant.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Design: quantitative issues</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/power_analysis_framework_2.html" class="pagination-link">
+        <span class="nav-page-text">Power analysis workflow (Jamie Elsey)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Experiments: Qualitative and implementation design issues {#expt-qual-imp}</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Design: quantitative issues {#expt-quant}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See <span class="co">[</span><span class="ot">Reinstein notes on 'why run an experiment'</span><span class="co">](https://daaronr.github.io/metrics_discussion/why-experiment-design.html#why-run-an-experiment-or-study)</span> (somewhat more relevant to 'lab experiments')</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See informal 'practitioners' discussion <span class="co">[</span><span class="ot">below</span><span class="co">](#eamt-qual)</span>, from 'EA market testing'</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Note that much 'experiment and trial' relevant content is covered in the <span class="co">[</span><span class="ot">surveys</span><span class="co">](#surveys)</span> section. We will put in placeholders and cross-link.</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some quantitative issues</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'Treatment' assignment (blocking, randomization, etc)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Adaptive, sequential and dynamic designs</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Planning, diagnosing and adjusting a design</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Power analyses (and other 'diagnosands')</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proposed structure of section</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Basic design choices and terminology</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Note that much 'experiment and trial' relevant content is covered in the <span class="co">[</span><span class="ot">surveys</span><span class="co">](#surveys)</span> section. We will put in placeholders and cross-link.</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Types of experiments: 'lab and field'</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Formulating hypotheses and 'learning and adaptation goals'</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hypothesis testing versus 'reinforcement learning' goals</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Treatment' assignment (blocking, randomization, etc)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Design concerns and pitfalls</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adaptive, sequential and dynamic designs</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Confounded designs</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Reinstein notes and links here</span><span class="co">](https://daaronr.github.io/metrics_discussion/quant-design-power.html#quant_design_power)</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Attrition and failed randomization</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Elsey: http://www.sequentialtesting.com/</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>'Demand effects'</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Naturalness versus cleanliness</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Practical and implementation issues</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Survey and experiment platforms (see '<span class="co">[</span><span class="ot">surveys</span><span class="co">](#surveys)</span>') chapter</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Field experiments, A/B and lift tests, and marketing trials</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Planning, diagnosing and adjusting a design</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### Specifying models, hypotheses, and statistical testing and inference approaches</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>(Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Power analyses (and other 'diagnosands')^[Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Designing, coding, and implementing experiments: IT issues</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Failure and success modes</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Capturing outcome data</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Pre-registration and pre-analysis plans</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### Key resources and explainers</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>('Curate link' tools we found useful)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Reinstein notes and code</span><span class="co">](https://daaronr.github.io/metrics_discussion/power.html)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>... See Reinstein discussion notes on the benefits and costs <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/metrics_discussion/quant-design-power.html#the-benefits-and-costs-of-pre-registration-a-typical-discussion)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### See ['Rethink_Priorities_Power_analysis_framework_2' in  appendix](#power-workflow)</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>DR: I'm putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>An alternative to an 'appendix' is a standalone page which we can link here. This can sometimes be helpful; it allows a different format, may save time on knitting, may allow that other page to be better integrated elsewhere.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>But for now, I'll make it a bookdown appendix, to help get us all used to the current format and avoid disagregation.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
