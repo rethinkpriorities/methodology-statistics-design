@@ -3,9 +3,10 @@ project:
   output-dir: docs
 
 book:
-  title: "Rethink Priorities: surveys/experiment design, analysis; methods, protocols, templates"
+  title: "Rethink Priorities: Methods"
+  subtitle: "Surveys/experiment design, analysis; methodology, protocols, templates"
   author: "David Reinstein (most content atm), Willem Sleegers, Jamey Elsey"
-  repo-url: https://github.com/ /rethinkpriorities/methodology-statistics-design
+  repo-url: https://github.com/rethinkpriorities/methodology-statistics-design
   repo-actions: [edit, issue]
   chapters:
     - part: "Introduction, protocols/style"
