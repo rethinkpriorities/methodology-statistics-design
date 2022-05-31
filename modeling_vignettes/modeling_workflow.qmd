@@ -34,10 +34,9 @@ This vignette
 
 - To give a little bit of insight into the modeling choices and approaches.
 
-
 ## Reading in data from a repo
 
-The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.
+The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.^[Ideally, for replicablity, one reads data in directly from it's earliest source, such as an API for the survey site where it was hosted.]
 
 ```{r input, include=FALSE}
 
@@ -51,7 +50,7 @@ df <- rethinkpriorities::read_file_from_repo(
 
 ```
 
-Next we sample from this data and remove labels, to make it process quicker and easier
+Next we sample from this data and remove labels, to make it process quicker and easier.
 
 ```{r simplify_for_tidymodel}
 
@@ -64,7 +63,6 @@ dplyr::sample_n(2000)
 
 
 # Modeling discussion 
-
 
 
 ::: {.callout-note collapse="true"}
