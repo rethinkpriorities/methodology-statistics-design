@@ -1,6 +1,6 @@
 # RP 'methods book': Introduction/overview
 
-A set of curated resources tied to use-cases, and a space to organize our discussion"
+A set of curated resources tied to use-cases, and a space to organize our discussion
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 
