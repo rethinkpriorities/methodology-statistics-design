@@ -1,11 +1,10 @@
 # Monte-Carlo 'Fermi Estimation' Approaches {-#fermi}
 
-
 'BOTEC': Back of the envelope calculations are central to RP's work
 
 'Fermi estimation' is essentially a more formal approach to this, carefully defining and explaining each element of the 'model' equation.
 
-When we explicitly define (and justify) a probability distribution over each variable in the model, and compute (often through simulation) the overall uncertainty of the outputs (predictions, estimates, etc), we call this "Monte Carlo Fermi Estimation".^[At least David Reinstein thinks this is what it's called]
+When we explicitly define (and justify) a probability distribution over each variable in the model, and compute (often through simulation) the overall uncertainty of the outputs (predictions, estimates, etc), we call this "Monte Carlo Fermi Estimation".^[At least David Reinstein thinks this is what it's called.]
 
 
 ## 'How to measure anything', By Douglas Hubbard
@@ -19,12 +18,24 @@ See
 
 ### Accompanying tools and exercises {-}
 
-> DR: Hubbard provides a set of excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.
+> DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.
 
 
-## Monte Carlo Fermi approaches to GiveWell style Cost Effectiveness Analysis
+Chapter 3: The Urn of Mystery Simulation				
 
-Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, lay out some building blocks,
+> This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book.  This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles.  Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles.  The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case).  A marble is drawn at random from each urn.  The probability of drawing a green marble is, obviously, just the percentage of marbles that are green.  So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green.  Otherwise, red is drawn.  In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn.  The person only uses the drawn marble to determine whether to bet the majority is green or red.  We then determine whether that single draw turned out to be the majority color.  We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.				
+
+
+Urn	Percentage Green	Majority color	Color of Randomly Drawn Marble	Drawn Color Same as Majority?
+
+
+Share of Times Drawn Color is Same as Majority:				(78% comes out of sheet)
+
+
+
+## Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis
+
+Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, laying out some building blocks,
 
 ... and embed some tools and work-in-progress on this [HERE](https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/),  also embedded below.
 
