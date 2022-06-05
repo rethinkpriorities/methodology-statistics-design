@@ -1,5 +1,14 @@
 # Monte-Carlo 'Fermi Estimation' Approaches {-#fermi}
 
+```{r setup}
+library(pacman)
+p_load(rethinkpriorities)
+library(rethinkpriorities)
+library(dplyr)
+library(tibble)
+```
+
+
 'BOTEC': Back of the envelope calculations are central to RP's work
 
 'Fermi estimation' is essentially a more formal approach to this, carefully defining and explaining each element of the 'model' equation.
@@ -21,16 +30,125 @@ See
 > DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.
 
 
-Chapter 3: The Urn of Mystery Simulation				
+
+::: {.callout-note collapse="true"}
+
+## Chapter 3: The Urn of Mystery Simulation			
 
 > This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book.  This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles.  Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles.  The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case).  A marble is drawn at random from each urn.  The probability of drawing a green marble is, obviously, just the percentage of marbles that are green.  So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green.  Otherwise, red is drawn.  In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn.  The person only uses the drawn marble to determine whether to bet the majority is green or red.  We then determine whether that single draw turned out to be the majority color.  We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.				
 
+::: 
 
-Urn	Percentage Green	Majority color	Color of Randomly Drawn Marble	Drawn Color Same as Majority?
+The above (folded) narrative is rather confusing, and the spreadsheet is rather bulky. We can explain it and simulate it much more simply by using code.  The point is... [what was the point again?]
 
 
-Share of Times Drawn Color is Same as Majority:				(78% comes out of sheet)
+1. Randomly draw a 'share green' for each urn, for each of 1000 (or '$K=1000$') 'urns', and record the majority color, i.e.,  *is it more than half green?*
 
+We set the value 'K=1000', which we could adjust later, indicating 'how many urns' we are using in our simulation. It makes it clearer to define things at the top and see how it drives the results. 
+
+```{r urns}
+
+K <- 1000
+
+urns <- runif(K, 0, 1)
+
+```
+
+The code above yields the object `urns`, a vector of 1000 probabilities. It assigns 'urns' to be equal to the function `runif`, i.e., 'random uniform'.
+
+^[This uses arguments K` draws, `0` lower bound, and `1` upper bound.]
+
+
+^[See the tutorial [HERE](https://bookdown.org/ndphillips/YaRrr/generating-random-data.html#uniform) for some tips on 'generating random data' in R.]
+We could view the whole thing in several ways, such as by typing `view(urns)` or `View(urns)` for a peek. We can also have any part of this printed to the screen.  The point is that this object is there in the background (in our 'environment'). We don't need to see it in front of us, at all times, as with a spreadsheet. 
+
+Printing out a peek at this object:
+
+```{r}
+str(urns)
+
+
+```
+
+
+The object is a 'numeric vector' with 1000 elements, the first 5 or so are listed. Each of these represent
+
+2. For each of ($K= 1000$) urns, randomly draw a single marble, and record whether this draw is the same as the urn's majority color.^[Well, we don't actually draw a marble, we simply make another uniform draw, and if it's below the 'share green' for that urn, we call it green.] 
+
+We put this together into a 'tibble' data frame below
+
+```{r}
+
+urns <- urns %>%  #start with the vector of urns generated above
+  as.tibble() %>% #make it a tibble, a type of data frame
+  rename(share_green = value) %>% #by default the runif function  called this 'value'; we rename it 
+  add_column(runif = runif(nrow(.))) %>%  #add a column of random uniform 0,1 draws, to use as our 'random draw' for each urn
+  mutate(
+    majority = if_else(share_green>.5, "green", "red"), #if most of an urn is green or red
+    draw = case_when(
+      runif > share_green ~ "red", #if the random draw exceeds the 'share green' in that urn, it's a draw of a red ball
+      TRUE ~ "green" #otherwise it's a draw of a green ball
+    )
+        )
+
+
+```
+
+3. Display this 'matrix' of 1000 outcomes (or a peek at it)
+
+```{r}
+urns
+```
+
+
+The snip above shows how these 'random draws' are generated, as noted above. 
+
+\
+
+4. Count 'which share of these agree with their urn's majority color'
+
+```{r share_agree}
+
+(
+  share_agree <- sum(urns$draw == urns$majority)/K
+  )
+
+#sum number of cases where the 'draw is the same color as the majority for the urn
+
+```
+
+I.e., `r op(share_agree*100, d=4)`% of the draws are the same color as the majority of their urn.^[Check out the raw code -- note how the number here is automatically generated with 'inline code'. I didn't literally type in that number.]
+
+
+The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).
+
+For one example, suppose you wanted to test this with 1 *million* urns. That would be a huge pain to do in Excel... I dare you to try it.  In `R` we simply change the code to specify $K =1,000,000$ urns, and do the above again.^[Even better, rather than recopying the code, we would make it a function.]
+  
+
+```{r}
+
+K <- 1000*1000
+
+urns <- runif(K, 0, 1)
+
+urns <- urns %>%  
+  as.tibble() %>%
+  rename(share_green = value) %>% 
+  add_column(runif = runif(nrow(.))) %>% 
+  mutate(
+    majority = if_else(share_green>.5, "green", "red"),
+    draw = case_when(
+      runif > share_green ~ "red",
+      TRUE ~ "green"
+    )
+        )
+
+(
+  share_agree <- sum(urns$draw == urns$majority)/K
+  )
+```
+
+On my computer, this ran almost immediately.
 
 
 ## Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis

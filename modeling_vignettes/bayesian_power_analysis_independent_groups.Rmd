@@ -76,6 +76,7 @@ sim.data <- sim.data %>% group_by(sim) %>% group_split()
 ```
 
 # Step 2: Run the proposed analysis over the many data sets and return the estimands of interest
+
 Now we set up a Bayesian regression model that will run our analysis over the many data sets. It is important to ensure that the estimands we are interested in can be returned at this step, because this process can be time consuming and would ideally not have to be repeated due to small mistakes. Hence, carefully check that the code returns the parameters you are interested in, and then put it into a function that will run over the many data sets. In any case, we need to run the model at least once outside of the function, because this regression serves to compile the code and prevent the need to recompile it each time a new analysis is run. This saves a considerable amount of time.
 
 Our simple formula for the t-test is:
@@ -86,7 +87,7 @@ reg.form <- response ~ 1 + group
 
 ```
 
-We can check what priors can be set for this model with the code below, and then set weakly informative priors on the parameters that will constrain the model from entertaining highly unlikely parameter estimates. Setting reasonable priors on a model also helps speed up the MCMC samplin.:
+We can check what priors can be set for this model with the code below, and then set weakly informative priors on the parameters that will constrain the model from entertaining highly unlikely parameter estimates. Setting reasonable priors on a model also helps speed up the MCMC sampling:
 
 ```{r priors, message = FALSE}
 
@@ -320,4 +321,4 @@ ggplot(data = precision25) +
 
 ```
 
-Note that, as would be expected, the chance that we achieve our goal of rejecting a non-zero effect varies with the true effect size. When we consider the precision of our estimates, the actual effect size is not relevant: the more data we gather, the more precise our estimates become, irrespective of the size true effect.
+Note that, as would be expected, the chance that we achieve our goal of rejecting a non-zero effect varies with the true effect size. When we consider the precision of our estimates, the actual effect size is not relevant: the more data we gather, the more precise our estimates become, irrespective of the size true effect.^[DR: Is this getting at the desired goal we discussed earlier of 'power to have a precise interval estimate?'  Also, does the statement about 'actual effect size is irrelevant for this' hold modeling frameworks, or only for simple and linear ones?]
