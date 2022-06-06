@@ -1,4 +1,4 @@
-# RP 'methods book': Introduction/overview
+# Introduction/overview
 
 A set of curated resources tied to use-cases, and a space to organize our discussion
 

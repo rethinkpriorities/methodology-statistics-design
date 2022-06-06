@@ -1,4 +1,4 @@
-#  Factor analysis (EFA, CFA), principle components (PCA), {#factor-descriptive}
+#  Factor analysis (EFA, CFA), PCA, {#factor-descriptive}
 
 Dimension reduction, and 'carving reality at its joints', uncovering structural parameters?
 
@@ -9,7 +9,7 @@ Dimension reduction, and 'carving reality at its joints', uncovering structural 
 
 ## PCA
 
-## Factor analysis 
+## Factor analysis
 
 Integrate...
 

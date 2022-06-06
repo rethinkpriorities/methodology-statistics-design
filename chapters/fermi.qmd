@@ -30,6 +30,8 @@ See
 > DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.
 
 
+#### Chapter 3: The Urn of Mystery Simulation	{-}
+
 
 ::: {.callout-note collapse="true"}
 
@@ -56,7 +58,7 @@ urns <- runif(K, 0, 1)
 
 The code above yields the object `urns`, a vector of 1000 probabilities. It assigns 'urns' to be equal to the function `runif`, i.e., 'random uniform'.
 
-^[This uses arguments K` draws, `0` lower bound, and `1` upper bound.]
+^[This uses arguments K draws, `0` lower bound, and `1` upper bound.]
 
 
 ^[See the tutorial [HERE](https://bookdown.org/ndphillips/YaRrr/generating-random-data.html#uniform) for some tips on 'generating random data' in R.]

@@ -1,4 +1,4 @@
-# Experiments: Qualitative and implementation design issues {#expt-qual-imp}
+# Experiments: Qualitative design, implementation {#expt-qual-imp}
 
 - See [Reinstein notes on 'why run an experiment'](https://daaronr.github.io/metrics_discussion/why-experiment-design.html#why-run-an-experiment-or-study) (somewhat more relevant to 'lab experiments')
 

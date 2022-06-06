@@ -9,7 +9,7 @@ book:
   repo-url: https://github.com/rethinkpriorities/methodology-statistics-design
   repo-actions: [edit, issue]
   chapters:
-    - part: "Introduction, protocols/style"
+    - part: "Intro., protocols, style"
       chapters:
         - index.qmd
         - chapters/coding_data.qmd
@@ -18,9 +18,9 @@ book:
       chapters:
         - chapters/survey_designs_methods.qmd
         - chapters/experiments_trials_design.qmd
+        - chapters/qualitative-design-issues_plus.md
         - chapters/exp_design_quant.qmd
         - chapters/power_analysis_framework_2.qmd
-        - chapters/qualitative-design-issues_plus.md
     - part: "Statistics and modeling"
       chapters:
         - chapters/basic_stats.qmd

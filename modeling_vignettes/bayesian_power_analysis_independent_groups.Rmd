@@ -12,18 +12,23 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-This guided example is a supplement to the more general explanatory paper on general framework for power analyses, and follows through the general steps outlined there. In this example, we will be using the package brms for Bayesian estimation of parameter values. To keep things computationally tractable, a simple comparison between two independent samples will be used. The general steps are applicable to other Bayesian designs.
 
-Pre-requisite: You will need to set up RStan on your computer for the Bayesian analyses in this example to work. See https://mc-stan.org/users/interfaces/rstan.html and https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started 
+This guided example is a supplement to the [more general chapter offering a framework and workflow for power analyses](#power-workflow). It follows  the general steps outlined there. In this example, we will use the package `brms` for Bayesian estimation of parameter values. To keep things computationally tractable, we will focus on a simple comparison between two independent samples. The general steps are applicable to other Bayesian designs.
+
+Pre-requisite: You will need to set up `RStan` on your computer for the Bayesian analyses in this example to work. See [mc-stan.org](https://mc-stan.org/users/interfaces/rstan.html) and  [Rstan's wiki](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started).
 
 # Step 1: Generate a large number of data sets for the analysis
-We will run a comparison of two independent samples, and seek to assess our capacity for detecting a range of possible effect sizes, with Cohen's d at 0, .15, .3. We will also increase the memory limit in R to alow for the large objects that are likely to be created:
+
+We will run a comparison of two independent samples, and seek to assess our capacity for detecting a range of possible effect sizes, considering Cohen's $d$ at 0, .15, .3. 
+
 
 ```{r change-memory-limit, message = FALSE, warning = FALSE}
+#We will also increase the memory limit in R to allow for the large objects that are likely to be created:
 memory.limit(100000)
+
+#This is a Windows specific function. Some possible ways to do this in Mac are suggested here: https://stackoverflow.com/questions/51295402/r-on-macos-error-vector-memory-exhausted-limit-reached
 ```
 
-This is a Windows specific function. Some possible ways to do this in Mac are suggested here: https://stackoverflow.com/questions/51295402/r-on-macos-error-vector-memory-exhausted-limit-reached
 
 ```{r load-tidyverse, message = FALSE, warning = FALSE, echo = FALSE}
 
@@ -38,12 +43,16 @@ t.data.maker <- function(sim, effect.size, group.size) {
   
   # create a data frame with two groups, standard normal distribution
   # group b differs from group a according to the specified effect size
-  data <- tibble(a.group = rnorm(n = group.size, mean = 0, sd = 1),
-                 b.group = rnorm(n = group.size, mean = effect.size, sd = 1),
-                 n = seq(1:group.size),
-                 'effect.size' = effect.size,
-                 'sim' = sim) %>% 
-    pivot_longer(cols = a.group:b.group, names_to = 'group', values_to = 'response')
+  data <- tibble(
+    a.group = rnorm(n = group.size, mean = 0, sd = 1),  #create `group.size` rows of a standard normal, 
+    b.group = rnorm(n = group.size, mean = effect.size, sd = 1), #... of a std normal shifted by `effect` for 'treatment group' (or after-treatment if this is within subject)
+    n = seq(1:group.size), #counter
+    'effect.size' = effect.size, 
+    'sim' = sim
+  ) %>%
+    pivot_longer(cols = a.group:b.group, #make this one row per 'observation in  group' ... so 2*group.size rows
+      names_to = 'group',
+      values_to = 'response')
   
   return(data)
   
@@ -51,35 +60,55 @@ t.data.maker <- function(sim, effect.size, group.size) {
 
 ```
 
-We will run 250 analyses per effect size of interest, with maximum group sizes of 1500. We put these into a format to pass to a map function, and then run the data-making function over the different effect sizes to generate the many data sets:
+We will run 250 analyses for each of the three effect sizes of interest, for a total of 750. We use maximum group sizes of 1500.^[DR: This needs some clarification up front. Why do we run so many analyses per effect size? Do you mean you will do each of these for 250 simulated data sets?  What's this 'maximum' group size? Do you mean you will try out a range of sample sizes up to a sample of 1500?] We put these into a format to pass to a map function, and then run the data-making function over the different effect sizes to generate the many data sets.
+
+In the code below, we create this simulated data, creating a list of tibbles, one tibble for each simulated data set.
 
 ```{r iterate-datamaker, message = FALSE, warning = FALSE}
 
-# set up furrr to run iterations more quickly
+# set up furrr to run iterations more quickly ... this is parallel processing stuff
 library(furrr)
-
 plan(multisession)
-
 options <- furrr_options(seed = 1234)
 
 # make a tibble with our intended effect sizes and sample sizes
-effect.sizes <- tibble(effect.size = c(rep(0, 250), rep(.15, 250), rep(.3, 250)),
-                       sim = seq(1:750))
+effect.sizes <- tibble(
+    effect.size = c(rep(0, 250), rep(.15, 250), rep(.3, 250)), 
+    sim = seq(1:750)
+    )
 
 # run t.data.maker over all the requested data sets
-sim.data <- future_map2_dfr(.x = effect.sizes$sim, .y = effect.sizes$effect.size,
-                     .f = t.data.maker, group.size = 1500, .options = options)
+# Map the list of effect sizes (and sim counter) to `t.data.maker` 
+#... to generate a list of tibbles (each of size 1500)
+#... as specified, with 250 'treated' and 250 'controls' per effect size, where controls are standard normal and treated have the given effect sizes
 
-# split the simulated data sets for analysis
+sim.data <- future_map2_dfr(
+  .x = effect.sizes$sim,
+  .y = effect.sizes$effect.size,
+  .f = t.data.maker,
+  group.size = 1500,
+  .options = options
+)
+
+# split the simulated data sets (into a list of tibbles, one tibble per simulation) for analysis
 sim.data <- sim.data %>% group_by(sim) %>% group_split()
 
 ```
 
 # Step 2: Run the proposed analysis over the many data sets and return the estimands of interest
 
-Now we set up a Bayesian regression model that will run our analysis over the many data sets. It is important to ensure that the estimands we are interested in can be returned at this step, because this process can be time consuming and would ideally not have to be repeated due to small mistakes. Hence, carefully check that the code returns the parameters you are interested in, and then put it into a function that will run over the many data sets. In any case, we need to run the model at least once outside of the function, because this regression serves to compile the code and prevent the need to recompile it each time a new analysis is run. This saves a considerable amount of time.
+We set up a Bayesian regression model to run over the many simulated data sets.
 
-Our simple formula for the t-test is:
+::: {.callout-note collapse="true"}
+## Make sure this produces and saves your estimands!
+
+It is important to ensure that the estimands we are interested in can be returned at this step, because this process can be time consuming. We don't want to have to repeated it due to small mistakes. Hence, first carefully check that the code returns all the parameters you need, and then put it into a function that runs over the many data sets. 
+
+In any case, we need to run the model at least once outside of the function.^[DR: what do you mean 'outside the function'?] This regression serves to compile the code and prevent the need to recompile it each time a new analysis is run, saving a lot of time.
+::: 
+
+
+Our simple formula for the t-test is a simple linear model:
 
 ```{r regression-formula}
 
@@ -87,10 +116,11 @@ reg.form <- response ~ 1 + group
 
 ```
 
-We can check what priors can be set for this model with the code below, and then set weakly informative priors on the parameters that will constrain the model from entertaining highly unlikely parameter estimates. Setting reasonable priors on a model also helps speed up the MCMC sampling:
+In the code below, we consider the nature of priors we can set for this model. We pass `brms::get_prior` our data, the family of response and link we want to use in the model, and the formula we are fitting. It suggests some possible priors or things to assign priors over?]
 
-```{r priors, message = FALSE}
+We aim for 'weakly informative priors', to constrain the model from entertaining highly unlikely parameter estimates. Setting reasonable priors on a model also helps speed up the MCMC sampling.
 
+```{r getprior, message = FALSE}
 # load in requisite packages
 library(brms)
 library(tidybayes)
@@ -99,14 +129,30 @@ library(tidybayes)
 get_prior(formula = reg.form,
           data = sim.data[[501]],
           family = gaussian())
-
-# set our own priors
-reg.prior <- c(set_prior("normal(0 , 1)", class = "Intercept"),
-               set_prior("normal(0 , .8)", class = "b", coef = "groupb.group"),
-               set_prior("normal(1, 1)", class = "sigma"))
 ```
 
-Now we want to check that the model runs properly, and that we can extract the estimands of interest. We run the regression with the brm() command, and we extract and manipulate the estimands of interest by pulling out the posterior distribution from the model with posterior_samples():
+Next we set our priors (coded).^[DR: how did we decide on these?]
+
+```{r setpriors, message = FALSE}
+
+# set our own priors
+(
+  reg.prior <- c(set_prior("normal(0 , 1)", class = "Intercept"),
+               set_prior("normal(0 , .8)", class = "b", coef = "groupb.group"),
+               set_prior("normal(1, 1)", class = "sigma"))
+)
+
+```
+
+Note that we have specified
+
+- A standard  normal prior over the intercept^[DR: Isn't this simply a known parameter?]
+- A normal with mean 0 and variance 0.8 over the group-b adjustment
+- A normal(1,1) over the standard error of the outcome (?)
+
+\
+
+Now we want to check that the model runs properly, and that we can extract the estimands of interest. We run the regression with the `brm()` command, and we extract and manipulate the estimands of interest by pulling out the posterior distribution from the model with `posterior_samples()`:
 
 ```{r run-regression-model, message = FALSE, warning = FALSE}
 

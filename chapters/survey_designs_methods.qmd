@@ -1,4 +1,4 @@
-# Survey design and item development {#surveydesign}
+# Survey design, item dev. {#surveydesign}
 
 This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.
 

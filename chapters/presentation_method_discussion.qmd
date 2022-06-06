@@ -1,6 +1,6 @@
-# Presentation, labeling and visualisations {#presentation}
+# Presentation and visualisation {#presentation}
 
-# 
+#
 
 ```{r}
 #| include: false

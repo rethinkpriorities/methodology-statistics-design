@@ -1,4 +1,4 @@
-# Coding and data management {#coding}
+# Coding, data  {#coding}
 
 Integrate further content from [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein,
 
