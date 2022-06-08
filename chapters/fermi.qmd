@@ -25,9 +25,7 @@ See
 - [Luke M's summary at Lesswrong](https://www.lesswrong.com/posts/ybYBCK9D7MZCcdArB/how-to-measure-anything)
 
 
-### Accompanying tools and exercises {-}
-
-> DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.
+z
 
 
 #### Chapter 3: The Urn of Mystery Simulation	{-}
@@ -36,6 +34,13 @@ See
 ::: {.callout-note collapse="true"}
 
 ## Chapter 3: The Urn of Mystery Simulation			
+
+
+**The point**
+
+> The Single Sample Majority Rule (i.e., The Urn of Mystery Rule): Given maximum uncertainty about a population proportion – such that you believe the proportion could be anything between 0% and 100% with all values being equally likely – there is a 75% chance that a single randomly selected sample [i.e., one ball drawn from the urn] is from the majority of the population
+
+Discussion of exercise
 
 > This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book.  This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles.  Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles.  The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case).  A marble is drawn at random from each urn.  The probability of drawing a green marble is, obviously, just the percentage of marbles that are green.  So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green.  Otherwise, red is drawn.  In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn.  The person only uses the drawn marble to determine whether to bet the majority is green or red.  We then determine whether that single draw turned out to be the majority color.  We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.				
 
@@ -66,9 +71,10 @@ We could view the whole thing in several ways, such as by typing `view(urns)` or
 
 Printing out a peek at this object:
 
+
+
 ```{r}
 str(urns)
-
 
 ```
 
@@ -77,24 +83,24 @@ The object is a 'numeric vector' with 1000 elements, the first 5 or so are liste
 
 2. For each of ($K= 1000$) urns, randomly draw a single marble, and record whether this draw is the same as the urn's majority color.^[Well, we don't actually draw a marble, we simply make another uniform draw, and if it's below the 'share green' for that urn, we call it green.] 
 
-We put this together into a 'tibble' data frame below
+We put this together into a 'tibble' data frame below^[I could reuse the above vector, but I'll just re-create it instead] 
 
 ```{r}
 
-urns <- urns %>%  #start with the vector of urns generated above
-  as.tibble() %>% #make it a tibble, a type of data frame
-  rename(share_green = value) %>% #by default the runif function  called this 'value'; we rename it 
-  add_column(runif = runif(nrow(.))) %>%  #add a column of random uniform 0,1 draws, to use as our 'random draw' for each urn
-  mutate(
-    majority = if_else(share_green>.5, "green", "red"), #if most of an urn is green or red
-    draw = case_when(
-      runif > share_green ~ "red", #if the random draw exceeds the 'share green' in that urn, it's a draw of a red ball
-      TRUE ~ "green" #otherwise it's a draw of a green ball
-    )
-        )
+library(tidyverse)
+
+K <- 1000
+
+urns <- tibble(
+    share_green = runif(K, 0, 1), #recreating the vector of uniform draws as the first column of a tibble
+    majority = if_else(share_green > .5, "green", "red"), #classifying whether the tibble is majority green or red
+    draw = if_else(runif(K) > share_green, "red", "green") #if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce
+  ) 
 
 
 ```
+
+
 
 3. Display this 'matrix' of 1000 outcomes (or a peek at it)
 
@@ -111,8 +117,9 @@ The snip above shows how these 'random draws' are generated, as noted above.
 
 ```{r share_agree}
 
+
 (
-  share_agree <- sum(urns$draw == urns$majority)/K
+  share_agree <- summarize(urns, share_agree = sum(draw == majority) / K)
   )
 
 #sum number of cases where the 'draw is the same color as the majority for the urn
@@ -131,19 +138,12 @@ For one example, suppose you wanted to test this with 1 *million* urns. That wou
 
 K <- 1000*1000
 
-urns <- runif(K, 0, 1)
 
-urns <- urns %>%  
-  as.tibble() %>%
-  rename(share_green = value) %>% 
-  add_column(runif = runif(nrow(.))) %>% 
-  mutate(
-    majority = if_else(share_green>.5, "green", "red"),
-    draw = case_when(
-      runif > share_green ~ "red",
-      TRUE ~ "green"
-    )
-        )
+urns <- tibble(
+    share_green = runif(K, 0, 1),
+    majority = if_else(share_green > .5, "green", "red"), 
+    draw = if_else(runif(K) > share_green, "red", "green") 
+  ) 
 
 (
   share_agree <- sum(urns$draw == urns$majority)/K
@@ -151,6 +151,21 @@ urns <- urns %>%
 ```
 
 On my computer, this ran almost immediately.
+
+
+### Tools for Monte-Carlo Fermi, other than Excel
+
+Some links to simple vignettes in other tools
+
+- [Causal, buy vs rent](https://my.causal.app/models/69949)
+
+
+- [Guesstimate: simplest trivial example](https://www.getguesstimate.com/models/3394)
+- [Guesstimate, slightly more involved: deep work before death of your mind](https://www.getguesstimate.com/models/2758)
+
+- [Squiggle notebook, GiveDirectly/Givewell mode](https://observablehq.com/@hazelfire/givewells-givedirectly-cost-effectiveness-analysis)
+
+- R code (working on it)
 
 
 ## Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis

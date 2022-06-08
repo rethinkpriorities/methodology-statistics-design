@@ -270,7 +270,7 @@
 <li>
 <a href="#how-to-measure-anything-by-douglas-hubbard" id="toc-how-to-measure-anything-by-douglas-hubbard" class="nav-link active" data-scroll-target="#how-to-measure-anything-by-douglas-hubbard"> <span class="header-section-number">15.1</span> ‘How to measure anything’, By Douglas Hubbard</a>
 <ul class="collapse">
-<li><a href="#accompanying-tools-and-exercises" id="toc-accompanying-tools-and-exercises" class="nav-link" data-scroll-target="#accompanying-tools-and-exercises">Accompanying tools and exercises</a></li>
+<li><a href="#tools-for-monte-carlo-fermi-other-than-excel" id="toc-tools-for-monte-carlo-fermi-other-than-excel" class="nav-link" data-scroll-target="#tools-for-monte-carlo-fermi-other-than-excel"> <span class="header-section-number">15.1.1</span> Tools for Monte-Carlo Fermi, other than Excel</a></li>
 </ul>
 </li>
 <li><a href="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" id="toc-monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="nav-link" data-scroll-target="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis"> <span class="header-section-number">15.2</span> Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</a></li>
@@ -300,10 +300,7 @@
 <a href="https://docs.google.com/document/d/1JMAuIiE52o0E0SxeItD9vH_lWRifWHEETIvjjTiB_Gk/edit#heading=h.16rulnin7e3i">RP book group notes and links</a> (private access)</li>
 <li><a href="https://www.lesswrong.com/posts/ybYBCK9D7MZCcdArB/how-to-measure-anything">Luke M’s summary at Lesswrong</a></li>
 </ul>
-<section id="accompanying-tools-and-exercises" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="accompanying-tools-and-exercises">Accompanying tools and exercises</h3>
-<blockquote class="blockquote">
-<p>DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.</p>
-</blockquote>
+<p>z</p>
 <section id="chapter-3-the-urn-of-mystery-simulation" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="chapter-3-the-urn-of-mystery-simulation">Chapter 3: The Urn of Mystery Simulation</h4>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -317,6 +314,11 @@ Chapter 3: The Urn of Mystery Simulation
 </div>
 <div id="callout-1" class="callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p><strong>The point</strong></p>
+<blockquote class="blockquote">
+<p>The Single Sample Majority Rule (i.e., The Urn of Mystery Rule): Given maximum uncertainty about a population proportion – such that you believe the proportion could be anything between 0% and 100% with all values being equally likely – there is a 75% chance that a single randomly selected sample [i.e., one ball drawn from the urn] is from the majority of the population</p>
+</blockquote>
+<p>Discussion of exercise</p>
 <blockquote class="blockquote">
 <p>This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book. This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles. Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles. The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case). A marble is drawn at random from each urn. The probability of drawing a green marble is, obviously, just the percentage of marbles that are green. So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green. Otherwise, red is drawn. In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn. The person only uses the drawn marble to determine whether to bet the majority is green or red. We then determine whether that single draw turned out to be the majority color. We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.</p>
 </blockquote>
@@ -342,7 +344,7 @@ Chapter 3: The Urn of Mystery Simulation
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">urns</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code> num [1:1000] 0.978 0.82 0.982 0.188 0.706 ...</code></pre>
+<pre><code> num [1:1000] 0.423 0.455 0.41 0.613 0.44 ...</code></pre>
 </div>
 </div>
 <p>The object is a ‘numeric vector’ with 1000 elements, the first 5 or so are listed. Each of these represent</p>
@@ -350,19 +352,17 @@ Chapter 3: The Urn of Mystery Simulation
 <li>For each of (<span class="math inline">\(K= 1000\)</span>) urns, randomly draw a single marble, and record whether this draw is the same as the urn’s majority color.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>
 </li>
 </ol>
-<p>We put this together into a ‘tibble’ data frame below</p>
+<p>We put this together into a ‘tibble’ data frame below<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">urns</span> <span class="op">&lt;-</span> <span class="va">urns</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>  <span class="co">#start with the vector of urns generated above</span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> <span class="co">#make it a tibble, a type of data frame</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>share_green <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> <span class="co">#by default the runif function  called this 'value'; we rename it </span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>runif <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>  <span class="co">#add a column of random uniform 0,1 draws, to use as our 'random draw' for each urn</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span><span class="op">&gt;</span><span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, <span class="co">#if most of an urn is green or red</span>
-    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
-      <span class="va">runif</span> <span class="op">&gt;</span> <span class="va">share_green</span> <span class="op">~</span> <span class="st">"red"</span>, <span class="co">#if the random draw exceeds the 'share green' in that urn, it's a draw of a red ball</span>
-      <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"green"</span> <span class="co">#otherwise it's a draw of a green ball</span>
-    <span class="op">)</span>
-        <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+
+<span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
+
+<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>
+    share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="co">#recreating the vector of uniform draws as the first column of a tibble</span>
+    majority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, <span class="co">#classifying whether the tibble is majority green or red</span>
+    draw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span>
+  <span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="3" type="1">
@@ -371,19 +371,19 @@ Chapter 3: The Urn of Mystery Simulation
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">urns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,000 × 4
-   share_green  runif majority draw 
-         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
- 1      0.978  0.314  green    green
- 2      0.820  0.0878 green    green
- 3      0.982  0.747  green    green
- 4      0.188  0.228  red      red  
- 5      0.706  0.848  green    red  
- 6      0.332  0.245  red      green
- 7      0.0976 0.302  red      red  
- 8      0.345  0.449  red      red  
- 9      0.464  0.0951 red      green
-10      0.879  0.212  green    green
+<pre><code># A tibble: 1,000 × 3
+   share_green majority draw 
+         &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
+ 1      0.335  red      red  
+ 2      0.420  red      green
+ 3      0.0116 red      red  
+ 4      0.681  green    green
+ 5      0.0729 red      red  
+ 6      0.445  red      green
+ 7      0.607  green    red  
+ 8      0.398  red      red  
+ 9      0.433  red      red  
+10      0.548  green    green
 # … with 990 more rows</code></pre>
 </div>
 </div>
@@ -394,43 +394,48 @@ Chapter 3: The Urn of Mystery Simulation
 </ol>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="op">(</span>
-  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">urns</span><span class="op">$</span><span class="va">draw</span> <span class="op">==</span> <span class="va">urns</span><span class="op">$</span><span class="va">majority</span><span class="op">)</span><span class="op">/</span><span class="va">K</span>
+  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span><span class="va">urns</span>, share_agree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draw</span> <span class="op">==</span> <span class="va">majority</span><span class="op">)</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.73</code></pre>
+<pre><code># A tibble: 1 × 1
+  share_agree
+        &lt;dbl&gt;
+1       0.763</code></pre>
 </div>
 <details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>I.e., 73% of the draws are the same color as the majority of their urn.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p>I.e., 76.3% of the draws are the same color as the majority of their urn.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).</p>
-<p>For one example, suppose you wanted to test this with 1 <em>million</em> urns. That would be a huge pain to do in Excel… I dare you to try it. In <code>R</code> we simply change the code to specify <span class="math inline">\(K =1,000,000\)</span> urns, and do the above again.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>For one example, suppose you wanted to test this with 1 <em>million</em> urns. That would be a huge pain to do in Excel… I dare you to try it. In <code>R</code> we simply change the code to specify <span class="math inline">\(K =1,000,000\)</span> urns, and do the above again.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">*</span><span class="fl">1000</span>
 
-<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 
-<span class="va">urns</span> <span class="op">&lt;-</span> <span class="va">urns</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>  
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>share_green <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_column.html">add_column</a></span><span class="op">(</span>runif <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span><span class="op">&gt;</span><span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>,
-    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
-      <span class="va">runif</span> <span class="op">&gt;</span> <span class="va">share_green</span> <span class="op">~</span> <span class="st">"red"</span>,
-      <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"green"</span>
-    <span class="op">)</span>
-        <span class="op">)</span>
+<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>
+    share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+    majority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, 
+    draw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> 
+  <span class="op">)</span> 
 
 <span class="op">(</span>
   <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">urns</span><span class="op">$</span><span class="va">draw</span> <span class="op">==</span> <span class="va">urns</span><span class="op">$</span><span class="va">majority</span><span class="op">)</span><span class="op">/</span><span class="va">K</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.74948</code></pre>
+<pre><code>[1] 0.75072</code></pre>
 </div>
 </div>
 <p>On my computer, this ran almost immediately.</p>
-</section></section></section><section id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis">
+</section><section id="tools-for-monte-carlo-fermi-other-than-excel" class="level3" data-number="15.1.1"><h3 data-number="15.1.1" class="anchored" data-anchor-id="tools-for-monte-carlo-fermi-other-than-excel">
+<span class="header-section-number">15.1.1</span> Tools for Monte-Carlo Fermi, other than Excel</h3>
+<p>Some links to simple vignettes in other tools</p>
+<ul>
+<li><p><a href="https://my.causal.app/models/69949">Causal, buy vs rent</a></p></li>
+<li><p><a href="https://www.getguesstimate.com/models/3394">Guesstimate: simplest trivial example</a></p></li>
+<li><p><a href="https://www.getguesstimate.com/models/2758">Guesstimate, slightly more involved: deep work before death of your mind</a></p></li>
+<li><p><a href="https://observablehq.com/@hazelfire/givewells-givedirectly-cost-effectiveness-analysis">Squiggle notebook, GiveDirectly/Givewell mode</a></p></li>
+<li><p>R code (working on it)</p></li>
+</ul></section></section><section id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis">
 <span class="header-section-number">15.2</span> Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</h2>
 <p>Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, laying out some building blocks,</p>
 <p>… and embed some tools and work-in-progress on this <a href="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/">HERE</a>, also embedded below.</p>
@@ -459,8 +464,9 @@ Chapter 3: The Urn of Mystery Simulation
 <li id="fn2" role="doc-endnote"><p>This uses arguments K draws, <code>0</code> lower bound, and <code>1</code> upper bound.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>See the tutorial <a href="https://bookdown.org/ndphillips/YaRrr/generating-random-data.html#uniform">HERE</a> for some tips on ‘generating random data’ in R.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4" role="doc-endnote"><p>Well, we don’t actually draw a marble, we simply make another uniform draw, and if it’s below the ‘share green’ for that urn, we call it green.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>Check out the raw code – note how the number here is automatically generated with ‘inline code’. I didn’t literally type in that number.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>Even better, rather than recopying the code, we would make it a function.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>I could reuse the above vector, but I’ll just re-create it instead<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Check out the raw code – note how the number here is automatically generated with ‘inline code’. I didn’t literally type in that number.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>Even better, rather than recopying the code, we would make it a function.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
@@ -625,123 +631,123 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Luke M's summary at Lesswrong</span><span class="co">](https://www.lesswrong.com/posts/ybYBCK9D7MZCcdArB/how-to-measure-anything)</span></span>
 <span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Accompanying tools and exercises {-}</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>z</span>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DR: Hubbard provides a set of Excel spreadsheets to go through his examples and illustrations, but we have better tools than this. I hope to embed or link a set of these below.</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Chapter 3: The Urn of Mystery Simulation   {-}</span></span>
 <span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Chapter 3: The Urn of Mystery Simulation   {-}</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
 <span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chapter 3: The Urn of Mystery Simulation         </span></span>
 <span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chapter 3: The Urn of Mystery Simulation         </span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book.  This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles.  Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles.  The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case).  A marble is drawn at random from each urn.  The probability of drawing a green marble is, obviously, just the percentage of marbles that are green.  So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green.  Otherwise, red is drawn.  In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn.  The person only uses the drawn marble to determine whether to bet the majority is green or red.  We then determine whether that single draw turned out to be the majority color.  We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.              </span></span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>The above (folded) narrative is rather confusing, and the spreadsheet is rather bulky. We can explain it and simulate it much more simply by using code.  The point is... <span class="co">[</span><span class="ot">what was the point again?</span><span class="co">]</span></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>**The point**</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The Single Sample Majority Rule (i.e., The Urn of Mystery Rule): Given maximum uncertainty about a population proportion – such that you believe the proportion could be anything between 0% and 100% with all values being equally likely – there is a 75% chance that a single randomly selected sample </span><span class="co">[</span><span class="ot">i.e., one ball drawn from the urn</span><span class="co">]</span><span class="at"> is from the majority of the population</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>Discussion of exercise</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This is a simulation that represents the Urn of Mystery example mentioned in Chapter 3, pages 44-46 from the 3rd edition of the book.  This is a more economical way of testing the Urn of Mystery example than having a warehouse full of thousands of urns filled with green and red marbles.  Consider that there are 1000 urns in the simulated warehouse, each with 0% to 100% green marbles.  The percentage of green marbles are generated separately for each urn using a uniform distribution (the maximum possible uncertainty in this case).  A marble is drawn at random from each urn.  The probability of drawing a green marble is, obviously, just the percentage of marbles that are green.  So, for each urn, the color of the randomly drawn marble is determined with a binary distribution using the percentage of green marbles as the chance of drawing green.  Otherwise, red is drawn.  In this simulation, we pretend the drawing person does not see the real percentage of green marbles in the urn.  The person only uses the drawn marble to determine whether to bet the majority is green or red.  We then determine whether that single draw turned out to be the majority color.  We can see that after 1000 urns the single draw is the same color as the majority about 75% of the time.              </span></span>
 <span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Randomly draw a 'share green' for each urn, for each of 1000 (or '$K=1000$') 'urns', and record the majority color, i.e.,  *is it more than half green?*</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>::: </span>
 <span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>We set the value 'K=1000', which we could adjust later, indicating 'how many urns' we are using in our simulation. It makes it clearer to define things at the top and see how it drives the results. </span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>The above (folded) narrative is rather confusing, and the spreadsheet is rather bulky. We can explain it and simulate it much more simply by using code.  The point is... <span class="co">[</span><span class="ot">what was the point again?</span><span class="co">]</span></span>
 <span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r urns}</span></span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>The code above yields the object <span class="in">`urns`</span>, a vector of 1000 probabilities. It assigns 'urns' to be equal to the function <span class="in">`runif`</span>, i.e., 'random uniform'.</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">This uses arguments K draws, `0` lower bound, and `1` upper bound.</span><span class="co">]</span></span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Randomly draw a 'share green' for each urn, for each of 1000 (or '$K=1000$') 'urns', and record the majority color, i.e.,  *is it more than half green?*</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>We set the value 'K=1000', which we could adjust later, indicating 'how many urns' we are using in our simulation. It makes it clearer to define things at the top and see how it drives the results. </span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r urns}</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">See the tutorial [HERE](https://bookdown.org/ndphillips/YaRrr/generating-random-data.html#uniform) for some tips on 'generating random data' in R.</span><span class="co">]</span></span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>We could view the whole thing in several ways, such as by typing <span class="in">`view(urns)`</span> or <span class="in">`View(urns)`</span> for a peek. We can also have any part of this printed to the screen.  The point is that this object is there in the background (in our 'environment'). We don't need to see it in front of us, at all times, as with a spreadsheet. </span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>Printing out a peek at this object:</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>The code above yields the object <span class="in">`urns`</span>, a vector of 1000 probabilities. It assigns 'urns' to be equal to the function <span class="in">`runif`</span>, i.e., 'random uniform'.</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">This uses arguments K draws, `0` lower bound, and `1` upper bound.</span><span class="co">]</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(urns)</span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">See the tutorial [HERE](https://bookdown.org/ndphillips/YaRrr/generating-random-data.html#uniform) for some tips on 'generating random data' in R.</span><span class="co">]</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>We could view the whole thing in several ways, such as by typing <span class="in">`view(urns)`</span> or <span class="in">`View(urns)`</span> for a peek. We can also have any part of this printed to the screen.  The point is that this object is there in the background (in our 'environment'). We don't need to see it in front of us, at all times, as with a spreadsheet. </span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>Printing out a peek at this object:</span>
 <span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>The object is a 'numeric vector' with 1000 elements, the first 5 or so are listed. Each of these represent</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>For each of ($K= 1000$) urns, randomly draw a single marble, and record whether this draw is the same as the urn's majority color.^<span class="co">[</span><span class="ot">Well, we don't actually draw a marble, we simply make another uniform draw, and if it's below the 'share green' for that urn, we call it green.</span><span class="co">]</span> </span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>We put this together into a 'tibble' data frame below</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(urns)</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> urns <span class="sc">%&gt;%</span>  <span class="co">#start with the vector of urns generated above</span></span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tibble</span>() <span class="sc">%&gt;%</span> <span class="co">#make it a tibble, a type of data frame</span></span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">share_green =</span> value) <span class="sc">%&gt;%</span> <span class="co">#by default the runif function  called this 'value'; we rename it </span></span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">runif =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(.))) <span class="sc">%&gt;%</span>  <span class="co">#add a column of random uniform 0,1 draws, to use as our 'random draw' for each urn</span></span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green<span class="sc">&gt;</span>.<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>), <span class="co">#if most of an urn is green or red</span></span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">case_when</span>(</span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>      runif <span class="sc">&gt;</span> share_green <span class="sc">~</span> <span class="st">"red"</span>, <span class="co">#if the random draw exceeds the 'share green' in that urn, it's a draw of a red ball</span></span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"green"</span> <span class="co">#otherwise it's a draw of a green ball</span></span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Display this 'matrix' of 1000 outcomes (or a peek at it)</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>The object is a 'numeric vector' with 1000 elements, the first 5 or so are listed. Each of these represent</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>For each of ($K= 1000$) urns, randomly draw a single marble, and record whether this draw is the same as the urn's majority color.^<span class="co">[</span><span class="ot">Well, we don't actually draw a marble, we simply make another uniform draw, and if it's below the 'share green' for that urn, we call it green.</span><span class="co">]</span> </span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>We put this together into a 'tibble' data frame below^<span class="co">[</span><span class="ot">I could reuse the above vector, but I'll just re-create it instead</span><span class="co">]</span> </span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">share_green =</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>), <span class="co">#recreating the vector of uniform draws as the first column of a tibble</span></span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>), <span class="co">#classifying whether the tibble is majority green or red</span></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(K) <span class="sc">&gt;</span> share_green, <span class="st">"red"</span>, <span class="st">"green"</span>) <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span></span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>urns</span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Display this 'matrix' of 1000 outcomes (or a peek at it)</span>
 <span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>The snip above shows how these 'random draws' are generated, as noted above. </span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Count 'which share of these agree with their urn's majority color'</span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>urns</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r share_agree}</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>The snip above shows how these 'random draws' are generated, as noted above. </span>
 <span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>  share_agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(urns<span class="sc">$</span>draw <span class="sc">==</span> urns<span class="sc">$</span>majority)<span class="sc">/</span>K</span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Count 'which share of these agree with their urn's majority color'</span>
 <span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r share_agree}</span></span>
 <span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>I.e., <span class="in">`r op(share_agree*100, d=4)`</span>% of the draws are the same color as the majority of their urn.^<span class="co">[</span><span class="ot">Check out the raw code -- note how the number here is automatically generated with 'inline code'. I didn't literally type in that number.</span><span class="co">]</span></span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>  share_agree <span class="ot">&lt;-</span> <span class="fu">summarize</span>(urns, <span class="at">share_agree =</span> <span class="fu">sum</span>(draw <span class="sc">==</span> majority) <span class="sc">/</span> K)</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></span>
 <span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a>For one example, suppose you wanted to test this with 1 *million* urns. That would be a huge pain to do in Excel... I dare you to try it.  In <span class="in">`R`</span> we simply change the code to specify $K =1,000,000$ urns, and do the above again.^<span class="co">[</span><span class="ot">Even better, rather than recopying the code, we would make it a function.</span><span class="co">]</span></span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span><span class="sc">*</span><span class="dv">1000</span></span>
-<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>I.e., <span class="in">`r op(share_agree*100, d=4)`</span>% of the draws are the same color as the majority of their urn.^<span class="co">[</span><span class="ot">Check out the raw code -- note how the number here is automatically generated with 'inline code'. I didn't literally type in that number.</span><span class="co">]</span></span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a>The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).</span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>For one example, suppose you wanted to test this with 1 *million* urns. That would be a huge pain to do in Excel... I dare you to try it.  In <span class="in">`R`</span> we simply change the code to specify $K =1,000,000$ urns, and do the above again.^<span class="co">[</span><span class="ot">Even better, rather than recopying the code, we would make it a function.</span><span class="co">]</span></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> urns <span class="sc">%&gt;%</span>  </span>
-<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">share_green =</span> value) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">runif =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(.))) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green<span class="sc">&gt;</span>.<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>),</span>
-<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">case_when</span>(</span>
-<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>      runif <span class="sc">&gt;</span> share_green <span class="sc">~</span> <span class="st">"red"</span>,</span>
-<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"green"</span></span>
-<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span><span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>    <span class="at">share_green =</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>), </span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(K) <span class="sc">&gt;</span> share_green, <span class="st">"red"</span>, <span class="st">"green"</span>) </span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a>  ) </span>
 <span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a>  share_agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(urns<span class="sc">$</span>draw <span class="sc">==</span> urns<span class="sc">$</span>majority)<span class="sc">/</span>K</span>
@@ -751,30 +757,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>On my computer, this ran almost immediately.</span>
 <span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</span></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tools for Monte-Carlo Fermi, other than Excel</span></span>
 <span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, laying out some building blocks,</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>Some links to simple vignettes in other tools</span>
 <span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>... and embed some tools and work-in-progress on this <span class="co">[</span><span class="ot">HERE</span><span class="co">](https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/)</span>,  also embedded below.</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Causal, buy vs rent</span><span class="co">](https://my.causal.app/models/69949)</span></span>
 <span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>**Overview**</span>
-<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The basic ideas</span>
-<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Causal and Guesstimate</span>
-<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Code-based tools</span>
-<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Guesstimate: simplest trivial example</span><span class="co">](https://www.getguesstimate.com/models/3394)</span></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Guesstimate, slightly more involved: deep work before death of your mind</span><span class="co">](https://www.getguesstimate.com/models/2758)</span></span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Squiggle notebook, GiveDirectly/Givewell mode</span><span class="co">](https://observablehq.com/@hazelfire/givewells-givedirectly-cost-effectiveness-analysis)</span></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R code (working on it)</span>
 <span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/"</span>)</span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="fu">## Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</span></span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a>Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, laying out some building blocks,</span>
 <span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a>... and embed some tools and work-in-progress on this <span class="co">[</span><span class="ot">HERE</span><span class="co">](https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/)</span>,  also embedded below.</span>
 <span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
-<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a>DR: We may want to look for ways to explicitly incorporate and integrate these approaches into our data analysis work in R, etc.</span>
-<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>**Overview**</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The basic ideas</span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Causal and Guesstimate</span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Code-based tools</span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/"</span>)</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>DR: We may want to look for ways to explicitly incorporate and integrate these approaches into our data analysis work in R, etc.</span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
