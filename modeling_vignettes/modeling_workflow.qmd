@@ -76,12 +76,12 @@ In our *descriptive* modeling we do *not* remove 'insignificant' features from t
 
 ## We retain those features of most direct interest
 
-... (such as 'how introduced to EA') and/or theoretical importance (such as income),^[Classical economic theory suggests that most goods are 'normal', with the amount consumed increasing in income. Empirical evidence supports this for charitable giving; [recent work](https://econofact.org/are-rich-people-really-less-generous) suggests that *share of income* is relatively constant across the income distribution, implying that wealthier people give more in absolute terms.] and 'controls' (especially time-in-EA and survey-year) that might allow us to better interpret the features of interest.^[See further discussion in post.]
+... (such as 'how introduced to EA') and/or theoretical importance (such as income),
+^[Classical economic theory suggests that most goods are 'normal', with the amount consumed increasing in income. Empirical evidence supports this for charitable giving; [recent work](https://econofact.org/are-rich-people-really-less-generous) suggests that *share of income* is relatively constant across the income distribution, implying that wealthier people give more in absolute terms.] and 'controls' (especially time-in-EA and survey-year) that might allow us to better interpret the features of interest.^[See further discussion in post.]
 
 :::
 
-### Choosing features and modeling targets, defining these lists/objects {.unnumbered}
-
+# Choosing features and modeling targets, defining these lists/objects {.unnumbered}
 
 **We focus on three key outcomes:**
 
@@ -91,7 +91,6 @@ In our *descriptive* modeling we do *not* remove 'insignificant' features from t
 
 3.  Whether donated more than 1000 USD
 
-
 **We construct several 'feature sets':**
 
 -   "Key demographics, student status, and geography", used in all models 
@@ -99,18 +98,16 @@ In our *descriptive* modeling we do *not* remove 'insignificant' features from t
 
 <!-- ^["Top-6 university" refers to whether the individual lists any of the six universities (Oxford, Stanford, Harvard, CalTech, MIT, Cambridge) appearing in the top-10 of all of USNWR, QS, and THE rankings. However, university was not asked in the 2018 survey ] -->
     <!-- feat_income_employ -- -->
--   "Pledges/commitments:" Whether ever taken a 'Giving What We Can
-    Pledge', whether 'Earning to Give' <!-- feat_gwwc_etg -->
--   "Controls" for age, time-in-EA, and survey-year (used in all
-    models)^[We refer to the latter as "controls" because they aid our
-    interpretation of other features of interest, as noted above.
-    However, these are *also* of independent interest.]
-
     
+-   "Pledges/commitments:" Whether ever taken a 'Giving What We Can Pledge', whether 'Earning to Give' <!-- feat_gwwc_etg -->
+
+-   "Controls" for age, time-in-EA, and survey-year (used in all models)
+^[We refer to the latter as "controls" because they aid our interpretation of other features of interest, as noted above. However, these are *also* of independent interest.]
+
 :::
 
 
-**In the code below, we define these objects!**
+**In the code below, we define these as objects!**
 
 We define the lists of the different 'features' we care about as character vectors, to put into the models later. The idea is 'all decisions are specified and discussed up top', for better organization and control.
 
@@ -163,4 +160,78 @@ robust_controls_n <- c("years_inv_d2sd_post_med",  "age_d2sd_post_med", "income_
 
 ```
 
+# Ad-hoc data cleaning, recipes
+
+We impute a few missings, etc, just for modeling.^[Use `recipe` package for this if it makes it more organized, but it's not necessary to use recipe if we are not doing machine learning, as leaks are not an issue, and we only need to do the imputation once. On the other hand, in non-prediction models we have a (bad?) tendency to assign a causal interpretation to particular features, and we need to be careful about how imputation might affect this.]
+
+Below, some e imputations and constructed features (for functional form interpretation) that I did in the 'actual analysis'.
+
+
+```{r impute_norm_features, warning=FALSE}
+
+#We impute variables where missing and normalizing all variables to be mean-zero and to be on the same scale.
+
+diqr <- function(x) {
+  (x - mean(x, na.rm=TRUE))/IQR(x, na.rm=TRUE)
+}
+
+gtmed <- function(x) {
+  x*(x>med(x))
+}
+
+eas_all_s <- eas_all %>%
+  filter(!is.na(don_av2_yr) & year_f %in% last_3_years) %>%
+  mutate(
+    #(re) code scaling and 2-part splits for the modeling sample (2018-20, reporting donations)
+    age_d2sd = arm::rescale(age), #Todo (automate this with `mutate(across)` thing)
+    years_involved_d2sd = arm::rescale(year - as.numeric(year_involved)),
+    years_inv_d2sd_post_med = gtmed(years_involved_d2sd),
+    income_c_imp_diqr = diqr(income_c_imp_bc5k),
+    age_d2sd_post_med = arm::rescale(age_if_older),
+    income_c_imp_diqr_if_richer = gtmed(income_c_imp_diqr),
+    ln_income_c_imp_if_richer= gtmed(ln_income_c_imp_bc5k)
+  ) %>%
+  rowwise() %>%
+  mutate(don_share_inc_imp_bc5k = min(don_share_inc_imp_bc5k, 1)) %>%  #recode about 84 values so the range is between 0-1 for frac. logit to work
+  ungroup() %>%
+  dplyr::select(all_of(c(num_out, bin_out, controls, key_demog, feat_income_employ, feat_gwwc_etg, robust_controls)),
+                income_c, income_c_imp, income_c_imp_bc5k, income_c_imp_diqr, income_c_imp_diqr_if_richer, first_hear_ea_lump, years_involved, age,
+                contains("d2sd"), contains("iqr")) %>% #I have added first_hear_ea_lump back even though we don't use it here because we want to use it in ML; I hope it doesn't mess anything up
+  # years_involved included to put in sumstats
+  labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)
+
+
+  #Recode missing as 0 for all dummies, as a 'NA category' for categoricals
+  #also for normalized variables; i.e., set missings to the mean
+eas_all_s_rl <- eas_all_s %>%
+    mutate(across(matches("d_|not_just_white"), missing_to_zero))
+
+eas_all_s_rl_imp <- eas_all_s_rl %>%
+      mutate(across(matches("d2sd|diqr"), missing_to_zero)) %>%
+    labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)
+#TODO: (future) -- check for sensitivity to this imputation vs dropping these obs
+
+
+```
+
+
+## Peeking at data for sanity checks 
+
+We report summary statistics on a selection of these features and target outcomes below...
+
+# Constructing and specifying models {.unnumbered}
+
+## Make 'model data frames'
+
+# Report model results
+
+(tables and plots of results; latest years combined) 
+
+We put together forest plots of (normalized) coefficients from the distinct set of models outlined above, where these can be compared on the same scales. Specifically, we consider,
+
+-   for each of the three key outcomes ('amount donated (averaged)',
+    'donation as a share of income', 'donated over 1000 USD'),
+-   models with three specific sets of features, yielding nine models in total (plus robustness checks in the appendix).
+
+The feature sets, which we will refer to in the forest plots below, are:
 
