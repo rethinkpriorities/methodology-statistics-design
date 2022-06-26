@@ -54,4 +54,7 @@ knitr::include_url("https://daaronr.github.io/metrics_discussion/surveys.html")
 - Survey design tools (IT)
 
 
+## Discussions to integrate
 
+
+- Disputing claim that "One doesn't need to worry about framing effects" because of Morewedge et al, 2015; Khan et al, 2006; Baumer et al, 2015 [private slack conversation link](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1655407493604669)

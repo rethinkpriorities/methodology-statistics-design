@@ -1,4 +1,4 @@
-# Power analss workflow (Elsey) {#power-workflow}
+# Power analysis discussion and workflow (Elsey) {#power-workflow}
 
 [^power_analysis_framework_2-1]
 
@@ -70,9 +70,7 @@ Before we conduct an experiment (or run a survey, or collect data for an analysi
 
     Bayesian: 'the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).'
 
-We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.
-
-Given a particular underlying effect (or range of effects, or lack thereof), and a particular sample size (or range of sample sizes), we ask 'what is the probability of'... ?:[^power_analysis_framework_2-8]
+We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.  Given a particular underlying effect (or range of effects, or lack thereof), and a particular sample size (or range of sample sizes), we may ask 'what is the probability of'... ?:[^power_analysis_framework_2-8]
 
 [^power_analysis_framework_2-8]: Note that these could all be either Bayesian or frequentist, depending on how you specify your goals/inferences.
 
@@ -95,6 +93,18 @@ Given a particular underlying effect (or range of effects, or lack thereof), and
 [^power_analysis_framework_2-11]: This is sometimes called 'equivalence testing'. In Bayesian estimation, you can consider a 'range of practical equivalence' (ROPE). Here, if a large enough proportion of the posterior (of the difference between two groups, say) falls in this range, you conclude that 'to all intents and purposes these groups are equivalent.'
 
     \
+    
+::: {.callout-note collapse="true"}
+## 'Power of an equivalence test' (key aside)
+
+We may wish to estimate the 'likelihood that we will determine that the effect is in a near-zero range', when the true effect size are in fact zero or very small. The former determination is called an 'equivalence test'; thus we may want to compute the 'power of an equivalence test against a particular distribution of true (small) effect sizes'. I'll call the latter the 'equivalence distribution' for now.
+
+1. Determine *how* we wish to compute our equivalence test (there may be dragons here)
+2. Simulate a large number of data sets arising under the equivalence distribution 
+3. Compute the equivalence test for each simulated data set. 
+4. Count the share of these that 'determine the effect is near zero'. This share is the 'power of our equivalence test against the equivalence distribution'
+
+::: 
 
 Hence, a power analysis helps frame our prospective research project in relation to the goals we would like to achieve.[^power_analysis_framework_2-12] It provides uswith an estimate (and it is indeed an estimate, not a certainty!) of the probability that we will be able to make the inference we wish to make, given various factors both inside and outside of our control. (See discussion in fold.)
 

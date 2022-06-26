@@ -1,6 +1,17 @@
 # Coding, data  {#coding}
 
-Integrate further content from [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein,
+## Some resources
+
+[R for data science](https://r4ds.had.co.nz/): highly recommended
+
+See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein) ^[Todo: integrate key content/
+
+
+*Pete W's Gists curating...:*
+
+- [Hadley Wickham's "Advanced R](https://gist.github.com/peterhurford/72dbd44e0a34e29297485a8cf679cf73) ... for the most keen
+
+- ["Git 101" (various resources)](https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5)    
 
 ## Coding and organisational issues
 
@@ -102,3 +113,44 @@ eas_all %<>%
   labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)
 ```
 
+
+
+## Simple summary tools I was not aware of
+
+
+From Willem's [intro to R workshop script](https://docs.google.com/document/d/13jPMcG5m4oxinqEtlQ2tSqkQs4-JEUcC0ytz9woFG3E/edit)
+
+
+```{r}
+
+diamonds %>%
+ count(cut) %>%
+ mutate(pct = n / sum(n))
+
+
+# Use tidystats
+library(tidystats)
+
+count_data(diamonds, cut)
+
+diamonds %>%
+ group_by(color) %>%
+ count_data(cut)
+describe_data(diamonds, price)
+
+```
+
+This one I knew, of course, the typical 'grouped summary's
+
+```{r groupedsum}
+
+diamonds %>%
+ group_by(color) %>%
+ summarize(
+   M = mean(price),
+   SD = sd(price),
+   min = min(price)
+ ) %>%
+ .kable() %>% .kable_styling()
+
+```

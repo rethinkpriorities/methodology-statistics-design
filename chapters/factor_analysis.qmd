@@ -13,12 +13,13 @@ Dimension reduction, and 'carving reality at its joints', uncovering structural 
 
 Integrate...
 
-Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/chapters/statistics/)
+Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/content/statistics/)
 
+https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/
 
 ```{r }
 
-knitr::include_url("https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html")
+knitr::include_url("https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/")
 
 ```
 

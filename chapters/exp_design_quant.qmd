@@ -35,8 +35,9 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 (Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis
 
-## Power analyses (and other 'diagnosands')^[Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?
-]
+## Power analyses (and other 'diagnosands')
+
+^[Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here? ]
 
 
 ### Key resources and explainers
@@ -46,22 +47,11 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 [Reinstein notes and code](https://daaronr.github.io/metrics_discussion/power.html)
 
 
-
-### See ['Rethink_Priorities_Power_analysis_framework_2' in  appendix](#power-workflow)
+### See [Power analysis discussion and workflow](#power-workflow)
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
 
-::: {.alert .alert-secondary}
 
-
-DR: I'm putting it into an appendix to the bookdown for now. We may incorporate much of that into the present section.
-
-An alternative to an 'appendix' is a standalone page which we can link here. This can sometimes be helpful; it allows a different format, may save time on knitting, may allow that other page to be better integrated elsewhere.
-
-But for now, I'll make it a bookdown appendix, to help get us all used to the current format and avoid disagregation.
-
-
-:::
 
 
 

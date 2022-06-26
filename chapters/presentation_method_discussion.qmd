@@ -18,11 +18,28 @@ source(here("code", "get_eas_data.R"))
 Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here\* NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/ ... more still needs to be moved
 :::
 
+## Tables
+
+
+Data tables, so users can sort view them
+
+```{r tabresid}
+
+(
+mtcars_data_table <-  mtcars %>%
+ mutate(across(is.numeric, round, digits = 2)) %>%
+  datatable(class = 'cell-border stripe')
+)
+
+```
+
+
 ## Aside: EA Forum organisation, collophon, formatting
 
-MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
 ## Visualizations
+
+MOVED to [how-to-visualize](https://rethinkpriorities.github.io/how-to-visualize/)
 
 See also Gdoc: [visualisation discussions](https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#)
 
