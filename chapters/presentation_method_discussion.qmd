@@ -1,7 +1,5 @@
 # Presentation and visualisation {#presentation}
 
-#
-
 ```{r}
 #| include: false
 
@@ -15,11 +13,12 @@ source(here("code", "get_eas_data.R"))
 ```
 
 ::: {.alert .alert-secondary}
-Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here\* NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/ ... more still needs to be moved
+Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here
+
+NOTE: this is being moved to [our 'how to visualize'](https://rethinkpriorities.github.io/how-to-visualize/) ... more still needs to be moved
 :::
 
 ## Tables
-
 
 Data tables, so users can sort view them
 
@@ -28,14 +27,12 @@ Data tables, so users can sort view them
 (
 mtcars_data_table <-  mtcars %>%
  mutate(across(is.numeric, round, digits = 2)) %>%
-  datatable(class = 'cell-border stripe')
+  DT::datatable(class = 'cell-border stripe')
 )
 
 ```
 
-
 ## Aside: EA Forum organisation, collophon, formatting
-
 
 ## Visualizations
 
@@ -104,10 +101,7 @@ But what if we have a few values that are way above others, and 'mess up the sca
 Sometimes a logarithmic scale is helpful, but that can also lead to confusion. Otherwise...
 
 -   "any CI's or other things that go outside of the limits should just be extended to the edge and not dropped)"
-
-    -   doable with scale_y\_continuous( oob = scales::squish) +
-
-        scale_x\_continuous( oob = scales::squish)`` or  `coord_cartesian` ``
+    -   doable with `scale_y_continuous( oob = scales::squish) + scale_x_continuous( oob = scales::squish)` or  `coord_cartesian`
 
 -   or otherwise allow a clear 'break' in the axis?
 
@@ -139,7 +133,13 @@ Above, from the [EAS engagement post bookdown](https://rethinkpriorities.github.
 
 [^presentation_method_discussion-1]: DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?
 
-Here, I think the use of `%>% ggplotly` yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'.
+::: {.callout-note collapse="true"}
+## ggplotly pros and cons
+
+Here, I think the use of `%>% ggplotly` yields only one helpful feature (but it's very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'. On the other hand, Plotly makes it easy to distort the sizes of the graphs in inconvenient ways, and using ggplotly can be incompatible with certain other features. 
+
+::: 
+
 
 ### Case: Visualizing (regression) model coefficients and confidence intervals {.unnumbered}
 

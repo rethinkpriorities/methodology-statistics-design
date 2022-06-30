@@ -4,10 +4,18 @@
 
 - See informal 'practitioners' discussion [below](#eamt-qual), from 'EA market testing'
 
+
+## Other relevant resources
+
+
+[John List 'Some Tips for “Start-Ups” to do Better Field
+Experiments and Getting Your Work Published'](http://s3.amazonaws.com/fieldexperiments-papers2/papers/00755.pdf)
+
 ::: {.alert .alert-secondary}
 
 
-Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
+<!-- Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
+-->
 
 :::
 

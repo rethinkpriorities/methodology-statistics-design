@@ -101,7 +101,11 @@
       "search-detached-cancel-button-title": "Cancel",
       "search-submit-button-title": "Submit"
     }
-  }</script><script async="" src="https://hypothes.is/embed.js"></script><!--[if lt IE 9]>
+  }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.22/datatables.js"></script><script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><link href="../site_libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script><link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
@@ -190,7 +194,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analss workflow (Elsey)</span></a>
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis discussion and workflow (Elsey)</span></a>
   </div>
 </li>
     </ul>
@@ -265,13 +269,10 @@
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
+<li><a href="#tables" id="toc-tables" class="nav-link active" data-scroll-target="#tables"> <span class="header-section-number">3.1</span> Tables</a></li>
+<li><a href="#aside-ea-forum-organisation-collophon-formatting" id="toc-aside-ea-forum-organisation-collophon-formatting" class="nav-link" data-scroll-target="#aside-ea-forum-organisation-collophon-formatting"> <span class="header-section-number">3.2</span> Aside: EA Forum organisation, collophon, formatting</a></li>
 <li>
-<a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"> <span class="header-section-number">4</span> </a>
-<ul class="collapse">
-<li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables"> <span class="header-section-number">4.1</span> Tables</a></li>
-<li><a href="#aside-ea-forum-organisation-collophon-formatting" id="toc-aside-ea-forum-organisation-collophon-formatting" class="nav-link" data-scroll-target="#aside-ea-forum-organisation-collophon-formatting"> <span class="header-section-number">4.2</span> Aside: EA Forum organisation, collophon, formatting</a></li>
-<li>
-<a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"> <span class="header-section-number">4.3</span> Visualizations</a>
+<a href="#visualizations" id="toc-visualizations" class="nav-link" data-scroll-target="#visualizations"> <span class="header-section-number">3.3</span> Visualizations</a>
 <ul class="collapse">
 <li><a href="#ideal-coding-practice-for-visualisations" id="toc-ideal-coding-practice-for-visualisations" class="nav-link" data-scroll-target="#ideal-coding-practice-for-visualisations">Ideal coding practice for visualisations</a></li>
 <li><a href="#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country" id="toc-case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country" class="nav-link" data-scroll-target="#case-relative-shares-of-a-total-e.g.-shares-of-ea-population-by-referrer-or-donation-totals-by-country">Case: Relative shares of a total; e.g.&nbsp;‘shares of EA population by referrer’, or ‘donation totals by country’</a></li>
@@ -282,34 +283,32 @@
 <li><a href="#case-visualizing-regression-model-coefficients-and-confidence-intervals" id="toc-case-visualizing-regression-model-coefficients-and-confidence-intervals" class="nav-link" data-scroll-target="#case-visualizing-regression-model-coefficients-and-confidence-intervals">Case: Visualizing (regression) model coefficients and confidence intervals</a></li>
 </ul>
 </li>
-</ul>
-</li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/presentation_method_discussion.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="presentation" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Presentation and visualisation</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><section id="section" class="level1" data-number="4"><h1 data-number="4">
-<span class="header-section-number">4</span> </h1>
-<div class="alert alert-secondary">
-<p>Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here* NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/ … more still needs to be moved</p>
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="presentation" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Presentation and visualisation</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="alert alert-secondary">
+<p>Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here</p>
+<p>NOTE: this is being moved to <a href="https://rethinkpriorities.github.io/how-to-visualize/">our ‘how to visualize’</a> … more still needs to be moved</p>
 </div>
-<section id="tables" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="tables">
-<span class="header-section-number">4.1</span> Tables</h2>
+<section id="tables" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="tables">
+<span class="header-section-number">3.1</span> Tables</h2>
 <p>Data tables, so users can sort view them</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="op">(</span>
 <span class="va">mtcars_data_table</span> <span class="op">&lt;-</span>  <span class="va">mtcars</span> <span class="op">%&gt;%</span>
  <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">round</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">datatable</span><span class="op">(</span>class <span class="op">=</span> <span class="st">'cell-border stripe'</span><span class="op">)</span>
+  <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">'cell-border stripe'</span><span class="op">)</span>
 <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
-<pre><code>Error in datatable(., class = "cell-border stripe"): could not find function "datatable"</code></pre>
+</details><div class="cell-output-display">
+<div id="htmlwidget-7ee893a7ce52d6758e28" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7ee893a7ce52d6758e28">{"x":{"filter":"none","vertical":false,"data":[["Mazda RX4","Mazda RX4 Wag","Datsun 710","Hornet 4 Drive","Hornet Sportabout","Valiant","Duster 360","Merc 240D","Merc 230","Merc 280","Merc 280C","Merc 450SE","Merc 450SL","Merc 450SLC","Cadillac Fleetwood","Lincoln Continental","Chrysler Imperial","Fiat 128","Honda Civic","Toyota Corolla","Toyota Corona","Dodge Challenger","AMC Javelin","Camaro Z28","Pontiac Firebird","Fiat X1-9","Porsche 914-2","Lotus Europa","Ford Pantera L","Ferrari Dino","Maserati Bora","Volvo 142E"],[21,21,22.8,21.4,18.7,18.1,14.3,24.4,22.8,19.2,17.8,16.4,17.3,15.2,10.4,10.4,14.7,32.4,30.4,33.9,21.5,15.5,15.2,13.3,19.2,27.3,26,30.4,15.8,19.7,15,21.4],[6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],[160,160,108,258,360,225,360,146.7,140.8,167.6,167.6,275.8,275.8,275.8,472,460,440,78.7,75.7,71.1,120.1,318,304,350,400,79,120.3,95.1,351,145,301,121],[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],[3.9,3.9,3.85,3.08,3.15,2.76,3.21,3.69,3.92,3.92,3.92,3.07,3.07,3.07,2.93,3,3.23,4.08,4.93,4.22,3.7,2.76,3.15,3.73,3.08,4.08,4.43,3.77,4.22,3.62,3.54,4.11],[2.62,2.88,2.32,3.21,3.44,3.46,3.57,3.19,3.15,3.44,3.44,4.07,3.73,3.78,5.25,5.42,5.34,2.2,1.61,1.83,2.46,3.52,3.44,3.84,3.85,1.94,2.14,1.51,3.17,2.77,3.57,2.78],[16.46,17.02,18.61,19.44,17.02,20.22,15.84,20,22.9,18.3,18.9,17.4,17.6,18,17.98,17.82,17.42,19.47,18.52,19.9,20.01,16.87,17.3,15.41,17.05,18.9,16.7,16.9,14.5,15.5,14.6,18.6],[0,0,1,1,0,1,0,1,1,1,1,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,1,0,0,0,1],[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1],[4,4,4,3,3,3,3,4,4,4,4,3,3,3,3,3,3,4,4,4,3,3,3,3,3,4,5,5,5,5,5,4],[4,4,1,1,2,1,4,2,2,4,4,3,3,3,4,4,4,1,2,1,1,2,2,4,2,1,2,2,4,6,8,2]],"container":"<table class=\"cell-border stripe\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cyl<\/th>\n      <th>disp<\/th>\n      <th>hp<\/th>\n      <th>drat<\/th>\n      <th>wt<\/th>\n      <th>qsec<\/th>\n      <th>vs<\/th>\n      <th>am<\/th>\n      <th>gear<\/th>\n      <th>carb<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10,11]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</section><section id="aside-ea-forum-organisation-collophon-formatting" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="aside-ea-forum-organisation-collophon-formatting">
-<span class="header-section-number">4.2</span> Aside: EA Forum organisation, collophon, formatting</h2>
-</section><section id="visualizations" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="visualizations">
-<span class="header-section-number">4.3</span> Visualizations</h2>
+</section><section id="aside-ea-forum-organisation-collophon-formatting" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="aside-ea-forum-organisation-collophon-formatting">
+<span class="header-section-number">3.2</span> Aside: EA Forum organisation, collophon, formatting</h2>
+</section><section id="visualizations" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="visualizations">
+<span class="header-section-number">3.3</span> Visualizations</h2>
 <p>MOVED to <a href="https://rethinkpriorities.github.io/how-to-visualize/">how-to-visualize</a></p>
 <p>See also Gdoc: <a href="https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#">visualisation discussions</a></p>
 <section id="ideal-coding-practice-for-visualisations" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="ideal-coding-practice-for-visualisations">Ideal coding practice for visualisations</h3>
@@ -321,7 +320,7 @@
 <p>NOTE: The below will not run without data, but we cannot make data ‘public’ here … we can swap this for built in R or simulated data in this discussion</p>
 </div>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">geom_treemap_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">geom_treemap</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">geom_treemap_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu">geom_treemap</span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,
   <span class="fu">geom_treemap_text</span><span class="op">(</span>fontface <span class="op">=</span> <span class="st">"italic"</span>, colour <span class="op">=</span> <span class="st">"white"</span>, place <span class="op">=</span> <span class="st">"centre"</span>,
                     grow <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">1</span> <span class="op">)</span>,
   <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span>,
@@ -348,7 +347,7 @@
 </section><section id="case-likert-scale-individual-items-and-relative-responses-to-these" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="case-likert-scale-individual-items-and-relative-responses-to-these">Case: Likert scale (individual items) and relative responses to these</h3>
 <p>The combination of stacked bar charts and overlayed error/CI bars for some ‘middle split’ seems informative:</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><iframe src="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts" width="672" height="400px" data-external="1">
 </iframe>
 </div>
@@ -361,9 +360,7 @@
 <li>
 <p>“any CI’s or other things that go outside of the limits should just be extended to the edge and not dropped)”</p>
 <ul>
-<li>
-<p>doable with scale_y_continuous( oob = scales::squish) +</p>
-<p>scale_x_continuous( oob = scales::squish)<code>or  `coord_cartesian`</code></p>
+<li>doable with <code>scale_y_continuous( oob = scales::squish) + scale_x_continuous( oob = scales::squish)</code> or <code>coord_cartesian</code>
 </li>
 </ul>
 </li>
@@ -380,12 +377,27 @@
 <li>Vertical lines for ‘medians and means’ help put this in context</li>
 </ul></section><section id="case-categorical-outcomes-by-continuous-outcomes-and-viceversa" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="case-categorical-outcomes-by-continuous-outcomes-and-viceversa">Case: Categorical outcomes by continuous outcomes (and vice/versa)</h3>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><iframe src="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure" width="672" height="400px" data-external="1">
 </iframe>
 </div>
 <p>Above, from the <a href="https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure">EAS engagement post bookdown</a>, we combine a <code>geom_point</code> with a <code>geom_smooth</code>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Here, I think the use of <code>%&gt;% ggplotly</code> yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand ‘what the heck this is’.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+ggplotly pros and cons
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here, I think the use of <code>%&gt;% ggplotly</code> yields only one helpful feature (but it’s very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand ‘what the heck this is’. On the other hand, Plotly makes it easy to distort the sizes of the graphs in inconvenient ways, and using ggplotly can be incompatible with certain other features.</p>
+</div>
+</div>
+</div>
 </section><section id="case-visualizing-regression-model-coefficients-and-confidence-intervals" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="case-visualizing-regression-model-coefficients-and-confidence-intervals">Case: Visualizing (regression) model coefficients and confidence intervals</h3>
 <p>Forest plots as seen <a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models">in donation post here</a></p>
 <p><img src="https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/fp_demog_coefs_qp-1.png" class="img-fluid"></p>
@@ -399,7 +411,7 @@
 
 <!-- -->
 
-</section></section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>DR: I’m slightly concerned about misinterpretations of the smoothed thing though … those shaded regions maybe should not be interpreted as CI?<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script type="application/javascript">
@@ -539,163 +551,163 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Presentation and visualisation {#presentation}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>#</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"methods_setup.R"</span>))</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get EAS data</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"get_eas_data.R"</span>))</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here<span class="sc">\*</span> NOTE: this is being moved to https://rethinkpriorities.github.io/how-to-visualize/ ... more still needs to be moved</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tables</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>Data tables, so users can sort view them</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tabresid}</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>mtcars_data_table <span class="ot">&lt;-</span>  mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="fu">across</span>(is.numeric, round, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>(<span class="at">class =</span> <span class="st">'cell-border stripe'</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aside: EA Forum organisation, collophon, formatting</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualizations</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>MOVED to <span class="co">[</span><span class="ot">how-to-visualize</span><span class="co">](https://rethinkpriorities.github.io/how-to-visualize/)</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>See also Gdoc: <span class="co">[</span><span class="ot">visualisation discussions</span><span class="co">](https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#)</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ideal coding practice for visualisations {.unnumbered}</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>MOVED much content to <span class="co">[</span><span class="ot">how-to-visualize</span><span class="co">](https://rethinkpriorities.github.io/how-to-visualize/)</span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>Will move the below over as well</span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {.unnumbered}</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>**Treemaps**</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>NOTE: The below will not run without data, but we cannot make data 'public' here ... we can swap this for built in R or simulated data in this discussion</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>geom_treemap_opts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">geom_treemap</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>),</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_treemap_text</span>(<span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">place =</span> <span class="st">"centre"</span>,</span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grow =</span> <span class="cn">TRUE</span>, <span class="at">min.size =</span> <span class="dv">1</span> ),</span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  don_share_by_size <span class="ot">&lt;-</span> eas_20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(donation_2019_c, donation_2019_c_split) <span class="sc">%&gt;%</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(donation_2019_c_split) <span class="sc">%&gt;%</span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_don =</span> <span class="fu">sum</span>(donation_2019_c, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">don_share =</span> <span class="fu">round</span>(total_don<span class="sc">/</span><span class="fu">sum</span>(total_don)<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(donation_2019_c_split)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">area =</span> total_don, <span class="at">fill=</span> donation_2019_c_split,</span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Include percentage of total donation</span></span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(donation_2019_c_split, <span class="fu">paste0</span>(don_share, <span class="st">"%"</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))) <span class="sc">+</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Share of total 2019 reported donation amount, by donation size"</span>)</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>A good alternative to the treemap ... conveying both absolute amounts and rates in the same graph?</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Likert scale (individual items) and relative responses to these {.unnumbered}</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>The combination of stacked bar charts and overlayed error/CI bars for some 'middle split' seems informative:</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts"</span>)</span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>Above: from <span class="co">[</span><span class="ot">EAS engagement post, bookdown supplement</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts)</span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="fu">### Issue: Dealing with scales and large differences in magnitudes {.unnumbered}</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>If axes are cut and don't go to zero, mention this prominently in the plot.</span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>But what if we have a few values that are way above others, and 'mess up the scale'?</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>Sometimes a logarithmic scale is helpful, but that can also lead to confusion. Otherwise...</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>"any CI's or other things that go outside of the limits should just be extended to the edge and not dropped)"</span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>doable with scale_y<span class="sc">\_</span>continuous( oob = scales::squish) +</span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>        scale_x<span class="sc">\_</span>continuous( oob = scales::squish)`<span class="in">` or  `</span>coord_cartesian` ``</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>or otherwise allow a clear 'break' in the axis?</span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Not possible to break the axis ggplot <span class="ot">&lt;https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis&gt;</span></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>... what about 'extending to the edge'?</span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>Remove outliers as a last resort; prominently mention this where doing so.</span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Means of continuous variables: differences across groups {.unnumbered}</span></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>Some (imperfect) examples from donation post:</span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/gap-actual-planned-2019-1.png)</span></span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/planned_actual_gwwc-1.png)</span></span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Vertical lines for 'medians and means' help put this in context</span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Categorical outcomes by continuous outcomes (and vice/versa) {.unnumbered}</span></span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure"</span>)</span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>Above, from the <span class="co">[</span><span class="ot">EAS engagement post bookdown</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure)</span>, we combine a <span class="in">`geom_point`</span> with a <span class="in">`geom_smooth`</span>.<span class="ot">[^presentation_method_discussion-1]</span></span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="ot">[^presentation_method_discussion-1]: </span>DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?</span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>Here, I think the use of <span class="in">`%&gt;% ggplotly`</span> yields only one helpful feature (but its very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'.</span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Visualizing (regression) model coefficients and confidence intervals {.unnumbered}</span></span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>Forest plots as seen <span class="co">[</span><span class="ot">in donation post here</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/fp_demog_coefs_qp-1.png)</span></span>
-<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>Our <span class="in">`group_fp_do`</span> function makes this easy to do.</span>
-<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>See how we group the coefficients into plots by 'theme'</span>
-<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>In some contexts, lines for 'base rates' can be helpful</span>
-<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png)</span> ... context, scroll up from <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)</span></span>
+<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Presentation and visualisation {#presentation}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"methods_setup.R"</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get EAS data</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"get_eas_data.R"</span>))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Note: this has been moved from a discussion of the EA survey in the ea-data repo, and is being expanded here</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>NOTE: this is being moved to <span class="co">[</span><span class="ot">our 'how to visualize'</span><span class="co">](https://rethinkpriorities.github.io/how-to-visualize/)</span> ... more still needs to be moved</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tables</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>Data tables, so users can sort view them</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tabresid}</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>mtcars_data_table <span class="ot">&lt;-</span>  mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="fu">across</span>(is.numeric, round, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">datatable</span>(<span class="at">class =</span> <span class="st">'cell-border stripe'</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aside: EA Forum organisation, collophon, formatting</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualizations</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>MOVED to <span class="co">[</span><span class="ot">how-to-visualize</span><span class="co">](https://rethinkpriorities.github.io/how-to-visualize/)</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>See also Gdoc: <span class="co">[</span><span class="ot">visualisation discussions</span><span class="co">](https://docs.google.com/document/d/1U_k_sIPDQmkKgatgXStDqrwi-g3vPGgftYbN8AEDPhs/edit#)</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ideal coding practice for visualisations {.unnumbered}</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>MOVED much content to <span class="co">[</span><span class="ot">how-to-visualize</span><span class="co">](https://rethinkpriorities.github.io/how-to-visualize/)</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>Will move the below over as well</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Relative shares of a total; e.g. 'shares of EA population by referrer', or 'donation totals by country' {.unnumbered}</span></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>**Treemaps**</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>NOTE: The below will not run without data, but we cannot make data 'public' here ... we can swap this for built in R or simulated data in this discussion</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>geom_treemap_opts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">geom_treemap</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>),</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_treemap_text</span>(<span class="at">fontface =</span> <span class="st">"italic"</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">place =</span> <span class="st">"centre"</span>,</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>                    <span class="at">grow =</span> <span class="cn">TRUE</span>, <span class="at">min.size =</span> <span class="dv">1</span> ),</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>  don_share_by_size <span class="ot">&lt;-</span> eas_20 <span class="sc">%&gt;%</span> <span class="fu">select</span>(donation_2019_c, donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(donation_2019_c_split) <span class="sc">%&gt;%</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_don =</span> <span class="fu">sum</span>(donation_2019_c, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">don_share =</span> <span class="fu">round</span>(total_don<span class="sc">/</span><span class="fu">sum</span>(total_don)<span class="sc">*</span><span class="dv">100</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(donation_2019_c_split)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">area =</span> total_don, <span class="at">fill=</span> donation_2019_c_split,</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>             <span class="co"># Include percentage of total donation</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>             <span class="at">label =</span> <span class="fu">paste</span>(donation_2019_c_split, <span class="fu">paste0</span>(don_share, <span class="st">"%"</span>), <span class="at">sep =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))) <span class="sc">+</span></span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    geom_treemap_opts <span class="sc">+</span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Share of total 2019 reported donation amount, by donation size"</span>)</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>A good alternative to the treemap ... conveying both absolute amounts and rates in the same graph?</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Likert scale (individual items) and relative responses to these {.unnumbered}</span></span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>The combination of stacked bar charts and overlayed error/CI bars for some 'middle split' seems informative:</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts"</span>)</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>Above: from <span class="co">[</span><span class="ot">EAS engagement post, bookdown supplement</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#summary-charts)</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### Issue: Dealing with scales and large differences in magnitudes {.unnumbered}</span></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>If axes are cut and don't go to zero, mention this prominently in the plot.</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>But what if we have a few values that are way above others, and 'mess up the scale'?</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>Sometimes a logarithmic scale is helpful, but that can also lead to confusion. Otherwise...</span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>"any CI's or other things that go outside of the limits should just be extended to the edge and not dropped)"</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>doable with <span class="in">`scale_y_continuous( oob = scales::squish) + scale_x_continuous( oob = scales::squish)`</span> or  <span class="in">`coord_cartesian`</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>or otherwise allow a clear 'break' in the axis?</span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Not possible to break the axis ggplot <span class="ot">&lt;https://stackoverflow.com/questions/7194688/using-ggplot2-can-i-insert-a-break-in-the-axis&gt;</span></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>... what about 'extending to the edge'?</span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>Remove outliers as a last resort; prominently mention this where doing so.</span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Means of continuous variables: differences across groups {.unnumbered}</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>Some (imperfect) examples from donation post:</span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/gap-actual-planned-2019-1.png)</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/planned_actual_gwwc-1.png)</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Vertical lines for 'medians and means' help put this in context</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Categorical outcomes by continuous outcomes (and vice/versa) {.unnumbered}</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure"</span>)</span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>Above, from the <span class="co">[</span><span class="ot">EAS engagement post bookdown</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#engagement-by-age-and-tenure)</span>, we combine a <span class="in">`geom_point`</span> with a <span class="in">`geom_smooth`</span>.<span class="ot">[^presentation_method_discussion-1]</span></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a><span class="ot">[^presentation_method_discussion-1]: </span>DR: I'm slightly concerned about misinterpretations of the smoothed thing though ... those shaded regions maybe should not be interpreted as CI?</span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## ggplotly pros and cons</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>Here, I think the use of <span class="in">`%&gt;% ggplotly`</span> yields only one helpful feature (but it's very helpful): hovering over a dot or point on the line brings up an exact value label. I think this helps a reader understand 'what the heck this is'. On the other hand, Plotly makes it easy to distort the sizes of the graphs in inconvenient ways, and using ggplotly can be incompatible with certain other features. </span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Case: Visualizing (regression) model coefficients and confidence intervals {.unnumbered}</span></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>Forest plots as seen <span class="co">[</span><span class="ot">in donation post here</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)</span></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://rethinkpriorities.github.io/ea_data_public/ea_survey_work_files/figure-html/fp_demog_coefs_qp-1.png)</span></span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>Our <span class="in">`group_fp_do`</span> function makes this easy to do.</span>
+<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>See how we group the coefficients into plots by 'theme'</span>
+<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a>In some contexts, lines for 'base rates' can be helpful</span>
+<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png)</span> ... context, scroll up from <span class="co">[</span><span class="ot">here</span><span class="co">](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

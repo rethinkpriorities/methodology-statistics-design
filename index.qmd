@@ -17,9 +17,17 @@ A github-hosted '[quarto](https://quarto.org/)' for structured in-depth discussi
 ::: {.callout-note collapse="true"}
 ## But why do we want or need this?
 
-But I often question 'why do I have a sense this is useful'? When a concept comes up that one doesn't understand we all have resources we can go to, and our tutorials could feel like 'reinventing the wheel'.
+'Why do I have a sense this is useful'?
 
--our situations are sometimes particular - explaining it in our own words is helpful - keeping track of what we have done,
+Case against this: When a concept comes up that one doesn't understand we all have our own resources we can go to, and our tutorials could feel like 'reinventing the wheel'.
+
+So, why?
+
+- our situations are sometimes particular
+
+- explaining it in our own words is helpful
+
+- keeping track of what we have done,
 
 -   build a protocol and have a 'go-to procedure'
 
@@ -78,9 +86,12 @@ I also hope to use this to develop 'templates and standard practices' for our wo
 
 \
 
-**What to include and when to dive into the rabbit hole?** (Unfold: the 'second time it comes up' rule)
+**What to include and when to dive into the rabbit hole?**
 
 ::: {.callout-note collapse="true"}
+
+## The 'second time it comes up' rule
+
 In 'building a knowledge base', there are some things that are important to include, but others should be excluded. If we are compulsive and auto-nerd-sniped to go down every rabbit hole it will be wasteful. But some rabbit holes will be worth going down, at least partially.
 
 *What's a good rule-of-thumb for knowing if it's worth a dive?* Maybe the 'second time rule'?

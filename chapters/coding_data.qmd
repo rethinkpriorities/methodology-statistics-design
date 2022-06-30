@@ -1,17 +1,26 @@
 # Coding, data  {#coding}
 
+```{r setup}
+library(pacman)
+p_load(rethinkpriorities)
+library(rethinkpriorities)
+library(dplyr)
+library(tibble)
+```
+
+
 ## Some resources
 
 [R for data science](https://r4ds.had.co.nz/): highly recommended
 
-See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein) ^[Todo: integrate key content/
+See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein) ^[Todo: integrate key content.]
 
 
 *Pete W's Gists curating...:*
 
 - [Hadley Wickham's "Advanced R](https://gist.github.com/peterhurford/72dbd44e0a34e29297485a8cf679cf73) ... for the most keen
 
-- ["Git 101" (various resources)](https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5)    
+- ["Git 101" (various resources)](https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5)
 
 ## Coding and organisational issues
 

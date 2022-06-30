@@ -8,7 +8,7 @@ rename_all <- dplyr::rename_all
 filter <- dplyr::filter
 
 
-pacman::p_load(arm, bookdown,  binom, bslib, corrr, data.table, DescTools, digest, downlit, dplyr, forcats, gdata, gganimate, ggthemes, ggpointdensity, ggpubr, ggrepel, ggridges, gtsummary, here, huxtable, infer, purrr, janitor, lmtest, magrittr, labelled, lubridate, plotly, pryr, readr, readstata13, rlang, sandwich, santoku, scales, sjlabelled,  snakecase, tidyverse, treemapify, vtable, install = FALSE) #note -- install = FALSE should be OK if the `renv` environment is present -- unless it was gitignored
+pacman::p_load(arm, bookdown,  binom, bslib, corrr, DT, DescTools, digest, downlit, dplyr, forcats, gdata, gganimate, ggthemes, ggpointdensity, ggpubr, ggrepel, ggridges, gtsummary, here, huxtable, infer, purrr, janitor, lmtest, magrittr, labelled, lubridate, plotly, pryr, readr, readstata13, rlang, sandwich, santoku, scales, sjlabelled,  snakecase, tidyverse, treemapify, vtable, install = FALSE) #note -- install = FALSE should be OK if the `renv` environment is present -- unless it was gitignored
 #ggstatsplot
 
 #p_load("systemfonts")

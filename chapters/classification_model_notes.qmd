@@ -1,7 +1,5 @@
 # Classification models
 
-(Fill in or link here)
-
 ## Discussion: Assessing classification models and precision/recall {#classification_model_disc}
 
 Below, I try to explain "Classification problems", "Precision and Recall", and ROC and ROC-AUC (machine learning validation) by analogy ...

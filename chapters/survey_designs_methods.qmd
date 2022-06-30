@@ -1,18 +1,14 @@
 # Survey design, item dev. {#surveydesign}
 
-This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.
-
-More technical and involved discussion of overlapping content will often be deferred to the [experiments and trials](#expt_trial) section, with placeholders and links.
-
-@schwarcz2007
+This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.^M[ore technical and involved discussion of overlapping content will often be deferred to the 'experiments' related sections, with placeholders and links.]
 
 
 ::: {.alert .alert-secondary}
 
 
-Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development),
+Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/),
 
-and [Reinstein's sloppy notes](https://daaronr.github.io/metrics_discussion/surveys.html); see embeds below
+and [Reinstein's sloppy notes here](https://daaronr.github.io/metrics_discussion/surveys.html) focusing on probability sampling and sampling rare populations; see embeds below
 
 
 :::
@@ -20,11 +16,13 @@ and [Reinstein's sloppy notes](https://daaronr.github.io/metrics_discussion/surv
 
 ## (Willem Sleegers, to incorporate)
 
-[item development](https://willemsleegers.github.io/how-to-science/survey-design.html#item-development)
+[item development](https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/item-development.html)
+
+[wayback link](https://web.archive.org/web/20220630084700/https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/item-development.html)
 
 ```{r }
 
-knitr::include_url("https://willemsleegers.github.io/how-to-science/survey-design.html#item-development")
+knitr::include_url("https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/item-development.html")
 
 ```
 
@@ -38,9 +36,17 @@ knitr::include_url("https://daaronr.github.io/metrics_discussion/surveys.html")
 
 ## Suggested sections...
 
+**'Qualitative' issues** (hopefully backed by evidence)
+
 - How to ask good survey questions
 
-- Avoiding pitfalls
+- Avoiding pitfalls (framing, agreeability bias, comprehension, attention,  etc.)
+
+- Validating the measure is capturing 'the thing you intend'
+
+\
+
+**'Quantitative issues'**
 
 - Constructing reliable indices and scales
 
@@ -48,10 +54,17 @@ knitr::include_url("https://daaronr.github.io/metrics_discussion/surveys.html")
    - Elsey on "Mr P"
    - Reinstein on ['sampling'](https://daaronr.github.io/metrics_discussion/surveys.html#survey-samplingintake) and ['measuring a rare population'](https://daaronr.github.io/metrics_discussion/surveys.html#jazz-case) with reference to the EA survey
 
+\
+
+**'Implementation'**
+
+- Participant platforms
 
 - Implementation platforms and issues
 
 - Survey design tools (IT)
+
+
 
 
 ## Discussions to integrate

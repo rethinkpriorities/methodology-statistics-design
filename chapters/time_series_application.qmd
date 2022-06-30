@@ -11,14 +11,7 @@ Modeling what drives/effects/predicts ...
 
 - quality of conversions
 
-Particularly in response to discrete events, media coverage, etc.\*
-
-::: {.alert .alert-secondary}
-
-\* DR: The latter makes this seem more like a causal inference problem (‘what works to boost good applications’) …
-than a ‘predict the future to plan around it’ problem (as in Pete’s ML notes).
-
-:::
+Particularly in response to discrete events, media coverage, etc.^[DR: The latter makes this seem more like a causal inference problem (‘what works to boost good applications’) ... than a ‘predict the future to plan around it’ problem (as in Pete’s ML notes).]
 
 
 - "Did any of these events (at different times) seem to increase numbers?*"
@@ -47,49 +40,48 @@ When considering the impact of an event, we/they want to measure its 'full effec
 DR: I think a simple model 'adjusted to trends (and maybe seasonality)' might be good enough as a first pass. I'm not sure the data is rich enough to justify much more.
 
 
-### Nik's approach
+::: {.callout-note collapse="true"}
+## Nik's approach/background
 
-so I don’t have a huge amount of familiarity here  :confused: but from past cursory reads of the lit my impression’s been that there are lots of equivalencies to areas I’m more familiar with,
+From past cursory reads of the lit my impression’s been that there are lots of equivalencies to areas I’m more familiar with,
 
-e.g. an ARIMA(0,1,0) model is a Brownian motion is a GP with Gaussian kernel $min(x_1,x_2)$
+e.g. an $ARIMA(0,1,0)$ model is a Brownian motion is a GP with Gaussian kernel $min(x_1,x_2)$
 
+From your description of them problem, there are a few salient properties / complexities:
 
-so from your description of them problem, there are a few salient properties / complexities:
-
-The focal outcome is a discrete nonzero number, ie the number of apps / page views.
-
-The focal parameter is something like being featured in the WSJ, i.e. a (0,1) indicator.
-
-Maybe the effect of this isn't one-and-done, but but gives an immediate  boost that e.g. decays exponentially through time?
+The focal outcome is a discrete nonzero number, ie the number of apps / page views.  The focal parameter is something like being featured in the WSJ, i.e. a $(0,1)$ indicator.  Maybe the effect of this isn't one-and-done, but but gives an immediate  boost that e.g. decays exponentially through time?
 
 The data are temporally autocorrelated, i.e. samples closer together in time are probably going to be more similar to each other than those further away
 
-There may also be a linear trend through time separate from being featured in the WSJ, e.g. increasing general interest in 80kh, such that average interest on either side of the ‘discontinuity’ is different in a manner unrelated to 2.
+There may also be a linear trend through time separate from being featured in the WSJ, e.g. increasing general interest in 80kh, such that average interest on either side of the ‘discontinuity’ is different in a manner unrelated to 2.  There may also be nonlinear trends through time, e.g. seasonality effects.
 
-There may also be nonlinear trends through time, e.g. seasonality effects.
+:::
 
-I think my first stab would be to model this with a GLM
+::: {.callout-note collapse="true"}
+## Nik: I  think my first stab would be to model this with a GLM. 
 
 Specifically, a Poisson likelihood w/ a log link and linear model with intercept,
 
-(DR: Poisson because its 'arrival of events'. Why a 'log link'?)
+^[DR: Poisson because its 'arrival of events'. Why a 'log link'?]
 
 - a linear coefficient on time,
 
 - and an indicator for some discrete bump corresponding to whether a point came before or after the WSJ feature.
 
-(DR: Fundamentally, there will be bumps in individual periods that may occur randomly. A shock or permanent shift after the WSJ feature need not have been *caused* by it. The question is 'how unusual is such a shock, in the context of a long time series of shocks'? And how long is this series, anyways?)
+^[DR: Fundamentally, there will be bumps in individual periods that may occur randomly. A shock or permanent shift after the WSJ feature need not have been *caused* by it. The question is 'how unusual is such a shock, in the context of a long time series of shocks'? And how long is this series, anyways?]
 
-Then, add a mean 0 multivariate normal error term for overdispersion to this, composing like an RBF kernel w/ a periodic kernel?
+Then, add a mean-0 multivariate normal error term for overdispersion to this, composing like an RBF kernel w/ a periodic kernel?
 
-(DR: Can you explain more? And does this allow for flexible autocorrelation? Do we need to 'test if its a random walk'?)
+^[DR: Can you explain more? And does this allow for flexible autocorrelation? Do we need to 'test if it's a random walk'?)]
 
-This would sorta be like ‘kriging’ / using GPs to model temporal autocorrelation and I think should satisfy 1-3 above. And then if that works focus on trying to build out to cover more nuanced dynamics. But there might be better / more established ways to treat problems like this!
+This would sorta be like ‘kriging’ / using GPs to model temporal autocorrelation and I think should satisfy 1-3 above. And then if that works focus on trying to build out to cover more nuanced dynamics. But there might be better / more established ways to treat problems like this! ^[DR: I don't know what 'kriging' means; does anyone else understand it?]
 
-(I don't know what 'kriging' means; does anyone else understand it?)
+:::
 
 
-### Kim C's thoughts
+::: {.callout-note collapse="true"}
+
+## Kim C's thoughts
 
 1. structural change analysis (e.g., like that implemented in the R package [strucchange](https://cran.r-project.org/web/packages/strucchange/strucchange.pdf)).
 
@@ -97,18 +89,12 @@ You can use this procedure to find "breakpoints" in the data where for example, 
 
 If you think the trends are nonlinear, I've  done a similar thing using GAMs, and then taking the 1st derivative of the fitted curves and checking if it intersects zero. Explained pretty well [here](https://www.frontiersin.org/articles/10.3389/fevo.2018.00149/full).
 
-
-
-
-## PETE'S NOTES BELOW
-
-::: {.alert .alert-secondary}
-
-
-DR: Not sure what/how to adapt this
-
-
 :::
+
+
+## Pete's General notes on time series (in a prediction/ML context)
+
+^[DR: Not sure what/how to adapt this.]:::
 
 In Machine Learning,  **Time series** problems are problems that involve forecasting (extrapolating) the future based on the information of the past. Typically we have to make a chain of non-independent predictions rather than predict discrete, independent events.
 

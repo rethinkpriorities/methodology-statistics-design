@@ -192,7 +192,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analss workflow (Elsey)</span></a>
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis discussion and workflow (Elsey)</span></a>
   </div>
 </li>
     </ul>
@@ -358,10 +358,10 @@ Chapter 3: The Urn of Mystery Simulation
 
 <span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span>
 
-<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>
+<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
     share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="co">#recreating the vector of uniform draws as the first column of a tibble</span>
-    majority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, <span class="co">#classifying whether the tibble is majority green or red</span>
-    draw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span>
+    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, <span class="co">#classifying whether the tibble is majority green or red</span>
+    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span>
   <span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
@@ -394,7 +394,7 @@ Chapter 3: The Urn of Mystery Simulation
 </ol>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="op">(</span>
-  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span><span class="va">urns</span>, share_agree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draw</span> <span class="op">==</span> <span class="va">majority</span><span class="op">)</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span>
+  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="va">urns</span>, share_agree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draw</span> <span class="op">==</span> <span class="va">majority</span><span class="op">)</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -412,10 +412,10 @@ Chapter 3: The Urn of Mystery Simulation
 <details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">*</span><span class="fl">1000</span>
 
 
-<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>
+<span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
     share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
-    majority <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, 
-    draw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> 
+    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, 
+    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> 
   <span class="op">)</span> 
 
 <span class="op">(</span>
