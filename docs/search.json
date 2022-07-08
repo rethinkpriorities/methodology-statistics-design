@@ -11,7 +11,7 @@
     "href": "chapters/coding_data.html",
     "title": "2  Coding, data",
     "section": "",
-    "text": "Codelibrary(pacman)\np_load(rethinkpriorities)\nlibrary(rethinkpriorities)\nlibrary(dplyr)\nlibrary(tibble)"
+    "text": "Codelibrary(pacman)\np_load(rethinkpriorities)\nlibrary(rethinkpriorities)\nlibrary(dplyr)\nlibrary(tibble)\nlibrary(tidyverse)"
   },
   {
     "objectID": "chapters/coding_data.html#coding-and-organisational-issues",
@@ -53,14 +53,14 @@
     "href": "chapters/coding_data.html#labelling-columns",
     "title": "2  Coding, data",
     "section": "\n2.6 Labelling columns",
-    "text": "2.6 Labelling columns\nSome example code below\nPut list of labels and renamings in objects in a separate location … to avoid duplication and clutter:\n\nCodekey_eas_all_labels <- c( #note these are converted to a list with as.list before assigning them\n    donation_usd = \"Donation (USD)\",\n    l_don_usd = \"Log Don. (USD)\",\n    l_don_av_2yr = \"Log Don. 'avg.'\",\n    ln_age = \"Log age\",\n    don_av2_yr = \"Don. 'avg'\",\n    donation_plan_usd = \"Don. plan (USD)\")\n\n\nVariable labels are helpful\n\nCodeeas_all %<>%\n  labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)\n\nError in eas_all %<>% labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), : could not find function \"%<>%\""
+    "text": "2.6 Labelling columns\nSome example code below\nPut list of labels and renamings in objects in a separate location … to avoid duplication and clutter:\n\nCodekey_eas_all_labels <- c( #note these are converted to a list with as.list before assigning them\n    donation_usd = \"Donation (USD)\",\n    l_don_usd = \"Log Don. (USD)\",\n    l_don_av_2yr = \"Log Don. 'avg.'\",\n    ln_age = \"Log age\",\n    don_av2_yr = \"Don. 'avg'\",\n    donation_plan_usd = \"Don. plan (USD)\")\n\n\nVariable labels are helpful\n\nCodeeas_all <-  eas_all %>% \n  labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)\n\nError in as.vector(y): object 'eas_all' not found"
   },
   {
     "objectID": "chapters/coding_data.html#simple-summary-tools-i-was-not-aware-of",
     "href": "chapters/coding_data.html#simple-summary-tools-i-was-not-aware-of",
     "title": "2  Coding, data",
     "section": "\n2.7 Simple summary tools I was not aware of",
-    "text": "2.7 Simple summary tools I was not aware of\nFrom Willem’s intro to R workshop script\n\nCodediamonds %>%\n count(cut) %>%\n mutate(pct = n / sum(n))\n\nError in count(., cut): object 'diamonds' not found\n\nCode# Use tidystats\nlibrary(tidystats)\n\nError in library(tidystats): there is no package called 'tidystats'\n\nCodecount_data(diamonds, cut)\n\nError in count_data(diamonds, cut): could not find function \"count_data\"\n\nCodediamonds %>%\n group_by(color) %>%\n count_data(cut)\n\nError in count_data(., cut): could not find function \"count_data\"\n\nCodedescribe_data(diamonds, price)\n\nError in describe_data(diamonds, price): could not find function \"describe_data\"\n\n\nThis one I knew, of course, the typical ’grouped summary’s\n\nCodediamonds %>%\n group_by(color) %>%\n summarize(\n   M = mean(price),\n   SD = sd(price),\n   min = min(price)\n ) %>%\n .kable() %>% .kable_styling()\n\nError in group_by(., color): object 'diamonds' not found"
+    "text": "2.7 Simple summary tools I was not aware of\nFrom Willem’s intro to R workshop script\n\nCodediamonds %>%\n count(cut) %>%\n mutate(pct = n / sum(n))\n\n# A tibble: 5 × 3\n  cut           n    pct\n  <ord>     <int>  <dbl>\n1 Fair       1610 0.0298\n2 Good       4906 0.0910\n3 Very Good 12082 0.224 \n4 Premium   13791 0.256 \n5 Ideal     21551 0.400 \n\nCode# Use tidystats\nlibrary(tidystats)\n\nError in library(tidystats): there is no package called 'tidystats'\n\nCodecount_data(diamonds, cut)\n\nError in count_data(diamonds, cut): could not find function \"count_data\"\n\nCodediamonds %>%\n group_by(color) %>%\n count_data(cut)\n\nError in count_data(., cut): could not find function \"count_data\"\n\nCodedescribe_data(diamonds, price)\n\nError in describe_data(diamonds, price): could not find function \"describe_data\"\n\n\nThis one I knew, of course, the typical ’grouped summary’s\n\nCodediamonds %>%\n group_by(color) %>%\n summarize(\n   M = mean(price),\n   SD = sd(price),\n   min = min(price)\n ) %>%\n .kable() %>% .kable_styling()\n\n\n\n color \n    M \n    SD \n    min \n  \n\n\n D \n    3,169.954 \n    3,356.591 \n    357 \n  \n\n E \n    3,076.752 \n    3,344.159 \n    326 \n  \n\n F \n    3,724.886 \n    3,784.992 \n    342 \n  \n\n G \n    3,999.136 \n    4,051.103 \n    354 \n  \n\n H \n    4,486.669 \n    4,215.944 \n    337 \n  \n\n I \n    5,091.875 \n    4,722.388 \n    334 \n  \n\n J \n    5,323.818 \n    4,438.187 \n    335"
   },
   {
     "objectID": "chapters/presentation_method_discussion.html",
@@ -74,7 +74,7 @@
     "href": "chapters/survey_designs_methods.html",
     "title": "4  Survey design, item dev.",
     "section": "",
-    "text": "This section will cover specific ‘survey’ related content, as well as some content that overlaps with experiments and trials.\nMore technical and involved discussion of overlapping content will often be deferred to the experiments and trials section, with placeholders and links.\nSchwarcz et al. (2007)"
+    "text": "This section will cover specific ‘survey’ related content, as well as some content that overlaps with experiments and trials.^M[ore technical and involved discussion of overlapping content will often be deferred to the ‘experiments’ related sections, with placeholders and links.]"
   },
   {
     "objectID": "chapters/survey_designs_methods.html#willem-sleegers-to-incorporate",
@@ -102,7 +102,7 @@
     "href": "chapters/survey_designs_methods.html#discussions-to-integrate",
     "title": "4  Survey design, item dev.",
     "section": "\n4.3 Discussions to integrate",
-    "text": "4.3 Discussions to integrate\n\nDisputing claim that “One doesn’t need to worry about framing effects” because of Morewedge et al, 2015; Khan et al, 2006; Baumer et al, 2015 private slack conversation link\n\n\n\n\n\n\n\n\n\nSchwarcz, Sandra, Hilary Spindler, Susan Scheer, Linda Valleroy, and Amy Lansky. 2007. “Assessing Representativeness of Sampling Methods for Reaching Men Who Have Sex with Men: A Direct Comparison of Results Obtained from Convenience and Probability Samples.” AIDS and Behavior 11 (4): 596. https://doi.org/ctgppb."
+    "text": "4.3 Discussions to integrate\n\nDisputing claim that “One doesn’t need to worry about framing effects” because of Morewedge et al, 2015; Khan et al, 2006; Baumer et al, 2015 private slack conversation link"
   },
   {
     "objectID": "chapters/experiments_trials_design.html",
@@ -116,7 +116,7 @@
     "href": "chapters/experiments_trials_design.html#other-relevant-resources",
     "title": "5  Experiments: Qualitative design, implementation",
     "section": "5.1 Other relevant resources",
-    "text": "5.1 Other relevant resources\nJohn List ‘Some Tips for “Start-Ups” to do Better Field Experiments and Getting Your Work Published’\n\nNote that much ‘experiment and trial’ relevant content is covered in the surveys section. We will put in placeholders and cross-link."
+    "text": "5.1 Other relevant resources\nJohn List ‘Some Tips for “Start-Ups” to do Better Field Experiments and Getting Your Work Published’"
   },
   {
     "objectID": "chapters/experiments_trials_design.html#proposed-structure-of-section",
@@ -254,37 +254,37 @@
   {
     "objectID": "chapters/factor_analysis.html",
     "href": "chapters/factor_analysis.html",
-    "title": "10  Factor analysis (EFA, CFA), PCA,",
+    "title": "10  Factor analysis: EFA/CFA, PCA",
     "section": "",
     "text": "Dimension reduction, and ‘carving reality at its joints’, uncovering structural parameters?"
   },
   {
     "objectID": "chapters/factor_analysis.html#where-have-we-used-thiswhere-do-we-anticipate-using-it",
     "href": "chapters/factor_analysis.html#where-have-we-used-thiswhere-do-we-anticipate-using-it",
-    "title": "10  Factor analysis (EFA, CFA), PCA,",
+    "title": "10  Factor analysis: EFA/CFA, PCA",
     "section": "\n10.1 Where have we used this/where do we anticipate using it?",
     "text": "10.1 Where have we used this/where do we anticipate using it?"
   },
   {
     "objectID": "chapters/factor_analysis.html#the-idea",
     "href": "chapters/factor_analysis.html#the-idea",
-    "title": "10  Factor analysis (EFA, CFA), PCA,",
+    "title": "10  Factor analysis: EFA/CFA, PCA",
     "section": "\n10.2 The idea",
     "text": "10.2 The idea"
   },
   {
     "objectID": "chapters/factor_analysis.html#pca",
     "href": "chapters/factor_analysis.html#pca",
-    "title": "10  Factor analysis (EFA, CFA), PCA,",
+    "title": "10  Factor analysis: EFA/CFA, PCA",
     "section": "\n10.3 PCA",
     "text": "10.3 PCA"
   },
   {
     "objectID": "chapters/factor_analysis.html#factor-analysis",
     "href": "chapters/factor_analysis.html#factor-analysis",
-    "title": "10  Factor analysis (EFA, CFA), PCA,",
+    "title": "10  Factor analysis: EFA/CFA, PCA",
     "section": "\n10.4 Factor analysis",
-    "text": "10.4 Factor analysis\nIntegrate…\nWillem’s work link: ‘How to Science’\nhttps://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/\n\nCodeknitr::include_url(\"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/\")"
+    "text": "10.4 Factor analysis\n\n10.4.1 Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?\nFactors represent ‘real but latent ways people differ’ (in personality psych)\n\n“We don’t want cross-loadings” (in the case where we use sum scores). We don’t want the ‘factor loadings’ to be nonzero (or far from 0) on the same items for multiple factors.\n\nDoes this make sense?\n… We don’t want our indicators (survey measures) to be measuring more than one true factor, I guess. We don’t want questions we think are about happiness to really be picking up sociability. But can such questions be designed? Suppose the questions do pick up multiple personality characteristics. If we redefine the ‘factors’ so that they only load on separate sets of question, I don’t see how these redefined factors will be truly reflecting the personality characteristics.\nWe know\n\nthe latent personality traits are correlated (e.g., happy people are more sociable)\nThus, people who are happy will tend to be more sociable, and thus tend to respond more positively to responses to questions about happiness and questions about sociability\nSo if we restrict ‘only questions about sociability can load onto factor’, I claim that the value of this factor will tend to be higher for people who are happy (I know we are not restricting it, but that is the stated goal, so we should consider what it implies)\nThus, ‘does this imply that the factor is measuring happiness and not just sociability?’\n\nPerhaps the answer is something like\n\nYes, each sociabity question will tend to be higher for people who are happier (higher on the true ‘happiness factor’). However, the estimated ‘sociability factor level’ for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are ‘already adequately picking up sociability’ through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items.\n\n\n10.4.2 Suggested readings\n\n“Best practices in EFA” (Jason W. Osborne)\nDynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models\n\n10.4.3 Integrate…\nWillem’s work link: ‘How to Science’\nhttps://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/\n\nCodeknitr::include_url(\"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/\")"
   },
   {
     "objectID": "chapters/ml_modeling.html",
@@ -382,7 +382,7 @@
     "href": "chapters/classification_model_notes.html",
     "title": "13  Classification models",
     "section": "",
-    "text": "(Fill in or link here)"
+    "text": "Below, I try to explain “Classification problems”, “Precision and Recall”, and ROC and ROC-AUC (machine learning validation) by analogy …\nThis loosely connects to the classification models used in the ‘EA Survey Donations post/bookdown’, particularly the consideration of model performance\nSpy-detection We have been asked to come up with a method for classifying spies based on observable characteristics of a suspect population (‘population’ in the statistical sense). For example, some of them have mustaches, some wear pointed hats, some have sinister cackles and lapdogs to a greater or less or degree, and some appear to be more wealthy than others… Let us suppose that: We have previous similar suspect populations that we know to be the same in nature (‘drawn from an identical pool’) to the future suspect populations that we will need to make these predictions for We ultimately learned with certainty which of the previous suspect populations turned out to be spies (To keep intuition and calculation simple) suppose that in these populations know that half of all of these people are spies, and half are completely innocent. (This is called ‘balanced classes’).\nWe are asked to come up with a method to use the observable characteristics to classify each individual as more or less likely to be a spy. If we are given a group of individuals’ characteristics our method needs to assign a number to each one that might be interpreted as the “likelihood this person is a spy”. For example our ‘model’ we might say “anyone with a mustache is 75% likely to be a spy, and anyone without a mustache is 25% likely to be a spy.” (If half of the population wears mustaches, this would also give us an average prediction in line with the known overall 50% spy rate.) Or, let’s make the ‘model’ a bit more complicated (but to allow ‘ordering’ predictions) … we might say … we give the probability of being a spy as\n\\(0.75 - 0.25*wtdev\\)\nif they wear a moustache and\n\\(0.25 - 0.25*wtdev\\) otherwise.\nwhere \\(wtdev\\) represents some “normalized” measure of the person’s weight relative to the average weight in the sample, We predict skinnier people are slightly more likely to be spies.\nNote that, since everyone’s weight is slightly different, this will yield a slightly different projected probability for any observed individual. Thus, our model could also be seen as a “ranking” where, for any group of individuals we are given we can order them from least likely to be a spy (the fattest clean-shaven people) to most likely to be a spy (the skinniest moustache-wearer).\nHow should we evaluate a model, in absolute terms, or against other models? This depends on how the models predictions will be used and on the cost of getting it right or wrong in either direction.\nOur model might be applied by a very soft judge (think Mr. Van Driessen from B&B) who thinks it is much worse to convict an innocent person then to set free many spies. On the other hand it might be applied by a very tight-ass judge (think the gym coach) who puts almost no cost on convicting the innocent … he just wants to cath spies. How can we conceive of the ‘success’ of our model? (edited)\n\nWe could compare across different models to see if one does ‘universally better or worse’ in a sense to be defined. Suppose each model both gives a probability of being a spy for each person. As noted, this implies that each model “rank-orders” a population of individuals in terms of most to least likely being a spy.\n\n\nIn a given (test) set of data, we might see something like the number line dots thing above. The person our model claims is most likely to be a spy is on the right and the one predicted least likely is on the left. In application the liberal judge (“vDriessen”) might convict only the “top 1/3” of the distribution, while the tight-ass (“Coach”) might put 2/3 of these ‘dots’ in prison. Each have made different types of mistakes in practice. vDriessen let a bunch of spies free (and falsely convicted only a few), while the Coach put a lot of innocent people in prison (and, in practice, but not in the dots example above, also let a few spies free). (edited)\nWe might consider that our model has some probability of being applied by various types of judges. It might be that our model performs “better” than an alternative model when applied by the liberal vDriessen but “worse” when applied by the strict Coach. On the other hand, we can imagine that some models might perform better for nearly all types of judge! How could we measure this? The ROC curve can be helpful:\n\nAbove we see models that are strictly ordered from best to worse … the lines do not cross (this need not always be the case). The blue line to picks or model that is strictly better than the orange line, which is itself strictly better than a “random classifier”. A ‘random classifier’ give us no information. If we use this we can only choose some probability to convict everyone. Using this, if we increase the rate we can convict people by 2 per 100, then on average we are convicting one more spy and one more innocent person, in our example. So, by what measure is the blue classifier ‘better’ than the orange one (and both are better than the random classifier)? (edited)\nRemember, each classifier gives a ‘ranked ordering’ of the population. Suppose that we consider going down the list from the most guilty looking to the most innocent looking, and increasing the number of people that we choose to convict.\nAs we go down the ranking in general and decide to convict a larger share of the population we are adding some possibility of convicting and innocent person (the ‘cost’) to gain the ‘benefit’ of convicting some true spies. As depicted in the ROC curves above, as we do this the blue curve (classifier) is achieving a better tradeoff than the orange, green or red curve … (this is because it gives us a ‘better ordered list of who us more likely to be guilty’)…\nAs the judge using the blue curve decides to go further down the ‘blue curve list’ (paying the cost of convicting more innocent people) he also catches more spies than if he had used the ‘orange, green, or red curve list’ . The benefit to cost ratio is higher at all ‘rates of conviction’ here. (edited)\nThis is fine in a relative sense … we know blue is better here (better than all the others except for the purple ‘perfect classifier’ … which is equivalent to a tool that always ‘perfectly orders’ guilt so there is no tradeoff)\nBut:\n\nWhat if the curves cross? and\nHow do we consider the “overall” success of these classifier models? Maybe they are all doing a terrible job.\n\n(gotta run now, will try to get back to this … for question 2 the ‘area under the curve’ seems like a decent measure that somehow ‘averages’ the gain in insight over the random classifier for all possible types of judge, if I understand correctly)\nI have been told that the following is the case:\n\nGiven randomly chosen examples from class 1 and 2, the AUC is the probability that our classifier gives a larger probability of assigning the class 1 example to class 1 (true positive) than the class 2 example (false positive)\n\nI am reinterpreting this more simply as…\n\nCompare a randomly chosen spy (case \\(i\\) where \\(y_i=1\\)) to a randomly chosen innocent person (case \\(i\\) where \\(y_i=0\\)) … (in the testing data). Recall that a ‘classifier’ (at least typically, e.g., as in a logistic regression) assigns to each case \\(i\\) some probability \\(\\hat(p_i)\\) of being a spy, based on its features. The AUC tells me “the probability that my classifier assigns a larger probability of guilt \\(\\hat(p_i)\\) to the randomly-chosen spy than to the randomly-chosen innocent person.”\n\nAn analogy has also been made to the Wilcoxon Rank-sum measure."
   },
   {
     "objectID": "chapters/classification_model_notes.html#classification_model_disc",

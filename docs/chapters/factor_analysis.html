@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.243">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Rethink Priorities: Methods - 10&nbsp; Factor analysis (EFA, CFA), PCA,</title>
+<title>Rethink Priorities: Methods - 10&nbsp; Factor analysis: EFA/CFA, PCA</title>
 <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@
 <body class="floating">
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), PCA,</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis: EFA/CFA, PCA</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -210,7 +210,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), PCA,</span></a>
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis: EFA/CFA, PCA</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -268,12 +268,19 @@
 <li><a href="#where-have-we-used-thiswhere-do-we-anticipate-using-it" id="toc-where-have-we-used-thiswhere-do-we-anticipate-using-it" class="nav-link active" data-scroll-target="#where-have-we-used-thiswhere-do-we-anticipate-using-it"> <span class="header-section-number">10.1</span> Where have we used this/where do we anticipate using it?</a></li>
 <li><a href="#the-idea" id="toc-the-idea" class="nav-link" data-scroll-target="#the-idea"> <span class="header-section-number">10.2</span> The idea</a></li>
 <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"> <span class="header-section-number">10.3</span> PCA</a></li>
-<li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"> <span class="header-section-number">10.4</span> Factor analysis</a></li>
+<li>
+<a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"> <span class="header-section-number">10.4</span> Factor analysis</a>
+<ul class="collapse">
+<li><a href="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" id="toc-conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="nav-link" data-scroll-target="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings"> <span class="header-section-number">10.4.1</span> Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</a></li>
+<li><a href="#suggested-readings" id="toc-suggested-readings" class="nav-link" data-scroll-target="#suggested-readings"> <span class="header-section-number">10.4.2</span> Suggested readings</a></li>
+<li><a href="#integrate" id="toc-integrate" class="nav-link" data-scroll-target="#integrate"> <span class="header-section-number">10.4.3</span> Integrate…</a></li>
+</ul>
+</li>
 </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/factor_analysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="factor-descriptive" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), PCA,</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><p>Dimension reduction, and ‘carving reality at its joints’, uncovering structural parameters?</p>
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="factor-descriptive" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis: EFA/CFA, PCA</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><p>Dimension reduction, and ‘carving reality at its joints’, uncovering structural parameters?</p>
 <section id="where-have-we-used-thiswhere-do-we-anticipate-using-it" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="where-have-we-used-thiswhere-do-we-anticipate-using-it">
 <span class="header-section-number">10.1</span> Where have we used this/where do we anticipate using it?</h2>
 </section><section id="the-idea" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="the-idea">
@@ -282,7 +289,32 @@
 <span class="header-section-number">10.3</span> PCA</h2>
 </section><section id="factor-analysis" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="factor-analysis">
 <span class="header-section-number">10.4</span> Factor analysis</h2>
-<p>Integrate…</p>
+<section id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings">
+<span class="header-section-number">10.4.1</span> Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</h3>
+<p>Factors represent ‘real but latent ways people differ’ (in personality psych)</p>
+<blockquote class="blockquote">
+<p>“We don’t want cross-loadings” (in the case where we use sum scores). We don’t want the ‘factor loadings’ to be nonzero (or far from 0) on the same items for multiple factors.</p>
+</blockquote>
+<p><em>Does this make sense?</em></p>
+<p>… We don’t want our indicators (survey measures) to be measuring more than one true factor, I guess. We don’t want questions we think are about happiness to really be picking up sociability. But can such questions be designed? Suppose the questions <em>do</em> pick up multiple personality characteristics. If we redefine the ‘factors’ so that they only load on separate sets of question, I don’t see how these redefined factors will be truly reflecting the personality characteristics.</p>
+<p>We know</p>
+<ol type="1">
+<li><p>the latent personality traits are correlated (e.g., happy people are more sociable)</p></li>
+<li><p>Thus, people who are happy will tend to be more sociable, and thus tend to respond more positively to responses to questions about happiness <em>and</em> questions about sociability</p></li>
+<li><p>So if we restrict ‘only questions about sociability can load onto factor’, I claim that the value of this factor will tend to be higher for people who are happy (I know we are not restricting it, but that is the stated goal, so we should consider what it implies)</p></li>
+<li><p>Thus, ‘does this imply that the factor is measuring happiness and not just sociability?’</p></li>
+</ol>
+<p>Perhaps the answer is something like</p>
+<blockquote class="blockquote">
+<p>Yes, each sociabity question will tend to be higher for people who are happier (higher on the true ‘happiness factor’). However, the estimated ‘sociability <em>factor</em> level’ for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are ‘already adequately picking up sociability’ through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items.</p>
+</blockquote>
+</section><section id="suggested-readings" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="suggested-readings">
+<span class="header-section-number">10.4.2</span> Suggested readings</h3>
+<ol type="1">
+<li>“Best practices in EFA” (Jason W. Osborne)</li>
+<li><a href="https://psyarxiv.com/v8yru/">Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models</a></li>
+</ol></section><section id="integrate" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="integrate">
+<span class="header-section-number">10.4.3</span> Integrate…</h3>
 <p>Willem’s work <a href="https://willemsleegers.github.io/how-to-science/content/statistics/">link: ‘How to Science’</a></p>
 <p>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</p>
 <div class="cell">
@@ -296,7 +328,7 @@
 
 <!-- -->
 
-</section></main><!-- /main --><script type="application/javascript">
+</section></section></main><!-- /main --><script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
@@ -433,7 +465,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">#  Factor analysis (EFA, CFA), PCA, {#factor-descriptive}</span></span>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">#  Factor analysis: EFA/CFA, PCA {#factor-descriptive}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Dimension reduction, and 'carving reality at its joints', uncovering structural parameters?</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,27 +474,63 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## The idea</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## PCA</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## Factor analysis</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## PCA</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Integrate...</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Factor analysis</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/content/statistics/)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conceptual question 1:  How can we have correlated traits but no overlap in factor loadings?</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Factors represent 'real but latent ways people differ' (in personality psych)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "We don't want cross-loadings" (in the case where we use sum scores). We don't want the 'factor loadings' to be nonzero (or far from 0) on the same items for multiple factors. </span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>*Does this make sense?*</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>... We don't want our indicators (survey measures) to be measuring more than one true factor, I guess.  We don't want questions we think are about happiness to really be picking up sociability.  But can such questions be designed? Suppose the questions *do* pick up multiple personality characteristics. If we redefine the 'factors' so that they only load on separate sets of question, I don't see how these redefined factors will be truly reflecting the personality characteristics.</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>We know</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>the latent personality traits are correlated (e.g., happy people are more sociable)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Thus, people who are happy will tend to be more sociable, and thus tend to respond more positively to responses to questions about happiness *and* questions about sociability</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>So if we restrict 'only questions about sociability can load onto factor', I claim that the value of this factor will tend to be higher for people who are happy (I know we are not restricting it, but that is the stated goal, so we should consider what it implies)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Thus, 'does this imply that the factor is measuring happiness and not just sociability?'</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Perhaps the answer is something like </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Yes, each sociabity question will tend to be higher for people who are happier (higher on the true 'happiness factor'). However, the estimated 'sociability *factor* level' for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are 'already adequately picking up sociability' through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items. </span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### Suggested readings</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"Best practices in EFA" (Jason W. Osborne)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models</span><span class="co">](https://psyarxiv.com/v8yru/)</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Integrate...</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/content/statistics/)</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

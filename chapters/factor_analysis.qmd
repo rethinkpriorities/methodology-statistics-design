@@ -7,11 +7,47 @@ Dimension reduction, and 'carving reality at its joints', uncovering structural 
 
 ## The idea
 
+
+
 ## PCA
 
 ## Factor analysis
 
-Integrate...
+
+### Conceptual question 1:  How can we have correlated traits but no overlap in factor loadings?
+
+Factors represent 'real but latent ways people differ' (in personality psych)
+
+> "We don't want cross-loadings" (in the case where we use sum scores). We don't want the 'factor loadings' to be nonzero (or far from 0) on the same items for multiple factors. 
+
+*Does this make sense?*
+
+... We don't want our indicators (survey measures) to be measuring more than one true factor, I guess.  We don't want questions we think are about happiness to really be picking up sociability.  But can such questions be designed? Suppose the questions *do* pick up multiple personality characteristics. If we redefine the 'factors' so that they only load on separate sets of question, I don't see how these redefined factors will be truly reflecting the personality characteristics.
+
+
+We know
+
+1. the latent personality traits are correlated (e.g., happy people are more sociable)
+
+2. Thus, people who are happy will tend to be more sociable, and thus tend to respond more positively to responses to questions about happiness *and* questions about sociability
+
+3. So if we restrict 'only questions about sociability can load onto factor', I claim that the value of this factor will tend to be higher for people who are happy (I know we are not restricting it, but that is the stated goal, so we should consider what it implies)
+
+4. Thus, 'does this imply that the factor is measuring happiness and not just sociability?'
+
+Perhaps the answer is something like 
+
+> Yes, each sociabity question will tend to be higher for people who are happier (higher on the true 'happiness factor'). However, the estimated 'sociability *factor* level' for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are 'already adequately picking up sociability' through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items. 
+
+
+
+### Suggested readings
+
+1. "Best practices in EFA" (Jason W. Osborne)
+2. [Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models](https://psyarxiv.com/v8yru/)
+
+
+### Integrate...
 
 Willem's work [link: 'How to Science'](https://willemsleegers.github.io/how-to-science/content/statistics/)
 

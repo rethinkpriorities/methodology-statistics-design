@@ -6,6 +6,8 @@ p_load(rethinkpriorities)
 library(rethinkpriorities)
 library(dplyr)
 library(tibble)
+library(tidyverse)
+
 ```
 
 
@@ -118,7 +120,7 @@ key_eas_all_labels <- c( #note these are converted to a list with as.list before
 Variable labels are helpful
 
 ```{r}
-eas_all %<>%
+eas_all <-  eas_all %>% 
   labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)
 ```
 
