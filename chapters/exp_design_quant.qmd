@@ -3,31 +3,23 @@
 ::: {.callout-note collapse="true"}
 ## Some quantitative issues
 
-- 'Treatment' assignment (blocking, randomization, etc)
-- Adaptive, sequential and dynamic designs
-- Planning, diagnosing and adjusting a design
-- Power analyses (and other 'diagnosands')
-
+-   'Treatment' assignment (blocking, randomization, etc)
+-   Adaptive, sequential and dynamic designs
+-   Planning, diagnosing and adjusting a design
+-   Power analyses (and other 'diagnosands')
 :::
 
-
 ::: {.alert .alert-secondary}
-
-
 Note that much 'experiment and trial' relevant content is covered in the [surveys](#surveys) section. We will put in placeholders and cross-link.
-
-
 :::
 
 ## 'Treatment' assignment (blocking, randomization, etc)
 
-
 ### Adaptive, sequential and dynamic designs
 
-- [Reinstein notes and links here](https://daaronr.github.io/metrics_discussion/quant-design-power.html#quant_design_power)
+-   [Reinstein notes and links here](https://daaronr.github.io/metrics_discussion/quant-design-power.html#quant_design_power)
 
-- Elsey: http://www.sequentialtesting.com/
-
+-   Elsey: http://www.sequentialtesting.com/
 
 ## Planning, diagnosing and adjusting a design
 
@@ -35,10 +27,15 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 (Just a brief here, this will be covered in more detail in the sections on statistical inference, testing, and analysis
 
+## Gains from small sample sizes in a Bayesian context
+
+[Jamie's notes here](https://docs.google.com/document/d/1eTgYMYPuARg8mtFcEg9dZUobObl0YlpZhPZJh34M8UA/edit)
+
 ## Power analyses (and other 'diagnosands')
 
-^[Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here? ]
+[^exp_design_quant-1]
 
+[^exp_design_quant-1]: Note: this will very much overlap the discussion of power analysis for *surveys*. Perhaps we put the simpler introduction there, and the more involved details here?
 
 ### Key resources and explainers
 
@@ -46,12 +43,6 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 [Reinstein notes and code](https://daaronr.github.io/metrics_discussion/power.html)
 
-
 ### See [Power analysis discussion and workflow](#power-workflow)
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
-
-
-
-
-

@@ -56,18 +56,22 @@ knitr::include_url("https://daaronr.github.io/metrics_discussion/surveys.html")
 
 \
 
-**'Implementation'**
-
-- Participant platforms
-
-- Implementation platforms and issues
-
-- Survey design tools (IT)
-
 
 
 
 ## Discussions to integrate
 
 
-- Disputing claim that "One doesn't need to worry about framing effects" because of Morewedge et al, 2015; Khan et al, 2006; Baumer et al, 2015 [private slack conversation link](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1655407493604669)
+1. Disputing claim that "One doesn't need to worry about framing effects" because of Morewedge et al, 2015; Khan et al, 2006; Baumer et al, 2015 [private slack conversation link](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1655407493604669)
+
+
+2. In asking a series of attitude measures that have a natural order, present them in that order or randomize (e.g., [here](https://docs.google.com/document/d/16lmVZu9sjoHLceh8Zdgs8A_n4sxmZudahn7825ctRW4/edit#heading=h.gwnnifgo8qd)  https://docs.google.com/document/d/16lmVZu9sjoHLceh8Zdgs8A_n4sxmZudahn7825ctRW4/edit#heading=h.gwnnifgo8qd) ... I found it interesting, I am enthusiastic, I would definitely sign up, etc.)
+
+> DR:   I see the case for increasing order is 'it makes it more clear for them to follow/more coherent to respond.  On the other hand, it could lead to less careful consideration of each response and a mechanical 'I better increase it'
+
+> DM: If we want to test how many people will say they would be likely to do 1/2/3/4/5/6 I think we want to minimise the influence of order (or anything extraneous) on their likelihood of selecting 1/2/3/4/5/6. Ordering them by perceived commitment seems like it can only serve to nudge them in untoward ways to be more or less likely to select some.
+
+> Also I don't think we have good grounds to predict what the order of increasing commitment is or to assume this is invariant across respondents.
+
+> DR: OK, I see your point, if we actually  want to know, and see these as measures of how many people will do/think each of these things. As a 'measure of commitment and affinity' the ordering makes some sense to me.
+

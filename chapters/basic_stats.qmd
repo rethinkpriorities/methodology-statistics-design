@@ -183,7 +183,12 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Equivalence_test) (accessed 12 Ap
 
 [Lakens](http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html) offers pointers, and TOSTER package, for this approach.
 
+
+### Bayes factors {-}
+
 Semi-aside: [Unresolved discussion of 'Bayes factors' (Nik and Reinstein)](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)
+
+[Clear DataColada argument against the use of 'Bayes Factors' for 'accepting the null'](http://datacolada.org/78a)
 
 
 ## Some simple Bayesian testing examples {#simple-bayes}
