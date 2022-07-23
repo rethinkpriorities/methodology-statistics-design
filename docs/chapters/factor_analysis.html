@@ -101,7 +101,7 @@
       "search-detached-cancel-button-title": "Cancel",
       "search-submit-button-title": "Submit"
     }
-  }</script><script async="" src="https://hypothes.is/embed.js"></script><!--[if lt IE 9]>
+  }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
@@ -180,7 +180,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Further practical design/implementation issues (surveys/experiments)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -308,6 +308,44 @@
 <blockquote class="blockquote">
 <p>Yes, each sociabity question will tend to be higher for people who are happier (higher on the true ‘happiness factor’). However, the estimated ‘sociability <em>factor</em> level’ for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are ‘already adequately picking up sociability’ through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items.</p>
 </blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-1" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Further thoughts and insight into ‘how do PCA and FA differ?’
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I know what principal component analysis does: it reduces dimensionality. It projects your outcomes into a series of vectors (components) so that each ‘individual’ can be described by a value for each component. This score ‘predicts’ her value for each of the outcomes, and the algorithm does this to minimize the sum of squared differences (SSE) between the prediction and actual. A natural result of ‘minimizing the SSE’ is that each component vector will be set to be orthogonal to each other vector. How many vectors (componenets)? That’s another issue, and there are various rules of thumb and metrics.</p>
+<p>I know what factor analysis intends to do, and why this is conceptually different from PCA.</p>
+<p>Explanation here about ‘latent factors’, with genes as an example, before they were able to be observed … We only observe and measure physical and behavioral outcomes, like height, weight, math performance, and verbal performance on specific tests. We want to predict ‘how many genes determine these’ and ‘how to best predict the value of these genes for each individual’. Note that the genes themselves may be correlated. If there is a ‘growth’ gene and an ‘intelligence’ gene, they may tend to be positively related to one another, because of other factors (assortative mating, health and nutrition in early childhood, etc.)</p>
+<blockquote class="blockquote">
+<p>True ‘factors’ (genes): <code>intelligence</code>, <code>growth</code></p>
+</blockquote>
+<p>(However, we do not know how many true factors/genes there are… we just know there are some nmber).</p>
+<blockquote class="blockquote">
+<p>Measured ‘items’: <code>height</code>, <code>weight</code>, <code>hand_size</code>, <code>verbal_score</code>, <code>math_score</code>, <code>spatial_score</code></p>
+</blockquote>
+<p>What I’ve been stuck on is ’mechanically, what is it that FA does to “better recover these genes (factors)” that PCA does not do. It is clearly not merely trying to maximize prediction… because that would be PCA. Maybe it maximizes predictiveness (minimizes some error term) subject to some constraints … <em>where imposing these constraints makes it more likely that we are identifying genes</em>, i.e., makes the factors a better estimate of these gene values.</p>
+<p>One possible ‘constraint’ that might be meaningful: Maybe we know that specific genes cause (or ‘have a (causal) impact on’) certain behaviors and traits, although we do not know which ones and by how much. (A stronger assumption would be that ‘only a single gene causes each measured behavior or trait’ … but that’s probably too strong and unrealistic.) This (weaker or stronger assumption) will imply that certain traits, the traits ‘caused’ by any gene, must indeed be correlated in the population. If the ‘growth’ gene causes measured height, weight, and hand size, then people will tend to have high, medium, or low values of all of these, depending (at least in part) on the value of their growth gene. If the ‘intelligence’ gene causes measured verbal, math, and spatial performance … these will be similarly related.</p>
+<p>In the other hand, the axes of variation (‘principal component vectors’) that most succinctly <em>predict</em> all of the measured items above might involve ‘substantial mixing’ of the physical measures and scores, even measures that do not themselves tend to be strongly correlated to one another. In other words, multiple items given positive weights in each vector might actually be negatively correlated in the population. Why?</p>
+<p>Is this a helpful example?: The data may mix people from two cities, one of which pushes fatty foods but has great math education. This may then lead to the most predictive vectors (here I state them as sums, crossing them with the values) being something like (wait, I need to make these orthogonal … ugh) $V1 = -1 height + 7 weight + 8 math - 1 verbal -1 spatial * $ and <span class="math inline">\(V2 = 2 height -3 weight + 2 math + 1 verbal + 8 spatial\)</span>. But in fact, (do we know this?) height and weight are correlated in the population, as are all of the ‘intelligence’ scores. The psychometrician doesn’t know this (because this is ‘exploratory’), but they do know that whatever the latent <em>factors</em> are, they will imply items all caused by the factor, and thus given positive weights within a factor must (?) be correlated to one another. (At least if multiple, negatively correlated genes/factors are not each having important impacts on these items).</p>
+<p>So the psychometrician says (perhaps driven by some theoretical model of genes, stated in explicit equations):</p>
+<blockquote class="blockquote">
+<p>I am going to require that, whatever my factors are, the items given substantial positive weights within them must be positively correlated in the population</p>
+</blockquote>
+<p>But what are ‘substantial positive weights’? Perhaps the metric itself is weighted; the more positive the weights in each factor, the more correlated the items must be.</p>
+<p>This then may lead them to estimate a sort of ‘constrained PCA’ model … maximizing the predictiveness under the constraint like <span class="math inline">\(R_{12} := \rho(\gamma_1 x_1, \gamma_2 x_2) &gt; 0.6 \forall x_1, x_2\)</span>, where $is a Pearson’s correlation coefficient, and the <span class="math inline">\(\gamma\)</span>’s represent the factor loadings on any two items <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
+<p>Or perhaps, rather than a <em>constaint</em>, the FA may maximize a value function that considers both these <span class="math inline">\(R_{ij}\)</span> measures and the predictive power (the latter as in PCA).</p>
+<p>If the ‘theory is correct’ and ‘factors tend to contain correlated items’, then imposing the constraint (or ‘reward in the value function’) that items should be correlated, will likely yeild better estimates of the true factors.</p>
+<p>But what does this say about ‘using FA to choose which items to include?’</p>
+</div>
+</div>
+</div>
 </section><section id="suggested-readings" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="suggested-readings">
 <span class="header-section-number">10.4.2</span> Suggested readings</h3>
 <ol type="1">
@@ -485,7 +523,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Factors represent 'real but latent ways people differ' (in personality psych)</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "We don't want cross-loadings" (in the case where we use sum scores). We don't want the 'factor loadings' to be nonzero (or far from 0) on the same items for multiple factors. </span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "We don't want cross-loadings" (in the case where we use sum scores). We don't want the 'factor loadings' to be nonzero (or far from 0) on the same items for multiple factors.</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>*Does this make sense?*</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
@@ -502,35 +540,78 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Thus, 'does this imply that the factor is measuring happiness and not just sociability?'</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Perhaps the answer is something like </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Perhaps the answer is something like</span>
 <span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Yes, each sociabity question will tend to be higher for people who are happier (higher on the true 'happiness factor'). However, the estimated 'sociability *factor* level' for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are 'already adequately picking up sociability' through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items. </span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Yes, each sociabity question will tend to be higher for people who are happier (higher on the true 'happiness factor'). However, the estimated 'sociability *factor* level' for an individual (summed factor loadings times individual values of items) need not be reflected in the loadings on the happiness items. If we are 'already adequately picking up sociability' through the loadings on the sociability questions, what remains (residual?) need not be related to the happiness items.</span></span>
 <span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### Suggested readings</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further thoughts and insight into 'how do PCA and FA differ?'</span></span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"Best practices in EFA" (Jason W. Osborne)</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models</span><span class="co">](https://psyarxiv.com/v8yru/)</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>I know what principal component analysis does: it reduces dimensionality. It projects your outcomes into a series of vectors (components) so that each 'individual' can be described by a value for each component. This score 'predicts' her value for each of the outcomes, and the algorithm does this to minimize the sum of squared differences (SSE) between the prediction and actual. A natural result of 'minimizing the SSE' is that each component vector will be set to be orthogonal to each other vector. How many vectors (componenets)?  That's another issue, and there are various rules of thumb and metrics.</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>I know what factor analysis intends to do, and why this is conceptually different from PCA.</span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Integrate...</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/content/statistics/)</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span>)</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>Explanation here about 'latent factors', with genes as an example, before they were able to be observed ... We only observe and measure physical and behavioral outcomes, like height, weight, math performance, and verbal performance on specific tests.  We want to predict 'how many genes determine these' and 'how to best predict the value of these genes for each individual'. Note that the genes themselves may be correlated. If there is a 'growth' gene and an 'intelligence' gene, they may tend to be positively related to one another, because of other factors (assortative mating, health and nutrition in early childhood, etc.)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; True 'factors' (genes): </span><span class="in">`intelligence`</span><span class="at">, </span><span class="in">`growth`</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>(However, we do not know how many true factors/genes there are... we just know there are some nmber).</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Measured 'items': </span><span class="in">`height`</span><span class="at">, </span><span class="in">`weight`</span><span class="at">, </span><span class="in">`hand_size`</span><span class="at">, </span><span class="in">`verbal_score`</span><span class="at">, </span><span class="in">`math_score`</span><span class="at">, </span><span class="in">`spatial_score`</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>What I've been stuck on is 'mechanically, what is it that FA does to "better recover these genes (factors)" that PCA does not do. It is clearly not merely trying to maximize prediction... because that would be PCA. Maybe it maximizes predictiveness (minimizes some error term) subject to some constraints ... *where imposing these constraints makes it more likely that we are identifying genes*, i.e., makes the factors a better estimate of these gene values.</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>One possible 'constraint' that might be meaningful: Maybe we know that specific genes cause (or 'have a (causal) impact on') certain behaviors and traits, although we do not know which ones and by how much. (A stronger assumption would be that 'only a single gene causes each measured behavior or trait' ... but that's probably too strong and unrealistic.)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>This (weaker or stronger assumption) will imply that certain traits, the traits 'caused' by any gene, must indeed be correlated in the population. If the 'growth' gene causes measured height, weight, and hand size, then people will tend to have high, medium, or low values of all of these, depending (at least in part) on the value of their growth gene. If the 'intelligence' gene causes measured verbal, math, and spatial performance ... these will be similarly related.</span>
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>In the other hand, the axes of variation ('principal component vectors') that most succinctly *predict* all of the measured items above might involve 'substantial mixing' of the physical measures and scores, even measures that do not themselves tend to be strongly correlated to one another. In other words, multiple items given positive weights in each vector might actually be negatively correlated in the population. Why?</span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>Is this a helpful example?: The data may mix people from two cities, one of which pushes fatty foods but has great math education. This may then lead to the most predictive vectors (here I state them as sums, crossing them with the values) being something like  (wait, I need to make these orthogonal ... ugh) $V1 = -1 height + 7 weight + 8 math - 1 verbal -1 spatial * $ and $V2 = 2 height -3 weight + 2 math + 1 verbal + 8 spatial$. But in fact, (do we know this?) height and weight are correlated in the population, as are all of the 'intelligence' scores.  The psychometrician doesn't know this (because this is 'exploratory'), but they do know that whatever the latent *factors* are, they will imply items all caused by the factor, and thus given positive weights within a factor must (?) be correlated to one another. (At least if multiple, negatively correlated genes/factors are not each having important impacts on these items).</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>So the psychometrician says (perhaps driven by some theoretical model of genes, stated in explicit equations):</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; I am going to require that, whatever my factors are, the items given substantial positive weights within them must be positively correlated in the population</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>But what are 'substantial positive weights'? Perhaps the metric itself is weighted; the more positive the weights in each factor, the more correlated the items must be.</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>This then may lead them to estimate a sort of 'constrained PCA' model ... maximizing the predictiveness under the constraint like $R_{12} := \rho(\gamma_1 x_1, \gamma_2 x_2) &gt; 0.6 \forall x_1, x_2$, where $\rho@ is a Pearson's correlation coefficient, and the $\gamma$'s represent the factor loadings on any two items $x_1$ and $x_2$.</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>Or perhaps, rather than a *constaint*, the FA may maximize a value function that considers both these $R_{ij}$ measures and the predictive power (the latter as in PCA).</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>If the 'theory is correct' and 'factors tend to contain correlated items', then imposing the constraint (or 'reward in the value function') that items should be correlated, will likely yeild better estimates of the true factors.</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>But what does this say about 'using FA to choose which items to include?'</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Suggested readings</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>"Best practices in EFA" (Jason W. Osborne)</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="co">[</span><span class="ot">Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models</span><span class="co">](https://psyarxiv.com/v8yru/)</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Integrate...</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/content/statistics/)</span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span>)</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

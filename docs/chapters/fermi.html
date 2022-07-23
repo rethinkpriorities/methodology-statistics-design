@@ -182,7 +182,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">“Qualitative” design issues</span></a>
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Further practical design/implementation issues (surveys/experiments)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -212,7 +212,7 @@
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis (EFA, CFA), PCA,</span></a>
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analysis: EFA/CFA, PCA</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -344,7 +344,7 @@ Chapter 3: The Urn of Mystery Simulation
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">urns</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code> num [1:1000] 0.423 0.455 0.41 0.613 0.44 ...</code></pre>
+<pre><code> num [1:1000] 0.973 0.35 0.426 0.559 0.972 ...</code></pre>
 </div>
 </div>
 <p>The object is a ‘numeric vector’ with 1000 elements, the first 5 or so are listed. Each of these represent</p>
@@ -374,16 +374,16 @@ Chapter 3: The Urn of Mystery Simulation
 <pre><code># A tibble: 1,000 × 3
    share_green majority draw 
          &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
- 1      0.335  red      red  
- 2      0.420  red      green
- 3      0.0116 red      red  
- 4      0.681  green    green
- 5      0.0729 red      red  
- 6      0.445  red      green
- 7      0.607  green    red  
- 8      0.398  red      red  
- 9      0.433  red      red  
-10      0.548  green    green
+ 1       0.690 green    red  
+ 2       0.354 red      red  
+ 3       0.166 red      red  
+ 4       0.260 red      red  
+ 5       0.586 green    green
+ 6       0.821 green    red  
+ 7       0.458 red      red  
+ 8       0.714 green    red  
+ 9       0.338 red      red  
+10       0.799 green    green
 # … with 990 more rows</code></pre>
 </div>
 </div>
@@ -400,12 +400,12 @@ Chapter 3: The Urn of Mystery Simulation
 <pre><code># A tibble: 1 × 1
   share_agree
         &lt;dbl&gt;
-1       0.763</code></pre>
+1       0.731</code></pre>
 </div>
 <details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>I.e., 76.3% of the draws are the same color as the majority of their urn.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>I.e., 73.1% of the draws are the same color as the majority of their urn.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).</p>
 <p>For one example, suppose you wanted to test this with 1 <em>million</em> urns. That would be a huge pain to do in Excel… I dare you to try it. In <code>R</code> we simply change the code to specify <span class="math inline">\(K =1,000,000\)</span> urns, and do the above again.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <div class="cell">
@@ -422,7 +422,7 @@ Chapter 3: The Urn of Mystery Simulation
   <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">urns</span><span class="op">$</span><span class="va">draw</span> <span class="op">==</span> <span class="va">urns</span><span class="op">$</span><span class="va">majority</span><span class="op">)</span><span class="op">/</span><span class="va">K</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.75072</code></pre>
+<pre><code>[1] 0.750051</code></pre>
 </div>
 </div>
 <p>On my computer, this ran almost immediately.</p>
