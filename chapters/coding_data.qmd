@@ -102,8 +102,6 @@ We sometimes input a 'dictionary' for renaming many columns at a time. ^[However
 Some example code below
 
 
-
-
 Put list of labels and renamings in objects in a separate location ... to avoid duplication and clutter:
 
 ```{r}

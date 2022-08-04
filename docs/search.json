@@ -200,14 +200,14 @@
     "href": "chapters/basic_stats.html#what_models",
     "title": "9  Frameworks, ‘models’, inference, tests",
     "section": "\n9.1 Types of ‘statistical models’ goals",
-    "text": "9.1 Types of ‘statistical models’ goals\nAs discussed in our posts and linked material, we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)\n\nDescriptive modeling: Essentially, offering a “dimension reduction” of the data, presenting ‘which features relate to donation behavior’?\nPredictive modeling: Training a model to produce the best out-of-sample (or out-of-time) fit for current (or future) donations based on individual characteristics. This model should not include ‘leaks’, i.e., it should excluding individual characteristics and outcomes that occur after the time we would be ‘doing the prediction’.\nCausal: Consider identification of ‘causal paths’, i.e., ‘what actually determines amounts donated’.1\n\n\n\nBootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.\n\nThe infer package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the coin package).2\n\nWe use this, and give some explanation, in the 2021 EAS donations post - see bookdown (see folds within)\n\nWe use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). …\n\nThe code we use for these tests is permalinked here E\nWhy use these techniques?\n\nTractable for testing differences in medians\nFairly easy to explain, fairly intuitive\nDo not depend on strong assumptions about underlying distributions or ‘large sample asymptotics’\nSome statisticians and Econometricians (e.g., Athey and Imbens) argue for their value and robustness; it also seems close to what a lot of ‘data science’ people do (they love simulation)\n\n\nDR concerns about ‘population vs super-population’, possibly misinformed:\n\n\n\n\n\n\n\nNote\n\n\n\n\n\n… we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference."
+    "text": "9.1 Types of ‘statistical models’ goals\nAs discussed in our posts and linked material, we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)\n\nDescriptive modeling: Essentially, offering a “dimension reduction” of the data, presenting ‘which features relate to donation behavior’?\nPredictive modeling: Training a model to produce the best out-of-sample (or out-of-time) fit for current (or future) donations based on individual characteristics. This model should not include ‘leaks’, i.e., it should excluding individual characteristics and outcomes that occur after the time we would be ‘doing the prediction’.\nCausal: Consider identification of ‘causal paths’, i.e., ‘what actually determines amounts donated’.1"
   },
   {
     "objectID": "chapters/basic_stats.html#particular-experimetrics-issues",
     "href": "chapters/basic_stats.html#particular-experimetrics-issues",
     "title": "9  Frameworks, ‘models’, inference, tests",
-    "section": "\n9.2 Particular ‘experimetrics’ issues",
-    "text": "9.2 Particular ‘experimetrics’ issues\nShould we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?\n\n“in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model” is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results.” - (?) Athey and Imbens\n\n:::"
+    "section": "\n9.5 Particular ‘experimetrics’ issues",
+    "text": "9.5 Particular ‘experimetrics’ issues\nShould we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?\n\n“in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model” is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results.” - (?) Athey and Imbens\n\n:::"
   },
   {
     "objectID": "chapters/basic_stats.html#equivalence-tests-and-simple-frequentist-approaches",
@@ -544,5 +544,33 @@
     "title": "7  Design: quantitative issues",
     "section": "7.3 Gains from small sample sizes in a Bayesian context",
     "text": "7.3 Gains from small sample sizes in a Bayesian context\nJamie’s notes here"
+  },
+  {
+    "objectID": "chapters/qualitative-design-issues_plus.html#misc-notes-on-platforms-and-tools",
+    "href": "chapters/qualitative-design-issues_plus.html#misc-notes-on-platforms-and-tools",
+    "title": "6  Further practical design/implementation issues (surveys/experiments)",
+    "section": "6.6 Misc notes on platforms and tools",
+    "text": "6.6 Misc notes on platforms and tools\nIntegrating RStudio and Qualtrics: Importing Surveys to and Exporting Data from Qualtrics"
+  },
+  {
+    "objectID": "chapters/basic_stats.html#conceptual",
+    "href": "chapters/basic_stats.html#conceptual",
+    "title": "9  Frameworks, ‘models’, inference, tests",
+    "section": "\n9.2 Discussion: statistics, probability and inference",
+    "text": "9.2 Discussion: statistics, probability and inference\nFrequentist, Bayesian, ‘randomization inference’, ‘likelihood-ist’\n\nDR: I am not saying this should be a major focus. We probably don’t want to get too deep here. However, if we do end up discussing these issues, I propose we put it or link it here."
+  },
+  {
+    "objectID": "chapters/basic_stats.html#hypothesis-testing-statistical-comparisons-and-inferences",
+    "href": "chapters/basic_stats.html#hypothesis-testing-statistical-comparisons-and-inferences",
+    "title": "9  Frameworks, ‘models’, inference, tests",
+    "section": "\n9.3 Hypothesis testing, statistical comparisons and inferences",
+    "text": "9.3 Hypothesis testing, statistical comparisons and inferences\n\n9.3.1 ‘Common statistical tests are linear models’\n\nMany of the ‘univariate’ tests presented below can be extended to multiple-variable models (e.g., regression coefficients).\nFurther discussion, examples, and tables comparing the statistics by Oska Fentem in his Notion here."
+  },
+  {
+    "objectID": "chapters/basic_stats.html#randomization-and-permutation-based-tests-and-inference",
+    "href": "chapters/basic_stats.html#randomization-and-permutation-based-tests-and-inference",
+    "title": "9  Frameworks, ‘models’, inference, tests",
+    "section": "\n9.4 Randomization and permutation-based tests and inference",
+    "text": "9.4 Randomization and permutation-based tests and inference\n2\nBasic description: (still looking for the best source for this)\n\nDiscussion of the difference between randomization inference and bootstrapping here\n\n\n\nBootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.\n\nThe infer package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the coin package).3\n\nWe use this, and give some explanation, in the 2021 EAS donations post - see bookdown (see folds within)\n\nWe use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). …\n\nThe code we use for these tests is permalinked here\n\nWhy use these techniques?\n\nTractable for testing differences in medians\nFairly easy to explain, fairly intuitive\nDo not depend on strong assumptions about underlying distributions or ‘large sample asymptotics’\nSome statisticians and Econometricians (e.g., Athey and Imbens) argue for their value and robustness; it also seems close to what a lot of ‘data science’ people do (they love simulation)\n\n\nDR concerns about ‘population vs super-population’, possibly misinformed:\n\n\n\n\n\n\n\nNote\n\n\n\n\n\n… we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference."
   }
 ]

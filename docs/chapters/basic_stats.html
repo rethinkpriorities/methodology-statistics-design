@@ -266,8 +266,16 @@
         <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#what_models" id="toc-what_models" class="nav-link active" data-scroll-target="#what_models"> <span class="header-section-number">9.1</span> Types of ‘statistical models’ goals</a></li>
+<li><a href="#conceptual" id="toc-conceptual" class="nav-link" data-scroll-target="#conceptual"> <span class="header-section-number">9.2</span> Discussion: statistics, probability and inference</a></li>
 <li>
-<a href="#particular-experimetrics-issues" id="toc-particular-experimetrics-issues" class="nav-link" data-scroll-target="#particular-experimetrics-issues"> <span class="header-section-number">9.2</span> Particular ‘experimetrics’ issues</a>
+<a href="#hypothesis-testing-statistical-comparisons-and-inferences" id="toc-hypothesis-testing-statistical-comparisons-and-inferences" class="nav-link" data-scroll-target="#hypothesis-testing-statistical-comparisons-and-inferences"> <span class="header-section-number">9.3</span> Hypothesis testing, statistical comparisons and inferences</a>
+<ul class="collapse">
+<li><a href="#common-statistical-tests-are-linear-models" id="toc-common-statistical-tests-are-linear-models" class="nav-link" data-scroll-target="#common-statistical-tests-are-linear-models"> <span class="header-section-number">9.3.1</span> <span>‘Common statistical tests are linear models’</span></a></li>
+</ul>
+</li>
+<li><a href="#randomization-and-permutation-based-tests-and-inference" id="toc-randomization-and-permutation-based-tests-and-inference" class="nav-link" data-scroll-target="#randomization-and-permutation-based-tests-and-inference"> <span class="header-section-number">9.4</span> Randomization and permutation-based tests and inference</a></li>
+<li>
+<a href="#particular-experimetrics-issues" id="toc-particular-experimetrics-issues" class="nav-link" data-scroll-target="#particular-experimetrics-issues"> <span class="header-section-number">9.5</span> Particular ‘experimetrics’ issues</a>
 <ul class="collapse">
 <li><a href="#should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" id="toc-should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" class="nav-link" data-scroll-target="#should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments">Should we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?</a></li>
 </ul>
@@ -306,17 +314,16 @@ Aim to integrate content from
 <div id="callout-1" class="callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Willem’s blog and vignettes</li>
+<li><p>Willem’s blog and vignettes</p></li>
 <li>
-<a href="https://daaronr.github.io/metrics_discussion/introduction.html">Reinstein notes</a> and beyond
+<p><a href="https://daaronr.github.io/metrics_discussion/introduction.html">Reinstein notes</a> and beyond</p>
 <ul>
 <li>This should <em>not</em> include extensive discussion of causality (which is later), only an introduction to regression as a ‘fitted descriptive line/plane’]</li>
 </ul>
 </li>
-<li><a href="https://lakens.github.io/statistical_inferences/">Lakens on statistical inference</a></li>
-<li>McElreath</li>
-<li>
-</li></ul>
+<li><p><a href="https://lakens.github.io/statistical_inferences/">Lakens on statistical inference</a></p></li>
+<li><p>McElreath</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -369,49 +376,38 @@ For these reasons, we general look for sources of experimental or
 quasi-experimental variation in the factors of interest to justify
 causal inference.
 :::
-
-
-
-
-## Discussion: statistics, probability and inference {#conceptual}
-
-Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'
-
-::: {.alert .alert-secondary}
-
-
-DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.
-
-:::
-
-
-## Hypothesis testing, statistical comparisons and inferences
-
-
-### ['Common statistical tests are linear models'](https://lindeloev.github.io/tests-as-linear/)
-
-Many of the 'univariate' tests presented below can be extended to multiple-variable models (e.g., regression coefficients).
-
-Further discussion, examples, and tables comparing the statistics by [Oska Fentem in his Notion here](https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe).
-
-## Randomization and permutation-based tests and inference
-
-^[Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches ... see ['single framework'](#simulation_to_bayes)]
-
-Basic description: (still looking for the best source for this)
-
-- Discussion of the difference between randomization inference and bootstrapping [here](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)
-
+--></section><section id="conceptual" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="conceptual">
+<span class="header-section-number">9.2</span> Discussion: statistics, probability and inference</h2>
+<p>Frequentist, Bayesian, ‘randomization inference’, ‘likelihood-ist’</p>
+<div class="alert alert-secondary">
+<p>DR: I am <strong>not</strong> saying this should be a major focus. We probably don’t want to get too deep here. However, if we <em>do</em> end up discussing these issues, I propose we put it or link it here.</p>
+</div>
+</section><section id="hypothesis-testing-statistical-comparisons-and-inferences" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="hypothesis-testing-statistical-comparisons-and-inferences">
+<span class="header-section-number">9.3</span> Hypothesis testing, statistical comparisons and inferences</h2>
+<section id="common-statistical-tests-are-linear-models" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="common-statistical-tests-are-linear-models">
+<span class="header-section-number">9.3.1</span> <a href="https://lindeloev.github.io/tests-as-linear/">‘Common statistical tests are linear models’</a>
+</h3>
+<p>Many of the ‘univariate’ tests presented below can be extended to multiple-variable models (e.g., regression coefficients).</p>
+<p>Further discussion, examples, and tables comparing the statistics by <a href="https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe">Oska Fentem in his Notion here</a>.</p>
+</section></section><section id="randomization-and-permutation-based-tests-and-inference" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="randomization-and-permutation-based-tests-and-inference">
+<span class="header-section-number">9.4</span> Randomization and permutation-based tests and inference</h2>
+<p><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Basic description: (still looking for the best source for this)</p>
+<ul>
+<li>Discussion of the difference between randomization inference and bootstrapping <a href="https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/">here</a>
+</li>
+</ul>
 <!-- ![](picsfigs/clip_permutation_process.png) --><blockquote class="blockquote">
 <p>Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.<br></p>
 </blockquote>
-<p>The <a href="https://infer.tidymodels.org/articles/infer.html">infer</a> package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the <code>coin</code> package).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The <a href="https://infer.tidymodels.org/articles/infer.html">infer</a> package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the <code>coin</code> package).<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p><br></p>
 <p>We use this, and give some explanation, in the 2021 <a href="https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all">EAS donations post - see bookdown</a> (see folds within)</p>
 <blockquote class="blockquote">
 <p>We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). …</p>
 </blockquote>
-<p>The code we use for these tests is permalinked <a href="https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128">here</a> E<br></p>
+<p>The code we use for these tests is permalinked <a href="https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128">here</a></p>
+<p><br></p>
 <p><em>Why use these techniques?</em></p>
 <ul>
 <li><p>Tractable for testing differences in medians</p></li>
@@ -439,8 +435,8 @@ Note
 </div>
 </div>
 <p><br></p>
-</section><section id="particular-experimetrics-issues" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="particular-experimetrics-issues">
-<span class="header-section-number">9.2</span> Particular ‘experimetrics’ issues</h2>
+</section><section id="particular-experimetrics-issues" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="particular-experimetrics-issues">
+<span class="header-section-number">9.5</span> Particular ‘experimetrics’ issues</h2>
 <section id="should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="should-we-include-controls-covariates-in-analyzing-treatment-effects-from-randomized-experiments">Should we include controls (covariates) in analyzing ‘treatment effects’ from randomized experiments?</h3>
 <blockquote class="blockquote">
 <p>“in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model” is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results.” - (?) Athey and Imbens</p>
@@ -795,7 +791,8 @@ lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base
 </section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>However causal inference requires strong assumptions and/or exogenous and random shifts in potential determinants of donation behavior.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p> See also Reinstein’s <a href="https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r">notes/work</a> on the vignette.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches … see <a href="#simulation_to_bayes">‘single framework’</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p> See also Reinstein’s <a href="https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r">notes/work</a> on the vignette.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
@@ -941,427 +938,430 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Aim to integrate content from</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Willem's blog and vignettes</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Reinstein notes</span><span class="co">](https://daaronr.github.io/metrics_discussion/introduction.html)</span> and beyond</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Lakens on statistical inference</span><span class="co">](https://lakens.github.io/statistical_inferences/)</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>McElreath</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>-</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Reinstein notes</span><span class="co">](https://daaronr.github.io/metrics_discussion/introduction.html)</span> and beyond</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Lakens on statistical inference</span><span class="co">](https://lakens.github.io/statistical_inferences/)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>McElreath</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"methods_setup.R"</span>))</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get EAS data</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"get_eas_data.R"</span>))</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.  Load packages, some setup definitions -- need to run it in every qmd</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"methods_setup.R"</span>))</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get EAS data</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"code"</span>, <span class="st">"get_eas_data.R"</span>))</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types of 'statistical models' goals {#what_models}</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types of 'statistical models' goals {#what_models}</span></span>
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>As discussed in our posts <span class="co">[</span><span class="ot">and linked material</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#modeling-engagement)</span>, we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>As discussed in our posts <span class="co">[</span><span class="ot">and linked material</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas-engagement.html#modeling-engagement)</span>, we broadly imagine three categories of modeling: (See discussion in the fold/footnote.)</span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Descriptive modeling: Essentially, offering a "dimension reduction" of the data, presenting 'which features relate to donation behavior'?</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Predictive modeling: Training a model to produce the best out-of-sample (or out-of-time) fit for current (or future) donations based on individual characteristics. This model should not include 'leaks', i.e., it should excluding individual characteristics and outcomes that occur after the time we would be 'doing the prediction'.</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Causal: Consider identification of 'causal paths', i.e., 'what actually determines amounts donated'.^<span class="co">[</span><span class="ot">However causal inference requires strong assumptions and/or exogenous and random shifts in potential determinants of donation behavior.</span><span class="co">]</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Descriptive modeling: Essentially, offering a "dimension reduction" of the data, presenting 'which features relate to donation behavior'?</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Predictive modeling: Training a model to produce the best out-of-sample (or out-of-time) fit for current (or future) donations based on individual characteristics. This model should not include 'leaks', i.e., it should excluding individual characteristics and outcomes that occur after the time we would be 'doing the prediction'.</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Causal: Consider identification of 'causal paths', i.e., 'what actually determines amounts donated'.^<span class="co">[</span><span class="ot">However causal inference requires strong assumptions and/or exogenous and random shifts in potential determinants of donation behavior.</span><span class="co">]</span></span>
 <span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- MOVE TO METHODS: WHY DO WE CARE ABOUT CAUSALITY?</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">::: {.callout-note collapse="true"}</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">## Why do we care about causality? ('donations post' context)</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- MOVE TO METHODS: WHY DO WE CARE ABOUT CAUSALITY?</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">::: {.callout-note collapse="true"}</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="co">## Why do we care about causality? ('donations post' context)</span></span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co">We may care about causality</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="co">i.  because we see potential to intervene and boost those variables that</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co">    cause greater giving, and/or because</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co">ii. a better understanding of what actually *drives* donation behavior</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co">    may yield additional insights, helping us understand the world</span></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">    better.</span></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="co">We may care about causality</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co">i.  because we see potential to intervene and boost those variables that</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="co">    cause greater giving, and/or because</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co">ii. a better understanding of what actually *drives* donation behavior</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">    may yield additional insights, helping us understand the world</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="co">    better.</span></span>
 <span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="co">Consider factors of potential interest, including those we could</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="co">influence as a movement (e.g., 'recommended career paths') and those of</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="co">fundamental interest (perhaps income, age or initial cause</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="co">prioritization). Simply looking at differences in donation by these</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co">measures will not tell us their actual *impact* on donation; nor will a</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="co">'controlled regression': each of these are likely to be related to, and</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="co">influenced by (observable and) unobserved components which may also</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="co">drive donations.</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="co">E.g., suppose people who first went to an elite university tended to</span></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="co">donate more. This would *not* this mean that attending an elite</span></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="co">university causes greater donations. Individuals who attend elite</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="co">university may have greater exposure to EA charitable appeals, or</span></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">greater (unobserved wealth) or lifetime income, which may independently</span></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co">cause greater giving. Even age cannot be given an obvious causal</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="co">interpretation, given our sample selection; e.g., in any sample we look</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co">at the older people will tend to have joined EA at a younger age, and</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="co">people may have been driven to join at a younger age *because* they were</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="co">more altruistic, or because they had a stronger EA peer network, etc.</span></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="co">For these reasons, we general look for sources of experimental or</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="co">quasi-experimental variation in the factors of interest to justify</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="co">causal inference.</span></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="co">:::</span></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="co">Consider factors of potential interest, including those we could</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="co">influence as a movement (e.g., 'recommended career paths') and those of</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="co">fundamental interest (perhaps income, age or initial cause</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="co">prioritization). Simply looking at differences in donation by these</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="co">measures will not tell us their actual *impact* on donation; nor will a</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="co">'controlled regression': each of these are likely to be related to, and</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="co">influenced by (observable and) unobserved components which may also</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="co">drive donations.</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="co">E.g., suppose people who first went to an elite university tended to</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="co">donate more. This would *not* this mean that attending an elite</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="co">university causes greater donations. Individuals who attend elite</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co">university may have greater exposure to EA charitable appeals, or</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co">greater (unobserved wealth) or lifetime income, which may independently</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="co">cause greater giving. Even age cannot be given an obvious causal</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co">interpretation, given our sample selection; e.g., in any sample we look</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="co">at the older people will tend to have joined EA at a younger age, and</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="co">people may have been driven to join at a younger age *because* they were</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="co">more altruistic, or because they had a stronger EA peer network, etc.</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="co">For these reasons, we general look for sources of experimental or</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="co">quasi-experimental variation in the factors of interest to justify</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="co">causal inference.</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co">:::</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
 <span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="co">## Discussion: statistics, probability and inference {#conceptual}</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="co">Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion: statistics, probability and inference {#conceptual}</span></span>
 <span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="co">::: {.alert .alert-secondary}</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>Frequentist, Bayesian, 'randomization inference', 'likelihood-ist'</span>
 <span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co">DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="co">:::</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>DR: I am **not** saying this should be a major focus. We probably don't want to get too deep here. However, if we *do* end up discussing these issues, I propose we put it or link it here.</span>
 <span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="co">## Hypothesis testing, statistical comparisons and inferences</span></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="al">###</span><span class="co"> ['Common statistical tests are linear models'](https://lindeloev.github.io/tests-as-linear/)</span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothesis testing, statistical comparisons and inferences</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="co">Many of the 'univariate' tests presented below can be extended to multiple-variable models (e.g., regression coefficients).</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### ['Common statistical tests are linear models'](https://lindeloev.github.io/tests-as-linear/)</span></span>
 <span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="co">Further discussion, examples, and tables comparing the statistics by [Oska Fentem in his Notion here](https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe).</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>Many of the 'univariate' tests presented below can be extended to multiple-variable models (e.g., regression coefficients).</span>
 <span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="co">## Randomization and permutation-based tests and inference</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>Further discussion, examples, and tables comparing the statistics by <span class="co">[</span><span class="ot">Oska Fentem in his Notion here</span><span class="co">](https://www.notion.so/Hypothesis-testing-049768b23f3e44de96950121effbfcbe)</span>.</span>
 <span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="co">^[Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches ... see ['single framework'](#simulation_to_bayes)]</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## Randomization and permutation-based tests and inference</span></span>
 <span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a><span class="co">Basic description: (still looking for the best source for this)</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">Thought: the simulations done in randomization inference may overlap the simulations done in computing likelihoods as an input to Bayesian approaches ... see ['single framework'](#simulation_to_bayes)</span><span class="co">]</span></span>
 <span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="co">- Discussion of the difference between randomization inference and bootstrapping [here](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>Basic description: (still looking for the best source for this)</span>
 <span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ![](picsfigs/clip_permutation_process.png) --&gt;</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Discussion of the difference between randomization inference and bootstrapping <span class="co">[</span><span class="ot">here</span><span class="co">](https://jasonkerwin.com/nonparibus/2017/09/25/randomization-inference-vs-bootstrapping-p-values/)</span></span>
 <span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.</span></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="at">\</span></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">infer</span><span class="co">](https://infer.tidymodels.org/articles/infer.html)</span> package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the <span class="in">`coin`</span> package).^<span class="co">[</span><span class="ot"> See also Reinstein's [notes/work</span><span class="co">](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r)</span> on the vignette.</span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ![](picsfigs/clip_permutation_process.png) --&gt;</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Bootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.</span></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="at">\</span></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">infer</span><span class="co">](https://infer.tidymodels.org/articles/infer.html)</span> package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the <span class="in">`coin`</span> package).^<span class="co">[</span><span class="ot"> See also Reinstein's [notes/work</span><span class="co">](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#packages-the-infer-package-in-r)</span> on the vignette.</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>We use this, and give some explanation, in the 2021 <span class="co">[</span><span class="ot">EAS donations post - see bookdown</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all)</span> (see folds within)</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>\</span>
 <span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). ...</span></span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>The code we use for these tests is permalinked <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128)</span></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>E</span>
-<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>*Why use these techniques?*</span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tractable for testing differences in medians</span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fairly easy to explain, fairly intuitive</span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do not depend on strong assumptions about underlying distributions or 'large sample asymptotics'</span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Some statisticians and Econometricians (e.g., <span class="co">[</span><span class="ot">Athey and Imbens</span><span class="co">](https://arxiv.org/abs/1607.00698)</span>) argue for their value and robustness; it also seems close to what a lot of 'data science' people do (they love simulation)</span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>We use this, and give some explanation, in the 2021 <span class="co">[</span><span class="ot">EAS donations post - see bookdown</span><span class="co">](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all)</span> (see folds within)</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). ...</span></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>The code we use for these tests is permalinked <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128)</span></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>*Why use these techniques?*</span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tractable for testing differences in medians</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fairly easy to explain, fairly intuitive</span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do not depend on strong assumptions about underlying distributions or 'large sample asymptotics'</span>
 <span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DR concerns about 'population vs super-population', possibly misinformed:</span></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Some statisticians and Econometricians (e.g., <span class="co">[</span><span class="ot">Athey and Imbens</span><span class="co">](https://arxiv.org/abs/1607.00698)</span>) argue for their value and robustness; it also seems close to what a lot of 'data science' people do (they love simulation)</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a> ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DR concerns about 'population vs super-population', possibly misinformed:</span></span>
 <span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a> ... we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference.</span>
 <span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## Particular 'experimetrics' issues</span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a><span class="fu">### Should we include controls (covariates) in analyzing 'treatment effects' from randomized experiments? {-}</span></span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."</span></span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>(?) Athey and Imbens</span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## Particular 'experimetrics' issues</span></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a><span class="fu">### Should we include controls (covariates) in analyzing 'treatment effects' from randomized experiments? {-}</span></span>
 <span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "in the conventional sampling paradigm… Controlling for observable heterogeneity using a regression model" is required for the assumptions to be justified with this approach. With the randomisation approach it makes more sense to put data into strata by covariates, analyse within-group experiments and average results."</span></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>(?) Athey and Imbens</span>
 <span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="fu"># Equivalence tests and Bayesian approaches</span></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## Equivalence tests and simple frequentist approaches</span></span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="fu"># Equivalence tests and Bayesian approaches</span></span>
 <span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>From <span class="co">[</span><span class="ot">Wikipedia</span><span class="co">](https://en.wikipedia.org/wiki/Equivalence_test)</span> (accessed 12 Apr 2022)</span>
-<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In equivalence tests, the null hypothesis is defined as an effect large enough to be deemed interesting, specified by an equivalence bound. The alternative hypothesis is any effect that is less extreme than said equivalence bound. The observed data is statistically compared against the equivalence bounds. If the statistical test indicates the observed data is surprising, assuming that true effects are at least as extreme as the equivalence bounds, a Neyman-Pearson approach to statistical inferences can be used to reject effect sizes larger than the equivalence bounds with a pre-specified Type 1 error rate.</span></span>
-<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Several tests exist for equivalence analyses; however, more recently the Two-one-sided t-tests (TOST) procedure has been garnering considerable attention. As outlined below, this approach is an adaptation of the widely known t-test.</span></span>
-<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "A very simple equivalence testing approach is the ‘two-one-sided t-tests’ (TOST) procedure. </span><span class="co">[</span><span class="ot">Schuirmann, 1987</span><span class="co">]</span><span class="at"> In the TOST procedure an upper ($\Delta U$) and lower (-$\Delta L$) equivalence bound is specified based on the smallest effect size of interest (e.g., a positive or negative difference of $d = 0.3$). Two composite null hypotheses are tested: $H_{01}: \Delta \leq –\Delta L$ and $H_{02}: \Delta \geq \Delta U$   When both these one-sided tests can be statistically rejected, we can conclude that $–\Delta L &lt; \Delta &lt; \Delta U$, or that the observed effect falls within the equivalence bounds ... .</span><span class="co">[</span><span class="ot">Searman et al, 1998</span><span class="co">]</span><span class="at">" </span><span class="co">[</span><span class="ot">Lakens 2017</span><span class="co">]</span></span>
-<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## Equivalence tests and simple frequentist approaches</span></span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>From <span class="co">[</span><span class="ot">Wikipedia</span><span class="co">](https://en.wikipedia.org/wiki/Equivalence_test)</span> (accessed 12 Apr 2022)</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In equivalence tests, the null hypothesis is defined as an effect large enough to be deemed interesting, specified by an equivalence bound. The alternative hypothesis is any effect that is less extreme than said equivalence bound. The observed data is statistically compared against the equivalence bounds. If the statistical test indicates the observed data is surprising, assuming that true effects are at least as extreme as the equivalence bounds, a Neyman-Pearson approach to statistical inferences can be used to reject effect sizes larger than the equivalence bounds with a pre-specified Type 1 error rate.</span></span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Several tests exist for equivalence analyses; however, more recently the Two-one-sided t-tests (TOST) procedure has been garnering considerable attention. As outlined below, this approach is an adaptation of the widely known t-test.</span></span>
 <span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Lakens</span><span class="co">](http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html)</span> offers pointers, and TOSTER package, for this approach.</span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "A very simple equivalence testing approach is the ‘two-one-sided t-tests’ (TOST) procedure. </span><span class="co">[</span><span class="ot">Schuirmann, 1987</span><span class="co">]</span><span class="at"> In the TOST procedure an upper ($\Delta U$) and lower (-$\Delta L$) equivalence bound is specified based on the smallest effect size of interest (e.g., a positive or negative difference of $d = 0.3$). Two composite null hypotheses are tested: $H_{01}: \Delta \leq –\Delta L$ and $H_{02}: \Delta \geq \Delta U$   When both these one-sided tests can be statistically rejected, we can conclude that $–\Delta L &lt; \Delta &lt; \Delta U$, or that the observed effect falls within the equivalence bounds ... .</span><span class="co">[</span><span class="ot">Searman et al, 1998</span><span class="co">]</span><span class="at">" </span><span class="co">[</span><span class="ot">Lakens 2017</span><span class="co">]</span></span>
 <span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bayes factors {-}</span></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Lakens</span><span class="co">](http://daniellakens.blogspot.com/2016/05/absence-of-evidence-is-not-evidence-of.html)</span> offers pointers, and TOSTER package, for this approach.</span>
 <span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>Semi-aside: <span class="co">[</span><span class="ot">Unresolved discussion of 'Bayes factors' (Nik and Reinstein)</span><span class="co">](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)</span></span>
-<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Clear DataColada argument against the use of 'Bayes Factors' for 'accepting the null'</span><span class="co">](http://datacolada.org/78a)</span></span>
-<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bayes factors {-}</span></span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a>Semi-aside: <span class="co">[</span><span class="ot">Unresolved discussion of 'Bayes factors' (Nik and Reinstein)</span><span class="co">](https://daaronr.github.io/metrics_discussion/hypothesis-testing-statistical-comparisons-and-inferences.html#b-factor)</span></span>
 <span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some simple Bayesian testing examples {#simple-bayes}</span></span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Clear DataColada argument against the use of 'Bayes Factors' for 'accepting the null'</span><span class="co">](http://datacolada.org/78a)</span></span>
 <span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>We return to consider a very simple and common case of interest:</span>
-<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>We have a population divided into two treatment conditions (e.g., 'Impact' vs 'Emotion' language in an email donation appeal)</span>
-<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>We wish to focus on a binary outcome (e.g., 'whether clicked to donate'), which may be rare in each treatment.</span>
-<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>We want to understand the impact of the treatment condition on the binary outcome, putting probability bounds on our belief about this</span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some simple Bayesian testing examples {#simple-bayes}</span></span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a>We return to consider a very simple and common case of interest:</span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>We have a population divided into two treatment conditions (e.g., 'Impact' vs 'Emotion' language in an email donation appeal)</span>
 <span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a>This is a classic example for Bayesian inference. Some good discussions and vignettes:</span>
-<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>*Discussions and walk-throughs*</span>
-<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>I have a memory that McElreath goes through this, but I cannot find it</span>
-<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Jamie Elsey's code example</span><span class="co">](bayes_odds_ratio.R)</span>: <span class="in">`bayes_odds_ratio.R`</span>, which uses the <span class="co">[</span><span class="ot">brms interface to Stan</span><span class="co">](https://mc-stan.org/users/interfaces/brms)</span></span>
-<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Reinstein and Dickerson's work using `bayesian_test_me`</span><span class="co">](https://daaronr.github.io/dualprocess/analysis-questions-and-tests.html#bayes_prop)</span> on 'dual process' donation data</span>
-<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>We wish to focus on a binary outcome (e.g., 'whether clicked to donate'), which may be rare in each treatment.</span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>We want to understand the impact of the treatment condition on the binary outcome, putting probability bounds on our belief about this</span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a>This is a classic example for Bayesian inference. Some good discussions and vignettes:</span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a>*Discussions and walk-throughs*</span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>I have a memory that McElreath goes through this, but I cannot find it</span>
+<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Jamie Elsey's code example</span><span class="co">](bayes_odds_ratio.R)</span>: <span class="in">`bayes_odds_ratio.R`</span>, which uses the <span class="co">[</span><span class="ot">brms interface to Stan</span><span class="co">](https://mc-stan.org/users/interfaces/brms)</span></span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Reinstein and Dickerson's work using `bayesian_test_me`</span><span class="co">](https://daaronr.github.io/dualprocess/analysis-questions-and-tests.html#bayes_prop)</span> on 'dual process' donation data</span>
 <span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>*Ready packages*</span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>\</span>
 <span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bayesAB`</span> is easy to apply, allows flexible specification of priors (and has tools to help you visualize these), and generates very clear output and graphs. See  <span class="co">[</span><span class="ot">vignette</span><span class="co">](http://frankportman.github.io/bayesAB/)</span></span>
-<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>It (seems to) save the simulation data for you to summarize as you like</span>
-<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Limitations: Requires raw data for each treatment (not just summarized data), cannot address more than two groups, does not (?) share the 'raw code doing the work' for tweaking</span>
-<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`BayesianFirstAid::bayes.prop.test`</span> is also easy to use  (see <span class="co">[</span><span class="ot">vignette</span><span class="co">](https://www.sumsar.net/blog/2014/06/bayesian-first-aid-prop-test/)</span>), and it works with either vectors or counts.</span>
-<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>It uses a uniform prior, but you can get it to spit out the <span class="in">`rjags`</span> code and then adjust this</span>
-<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>... or adjust to multiple groups</span>
-<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The plots it give you by default are pretty messy, but it also preserves the simulation data, so you could make your own plots</span>
-<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## A single framework? "Significance and equivalence testing" with randomization inference/simulation; building to Bayes {#simulation_to_bayes}</span></span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a>*Ready packages*</span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bayesAB`</span> is easy to apply, allows flexible specification of priors (and has tools to help you visualize these), and generates very clear output and graphs. See  <span class="co">[</span><span class="ot">vignette</span><span class="co">](http://frankportman.github.io/bayesAB/)</span></span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>It (seems to) save the simulation data for you to summarize as you like</span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Limitations: Requires raw data for each treatment (not just summarized data), cannot address more than two groups, does not (?) share the 'raw code doing the work' for tweaking</span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`BayesianFirstAid::bayes.prop.test`</span> is also easy to use  (see <span class="co">[</span><span class="ot">vignette</span><span class="co">](https://www.sumsar.net/blog/2014/06/bayesian-first-aid-prop-test/)</span>), and it works with either vectors or counts.</span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>It uses a uniform prior, but you can get it to spit out the <span class="in">`rjags`</span> code and then adjust this</span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>... or adjust to multiple groups</span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The plots it give you by default are pretty messy, but it also preserves the simulation data, so you could make your own plots</span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{block2,  type='note'}</span></span>
+<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## A single framework? "Significance and equivalence testing" with randomization inference/simulation; building to Bayes {#simulation_to_bayes}</span></span>
 <span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a><span class="in">This is an outline/discussion. I (DR) try to implement and demonstrate this in `eamt_data_analysis/oftw_giving_season_upsell_2021_trial/oftw_upsell_input_first_analysis.Rmd`</span></span>
-<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a><span class="in">Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package or `BayesianFirstAid`</span></span>
-<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a>Suppose we see a 'small difference' between treatment groups and it is 'not significant in standard tests' (tests not shown here yet).</span>
-<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a>*How can we:*</span>
-<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Put meaningful bounds on this?</span>
-<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Statistically 'rule out large effects'?</span>
-<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do this in the same context as our 'null hypothesis tests'?</span>
-<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do and communicate this in a way that is acceptable to a range of audiences?</span>
-<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a>(This parallels the analysis done in  <span class="co">[</span><span class="ot">HERE</span><span class="co">](https://rethinkpriorities.github.io/methodology-statistics-design/inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes)</span>, which includes dome further explanation of the methods)</span>
-<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a>I (David) propose taking the following approach:</span>
-<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Construct (by simulation or analytical formulae) the 'probability of "some function of our data" given a range of true parameters, i.e., given a range of relevant 'true rates of (relative) incidence' under each treatment (1/2, 3/4, equal, 4/3, 2, etc). This includes (and perhaps focuses on) the case where 'the true rates of incidence are equal to one another and equal to the average empirical incidence in our sample.'</span>
-<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{block2,  type='note'}</span></span>
+<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a><span class="in">This is an outline/discussion. I (DR) try to implement and demonstrate this in `eamt_data_analysis/oftw_giving_season_upsell_2021_trial/oftw_upsell_input_first_analysis.Rmd`</span></span>
+<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a><span class="in">Note: there  may be good ways to hijack all sorts of existing tools, such as the `bayesAB` package or `BayesianFirstAid`</span></span>
+<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a>Suppose we see a 'small difference' between treatment groups and it is 'not significant in standard tests' (tests not shown here yet).</span>
+<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a>*How can we:*</span>
+<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Put meaningful bounds on this?</span>
+<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Statistically 'rule out large effects'?</span>
+<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do this in the same context as our 'null hypothesis tests'?</span>
+<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Do and communicate this in a way that is acceptable to a range of audiences?</span>
+<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a>(This parallels the analysis done in  <span class="co">[</span><span class="ot">HERE</span><span class="co">](https://rethinkpriorities.github.io/methodology-statistics-design/inference-and-rough-equivalence-testing-with-binomial-outcomes.html#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes)</span>, which includes dome further explanation of the methods)</span>
+<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a>I (David) propose taking the following approach:</span>
 <span id="cb7-260"><a href="#cb7-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a>*What "function of our data"?*</span>
+<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Construct (by simulation or analytical formulae) the 'probability of "some function of our data" given a range of true parameters, i.e., given a range of relevant 'true rates of (relative) incidence' under each treatment (1/2, 3/4, equal, 4/3, 2, etc). This includes (and perhaps focuses on) the case where 'the true rates of incidence are equal to one another and equal to the average empirical incidence in our sample.'</span>
 <span id="cb7-262"><a href="#cb7-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
-<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>The exact proportional difference in incidence rates that we see</span>
-<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see (in absolute value) or larger (I believe this is the 'two-tailed frequentist p-value')</span>
-<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see (in absolute value) or smaller (this gives us a sense of 'how unlikely is a large true effect ... can we probabilistically rule out a big difference')</span>
-<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large or larger in favor of the Treatment</span>
-<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see in favor of the Control</span>
-<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-270"><a href="#cb7-270" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... Perhaps similar measures for other statistics such as  'difference in counts (not proportional), or 'average amount (donated)' (for the latter, we'd need to consider distinct true *distributions* of contributions)</span>
-<span id="cb7-271"><a href="#cb7-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a>*What "function of our data"?*</span>
+<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>The exact proportional difference in incidence rates that we see</span>
+<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see (in absolute value) or larger (I believe this is the 'two-tailed frequentist p-value')</span>
+<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see (in absolute value) or smaller (this gives us a sense of 'how unlikely is a large true effect ... can we probabilistically rule out a big difference')</span>
+<span id="cb7-270"><a href="#cb7-270" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large or larger in favor of the Treatment</span>
+<span id="cb7-271"><a href="#cb7-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A proportional difference in incidence rates as large as we see in favor of the Control</span>
 <span id="cb7-272"><a href="#cb7-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-273"><a href="#cb7-273" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-273"><a href="#cb7-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... Perhaps similar measures for other statistics such as  'difference in counts (not proportional), or 'average amount (donated)' (for the latter, we'd need to consider distinct true *distributions* of contributions)</span>
 <span id="cb7-274"><a href="#cb7-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-275"><a href="#cb7-275" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Plot the above over the parameter range to get a visual picture of the maximum likelihood parameter, and (eyeballing) the relative probability of different ranges</span>
-<span id="cb7-276"><a href="#cb7-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-277"><a href="#cb7-277" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>For a few important elements of the above, consider the 'relative likelihood of the data' under different true rates of incidence (or distributions of donations), for important comparisons such as</span>
-<span id="cb7-278"><a href="#cb7-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-279"><a href="#cb7-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A relative incidence of 1.5 versus a relative incidence of 1</span>
-<span id="cb7-280"><a href="#cb7-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-281"><a href="#cb7-281" aria-hidden="true" tabindex="-1"></a>... If the ratio is very small we might suspect that 'no difference is far more likely than a strong difference in favor of the treatment.</span>
-<span id="cb7-282"><a href="#cb7-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-283"><a href="#cb7-283" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Implicitly considering a 'flat prior', integrate (average) and compare important ranges of the above</span>
-<span id="cb7-284"><a href="#cb7-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-285"><a href="#cb7-285" aria-hidden="true" tabindex="-1"></a>E.g....</span>
-<span id="cb7-286"><a href="#cb7-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-275"><a href="#cb7-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-276"><a href="#cb7-276" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-277"><a href="#cb7-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-278"><a href="#cb7-278" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Plot the above over the parameter range to get a visual picture of the maximum likelihood parameter, and (eyeballing) the relative probability of different ranges</span>
+<span id="cb7-279"><a href="#cb7-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-280"><a href="#cb7-280" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>For a few important elements of the above, consider the 'relative likelihood of the data' under different true rates of incidence (or distributions of donations), for important comparisons such as</span>
+<span id="cb7-281"><a href="#cb7-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-282"><a href="#cb7-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A relative incidence of 1.5 versus a relative incidence of 1</span>
+<span id="cb7-283"><a href="#cb7-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-284"><a href="#cb7-284" aria-hidden="true" tabindex="-1"></a>... If the ratio is very small we might suspect that 'no difference is far more likely than a strong difference in favor of the treatment.</span>
+<span id="cb7-285"><a href="#cb7-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-286"><a href="#cb7-286" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Implicitly considering a 'flat prior', integrate (average) and compare important ranges of the above</span>
 <span id="cb7-287"><a href="#cb7-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-288"><a href="#cb7-288" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
-<span id="cb7-289"><a href="#cb7-289" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>the probability mass of the parameter 'the incidence is 1.25x or higher in favor of the Treatment' , versus  1.25x or lower (closer to zero, or higher incidence under the Control)...</span>
-<span id="cb7-290"><a href="#cb7-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... If the ratio is very small, then, given a fairly flat prior, our posterior should put a low probability on 'a large difference in favor of the treatment' ...</span>
-<span id="cb7-291"><a href="#cb7-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And similarly, reversing the control and treatment</span>
-<span id="cb7-292"><a href="#cb7-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-293"><a href="#cb7-293" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And similarly, for both extremes relative to a middle incidence range...</span>
-<span id="cb7-294"><a href="#cb7-294" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... here, if the ratio is very small, we will say "we can probablistically rule out an effect of 1.5x or larger in either direction"</span>
+<span id="cb7-288"><a href="#cb7-288" aria-hidden="true" tabindex="-1"></a>E.g....</span>
+<span id="cb7-289"><a href="#cb7-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-290"><a href="#cb7-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-291"><a href="#cb7-291" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb7-292"><a href="#cb7-292" aria-hidden="true" tabindex="-1"></a><span class="ss"> - </span>the probability mass of the parameter 'the incidence is 1.25x or higher in favor of the Treatment' , versus  1.25x or lower (closer to zero, or higher incidence under the Control)...</span>
+<span id="cb7-293"><a href="#cb7-293" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... If the ratio is very small, then, given a fairly flat prior, our posterior should put a low probability on 'a large difference in favor of the treatment' ...</span>
+<span id="cb7-294"><a href="#cb7-294" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And similarly, reversing the control and treatment</span>
 <span id="cb7-295"><a href="#cb7-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-296"><a href="#cb7-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-297"><a href="#cb7-297" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-296"><a href="#cb7-296" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And similarly, for both extremes relative to a middle incidence range...</span>
+<span id="cb7-297"><a href="#cb7-297" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>... here, if the ratio is very small, we will say "we can probablistically rule out an effect of 1.5x or larger in either direction"</span>
 <span id="cb7-298"><a href="#cb7-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-299"><a href="#cb7-299" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Question: Is it ever meaningful (or better) to compare regions that are not adjacent one another, and regions that do not add up to the entire space, e.g., compare [2, infinity] to  [-1,1] or something? --&gt;</span></span>
-<span id="cb7-300"><a href="#cb7-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-299"><a href="#cb7-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-300"><a href="#cb7-300" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb7-301"><a href="#cb7-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-302"><a href="#cb7-302" aria-hidden="true" tabindex="-1"></a>Note:</span>
+<span id="cb7-302"><a href="#cb7-302" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Question: Is it ever meaningful (or better) to compare regions that are not adjacent one another, and regions that do not add up to the entire space, e.g., compare [2, infinity] to  [-1,1] or something? --&gt;</span></span>
 <span id="cb7-303"><a href="#cb7-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-304"><a href="#cb7-304" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
-<span id="cb7-305"><a href="#cb7-305" aria-hidden="true" tabindex="-1"></a> Jamie:</span>
+<span id="cb7-304"><a href="#cb7-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-305"><a href="#cb7-305" aria-hidden="true" tabindex="-1"></a>Note:</span>
 <span id="cb7-306"><a href="#cb7-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-307"><a href="#cb7-307" aria-hidden="true" tabindex="-1"></a>"To put simply, likelihood is "the likelihood of $\theta$ having generated D" and posterior is essentially "the likelihood of θ having generated D" further multiplied by the prior distribution of θ. If the prior distribution is flat (or non-informative), likelihood is exactly the same as posterior."</span>
-<span id="cb7-308"><a href="#cb7-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-309"><a href="#cb7-309" aria-hidden="true" tabindex="-1"></a>So in essence, if you wanted, you could just put a prior distribution on the differences over which you have simulated differences, and multiply it with your likelihood. To get a proper posterior you would need a continuous distribution for the prior over the parameter space, and probably more simulations across the parameter space as well, to fill in the shape of the posterior. I guess the key difference between what you are suggesting and just running it as a Bayesian binomial regression is that your likelihood function is produced by simulation, whereas the one in the Bayesian regression would be generated through the model assumptions of the regression.</span>
-<span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-307"><a href="#cb7-307" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse='true'}</span>
+<span id="cb7-308"><a href="#cb7-308" aria-hidden="true" tabindex="-1"></a> Jamie:</span>
+<span id="cb7-309"><a href="#cb7-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a>"To put simply, likelihood is "the likelihood of $\theta$ having generated D" and posterior is essentially "the likelihood of θ having generated D" further multiplied by the prior distribution of θ. If the prior distribution is flat (or non-informative), likelihood is exactly the same as posterior."</span>
 <span id="cb7-311"><a href="#cb7-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-312"><a href="#cb7-312" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-312"><a href="#cb7-312" aria-hidden="true" tabindex="-1"></a>So in essence, if you wanted, you could just put a prior distribution on the differences over which you have simulated differences, and multiply it with your likelihood. To get a proper posterior you would need a continuous distribution for the prior over the parameter space, and probably more simulations across the parameter space as well, to fill in the shape of the posterior. I guess the key difference between what you are suggesting and just running it as a Bayesian binomial regression is that your likelihood function is produced by simulation, whereas the one in the Bayesian regression would be generated through the model assumptions of the regression.</span>
 <span id="cb7-313"><a href="#cb7-313" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-314"><a href="#cb7-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-315"><a href="#cb7-315" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Optionally, repeat the above with a Bayesian tool, considering more than one 'explicit prior'.</span>
+<span id="cb7-315"><a href="#cb7-315" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb7-316"><a href="#cb7-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-317"><a href="#cb7-317" aria-hidden="true" tabindex="-1"></a>Ongoing question: Do we need or want a separate prior for 'incidence under treatment' and 'incidence under control', or can our prior simply focus on the relative incidence rates?</span>
-<span id="cb7-318"><a href="#cb7-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-319"><a href="#cb7-319" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
-<span id="cb7-320"><a href="#cb7-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-321"><a href="#cb7-321" aria-hidden="true" tabindex="-1"></a>Jamie suggests: Just do a Bayesian analysis and consider the posterior distribution. You can test the sensitivity to different priors.</span>
-<span id="cb7-322"><a href="#cb7-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-323"><a href="#cb7-323" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb7-324"><a href="#cb7-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-325"><a href="#cb7-325" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Empirical Bayes'</span></span>
-<span id="cb7-326"><a href="#cb7-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-327"><a href="#cb7-327" aria-hidden="true" tabindex="-1"></a>Reference: David Robinson "Introduction to empirical bayes examples from baseball statistics" downloaded 28 Mar 2022</span>
-<span id="cb7-328"><a href="#cb7-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-329"><a href="#cb7-329" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Empirical Bayes estimation, where a beta distribution fit</span></span>
-<span id="cb7-330"><a href="#cb7-330" aria-hidden="true" tabindex="-1"></a><span class="at">on all observations is then used to improve each individually. What’s</span></span>
-<span id="cb7-331"><a href="#cb7-331" aria-hidden="true" tabindex="-1"></a><span class="at">great about this method is that as long as you have a lot of examples,</span></span>
-<span id="cb7-332"><a href="#cb7-332" aria-hidden="true" tabindex="-1"></a><span class="at">you don’t need to bring in prior expectations.</span></span>
-<span id="cb7-333"><a href="#cb7-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-334"><a href="#cb7-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-335"><a href="#cb7-335" aria-hidden="true" tabindex="-1"></a>Some data cleaning</span>
+<span id="cb7-317"><a href="#cb7-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-318"><a href="#cb7-318" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Optionally, repeat the above with a Bayesian tool, considering more than one 'explicit prior'.</span>
+<span id="cb7-319"><a href="#cb7-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-320"><a href="#cb7-320" aria-hidden="true" tabindex="-1"></a>Ongoing question: Do we need or want a separate prior for 'incidence under treatment' and 'incidence under control', or can our prior simply focus on the relative incidence rates?</span>
+<span id="cb7-321"><a href="#cb7-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-322"><a href="#cb7-322" aria-hidden="true" tabindex="-1"></a>::: {.alert .alert-secondary}</span>
+<span id="cb7-323"><a href="#cb7-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-324"><a href="#cb7-324" aria-hidden="true" tabindex="-1"></a>Jamie suggests: Just do a Bayesian analysis and consider the posterior distribution. You can test the sensitivity to different priors.</span>
+<span id="cb7-325"><a href="#cb7-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-326"><a href="#cb7-326" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-327"><a href="#cb7-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-328"><a href="#cb7-328" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Empirical Bayes'</span></span>
+<span id="cb7-329"><a href="#cb7-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-330"><a href="#cb7-330" aria-hidden="true" tabindex="-1"></a>Reference: David Robinson "Introduction to empirical bayes examples from baseball statistics" downloaded 28 Mar 2022</span>
+<span id="cb7-331"><a href="#cb7-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-332"><a href="#cb7-332" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Empirical Bayes estimation, where a beta distribution fit</span></span>
+<span id="cb7-333"><a href="#cb7-333" aria-hidden="true" tabindex="-1"></a><span class="at">on all observations is then used to improve each individually. What’s</span></span>
+<span id="cb7-334"><a href="#cb7-334" aria-hidden="true" tabindex="-1"></a><span class="at">great about this method is that as long as you have a lot of examples,</span></span>
+<span id="cb7-335"><a href="#cb7-335" aria-hidden="true" tabindex="-1"></a><span class="at">you don’t need to bring in prior expectations.</span></span>
 <span id="cb7-336"><a href="#cb7-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-337"><a href="#cb7-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup-baseball-stats}</span></span>
-<span id="cb7-338"><a href="#cb7-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-339"><a href="#cb7-339" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(Lahman)</span>
-<span id="cb7-340"><a href="#cb7-340" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out pitchers</span></span>
-<span id="cb7-341"><a href="#cb7-341" aria-hidden="true" tabindex="-1"></a>career <span class="ot">&lt;-</span> Batting <span class="sc">%&gt;%</span></span>
-<span id="cb7-342"><a href="#cb7-342" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(AB <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-343"><a href="#cb7-343" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(Pitching, <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-344"><a href="#cb7-344" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(playerID) <span class="sc">%&gt;%</span></span>
-<span id="cb7-345"><a href="#cb7-345" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(<span class="at">H =</span> <span class="fu">sum</span>(H), <span class="at">AB =</span> <span class="fu">sum</span>(AB)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-346"><a href="#cb7-346" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">average =</span> H <span class="sc">/</span> AB)</span>
-<span id="cb7-347"><a href="#cb7-347" aria-hidden="true" tabindex="-1"></a><span class="co"># Include names along with the player IDs</span></span>
-<span id="cb7-348"><a href="#cb7-348" aria-hidden="true" tabindex="-1"></a>career <span class="ot">&lt;-</span> Master <span class="sc">%&gt;%</span></span>
-<span id="cb7-349"><a href="#cb7-349" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_df</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-350"><a href="#cb7-350" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(playerID, nameFirst, nameLast) <span class="sc">%&gt;%</span></span>
-<span id="cb7-351"><a href="#cb7-351" aria-hidden="true" tabindex="-1"></a><span class="fu">unite</span>(name, nameFirst, nameLast, <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-352"><a href="#cb7-352" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(career, <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-353"><a href="#cb7-353" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>playerID)</span>
-<span id="cb7-354"><a href="#cb7-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-355"><a href="#cb7-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-356"><a href="#cb7-356" aria-hidden="true" tabindex="-1"></a>career_filtered <span class="ot">&lt;-</span> career <span class="sc">%&gt;%</span></span>
-<span id="cb7-357"><a href="#cb7-357" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(AB <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="co">#he uses 500, I think 100 is enough</span></span>
+<span id="cb7-337"><a href="#cb7-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-338"><a href="#cb7-338" aria-hidden="true" tabindex="-1"></a>Some data cleaning</span>
+<span id="cb7-339"><a href="#cb7-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-340"><a href="#cb7-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup-baseball-stats}</span></span>
+<span id="cb7-341"><a href="#cb7-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-342"><a href="#cb7-342" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(Lahman)</span>
+<span id="cb7-343"><a href="#cb7-343" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out pitchers</span></span>
+<span id="cb7-344"><a href="#cb7-344" aria-hidden="true" tabindex="-1"></a>career <span class="ot">&lt;-</span> Batting <span class="sc">%&gt;%</span></span>
+<span id="cb7-345"><a href="#cb7-345" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(AB <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-346"><a href="#cb7-346" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(Pitching, <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-347"><a href="#cb7-347" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(playerID) <span class="sc">%&gt;%</span></span>
+<span id="cb7-348"><a href="#cb7-348" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(<span class="at">H =</span> <span class="fu">sum</span>(H), <span class="at">AB =</span> <span class="fu">sum</span>(AB)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-349"><a href="#cb7-349" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">average =</span> H <span class="sc">/</span> AB)</span>
+<span id="cb7-350"><a href="#cb7-350" aria-hidden="true" tabindex="-1"></a><span class="co"># Include names along with the player IDs</span></span>
+<span id="cb7-351"><a href="#cb7-351" aria-hidden="true" tabindex="-1"></a>career <span class="ot">&lt;-</span> Master <span class="sc">%&gt;%</span></span>
+<span id="cb7-352"><a href="#cb7-352" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_df</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-353"><a href="#cb7-353" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(playerID, nameFirst, nameLast) <span class="sc">%&gt;%</span></span>
+<span id="cb7-354"><a href="#cb7-354" aria-hidden="true" tabindex="-1"></a><span class="fu">unite</span>(name, nameFirst, nameLast, <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-355"><a href="#cb7-355" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(career, <span class="at">by =</span> <span class="st">"playerID"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-356"><a href="#cb7-356" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>playerID)</span>
+<span id="cb7-357"><a href="#cb7-357" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-358"><a href="#cb7-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-359"><a href="#cb7-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-360"><a href="#cb7-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-359"><a href="#cb7-359" aria-hidden="true" tabindex="-1"></a>career_filtered <span class="ot">&lt;-</span> career <span class="sc">%&gt;%</span></span>
+<span id="cb7-360"><a href="#cb7-360" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(AB <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="co">#he uses 500, I think 100 is enough</span></span>
 <span id="cb7-361"><a href="#cb7-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-362"><a href="#cb7-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 1: Estimate a [Beta] prior from all your data</span></span>
-<span id="cb7-363"><a href="#cb7-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-364"><a href="#cb7-364" aria-hidden="true" tabindex="-1"></a>We set up a likelihood function... probability of the data given different parameters.  It sums the log of 'how likely is each row (batter) given that batting averages are drawn particular true beta distribution, and hits are drawn from this'. At bats are taken as a constant, I guess</span>
-<span id="cb7-365"><a href="#cb7-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-368"><a href="#cb7-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-369"><a href="#cb7-369" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats4)</span>
-<span id="cb7-370"><a href="#cb7-370" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(VGAM)</span>
-<span id="cb7-371"><a href="#cb7-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-372"><a href="#cb7-372" aria-hidden="true" tabindex="-1"></a>ll <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta) {</span>
-<span id="cb7-373"><a href="#cb7-373" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> career_filtered<span class="sc">$</span>H</span>
-<span id="cb7-374"><a href="#cb7-374" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> career_filtered<span class="sc">$</span>AB</span>
-<span id="cb7-375"><a href="#cb7-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-376"><a href="#cb7-376" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(VGAM<span class="sc">::</span><span class="fu">dbetabinom.ab</span>(x, total, alpha, beta, <span class="at">log =</span> <span class="cn">TRUE</span>)) <span class="co">#Note this is outputting the negative Log likelihood (not subtracting it from the last line)</span></span>
-<span id="cb7-377"><a href="#cb7-377" aria-hidden="true" tabindex="-1"></a><span class="co"># 'how likely</span></span>
-<span id="cb7-378"><a href="#cb7-378" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-379"><a href="#cb7-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-380"><a href="#cb7-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-381"><a href="#cb7-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-362"><a href="#cb7-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-363"><a href="#cb7-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-364"><a href="#cb7-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-365"><a href="#cb7-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 1: Estimate a [Beta] prior from all your data</span></span>
+<span id="cb7-366"><a href="#cb7-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-367"><a href="#cb7-367" aria-hidden="true" tabindex="-1"></a>We set up a likelihood function... probability of the data given different parameters.  It sums the log of 'how likely is each row (batter) given that batting averages are drawn particular true beta distribution, and hits are drawn from this'. At bats are taken as a constant, I guess</span>
+<span id="cb7-368"><a href="#cb7-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-371"><a href="#cb7-371" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-372"><a href="#cb7-372" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats4)</span>
+<span id="cb7-373"><a href="#cb7-373" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(VGAM)</span>
+<span id="cb7-374"><a href="#cb7-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-375"><a href="#cb7-375" aria-hidden="true" tabindex="-1"></a>ll <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha, beta) {</span>
+<span id="cb7-376"><a href="#cb7-376" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> career_filtered<span class="sc">$</span>H</span>
+<span id="cb7-377"><a href="#cb7-377" aria-hidden="true" tabindex="-1"></a>total <span class="ot">&lt;-</span> career_filtered<span class="sc">$</span>AB</span>
+<span id="cb7-378"><a href="#cb7-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-379"><a href="#cb7-379" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">sum</span>(VGAM<span class="sc">::</span><span class="fu">dbetabinom.ab</span>(x, total, alpha, beta, <span class="at">log =</span> <span class="cn">TRUE</span>)) <span class="co">#Note this is outputting the negative Log likelihood (not subtracting it from the last line)</span></span>
+<span id="cb7-380"><a href="#cb7-380" aria-hidden="true" tabindex="-1"></a><span class="co"># 'how likely</span></span>
+<span id="cb7-381"><a href="#cb7-381" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb7-382"><a href="#cb7-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-383"><a href="#cb7-383" aria-hidden="true" tabindex="-1"></a>Next we search for the 'most likely parameters' ... the alpha and beta that maximize the above (using a particular algorithm).</span>
+<span id="cb7-383"><a href="#cb7-383" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-384"><a href="#cb7-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-387"><a href="#cb7-387" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-388"><a href="#cb7-388" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum likelihood estimation</span></span>
-<span id="cb7-389"><a href="#cb7-389" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mle</span>(ll, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">10</span>), <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
-<span id="cb7-390"><a href="#cb7-390" aria-hidden="true" tabindex="-1"></a><span class="at">lower =</span> <span class="fu">c</span>(<span class="fl">0.0001</span>, .<span class="dv">1</span>))</span>
-<span id="cb7-391"><a href="#cb7-391" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">coef</span>(m)</span>
-<span id="cb7-392"><a href="#cb7-392" aria-hidden="true" tabindex="-1"></a>alpha0 <span class="ot">&lt;-</span> ab[<span class="dv">1</span>]</span>
-<span id="cb7-393"><a href="#cb7-393" aria-hidden="true" tabindex="-1"></a>beta0 <span class="ot">&lt;-</span> ab[<span class="dv">2</span>]</span>
-<span id="cb7-394"><a href="#cb7-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-395"><a href="#cb7-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-396"><a href="#cb7-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-397"><a href="#cb7-397" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Use that distribution as a prior for each individual estimate</span></span>
-<span id="cb7-398"><a href="#cb7-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-399"><a href="#cb7-399" aria-hidden="true" tabindex="-1"></a>With the Beta prior and Binomial distribution, it turns out there is a simple rule for finding the midpoint (MAP?) of the posterior for the mean.  Adjust the 'average' formula by ... taking the numerator (hits) and add $\alpha_0$ from the Beta prior. Take the denominator (at-bats) and add $\alpha_0 + \beta_0$.</span>
-<span id="cb7-400"><a href="#cb7-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-401"><a href="#cb7-401" aria-hidden="true" tabindex="-1"></a>So if someone got 30 hits out of 100, our midpoint estimate for their true 'data generating' batting average is  $\frac{30+\alpha_0}{100+\alpha_0+\beta_0}$</span>
-<span id="cb7-402"><a href="#cb7-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-403"><a href="#cb7-403" aria-hidden="true" tabindex="-1"></a>We can do this across all the data, and find the 'best and worst' batters:</span>
-<span id="cb7-404"><a href="#cb7-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-407"><a href="#cb7-407" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-408"><a href="#cb7-408" aria-hidden="true" tabindex="-1"></a>career_eb <span class="ot">&lt;-</span> career <span class="sc">%&gt;%</span></span>
-<span id="cb7-409"><a href="#cb7-409" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">eb_estimate =</span> (H <span class="sc">+</span> alpha0) <span class="sc">/</span> (AB <span class="sc">+</span> alpha0 <span class="sc">+</span> beta0))</span>
-<span id="cb7-410"><a href="#cb7-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-411"><a href="#cb7-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-412"><a href="#cb7-412" aria-hidden="true" tabindex="-1"></a>career_eb <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(eb_estimate) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb7-385"><a href="#cb7-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-386"><a href="#cb7-386" aria-hidden="true" tabindex="-1"></a>Next we search for the 'most likely parameters' ... the alpha and beta that maximize the above (using a particular algorithm).</span>
+<span id="cb7-387"><a href="#cb7-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-390"><a href="#cb7-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-391"><a href="#cb7-391" aria-hidden="true" tabindex="-1"></a><span class="co"># maximum likelihood estimation</span></span>
+<span id="cb7-392"><a href="#cb7-392" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mle</span>(ll, <span class="at">start =</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="dv">10</span>), <span class="at">method =</span> <span class="st">"L-BFGS-B"</span>,</span>
+<span id="cb7-393"><a href="#cb7-393" aria-hidden="true" tabindex="-1"></a><span class="at">lower =</span> <span class="fu">c</span>(<span class="fl">0.0001</span>, .<span class="dv">1</span>))</span>
+<span id="cb7-394"><a href="#cb7-394" aria-hidden="true" tabindex="-1"></a>ab <span class="ot">&lt;-</span> <span class="fu">coef</span>(m)</span>
+<span id="cb7-395"><a href="#cb7-395" aria-hidden="true" tabindex="-1"></a>alpha0 <span class="ot">&lt;-</span> ab[<span class="dv">1</span>]</span>
+<span id="cb7-396"><a href="#cb7-396" aria-hidden="true" tabindex="-1"></a>beta0 <span class="ot">&lt;-</span> ab[<span class="dv">2</span>]</span>
+<span id="cb7-397"><a href="#cb7-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-398"><a href="#cb7-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-399"><a href="#cb7-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-400"><a href="#cb7-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 2: Use that distribution as a prior for each individual estimate</span></span>
+<span id="cb7-401"><a href="#cb7-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-402"><a href="#cb7-402" aria-hidden="true" tabindex="-1"></a>With the Beta prior and Binomial distribution, it turns out there is a simple rule for finding the midpoint (MAP?) of the posterior for the mean.  Adjust the 'average' formula by ... taking the numerator (hits) and add $\alpha_0$ from the Beta prior. Take the denominator (at-bats) and add $\alpha_0 + \beta_0$.</span>
+<span id="cb7-403"><a href="#cb7-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-404"><a href="#cb7-404" aria-hidden="true" tabindex="-1"></a>So if someone got 30 hits out of 100, our midpoint estimate for their true 'data generating' batting average is  $\frac{30+\alpha_0}{100+\alpha_0+\beta_0}$</span>
+<span id="cb7-405"><a href="#cb7-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-406"><a href="#cb7-406" aria-hidden="true" tabindex="-1"></a>We can do this across all the data, and find the 'best and worst' batters:</span>
+<span id="cb7-407"><a href="#cb7-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-410"><a href="#cb7-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-411"><a href="#cb7-411" aria-hidden="true" tabindex="-1"></a>career_eb <span class="ot">&lt;-</span> career <span class="sc">%&gt;%</span></span>
+<span id="cb7-412"><a href="#cb7-412" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">eb_estimate =</span> (H <span class="sc">+</span> alpha0) <span class="sc">/</span> (AB <span class="sc">+</span> alpha0 <span class="sc">+</span> beta0))</span>
 <span id="cb7-413"><a href="#cb7-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-414"><a href="#cb7-414" aria-hidden="true" tabindex="-1"></a>career_eb <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>eb_estimate) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
-<span id="cb7-415"><a href="#cb7-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-416"><a href="#cb7-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-417"><a href="#cb7-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-418"><a href="#cb7-418" aria-hidden="true" tabindex="-1"></a>As noted (and plotted) in the book, this method tends to 'shrink' the averages towards the overall midpoint. The lowest averages are raised a bit, and the highest averages are reduced a bit ... with more 'shrinkage' where there are fewer observations (at-bats).</span>
-<span id="cb7-419"><a href="#cb7-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-420"><a href="#cb7-420" aria-hidden="true" tabindex="-1"></a><span class="fu"># Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}</span></span>
-<span id="cb7-421"><a href="#cb7-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-422"><a href="#cb7-422" aria-hidden="true" tabindex="-1"></a>Integrate...</span>
-<span id="cb7-423"><a href="#cb7-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-424"><a href="#cb7-424" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/chapters/statistics/)</span></span>
-<span id="cb7-425"><a href="#cb7-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-414"><a href="#cb7-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-415"><a href="#cb7-415" aria-hidden="true" tabindex="-1"></a>career_eb <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(eb_estimate) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb7-416"><a href="#cb7-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-417"><a href="#cb7-417" aria-hidden="true" tabindex="-1"></a>career_eb <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="sc">-</span>eb_estimate) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb7-418"><a href="#cb7-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-419"><a href="#cb7-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-420"><a href="#cb7-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-421"><a href="#cb7-421" aria-hidden="true" tabindex="-1"></a>As noted (and plotted) in the book, this method tends to 'shrink' the averages towards the overall midpoint. The lowest averages are raised a bit, and the highest averages are reduced a bit ... with more 'shrinkage' where there are fewer observations (at-bats).</span>
+<span id="cb7-422"><a href="#cb7-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-423"><a href="#cb7-423" aria-hidden="true" tabindex="-1"></a><span class="fu"># Factor analysis, dimension reduction, and 'carving reality at its joints' {#factor-descriptive}</span></span>
+<span id="cb7-424"><a href="#cb7-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-425"><a href="#cb7-425" aria-hidden="true" tabindex="-1"></a>Integrate...</span>
 <span id="cb7-426"><a href="#cb7-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-427"><a href="#cb7-427" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb7-427"><a href="#cb7-427" aria-hidden="true" tabindex="-1"></a>Willem's work <span class="co">[</span><span class="ot">link: 'How to Science'</span><span class="co">](https://willemsleegers.github.io/how-to-science/chapters/statistics/)</span></span>
 <span id="cb7-428"><a href="#cb7-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-429"><a href="#cb7-429" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html"</span>)</span>
-<span id="cb7-430"><a href="#cb7-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-431"><a href="#cb7-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-432"><a href="#cb7-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-433"><a href="#cb7-433" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
-<span id="cb7-434"><a href="#cb7-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-429"><a href="#cb7-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-430"><a href="#cb7-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r }</span></span>
+<span id="cb7-431"><a href="#cb7-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-432"><a href="#cb7-432" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/chapters/statistics/factor-analysis/EFA.html"</span>)</span>
+<span id="cb7-433"><a href="#cb7-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-434"><a href="#cb7-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb7-435"><a href="#cb7-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-436"><a href="#cb7-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-436"><a href="#cb7-436" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) --&gt;</span></span>
 <span id="cb7-437"><a href="#cb7-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-438"><a href="#cb7-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-439"><a href="#cb7-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-440"><a href="#cb7-440" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

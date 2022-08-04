@@ -18,6 +18,50 @@ comments:
     hypothesis: true
 ---
 
+
+
+```{r, include=FALSE}
+
+
+#or instead source(here("code", "methods_setup.R"))
+
+library(here)
+library(pacman)
+library(dplyr)
+
+p_load(rsample, install = FALSE) # Why p_load these? (Can create issues with dependencies)
+p_load(ggplot2, forcats, install = FALSE)
+p_load(parsnip, tune, dials, install = FALSE) # If loading multiple packages, better to use p_load with install = FALSE option
+p_load(conflicted, workflowsets,  install=FALSE)
+p_load(purrr)
+library(stringr)
+
+p_load(dynverse, install=FALSE)
+
+conflicted::conflict_prefer("set_label", "sjlabelled")
+conflicted::conflict_prefer("add_footnote", "kableExtra")
+conflicted::conflict_prefer("sample_n", "tidylog")
+
+set_label <- sjlabelled::set_label
+
+filter <- dplyr::filter
+ungroup <- dplyr::ungroup
+mutate <- dplyr::mutate
+  
+p_load(devtools)
+source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
+
+
+#github api yelled at me, and I had to do this: https://gist.github.com/Z3tt/3dab3535007acf108391649766409421
+
+devtools::install_github("rethinkpriorities/rp-r-package", force = TRUE)
+library(rethinkpriorities)
+
+devtools::install_github("rethinkpriorities/r-noodling-package")
+library(rnoodling)
+
+```
+
 # Introduction
 
 
@@ -50,7 +94,8 @@ df <- rethinkpriorities::read_file_from_repo(
 
 ```
 
-Next we sample from this data and remove labels, to make it process quicker and easier.
+
+Next we sample from this data and remove labels, to make the process quicker and easier.
 
 ```{r simplify_for_tidymodel}
 
@@ -97,14 +142,12 @@ In our *descriptive* modeling we do *not* remove 'insignificant' features from t
 -   "Career/Economics": (Income, employment status, top-6 university)
 
 <!-- ^["Top-6 university" refers to whether the individual lists any of the six universities (Oxford, Stanford, Harvard, CalTech, MIT, Cambridge) appearing in the top-10 of all of USNWR, QS, and THE rankings. However, university was not asked in the 2018 survey ] -->
-    <!-- feat_income_employ -- -->
     
 -   "Pledges/commitments:" Whether ever taken a 'Giving What We Can Pledge', whether 'Earning to Give' <!-- feat_gwwc_etg -->
 
 -   "Controls" for age, time-in-EA, and survey-year (used in all models)
 ^[We refer to the latter as "controls" because they aid our interpretation of other features of interest, as noted above. However, these are *also* of independent interest.]
 
-:::
 
 
 **In the code below, we define these as objects!**
@@ -118,7 +161,7 @@ First we define the 'targets': the binary outcomes, numerical outcomes, all outc
 #targets:
 bin_out <- c("d_don_1k", "d_don_10pct")
 
-num_out <- c('donation_c', 'don_av2_yr', 'l_don_c', "l_don_av_2yr", "don_share_inc_imp_bc5k", "donation_plan_c")
+num_out <- c('donation_usd', 'don_av2_yr', 'l_don_usd', "l_don_av_2yr", "don_share_inc_imp_bc5k", "donation_plan_usd")
 targets <- c(bin_out, num_out)
 targets_short <- c("don_av2_yr", "don_share_inc_imp_bc5k", "d_don_1k") 
 
@@ -160,16 +203,30 @@ robust_controls_n <- c("years_inv_d2sd_post_med",  "age_d2sd_post_med", "income_
 
 ```
 
+
+```{r key_eas_all_labels}
+
+key_eas_all_labels <- c( #note these are converted to a list with as.list before assigning them
+    donation_usd = "Donation (USD)",
+    l_don_usd = "Log Don. (USD)",
+    l_don_av_2yr = "Log Don. 'avg.'",
+    ln_age = "Log age",
+    don_av2_yr = "Don. 'avg'",
+    donation_plan_usd = "Don. plan (USD)")
+```
+
 # Ad-hoc data cleaning, recipes
 
 We impute a few missings, etc, just for modeling.^[Use `recipe` package for this if it makes it more organized, but it's not necessary to use recipe if we are not doing machine learning, as leaks are not an issue, and we only need to do the imputation once. On the other hand, in non-prediction models we have a (bad?) tendency to assign a causal interpretation to particular features, and we need to be careful about how imputation might affect this.]
 
-Below, some e imputations and constructed features (for functional form interpretation) that I did in the 'actual analysis'.
+Below, some imputations and constructed features (for functional form interpretation) that I did in the 'actual analysis'.
 
 
 ```{r impute_norm_features, warning=FALSE}
 
 #We impute variables where missing and normalizing all variables to be mean-zero and to be on the same scale.
+
+year <- 2020 
 
 diqr <- function(x) {
   (x - mean(x, na.rm=TRUE))/IQR(x, na.rm=TRUE)
@@ -179,15 +236,13 @@ gtmed <- function(x) {
   x*(x>med(x))
 }
 
-eas_all_s <- eas_all %>%
-  filter(!is.na(don_av2_yr) & year_f %in% last_3_years) %>%
+eas_all_s <- df %>%
   mutate(
     #(re) code scaling and 2-part splits for the modeling sample (2018-20, reporting donations)
     age_d2sd = arm::rescale(age), #Todo (automate this with `mutate(across)` thing)
-    years_involved_d2sd = arm::rescale(year - as.numeric(year_involved)),
+    years_involved_d2sd = arm::rescale(years_involved),
     years_inv_d2sd_post_med = gtmed(years_involved_d2sd),
     income_c_imp_diqr = diqr(income_c_imp_bc5k),
-    age_d2sd_post_med = arm::rescale(age_if_older),
     income_c_imp_diqr_if_richer = gtmed(income_c_imp_diqr),
     ln_income_c_imp_if_richer= gtmed(ln_income_c_imp_bc5k)
   ) %>%
@@ -219,9 +274,116 @@ eas_all_s_rl_imp <- eas_all_s_rl %>%
 
 We report summary statistics on a selection of these features and target outcomes below...
 
+
+```{r don_inc_career_tab}
+(
+  don_inc_career_tab <- eas_all_s_rl_imp %>%
+            filter(!is.na(don_av2_yr)) %>%
+      mutate(`Earn-to-give` = as.factor(d_career_etg),
+           `GwwC` = as.factor(d_gwwc_ever_0)) %>%
+  ungroup() %>%
+  filter(year_f %in% last_3_years) %>%
+ dplyr::select(starts_with("don"), starts_with("d_don"), starts_with("inc"), -income_c_imp_diqr,
+               d_pt_employment, d_not_employed,
+               `Earn-to-give`, `GwwC`) %>%
+  dplyr::select(-starts_with("l_"), -d_don_10pct, -ends_with("d2sd"),
+                -matches("_if_|_post_")) %>%
+    .summ(title = "Donations, income, career, most recent years,  (subset: reporting 0+ donation)",
+          digits = c(0,0,1,1,2,1),
+          labels=TRUE,
+          logical.labels = c("No", "Yes"),
+          factor.counts = FALSE,
+           out="kable") %>%
+  kable_styling()
+)
+
+```
+
+Above, we report donations, income, career, and GWWC pledge rates. For an actual analysis, I would report a bit more here.
+
+
 # Constructing and specifying models {.unnumbered}
 
-## Make 'model data frames'
+
+For simplicity, I will focus on *linear* models, at least for now, although our target outcomes don't really warrant this.
+
+
+### Construct lists of features etc. {-}
+
+We construct a list (of lists) of features to use in a few models. We consider three sets of features:
+
+1. Baseline, 
+2. with Robust controls
+3. Baseline with Earning to Give and GWWC
+
+```{r feat_list}
+# Define models (For LINEAR models ... used only in appendix, but some of these are reused in other models)
+#-----------------------------------------------------
+
+feat_list = list(
+  c(key_demog, feat_income_employ, controls),
+  c(key_demog, feat_income_employ, controls, robust_controls),
+  c(key_demog, feat_income_employ, feat_gwwc_etg, controls) )
+
+feat_names = c("Baseline", "Robust controls",  "Base + EtG & GWWC")
+```
+
+The first 2 elements of this list of lists of features is displayed below
+
+```{r}
+feat_list[1:2]
+```
+
+Next we define some more objects:
+
+`rhs_vars_list`: repeating the feature list to have all three lists for all three outcome variables; a total of 9 lists.
+`outcome_vars_list`: repeating the outcome variables to have all for all feature lists 
+`dfs`: ... the data frame 9 times
+
+```{r vars_list}
+
+rhs_vars_list <- rep(feat_list, length(targets_short))
+
+outcome_vars_list <- rep(as.list(targets_short), each=length(feat_list))
+
+dfs <- rep(list(eas_all_s_rl_imp), length(outcome_vars_list))
+
+```
+
+
+
+### Make 'model data frames'
+
+Using the `make_model_df` command, put all the above to make a 'model dataframe', which is a tibble of tibbles and lists ... specifying the outcome, the linear model formulas, and the data frames. 
+
+```{r model-prep-linear, warning=FALSE}
+
+## Create dataframe for modeling
+(linear_models <- make_model_df(rhs_vars_list, outcome_vars_list, dfs))
+
+```
+For example ` linear_models[2][[1,1]]` is the formula `r  linear_models[2][[1,1]]`
+
+### Fit linear models
+
+```{r fit_linear_models}
+
+linear_models <- linear_models %>%
+  mutate(
+    lm_fit = fit_models(
+      linear_models, "formulas", "dfs", fun = fit_lm)
+    )
+#warning `using type = "numeric" with a factor response will be ignored‘-’ not meaningful for factor`
+# @DR: Why are these models being fit on binary outcomes? DR, @OM: It is fit on all the outcomes including the binary ones, no? However, we haven't reported it yet. Anyways, I think there is still a norm of considering 'linear probability models' in Economics, and arguments on its behalf, at least as a robustness check.
+
+# Extract coefficients, fitted and residuals
+model_feat_names <- rep(c(feat_names), times= length(targets_short))
+model_oc_names <- rep(c(targets_short_names), each= length(feat_names))
+model_names <- paste(model_oc_names, model_feat_names, sep = ": ")
+
+```
+
+
 
 # Report model results
 

@@ -105,6 +105,13 @@ Skipping here, for now; this may help processing larger jobs, so we may want to 
 
 ## Reading in data from a repo
 
+
+::: {.callout-note collapse="true"}
+
+Todo: adapt this vignette to use some public data, like an R sample data set
+
+::: 
+
 The code below reads data in directly from the RP private github repo. You need to have authorization set up for this to work.[^eas_ml_modeling_vignette-3]
 
 [^eas_ml_modeling_vignette-3]: Note this data was already edited in an analysis file -- we should move that over to one of the R 'build files'
