@@ -27,3 +27,7 @@ We may add more technical and detailed material on these issues below (in the pr
 
 - Rewards for specific responses
 
+
+## Misc notes on platforms and tools
+
+[Integrating RStudio and Qualtrics: Importing Surveys to and Exporting Data from Qualtrics](https://www3.nd.edu/~sberry5/qualtricsAPI.html#will-this-really-help-me)

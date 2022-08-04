@@ -6,12 +6,13 @@
 ## Aim to integrate content from
 
 - Willem's blog and vignettes
+
 - [Reinstein notes](https://daaronr.github.io/metrics_discussion/introduction.html) and beyond
     - This should *not* include extensive discussion of causality (which is later), only an introduction to regression as a 'fitted descriptive line/plane']
 
 - [Lakens on statistical inference](https://lakens.github.io/statistical_inferences/)
 - McElreath
--
+
 
 :::
 
@@ -79,6 +80,7 @@ For these reasons, we general look for sources of experimental or
 quasi-experimental variation in the factors of interest to justify
 causal inference.
 :::
+-->
 
 
 
@@ -123,12 +125,13 @@ The [infer](https://infer.tidymodels.org/articles/infer.html) package vignette g
 
 \
 
+
 We use this, and give some explanation, in the 2021 [EAS donations post - see bookdown](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#plan-actual-all) (see folds within)
 
 > We use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). ...
 
 The code we use for these tests is permalinked [here](https://github.com/rethinkpriorities/ea-data/blob/c5da32aca0c37554353056874bbd57f9c1ebbf86/analysis/donations_20.Rmd#L2128)
-E
+
 \
 
 *Why use these techniques?*
