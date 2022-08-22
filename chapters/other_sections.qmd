@@ -1,22 +1,19 @@
 # Other suggested sections
 
+## Multilevel modeling
+
+[Slack thread on 'what are random effects'?](https://rethinkpriorities.slack.com/archives/G01BDCD2QPR/p1660060733533869)
 
 ## (Open and robust science: RP attitudes, discussions, resources) {#opensci}
 
 Integrate from:
 
-
 [Reinstein discussions here](https://daaronr.github.io/metrics_discussion/robust-diag.html)
 
+Code to do [Robustness checks as a 'specification chart'](https://github.com/ArielOrtizBobea/spec_chart), and sensitivity analysis
 
+Source: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&name=medium
 
 ## (Meta-analysis) {#meta}
 
 Incorporate and consolidate from [Reinsteins meta notes](https://daaronr.github.io/metrics_discussion/metaanalysis.html) and more
-
-
-
-
-
-
-

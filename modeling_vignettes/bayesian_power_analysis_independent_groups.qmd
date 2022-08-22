@@ -5,22 +5,42 @@ date: "11/17/2021"
 output:
   pdf_document: default
   html_document: default
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    code-tools: true
+    toc: true
+    number-sections: true
+    citations-hover: true
+    footnotes-hover: true
+execute:
+    freeze: auto # re-render only when source changes
+    warning: false
+    message: false
+    error: true
+comments:
+    hypothesis: true
+---
 
 # Introduction
 
-This guided example is a supplement to the [more general chapter offering a framework and workflow for power analyses](#power-workflow). It follows  the general steps outlined there. In this example, we will use the package `brms` for Bayesian estimation of parameter values. To keep things computationally tractable, we will focus on a simple comparison between two independent samples. The general steps are applicable to other Bayesian designs.
+This guided example is a supplement to the [more general chapter offering a framework and workflow for power analyses](#power-workflow). It follows the general steps outlined there. In this example, we will use the package `brms` for Bayesian estimation of parameter values. To keep things computationally tractable, we will focus on a simple comparison between two independent samples. The general steps are applicable to other Bayesian designs.
 
 Pre-requisite: You will need to set up `RStan` on your computer for the Bayesian analyses in this example to work. See [mc-stan.org](https://mc-stan.org/users/interfaces/rstan.html) and  [Rstan's wiki](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started).
 
+::: {.callout-note collapse="true"}
+## David Reinstein on installation on a Mac
+
+I never managed to install “mac -os Rtoolchain” but I did manage to get #Rstan up and running thanks to the [Coatless Professor’s workaround](https://thecoatlessprofessor.com/programming/cpp/r-compiler-tools-for-rcpp-on-macos/).
+
+::: 
+
+
 # Step 1: Generate a large number of data sets for the analysis
 
-We will run a comparison of two independent samples, and seek to assess our capacity for detecting a range of possible effect sizes, considering Cohen's $d$ at 0, .15, .3. 
-
+We will run a comparison of two independent samples, and seek to assess our capacity to detect (or rule out?) a range of possible effect sizes, considering Cohen's $d$ at 0, .15, .3.
 
 ```{r change-memory-limit, message = FALSE, warning = FALSE}
 #We will also increase the memory limit in R to allow for the large objects that are likely to be created:
@@ -40,22 +60,22 @@ library(tidyverse)
 ```{r data-making-function, message = FALSE, warning = FALSE}
 
 t.data.maker <- function(sim, effect.size, group.size) {
-  
+
   # create a data frame with two groups, standard normal distribution
   # group b differs from group a according to the specified effect size
   data <- tibble(
-    a.group = rnorm(n = group.size, mean = 0, sd = 1),  #create `group.size` rows of a standard normal, 
+    a.group = rnorm(n = group.size, mean = 0, sd = 1),  #create `group.size` rows of a standard normal,
     b.group = rnorm(n = group.size, mean = effect.size, sd = 1), #... of a std normal shifted by `effect` for 'treatment group' (or after-treatment if this is within subject)
     n = seq(1:group.size), #counter
-    'effect.size' = effect.size, 
+    'effect.size' = effect.size,
     'sim' = sim
   ) %>%
-    pivot_longer(cols = a.group:b.group, #make this one row per 'observation in  group' ... so 2*group.size rows
+    pivot_longer(cols = a.group:b.group, #make this one row per 'observation in  group' (rather than 1 per observation with 'both groups') ... so 2*group.size rows
       names_to = 'group',
       values_to = 'response')
-  
+
   return(data)
-  
+
 }
 
 ```
@@ -73,12 +93,12 @@ options <- furrr_options(seed = 1234)
 
 # make a tibble with our intended effect sizes and sample sizes
 effect.sizes <- tibble(
-    effect.size = c(rep(0, 250), rep(.15, 250), rep(.3, 250)), 
+    effect.size = c(rep(0, 250), rep(.15, 250), rep(.3, 250)),
     sim = seq(1:750)
     )
 
 # run t.data.maker over all the requested data sets
-# Map the list of effect sizes (and sim counter) to `t.data.maker` 
+# Map the list of effect sizes (and sim counter) to `t.data.maker`
 #... to generate a list of tibbles (each of size 1500)
 #... as specified, with 250 'treated' and 250 'controls' per effect size, where controls are standard normal and treated have the given effect sizes
 
@@ -102,10 +122,10 @@ We set up a Bayesian regression model to run over the many simulated data sets.
 ::: {.callout-note collapse="true"}
 ## Make sure this produces and saves your estimands!
 
-It is important to ensure that the estimands we are interested in can be returned at this step, because this process can be time consuming. We don't want to have to repeated it due to small mistakes. Hence, first carefully check that the code returns all the parameters you need, and then put it into a function that runs over the many data sets. 
+It is important to ensure that the estimands we are interested in can be returned at this step, because this process can be time consuming. We don't want to have to repeated it due to small mistakes. Hence, first carefully check that the code returns all the parameters you need, and then put it into a function that runs over the many data sets.
 
 In any case, we need to run the model at least once outside of the function.^[DR: what do you mean 'outside the function'?] This regression serves to compile the code and prevent the need to recompile it each time a new analysis is run, saving a lot of time.
-::: 
+:::
 
 
 Our simple formula for the t-test is a simple linear model:
@@ -172,7 +192,7 @@ base.reg <- brm(formula = reg.form,
 
 (base.reg)
 
-posterior <- as_tibble(posterior_samples(base.reg)) %>% 
+posterior <- as_tibble(posterior_samples(base.reg)) %>%
   # I use the names of the posterior sample columns
   # to calculate group means and Cohen's d
   mutate(a.group = `b_Intercept`,
@@ -189,9 +209,9 @@ We can see that our model run smoothly (decent effect sample sizes, Rhat of 1), 
 
 reg.maker <- function(simulated.data, base.reg = base.reg,
                       breaks = seq(from = 100, to = 1500, by = 100)) {
-  
+
   data <- simulated.data
-  
+
   # this function allows the sample size to be cut
   # so that we can see power for many different sample sizes
   cut.samples <- function(break.point, data) {
@@ -200,16 +220,16 @@ reg.maker <- function(simulated.data, base.reg = base.reg,
                        sample.size = break.point)
     return(cut.data)
   }
-  
+
   data.cuts <- map_dfr(.x = breaks, .f = cut.samples, data = data)
-  
+
   data.cuts <- data.cuts %>% group_by(sample.size) %>% group_split()
 
   # this function runs the regression model over the different sample sizes
   run.reg <- function(data, base.reg) {
-    
+
     set.seed = as.numeric(data[1 , "sim"])
-    
+
     # note use of the 'update' function rather than brm
     # to prevent need to recompile the model
     output <- update(base.reg,
@@ -218,9 +238,9 @@ reg.maker <- function(simulated.data, base.reg = base.reg,
                      cores = 1,
                      iter = 1750,
                      warmup = 250)
-    
+
     output <- as_tibble(posterior_samples(output))
-    
+
     output <- mutate(output,
                      sample.size = nrow(data) / 2,
                      effect.size = pull(data[1, "effect.size"]),
@@ -228,14 +248,14 @@ reg.maker <- function(simulated.data, base.reg = base.reg,
                      a.group = `b_Intercept`,
            b.group = `b_Intercept` + `b_groupb.group`,
                      cohen.d = `b_groupb.group` / `sigma`)
-    
+
     return(output)
-  } 
-  
+  }
+
   samples <- map_df(.x = data.cuts, .f = run.reg, base.reg = base.reg)
 
   return(samples)
-  
+
 }
 
 t1 <- Sys.time()
@@ -251,7 +271,7 @@ head(regression.samples)
 ```
 
 # Step 3: Summarise the output returned in Step 2 to determine likelihood of achieving various inferential goals
-The regression.samples object now contains posterior distributions for analyses of various effect sizes and sample sizes. For this example, our key outcome of interest is the effect size, measured as Cohen's d. We can use the posterior distribution for Cohen's d to draw various inferences about it. Some examples of possible 'tests' one might like to do with regards to a posterior distribution are presented below. 
+The regression.samples object now contains posterior distributions for analyses of various effect sizes and sample sizes. For this example, our key outcome of interest is the effect size, measured as Cohen's d. We can use the posterior distribution for Cohen's d to draw various inferences about it. Some examples of possible 'tests' one might like to do with regards to a posterior distribution are presented below.
 
 ```{r, decision-examples, echo = FALSE, warning = FALSE, message = FALSE}
 
@@ -262,11 +282,11 @@ examples <- tibble(over0 = rnorm(50000, mean = .4, sd = .22),
                    hdi95exc0 = rnorm(50000, mean = .5, sd = .22),
                    hdi99exc.1 = rnorm(50000, mean = .5, sd = .15),
                    withinrope = rnorm(50000, mean = 0, sd = .045),
-                   desired.precision = rnorm(50000, mean = .6, sd = .033)) %>% 
+                   desired.precision = rnorm(50000, mean = .6, sd = .033)) %>%
   pivot_longer(cols = everything(), names_to = 'decision', values_to = 'd')
 
 # summarise them in different ways
-examples.summary <- examples %>% group_by(decision) %>% 
+examples.summary <- examples %>% group_by(decision) %>%
   dplyr::summarise(lowerhdi95 = hdi(d)[1],
                    upperhdi95 = hdi(d)[2],
                    lowerhdi99 = hdi(d, .99)[1],
@@ -301,18 +321,18 @@ To do this, we simply need to make a function that will take each analysis (each
 # first split the posterior output according to sample size, effect size, and simulation
 regression.samples.split <-
 regression.samples %>%
-  group_by(effect.size, sample.size, sim) %>% 
+  group_by(effect.size, sample.size, sim) %>%
   group_split()
 
 # make a function to summarise the posterior
 posterior.inference <- function(posterior) {
-  
+
   # take the posterior and retrieve the upper and lower
   # 95% hdi bounds for the effect size
   summary <- dplyr::summarise(posterior,
                              lower95 = hdi(cohen.d, .95)[1],
                              upper95 = hdi(cohen.d, .95)[2])
-  
+
   # determine the width of the hdi and whether it is above 0
   # and add in meta information
   summary <- mutate(summary,
@@ -324,9 +344,9 @@ posterior.inference <- function(posterior) {
                     sample.size = posterior[[1, 'sample.size']],
                     effect.size = posterior[[1, 'effect.size']],
                     sim = posterior[[1, 'sim']])
-  
+
   return(summary)
-  
+
 }
 
 # feed the different posteriors to the summariser
@@ -341,12 +361,12 @@ We can now count and plot the proportion of times we achieve our inference goals
 
 above0 <- posterior.inferences %>% group_by(sample.size, effect.size) %>%
           summarise(.groups = 'keep',
-              n = sum(above.0)) %>% 
+              n = sum(above.0)) %>%
   mutate('Proportion of times achieved' = n/250)
 
 precision25 <- posterior.inferences %>% group_by(sample.size, effect.size) %>%
   summarise(.groups = 'keep',
-            n = sum(width.25)) %>% 
+            n = sum(width.25)) %>%
   mutate('Proportion of times achieved' = n/250)
 
 ggplot(data = above0) +
