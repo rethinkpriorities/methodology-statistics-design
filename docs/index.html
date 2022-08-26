@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.243">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="David Reinstein (most content atm), Willem Sleegers, Jamey Elsey">
-<title>Rethink Priorities: Methods</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.243">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="David Reinstein (most content atm), Willem Sleegers, Jamey Elsey">
+  <title>Rethink Priorities: Methods</title>
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -77,13 +76,25 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><link href="./chapters/coding_data.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+
+  <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="site_libs/quarto-nav/headroom.min.js"></script>
+  <script src="site_libs/clipboard/clipboard.min.js"></script>
+  <meta name="quarto:offset" content="./">
+  <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+  <script src="site_libs/quarto-search/fuse.min.js"></script>
+  <script src="site_libs/quarto-search/quarto-search.js"></script>
+  <link href="./chapters/coding_data.html" rel="next">
+  <script src="site_libs/quarto-html/quarto.js"></script>
+  <script src="site_libs/quarto-html/popper.min.js"></script>
+  <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="site_libs/quarto-html/anchor.min.js"></script>
+  <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script id="quarto-search-options" type="application/json">{
     "location": "sidebar",
     "copy-button": false,
     "collapse-after": 3,
@@ -101,21 +112,29 @@
       "search-detached-cancel-button-title": "Cancel",
       "search-submit-button-title": "Submit"
     }
-  }</script><script async="" src="https://hypothes.is/embed.js"></script><!--[if lt IE 9]>
+  }</script>
+  <script async="" src="https://hypothes.is/embed.js"></script>
+  <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body class="floating">
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">Rethink Priorities: Methods</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Rethink Priorities: Methods</a> 
         <div class="sidebar-tools-main">
@@ -135,15 +154,15 @@
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
   </div>
@@ -159,7 +178,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
@@ -167,8 +186,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
   </div>
@@ -194,7 +213,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics and modeling</a>
@@ -202,8 +221,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
@@ -234,7 +253,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
@@ -242,8 +261,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
   </div>
@@ -259,14 +278,16 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
 <ul>
-<li>
-<a href="#introductionoverview" id="toc-introductionoverview" class="nav-link active" data-scroll-target="#introductionoverview"> <span class="header-section-number">1</span> Introduction/overview</a>
+<li><a href="#introductionoverview" id="toc-introductionoverview" class="nav-link active" data-scroll-target="#introductionoverview"> <span class="header-section-number">1</span> Introduction/overview</a>
 <ul class="collapse">
 <li><a href="#rethink-priorities-our-approach-to-empirical-and-quantitative-work" id="toc-rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="nav-link" data-scroll-target="#rethink-priorities-our-approach-to-empirical-and-quantitative-work"> <span class="header-section-number">1.1</span> Rethink Priorities: Our approach to empirical and quantitative work</a></li>
 <li><a href="#the-purpose-of-this-resource" id="toc-the-purpose-of-this-resource" class="nav-link" data-scroll-target="#the-purpose-of-this-resource"> <span class="header-section-number">1.2</span> The purpose of this resource</a></li>
@@ -275,25 +296,30 @@
 <li><a href="#style-and-collophon" id="toc-style-and-collophon" class="nav-link" data-scroll-target="#style-and-collophon"> <span class="header-section-number">1.5</span> Style and ‘collophon’</a></li>
 <li><a href="#r-setup-and-packages" id="toc-r-setup-and-packages" class="nav-link" data-scroll-target="#r-setup-and-packages"> <span class="header-section-number">1.6</span> R setup and packages</a></li>
 <li><a href="#git-repo-shared-files-procedure-for-editing" id="toc-git-repo-shared-files-procedure-for-editing" class="nav-link" data-scroll-target="#git-repo-shared-files-procedure-for-editing"> <span class="header-section-number">1.7</span> Git repo, shared files, procedure for editing</a></li>
+</ul></li>
 </ul>
-</li>
-</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+
 
 
 <div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title d-none d-lg-block">Rethink Priorities: Methods</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div><p class="subtitle lead">Surveys/experiment design, analysis; methodology, protocols, templates</p></div><div class="quarto-title-meta"><div><div class="quarto-title-meta-heading">Author</div><div class="quarto-title-meta-contents"><div class="quarto-title-authors"><div><div>
 <p>David Reinstein (most content atm), Willem Sleegers, Jamey Elsey</p>
-</div></div></div></div></div></div></header><section id="introductionoverview" class="level1" data-number="1"><h1 data-number="1">
-<span class="header-section-number">1</span> Introduction/overview</h1>
+</div></div></div></div></div></div></header>
+
+<section id="introductionoverview" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction/overview</h1>
 <p>A set of curated resources tied to use-cases, and a space to organize our discussion</p>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <p><strong>NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.</strong></p>
-<section id="rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="rethink-priorities-our-approach-to-empirical-and-quantitative-work">
-<span class="header-section-number">1.1</span> Rethink Priorities: Our approach to empirical and quantitative work</h2>
-</section><section id="the-purpose-of-this-resource" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="the-purpose-of-this-resource">
-<span class="header-section-number">1.2</span> The purpose of this resource</h2>
+<section id="rethink-priorities-our-approach-to-empirical-and-quantitative-work" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="rethink-priorities-our-approach-to-empirical-and-quantitative-work"><span class="header-section-number">1.1</span> Rethink Priorities: Our approach to empirical and quantitative work</h2>
+</section>
+<section id="the-purpose-of-this-resource" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="the-purpose-of-this-resource"><span class="header-section-number">1.2</span> The purpose of this resource</h2>
 <!-- (integrate discussion from Slack thread and readme) -->
 <p>A github-hosted ‘<a href="https://quarto.org/">quarto</a>’ for structured in-depth discussion</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -344,7 +370,8 @@ Another reason: Common knowledge and language
 </div>
 </div>
 </div>
-<p><br></p>
+<p><br>
+</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-3" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -360,32 +387,27 @@ What to include, and how (Reinstein’s thoughts)
 <ul>
 <li><p>Don’t share any confidential data or sensitive information</p></li>
 <li><p>Don’t feel compelled to flesh out all sections with original content. Don’t add content just because “it’s in a typical syllabus’.</p></li>
-<li>
-<p>Focus on things that we use, have used, want to use, or have been requested to address.</p>
+<li><p>Focus on things that we use, have used, want to use, or have been requested to address.</p>
 <ul>
 <li>Secondarily, on things relevant to Effective Altruism-related research in general</li>
-</ul>
-</li>
+</ul></li>
 <li><p>Do curate link, and embed resources from elsewhere</p></li>
-<li>
-<p>Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)</p>
+<li><p>Incorporate examples from our work (where these are not sensitive or they where can be made anonymous)</p>
 <ul>
 <li>Top of each chapter/section: A ‘where do we use this’ section or box.</li>
-</ul>
-</li>
-<li>
-<p>Do put in content that is more in-depth and technical, or involving R-code and tools</p>
+</ul></li>
+<li><p>Do put in content that is more in-depth and technical, or involving R-code and tools</p>
 <ul>
 <li>Still, do try to ‘offset’ details (in folding blocks, appendix sections, margin notes), where it would otherwise clutter the book</li>
-</ul>
-</li>
+</ul></li>
 <li><p>Start with ‘plain language’ explanations of technical content; for ourselves, and potentially to share with partners in future</p></li>
 </ul>
 <p>I also hope to use this to develop ‘templates and standard practices’ for our work.</p>
 </div>
 </div>
 </div>
-<p><br></p>
+<p><br>
+</p>
 <p><strong>What to include and when to dive into the rabbit hole?</strong></p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target="#callout-4" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
@@ -417,8 +439,9 @@ The ‘second time it comes up’ rule
 <li><p>check our understanding through communication and discussion with others, flag key issues</p></li>
 </ul>
 </div>
-</section><section id="outline_sections" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="outline_sections">
-<span class="header-section-number">1.3</span> Sections and organization</h2>
+</section>
+<section id="outline_sections" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="outline_sections"><span class="header-section-number">1.3</span> Sections and organization</h2>
 <p>(Proposed/discussed below – keep updated with actual structure)</p>
 <p>Major ‘parts’:</p>
 <ol type="1">
@@ -470,26 +493,36 @@ Modeling, Prediction, inference, and machine learning .. some key topics
 <li>The basic ideas</li>
 <li>Causal and Guesstimate</li>
 <li>Code-based tools</li>
-</ul></section><section id="favorite-resources-references-tools" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="favorite-resources-references-tools">
-<span class="header-section-number">1.4</span> Favorite resources, references, tools</h2>
+</ul>
+</section>
+<section id="favorite-resources-references-tools" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="favorite-resources-references-tools"><span class="header-section-number">1.4</span> Favorite resources, references, tools</h2>
 <p><a href="https://airtable.com/shrIWaF4UsQ92CavA">“Research tools” Reinstein airtable, data relevant view</a></p>
 <p><a href="https://gist.github.com/peterhurford/">Pete W’s gists</a></p>
-</section><section id="style-and-collophon" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="style-and-collophon">
-<span class="header-section-number">1.5</span> Style and ‘collophon’</h2>
+</section>
+<section id="style-and-collophon" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="style-and-collophon"><span class="header-section-number">1.5</span> Style and ‘collophon’</h2>
 <p>For more information on how this ‘bookdown’ was created, see our public template <a href="https://rethinkpriorities.github.io/bookdown-template/">here</a>, and also consult the resources at <a href="https://bookdown.org/">bookdown.org</a></p>
-</section><section id="r-setup-and-packages" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="r-setup-and-packages">
-<span class="header-section-number">1.6</span> R setup and packages</h2>
+</section>
+<section id="r-setup-and-packages" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="r-setup-and-packages"><span class="header-section-number">1.6</span> R setup and packages</h2>
 <p>We are using <code>Renv</code> to keep packages aligned. Please install Renv it and snapshot</p>
-<p><code><a href="https://rstudio.github.io/renv/reference/dependencies.html">renv::dependencies</a></code> should tell us what packages are used/needed</p>
+<p><code>renv::dependencies</code> should tell us what packages are used/needed</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-
-<span class="va">dependencies</span> <span class="op">&lt;-</span> <span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/dependencies.html">dependencies</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>Finding R package dependencies ... [31/54] [32/54] [33/54] [34/54] [35/54] [36/54] [37/54] [38/54] [39/54] [40/54] [41/54] [42/54] [43/54] [44/54] [45/54] [46/54] [47/54] [48/54] [49/54] [50/54] [51/54] [52/54] [53/54] [54/54] Done!</code></pre>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dependencies <span class="ot">&lt;-</span> renv<span class="sc">::</span><span class="fu">dependencies</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Finding R package dependencies ... [31/54] [32/54] [33/54] [34/54] [35/54] [36/54] [37/54] [38/54] [39/54] [40/54] [41/54] [42/54] [43/54] [44/54] [45/54] [46/54] [47/54] [48/54] [49/54] [50/54] [51/54] [52/54] [53/54] [54/54] Done!</code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dependencies</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dependencies[<span class="dv">2</span>] <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">as.list</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>$Package
  [1] "quarto"              "here"                "dplyr"              
  [4] "Lahman"              "stats4"              "VGAM"               
@@ -525,17 +558,24 @@ Modeling, Prediction, inference, and machine learning .. some key topics
 [94] "tidybayes"           "dynverse"            "MASS"               </code></pre>
 </div>
 </div>
-</section><section id="git-repo-shared-files-procedure-for-editing" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="git-repo-shared-files-procedure-for-editing">
-<span class="header-section-number">1.7</span> Git repo, shared files, procedure for editing</h2>
+</section>
+<section id="git-repo-shared-files-procedure-for-editing" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="git-repo-shared-files-procedure-for-editing"><span class="header-section-number">1.7</span> Git repo, shared files, procedure for editing</h2>
 
 
 
 <!-- -->
 
-</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>As always, focus on ‘what repeatedly comes up in our work’, linking the practical cases<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></main><!-- /main --><script type="application/javascript">
+</ol>
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
@@ -661,7 +701,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
       <a href="./chapters/coding_data.html" class="pagination-link">

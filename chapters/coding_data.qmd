@@ -34,7 +34,7 @@ See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discus
 
 - Git and github
 
-- R and Rmd
+- R and Quarto (qmd) or Rmarkdown = `Rmd`
 
 - How to leave comments and collaborate?
 
@@ -52,7 +52,7 @@ See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discus
 
 'Soft-code' as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent
 
-[Inline code in Rmd](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html) is great but it can be a double-edged sword.
+[Inline code in Rmd/qmd](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html) is great but it can be a double-edged sword.
 
 Sometimes its better to 'do the important and complicated coding' in a chunk before this, not in the inline code itself because
 
@@ -70,7 +70,7 @@ Sometimes its better to 'do the important and complicated coding' in a chunk bef
 - Data import; external 'dictionary' can be helpful (see, e.g., [here](https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0) for EAS integrated with Google sheet; R code [here](https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R) brings it in
 
 - import, cleaning, variable creation separate from analysis (unless its a very 'one-off-for-analysis' thing)
-   - import and cleaning in `.R` rather than `.Rmd` perhaps
+   - import and cleaning in `.R` rather than `.Rmd` or `qmd` perhaps
 
 - 'raw' data in separate folder from 'munged' data
 
@@ -93,7 +93,6 @@ Sometimes its better to 'do the important and complicated coding' in a chunk bef
 We sometimes input a 'dictionary' for renaming many columns at a time. ^[However, I don't think I found a tidy way to do the renaming, at least I can't remember it.]
 
 `names(rename2020) <- eas_dictionary$true_name`
-
 
 
 
@@ -123,6 +122,9 @@ eas_all <-  eas_all %>%
 ```
 
 
+## Naming lists of columns for input into models
+
+See [vignette on 'modeling workflow'](https://rethinkpriorities.github.io/methodology-statistics-design/modeling_vignettes/modeling_workflow.html) for some examples
 
 ## Simple summary tools I was not aware of
 

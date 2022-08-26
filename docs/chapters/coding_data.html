@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.243">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Rethink Priorities: Methods - 2&nbsp; Coding, data</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.243">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Rethink Priorities: Methods - 2&nbsp; Coding, data</title>
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     span.underline{text-decoration: underline;}
@@ -76,14 +75,26 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><link href="../chapters/presentation_method_discussion.html" rel="next">
-<link href="../index.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script id="quarto-search-options" type="application/json">{
+
+  <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+  <script src="../site_libs/quarto-nav/headroom.min.js"></script>
+  <script src="../site_libs/clipboard/clipboard.min.js"></script>
+  <meta name="quarto:offset" content="../">
+  <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+  <script src="../site_libs/quarto-search/fuse.min.js"></script>
+  <script src="../site_libs/quarto-search/quarto-search.js"></script>
+  <link href="../chapters/presentation_method_discussion.html" rel="next">
+  <link href="../index.html" rel="prev">
+  <script src="../site_libs/quarto-html/quarto.js"></script>
+  <script src="../site_libs/quarto-html/popper.min.js"></script>
+  <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="../site_libs/quarto-html/anchor.min.js"></script>
+  <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+  <link id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+  <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <script id="quarto-search-options" type="application/json">{
     "location": "sidebar",
     "copy-button": false,
     "collapse-after": 3,
@@ -101,22 +112,31 @@
       "search-detached-cancel-button-title": "Cancel",
       "search-submit-button-title": "Submit"
     }
-  }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="../site_libs/kePrint-0.0.1/kePrint.js"></script><link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<!--[if lt IE 9]>
+  }</script>
+  <script async="" src="https://hypothes.is/embed.js"></script>
+  <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+  <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
 </head>
 <body class="floating">
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding, data</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Rethink Priorities: Methods</a> 
         <div class="sidebar-tools-main">
@@ -136,15 +156,15 @@
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item sidebar-item-section">
+        <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
   </div>
@@ -160,7 +180,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
@@ -168,8 +188,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
   </div>
@@ -195,7 +215,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics and modeling</a>
@@ -203,8 +223,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
@@ -235,7 +255,7 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
         <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
@@ -243,8 +263,8 @@
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
     </div>
-    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi Estimation’ Approaches</span></a>
   </div>
@@ -260,11 +280,14 @@
   </div>
 </li>
     </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Table of contents</h2>
 <ul>
 <li><a href="#some-resources" id="toc-some-resources" class="nav-link active" data-scroll-target="#some-resources"> <span class="header-section-number">2.1</span> Some resources</a></li>
 <li><a href="#coding-and-organisational-issues" id="toc-coding-and-organisational-issues" class="nav-link" data-scroll-target="#coding-and-organisational-issues"> <span class="header-section-number">2.2</span> Coding and organisational issues</a></li>
@@ -273,108 +296,136 @@
 <li><a href="#standard-cleaning-steps" id="toc-standard-cleaning-steps" class="nav-link" data-scroll-target="#standard-cleaning-steps"> <span class="header-section-number">2.4</span> Standard cleaning steps</a></li>
 <li><a href="#naming-columns-and-objects" id="toc-naming-columns-and-objects" class="nav-link" data-scroll-target="#naming-columns-and-objects"> <span class="header-section-number">2.5</span> Naming columns and objects</a></li>
 <li><a href="#labelling-columns" id="toc-labelling-columns" class="nav-link" data-scroll-target="#labelling-columns"> <span class="header-section-number">2.6</span> Labelling columns</a></li>
-<li><a href="#simple-summary-tools-i-was-not-aware-of" id="toc-simple-summary-tools-i-was-not-aware-of" class="nav-link" data-scroll-target="#simple-summary-tools-i-was-not-aware-of"> <span class="header-section-number">2.7</span> Simple summary tools I was not aware of</a></li>
-</ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/coding_data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<li><a href="#naming-lists-of-columns-for-input-into-models" id="toc-naming-lists-of-columns-for-input-into-models" class="nav-link" data-scroll-target="#naming-lists-of-columns-for-input-into-models"> <span class="header-section-number">2.7</span> Naming lists of columns for input into models</a></li>
+<li><a href="#simple-summary-tools-i-was-not-aware-of" id="toc-simple-summary-tools-i-was-not-aware-of" class="nav-link" data-scroll-target="#simple-summary-tools-i-was-not-aware-of"> <span class="header-section-number">2.8</span> Simple summary tools I was not aware of</a></li>
+</ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/coding_data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="coding" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding, data</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header><div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman">pacman</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+
+<div class="quarto-title"><div class="quarto-title-block d-none d-lg-block"><div><h1 class="title"><span id="coding" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding, data</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div></div></header>
+
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(rethinkpriorities)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="some-resources" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="some-resources">
-<span class="header-section-number">2.1</span> Some resources</h2>
+<section id="some-resources" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="some-resources"><span class="header-section-number">2.1</span> Some resources</h2>
 <p><a href="https://r4ds.had.co.nz/">R for data science</a>: highly recommended</p>
 <p>See <a href="https://daaronr.github.io/metrics_discussion/data-sci.html">getting, cleaning, and using data</a> (Reinstein) <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p><em>Pete W’s Gists curating…:</em></p>
 <ul>
 <li><p><a href="https://gist.github.com/peterhurford/72dbd44e0a34e29297485a8cf679cf73">Hadley Wickham’s “Advanced R</a> … for the most keen</p></li>
 <li><p><a href="https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5">“Git 101” (various resources)</a></p></li>
-</ul></section><section id="coding-and-organisational-issues" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="coding-and-organisational-issues">
-<span class="header-section-number">2.2</span> Coding and organisational issues</h2>
+</ul>
+</section>
+<section id="coding-and-organisational-issues" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="coding-and-organisational-issues"><span class="header-section-number">2.2</span> Coding and organisational issues</h2>
 <ul>
 <li><p>Data protection (e.g., EA Survey data pre-2021 is not publicly shareable!)</p></li>
 <li><p>Good data management</p></li>
 <li><p>Reproducability</p></li>
 <li><p>Git and github</p></li>
-<li><p>R and Rmd</p></li>
+<li><p>R and Quarto (qmd) or Rmarkdown = <code>Rmd</code></p></li>
 <li><p>How to leave comments and collaborate?</p></li>
 <li><p><code>trackdown</code> to convert to Gdoc for feedback</p></li>
 <li><p>Folder structure, use of packages; esp <code>Renv</code></p></li>
 <li><p>Functions etc pulled from <code>dr-rstuff</code> repo</p></li>
 <li><p>I (DR) love <code>lower_snake_case</code></p></li>
 </ul>
-<p><br></p>
-</section><section id="automation-and-dynamic-documents" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="automation-and-dynamic-documents">Automation and ‘dynamic documents’</h2>
+<p><br>
+</p>
+</section>
+<section id="automation-and-dynamic-documents" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="automation-and-dynamic-documents">Automation and ‘dynamic documents’</h2>
 <p>‘Soft-code’ as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent</p>
-<p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html">Inline code in Rmd</a> is great but it can be a double-edged sword.</p>
+<p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html">Inline code in Rmd/qmd</a> is great but it can be a double-edged sword.</p>
 <p>Sometimes its better to ‘do the important and complicated coding’ in a chunk before this, not in the inline code itself because</p>
 <ul>
 <li><p>the ‘bookdown’ doesn’t show the <em>code</em> generating the inline computation … so a separate chunk makes it more transparent for external readers</p></li>
 <li><p>inline code isn’t spaced well and its hard to read and debug.</p></li>
-</ul></section><section id="data-management" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="data-management">
-<span class="header-section-number">2.3</span> Data management</h2>
+</ul>
+</section>
+<section id="data-management" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="data-management"><span class="header-section-number">2.3</span> Data management</h2>
 <ul>
 <li><p>Track it from its ‘source’; use API to grab directly from Qualtrics (etc.) if possible</p></li>
 <li><p>A <code>main.R</code> file in the root directory should run everything</p></li>
 <li><p>Data import; external ‘dictionary’ can be helpful (see, e.g., <a href="https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0">here</a> for EAS integrated with Google sheet; R code <a href="https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R">here</a> brings it in</p></li>
-<li>
-<p>import, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)</p>
+<li><p>import, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)</p>
 <ul>
-<li>import and cleaning in <code>.R</code> rather than <code>.Rmd</code> perhaps</li>
-</ul>
-</li>
+<li>import and cleaning in <code>.R</code> rather than <code>.Rmd</code> or <code>qmd</code> perhaps</li>
+</ul></li>
 <li><p>‘raw’ data in separate folder from ‘munged’ data</p></li>
 <li><p><code>codebook</code> package – make a codebook</p></li>
-<li>
-<p>minimize ‘versions’ of the data frames … code and use ‘filter objects’ instead</p>
+<li><p>minimize ‘versions’ of the data frames … code and use ‘filter objects’ instead</p>
 <ul>
-<li>see <a href="https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set">‘lists of filters’</a> but actually defining the filter with <code><a href="https://dplyr.tidyverse.org/reference/tidyeval-compat.html">quo()</a></code> seems better.</li>
+<li>see <a href="https://daaronr.github.io/metrics_discussion/data-sci.html#building-results-based-on-lists-of-filters-of-the-data-set">‘lists of filters’</a> but actually defining the filter with <code>quo()</code> seems better.</li>
+</ul></li>
 </ul>
-</li>
-</ul></section><section id="standard-cleaning-steps" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="standard-cleaning-steps">
-<span class="header-section-number">2.4</span> Standard cleaning steps</h2>
-<p><code><a href="https://rdrr.io/pkg/janitor/man/remove_empty.html">janitor::remove_empty()</a></code> # removes empty rows and columns</p>
-</section><section id="naming-columns-and-objects" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="naming-columns-and-objects">
-<span class="header-section-number">2.5</span> Naming columns and objects</h2>
-<p><code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">janitor::clean_names()</a></code> is a helpful shortcut to snake case</p>
+</section>
+<section id="standard-cleaning-steps" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="standard-cleaning-steps"><span class="header-section-number">2.4</span> Standard cleaning steps</h2>
+<p><code>janitor::remove_empty()</code> # removes empty rows and columns</p>
+</section>
+<section id="naming-columns-and-objects" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="naming-columns-and-objects"><span class="header-section-number">2.5</span> Naming columns and objects</h2>
+<p><code>janitor::clean_names()</code> is a helpful shortcut to snake case</p>
 <p>We sometimes input a ‘dictionary’ for renaming many columns at a time. <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p><code>names(rename2020) &lt;- eas_dictionary$true_name</code></p>
-</section><section id="labelling-columns" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="labelling-columns">
-<span class="header-section-number">2.6</span> Labelling columns</h2>
+</section>
+<section id="labelling-columns" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="labelling-columns"><span class="header-section-number">2.6</span> Labelling columns</h2>
 <p>Some example code below</p>
 <p>Put list of labels and renamings in objects in a separate location … to avoid duplication and clutter:</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">key_eas_all_labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span> <span class="co">#note these are converted to a list with as.list before assigning them</span>
-    donation_usd <span class="op">=</span> <span class="st">"Donation (USD)"</span>,
-    l_don_usd <span class="op">=</span> <span class="st">"Log Don. (USD)"</span>,
-    l_don_av_2yr <span class="op">=</span> <span class="st">"Log Don. 'avg.'"</span>,
-    ln_age <span class="op">=</span> <span class="st">"Log age"</span>,
-    don_av2_yr <span class="op">=</span> <span class="st">"Don. 'avg'"</span>,
-    donation_plan_usd <span class="op">=</span> <span class="st">"Don. plan (USD)"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>key_eas_all_labels <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="co">#note these are converted to a list with as.list before assigning them</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_usd =</span> <span class="st">"Donation (USD)"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_usd =</span> <span class="st">"Log Don. (USD)"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_av_2yr =</span> <span class="st">"Log Don. 'avg.'"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ln_age =</span> <span class="st">"Log age"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">don_av2_yr =</span> <span class="st">"Don. 'avg'"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_plan_usd =</span> <span class="st">"Don. plan (USD)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Variable labels are helpful</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">eas_all</span> <span class="op">&lt;-</span>  <span class="va">eas_all</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu">labelled</span><span class="fu">::</span><span class="fu"><a href="http://larmarange.github.io/labelled/reference/var_label.html">set_variable_labels</a></span><span class="op">(</span>.labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">key_eas_all_labels</span><span class="op">)</span>, .strict<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>eas_all <span class="ot">&lt;-</span>  eas_all <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">set_variable_labels</span>(<span class="at">.labels =</span> <span class="fu">as.list</span>(key_eas_all_labels), <span class="at">.strict=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in as.vector(y): object 'eas_all' not found</code></pre>
 </div>
 </div>
-</section><section id="simple-summary-tools-i-was-not-aware-of" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="simple-summary-tools-i-was-not-aware-of">
-<span class="header-section-number">2.7</span> Simple summary tools I was not aware of</h2>
+</section>
+<section id="naming-lists-of-columns-for-input-into-models" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="naming-lists-of-columns-for-input-into-models"><span class="header-section-number">2.7</span> Naming lists of columns for input into models</h2>
+<p>See <a href="https://rethinkpriorities.github.io/methodology-statistics-design/modeling_vignettes/modeling_workflow.html">vignette on ‘modeling workflow’</a> for some examples</p>
+</section>
+<section id="simple-summary-tools-i-was-not-aware-of" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="simple-summary-tools-i-was-not-aware-of"><span class="header-section-number">2.8</span> Simple summary tools I was not aware of</h2>
 <p>From Willem’s <a href="https://docs.google.com/document/d/13jPMcG5m4oxinqEtlQ2tSqkQs4-JEUcC0ytz9woFG3E/edit">intro to R workshop script</a></p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">diamonds</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">cut</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(cut) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   cut           n    pct
   &lt;ord&gt;     &lt;int&gt;  &lt;dbl&gt;
@@ -384,89 +435,107 @@
 4 Premium   13791 0.256 
 5 Ideal     21551 0.400 </code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Use tidystats</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://willemsleegers.github.io/tidystats/">tidystats</a></span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use tidystats</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidystats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in library(tidystats): there is no package called 'tidystats'</code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">count_data</span><span class="op">(</span><span class="va">diamonds</span>, <span class="va">cut</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_data</span>(diamonds, cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in count_data(diamonds, cut): could not find function "count_data"</code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">diamonds</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">color</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu">count_data</span><span class="op">(</span><span class="va">cut</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">count_data</span>(cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in count_data(., cut): could not find function "count_data"</code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">describe_data</span><span class="op">(</span><span class="va">diamonds</span>, <span class="va">price</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-error">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_data</span>(diamonds, price)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
 <pre><code>Error in describe_data(diamonds, price): could not find function "describe_data"</code></pre>
 </div>
 </div>
 <p>This one I knew, of course, the typical ’grouped summary’s</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">diamonds</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">color</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>
-   M <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">price</span><span class="op">)</span>,
-   SD <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">price</span><span class="op">)</span>,
-   min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">price</span><span class="op">)</span>
- <span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span>
- <span class="fu">.kable</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/rethinkpriorities/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/rethinkpriorities/man/dot-kable_styling.html">.kable_styling</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">M =</span> <span class="fu">mean</span>(price),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">SD =</span> <span class="fu">sd</span>(price),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">min =</span> <span class="fu">min</span>(price)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">.kable</span>() <span class="sc">%&gt;%</span> <span class="fu">.kable_styling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:left;"> color </th>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> color </th>
    <th style="text-align:right;"> M </th>
    <th style="text-align:right;"> SD </th>
    <th style="text-align:right;"> min </th>
-  </tr></thead>
+  </tr>
+ </thead>
 <tbody>
-<tr>
-<td style="text-align:left;"> D </td>
+  <tr>
+   <td style="text-align:left;"> D </td>
    <td style="text-align:right;"> 3,169.954 </td>
    <td style="text-align:right;"> 3,356.591 </td>
    <td style="text-align:right;"> 357 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> E </td>
+  <tr>
+   <td style="text-align:left;"> E </td>
    <td style="text-align:right;"> 3,076.752 </td>
    <td style="text-align:right;"> 3,344.159 </td>
    <td style="text-align:right;"> 326 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> F </td>
+  <tr>
+   <td style="text-align:left;"> F </td>
    <td style="text-align:right;"> 3,724.886 </td>
    <td style="text-align:right;"> 3,784.992 </td>
    <td style="text-align:right;"> 342 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> G </td>
+  <tr>
+   <td style="text-align:left;"> G </td>
    <td style="text-align:right;"> 3,999.136 </td>
    <td style="text-align:right;"> 4,051.103 </td>
    <td style="text-align:right;"> 354 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> H </td>
+  <tr>
+   <td style="text-align:left;"> H </td>
    <td style="text-align:right;"> 4,486.669 </td>
    <td style="text-align:right;"> 4,215.944 </td>
    <td style="text-align:right;"> 337 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> I </td>
+  <tr>
+   <td style="text-align:left;"> I </td>
    <td style="text-align:right;"> 5,091.875 </td>
    <td style="text-align:right;"> 4,722.388 </td>
    <td style="text-align:right;"> 334 </td>
   </tr>
-<tr>
-<td style="text-align:left;"> J </td>
+  <tr>
+   <td style="text-align:left;"> J </td>
    <td style="text-align:right;"> 5,323.818 </td>
    <td style="text-align:right;"> 4,438.187 </td>
    <td style="text-align:right;"> 335 </td>
   </tr>
 </tbody>
 </table>
+
 </div>
 </div>
 
@@ -474,11 +543,16 @@
 
 <!-- -->
 
-</section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
 <ol>
 <li id="fn1" role="doc-endnote"><p>Todo: integrate key content.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2" role="doc-endnote"><p>However, I don’t think I found a tidy way to do the renaming, at least I can’t remember it.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></main><!-- /main --><script type="application/javascript">
+</ol>
+</section>
+</main> <!-- /main -->
+<script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const icon = "";
   const anchorJS = new window.AnchorJS();
@@ -604,7 +678,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></span>
       </a>          
@@ -651,7 +727,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Git and github</span>
 <span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R and Rmd</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R and Quarto (qmd) or Rmarkdown = <span class="in">`Rmd`</span></span>
 <span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How to leave comments and collaborate?</span>
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
@@ -669,7 +745,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>'Soft-code' as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent</span>
 <span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Inline code in Rmd</span><span class="co">](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html)</span> is great but it can be a double-edged sword.</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Inline code in Rmd/qmd</span><span class="co">](https://bookdown.org/yihui/rmarkdown-cookbook/r-code.html)</span> is great but it can be a double-edged sword.</span>
 <span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>Sometimes its better to 'do the important and complicated coding' in a chunk before this, not in the inline code itself because</span>
 <span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a></span>
@@ -687,7 +763,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Data import; external 'dictionary' can be helpful (see, e.g., <span class="co">[</span><span class="ot">here</span><span class="co">](https://docs.google.com/spreadsheets/d/1dWy-CZxd9lzx0bLZ5ntmCSmwGPTrwjGcKpY4ORLom8E/edit#gid=0)</span> for EAS integrated with Google sheet; R code <span class="co">[</span><span class="ot">here</span><span class="co">](https://github.com/rethinkpriorities/ea-data/blob/master/build/fmt_label_with_dic_dhj_ok.R)</span> brings it in</span>
 <span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>import, cleaning, variable creation separate from analysis (unless its a very 'one-off-for-analysis' thing)</span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>import and cleaning in <span class="in">`.R`</span> rather than <span class="in">`.Rmd`</span> perhaps</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>import and cleaning in <span class="in">`.R`</span> rather than <span class="in">`.Rmd`</span> or <span class="in">`qmd`</span> perhaps</span>
 <span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>'raw' data in separate folder from 'munged' data</span>
 <span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a></span>
@@ -713,71 +789,73 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Labelling columns</span></span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>Some example code below</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Labelling columns</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>Some example code below</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>Put list of labels and renamings in objects in a separate location ... to avoid duplication and clutter:</span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>key_eas_all_labels <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="co">#note these are converted to a list with as.list before assigning them</span></span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_usd =</span> <span class="st">"Donation (USD)"</span>,</span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_usd =</span> <span class="st">"Log Don. (USD)"</span>,</span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_av_2yr =</span> <span class="st">"Log Don. 'avg.'"</span>,</span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>    <span class="at">ln_age =</span> <span class="st">"Log age"</span>,</span>
-<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">don_av2_yr =</span> <span class="st">"Don. 'avg'"</span>,</span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_plan_usd =</span> <span class="st">"Don. plan (USD)"</span>)</span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>Variable labels are helpful</span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>eas_all <span class="ot">&lt;-</span>  eas_all <span class="sc">%&gt;%</span> </span>
-<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">set_variable_labels</span>(<span class="at">.labels =</span> <span class="fu">as.list</span>(key_eas_all_labels), <span class="at">.strict=</span><span class="cn">FALSE</span>)</span>
-<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>Put list of labels and renamings in objects in a separate location ... to avoid duplication and clutter:</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>key_eas_all_labels <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="co">#note these are converted to a list with as.list before assigning them</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_usd =</span> <span class="st">"Donation (USD)"</span>,</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_usd =</span> <span class="st">"Log Don. (USD)"</span>,</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">l_don_av_2yr =</span> <span class="st">"Log Don. 'avg.'"</span>,</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">ln_age =</span> <span class="st">"Log age"</span>,</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>    <span class="at">don_av2_yr =</span> <span class="st">"Don. 'avg'"</span>,</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">donation_plan_usd =</span> <span class="st">"Don. plan (USD)"</span>)</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>Variable labels are helpful</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>eas_all <span class="ot">&lt;-</span>  eas_all <span class="sc">%&gt;%</span> </span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>  labelled<span class="sc">::</span><span class="fu">set_variable_labels</span>(<span class="at">.labels =</span> <span class="fu">as.list</span>(key_eas_all_labels), <span class="at">.strict=</span><span class="cn">FALSE</span>)</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Naming lists of columns for input into models</span></span>
 <span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple summary tools I was not aware of</span></span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>See <span class="co">[</span><span class="ot">vignette on 'modeling workflow'</span><span class="co">](https://rethinkpriorities.github.io/methodology-statistics-design/modeling_vignettes/modeling_workflow.html)</span> for some examples</span>
 <span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>From Willem's <span class="co">[</span><span class="ot">intro to R workshop script</span><span class="co">](https://docs.google.com/document/d/13jPMcG5m4oxinqEtlQ2tSqkQs4-JEUcC0ytz9woFG3E/edit)</span></span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple summary tools I was not aware of</span></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(cut) <span class="sc">%&gt;%</span></span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a><span class="co"># Use tidystats</span></span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidystats)</span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="fu">count_data</span>(diamonds, cut)</span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>From Willem's <span class="co">[</span><span class="ot">intro to R workshop script</span><span class="co">](https://docs.google.com/document/d/13jPMcG5m4oxinqEtlQ2tSqkQs4-JEUcC0ytz9woFG3E/edit)</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(cut) <span class="sc">%&gt;%</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">pct =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a><span class="co"># Use tidystats</span></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidystats)</span>
 <span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a> <span class="fu">count_data</span>(cut)</span>
-<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_data</span>(diamonds, price)</span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="fu">count_data</span>(diamonds, cut)</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a> <span class="fu">count_data</span>(cut)</span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a><span class="fu">describe_data</span>(diamonds, price)</span>
 <span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>This one I knew, of course, the typical 'grouped summary's</span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r groupedsum}</span></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>This one I knew, of course, the typical 'grouped summary's</span>
 <span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
-<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(</span>
-<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>   <span class="at">M =</span> <span class="fu">mean</span>(price),</span>
-<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>   <span class="at">SD =</span> <span class="fu">sd</span>(price),</span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>   <span class="at">min =</span> <span class="fu">min</span>(price)</span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a> <span class="fu">.kable</span>() <span class="sc">%&gt;%</span> <span class="fu">.kable_styling</span>()</span>
-<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r groupedsum}</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">%&gt;%</span></span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(color) <span class="sc">%&gt;%</span></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarize</span>(</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>   <span class="at">M =</span> <span class="fu">mean</span>(price),</span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>   <span class="at">SD =</span> <span class="fu">sd</span>(price),</span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>   <span class="at">min =</span> <span class="fu">min</span>(price)</span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a> <span class="fu">.kable</span>() <span class="sc">%&gt;%</span> <span class="fu">.kable_styling</span>()</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

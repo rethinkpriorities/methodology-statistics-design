@@ -11,56 +11,56 @@
     "href": "chapters/coding_data.html",
     "title": "2  Coding, data",
     "section": "",
-    "text": "Codelibrary(pacman)\np_load(rethinkpriorities)\nlibrary(rethinkpriorities)\nlibrary(dplyr)\nlibrary(tibble)\nlibrary(tidyverse)"
+    "text": "Code\nlibrary(pacman)\np_load(rethinkpriorities)\nlibrary(rethinkpriorities)\nlibrary(dplyr)\nlibrary(tibble)\nlibrary(tidyverse)"
   },
   {
     "objectID": "chapters/coding_data.html#coding-and-organisational-issues",
     "href": "chapters/coding_data.html#coding-and-organisational-issues",
     "title": "2  Coding, data",
-    "section": "\n2.2 Coding and organisational issues",
-    "text": "2.2 Coding and organisational issues\n\nData protection (e.g., EA Survey data pre-2021 is not publicly shareable!)\nGood data management\nReproducability\nGit and github\nR and Rmd\nHow to leave comments and collaborate?\ntrackdown to convert to Gdoc for feedback\nFolder structure, use of packages; esp Renv\nFunctions etc pulled from dr-rstuff repo\nI (DR) love lower_snake_case"
+    "section": "2.2 Coding and organisational issues",
+    "text": "2.2 Coding and organisational issues\n\nData protection (e.g., EA Survey data pre-2021 is not publicly shareable!)\nGood data management\nReproducability\nGit and github\nR and Quarto (qmd) or Rmarkdown = Rmd\nHow to leave comments and collaborate?\ntrackdown to convert to Gdoc for feedback\nFolder structure, use of packages; esp Renv\nFunctions etc pulled from dr-rstuff repo\nI (DR) love lower_snake_case"
   },
   {
     "objectID": "chapters/coding_data.html#automation-and-dynamic-documents",
     "href": "chapters/coding_data.html#automation-and-dynamic-documents",
     "title": "2  Coding, data",
     "section": "Automation and ‘dynamic documents’",
-    "text": "Automation and ‘dynamic documents’\n‘Soft-code’ as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent\nInline code in Rmd is great but it can be a double-edged sword.\nSometimes its better to ‘do the important and complicated coding’ in a chunk before this, not in the inline code itself because\n\nthe ‘bookdown’ doesn’t show the code generating the inline computation … so a separate chunk makes it more transparent for external readers\ninline code isn’t spaced well and its hard to read and debug."
+    "text": "Automation and ‘dynamic documents’\n‘Soft-code’ as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent\nInline code in Rmd/qmd is great but it can be a double-edged sword.\nSometimes its better to ‘do the important and complicated coding’ in a chunk before this, not in the inline code itself because\n\nthe ‘bookdown’ doesn’t show the code generating the inline computation … so a separate chunk makes it more transparent for external readers\ninline code isn’t spaced well and its hard to read and debug."
   },
   {
     "objectID": "chapters/coding_data.html#data-management",
     "href": "chapters/coding_data.html#data-management",
     "title": "2  Coding, data",
-    "section": "\n2.3 Data management",
-    "text": "2.3 Data management\n\nTrack it from its ‘source’; use API to grab directly from Qualtrics (etc.) if possible\nA main.R file in the root directory should run everything\nData import; external ‘dictionary’ can be helpful (see, e.g., here for EAS integrated with Google sheet; R code here brings it in\n\nimport, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)\n\nimport and cleaning in .R rather than .Rmd perhaps\n\n\n‘raw’ data in separate folder from ‘munged’ data\ncodebook package – make a codebook\n\nminimize ‘versions’ of the data frames … code and use ‘filter objects’ instead\n\nsee ‘lists of filters’ but actually defining the filter with quo() seems better."
+    "section": "2.3 Data management",
+    "text": "2.3 Data management\n\nTrack it from its ‘source’; use API to grab directly from Qualtrics (etc.) if possible\nA main.R file in the root directory should run everything\nData import; external ‘dictionary’ can be helpful (see, e.g., here for EAS integrated with Google sheet; R code here brings it in\nimport, cleaning, variable creation separate from analysis (unless its a very ‘one-off-for-analysis’ thing)\n\nimport and cleaning in .R rather than .Rmd or qmd perhaps\n\n‘raw’ data in separate folder from ‘munged’ data\ncodebook package – make a codebook\nminimize ‘versions’ of the data frames … code and use ‘filter objects’ instead\n\nsee ‘lists of filters’ but actually defining the filter with quo() seems better."
   },
   {
     "objectID": "chapters/coding_data.html#standard-cleaning-steps",
     "href": "chapters/coding_data.html#standard-cleaning-steps",
     "title": "2  Coding, data",
-    "section": "\n2.4 Standard cleaning steps",
+    "section": "2.4 Standard cleaning steps",
     "text": "2.4 Standard cleaning steps\njanitor::remove_empty() # removes empty rows and columns"
   },
   {
     "objectID": "chapters/coding_data.html#naming-columns-and-objects",
     "href": "chapters/coding_data.html#naming-columns-and-objects",
     "title": "2  Coding, data",
-    "section": "\n2.5 Naming columns and objects",
+    "section": "2.5 Naming columns and objects",
     "text": "2.5 Naming columns and objects\njanitor::clean_names() is a helpful shortcut to snake case\nWe sometimes input a ‘dictionary’ for renaming many columns at a time. 2\nnames(rename2020) <- eas_dictionary$true_name"
   },
   {
     "objectID": "chapters/coding_data.html#labelling-columns",
     "href": "chapters/coding_data.html#labelling-columns",
     "title": "2  Coding, data",
-    "section": "\n2.6 Labelling columns",
-    "text": "2.6 Labelling columns\nSome example code below\nPut list of labels and renamings in objects in a separate location … to avoid duplication and clutter:\n\nCodekey_eas_all_labels <- c( #note these are converted to a list with as.list before assigning them\n    donation_usd = \"Donation (USD)\",\n    l_don_usd = \"Log Don. (USD)\",\n    l_don_av_2yr = \"Log Don. 'avg.'\",\n    ln_age = \"Log age\",\n    don_av2_yr = \"Don. 'avg'\",\n    donation_plan_usd = \"Don. plan (USD)\")\n\n\nVariable labels are helpful\n\nCodeeas_all <-  eas_all %>% \n  labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)\n\nError in as.vector(y): object 'eas_all' not found"
+    "section": "2.6 Labelling columns",
+    "text": "2.6 Labelling columns\nSome example code below\nPut list of labels and renamings in objects in a separate location … to avoid duplication and clutter:\n\n\nCode\nkey_eas_all_labels <- c( #note these are converted to a list with as.list before assigning them\n    donation_usd = \"Donation (USD)\",\n    l_don_usd = \"Log Don. (USD)\",\n    l_don_av_2yr = \"Log Don. 'avg.'\",\n    ln_age = \"Log age\",\n    don_av2_yr = \"Don. 'avg'\",\n    donation_plan_usd = \"Don. plan (USD)\")\n\n\nVariable labels are helpful\n\n\nCode\neas_all <-  eas_all %>% \n  labelled::set_variable_labels(.labels = as.list(key_eas_all_labels), .strict=FALSE)\n\n\nError in as.vector(y): object 'eas_all' not found"
   },
   {
     "objectID": "chapters/coding_data.html#simple-summary-tools-i-was-not-aware-of",
     "href": "chapters/coding_data.html#simple-summary-tools-i-was-not-aware-of",
     "title": "2  Coding, data",
-    "section": "\n2.7 Simple summary tools I was not aware of",
-    "text": "2.7 Simple summary tools I was not aware of\nFrom Willem’s intro to R workshop script\n\nCodediamonds %>%\n count(cut) %>%\n mutate(pct = n / sum(n))\n\n# A tibble: 5 × 3\n  cut           n    pct\n  <ord>     <int>  <dbl>\n1 Fair       1610 0.0298\n2 Good       4906 0.0910\n3 Very Good 12082 0.224 \n4 Premium   13791 0.256 \n5 Ideal     21551 0.400 \n\nCode# Use tidystats\nlibrary(tidystats)\n\nError in library(tidystats): there is no package called 'tidystats'\n\nCodecount_data(diamonds, cut)\n\nError in count_data(diamonds, cut): could not find function \"count_data\"\n\nCodediamonds %>%\n group_by(color) %>%\n count_data(cut)\n\nError in count_data(., cut): could not find function \"count_data\"\n\nCodedescribe_data(diamonds, price)\n\nError in describe_data(diamonds, price): could not find function \"describe_data\"\n\n\nThis one I knew, of course, the typical ’grouped summary’s\n\nCodediamonds %>%\n group_by(color) %>%\n summarize(\n   M = mean(price),\n   SD = sd(price),\n   min = min(price)\n ) %>%\n .kable() %>% .kable_styling()\n\n\n\n color \n    M \n    SD \n    min \n  \n\n\n D \n    3,169.954 \n    3,356.591 \n    357 \n  \n\n E \n    3,076.752 \n    3,344.159 \n    326 \n  \n\n F \n    3,724.886 \n    3,784.992 \n    342 \n  \n\n G \n    3,999.136 \n    4,051.103 \n    354 \n  \n\n H \n    4,486.669 \n    4,215.944 \n    337 \n  \n\n I \n    5,091.875 \n    4,722.388 \n    334 \n  \n\n J \n    5,323.818 \n    4,438.187 \n    335"
+    "section": "2.8 Simple summary tools I was not aware of",
+    "text": "2.8 Simple summary tools I was not aware of\nFrom Willem’s intro to R workshop script\n\n\nCode\ndiamonds %>%\n count(cut) %>%\n mutate(pct = n / sum(n))\n\n\n# A tibble: 5 × 3\n  cut           n    pct\n  <ord>     <int>  <dbl>\n1 Fair       1610 0.0298\n2 Good       4906 0.0910\n3 Very Good 12082 0.224 \n4 Premium   13791 0.256 \n5 Ideal     21551 0.400 \n\n\nCode\n# Use tidystats\nlibrary(tidystats)\n\n\nError in library(tidystats): there is no package called 'tidystats'\n\n\nCode\ncount_data(diamonds, cut)\n\n\nError in count_data(diamonds, cut): could not find function \"count_data\"\n\n\nCode\ndiamonds %>%\n group_by(color) %>%\n count_data(cut)\n\n\nError in count_data(., cut): could not find function \"count_data\"\n\n\nCode\ndescribe_data(diamonds, price)\n\n\nError in describe_data(diamonds, price): could not find function \"describe_data\"\n\n\nThis one I knew, of course, the typical ’grouped summary’s\n\n\nCode\ndiamonds %>%\n group_by(color) %>%\n summarize(\n   M = mean(price),\n   SD = sd(price),\n   min = min(price)\n ) %>%\n .kable() %>% .kable_styling()\n\n\n\n \n  \n    color \n    M \n    SD \n    min \n  \n \n\n  \n    D \n    3,169.954 \n    3,356.591 \n    357 \n  \n  \n    E \n    3,076.752 \n    3,344.159 \n    326 \n  \n  \n    F \n    3,724.886 \n    3,784.992 \n    342 \n  \n  \n    G \n    3,999.136 \n    4,051.103 \n    354 \n  \n  \n    H \n    4,486.669 \n    4,215.944 \n    337 \n  \n  \n    I \n    5,091.875 \n    4,722.388 \n    334 \n  \n  \n    J \n    5,323.818 \n    4,438.187 \n    335"
   },
   {
     "objectID": "chapters/presentation_method_discussion.html",
@@ -431,14 +431,14 @@
     "href": "chapters/other_sections.html",
     "title": "16  Other suggested sections",
     "section": "",
-    "text": "Integrate from:\nReinstein discussions here"
+    "text": "Slack thread on ‘what are random effects’?\nA beginner’s guide to LMER … the LMER package uses a maximum likelihood (not Bayesian) approach\n\n\nFrom Tristan Mahr’s vignette – this vignette explains a lot (but it doesn’t go into the formal maths)\n\n\n\nCode\nlibrary(lme4)\n#> Loading required package: Matrix\nlibrary(dplyr)\nlibrary(tibble)\n\n# Convert to tibble for better printing. Convert factors to strings\nsleepstudy <- sleepstudy %>% \n  as_tibble() %>% \n  mutate(Subject = as.character(Subject))\n\n# Add two fake participants\ndf_sleep <- bind_rows(\n  sleepstudy,\n  tibble(Reaction = c(286, 288), Days = 0:1, Subject = \"374\"),\n  tibble(Reaction = 245, Days = 0, Subject = \"373\"))\n\ndf_sleep\n\n\n# A tibble: 183 × 3\n   Reaction  Days Subject\n      <dbl> <dbl> <chr>  \n 1     250.     0 308    \n 2     259.     1 308    \n 3     251.     2 308    \n 4     321.     3 308    \n 5     357.     4 308    \n 6     415.     5 308    \n 7     382.     6 308    \n 8     290.     7 308    \n 9     431.     8 308    \n10     466.     9 308    \n# … with 173 more rows"
   },
   {
     "objectID": "chapters/other_sections.html#meta",
     "href": "chapters/other_sections.html#meta",
     "title": "16  Other suggested sections",
-    "section": "16.2 (Meta-analysis)",
-    "text": "16.2 (Meta-analysis)\nIncorporate and consolidate from Reinsteins meta notes and more"
+    "section": "16.3 (Meta-analysis)",
+    "text": "16.3 (Meta-analysis)\nIncorporate and consolidate from Reinsteins meta notes and more"
   },
   {
     "objectID": "from_ea_market_testing/binary_trial_computations_redacted_ed.html",
@@ -479,7 +479,7 @@
     "objectID": "chapters/coding_data.html#some-resources",
     "href": "chapters/coding_data.html#some-resources",
     "title": "2  Coding, data",
-    "section": "\n2.1 Some resources",
+    "section": "2.1 Some resources",
     "text": "2.1 Some resources\nR for data science: highly recommended\nSee getting, cleaning, and using data (Reinstein) 1\nPete W’s Gists curating…:\n\nHadley Wickham’s “Advanced R … for the most keen\n“Git 101” (various resources)"
   },
   {
@@ -572,5 +572,19 @@
     "title": "9  Frameworks, ‘models’, inference, tests",
     "section": "\n9.4 Randomization and permutation-based tests and inference",
     "text": "9.4 Randomization and permutation-based tests and inference\n2\nBasic description: (still looking for the best source for this)\n\nDiscussion of the difference between randomization inference and bootstrapping here\n\n\n\nBootstrapped p-values are about uncertainty over the specific sample of the population you drew, while randomization inference p-values are about uncertainty over which units within your sample are assigned to the treatment.\n\nThe infer package vignette gives a good walk-through; this package is useful for doing these tests (some also recommend the coin package).3\n\nWe use this, and give some explanation, in the 2021 EAS donations post - see bookdown (see folds within)\n\nWe use permutation tests for testing whether the median (and mean) of planned donations exceeded/fell short of the mean for actual donations, but using the data from different years’ surveys (without connected individuals). …\n\nThe code we use for these tests is permalinked here\n\nWhy use these techniques?\n\nTractable for testing differences in medians\nFairly easy to explain, fairly intuitive\nDo not depend on strong assumptions about underlying distributions or ‘large sample asymptotics’\nSome statisticians and Econometricians (e.g., Athey and Imbens) argue for their value and robustness; it also seems close to what a lot of ‘data science’ people do (they love simulation)\n\n\nDR concerns about ‘population vs super-population’, possibly misinformed:\n\n\n\n\n\n\n\nNote\n\n\n\n\n\n… we nearly always want to make inferences about the population that the treatment and control groups are taken from (even thinking about a hypothetical super-population), not about the impact on the sampled groups themselves. So, with this in mind, when would I still want to use randomization inference."
+  },
+  {
+    "objectID": "chapters/coding_data.html#naming-lists-of-columns-for-input-into-models",
+    "href": "chapters/coding_data.html#naming-lists-of-columns-for-input-into-models",
+    "title": "2  Coding, data",
+    "section": "2.7 Naming lists of columns for input into models",
+    "text": "2.7 Naming lists of columns for input into models\nSee vignette on ‘modeling workflow’ for some examples"
+  },
+  {
+    "objectID": "chapters/other_sections.html#opensci",
+    "href": "chapters/other_sections.html#opensci",
+    "title": "16  Other suggested sections",
+    "section": "16.2 (Open and robust science: RP attitudes, discussions, resources)",
+    "text": "16.2 (Open and robust science: RP attitudes, discussions, resources)\nIntegrate from:\nReinstein discussions here\nCode to do Robustness checks as a ‘specification chart’, and sensitivity analysis\nSource: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&name=medium"
   }
 ]

@@ -35,6 +35,7 @@ p_load(parsnip, tune, dials, install = FALSE) # If loading multiple packages, be
 p_load(conflicted, workflowsets,  install=FALSE)
 p_load(purrr)
 library(stringr)
+p_load(kableExtra, janitor, install=FALSE)
 
 p_load(dynverse, install=FALSE)
 
@@ -156,7 +157,7 @@ We define the lists of the different 'features' we care about as character vecto
 
 First we define the 'targets': the binary outcomes, numerical outcomes, all outcomes, and a subset of these outcomes for more involved analyses. 
 
-```{r targets, echo=FALSE, warning=FALSE}
+```{r targets, warning=FALSE}
 
 #targets:
 bin_out <- c("d_don_1k", "d_don_10pct")
@@ -196,10 +197,7 @@ robust_controls <- c("ln_years_involved_post_med",  "ln_age_if_older", "ln_incom
 
 robust_controls_n <- c("years_inv_d2sd_post_med",  "age_d2sd_post_med", "income_c_imp_diqr_if_richer")
 
-#note -- I swapped "age_ranges" for "gender_d2sd" because this will allow us a decent measure of 'is the age effect nonlinear' (see datacolada on the superiority of this over a quadratic)
 
-#contrasts(normtimeBP02$Nasality) = contr.treatment(4)
-#DR; I was never able to get the contrasts thing to work so I went with 'base group is most common group'
 
 ```
 
@@ -259,7 +257,7 @@ eas_all_s <- df %>%
   #Recode missing as 0 for all dummies, as a 'NA category' for categoricals
   #also for normalized variables; i.e., set missings to the mean
 eas_all_s_rl <- eas_all_s %>%
-    mutate(across(matches("d_|not_just_white"), missing_to_zero))
+    mutate(across(matches("d_not_just_white"), missing_to_zero))
 
 eas_all_s_rl_imp <- eas_all_s_rl %>%
       mutate(across(matches("d2sd|diqr"), missing_to_zero)) %>%
@@ -282,7 +280,6 @@ We report summary statistics on a selection of these features and target outcome
       mutate(`Earn-to-give` = as.factor(d_career_etg),
            `GwwC` = as.factor(d_gwwc_ever_0)) %>%
   ungroup() %>%
-  filter(year_f %in% last_3_years) %>%
  dplyr::select(starts_with("don"), starts_with("d_don"), starts_with("inc"), -income_c_imp_diqr,
                d_pt_employment, d_not_employed,
                `Earn-to-give`, `GwwC`) %>%
@@ -361,8 +358,10 @@ Using the `make_model_df` command, put all the above to make a 'model dataframe'
 ## Create dataframe for modeling
 (linear_models <- make_model_df(rhs_vars_list, outcome_vars_list, dfs))
 
+#For example ` linear_models[2][[1,1]]` is the formula `r  linear_models[2][[1,1]]` 
+
 ```
-For example ` linear_models[2][[1,1]]` is the formula `r  linear_models[2][[1,1]]`
+
 
 ### Fit linear models
 
