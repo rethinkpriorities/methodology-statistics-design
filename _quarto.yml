@@ -25,6 +25,7 @@ book:
       chapters:
         - chapters/basic_stats.qmd
         - chapters/factor_analysis.qmd
+        - chapters/mixed_multilevel_random.qmd
         - chapters/ml_modeling.qmd
         #- chapters/time_series_predict.qmd
         - chapters/time_series_application.qmd

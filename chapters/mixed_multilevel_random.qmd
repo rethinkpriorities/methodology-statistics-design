@@ -1,0 +1,81 @@
+# Random effects, mixed models, multilevel modeling {#mixed}
+
+
+## Discussions and resources
+
+[Slack thread on 'what are random effects'?](https://rethinkpriorities.slack.com/archives/G01BDCD2QPR/p1660060733533869)
+
+[A beginner's guide to LMER](https://rstudio-pubs-static.s3.amazonaws.com/63556_e35cc7e2dfb54a5bb551f3fa4b3ec4ae.html) ... the `LMER` package uses a maximum likelihood (not Bayesian) approach
+
+McElreath "Chapter 12 (?or 13) Models With Memory", free sample [here](http://xcelab.net/rmpubs/rethinking/Statistical_Rethinking_sample.pdf) and recoding [here](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/multilevel-models.html)
+
+### Discussing 'partial pooling'
+
+From [Tristan Mahr's vignette](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/) -- this vignette explains a lot (but it doesn't go into the formal maths)
+
+
+::: {.callout-note collapse="true"}
+## A quick intuition in one use case. Is it correct?
+
+I’m still trying to get my head around (quickly) what we are talking about when we say ‘mixed models’ and ‘random effects’, at least when using lmer.
+
+Suppose I run the following model
+
+```
+m_video_aud <-  all_surveys all_surveys %>%  filter(wave=="video") %>%
+lmer(interest80k_mn ~ 1 + condition + audience + condition:audience + (1|reader),
+dat=.)
+```
+
+This allows a “random intercept” for `reader` ...  But what does that mean? Here is my interpretation — how wrong am I?
+
+> The intercept (“average interest all else comparable”) for each of the two readers is equal to the overall average intercept plus some ‘random deviation’ drawn from a [normal?] distribution
+
+> In effect, this means that the ‘reader coefficient adjustment’ coefficient will be smaller than the adjustment we would get if we just looked at the difference in (the residual of the) outcome across readers. I.e., we ‘adjust less’ for reader than we would do if we made reader a fixed effect (i.e., a ‘dummy in a standard regression’).
+
+> Computationally, I think this happens because  we are assuming something like a normal distribution of the random deviation, where smaller deviations are more likely than large ones, and 0 is the most likely. Thus the larger is the ‘observed reader difference’ we see in the data, the more likely this is to be a ‘freak random draw’ ... thus we shrink this difference term a bit towards 0.
+
+::: 
+
+The above interpretation leaves some unresolved questions:
+
+1. How distinct is this from the ‘regularization with cross-validation’ that we see in Machine learning approaches? E.g., I could do a ridge model where I allow only the coefficient on reader to be regularized; this also leads to the same sort of ‘shrinkage’ ...  so what’s the difference?
+
+2. Thinking by analogy to a Bayesian approach, what does it mean that we assume the intercept is a “random deviations drawn from a distribution”? Isn’t that what we always assume, for each parameter in a Bayesian model … so then, what would it mean for a Bayesian model to have a fixed (vs random) coefficient?
+
+
+3. Why wouldn’t we want all our parameters to be random effects? Why include any fixed effects ...  considering general ideas of overfitting and effects as draws from larger distributions?
+
+
+4. ^[(Related to 3, I think)] What is the impact of the choice of giving one feature a ‘random intercept only’ on the estimates of the other coefficients?
+
+My thinking, getting back to an earlier discussion, is that by modeling the effect of reader as a random effect, thus shrinking it relative to the standard linear model’s  would mean that the problem of ‘omitted variable bias’ in other coefficients (e.g, on ‘condition’) could remain. This could be a problem if reader is not orthogonal to condition (~if they are correlated to one another).
+
+This also may come down to the question of ‘do we care mainly about interpreting and assessing a particular coefficient’ (as in most modern econometrics) or ‘do we care mainly about a predictive model overall’? 
+
+
+<!-- 
+
+Working through the [Tristan Mahr example](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)
+```{r}
+
+library(lme4)
+#> Loading required package: Matrix
+library(dplyr)
+library(tibble)
+
+# Convert to tibble for better printing. Convert factors to strings
+sleepstudy <- sleepstudy %>%
+  as_tibble() %>%
+  mutate(Subject = as.character(Subject))
+
+# Add two fake participants
+df_sleep <- bind_rows(
+  sleepstudy,
+  tibble(Reaction = c(286, 288), Days = 0:1, Subject = "374"),
+  tibble(Reaction = 245, Days = 0, Subject = "373"))
+
+df_sleep
+
+```
+-->
