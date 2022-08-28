@@ -608,78 +608,77 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A beginner's guide to LMER</span><span class="co">](https://rstudio-pubs-static.s3.amazonaws.com/63556_e35cc7e2dfb54a5bb551f3fa4b3ec4ae.html)</span> ... the <span class="in">`LMER`</span> package uses a maximum likelihood (not Bayesian) approach</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>McElreath "Chapter 12 (?or 13) Models With Memory", free sample <span class="co">[</span><span class="ot">here</span><span class="co">](http://xcelab.net/rmpubs/rethinking/Statistical_Rethinking_sample.pdf)</span> and recoding <span class="co">[</span><span class="ot">here</span><span class="co">](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/multilevel-models.html)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### Discussing 'partial pooling'</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>From <span class="co">[</span><span class="ot">Tristan Mahr's vignette</span><span class="co">](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)</span> -- this vignette explains a lot (but it doesn't go into the formal maths)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>McElreath "Chapter 12 (?or 13) Models With Memory", free sample <span class="co">[</span><span class="ot">here</span><span class="co">](http://xcelab.net/rmpubs/rethinking/Statistical_Rethinking_sample.pdf)</span> and recoding <span class="co">[</span><span class="ot">here</span><span class="co">](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/multilevel-models.html)</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### Discussing 'partial pooling'</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>From <span class="co">[</span><span class="ot">Tristan Mahr's vignette</span><span class="co">](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)</span> -- this vignette explains a lot (but it doesn't go into the formal maths)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## A quick intuition in one use case. Is it correct?</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>I’m still trying to get my head around (quickly) what we are talking about when we say ‘mixed models’ and ‘random effects’, at least when using lmer.</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Suppose I run the following model</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">m_video_aud &lt;-  all_surveys all_surveys %&gt;%  filter(wave=="video") %&gt;%</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">lmer(interest80k_mn ~ 1 + condition + audience + condition:audience + (1|reader),</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">dat=.)</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>This allows a “random intercept” for <span class="in">`reader`</span> ...  But what does that mean? Here is my interpretation — how wrong am I?</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The intercept (“average interest all else comparable”) for each of the two readers is equal to the overall average intercept plus some ‘random deviation’ drawn from a </span><span class="co">[</span><span class="ot">normal?</span><span class="co">]</span><span class="at"> distribution</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In effect, this means that the ‘reader coefficient adjustment’ coefficient will be smaller than the adjustment we would get if we just looked at the difference in (the residual of the) outcome across readers. I.e., we ‘adjust less’ for reader than we would do if we made reader a fixed effect (i.e., a ‘dummy in a standard regression’).</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Computationally, I think this happens because  we are assuming something like a normal distribution of the random deviation, where smaller deviations are more likely than large ones, and 0 is the most likely. Thus the larger is the ‘observed reader difference’ we see in the data, the more likely this is to be a ‘freak random draw’ ... thus we shrink this difference term a bit towards 0.</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>The above interpretation leaves some unresolved questions:</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How distinct is this from the ‘regularization with cross-validation’ that we see in Machine learning approaches? E.g., I could do a ridge model where I allow only the coefficient on reader to be regularized; this also leads to the same sort of ‘shrinkage’ ...  so what’s the difference?</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Thinking by analogy to a Bayesian approach, what does it mean that we assume the intercept is a “random deviations drawn from a distribution”? Isn’t that what we always assume, for each parameter in a Bayesian model … so then, what would it mean for a Bayesian model to have a fixed (vs random) coefficient?</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## A quick intuition in one use case. Is it correct?</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>I’m still trying to get my head around (quickly) what we are talking about when we say ‘mixed models’ and ‘random effects’, at least when using lmer.</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>Suppose I run the following model</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">m_video_aud &lt;-  all_surveys all_surveys %&gt;%  filter(wave=="video") %&gt;%</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">lmer(interest80k_mn ~ 1 + condition + audience + condition:audience + (1|reader),</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">dat=.)</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>This allows a “random intercept” for <span class="in">`reader`</span> ...  But what does that mean? Here is my interpretation — how wrong am I?</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The intercept (“average interest all else comparable”) for each of the two readers is equal to the overall average intercept plus some ‘random deviation’ drawn from a </span><span class="co">[</span><span class="ot">normal?</span><span class="co">]</span><span class="at"> distribution</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In effect, this means that the ‘reader coefficient adjustment’ coefficient will be smaller than the adjustment we would get if we just looked at the difference in (the residual of the) outcome across readers. I.e., we ‘adjust less’ for reader than we would do if we made reader a fixed effect (i.e., a ‘dummy in a standard regression’).</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Computationally, I think this happens because  we are assuming something like a normal distribution of the random deviation, where smaller deviations are more likely than large ones, and 0 is the most likely. Thus the larger is the ‘observed reader difference’ we see in the data, the more likely this is to be a ‘freak random draw’ ... thus we shrink this difference term a bit towards 0.</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>The above interpretation leaves some unresolved questions:</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How distinct is this from the ‘regularization with cross-validation’ that we see in Machine learning approaches? E.g., I could do a ridge model where I allow only the coefficient on reader to be regularized; this also leads to the same sort of ‘shrinkage’ ...  so what’s the difference?</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Thinking by analogy to a Bayesian approach, what does it mean that we assume the intercept is a “random deviations drawn from a distribution”? Isn’t that what we always assume, for each parameter in a Bayesian model … so then, what would it mean for a Bayesian model to have a fixed (vs random) coefficient?</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Why wouldn’t we want all our parameters to be random effects? Why include any fixed effects ...  considering general ideas of overfitting and effects as draws from larger distributions?</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Why wouldn’t we want all our parameters to be random effects? Why include any fixed effects ...  considering general ideas of overfitting and effects as draws from larger distributions?</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>^<span class="co">[</span><span class="ot">(Related to 3, I think)</span><span class="co">]</span> What is the impact of the choice of giving one feature a ‘random intercept only’ on the estimates of the other coefficients?</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>My thinking, getting back to an earlier discussion, is that by modeling the effect of reader as a random effect, thus shrinking it relative to the standard linear model’s  would mean that the problem of ‘omitted variable bias’ in other coefficients (e.g, on ‘condition’) could remain. This could be a problem if reader is not orthogonal to condition (~if they are correlated to one another).</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>This also may come down to the question of ‘do we care mainly about interpreting and assessing a particular coefficient’ (as in most modern econometrics) or ‘do we care mainly about a predictive model overall’? </span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>^<span class="co">[</span><span class="ot">(Related to 3, I think)</span><span class="co">]</span> What is the impact of the choice of giving one feature a ‘random intercept only’ on the estimates of the other coefficients?</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>My thinking, getting back to an earlier discussion, is that by modeling the effect of reader as a random effect, thus shrinking it relative to the standard linear model’s  would mean that the problem of ‘omitted variable bias’ in other coefficients (e.g, on ‘condition’) could remain. This could be a problem if reader is not orthogonal to condition (~if they are correlated to one another).</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>This also may come down to the question of ‘do we care mainly about interpreting and assessing a particular coefficient’ (as in most modern econometrics) or ‘do we care mainly about a predictive model overall’? </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">Working through the [Tristan Mahr example](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)</span></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co">library(lme4)</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: Matrix</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co">library(dplyr)</span></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="co">library(tibble)</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to tibble for better printing. Convert factors to strings</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">sleepstudy &lt;- sleepstudy %&gt;%</span></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co">  as_tibble() %&gt;%</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="co">  mutate(Subject = as.character(Subject))</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two fake participants</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co">df_sleep &lt;- bind_rows(</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co">  sleepstudy,</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">  tibble(Reaction = c(286, 288), Days = 0:1, Subject = "374"),</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co">  tibble(Reaction = 245, Days = 0, Subject = "373"))</span></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="co">df_sleep</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co">```</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co">Working through the [Tristan Mahr example](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/)</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co">library(lme4)</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: Matrix</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="co">library(dplyr)</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co">library(tibble)</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to tibble for better printing. Convert factors to strings</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co">sleepstudy &lt;- sleepstudy %&gt;%</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co">  as_tibble() %&gt;%</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co">  mutate(Subject = as.character(Subject))</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Add two fake participants</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co">df_sleep &lt;- bind_rows(</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co">  sleepstudy,</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co">  tibble(Reaction = c(286, 288), Days = 0:1, Subject = "374"),</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">  tibble(Reaction = 245, Days = 0, Subject = "373"))</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co">df_sleep</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="co">```</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
