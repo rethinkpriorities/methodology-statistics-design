@@ -46,3 +46,138 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 ### See [Power analysis discussion and workflow](#power-workflow)
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
+
+## Value of information and optimal trial design: estimation proposal
+
+### Nascent discussion: Value of Information and Optimal Design and inference
+
+For a decision-maker, knowing one condition is (e.g.) 80% likely to perform better than another may be very valuable. Still, the benefit of this depends on:
+
+1.  How the 'better' metric (here, mean of likert measures) translates into proximate/ultimate outcomes (e.g., signing up for EA coaching/changing jobs for greater impact, respectively),
+
+2.  'How much better is better'; e.g., what is the expected gain in the ultimate outcome, incorporating the costs of being 'wrong in either direction', and
+
+3.  How much is the ultimate outcome valued (e.g., the value of a positive career change)
+
+Ultimately, we want to choose our design and analysis strategy to maximize the "Value of Information" (VOI), minus the cost of acquiring this information. This VOI is essentially the difference between (incorporating some Greek letters to make it look fancy):
+
+1.  $V_1(\Sigma) := E[V(D(\Theta(\Sigma))]$ The expected value of the world according to 80k's criteria (and possibly those of other stakeholders). given the decisions $D$ that 80k and others can and will make in light of the information $\Theta$ gained from our trials that use design $\Sigma$.
+
+2.  $V_0 := E[V(D(\Theta_0))]$ The 'value of the world...' without any further information, i.e., with information set $\Theta_0$.
+
+$$V(\Sigma) = V_1 - V_0$$ This term is also an expectation, but using expectations operators everywhere gets boring; we may bring these (integrals) back again where we need to do explicit calculations.
+
+Thus we want to choose our design $\Sigma$ to maximize the net VOI $$\Pi(\Sigma) :=   V_1(\Sigma) -  V_0 - C(\Sigma)$$.
+
+Of course we cannot affect $V_0$, so we only need to worry about finding the design $\Sigma$ that achieves the highest value of:
+
+$$V_1(\Sigma) - C(\Sigma) = E[V(D(\Theta(\Sigma))] - C(\Sigma) $$.
+
+So far, this is all just defining terms, and potentially obvious. We need to start operationalizing this. We need to come up with explicit measures of:
+
+1.  The specific design choices we are considering, i.e., some subset of $\Sigma$. E.g., 'how many conditions, which conditions, and how many individuals assigned to each condition'.
+
+2.  The information we can gain (or make inferences about) from the trials, e.g.,
+
+-   $s_j \in [0,10]$ the survey mean of our 'interest in 80k questions' among Prolific participants, for each of conditions $j \in t_0, t_1, ..., t_k$ and,
+-   $c_j \in [0,1]$ the 'propensity to click on the 80k web link' ...
+
+Put these observable measures into some vector $I_o$.
+
+3.  The joint (prior) distribution over the information we can observe and the real-world outcomes we are interested in, something like $F(I_o, \Sigma)$. More simply, some quantification of 'how can we make inferences about the real world outcomes given what we will observe in the study'.
+
+E.g., "we expect the real world conversion rate for a condition (where 'conversion' means "a Youtube viewer clicks on the ad and signs up for 80k coaching") to be distributed with a Beta distribution centered at the mean of a weighted function of the true 'Prolific clicks rate' in that condition and the true average 'interest in 80k score', multiplied by some scaling factor.
+
+4.  The (relative) value of the world under each specific outcome. E.g., the dollar value 80k puts on some real-world conversion rate $\Sigma$ (which should also take into account how long the ads informed by this trial are going to run for and other factors)
+
+5.  The cost of our possible design decisions. E.g., the cost per additional participant.
+
+*Next*: If we can fill in some of this, we may be able to make considered but heroic assumptions over the rest, and generate a VOI measure as a function of our design choices. This would probably benefit from multiple quasi-independent takes and some benchmarks against 'outside views'. We probably want to look to existing models and approaches for guidance. And we may want to substitute reasonable proxy measures for things of ultimate interest.
+
+To the extent we go down this rabbit hole, most of the gains from this will not be specific to this particular trial but will come in helping us developing an approach to later work for 80k and others.
+
+### Building a tangible approach to VOI
+
+::: {.callout-note collapse="true"}
+## Power vs VOI
+
+> N = 680 per cell is enough to have 95% power to detect a Cohen's d of 0.20 ... multiple comparisons etc
+
+DR: I think the multiple comparisons issue is are important. But I think the power calculation approach kind of assumes we need p=0.01 or 0.05 or some such otherwise 'we can't reject the null ... which is vulnerable to being rounded up to 'we can't make any inference'.
+
+Which I think is the wrong way to consider it.
+
+If we think it's even 55% likely that message A is better than message B, we should choose message A. We have learned something. But of course it's better if we can use a procedure that has a lower rates of false positive. Why? Because if we do what I just said, we are choosing the wrong message 45% of the time, so our net gain is lower. ... maybe only a net gain of something like 'choosing the better message an additional 10% of the time'.
+:::
+
+::: {.callout-note collapse="true"}
+## Extending this 'benefit' to optimizing net-VOI
+
+What is the benefit of (e.g.) 'getting it right an additional 10% of the time?'
+
+This depends on 'how much better is the better message'? But of course, the greater the extent it is better, the more likely we will (correctly) deem it to be better, even with a small sample.
+
+So, to get at the VOI as a function of sample size we will have to start with a prior distribution over "the magnitude of superiority of one message over another." Then we draw from this, draw the number of observations simulating our design, and simulate the distribution value achieved as a function of sample size. I think we can actually do this!
+
+What we really want to know is 'up to what sample size do the benefits of collecting more data (in terms of better decisions) exceed the cost'?
+
+Of course I don't have a complete answer for how to do this, but I think we are working towards it. (I should read a bit more of the value of information work perhaps, to check if I'm missing some key points).
+:::
+
+[^exp_design_quant-2]
+
+[^exp_design_quant-2]: We won't have time to fully sort this out for the current trial, but I'm pretty convinced it is worth working towards.
+
+A helpful way to reframe the discussion ... instead of 'how many observations do we need for this to be useful at all' I think we should be thinking/considering "even small amounts of data permit useful learning, but how much data should we collect until it is no longer worth the cost ... to maximize our net gain?" [^exp_design_quant-3]
+
+[^exp_design_quant-3]: I'm saying this in the context of real-world decision problems, not necessarily considering scientific studies or studies trying to establish general truths and convince skeptical audiences of surprising results.)
+
+### A specific proposal for comparing the VOI of designs
+
+Reinstein "I have an idea (probably reinventing a wheel I'm not familiar with) for an approach that might be somewhat more explainable and satisfying, for comparing the value of different designs."...
+
+Essentially
+
+1.  We set (and carefully consider) a reasonable prior distribution over the 'message performance in the real world' (e.g., 'does an individual sign up for 80k coaching')... across a range/random draw of possible messages (say, $M$ total messages, indexed by $m$)/
+
+    ... E.g., individual probability of signup has a $\beta$ distribution with a mean $u_m$ for message $m$ . These means $u_m$ are all drawn from some multivariate normal distribution.
+
+```{=html}
+<!-- -->
+```
+2.  We make heroic assumptions over the connection between the observed metric (e.g., Likert score on Prolific) and the true outcome. This is probably the hardest part.[^exp_design_quant-4]
+
+    ... Perhaps a joint distribution,
+
+    ...or perhaps something simpler like a proportional relationship with an error term (if it's Likert resultis 10% better it will perform 10% better in the real world +/- some independent error term )
+
+[^exp_design_quant-4]: Jamie Elsey had some ideas for this
+
+```{=html}
+<!-- -->
+```
+3.  We simulate the distribution of value for each design we are considering $k \in K$. For each design $k$, for each simulation $t$, we...
+
+    A.  Simulate 'what we report to the client'
+
+        i.  Draw the parameters of the 'true value' of performance (of each message) from the prior, call it $I_t$ for sim $t$ , perhaps a vector of length $M$. Given these parameters...
+
+        ii. Consider a 'Sample population' $N(k)$ equal to the size of specified in design $k$. Simulate assigning each of $N(k)$ individuals (indexed by $i$) to a 'message treatment $m=m_i$', with this assignment followingto design $k$.
+
+        iii. Draw 'real outcomes for each sample individual $i$', if they were to be assigned to message $m_i$ in the real world, i.e., $y_i(m_i)$,\[\^exp_design_quant-5\]
+
+        iv. Draw the 'survey metric' $s_{im} = y_{im}+error$ (mean Likert scores etc.) for each individual, were they to be assigned to message treatment $m_i$. (Let the latter vector or all individuals in the simulated sample t be $S_t(I_t))$
+
+        v.  Estimate $\beta(S_t)$, the 'metric we would report to client' as a function of the above vector $S_t(I_t))$. This could be something simple, like a rank-ordering of the mean values of the Likert measure for each treatment.
+
+    B.  Calculate the 'client's message choice' given this information. For simplicity (for now), assume the client optimizes in some way (e.g., assigning all real-world people to the one treatment that performed best by our reported metric $\beta(S_t)$), Call this message $m^{*}_t$.
+
+    C.  Estimate the value achieved by this choice:
+
+        i.  Let $W$ be the number of people affected (e.g., the number they want to serve the ads to) Draw $W$ individuals from the simulated population, still using parameters $I_t$ for these draws
+
+        ii. Imagine each of these are assigned message $m^{*}_t$ according to the above 'client's choice procedure given our reporting.' Draw 'simulated real outcomes' for each of these individuals for this message. I.e., $y_{i}(m^{*}_t)$.
+
+    D.  Report the total value achieved (most simply $W \times y_{i}(m^{*}_t)$, call this value $V_t(k)$: the "value achieved in simulation $t$ under design $k$"
+
+4.  As noted, we do this simulation for each design choice $k$, and report the distribution of $V_t(k)$. We can then do this simulation for each of a range of relevant design choices $k$, including sample sizes, how many messages, number assigned to each message, etc, to compare performance. We can also test the sensitivity to different priors, different metrics reported to client/client decision rules, etc.

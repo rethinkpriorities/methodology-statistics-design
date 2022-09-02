@@ -9,6 +9,35 @@
 
 McElreath "Chapter 12 (?or 13) Models With Memory", free sample [here](http://xcelab.net/rmpubs/rethinking/Statistical_Rethinking_sample.pdf) and recoding [here](https://bookdown.org/ajkurz/Statistical_Rethinking_recoded/multilevel-models.html)
 
+
+### Sample code from a use case (scratch work)
+
+Context: 
+
+- Several surveys in different contexts (identified by 'wave')
+- Surveys have "conditions" (video content); this is the object of interest for decisionmaking
+- as well as different readers `reader`
+- (and some are text-only)
+
+- Outcome of key interest is a mean of several survey measures (`interestXXk_mn`)
+
+
+```
+
+high_interest_effectivenessmodel <- all_surveys %>% 
+  glmer(interestXXk_gt8 ~ effectiveness_ea_minded_mn + agreeablenesscale + (1|condition) +(1|reader), family="binomial", data=.)
+
+
+int_video_lmer_interact <- lmer(interestXXk_mn ~ 
+        condition*audience + condition*reader +  (1|reader),
+    data = newdatavideo)
+    
+#but we also may want to consider      
+
+
+  
+```
+
 ### Discussing 'partial pooling'
 
 From [Tristan Mahr's vignette](https://www.tjmahr.com/plotting-partial-pooling-in-mixed-effects-models/) -- this vignette explains a lot (but it doesn't go into the formal maths)
@@ -53,6 +82,32 @@ My thinking, getting back to an earlier discussion, is that by modeling the effe
 
 This also may come down to the question of ‘do we care mainly about interpreting and assessing a particular coefficient’ (as in most modern econometrics) or ‘do we care mainly about a predictive model overall’? 
 
+
+<!-- Notes from McElreath etc that might ? help resolve this 
+
+> Varying intercepts are just regularized estimates, but adaptively regularized by estimating how diverse the clusters are while estimating the features of each cluster ... but the explanation here seems to just get at the benefit of regularization for prediction. 
+
+13.3. More than one type of cluster
+
+> Each pull is within a cluster of pulls belonging to an individual chimpanzee. But
+each pull is also within an experimental block, which represents a collection of observations
+that happened on the same day. So each observed pull belongs to both an actor (1 to 7) and
+a block (1 to 6). There may be unique intercepts for each actor as well as for each block.
+
+> ,,, usually called a cross-classified multilevel model. 
+
+>  Could we also use partial pooling on the treatment
+effects? Yes, we could. Some people will scream “No!” at this suggestion, because they have
+been taught that varying effects are only for variables that were not experimentally controlled
+
+> This is all wrong. The reason to use varying effects is because they provide better inferences. It doesn’t matter how the clusters arise. If the individual units are exchangable— the index values could be reassigned without changing the meaning of the model—then partial pooling could help.
+
+14. ADVENTURES IN COVARIANCE
+
+There’s nothing special about intercepts; slopes can also vary by unit in the data, and pooling information among them makes better use of the data. 
+
+
+--> 
 
 <!-- 
 

@@ -3,13 +3,15 @@
 This section will cover specific 'survey' related content, as well as some content that overlaps with experiments and trials.^M[ore technical and involved discussion of overlapping content will often be deferred to the 'experiments' related sections, with placeholders and links.]
 
 
-::: {.alert .alert-secondary}
+## Some key resources and things to incorporte
 
 
-Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/),
+- [Katja Grace, 'things I believe after making some surveys'](https://www.lesswrong.com/posts/oyKzz7bvcZMEPaDs6/survey-advice)   
 
-and [Reinstein's sloppy notes here](https://daaronr.github.io/metrics_discussion/surveys.html) focusing on probability sampling and sampling rare populations; see embeds below
 
+-  Link or incorporate William Elsey's work [HERE](https://willemsleegers.github.io/how-to-science/content/methodology/survey-design/),
+
+- and [Reinstein's sloppy notes here](https://daaronr.github.io/metrics_discussion/surveys.html) focusing on probability sampling and sampling rare populations; see embeds below
 
 :::
 
