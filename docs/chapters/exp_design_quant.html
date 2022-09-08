@@ -688,8 +688,8 @@ Ways to extend this
 </details>
 <div class="cell-output-display">
 
-<div id="htmlwidget-924cc9c5d664ca5af2f0" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-924cc9c5d664ca5af2f0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11"],[20,20,20,20,20,100,100,100,100,1000,1000],["a","b","c","d","e","a","c","d","e","d","e"],[157,34,70,259,480,57,5,217,721,11,989],[15.7,3.4,7,25.9,48,5.7,0.5,21.7,72.1,1.1,98.9]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n_per_group<\/th>\n      <th>selected<\/th>\n      <th>n<\/th>\n      <th>pct<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1751aafa4a7a0b3a8ee0" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1751aafa4a7a0b3a8ee0">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11"],[20,20,20,20,20,100,100,100,100,1000,1000],["a","b","c","d","e","a","c","d","e","d","e"],[157,34,70,259,480,57,5,217,721,11,989],[15.7,3.4,7,25.9,48,5.7,0.5,21.7,72.1,1.1,98.9]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n_per_group<\/th>\n      <th>selected<\/th>\n      <th>n<\/th>\n      <th>pct<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Above, we see that the larger the sample size, the more often the best message is chosen.</p>
@@ -785,10 +785,10 @@ Ways to extend this
 <pre><code># A tibble: 4 × 4
   design    mean  lower  upper
   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1 100    221181. 191114 232640
-2 1000   227961. 222918 233082
-3 20     210303. 170078 231882
-4 guess  190635. 154958 230604</code></pre>
+1 100    221048. 191070 232524
+2 1000   227937. 222994 232842
+3 20     210467. 169716 231882
+4 guess  190581. 154876 229882</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -841,42 +841,42 @@ Ways to extend this
 <tbody>
   <tr>
    <td style="text-align:left;"> 100 </td>
-   <td style="text-align:right;"> 220,181 </td>
-   <td style="text-align:right;"> 12,458 </td>
-   <td style="text-align:right;"> 10,068 </td>
-   <td style="text-align:right;"> 190,114 </td>
-   <td style="text-align:right;"> 231,640 </td>
+   <td style="text-align:right;"> 220,048 </td>
+   <td style="text-align:right;"> 12,507 </td>
+   <td style="text-align:right;"> 10,095 </td>
+   <td style="text-align:right;"> 190,070 </td>
+   <td style="text-align:right;"> 231,524 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1000 </td>
-   <td style="text-align:right;"> 217,961 </td>
-   <td style="text-align:right;"> 3,615 </td>
-   <td style="text-align:right;"> 2,530 </td>
-   <td style="text-align:right;"> 212,918 </td>
-   <td style="text-align:right;"> 223,082 </td>
+   <td style="text-align:right;"> 217,937 </td>
+   <td style="text-align:right;"> 3,610 </td>
+   <td style="text-align:right;"> 2,523 </td>
+   <td style="text-align:right;"> 212,994 </td>
+   <td style="text-align:right;"> 222,842 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 20 </td>
-   <td style="text-align:right;"> 210,103 </td>
-   <td style="text-align:right;"> 20,938 </td>
-   <td style="text-align:right;"> 17,334 </td>
-   <td style="text-align:right;"> 169,878 </td>
+   <td style="text-align:right;"> 210,267 </td>
+   <td style="text-align:right;"> 20,781 </td>
+   <td style="text-align:right;"> 17,076 </td>
+   <td style="text-align:right;"> 169,516 </td>
    <td style="text-align:right;"> 231,682 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> guess </td>
-   <td style="text-align:right;"> 190,635 </td>
-   <td style="text-align:right;"> 25,435 </td>
-   <td style="text-align:right;"> 21,886 </td>
-   <td style="text-align:right;"> 154,958 </td>
-   <td style="text-align:right;"> 230,604 </td>
+   <td style="text-align:right;"> 190,581 </td>
+   <td style="text-align:right;"> 25,414 </td>
+   <td style="text-align:right;"> 21,900 </td>
+   <td style="text-align:right;"> 154,876 </td>
+   <td style="text-align:right;"> 229,882 </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-<p>As the graph and table above suggest, that the larger sample yields a lower payoff in expected value (but less dispersion).</p>
+<p>As the graph and table above suggest, the largest (1000 observation) sample design yields a lower payoff in expected value (but substantially less dispersion).</p>
 
 
 <!-- -->
@@ -1563,7 +1563,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-475"><a href="#cb13-475" aria-hidden="true" tabindex="-1"></a>) </span>
 <span id="cb13-476"><a href="#cb13-476" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-477"><a href="#cb13-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-478"><a href="#cb13-478" aria-hidden="true" tabindex="-1"></a>As the graph and table above suggest, that the larger sample yields a lower payoff in expected value (but less dispersion).</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-478"><a href="#cb13-478" aria-hidden="true" tabindex="-1"></a>As the graph and table above suggest, the largest (1000 observation) sample design yields a lower payoff in expected value (but substantially less dispersion).</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

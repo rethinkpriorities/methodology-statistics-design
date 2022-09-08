@@ -475,4 +475,4 @@ ggplot(value_for_messages) +
 ) 
 
 ```
-As the graph and table above suggest, that the larger sample yields a lower payoff in expected value (but less dispersion).
+As the graph and table above suggest, the largest (1000 observation) sample design yields a lower payoff in expected value (but substantially less dispersion).
