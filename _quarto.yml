@@ -35,7 +35,11 @@ book:
       chapters:
         - chapters/fermi.qmd
         - chapters/other_sections.qmd
-        - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd
+        - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd  
+    - part: "Statistical Rethinking/Bayes"
+      chapters:
+        - chapters/rethinking_bayes_recoding.qmd
+        - chapters/1_golem.qmd
   reader-mode: true
 
 execute:

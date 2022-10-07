@@ -1,0 +1,18 @@
+# Overview: Statistical Rethinking, Bayesian analysis, Recoding {#rethinking}
+
+## This resource
+
+The following chapters represent my notes ^[Reinstein, others may contribute] on 
+
+1. Richard McElreath's Statistical Rethinking text^[[McElreath, R. (2015). *Statistical rethinking: A Bayesian course with examples in R and Stan.* Chapman & Hall/CRC Press.](https://xcelab.net/rm/statistical-rethinking/)
+] (and sometimes his videos)
+
+and
+
+2. [Statistical rethinking with brms, ggplot2, and the tidyverse by A Solomon Kurz](https://bookdown.org/content/3890/)
+
+I intend to begin with a 'fork' of the latter^[This is not an actual fork, although I may move the content it over to my actual fork of that bookdown [here](https://github.com/daaronr/Statistical_Rethinking_with_brms_ggplot2_and_the_tidyverse/tree/master) ... when I do, I'll put a link back]
+
+The present resource is tied to our RP internal book group on the above, which is outlined and organized in the git wiki [here](https://github.com/rethinkpriorities/methodology-statistics-design/wiki/Statistical-Rethinking--(McElreath)-discussion-group:-proposed-outline).
+
+

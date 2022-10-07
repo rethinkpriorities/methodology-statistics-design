@@ -1,0 +1,165 @@
+# The Golem of Prague {#golem}
+
+```{r, echo = F, fig.align = "center", out.width = "20%", fig.cap = "Rabbi Loew and Golem by Mikoláš Aleš, 1899"}
+knitr::include_graphics("pictures/Golem_and_Loew.jpg") 
+
+# For the life of me, I couldn't get a hyperlink into this caption.
+# So for you real nerds, it came from here:
+# https://en.wikipedia.org/wiki/Golem#/media/File:Golem_and_Loew.jpg
+```
+
+## Statistical golems
+>
+> Scientists also make golems. Our golems rarely have physical form, but they too are often made of clay, living in silicon as computer code. These golems are scientific model. But these golems have real effects on the world, through the predictions they make and the intuitions they challenge or inspire. A concern with truth enlivens these models, but just like a golem or a modern robot, scientific models are neither true nor false, neither prophets nor charlatans. Rather they are constructs engineered for some purpose. These constructs are incredibly powerful, dutifully conducting their programmed calculations. (p. 1, *emphasis* in the original)
+
+> Kurz:  one of the most powerful themes interlaced throughout the pages is how we should be skeptical of our models.  [McElreath presentation](https://www.youtube.com/watch?v=oy7Ks3YfbDg&t=14s&frags=pl%2Cwn)? 
+
+
+
+## Hostility to cookbooks and flowcharts
+
+> Advanced courses in statistics do emphasize engineering principles, but most scientists never get that far. Teaching statistics this way is somewhat like teaching engineering backwards, starting with bridge building and ending with basic physics 
+
+> Why aren’t the tests enough for research? The classical procedures of introductory statistics tend to be inflexible and fragile. By inflexible, I mean that they have very limited ways to adapt to unique research contexts. By fragile, I mean that they fail in unpredictable ways when applied to new contexts 
+
+> Fisher’s exact test, which applies (exactly) to an extremely narrow empirical context, but is regularly used whenever cell counts are small 
+
+> in rethinking statistical inference as a set of strategies, instead of a set of pre-made tools. 
+
+## Null hypothesis significance testing and falsification 
+
+>greatest obstacle that I encounter among students and colleagues is the tacit belief that the proper objective of statistical inference is to test null hypotheses 
+
+> deductive falsification is impossible in nearly every scientific context 
+
+::: {.callout-note collapse="true"}
+## Intricate argument for this, non-unique predictions of models
+
+>  Many models correspond to the same hypothesis, and many hypotheses correspond to a single model. This makes strict falsification impossible. (2) Measurement matters. Even when we think the data falsify a model, another observer will debate our methods and measures. They don-t trust the data. Sometimes they are right. 
+
+
+
+> All models are false,6 so what does it mean to falsify a model? One consequence of the requirement to work with models is that it's no longer possible to deduce that a hypothesis is false, just because we reject a model derived from it.
+
+> And so this fact yields a statistical model, MII, that predicts a power law in the data. In contrast the constant selection process model P1A predicts something quite different, MIII. Unfortunately, other selection models (P1B) imply the same statistical model, MII, as the neutral model. They also produce power laws 
+
+> If we reject the null, we can’t really conclude that selection matters, because there are other neutral models that predict different distributions of alleles. And if we fail to reject the null, we can't really conclude that evolution is neutral, because some selection models expect the same frequency distribution 
+
+What about 'black swan' falsification?: 
+
+>  we most often face two simultaneous problems that make the swan fable misrepresentative. First, observations are prone to error, especially at the boundaries of scientific knowledge. Second, most hypotheses are quantitative, concerning degrees of existence, rather than discrete, concerning total presence or absence 
+
+\
+H0 "Black swans are rare"
+
+Neutrinos case: 
+
+> the “measurement” in this case is really an estimate from a statistical model, all false and true positives are possible..? usually measurement  error is an issue. so black swan falsification is not so simple
+
+::: 
+
+::: {.callout-note collapse="true"}
+##  *Rethinking: Is NHST falsificationist?*
+
+Null hypothesis significance testing, NHST, is often identified with the falsificationist, or Popperian, philosophy of science. However, usually NHST is used to falsify a null hypothesis, not the actual research hypothesis. So the falsification is being done to something other than the explanatory model.
+
+
+::: 
+
+
+## We model... 
+
+> attempting to mimic falsification is not a generally useful approach to statistical methods, what are we to do? We are to model. Models 
+
+> Tools for golem engineering...  We want to use our models for several distinct purposes: designing inquiry, extracting information from data, and making predictions. In this book I've chosen to focus on tools to help with each purpose. These tools are: (1) Bayesian data analysis (2) Model comparison (3) Multilevel models (4) Graphical causal models 
+
+
+## Bayesian data analysis 
+
+> Supposing you have some data, how should you use it to learn about the world? There is no uniquely correct answer to this question. Lots of approaches, both formal and heuristic, can be effective. But one of the most effective and general answers is to use Bayesian data analysis. Bayesian data analysis takes a question in the form of a model and uses logic to produce an answer in the form of probability distributions. In modest terms, Bayesian data analysis is no more than counting the numbers of ways the data could happen, according to our assumptions. Things that can happen more ways
+are more plausible. 
+
+### Bayes vs frequentist probability 
+
+>  Bayesian probability ... includes as a special case another important approach, the frequentist approach. The frequentist approach requires that all probabilities be defined by connection to the frequencies of events in very large samples 
+
+
+::: {.callout-note collapse="true"}
+## Frequentist: reinstein_question
+
+> This leads to frequentist uncertainty being premised on imaginary resampling of data—if we were to repeat the measurement many many times, we would end up collecting a list of values that will have some pattern to it. It means also that parameters and models cannot have probability distributions, only measurements can. The distribution of these measurements is called a sampling distribution. This resampling is never done, and in general it doesn’t even make sense—it is absurd to consider repeat sampling of the diversification of song birds in the Andes. 
+
+But Bayesian estimation also uses resampling. It also considers a draw from an imaginary distribution of 'true parameters'. This also seems absurd, so why is it better?
+
+>  Bayesian golems treat “randomness” as a property of information, not of the world. We just use randomness to describe our uncertainty in the face of incomplete knowledge.
+
+Again, why is this better?
+::: 
+
+::: {.callout-note collapse="true"}
+## Advantage of Bayesian approach?
+
+ 
+>   Note that the preceding description doesn’t invoke anyone’s “beliefs” or subjective opinions. Bayesian data analysis is just a logical procedure for processing information 
+
+>   Bayesian framework presents a distinct pedagogical advantage: many people find it more intuitive. Perhaps the best evidence for this is that very many scientists interpret non-Bayesian results in Bayesian terms, for example interpreting ordinary p-values as Bayesian posterior probabilities and non-Bayesian confidence intervals as Bayesian ones 
+
+dr_question: how do we define a 'Bayesian CI'? 
+
+:::
+
+
+### Model comparison and prediction. 
+
+> Bayesian data analysis provides a way for models to learn from data. But when there is more than one plausible model-and in most mature fields there should be-how should we choose among them? One answer is to prefer models that make good predictions. This answer creates a lot of new questions, since knowing which model will make the best predictions seems to require knowing the future. We'll look at two related tools, neither of which knows the future: cross-validation and information criteria 
+
+### Multilevel models 
+
+> Multilevel models-also known as hierarchical, random effects, varying effects, or mixed effects models 
+
+> Cross-validation and information criteria measure overfitting risk and help us to recognize it. Multilevel models actually do something about it. What they do is exploit an amazing trick known as partial pooling 
+
+[hich server, e.g., to... 
+>...adjust estimates for repeat sampling 
+> ...  for imbalance in sampling 
+
+...  model variation explicitly (heterogeneity)
+
+> Multilevel models preserve the uncertainty in the original, pre-averaged values, while still using the average to make predictions 
+
+>Suddenly singlelevel models end up looking like mere components of multilevel models   multilevel regression deserves to be the default form of regression 
+
+> even well-controlled treatments interact with unmeasured aspects of the individuals, groups, or populations studied 
+
+### Graphical causal models 
+
+>   all we see is a statistical association. From the data alone, it could also be that the branches swaying makes the wind. 
+
+ >  statistical model is an amazing association engine. It makes it possible to detect associations between causes and their effects. But a statistical model is never sufficient for inferring cause, because the statistical model makes no distinction between the wind causing the branches to sway and the branches causing the wind to blow 
+
+>  Models that are causally incorrect can make better predictions than those that are causally correct 
+
+>  tools like cross-validation are very useful. But these tools will happily recommend models that contain confounding variables and suggest incorrect causal relationships. Why? Confounded relationships are real associations, and they can improve prediction. After all, if you look outside and see branches swaying, it really does predict wind. Successful 
+
+>   What is needed is a causal model that can be used to design one or more statistical models for the purpose of causal identification. As I mentioned in the neutral molecular evolution example earlier in this chapter, a complete scientific model contains more information than a statistical model derived from it. And this additional information contains causal implications. These implications make it possible to test alternative causal models. The implications scientific theory driven approach to casual inference
+
+> AGs are heuristic—they are not detailed statistical models. But they allow us to deduce which statistical models can provide valid causal inferences, assuming the DAG is true. But where does a DAG itself come from? The terrible truth about statistical inference is that its validity relies upon information outside the data causal
+
+> the approach which dominates in many parts of biology and the social sciences is instead causal salad. Causal salad means tossing various 'control' variables into a statistical model, observing changes in estimates, and then telling a story about causation. Causal salad seems founded on the notion that only omitted variables can mislead us about causation. But included variables can just as easily confound us control strategies @metrics
+
+> Instead of choosing among various black-box tools for testing null hypotheses, we should learn to build and analyze multiple non-null models of natural phenomena. To support this goal, the chapter introduced Bayesian inference, model comparison, multilevel models, and graphical causal models. 
+
+
+## Session info {-}
+
+```{r}
+sessionInfo()
+```
+
+```{r, echo = F, message = F, warning = F, results = "hide"}
+pacman::p_unload(pacman::p_loaded(), character.only = TRUE)
+
+ggplot2::theme_set(ggplot2::theme_grey())
+
+bayesplot::color_scheme_set("blue")
+```
