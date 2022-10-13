@@ -1,4 +1,4 @@
-# Design: quantitative issues/VOI {#expt-quant}
+# Quant. issues/VOI {#expt-quant}
 
 ::: {.callout-note collapse="true"}
 ## Some quantitative issues

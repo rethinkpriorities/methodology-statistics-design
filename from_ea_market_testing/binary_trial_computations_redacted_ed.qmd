@@ -1,4 +1,4 @@
-# Inference/equivalence testing w. binomial outcomes
+# Inference/equivalence tests, (binomial) {#inference_binom_example}
 
 ```{r}
 #| include: false

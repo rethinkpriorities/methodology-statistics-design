@@ -1,4 +1,4 @@
-## Time Series -- application
+## Time Series (applied)
 
 'Predict the influence of discrete events' (and more) on web traffic, signups, etc
 

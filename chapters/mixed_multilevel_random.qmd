@@ -1,4 +1,4 @@
-# Random effects, mixed models, multilevel modeling {#mixed}
+# Random/mixed fx, mlm {#mixed}
 
 
 ## Discussions and resources

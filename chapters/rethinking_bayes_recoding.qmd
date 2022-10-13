@@ -1,4 +1,4 @@
-# Overview: Statistical Rethinking, Bayesian analysis, Recoding {#rethinking}
+# Overview (McE/Bayes/recode) {#rethinking}
 
 ## This resource
 

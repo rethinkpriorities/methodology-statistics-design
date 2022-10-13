@@ -1,4 +1,4 @@
-# Monte-Carlo 'Fermi Estimation' Approaches {-#fermi}
+# Monte-Carlo 'Fermi' {-#fermi}
 
 ```{r setup}
 library(pacman)

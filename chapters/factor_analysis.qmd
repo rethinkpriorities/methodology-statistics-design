@@ -1,4 +1,4 @@
-#  Factor analysis: EFA/CFA, PCA {#factor-descriptive}
+# Factor analss: EFA/CFA, PCA {#factor-descriptive}
 
 Dimension reduction, and 'carving reality at its joints', uncovering structural parameters?
 

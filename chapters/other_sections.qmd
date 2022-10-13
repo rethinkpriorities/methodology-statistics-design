@@ -1,7 +1,5 @@
 # Other suggested sections
 
-## Multilevel modeling (moved to [this chapter](#mixed))
-
 
 ## (Open and robust science: RP attitudes, discussions, resources) {#opensci}
 

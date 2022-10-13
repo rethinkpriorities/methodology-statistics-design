@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Rethink Priorities: Methods"
+  title: "RP: Methods"
   subtitle: "Surveys/experiment design, analysis; methodology, protocols, templates"
   author: "David Reinstein (most content atm), Willem Sleegers, Jamey Elsey"
   repo-url: https://github.com/rethinkpriorities/methodology-statistics-design
@@ -21,7 +21,7 @@ book:
         - chapters/qualitative-design-issues_plus.md
         - chapters/exp_design_quant.qmd
         - chapters/power_analysis_framework_2.qmd
-    - part: "Statistics and modeling"
+    - part: "Statistics/modeling"
       chapters:
         - chapters/basic_stats.qmd
         - chapters/factor_analysis.qmd
@@ -34,12 +34,13 @@ book:
     - part: "Other, worked examples"
       chapters:
         - chapters/fermi.qmd
-        - chapters/other_sections.qmd
         - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd  
-    - part: "Statistical Rethinking/Bayes"
+        - chapters/other_sections.qmd
+    - part: "Bayes/Rethinking"
       chapters:
         - chapters/rethinking_bayes_recoding.qmd
         - chapters/1_golem.qmd
+        - chapters/2_small_large_worlds.qmd
   reader-mode: true
 
 execute:

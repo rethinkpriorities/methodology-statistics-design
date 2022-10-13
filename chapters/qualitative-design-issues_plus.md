@@ -1,4 +1,4 @@
-# Further practical design/implementation issues (surveys/experiments) {-#eamt-qual}
+# Practical issues {-#eamt-qual}
 
 
 ## 'EA market testing' resource on qualitative design issues
