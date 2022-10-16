@@ -1,4 +1,4 @@
-# Monte-Carlo 'Fermi' {-#fermi}
+# MonteCarlo 'Fermi est.' {-#fermi}
 
 ```{r setup}
 library(pacman)

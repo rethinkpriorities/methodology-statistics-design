@@ -41,6 +41,7 @@ book:
         - chapters/rethinking_bayes_recoding.qmd
         - chapters/1_golem.qmd
         - chapters/2_small_large_worlds.qmd
+        - chapters/5_spurious_waffles.qmd
   reader-mode: true
 
 execute:

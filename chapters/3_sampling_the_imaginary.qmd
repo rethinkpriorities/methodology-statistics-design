@@ -1,0 +1,123 @@
+# Chapter 3. Sampling the Imaginary
+
+::: {.callout-note collapse="true"}
+## That 'standard textbook Bayesian updating false positive surprise example'; critique
+
+> In a population of 100,000 people, 100 of them are vampires. (2) Of the 100 who are vampires, 95 of them will test positive for vampirism. (3) Of the 99,900 mortals, 999 of them will test positive for vampirism
+
+> counts rather than probabilities, is often called the frequency format or natural frequencies. Why a frequency format helps people intuit the correct approach remains contentious.
+:::
+
+> vampirism example at the start of this chapter has the same logical structure as many different signal detection problems: (1) There is some binary state that is hidden from us; (2) we observe an imperfect cue of the hidden state; (3) we (should) use Bayes' theorem to logically deduce the impact of the cue on our uncertainty
+
+[^sampling_the_imaginary-1]
+
+[^sampling_the_imaginary-1]: DR: (what did I mean here?) really a great \[test?\] for something that's correlated with vampirism
+
+> Suppose that the probability of a positive finding, when an hypothesis is false, is Pr(sig\|false) = 0.05. That's the false-positive rate, like the 5% of conventional significance testing. Finally, we have to state the base rate at which hypotheses are true. Suppose for example that 1 in every 100 hypotheses turns out to be true -
+
+> So a positive finding corresponds to a 16% chance that the hypothesis is true
+
+> You can shrink the false-positive rate to 1% and get this posterior probability up to 0.5, only as good as a coin flip. The most important thing to do is to improve the base rate, Pr(true), and that requires thinking, not testing.
+
+DR: or why not shrink the false positive rate even further?
+
+# 3.1. Sampling from a grid-approximate posterior
+
+## 3.2. Sampling to summarize
+
+> We're going to call it a compatibility interval instead, in order to avoid the unwarranted implications of "confidence" and "credibility.
+
+> All you've done so far is crudely replicate the posterior density you had already computed. That isn't of much value. But next it is time to use these samples to describe and understand the posterior. That is of great value
+
+> since grid approximation isn't practical in general, it won't always be so easy. Once there is more than one parameter in the posterior distribution
+
+> using samples from the posterior
+
+> similarly add up all of the samples below 0.5, but also -Annotations】
+
+> divide the resulting count by the total number of samples. I
+
+> interval of posterior probability, such as the ones we are working with, may instead be called a credible interval. We-re going to call it a compatibility interval instead, in order to avoid the unwarranted implications of -confidence" and "credibility."54 What the interval indicates is a range of parameter values compatible with the model and data. The model and data themselves may not inspire confidence, in which case the interval will not either -Annotations】
+
+> Intervals of this sort, which assign equal probability mass to each tail -
+
+> percentile intervals (PI).
+
+> But in this example, it ends up excluding the most probable parameter values, near p = 1. So in terms of describing the shape of the posterior distribution-which is really all these intervals are asked to do---the percentile interval can be misleading. In contrast, the right-hand plot in Figure 3.3 displays the 50% highest posterior density interval (HPDI).57 The HPDI is the narrowest interval containing the specified probability mass. If
+
+![](images/paste-FDE37041.png)
+
+> HPDI is more computationally intensive than PI and suffers from greater simulation variance, which is a fancy way of saying that it is sensitive to how many samples you draw from the posterior. It is also harder to understand and many scientific audiences will not appreciate its features
+
+> percentile interval, as ordinary non-Bayesian intervals are typically interpreted (incorrectly) as percentile intervals -Annotations】
+
+> But whether you use a Bayesian interpretation or not, a 95% interval does not contain the true value 95% of the time. The history of science teaches us that confidence intervals exhibit chronic overconfidence.59 The word -Annotations】
+
+> The 95% is a small world number -Annotations】
+
+> The Bayesian parameter estimate is precisely the entire posterior distribution -Annotations】
+
+null-Original Text】it is very common for scientists to report the parameter value with highest posterior probability, a maximum a posteriori (MAP) estimate -Annotations】
+
+> Why not report the posterior mean or median? -Annotations】
+
+> repeating this calculation for every possible decision, using -Annotations】
+
+> loss \<- sapply( p_grid , function(d) sum( posterior\*abs( d - p_grid ) ) ) -Annotations】
+
+> p_grid\[ which.min(loss) \] -Annotations】
+
+> Different loss functions nominate different point estimates. The two most common examples are the absolute loss as above, which leads to the median as the point estimate, and the quadratic loss (d - p) 2 , which leads to the posterior mean (mean(samples)) as the point estimate -Annotations】
+
+3.3. Sampling to simulate prediction
+
+> Therefore the implied loss function is highly asymmetric, rising sharply as true wind speed exceeds our guess, but rising only slowly as
+>
+> true wind speed falls below our guess. In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to
+>
+> order an evacuation. Producing a point estimate of wind speed may not be necessary at all.
+>
+> In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to order an evacuation. Producing a point estimate of wind speed may not be necessary at all.\
+
+DR: Reinforcement learning could be better still?
+
+> You might argue that the decision to make is whether or not to accept an hypothesis. But the challenge then is to say what the relevant costs and benefits would be, in terms of the knowledge gained or lost
+
+> Usually it's better to communicate as much as you can about the posterior distribution, as well as the data and the model itself, so that others can build upon your work -Annotations】
+
+> combine sampling of simulated observations, as in the previous section, with sampling parameters from the posterior distribution. -Annotations】
+
+> basic model checks -Annotations】
+
+> ![](images/paste-14D0ECDD.png)
+>
+> Combining simulated observation distributions for all parameter values (not just the ten shown), each weighted by its posterior probability, produces the posterior predictive distribution -Annotations】
+
+> This distribution propagates uncertainty about parameter to uncertainty about prediction -Annotations】
+
+> out. If instead you were to use only a single parameter value to compute implied predictions, say the most probable value at the peak of posterior distribution, you-d produce an overconfident distribution of predictions, -Annotations】
+
+> w \<- rbinom( 1e4 , size=9 , prob=samples ) The symbol samples above is the same list of random samples from the posterior distribution that you-ve used in previous sections. For each sampled value, a random binomial observation is generated -Annotations】
+
+> Now the simulated predictions appear less consistent with the data, as the majority of simulated observations have fewer switches than were observed in the actual sample. This is consistent with lack of independence between tosses of the globe, in which each toss is negatively correlated with the last. Does this mean that the model is bad? That depends -Annotations】
+
+3.5. Practice-Original Text】converge on the correct proportion. But it will do so more slowly than the posterior distribution may lead us to believe. -Annotations】
+
+> posterior predictive checks -Annotations】
+
+## 3.3 Sampling to summarize
+
+> 3.3.2.2. Is the model adequate?
+
+DR: I.e., Does the model and its estimates predict a reasonable (sampled) distribution
+
+Multilevel models -Annotations】
+
+> multilevel model. Multilevel models-also known as hierarchical, random effects, varying effects, or mixed effects models
+
+> Cross-validation and information criteria measure overfitting risk and help us to recognize it. Multilevel models actually do something about it. What they do is exploit an amazing trick known as partial pooling -Annotations】
+
+Model comparison and prediction.
+
+> Bayesian data analysis provides a way for models to learn from data. But when there is more than one plausible model-and in most mature fields there should be-how should we choose among them? One answer is to prefer models that make good predictions. This answer creates a lot of new questions, since knowing which model will make the best predictions seems to require knowing the future. We'll look at two related tools, neither of which knows the future: cross-validation and information criteria

@@ -18,10 +18,8 @@ source(here("code", "methods_setup.R"))
 
 ### Introduction and goals
 
-The purpose of this document is to propose the fundamentals for a workflow for power analyses. I will begin with a standard frequentist analysis.[^power_analysis_framework_2-2]
-
+We propose the fundamentals for a workflow for power analyses, beginning with a standard frequentist analysis.[^power_analysis_framework_2-2]
 [^power_analysis_framework_2-2]:  Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach. Starting frequentist will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.
-
 The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals.
 
 ::: {.callout-note collapse="true"}
@@ -46,7 +44,6 @@ We will focus solely on 'simulation-based' power analysis,[^power_analysis_frame
 
 In frequentist null hypothesis significance testing (NHST), power is typically defined as 'the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true' (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.[^power_analysis_framework_2-5]
 
-[^power_analysis_framework_2-5]: DR: may be worth putting maths here at some point, and also give a canonical reference.
 
 ::: {.callout-note collapse="true"}
 ## From wikipedia: The statistical power of a binary hypothesis test...
@@ -56,13 +53,20 @@ The statistical power of a binary hypothesis test is the probability that the te
 [link accessed 12 Apr 2022](https://en.wikipedia.org/wiki/Power_of_a_test)
 :::
 
-Note that some Bayesian statisticians question the validity and usefulness of this presentation of power analysis.[^power_analysis_framework_2-6]
+::: {.callout-note collapse="true"}
+##  However some Bayesians question this
 
-[^power_analysis_framework_2-6]: This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - 'the true parameter is fixed and the data varies'. In Bayesian reasoning you note that you have 'uncertainty about the underlying parameter' but you  'consider the data as fixed'. A Bayesian approach does not tend to  consider 'the probability that the data arises in a particular way under a null hypothesis'; however 'Bayesian hypothesis testing' is discussed in the literature. (Presumably, it envisions 'rejecting a hypothesis' where the posterior probability that the hypothesis holds is sufficiently small).
+Some Bayesian statisticians question the validity and usefulness of this presentation of power analysis. This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - 'the true parameter is fixed and the data varies'. 
 
-    \
+In Bayesian reasoning you note that you have 'uncertainty about the underlying parameter' but you consider the data as fixed. A Bayesian approach does not tend to consider 'the probability that the data arises in a particular way under a null hypothesis'; however 'Bayesian hypothesis testing' is discussed in the literature. (Presumably, it envisions 'rejecting a hypothesis' where the posterior probability that the hypothesis holds is sufficiently small).
 
-Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: *'Given the range of data that I might observe, how likely is it that I can make certain conclusions?'*. [^power_analysis_framework_2-7]
+:::
+
+Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: 
+
+> Given the range of data that I might observe, how likely is it that I can make certain conclusions?. 
+
+[^power_analysis_framework_2-7]
 
 [^power_analysis_framework_2-7]: The conclusion or inference one wishes to make from a data set can go far beyond simply saying something like "there is a non-zero difference between groups" (although this is probably the most common inference people first consider). Or a comparable statement posed in probabilistic terms...
 

@@ -1,24 +1,102 @@
-# Ch 2. Small/Large Worlds
+# Ch 2. Small/Large Worlds {#mcelreath_ch2}
 
-
-##  2.1.
+## 2.1. Garden of Forking data
 
 > The small world is the self-contained logical world of the model.
 
 > The way that Bayesian models learn from evidence is arguably optimal in the small world. When their assumptions approximate reality, they also perform well in the large world. But large world performance has to be demonstrated rather than logically deduced.
 
-> This demonstrates that there are three (out of 64) ways for a bag containing [combo of blue and white marbles] to produce the data .  The inferential power comes from comparing this count to the numbers of ways each of the other conjectures of the bag's contents could produce the same data.
+> This demonstrates that there are three (out of 64) ways for a bag containing \[combo of blue and white marbles\] to produce the data . The inferential power comes from comparing this count to the numbers of ways each of the other conjectures of the bag's contents could produce the same data.
 
-> .... can be computed just by multiplying the new count by the old count. This updating approach amounts to nothing more than asserting that (1) when we have previous information suggesting there are $W_prior$ ways for a conjecture to produce a previous observation $D_{prior}$ and (2) we acquire new observations $D_{new}$ that the same conjecture can produce in $W_{new}$ ways, then (3) the number of ways the conjecture can account for both $D_{prior}$ as well as $D_{new}$ is just the product $W_{prior} \times  W_{new}$.
+> .... can be computed just by multiplying the new count by the old count. This updating approach amounts to nothing more than asserting that (1) when we have previous information suggesting there are $W_prior$ ways for a conjecture to produce a previous observation $D_{prior}$ and (2) we acquire new observations $D_{new}$ that the same conjecture can produce in $W_{new}$ ways, then (3) the number of ways the conjecture can account for both $D_{prior}$ as well as $D_{new}$ is just the product $W_{prior} \times W_{new}$.
 
-> This is sometimes known as the principle of indifference: When there is no reason to say that one conjecture is more plausible than another, weigh all of the conjectures equally. This book does not use nor endorse "ignorance” priors. As we’ll see in later chapters, the structure of the model and the scientific context always provide information that allows us to do better than ignorance
+> This is sometimes known as the principle of indifference: When there is no reason to say that one conjecture is more plausible than another, weigh all of the conjectures equally. This book does not use nor endorse "ignorance" priors. As we'll see in later chapters, the structure of the model and the scientific context always provide information that allows us to do better than ignorance.
+
+![](images/paste-748728A1.png){width="335"}
+
+::: {.callout-note collapse="true"}
+## Note: I'm skipping the construction of the 'forking paths' plot pastesd above
+
+Kurz laboriously calculates the values and constructs it using tibbles and ggplot. Not sure what the latter teaches us.
+:::
+
+### 2.1.2 Using prior information {.unnumbered}
+
+Some functions and data for tabulating 'how likely is the data we drew' (marbles we saw) given different bag compositions. We 'count the (equally likely) ways' below. This is the product of 'ways of drawing the first (blue) marble', the second 'white', and the third 'blue' marble.
+
+```{r}
+
+# if we make two custom functions, here, it will simplify the code within `mutate()`, below
+n_blue <- function(x) {
+  rowSums(x == "b")
+}
+
+n_white <- function(x) {
+  rowSums(x == "w")
+}
+
+t <-
+  # for the first four columns, `p_` indexes position
+  tibble(p_1 = rep(c("w", "b"), times = c(1, 4)),
+         p_2 = rep(c("w", "b"), times = c(2, 3)),
+         p_3 = rep(c("w", "b"), times = c(3, 2)),
+         p_4 = rep(c("w", "b"), times = c(4, 1))) %>% 
+  mutate(`draw 1: blue`  = n_blue(.),
+         `draw 2: white` = n_white(.),
+         `draw 3: blue`  = n_blue(.)) %>% 
+  mutate(`ways to produce` = `draw 1: blue` * `draw 2: white` * `draw 3: blue`)
+
+t %>%  knitr::kable()
+
+```
+
+Next we get more data: another blue marble (already shown above), and there is a 'shortcut':
+
+> . You could start all over again, making a garden with four layers to trace out the paths compatible with the data sequence . Or you could take the previous counts---the prior counts---over conjectures (0, 3, 8, 9, 0) and just update them in light of the new observation. It turns out that these two methods are mathematically identical, as long as the new observation is logically independent of the previous observations
+
+```{r}
+t <-
+  t %>% 
+  rename(`previous counts` = `ways to produce`,
+         `ways to produce` = `draw 1: blue`) %>% 
+  select(p_1:p_4, `ways to produce`, `previous counts`) %>% 
+  mutate(`new count` = `ways to produce` * `previous counts`)
+
+```
+
+We can also incorporate 'different data' -- e,g., certain amounts of 'prior counts of each bag in the factory' ... we simply multiply these in. 'You first draw a factory bag with a particular count ... which can occur XXX ways, and then you draw a blue marble from that bag, which can occur YYY ways, etc'.
+
+```{r}
+
+t <- t %>%
+select(p_1:p_4, `new count`) %>%
+rename(`prior count` = `new count`) %>%
+  mutate(`factory count` = c(0, 3:0)) %>%
+mutate(`new count` = `prior count` * `factory count`)
+
+t %>%
+knitr::kable()
+```
+
+### 2.1.3. From counts to probability {.unnumbered}
+
+![](images/paste-D5765E47.png)
+
+Putting this all together to compute the plausibilities
+
+*DR question:* is this with a flat prior ... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
+
+```{r}
+t %>% 
+  select(p_1:p_4) %>% 
+  mutate(p                      = seq(from = 0, to = 1, by = .25),
+         `ways to produce data` = c(0, 3, 8, 9, 0)) %>% 
+  mutate(plausibility = `ways to produce data` / sum(`ways to produce data`))
+```
 
 ## 2.2. Building a model
 
-> Designing a simple Bayesian model benefits from a design loop with three steps.
-> (1) Data story: Motivate the model by narrating how the data might arise.
-> (2) Update: Educate your model by feeding it the data.
-> (3) Evaluate: All statistical models require supervision, leading to model revision
+> Designing a simple Bayesian model benefits from a design loop with three steps. (1) Data story: Motivate the model by narrating how the data might arise. (2) Update: Educate your model by feeding it the data. (3) Evaluate: All statistical models require supervision, leading to model revision
 
 *DR question*: How can we 'revise the model' without overfitting or otherwise cheating in some way that overstates the confidence we should have in our results?
 
@@ -26,72 +104,157 @@
 
 **Power of Bayesian inference in small-sample contexts**
 
-> Why? In non-Bayesian statistical inference, procedures are often justified by the method's behavior at very large sample sizes, so-called asymptotic behavior. As a result, performance at small samples sizes is questionable. In contrast, Bayesian estimates are valid for any sample size. This does not mean that more data isn't helpful—it certainly is. Rather, the estimates have a clear and valid interpretation, no matter the sample size. But the price for this power is dependency upon the initial plausibilities, the prior. If the prior is a bad one, then the resulting inference will be misleading.
+> Why? In non-Bayesian statistical inference, procedures are often justified by the method's behavior at very large sample sizes, so-called asymptotic behavior. As a result, performance at small samples sizes is questionable. In contrast, Bayesian estimates are valid for any sample size. This does not mean that more data isn't helpful---it certainly is. Rather, the estimates have a clear and valid interpretation, no matter the sample size. But the price for this power is dependency upon the initial plausibilities, the prior. If the prior is a bad one, then the resulting inference will be misleading.
 
 *DR note*: There are some frequentist/non-Bayesian procedures and tests that don't rely on large sample approximations; e.g., Fisher's exact test
 
-### 2.2.1 - the 'globe tossing' data story
+### 2.2.1 - the 'globe tossing' data story {.unnumbered}
+
+### 2.2.2 Bayesian updating {-}
+
+Start with a particular sequence of data, accumulate trials and successes 
+```{r}
+
+(d <-
+    tibble(
+      toss = c("w", "l", "w", "w", "w", "l", "w", "l", "w"),
+      n_trials = 1:9,
+n_success = cumsum(toss == "w")
+  )
+)
+    
+
+```
+
+Next, we compute and plot the plausibility of every 'true share of water p' after observing the draws from the globe-tossing. We update this after each toss. 
+
+OK I need to construct some data on this globe tossing first; I skipped this earlier
+
+
+Next we build the tibble plausibility/updating tibble.
+
+Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss) 
+```{r}
+
+sequence_length <- 50
+
+(
+plaus_globe_updates <- 
+d %>% 
+  expand(nesting(n_trials, toss, n_success), 
+         p_water = seq(from = 0, to = 1, length.out = sequence_length))
+)
+
+```
+
+Next we create the 'lagged' colums (for ease of plotting the updating):
+```{r}
+
+plaus_globe_updates %<>%
+  group_by(p_water) %>% 
+ # you can learn more about lagging here: https://www.rdocumentation.org/packages/stats/versions/3.5.1/topics/lag or here: https://dplyr.tidyverse.org/reference/lead-lag.html
+  mutate(lagged_n_trials  = lag(n_trials,  k = 1),
+         lagged_n_success = lag(n_success, k = 1)) %>% 
+  ungroup()
+
+plaus_globe_updates[95:105,]
+```
+
+Next we start with a flat prior and, for each 'trial' ... 
+
+- compute the likelihood of the data (sucesses and trials) given each probability of water, according to the *binomial probability function*. 
+- both with the previous 'lagged' data and adding the new data point
+- normalize each of these by dividing by the likelihood of the data that has arisen,
+- this yields the 'plausbility' of each probability of water   . (I.e., the posterior?)
+```{r}
+
+plaus_globe_updates %<>%
+  mutate(prior  = ifelse(n_trials == 1, 1, #DR: I adjusted this to =1 to avoid confusing it with a certainty that p=.5
+          dbinom(
+            x= lagged_n_success, 
+            size = lagged_n_trials, 
+            prob = p_water)),
+         likelihood = dbinom(x  = n_success, 
+                             size = n_trials, 
+                             prob = p_water),
+         strip      = str_c("n = ", n_trials)) %>% 
+  # the next three lines allow us to normalize the prior and the likelihood, 
+  # putting them both in a probability metric 
+  group_by(n_trials) %>% 
+  mutate(prior      = prior      / sum(prior),
+         likelihood = likelihood / sum(likelihood))    
+
+```
+
+
+Plotting this:
+
+```{r, fig.width = 6, fig.height = 5}
+
+  plaus_globe_updates %>% filter(n_trials==5) %>%
+  # plot!
+  ggplot(aes(x = p_water)) +
+  geom_line(aes(y = prior), linetype = 2) +
+  geom_line(aes(y = likelihood)) +
+  scale_x_continuous("proportion water", breaks = c(0, .5, 1)) +
+  scale_y_continuous("plausibility", breaks = NULL) +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~strip, scales = "free_y")
+```
+
+^[DR note: although the plot looks smooth, I think this is only because we chose a small interval of probability ... 50 different probabilities. When I reduce it to 5 probabilities this gets choppy]
 
 
 ## 2.3. Components of the model
-
 
 ::: {.callout-note collapse="true"}
 ## Coding tip: `dbinom`, `pbinom`, `rbinom`, etc
 
 > "d" in `dbinom` stands for density. Functions named in this way almost always have corresponding partners that begin with "r" for random samples and that begin with "-p" for cumulative probabilities
-
 :::
 
 > The distributions we assign to the observed variables typically have their own variables.
 
+### What prior? {.unnumbered}
 
-### What prior? {-}
 > So where do priors come from? They are both engineering assumptions, chosen to help the machine learn, and scientific assumptions, chosen to reflect what we know about a phenomenon. The flat prior in Figure 2.5 is very common, but it is hardly ever the best prior.
 
-> There is a school of Bayesian inference that emphasizes choosing priors based upon the personal beliefs of the analyst.  While this subjective Bayesian approach thrives in some statistics and philosophy and economics programs, it is rare in the sciences.
+> There is a school of Bayesian inference that emphasizes choosing priors based upon the personal beliefs of the analyst. While this subjective Bayesian approach thrives in some statistics and philosophy and economics programs, it is rare in the sciences.
 
-> If your goal is to lie with statistics, you’d be a fool to do it with priors, because such a lie would be easily uncovered. Better to use the more opaque machinery of the likelihood. Or better yet-don’t actually take this advice!—massage the data, drop some “outliers,” and otherwise engage in motivated data transformation
+> If your goal is to lie with statistics, you'd be a fool to do it with priors, because such a lie would be easily uncovered. Better to use the more opaque machinery of the likelihood. Or better yet-don't actually take this advice!---massage the data, drop some "outliers," and otherwise engage in motivated data transformation
 
 > because non-Bayesian procedures need to make choices that Bayesian ones do not, such as choice of estimator or likelihood penalty
 
-
 ## 2.4 'Making the model go'
 
+### 2.4.1 Bayes theorem {.unnumbered}
 
-### 2.4.1 Bayes theorem {-}
 In word form:
 
 > Posterior (probability of any given value of $p$) =
 
-(Probability of the data [given p] $\times$ [Prior probability of p]) divided by the
-'Average probability of the data'
+(Probability of the data \[given p\] $\times$ \[Prior probability of p\]) divided by the 'Average probability of the data'
 
-I.e., (in my own words) 'how likely is this data *and* the particular parameter p'
-divided by 'the probability of this data overall' (given any p, with the probability of each p following the prior)
+I.e., (in my own words) 'how likely is this data *and* the particular parameter p' divided by 'the probability of this data overall' (given any p, with the probability of each p following the prior)
 
 > 'average probability of the data'
 
 > Averaged over what? Averaged over the prior. It's job is just to standardize the posterior, to ensure it sums (integrates) to one. In mathematical form: Pr(W, L) = E
 
-
 Probability of one Water followed by one Land:
 
-$$Pr(W, L|p)$$
-$$=E\Big( Pr(W, L|p) Big)$$
+$$Pr(W, L|p)$$ $$=E\Big( Pr(W, L|p) Big)$$
 
 $$= \int  Pr(W,L|p) Pr(p)dp $$
 
-> The key lesson is that the posterior is proportional to the product of the prior and the probability of the data [given the prior]. Why? Because for each specific value of p, the number of paths through the garden of forking data is the product of the prior number of paths and the new number of paths.
-> A flat prior constructs a posterior that is simply proportional to the likelihood
-
+> The key lesson is that the posterior is proportional to the product of the prior and the probability of the data \[given the prior\]. Why? Because for each specific value of p, the number of paths through the garden of forking data is the product of the prior number of paths and the new number of paths. A flat prior constructs a posterior that is simply proportional to the likelihood
 
 ::: {.callout-note collapse="true"}
-## "Bayesian data analysis isn’t about Bayes’ theorem"
+## "Bayesian data analysis isn't about Bayes' theorem"
 
 Dissing the 'HIV test false positive' thing
 
-> Inference under any probability concept will eventually make use of Bayes’ theorem. Common introductory examples of 'Bayesian' analysis using HIV and DNA testing are not  uniquely Bayesian
+> Inference under any probability concept will eventually make use of Bayes' theorem. Common introductory examples of 'Bayesian' analysis using HIV and DNA testing are not uniquely Bayesian
 :::
 
 > Numerical techniques for computing posterior distributions: (1) Grid approximation (2) Quadratic approximation (3) Markov chain Monte Carlo (MCMC)
@@ -102,19 +265,16 @@ Dissing the 'HIV test false positive' thing
 
 > in most of your real modeling, grid approximation isn't practical. The reason is that it scales very poorly, as the number of parameters increases
 
-> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or “normal”—in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 】
+> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 】
 
 > logarithm of a Gaussian distribution forms a parabola. And a parabola is a quadratic function
 
-> For many of the most common procedures in applied statistics-linear regression, for example—the approximation works very well
+> For many of the most common procedures in applied statistics-linear regression, for example---the approximation works very well
 
 > (1) Find the posterior mode
 
-some optimization algorithm, a procedure that virtually “climbs” the posterior distribution
+some optimization algorithm, a procedure that virtually "climbs" the posterior distribution
 
 > (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically, but 】
 
-
 *DR question:* But how does it do this estimate of the curvature? Does it come out of many simulations, or the optimizing hill climbing thing, or??
-
-
