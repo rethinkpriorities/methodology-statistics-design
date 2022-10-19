@@ -1,6 +1,6 @@
 ---
 title: "Bayesian independent group comparison power"
-author: "Jamie Elsey"
+author: "Jamie Elsey (edits/notes by David Reinstein)"
 date: "11/17/2021"
 output:
   pdf_document: default
@@ -37,10 +37,9 @@ I never managed to install “mac -os Rtoolchain” but I did manage to get #Rst
 
 ::: 
 
-
 # Step 1: Generate a large number of data sets for the analysis
 
-We will run a comparison of two independent samples, and seek to assess our capacity to detect (or rule out?) a range of possible effect sizes, considering Cohen's $d$ at 0, .15, .3.
+We will run a comparison of two independent samples, and seek to assess our capacity to detect ^[DR: Or rule out?] a range of possible effect sizes, considering Cohen's $d$ at 0, .15, .3.
 
 ```{r change-memory-limit, message = FALSE, warning = FALSE}
 #We will also increase the memory limit in R to allow for the large objects that are likely to be created:
@@ -57,7 +56,24 @@ library(tidyverse)
 
 ```
 
-```{r data-making-function, message = FALSE, warning = FALSE}
+
+::: {.callout-note collapse="true"}
+## The code `t.data.maker` below
+
+-  Creates a dataframe with two groups
+    - each with the same  `group.size` (easy to adjust this to allow 2 sizes)
+    - each drawn from standard normal distribution
+    - group b's mean differs from group a according to the specified `effect.size`
+- `sim` is just the counter of 'which simulation this is'
+-  one row per 'observation in  group'... so 2*group.size rows
+
+
+::: 
+
+```{r  message = FALSE, warning = FALSE}
+
+#| label: data-making-function
+#| code-summary: "function to make simulated data"
 
 t.data.maker <- function(sim, effect.size, group.size) {
 
@@ -80,18 +96,20 @@ t.data.maker <- function(sim, effect.size, group.size) {
 
 ```
 
-We will run 250 analyses for each of the three effect sizes of interest, for a total of 750. We use maximum group sizes of 1500.^[DR: This needs some clarification up front. Why do we run so many analyses per effect size? Do you mean you will do each of these for 250 simulated data sets?  What's this 'maximum' group size? Do you mean you will try out a range of sample sizes up to a sample of 1500?] We put these into a format to pass to a map function, and then run the data-making function over the different effect sizes to generate the many data sets.
+We will run 250 analyses^[DR: simulations?] for each of the three effect sizes of interest. We use maximum group sizes of 1500.^[DR: IIRC this comes from a real-world case where we are considering a maximum survey size of 1500 per group.] We put these into a format to pass to a map function, and then run the data-making function over the different effect sizes to generate the many data sets.
 
-In the code below, we create this simulated data, creating a list of tibbles, one tibble for each simulated data set.
+In the code below, we create this simulated data, creating a list of tibbles, one tibble for each simulated data set, considering the three effect sizes.
 
-```{r iterate-datamaker, message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE}
+#| label: iterate-datamaker
+#| code-summary: "iterate-datamaker"
 
-# set up furrr to run iterations more quickly ... this is parallel processing stuff
+# set up furrr to run iterations more quickly ... this is (optional) parallel processing stuff
 library(furrr)
 plan(multisession)
 options <- furrr_options(seed = 1234)
 
-# make a tibble with our intended effect sizes and sample sizes
+# make a tibble with our intended effect sizes (DR: for 250 simulations each) 
 effect.sizes <- tibble(
     effect.size = c(rep(0, 250), rep(.15, 250), rep(.3, 250)),
     sim = seq(1:750)
