@@ -16,3 +16,23 @@ I intend to begin with a 'fork' of the latter^[This is not an actual fork, altho
 The present resource is tied to our RP internal book group on the above, which is outlined and organized in the git wiki [here](https://github.com/rethinkpriorities/methodology-statistics-design/wiki/Statistical-Rethinking--(McElreath)-discussion-group:-proposed-outline).
 
 
+```{r}
+#| label: packages
+#| code-summary: "Key packages for Mcelreath and recoding"
+ 
+#for recoding
+library(pacman)
+p_load(dplyr, ggplot2, magrittr, janitor, stringr, brms)
+
+#mcelreath packages
+install.packages(c("coda","mvtnorm","devtools","dagitty"))
+library(devtools)
+devtools::install_github("rmcelreath/rethinking")
+
+library(rethinking)
+
+#renv::snapshot()
+
+```
+
+

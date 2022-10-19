@@ -10,19 +10,23 @@ library(tidyverse)
 
 ```
 
+::: {.callout-note collapse="true"}
 
-## Some resources
+## Some key resources
 
 [R for data science](https://r4ds.had.co.nz/): highly recommended
 
 See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discussion/data-sci.html) (Reinstein) ^[Todo: integrate key content.]
-
 
 *Pete W's Gists curating...:*
 
 - [Hadley Wickham's "Advanced R](https://gist.github.com/peterhurford/72dbd44e0a34e29297485a8cf679cf73) ... for the most keen
 
 - ["Git 101" (various resources)](https://gist.github.com/peterhurford/4d43aa5d6de114c0c741ba664c9c5ff5)
+
+quarto.org
+
+:::
 
 ## Coding and organisational issues
 
@@ -33,10 +37,7 @@ See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discus
 - Reproducability
 
 - Git and github
-
-- R and Quarto (qmd) or Rmarkdown = `Rmd`
-
-- How to leave comments and collaborate?
+    
 
 - `trackdown` to convert to Gdoc for feedback
 
@@ -48,7 +49,26 @@ See [getting, cleaning, and using data](https://daaronr.github.io/metrics_discus
 
 \
 
-## Automation and 'dynamic documents' {-}
+
+## Automation and 'dynamic documents' (qmd etc.) {-}
+
+See, e.g., quarto.org and [reinstein quarto template](https://daaronr.github.io/dr_quarto_template/chapters/intro.html) 
+
+*How to leave comments and collaborate?*
+- Easier if hosted, use Netlify for private hosting 
+- Then use hypothes.is comments
+
+Alternatives on Github are a bit workaroundy
+
+\
+
+*But I just want to see the code*
+
+Always make a 'just the code' version of the file with knitr::purl(here("filename.qmd"))
+
+
+
+### Inline code and soft-coding
 
 'Soft-code' as much as possible to avoid conflicting versions when data updates, and to make everything reproduceable and transparent
 
@@ -133,11 +153,13 @@ From Willem's [intro to R workshop script](https://docs.google.com/document/d/13
 
 
 ```{r}
+#| label: count_etc
+#| code-summary: "count, count_data, describe_data"
+ 
 
 diamonds %>%
  count(cut) %>%
  mutate(pct = n / sum(n))
-
 
 # Use tidystats
 library(tidystats)
@@ -151,7 +173,7 @@ describe_data(diamonds, price)
 
 ```
 
-This one I knew, of course, the typical 'grouped summary's
+This one I knew, of course, the typical 'grouped summaries'
 
 ```{r groupedsum}
 

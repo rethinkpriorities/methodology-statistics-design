@@ -133,7 +133,8 @@ OK I need to construct some data on this globe tossing first; I skipped this ear
 
 Next we build the tibble plausibility/updating tibble.
 
-Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss) 
+Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss). 
+
 ```{r}
 
 sequence_length <- 50
