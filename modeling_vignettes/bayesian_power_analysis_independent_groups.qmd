@@ -70,7 +70,7 @@ library(tidyverse)
 
 ::: 
 
-```{r  message = FALSE, warning = FALSE}
+```{r,  message = FALSE, warning = FALSE}
 
 #| label: data-making-function
 #| code-summary: "function to make simulated data"

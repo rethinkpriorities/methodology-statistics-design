@@ -335,7 +335,9 @@ you don’t need to bring in prior expectations.
 
 Some data cleaning
 
-```{r setup-baseball-stats}
+```{r}
+#| label: setup-baseball-stats
+#| code-summary: "setup  baseball-stats"
 
 p_load(Lahman)
 # Filter out pitchers

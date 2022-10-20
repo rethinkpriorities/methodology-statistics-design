@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.113">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>RP: Methods - 16&nbsp; Monte-Carlo ‘Fermi’</title>
+<title>RP: Methods - 16&nbsp; MonteCarlo ‘Fermi est.’</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,31 +117,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">RP: Methods</a> 
         <div class="sidebar-tools-main">
@@ -166,15 +152,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
   </div>
@@ -190,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
@@ -198,8 +184,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
   </div>
@@ -225,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics/modeling</a>
@@ -233,8 +219,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
@@ -270,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
@@ -278,10 +264,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Bayes/Rethinking</a>
@@ -303,8 +289,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/rethinking_bayes_recoding.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Overview (McE/Bayes)</span></a>
   </div>
@@ -319,31 +305,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../chapters/2_small_large_worlds.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ch 2. Small/Large Worlds</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
+  </div>
+</li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-to-measure-anything-by-douglas-hubbard" id="toc-how-to-measure-anything-by-douglas-hubbard" class="nav-link active" data-scroll-target="#how-to-measure-anything-by-douglas-hubbard"><span class="toc-section-number">16.1</span>  ‘How to measure anything’, By Douglas Hubbard</a>
+<li>
+<a href="#how-to-measure-anything-by-douglas-hubbard" id="toc-how-to-measure-anything-by-douglas-hubbard" class="nav-link active" data-scroll-target="#how-to-measure-anything-by-douglas-hubbard"><span class="toc-section-number">16.1</span>  ‘How to measure anything’, By Douglas Hubbard</a>
   <ul class="collapse">
-  <li><a href="#tools-for-monte-carlo-fermi-other-than-excel" id="toc-tools-for-monte-carlo-fermi-other-than-excel" class="nav-link" data-scroll-target="#tools-for-monte-carlo-fermi-other-than-excel"><span class="toc-section-number">16.1.1</span>  Tools for Monte-Carlo Fermi, other than Excel</a></li>
-  </ul></li>
-  <li><a href="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" id="toc-monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="nav-link" data-scroll-target="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis"><span class="toc-section-number">16.2</span>  Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</a></li>
+<li><a href="#tools-for-monte-carlo-fermi-other-than-excel" id="toc-tools-for-monte-carlo-fermi-other-than-excel" class="nav-link" data-scroll-target="#tools-for-monte-carlo-fermi-other-than-excel"><span class="toc-section-number">16.1.1</span>  Tools for Monte-Carlo Fermi, other than Excel</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/fermi.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</li>
+  <li><a href="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" id="toc-monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="nav-link" data-scroll-target="#monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis"><span class="toc-section-number">16.2</span>  Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/fermi.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">
+<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span>
+</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -355,32 +343,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(rethinkpriorities)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinkpriorities)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</header><div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/trinker/pacman">pacman</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rethinkpriorities</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>‘BOTEC’: Back of the envelope calculations are central to RP’s work</p>
 <p>‘Fermi estimation’ is essentially a more formal approach to this, carefully defining and explaining each element of the ‘model’ equation.</p>
 <p>When we explicitly define (and justify) a probability distribution over each variable in the model, and compute (often through simulation) the overall uncertainty of the outputs (predictions, estimates, etc), we call this “Monte Carlo Fermi Estimation”.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<section id="how-to-measure-anything-by-douglas-hubbard" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="how-to-measure-anything-by-douglas-hubbard"><span class="header-section-number">16.1</span> ‘How to measure anything’, By Douglas Hubbard</h2>
+<section id="how-to-measure-anything-by-douglas-hubbard" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="how-to-measure-anything-by-douglas-hubbard">
+<span class="header-section-number">16.1</span> ‘How to measure anything’, By Douglas Hubbard</h2>
 <p>See</p>
 <ul>
 <li><a href="https://www.howtomeasureanything.com/3rd-edition/">book website here</a></li>
-<li><a href="https://docs.google.com/document/d/1JMAuIiE52o0E0SxeItD9vH_lWRifWHEETIvjjTiB_Gk/edit#heading=h.16rulnin7e3i">RP book group notes and links</a> (private access)</li>
+<li>
+<a href="https://docs.google.com/document/d/1JMAuIiE52o0E0SxeItD9vH_lWRifWHEETIvjjTiB_Gk/edit#heading=h.16rulnin7e3i">RP book group notes and links</a> (private access)</li>
 <li><a href="https://www.lesswrong.com/posts/ybYBCK9D7MZCcdArB/how-to-measure-anything">Luke M’s summary at Lesswrong</a></li>
 </ul>
 <p>z</p>
-<section id="chapter-3-the-urn-of-mystery-simulation" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="chapter-3-the-urn-of-mystery-simulation">Chapter 3: The Urn of Mystery Simulation</h4>
+<section id="chapter-3-the-urn-of-mystery-simulation" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="chapter-3-the-urn-of-mystery-simulation">Chapter 3: The Urn of Mystery Simulation</h4>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -406,15 +390,14 @@ Chapter 3: The Urn of Mystery Simulation
 </div>
 <p>The above (folded) narrative is rather confusing, and the spreadsheet is rather bulky. We can explain it and simulate it much more simply by using code. The point is… [what was the point again?]</p>
 <ol type="1">
-<li>Randomly draw a ‘share green’ for each urn, for each of 1000 (or ‘<span class="math inline">\(K=1000\)</span>’) ‘urns’, and record the majority color, i.e., <em>is it more than half green?</em></li>
+<li>Randomly draw a ‘share green’ for each urn, for each of 1000 (or ‘<span class="math inline">\(K=1000\)</span>’) ‘urns’, and record the majority color, i.e., <em>is it more than half green?</em>
+</li>
 </ol>
 <p>We set the value ‘K=1000’, which we could adjust later, indicating ‘how many urns’ we are using in our simulation. It makes it clearer to define things at the top and see how it drives the results.</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span></span>
+<span><span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>The code above yields the object <code>urns</code>, a vector of 1000 probabilities. It assigns ‘urns’ to be equal to the function <code>runif</code>, i.e., ‘random uniform’.</p>
@@ -422,109 +405,92 @@ Chapter 3: The Urn of Mystery Simulation
 <p><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> We could view the whole thing in several ways, such as by typing <code>view(urns)</code> or <code>View(urns)</code> for a peek. We can also have any part of this printed to the screen. The point is that this object is there in the background (in our ‘environment’). We don’t need to see it in front of us, at all times, as with a spreadsheet.</p>
 <p>Printing out a peek at this object:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(urns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code> num [1:1000] 0.738 0.19 0.716 0.499 0.317 ...</code></pre>
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">urns</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> num [1:1000] 0.08596 0.70347 0.40853 0.00597 0.84137 ...</code></pre>
 </div>
 </div>
 <p>The object is a ‘numeric vector’ with 1000 elements, the first 5 or so are listed. Each of these represent</p>
 <ol start="2" type="1">
-<li>For each of (<span class="math inline">\(K= 1000\)</span>) urns, randomly draw a single marble, and record whether this draw is the same as the urn’s majority color.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>For each of (<span class="math inline">\(K= 1000\)</span>) urns, randomly draw a single marble, and record whether this draw is the same as the urn’s majority color.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>
+</li>
 </ol>
 <p>We put this together into a ‘tibble’ data frame below<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">share_green =</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>), <span class="co">#recreating the vector of uniform draws as the first column of a tibble</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>), <span class="co">#classifying whether the tibble is majority green or red</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(K) <span class="sc">&gt;</span> share_green, <span class="st">"red"</span>, <span class="st">"green"</span>) <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span></span>
+<span><span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="co">#recreating the vector of uniform draws as the first column of a tibble</span></span>
+<span>    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, <span class="co">#classifying whether the tibble is majority green or red</span></span>
+<span>    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> <span class="co">#if another random uniform draw exceeds the 'share green' in that urn, it's a draw of a red ball. Note this is doing this for the entire vector runif(K) atonce</span></span>
+<span>  <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="3" type="1">
 <li>Display this ‘matrix’ of 1000 outcomes (or a peek at it)</li>
 </ol>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>urns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">urns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,000 × 3
    share_green majority draw 
          &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;
- 1      0.558  green    red  
- 2      0.759  green    red  
- 3      0.861  green    green
- 4      0.158  red      red  
- 5      0.276  red      red  
- 6      0.403  red      red  
- 7      0.0446 red      red  
- 8      0.371  red      red  
- 9      0.293  red      green
-10      0.240  red      red  
+ 1       0.687 green    red  
+ 2       0.517 green    green
+ 3       0.456 red      red  
+ 4       0.350 red      green
+ 5       0.280 red      red  
+ 6       0.448 red      green
+ 7       0.651 green    red  
+ 8       0.947 green    green
+ 9       0.553 green    red  
+10       0.497 red      red  
 # … with 990 more rows</code></pre>
 </div>
 </div>
 <p>The snip above shows how these ‘random draws’ are generated, as noted above.</p>
-<p><br>
-</p>
+<p><br></p>
 <ol start="4" type="1">
 <li>Count ‘which share of these agree with their urn’s majority color’</li>
 </ol>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  share_agree <span class="ot">&lt;-</span> <span class="fu">summarize</span>(urns, <span class="at">share_agree =</span> <span class="fu">sum</span>(draw <span class="sc">==</span> majority) <span class="sc">/</span> K)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span></span>
+<span>  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span><span class="va">urns</span>, share_agree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">draw</span> <span class="op">==</span> <span class="va">majority</span><span class="op">)</span> <span class="op">/</span> <span class="va">K</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   share_agree
         &lt;dbl&gt;
-1       0.766</code></pre>
+1       0.727</code></pre>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#sum number of cases where the 'draw is the same color as the majority for the urn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>I.e., 76.6% of the draws are the same color as the majority of their urn.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>I.e., 72.7% of the draws are the same color as the majority of their urn.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
 <p>The above code is not as elegant as it should be, and we should clean it up. Still I think this is better than using the Excel spreadsheet. Why? It gives you more control, a better record of what you have done, the ability to do more powerful analysis, and you can do more with the results (such as embedding them into a dynamic document like this one).</p>
 <p>For one example, suppose you wanted to test this with 1 <em>million</em> urns. That would be a huge pain to do in Excel… I dare you to try it. In <code>R</code> we simply change the code to specify <span class="math inline">\(K =1,000,000\)</span> urns, and do the above again.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1000</span><span class="sc">*</span><span class="dv">1000</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>urns <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">share_green =</span> <span class="fu">runif</span>(K, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">majority =</span> <span class="fu">if_else</span>(share_green <span class="sc">&gt;</span> .<span class="dv">5</span>, <span class="st">"green"</span>, <span class="st">"red"</span>), </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">draw =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(K) <span class="sc">&gt;</span> share_green, <span class="st">"red"</span>, <span class="st">"green"</span>) </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  share_agree <span class="ot">&lt;-</span> <span class="fu">sum</span>(urns<span class="sc">$</span>draw <span class="sc">==</span> urns<span class="sc">$</span>majority)<span class="sc">/</span>K</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.750705</code></pre>
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">K</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">*</span><span class="fl">1000</span></span>
+<span></span>
+<span></span>
+<span><span class="va">urns</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    share_green <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    majority <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">share_green</span> <span class="op">&gt;</span> <span class="fl">.5</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, </span>
+<span>    draw <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span> <span class="op">&gt;</span> <span class="va">share_green</span>, <span class="st">"red"</span>, <span class="st">"green"</span><span class="op">)</span> </span>
+<span>  <span class="op">)</span> </span>
+<span></span>
+<span><span class="op">(</span></span>
+<span>  <span class="va">share_agree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">urns</span><span class="op">$</span><span class="va">draw</span> <span class="op">==</span> <span class="va">urns</span><span class="op">$</span><span class="va">majority</span><span class="op">)</span><span class="op">/</span><span class="va">K</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.749833</code></pre>
 </div>
 </div>
 <p>On my computer, this ran almost immediately.</p>
-</section>
-<section id="tools-for-monte-carlo-fermi-other-than-excel" class="level3" data-number="16.1.1">
-<h3 data-number="16.1.1" class="anchored" data-anchor-id="tools-for-monte-carlo-fermi-other-than-excel"><span class="header-section-number">16.1.1</span> Tools for Monte-Carlo Fermi, other than Excel</h3>
+</section><section id="tools-for-monte-carlo-fermi-other-than-excel" class="level3" data-number="16.1.1"><h3 data-number="16.1.1" class="anchored" data-anchor-id="tools-for-monte-carlo-fermi-other-than-excel">
+<span class="header-section-number">16.1.1</span> Tools for Monte-Carlo Fermi, other than Excel</h3>
 <p>Some links to simple vignettes in other tools</p>
 <ul>
 <li><p><a href="https://my.causal.app/models/69949">Causal, buy vs rent</a></p></li>
@@ -532,11 +498,8 @@ Chapter 3: The Urn of Mystery Simulation
 <li><p><a href="https://www.getguesstimate.com/models/2758">Guesstimate, slightly more involved: deep work before death of your mind</a></p></li>
 <li><p><a href="https://observablehq.com/@hazelfire/givewells-givedirectly-cost-effectiveness-analysis">Squiggle notebook, GiveDirectly/Givewell mode</a></p></li>
 <li><p>R code (working on it)</p></li>
-</ul>
-</section>
-</section>
-<section id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis"><span class="header-section-number">16.2</span> Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</h2>
+</ul></section></section><section id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="monte-carlo-fermi-approaches-to-givewell-style-cost-effectiveness-analysis">
+<span class="header-section-number">16.2</span> Monte-Carlo Fermi approaches to GiveWell-style Cost-Effectiveness Analysis</h2>
 <p>Embedded below, David Reinstein and Sam Nolan explain this approach, advocating its use in GiveWell models and beyond, laying out some building blocks,</p>
 <p>… and embed some tools and work-in-progress on this <a href="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/">HERE</a>, also embedded below.</p>
 <p><strong>Overview</strong></p>
@@ -546,11 +509,8 @@ Chapter 3: The Urn of Mystery Simulation
 <li>Code-based tools</li>
 </ul>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<iframe src="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/" width="672" height="400px" data-external="1">
+<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><iframe src="https://effective-giving-marketing.gitbook.io/innovations-in-givewell-esque-ceas/" width="672" height="400px" data-external="1">
 </iframe>
 </div>
 <div class="alert alert-secondary">
@@ -560,9 +520,7 @@ Chapter 3: The Urn of Mystery Simulation
 
 <!-- -->
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>At least David Reinstein thinks this is what it’s called.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This uses arguments K draws, <code>0</code> lower bound, and <code>1</code> upper bound.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -571,11 +529,7 @@ Chapter 3: The Urn of Mystery Simulation
 <li id="fn5"><p>I could reuse the above vector, but I’ll just re-create it instead<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Check out the raw code – note how the number here is automatically generated with ‘inline code’. I didn’t literally type in that number.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>Even better, rather than recopying the code, we would make it a function.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -723,9 +677,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/causal_inf.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Causal Inference</span></span>
       </a>          
@@ -736,7 +688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Monte-Carlo 'Fermi' {-#fermi}</span></span>
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># MonteCarlo 'Fermi est.' {-#fermi}</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>

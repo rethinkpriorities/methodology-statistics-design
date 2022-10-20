@@ -6,7 +6,7 @@ A set of curated resources tied to use-cases, and a space to organize our discus
 
 **NOTE: this is now publicly hosted but not indexed. Please be careful not to share any confidential data or sensitive information.**
 
-## Rethink Priorities: Our approach to empirical and quantitative work
+<!-- ## Rethink Priorities: approach to empirical and quantitative work -->
 
 ## The purpose of this resource
 

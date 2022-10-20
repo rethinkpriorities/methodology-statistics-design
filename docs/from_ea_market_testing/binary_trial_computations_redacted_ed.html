@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.113">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>RP: Methods - 17&nbsp; Inference/equivalence tests, (binomial)</title>
 <style>
 code{white-space: pre-wrap;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,31 +117,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inference/equivalence tests, (binomial)</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">RP: Methods</a> 
         <div class="sidebar-tools-main">
@@ -166,15 +150,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
   </div>
@@ -190,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
@@ -198,8 +182,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
   </div>
@@ -225,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics/modeling</a>
@@ -233,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
@@ -270,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
@@ -278,10 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Bayes/Rethinking</a>
@@ -303,8 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/rethinking_bayes_recoding.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Overview (McE/Bayes)</span></a>
   </div>
@@ -319,34 +303,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../chapters/2_small_large_worlds.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ch 2. Small/Large Worlds</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
+  </div>
+</li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#input-from-gsheet-wip" id="toc-input-from-gsheet-wip" class="nav-link active" data-scroll-target="#input-from-gsheet-wip"><span class="toc-section-number">17.1</span>  Input from Gsheet (WIP)</a></li>
+<li><a href="#input-from-gsheet-wip" id="toc-input-from-gsheet-wip" class="nav-link active" data-scroll-target="#input-from-gsheet-wip"><span class="toc-section-number">17.1</span>  Input from Gsheet (WIP)</a></li>
   <li><a href="#randomization-inference-approach" id="toc-randomization-inference-approach" class="nav-link" data-scroll-target="#randomization-inference-approach"><span class="toc-section-number">17.2</span>  Randomization inference approach</a></li>
   <li><a href="#how-likely-is-the-imbalance-of-unique-emails-due-to-chance" id="toc-how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="nav-link" data-scroll-target="#how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="toc-section-number">17.3</span>  How likely is the ‘imbalance of unique emails’ due to chance?</a></li>
-  <li><a href="#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." id="toc-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." class="nav-link" data-scroll-target="#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power."><span class="toc-section-number">17.4</span>  How likely are ‘proportions this similar’ under different size ‘true effect sizes’?^[ I think this is relates to a ‘power calculation’, but reporting <span class="math inline">\(1-power\)</span>.</a>
+  <li>
+<a href="#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." id="toc-how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." class="nav-link" data-scroll-target="#how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power."><span class="toc-section-number">17.4</span>  How likely are ‘proportions this similar’ under different size ‘true effect sizes’?^[ I think this is relates to a ‘power calculation’, but reporting <span class="math inline">\(1-power\)</span>.</a>
   <ul class="collapse">
-  <li><a href="#difference-between-two-binomial-random-variables." id="toc-difference-between-two-binomial-random-variables." class="nav-link" data-scroll-target="#difference-between-two-binomial-random-variables."><span class="toc-section-number">17.4.1</span>  Difference between two binomial random variables.</a></li>
+<li><a href="#difference-between-two-binomial-random-variables." id="toc-difference-between-two-binomial-random-variables." class="nav-link" data-scroll-target="#difference-between-two-binomial-random-variables."><span class="toc-section-number">17.4.1</span>  Difference between two binomial random variables.</a></li>
   <li><a href="#applying-this-to-present-data" id="toc-applying-this-to-present-data" class="nav-link" data-scroll-target="#applying-this-to-present-data"><span class="toc-section-number">17.4.2</span>  Applying this to present data</a></li>
   <li><a href="#adaptation-of-this-magnitude-or-smaller" id="toc-adaptation-of-this-magnitude-or-smaller" class="nav-link" data-scroll-target="#adaptation-of-this-magnitude-or-smaller"><span class="toc-section-number">17.4.3</span>  Adaptation: ‘of this magnitude or smaller’</a></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/from_ea_market_testing/binary_trial_computations_redacted_ed.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/from_ea_market_testing/binary_trial_computations_redacted_ed.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title"><span id="inference_binom_example" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inference/equivalence tests, (binomial)</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -359,44 +343,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<div class="alert alert-secondary">
+</header><div class="alert alert-secondary">
 <p>This work has been moved from the EA market testing repo, with ‘identifying’ content redacted</p>
 </div>
 <p>The context for this trial is discussed <a href="https://app.gitbook.com/o/-MfFk4CTSGwVOPkwnRgx/s/-Mf8cHxdwePMZXRTKnEE/c/0qFJ2AUh7cZzynp3zRjk/contexts-and-environments-for-testing/one-for-the-world/pre-giving-tuesday-email-split-test">here (private)</a> and will be publicly shared <a href="">here</a> when we gain permission.</p>
-<section id="input-from-gsheet-wip" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="input-from-gsheet-wip"><span class="header-section-number">17.1</span> Input from Gsheet (WIP)</h2>
+<section id="input-from-gsheet-wip" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="input-from-gsheet-wip">
+<span class="header-section-number">17.1</span> Input from Gsheet (WIP)</h2>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(googlesheets4)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#read_sheet("XXX")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Need authorization here; how to do it? Note -- we need those cells to be anonymized </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#library(googlesheets4)</span></span>
+<span><span class="co">#read_sheet("XXX")</span></span>
+<span><span class="co">#Need authorization here; how to do it? Note -- we need those cells to be anonymized </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Note: subject lines were different … the impact email got more opens</p>
 <p>‘Giving Season contributions - website’ for donations … because CtA is a donation button on the website</p>
-</section>
-<section id="randomization-inference-approach" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="randomization-inference-approach"><span class="header-section-number">17.2</span> Randomization inference approach</h2>
-</section>
-<section id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance"><span class="header-section-number">17.3</span> How likely is the ‘imbalance of unique emails’ due to chance?</h2>
+</section><section id="randomization-inference-approach" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="randomization-inference-approach">
+<span class="header-section-number">17.2</span> Randomization inference approach</h2>
+</section><section id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="how-likely-is-the-imbalance-of-unique-emails-due-to-chance">
+<span class="header-section-number">17.3</span> How likely is the ‘imbalance of unique emails’ due to chance?</h2>
 <p>We’ve 1345 unique emails in the dataset for ‘control’ treatment 1 and 1190 unique emails for treatment 2, if I did the quick calculations correctly. (Todo– integrate the data here.)</p>
 <p>We know some emails are repeated. To analyze this correctly I should bring in the actual distribution of ‘number of times an email is in the data’ and simulate assignment. (Or maybe this is a ‘Poisson’ thing?)</p>
 <p>As a (perhaps incorrect) first pass I could consider ‘legitimate unique email shows up in the treatment group’ as a random binomial event. (I guess the event is something like ’email is (not) duplicated?) Then we can do the standard binomial (Chi-sq) and Fisher’s exact tests.</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  binom_emails <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(n1, n1<span class="sc">+</span>n2, <span class="at">correct=</span><span class="cn">FALSE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n1</span> <span class="op">&lt;-</span> <span class="fl">1345</span></span>
+<span><span class="va">n2</span> <span class="op">&lt;-</span> <span class="fl">1190</span></span>
+<span></span>
+<span><span class="op">(</span></span>
+<span>  <span class="va">binom_emails</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prop.test.html">prop.test</a></span><span class="op">(</span><span class="va">n1</span>, <span class="va">n1</span><span class="op">+</span><span class="va">n2</span>, correct<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>
     1-sample proportions test without continuity correction
 
@@ -409,13 +384,10 @@ sample estimates:
        p 
 0.530572 </code></pre>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  fisher_emails <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(n1, n2, n2, n1), <span class="at">ncol=</span><span class="dv">2</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span></span>
+<span>  <span class="va">fisher_emails</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/fisher.test.html">fisher.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">n1</span>, <span class="va">n2</span>, <span class="va">n2</span>, <span class="va">n1</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>
     Fisher's Exact Test for Count Data
 
@@ -431,13 +403,12 @@ odds ratio
 </div>
 <p>If the above tests are reasonable, this imbalance is very unlikely to occur by chance.</p>
 <p>Note: if we think this is opens, this is a demonstration that one email is opened more.</p>
-</section>
-<section id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power."><span class="header-section-number">17.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes’?^[ I think this is relates to a ‘power calculation’, but reporting <span class="math inline">\(1-power\)</span>.</h2>
+</section><section id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power." class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="how-likely-are-proportions-this-similar-under-different-size-true-effect-sizes-i-think-this-is-relates-to-a-power-calculation-but-reporting-1-power.">
+<span class="header-section-number">17.4</span> How likely are ‘proportions this similar’ under different size ‘true effect sizes’?^[ I think this is relates to a ‘power calculation’, but reporting <span class="math inline">\(1-power\)</span>.</h2>
 <p>]</p>
 <p>In the next section I started an off-the-cuff simulation approach, in folded code. But I believe that the <em>analytical</em> form <a href="https://math.stackexchange.com/questions/562119/difference-of-two-binomial-random-variables">here</a> with code and a simulation <a href="https://gist.github.com/coppeliaMLA/9681819">here</a> should be applicable.</p>
-<section id="difference-between-two-binomial-random-variables." class="level3" data-number="17.4.1">
-<h3 data-number="17.4.1" class="anchored" data-anchor-id="difference-between-two-binomial-random-variables."><span class="header-section-number">17.4.1</span> Difference between two binomial random variables.</h3>
+<section id="difference-between-two-binomial-random-variables." class="level3" data-number="17.4.1"><h3 data-number="17.4.1" class="anchored" data-anchor-id="difference-between-two-binomial-random-variables.">
+<span class="header-section-number">17.4.1</span> Difference between two binomial random variables.</h3>
 <p><strong>Reprinting and discussing from <a href="https://math.stackexchange.com/questions/562119/difference-of-two-binomial-random-variables">Stackexchange post</a></strong></p>
 <p>“derive the distribution of the difference between two binomial random variables.”</p>
 <blockquote class="blockquote">
@@ -464,8 +435,7 @@ odds ratio
 </ol>
 <p>In the first case</p>
 <p><span class="math inline">\(p(z) = \sum_{i=0}^{n_1} m(i+z, n_1, p_1) m(i, n_2, p_2)\)</span></p>
-<p>since this covers all the ways in which X-Y could equal z.<br>
-</p>
+<p>since this covers all the ways in which X-Y could equal z.<br></p>
 </blockquote>
 <p>Because <span class="math inline">\((i+z) - i = z\)</span>, of course … ‘sum up’ the probability of each of these ‘co-occurances’</p>
 <blockquote class="blockquote">
@@ -485,33 +455,30 @@ odds ratio
 <p>Let me try to apply it…</p>
 <p>Defining their code for this function:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>modBin <span class="ot">&lt;-</span>dbinom <span class="co">#DR: I just do this renaming here for consistency with the rest ... but the modBin they defined was redundant</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>diffBin<span class="ot">&lt;-</span><span class="cf">function</span>(z, n1, p1, n2, p2){</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (z<span class="sc">&gt;=</span><span class="dv">0</span>){</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n1){</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1) <span class="sc">*</span> <span class="fu">modBin</span>(i, n2, p2)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n2){</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      prob<span class="ot">&lt;-</span>prob<span class="sc">+</span><span class="fu">modBin</span>(i<span class="sc">+</span>z, n1, p1)<span class="sc">*</span><span class="fu">modBin</span>(i, n2, p2)</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">modBin</span> <span class="op">&lt;-</span><span class="va">dbinom</span> <span class="co">#DR: I just do this renaming here for consistency with the rest ... but the modBin they defined was redundant</span></span>
+<span></span>
+<span><span class="va">diffBin</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">prob</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">z</span><span class="op">&gt;=</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n1</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">prob</span> <span class="op">&lt;-</span> <span class="va">prob</span> <span class="op">+</span> <span class="fu">modBin</span><span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span><span class="op">)</span> <span class="op">*</span> <span class="fu">modBin</span><span class="op">(</span><span class="va">i</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">else</span></span>
+<span>  <span class="op">{</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n2</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">prob</span><span class="op">&lt;-</span><span class="va">prob</span><span class="op">+</span><span class="fu">modBin</span><span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span><span class="op">)</span><span class="op">*</span><span class="fu">modBin</span><span class="op">(</span><span class="va">i</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">prob</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="applying-this-to-present-data" class="level3" data-number="17.4.2">
-<h3 data-number="17.4.2" class="anchored" data-anchor-id="applying-this-to-present-data"><span class="header-section-number">17.4.2</span> Applying this to present data</h3>
+</section><section id="applying-this-to-present-data" class="level3" data-number="17.4.2"><h3 data-number="17.4.2" class="anchored" data-anchor-id="applying-this-to-present-data">
+<span class="header-section-number">17.4.2</span> Applying this to present data</h3>
 <p>Rather than using their example, I’ll dive right in to the present case.</p>
 <p>My notes on the outcomes as of 15 Dec 2021</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -535,13 +502,11 @@ Note
 </div>
 <p>Putting the observations into defined objects (later: do from data)</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">1345</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">1190</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> d1<span class="sc">-</span>d2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n1</span> <span class="op">&lt;-</span> <span class="fl">1345</span></span>
+<span><span class="va">n2</span> <span class="op">&lt;-</span> <span class="fl">1190</span></span>
+<span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
+<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">d1</span><span class="op">-</span><span class="va">d2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Computation for a few ‘ad-hoc cases’ (later explore the space with vectors of values)</p>
@@ -549,109 +514,90 @@ Note
 <li>Suppose truly equal incidence, at the mean level</li>
 </ol>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> (d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  db_0 <span class="ot">&lt;-</span> <span class="fu">diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">d1</span><span class="op">+</span><span class="va">d2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">n1</span><span class="op">+</span><span class="va">n2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p1</span></span>
+<span></span>
+<span><span class="op">(</span></span>
+<span>  <span class="va">db_0</span> <span class="op">&lt;-</span> <span class="fu">diffBin</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1024599</code></pre>
 </div>
 </div>
 <p>This implies there is a 10.2% chance of getting this <em>exact</em> difference of +2 incidences between the treatments (in one direction), if the true incidence rates were equal.</p>
 <p>Let’s plot this for a range of ‘incidence rate differences’ in this region. (Sorry, using the traditional plot, ggplot is better).</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">*</span>z, <span class="dv">10</span><span class="sc">*</span>z)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="fu">sapply</span>(s, <span class="cf">function</span>(z) <span class="fu">diffBin</span>(z, n1, p1, n2, p2))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(s,p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span><span class="op">*</span><span class="va">z</span>, <span class="fl">10</span><span class="op">*</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="va">p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">s</span>, <span class="kw">function</span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="fu">diffBin</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">s</span>,<span class="va">p</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <p><img src="binary_trial_computations_redacted_ed_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We see a large likelihood of values in the range of the +2 difference observed, and a low likelihood of a difference of 10 or more in either direction.</p>
-</section>
-<section id="adaptation-of-this-magnitude-or-smaller" class="level3" data-number="17.4.3">
-<h3 data-number="17.4.3" class="anchored" data-anchor-id="adaptation-of-this-magnitude-or-smaller"><span class="header-section-number">17.4.3</span> Adaptation: ‘of this magnitude or smaller’</h3>
+</section><section id="adaptation-of-this-magnitude-or-smaller" class="level3" data-number="17.4.3"><h3 data-number="17.4.3" class="anchored" data-anchor-id="adaptation-of-this-magnitude-or-smaller">
+<span class="header-section-number">17.4.3</span> Adaptation: ‘of this magnitude or smaller’</h3>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ltmag_diffBin <span class="ot">&lt;-</span> <span class="cf">function</span>(z, n1, p1, n2, p2){</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  prob <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  z_n <span class="ot">&lt;-</span> <span class="sc">-</span>z <span class="co">#negative value</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> z_n<span class="sc">:</span>z){     <span class="co">#sum for all integer differences between observed value and its negative, inclusive</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    prob <span class="ot">&lt;-</span> prob <span class="sc">+</span> <span class="fu">diffBin</span>(i, n1, p1, n2, p2)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(prob)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ltmag_diffBin</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">prob</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span>  <span class="va">z_n</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">z</span> <span class="co">#negative value</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">z_n</span><span class="op">:</span><span class="va">z</span><span class="op">)</span><span class="op">{</span>     <span class="co">#sum for all integer differences between observed value and its negative, inclusive</span></span>
+<span>    <span class="va">prob</span> <span class="op">&lt;-</span> <span class="va">prob</span> <span class="op">+</span> <span class="fu">diffBin</span><span class="op">(</span><span class="va">i</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">prob</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now, a similar computation as above, but for ‘this big or smaller in magnitude’:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  (</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    mag_db_0 <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span>  <span class="op">(</span></span>
+<span>    <span class="va">mag_db_0</span> <span class="op">&lt;-</span> <span class="fu">ltmag_diffBin</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4908031</code></pre>
 </div>
 </div>
 <p>This implies there is a 49.1% chance of getting a difference <em>no larger than this one in magnitude</em> of +/-2 incidences between the treatments if the true incidence rates were equal.</p>
-<p><br>
-</p>
+<p><br></p>
 <p><strong>And finally, what we were looking for:</strong> the chance of ‘a difference this small or smaller’ as a function of the <strong>true difference…</strong></p>
 <p>Set up an arbitrary vector of ‘true differences’ (to keep it simple, only change it in one direction for now …)</p>
 <p>Below, I plot</p>
 <p>Y-axis: ’how likely would a difference in donations ‘as small or smaller in magnitude’” than we see in the data against</p>
 <p>X-axis: if the “true difference in incidence rates” were of these magnitudes</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">10</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">rep</span>((d1<span class="sc">+</span>d2)<span class="sc">/</span>(n1<span class="sc">+</span>n2), <span class="fu">length</span>(B))</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1<span class="sc">*</span>B</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">as.list</span>(<span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="fu">format</span>(<span class="at">digits=</span><span class="dv">3</span>, <span class="at">scientific=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>scipen<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.5</span>, <span class="fl">2</span>, <span class="fl">2.5</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="op">(</span><span class="va">d1</span><span class="op">+</span><span class="va">d2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">n1</span><span class="op">+</span><span class="va">n2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">B</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">p1</span><span class="op">*</span><span class="va">B</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="fu">ltmag_diffBin</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span>digits<span class="op">=</span><span class="fl">3</span>, scientific<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] "49.1"             "39.4"             "20.6"             "8.02"            
 [5] "2.51"             "0.153"            "0.00000000000855"</code></pre>
 </div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>probmag <span class="ot">&lt;-</span> <span class="fu">ltmag_diffBin</span>(z, n1, p1, n2, p2)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#qplot(B, probmag, log  = "x", xlab = "True relative incidence", ylab ="Prob. of difference this small")</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  probmag_plot <span class="ot">&lt;-</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>B, <span class="at">y=</span>probmag) <span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span><span class="st">'log2'</span>) <span class="sc">+</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(<span class="dv">0</span>,.<span class="dv">51</span>) <span class="sc">+</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"True relative incidence rate"</span>) <span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Prob. diff. as small as obsd"</span>)</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
+<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">probmag</span> <span class="op">&lt;-</span> <span class="fu">ltmag_diffBin</span><span class="op">(</span><span class="va">z</span>, <span class="va">n1</span>, <span class="va">p1</span>, <span class="va">n2</span>, <span class="va">p2</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">#qplot(B, probmag, log  = "x", xlab = "True relative incidence", ylab ="Prob. of difference this small")</span></span>
+<span></span>
+<span><span class="op">(</span></span>
+<span>  <span class="va">probmag_plot</span> <span class="op">&lt;-</span></span>
+<span>    <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">B</span>, y<span class="op">=</span><span class="va">probmag</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>trans<span class="op">=</span><span class="st">'log2'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">.51</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">xlab</span><span class="op">(</span><span class="st">"True relative incidence rate"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">"Prob. diff. as small as obsd"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
 <p><img src="binary_trial_computations_redacted_ed_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
@@ -680,11 +626,7 @@ Do this for a range of considered effect sizes, e.g., $B \in \{0.5, 0.75, 1, 1.5
 
 <!-- -->
 
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -832,11 +774,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/fermi.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

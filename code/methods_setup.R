@@ -7,8 +7,7 @@ rename_all <- dplyr::rename_all
 
 filter <- dplyr::filter
 
-
-pacman::p_load(arm, bookdown,  binom, bslib, corrr, DT, DescTools, digest, downlit, dplyr, forcats, gdata, gganimate, ggthemes, ggpointdensity, ggpubr, ggrepel, ggridges, gtsummary, here, huxtable, infer, purrr, janitor, lmtest, magrittr, labelled, lubridate, plotly, pryr, readr, readstata13, rlang, sandwich, santoku, scales, sjlabelled,  snakecase, tidyverse, treemapify, vtable, install = FALSE) #note -- install = FALSE should be OK if the `renv` environment is present -- unless it was gitignored
+pacman::p_load(arm, bookdown,  binom, bslib, corrr, DT, DescTools, digest, downlit, downloader, dplyr, forcats, gdata, gganimate, ggthemes, ggpointdensity, ggpubr, ggrepel, ggridges, gtsummary, here, huxtable, infer, purrr, janitor, lmtest, magrittr, labelled, lubridate, plotly, pryr, readr, readstata13, rlang, sandwich, santoku, scales, sjlabelled,  snakecase, tidyverse, treemapify, vtable, install = FALSE) #note -- install = FALSE should be OK if the `renv` environment is present -- unless it was gitignored
 #ggstatsplot
 
 #p_load("systemfonts")
@@ -17,9 +16,15 @@ pacman::p_load(arm, bookdown,  binom, bslib, corrr, DT, DescTools, digest, downl
 #p_load_gh("https://github.com/bbolker/broom.mixed")
 #p_load("SuppDists")
 
-if (!require("devtools")) { install.packages("devtools", dependencies=TRUE) }
+update.packages("cli")
+#update.packages("devtools")
 
 install.packages("remotes")
+library(remotes)
+install.packages("downloader")
+library(downloader)
+
+
 #remotes::install_github("peterhurford/checkr")
 #library(checkr)
 
@@ -28,7 +33,7 @@ install.packages("remotes")
 #remotes::install_github("tidymodels/corrr")
 #require(corrr)
 
-devtools::install_github("robertzk/bettertrace")
+#devtools::install_github("robertzk/bettertrace")
 
 #install_github("peterhurford/surveytools2")
 #install_github("peterhurford/funtools")
@@ -39,15 +44,15 @@ devtools::install_github("robertzk/bettertrace")
 #library(surveytools2)
 library(bettertrace)
 
-devtools::install_github("rethinkpriorities/rp-r-package")
+remotes::install_github("rethinkpriorities/rp-r-package")
 library(rethinkpriorities)
 
-devtools::install_github("rethinkpriorities/r-noodling-package")
+remotes::install_github("rethinkpriorities/r-noodling-package")
 library(rnoodling)
 
 
 
 #Just a bunch of handy shortcuts and precedence of packages
-source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R")
+downloader::source_url("https://raw.githubusercontent.com/daaronr/dr-rstuff/master/functions/baseoptions.R", prompt=FALSE)
 
 

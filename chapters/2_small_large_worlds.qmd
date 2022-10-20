@@ -1,5 +1,12 @@
 # Ch 2. Small/Large Worlds {#mcelreath_ch2}
 
+```{r}
+library(pacman)
+p_load(dplyr, magrittr, ggplot2, tidyr, install = FALSE)
+```
+
+
+
 ## 2.1. Garden of Forking data
 
 > The small world is the self-contained logical world of the model.
@@ -25,6 +32,9 @@ Kurz laboriously calculates the values and constructs it using tibbles and ggplo
 Some functions and data for tabulating 'how likely is the data we drew' (marbles we saw) given different bag compositions. We 'count the (equally likely) ways' below. This is the product of 'ways of drawing the first (blue) marble', the second 'white', and the third 'blue' marble.
 
 ```{r}
+#| label: marble_ways
+#| code-summary: "Ways of producing data"
+
 
 # if we make two custom functions, here, it will simplify the code within `mutate()`, below
 n_blue <- function(x) {
@@ -40,10 +50,10 @@ t <-
   tibble(p_1 = rep(c("w", "b"), times = c(1, 4)),
          p_2 = rep(c("w", "b"), times = c(2, 3)),
          p_3 = rep(c("w", "b"), times = c(3, 2)),
-         p_4 = rep(c("w", "b"), times = c(4, 1))) %>% 
+         p_4 = rep(c("w", "b"), times = c(4, 1))) %>%
   mutate(`draw 1: blue`  = n_blue(.),
          `draw 2: white` = n_white(.),
-         `draw 3: blue`  = n_blue(.)) %>% 
+         `draw 3: blue`  = n_blue(.)) %>%
   mutate(`ways to produce` = `draw 1: blue` * `draw 2: white` * `draw 3: blue`)
 
 t %>%  knitr::kable()
@@ -52,14 +62,17 @@ t %>%  knitr::kable()
 
 Next we get more data: another blue marble (already shown above), and there is a 'shortcut':
 
-> . You could start all over again, making a garden with four layers to trace out the paths compatible with the data sequence . Or you could take the previous counts---the prior counts---over conjectures (0, 3, 8, 9, 0) and just update them in light of the new observation. It turns out that these two methods are mathematically identical, as long as the new observation is logically independent of the previous observations
+> You could start all over again, making a garden with four layers to trace out the paths compatible with the data sequence . Or you could take the previous counts---the prior counts---over conjectures (0, 3, 8, 9, 0) and just update them in light of the new observation. It turns out that these two methods are mathematically identical, as long as the new observation is logically independent of the previous observations
 
 ```{r}
+#| label: add_marble
+#| code-summary: "Ways; add a marble"
+
 t <-
-  t %>% 
+  t %>%
   rename(`previous counts` = `ways to produce`,
-         `ways to produce` = `draw 1: blue`) %>% 
-  select(p_1:p_4, `ways to produce`, `previous counts`) %>% 
+         `ways to produce` = `draw 1: blue`) %>%
+  select(p_1:p_4, `ways to produce`, `previous counts`) %>%
   mutate(`new count` = `ways to produce` * `previous counts`)
 
 ```
@@ -67,6 +80,9 @@ t <-
 We can also incorporate 'different data' -- e,g., certain amounts of 'prior counts of each bag in the factory' ... we simply multiply these in. 'You first draw a factory bag with a particular count ... which can occur XXX ways, and then you draw a blue marble from that bag, which can occur YYY ways, etc'.
 
 ```{r}
+#| label: factory_counts
+#| code-summary: "add factory counts"
+
 
 t <- t %>%
 select(p_1:p_4, `new count`) %>%
@@ -87,10 +103,13 @@ Putting this all together to compute the plausibilities
 *DR question:* is this with a flat prior ... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
 
 ```{r}
-t %>% 
-  select(p_1:p_4) %>% 
+#| label: plausibilities
+#| code-summary: "plausibilities"
+
+t %>%
+  select(p_1:p_4) %>%
   mutate(p                      = seq(from = 0, to = 1, by = .25),
-         `ways to produce data` = c(0, 3, 8, 9, 0)) %>% 
+         `ways to produce data` = c(0, 3, 8, 9, 0)) %>%
   mutate(plausibility = `ways to produce data` / sum(`ways to produce data`))
 ```
 
@@ -112,7 +131,7 @@ t %>%
 
 ### 2.2.2 Bayesian updating {-}
 
-Start with a particular sequence of data, accumulate trials and successes 
+Start with a particular sequence of data, accumulate trials and successes
 ```{r}
 
 (d <-
@@ -122,27 +141,27 @@ Start with a particular sequence of data, accumulate trials and successes
 n_success = cumsum(toss == "w")
   )
 )
-    
+
 
 ```
 
-Next, we compute and plot the plausibility of every 'true share of water p' after observing the draws from the globe-tossing. We update this after each toss. 
+Next, we compute and plot the plausibility of every 'true share of water p' after observing the draws from the globe-tossing. We update this after each toss.
 
 OK I need to construct some data on this globe tossing first; I skipped this earlier
 
 
 Next we build the tibble plausibility/updating tibble.
 
-Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss). 
+Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss).
 
 ```{r}
 
 sequence_length <- 50
 
 (
-plaus_globe_updates <- 
-d %>% 
-  expand(nesting(n_trials, toss, n_success), 
+plaus_globe_updates <-
+d %>%
+  expand(nesting(n_trials, toss, n_success),
          p_water = seq(from = 0, to = 1, length.out = sequence_length))
 )
 
@@ -152,18 +171,18 @@ Next we create the 'lagged' colums (for ease of plotting the updating):
 ```{r}
 
 plaus_globe_updates %<>%
-  group_by(p_water) %>% 
+  group_by(p_water) %>%
  # you can learn more about lagging here: https://www.rdocumentation.org/packages/stats/versions/3.5.1/topics/lag or here: https://dplyr.tidyverse.org/reference/lead-lag.html
   mutate(lagged_n_trials  = lag(n_trials,  k = 1),
-         lagged_n_success = lag(n_success, k = 1)) %>% 
+         lagged_n_success = lag(n_success, k = 1)) %>%
   ungroup()
 
 plaus_globe_updates[95:105,]
 ```
 
-Next we start with a flat prior and, for each 'trial' ... 
+Next we start with a flat prior and, for each 'trial' ...
 
-- compute the likelihood of the data (sucesses and trials) given each probability of water, according to the *binomial probability function*. 
+- compute the likelihood of the data (sucesses and trials) given each probability of water, according to the *binomial probability function*.
 - both with the previous 'lagged' data and adding the new data point
 - normalize each of these by dividing by the likelihood of the data that has arisen,
 - this yields the 'plausbility' of each probability of water   . (I.e., the posterior?)
@@ -172,18 +191,18 @@ Next we start with a flat prior and, for each 'trial' ...
 plaus_globe_updates %<>%
   mutate(prior  = ifelse(n_trials == 1, 1, #DR: I adjusted this to =1 to avoid confusing it with a certainty that p=.5
           dbinom(
-            x= lagged_n_success, 
-            size = lagged_n_trials, 
+            x= lagged_n_success,
+            size = lagged_n_trials,
             prob = p_water)),
-         likelihood = dbinom(x  = n_success, 
-                             size = n_trials, 
+         likelihood = dbinom(x  = n_success,
+                             size = n_trials,
                              prob = p_water),
-         strip      = str_c("n = ", n_trials)) %>% 
-  # the next three lines allow us to normalize the prior and the likelihood, 
-  # putting them both in a probability metric 
-  group_by(n_trials) %>% 
+         strip      = str_c("n = ", n_trials)) %>%
+  # the next three lines allow us to normalize the prior and the likelihood,
+  # putting them both in a probability metric
+  group_by(n_trials) %>%
   mutate(prior      = prior      / sum(prior),
-         likelihood = likelihood / sum(likelihood))    
+         likelihood = likelihood / sum(likelihood))
 
 ```
 
@@ -192,7 +211,7 @@ Plotting this:
 
 ```{r, fig.width = 6, fig.height = 5}
 
-  plaus_globe_updates %>% filter(n_trials==5) %>%
+plaus_globe_updates %>% filter(n_trials==5) %>%
   # plot!
   ggplot(aes(x = p_water)) +
   geom_line(aes(y = prior), linetype = 2) +
@@ -201,6 +220,7 @@ Plotting this:
   scale_y_continuous("plausibility", breaks = NULL) +
   theme(panel.grid = element_blank()) +
   facet_wrap(~strip, scales = "free_y")
+
 ```
 
 ^[DR note: although the plot looks smooth, I think this is only because we chose a small interval of probability ... 50 different probabilities. When I reduce it to 5 probabilities this gets choppy]

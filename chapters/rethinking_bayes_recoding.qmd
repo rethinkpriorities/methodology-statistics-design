@@ -22,7 +22,7 @@ The present resource is tied to our RP internal book group on the above, which i
  
 #for recoding
 library(pacman)
-p_load(dplyr, ggplot2, magrittr, janitor, stringr, brms)
+p_load(dplyr, ggplot2, magrittr, janitor, stringr, brms, tidyr,  install = FALSE)
 
 #mcelreath packages
 install.packages(c("coda","mvtnorm","devtools","dagitty"))

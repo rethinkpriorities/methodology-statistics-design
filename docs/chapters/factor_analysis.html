@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.113">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>RP: Methods - 10&nbsp; Factor analss: EFA/CFA, PCA</title>
 <style>
 code{white-space: pre-wrap;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,31 +117,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analss: EFA/CFA, PCA</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">RP: Methods</a> 
         <div class="sidebar-tools-main">
@@ -166,15 +150,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
   </div>
@@ -190,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
@@ -198,8 +182,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
   </div>
@@ -225,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics/modeling</a>
@@ -233,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
   </div>
@@ -270,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
@@ -278,10 +262,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Monte-Carlo ‘Fermi’</span></a>
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Bayes/Rethinking</a>
@@ -303,8 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/rethinking_bayes_recoding.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Overview (McE/Bayes)</span></a>
   </div>
@@ -319,34 +303,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="../chapters/2_small_large_worlds.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ch 2. Small/Large Worlds</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
+  </div>
+</li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#where-have-we-used-thiswhere-do-we-anticipate-using-it" id="toc-where-have-we-used-thiswhere-do-we-anticipate-using-it" class="nav-link active" data-scroll-target="#where-have-we-used-thiswhere-do-we-anticipate-using-it"><span class="toc-section-number">10.1</span>  Where have we used this/where do we anticipate using it?</a></li>
+<li><a href="#where-have-we-used-thiswhere-do-we-anticipate-using-it" id="toc-where-have-we-used-thiswhere-do-we-anticipate-using-it" class="nav-link active" data-scroll-target="#where-have-we-used-thiswhere-do-we-anticipate-using-it"><span class="toc-section-number">10.1</span>  Where have we used this/where do we anticipate using it?</a></li>
   <li><a href="#the-idea" id="toc-the-idea" class="nav-link" data-scroll-target="#the-idea"><span class="toc-section-number">10.2</span>  The idea</a></li>
   <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="toc-section-number">10.3</span>  PCA</a></li>
-  <li><a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"><span class="toc-section-number">10.4</span>  Factor analysis</a>
+  <li>
+<a href="#factor-analysis" id="toc-factor-analysis" class="nav-link" data-scroll-target="#factor-analysis"><span class="toc-section-number">10.4</span>  Factor analysis</a>
   <ul class="collapse">
-  <li><a href="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" id="toc-conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="nav-link" data-scroll-target="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings"><span class="toc-section-number">10.4.1</span>  Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</a></li>
+<li><a href="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" id="toc-conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="nav-link" data-scroll-target="#conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings"><span class="toc-section-number">10.4.1</span>  Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</a></li>
   <li><a href="#suggested-readings" id="toc-suggested-readings" class="nav-link" data-scroll-target="#suggested-readings"><span class="toc-section-number">10.4.2</span>  Suggested readings</a></li>
   <li><a href="#integrate" id="toc-integrate" class="nav-link" data-scroll-target="#integrate"><span class="toc-section-number">10.4.3</span>  Integrate…</a></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/factor_analysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/factor_analysis.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title"><span id="factor-descriptive" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analss: EFA/CFA, PCA</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
@@ -359,22 +343,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<p>Dimension reduction, and ‘carving reality at its joints’, uncovering structural parameters?</p>
-<section id="where-have-we-used-thiswhere-do-we-anticipate-using-it" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="where-have-we-used-thiswhere-do-we-anticipate-using-it"><span class="header-section-number">10.1</span> Where have we used this/where do we anticipate using it?</h2>
-</section>
-<section id="the-idea" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="the-idea"><span class="header-section-number">10.2</span> The idea</h2>
-</section>
-<section id="pca" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="pca"><span class="header-section-number">10.3</span> PCA</h2>
-</section>
-<section id="factor-analysis" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="factor-analysis"><span class="header-section-number">10.4</span> Factor analysis</h2>
-<section id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="level3" data-number="10.4.1">
-<h3 data-number="10.4.1" class="anchored" data-anchor-id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings"><span class="header-section-number">10.4.1</span> Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</h3>
+</header><p>Dimension reduction, and ‘carving reality at its joints’, uncovering structural parameters?</p>
+<section id="where-have-we-used-thiswhere-do-we-anticipate-using-it" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="where-have-we-used-thiswhere-do-we-anticipate-using-it">
+<span class="header-section-number">10.1</span> Where have we used this/where do we anticipate using it?</h2>
+</section><section id="the-idea" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="the-idea">
+<span class="header-section-number">10.2</span> The idea</h2>
+</section><section id="pca" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="pca">
+<span class="header-section-number">10.3</span> PCA</h2>
+</section><section id="factor-analysis" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="factor-analysis">
+<span class="header-section-number">10.4</span> Factor analysis</h2>
+<section id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings" class="level3" data-number="10.4.1"><h3 data-number="10.4.1" class="anchored" data-anchor-id="conceptual-question-1-how-can-we-have-correlated-traits-but-no-overlap-in-factor-loadings">
+<span class="header-section-number">10.4.1</span> Conceptual question 1: How can we have correlated traits but no overlap in factor loadings?</h3>
 <p>Factors represent ‘real but latent ways people differ’ (in personality psych)</p>
 <blockquote class="blockquote">
 <p>“We don’t want cross-loadings” (in the case where we use sum scores). We don’t want the ‘factor loadings’ to be nonzero (or far from 0) on the same items for multiple factors.</p>
@@ -430,24 +409,18 @@ Further thoughts and insight into ‘how do PCA and FA differ?’
 </div>
 </div>
 </div>
-</section>
-<section id="suggested-readings" class="level3" data-number="10.4.2">
-<h3 data-number="10.4.2" class="anchored" data-anchor-id="suggested-readings"><span class="header-section-number">10.4.2</span> Suggested readings</h3>
+</section><section id="suggested-readings" class="level3" data-number="10.4.2"><h3 data-number="10.4.2" class="anchored" data-anchor-id="suggested-readings">
+<span class="header-section-number">10.4.2</span> Suggested readings</h3>
 <ol type="1">
 <li>“Best practices in EFA” (Jason W. Osborne)</li>
 <li><a href="https://psyarxiv.com/v8yru/">Dynamic Fit Index Cutoffs for Confirmatory Factor Analysis Models</a></li>
-</ol>
-</section>
-<section id="integrate" class="level3" data-number="10.4.3">
-<h3 data-number="10.4.3" class="anchored" data-anchor-id="integrate"><span class="header-section-number">10.4.3</span> Integrate…</h3>
+</ol></section><section id="integrate" class="level3" data-number="10.4.3"><h3 data-number="10.4.3" class="anchored" data-anchor-id="integrate">
+<span class="header-section-number">10.4.3</span> Integrate…</h3>
 <p>Willem’s work <a href="https://willemsleegers.github.io/how-to-science/content/statistics/">link: ‘How to Science’</a></p>
 <p>https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<iframe src="https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/" width="672" height="400px" data-external="1">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><iframe src="https://willemsleegers.github.io/how-to-science/content/statistics/factor-analysis/" width="672" height="400px" data-external="1">
 </iframe>
 </div>
 <!-- Possibly Reinstein's notes (but these are a but unformed and cluttered) -->
@@ -455,11 +428,7 @@ Further thoughts and insight into ‘how do PCA and FA differ?’
 
 <!-- -->
 
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -607,9 +576,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/basic_stats.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></span>
       </a>          
