@@ -15,6 +15,8 @@ I intend to begin with a 'fork' of the latter^[This is not an actual fork, altho
 
 The present resource is tied to our RP internal book group on the above, which is outlined and organized in the git wiki [here](https://github.com/rethinkpriorities/methodology-statistics-design/wiki/Statistical-Rethinking--(McElreath)-discussion-group:-proposed-outline).
 
+For now, our collaborative organizational space is [this Gdoc](https://docs.google.com/document/d/1aGR4PAy4VQLMzVJq74rojfbUgrNXg-79NaASbeSGmwY/edit)
+
 
 ```{r}
 #| label: packages

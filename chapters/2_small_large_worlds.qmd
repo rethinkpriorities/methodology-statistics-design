@@ -2,7 +2,7 @@
 
 ```{r}
 library(pacman)
-p_load(dplyr, magrittr, ggplot2, tidyr, install = FALSE)
+p_load(dplyr, magrittr, ggplot2, stringr, tidyr, install = FALSE)
 ```
 
 
@@ -13,7 +13,7 @@ p_load(dplyr, magrittr, ggplot2, tidyr, install = FALSE)
 
 > The way that Bayesian models learn from evidence is arguably optimal in the small world. When their assumptions approximate reality, they also perform well in the large world. But large world performance has to be demonstrated rather than logically deduced.
 
-> This demonstrates that there are three (out of 64) ways for a bag containing \[combo of blue and white marbles\] to produce the data . The inferential power comes from comparing this count to the numbers of ways each of the other conjectures of the bag's contents could produce the same data.
+> This demonstrates that there are three (out of 64) ways for a bag containing \[a combo of blue and white marbles\] to produce the data. The inferential power comes from comparing this count to the numbers of ways each of the other conjectures of the bag's contents could produce the same data.
 
 > .... can be computed just by multiplying the new count by the old count. This updating approach amounts to nothing more than asserting that (1) when we have previous information suggesting there are $W_prior$ ways for a conjecture to produce a previous observation $D_{prior}$ and (2) we acquire new observations $D_{new}$ that the same conjecture can produce in $W_{new}$ ways, then (3) the number of ways the conjecture can account for both $D_{prior}$ as well as $D_{new}$ is just the product $W_{prior} \times W_{new}$.
 
@@ -22,7 +22,7 @@ p_load(dplyr, magrittr, ggplot2, tidyr, install = FALSE)
 ![](images/paste-748728A1.png){width="335"}
 
 ::: {.callout-note collapse="true"}
-## Note: I'm skipping the construction of the 'forking paths' plot pastesd above
+## Note: I'm skipping the construction of the 'forking paths' plot pasted above
 
 Kurz laboriously calculates the values and constructs it using tibbles and ggplot. Not sure what the latter teaches us.
 :::
@@ -62,7 +62,7 @@ t %>%  knitr::kable()
 
 Next we get more data: another blue marble (already shown above), and there is a 'shortcut':
 
-> You could start all over again, making a garden with four layers to trace out the paths compatible with the data sequence . Or you could take the previous counts---the prior counts---over conjectures (0, 3, 8, 9, 0) and just update them in light of the new observation. It turns out that these two methods are mathematically identical, as long as the new observation is logically independent of the previous observations
+> You could start all over again, making a garden with four layers to trace out the paths compatible with the data sequence. Or you could take the previous counts---the prior counts---over conjectures (0, 3, 8, 9, 0) and just update them in light of the new observation. It turns out that these two methods are mathematically identical, as long as the new observation is logically independent of the previous observations
 
 ```{r}
 #| label: add_marble
@@ -100,7 +100,11 @@ knitr::kable()
 
 Putting this all together to compute the plausibilities
 
+::: {.callout-note }
+
 *DR question:* is this with a flat prior ... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
+
+::: 
 
 ```{r}
 #| label: plausibilities
@@ -152,7 +156,7 @@ OK I need to construct some data on this globe tossing first; I skipped this ear
 
 Next we build the tibble plausibility/updating tibble.
 
-Going through the coding steps for my own benefit, First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss).
+Going through the coding steps for my own benefit... First we expand the tibble to consider each of 50 possible `p_water` values after each trial (toss).
 
 ```{r}
 
@@ -167,8 +171,11 @@ d %>%
 
 ```
 
-Next we create the 'lagged' colums (for ease of plotting the updating):
+Next we create the 'lagged' columns (for ease of plotting the updating):
 ```{r}
+#| label: plaus_globe_updates
+#| code-summary: "updating globe tossing - lags"
+ 
 
 plaus_globe_updates %<>%
   group_by(p_water) %>%
@@ -244,7 +251,7 @@ plaus_globe_updates %>% filter(n_trials==5) %>%
 
 > If your goal is to lie with statistics, you'd be a fool to do it with priors, because such a lie would be easily uncovered. Better to use the more opaque machinery of the likelihood. Or better yet-don't actually take this advice!---massage the data, drop some "outliers," and otherwise engage in motivated data transformation
 
-> because non-Bayesian procedures need to make choices that Bayesian ones do not, such as choice of estimator or likelihood penalty
+> because non-Bayesian procedures need to make choices that Bayesian ones do not, such as choice of estimator or likelihood penalty.
 
 ## 2.4 'Making the model go'
 
@@ -286,16 +293,18 @@ Dissing the 'HIV test false positive' thing
 
 > in most of your real modeling, grid approximation isn't practical. The reason is that it scales very poorly, as the number of parameters increases
 
-> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 】
+> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 
 
 > logarithm of a Gaussian distribution forms a parabola. And a parabola is a quadratic function
 
 > For many of the most common procedures in applied statistics-linear regression, for example---the approximation works very well
 
+**Stepping through this**
+
 > (1) Find the posterior mode
 
 some optimization algorithm, a procedure that virtually "climbs" the posterior distribution
 
-> (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically, but 】
+> (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically,  but... 
 
 *DR question:* But how does it do this estimate of the curvature? Does it come out of many simulations, or the optimizing hill climbing thing, or??
