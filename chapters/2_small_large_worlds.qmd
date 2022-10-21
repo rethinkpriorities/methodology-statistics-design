@@ -102,7 +102,9 @@ Putting this all together to compute the plausibilities
 
 ::: {.callout-note }
 
-*DR question:* is this with a flat prior ... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
+## DR question: Is this with a flat prior 
+
+Is this with a flat prior... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
 
 ::: 
 
@@ -121,7 +123,13 @@ t %>%
 
 > Designing a simple Bayesian model benefits from a design loop with three steps. (1) Data story: Motivate the model by narrating how the data might arise. (2) Update: Educate your model by feeding it the data. (3) Evaluate: All statistical models require supervision, leading to model revision
 
-*DR question*: How can we 'revise the model' without overfitting or otherwise cheating in some way that overstates the confidence we should have in our results?
+
+::: {.callout-note }
+## DR question
+
+How can we 'revise the model' without overfitting or otherwise cheating in some way that overstates the confidence we should have in our results?
+
+::: 
 
 > The maximum height of the curve increases with each sample, meaning that fewer values of $p$ amass more plausibility as the amount of evidence increases
 
@@ -218,7 +226,8 @@ Plotting this:
 
 ```{r, fig.width = 6, fig.height = 5}
 
-plaus_globe_updates %>% filter(n_trials==5) %>%
+plaus_globe_updates %>%
+  # filter(n_trials==5) %>%
   # plot!
   ggplot(aes(x = p_water)) +
   geom_line(aes(y = prior), linetype = 2) +
@@ -293,6 +302,8 @@ Dissing the 'HIV test false positive' thing
 
 > in most of your real modeling, grid approximation isn't practical. The reason is that it scales very poorly, as the number of parameters increases
 
+### Quadratic approximation (summary) {-}
+
 > Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 
 
 > logarithm of a Gaussian distribution forms a parabola. And a parabola is a quadratic function
@@ -307,4 +318,51 @@ some optimization algorithm, a procedure that virtually "climbs" the posterior d
 
 > (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically,  but... 
 
-*DR question:* But how does it do this estimate of the curvature? Does it come out of many simulations, or the optimizing hill climbing thing, or??
+::: {.callout-note }
+## DR question
+
+But how does it do this estimate of the curvature? Does it come out of many simulations, or the optimizing hill climbing thing, or??
+
+:::
+
+
+::: {.callout-note collapse="true"}
+## The Hession and quadratic approximation 
+
+> Hessian is a square matrix of second derivatives. It is used for many purposes in mathematics, but in the quadratic approximation it is second derivatives of the log of posterior probability with respect to the parameters. It turns out that these derivatives are sufficient to describe a Gaussian distribution, because the logarithm of a Gaussian distribution is just a parabola. Parabolas have no derivatives beyond the second 
+
+
+::: 
+
+### Markov chain Monte Carlo (incomplete explanation) {-}
+
+DR:MCMC is not fully explained here. Somehow you 'sample from the posterior (over the parameter values)" and do some magic.  Maybe weighting these by how consistent they are with the prior and the data?
+
+> Grid approximation routinely fails here, because it just takes too long—the Sun will go dark before your computer finishes the grid. Special forms of quadratic approximation might work, if everything is just right. But commonly, something is not just right. Furthermore, multilevel models do not always allow us to write down a single, unified function for the posterior distribution. This means that the function to maximize (when finding the MAP) is not known, but must be computed in pieces 
+
+> is fair to say that MCMC is largely responsible for the insurgence of Bayesian data analysis that began in the 1990s.
+
+
+> highly non-obvious strategy. Instead of attempting to compute or approximate the posterior distribution directly, MCMC techniques merely draw samples from the posterior. You end up with a collection of parameter values, and the frequencies of these values correspond to the posterior plausibilities. You can then build a picture of the posterior from the histogram of these samples. We nearly always work directly with these samples, rather than first constructing some mathematical estimate from them 
+
+> , a working Markov chain for the globe tossing model does not require much code 
+
+
+He starts with $p=.5$, considers the likelihood of the data under this probability, adjusts p. 
+
+\
+
+::: {.callout-note }
+## DR question
+
+I don't see how this MCMC works; anyone have more insight? And where does the prior come in here?)
+
+:::
+\
+
+### Practice questions {-}
+
+> The target of inference in Bayesian inference is a posterior probability distribution. Posterior probabilities state the relative numbers of ways each conjectured cause of the data could have produced the data
+
+
+
