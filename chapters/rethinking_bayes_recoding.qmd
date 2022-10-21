@@ -27,9 +27,9 @@ library(pacman)
 p_load(dplyr, ggplot2, magrittr, janitor, stringr, brms, tidyr,  install = FALSE)
 
 #mcelreath packages
-install.packages(c("coda","mvtnorm","devtools","dagitty"))
-library(devtools)
-devtools::install_github("rmcelreath/rethinking")
+install.packages(c("coda","mvtnorm","devtools","dagitty", "remotes"))
+library(remotes)
+remotes::install_github("rmcelreath/rethinking")
 
 library(rethinking)
 

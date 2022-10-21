@@ -5,8 +5,6 @@ library(pacman)
 p_load(dplyr, magrittr, ggplot2, stringr, tidyr, install = FALSE)
 ```
 
-
-
 ## 2.1. Garden of Forking data
 
 > The small world is the self-contained logical world of the model.
@@ -100,13 +98,11 @@ knitr::kable()
 
 Putting this all together to compute the plausibilities
 
-::: {.callout-note }
-
-## DR question: Is this with a flat prior 
+::: callout-note
+## DR question: Is this with a flat prior
 
 Is this with a flat prior... starting with an equal probability of each bag type, or is 'plausibility' something different than the posterior?
-
-::: 
+:::
 
 ```{r}
 #| label: plausibilities
@@ -123,13 +119,11 @@ t %>%
 
 > Designing a simple Bayesian model benefits from a design loop with three steps. (1) Data story: Motivate the model by narrating how the data might arise. (2) Update: Educate your model by feeding it the data. (3) Evaluate: All statistical models require supervision, leading to model revision
 
-
-::: {.callout-note }
+::: callout-note
 ## DR question
 
 How can we 'revise the model' without overfitting or otherwise cheating in some way that overstates the confidence we should have in our results?
-
-::: 
+:::
 
 > The maximum height of the curve increases with each sample, meaning that fewer values of $p$ amass more plausibility as the amount of evidence increases
 
@@ -141,9 +135,10 @@ How can we 'revise the model' without overfitting or otherwise cheating in some 
 
 ### 2.2.1 - the 'globe tossing' data story {.unnumbered}
 
-### 2.2.2 Bayesian updating {-}
+### 2.2.2 Bayesian updating {.unnumbered}
 
 Start with a particular sequence of data, accumulate trials and successes
+
 ```{r}
 
 (d <-
@@ -160,7 +155,6 @@ n_success = cumsum(toss == "w")
 Next, we compute and plot the plausibility of every 'true share of water p' after observing the draws from the globe-tossing. We update this after each toss.
 
 OK I need to construct some data on this globe tossing first; I skipped this earlier
-
 
 Next we build the tibble plausibility/updating tibble.
 
@@ -180,6 +174,7 @@ d %>%
 ```
 
 Next we create the 'lagged' columns (for ease of plotting the updating):
+
 ```{r}
 #| label: plaus_globe_updates
 #| code-summary: "updating globe tossing - lags"
@@ -197,10 +192,11 @@ plaus_globe_updates[95:105,]
 
 Next we start with a flat prior and, for each 'trial' ...
 
-- compute the likelihood of the data (sucesses and trials) given each probability of water, according to the *binomial probability function*.
-- both with the previous 'lagged' data and adding the new data point
-- normalize each of these by dividing by the likelihood of the data that has arisen,
-- this yields the 'plausbility' of each probability of water   . (I.e., the posterior?)
+-   compute the likelihood of the data (sucesses and trials) given each probability of water, according to the *binomial probability function*.
+-   both with the previous 'lagged' data and adding the new data point
+-   normalize each of these by dividing by the likelihood of the data that has arisen,
+-   this yields the 'plausbility' of each probability of water . (I.e., the posterior?)
+
 ```{r}
 
 plaus_globe_updates %<>%
@@ -221,7 +217,6 @@ plaus_globe_updates %<>%
 
 ```
 
-
 Plotting this:
 
 ```{r, fig.width = 6, fig.height = 5}
@@ -239,10 +234,25 @@ plaus_globe_updates %>%
 
 ```
 
-^[DR note: although the plot looks smooth, I think this is only because we chose a small interval of probability ... 50 different probabilities. When I reduce it to 5 probabilities this gets choppy]
+[^small_large_worlds-1]
 
+[^small_large_worlds-1]: DR note: although the plot looks smooth, I think this is only because we chose a small interval of probability ... 50 different probabilities. When I reduce it to 5 probabilities this gets choppy
+
+::: {.callout-note collapse="true"}
+## Other love letter notes on the above
+
+> If it wasn't clear in the code, the dashed curves are normalized prior densities. The solid ones are normalized likelihoods. If you don't normalize (i.e., divide the density by the sum of the density), their respective heights don't match up with those in the text. Furthermore, it's the normalization that makes them directly comparable.
+
+> To learn more about `dplyr::group_by()` and its opposite `dplyr::ungroup()`, check out [*R4DS*, Chapter 5](https://r4ds.had.co.nz/transform.html). To learn about `tidyr::expand()`, go [here](https://tidyr.tidyverse.org/reference/expand.html).
+:::
 
 ## 2.3. Components of the model
+
+> 1.  a likelihood function: "the number of ways each conjecture could produce an observation"
+
+> 2.  one or more parameters: "the accumulated number of ways each conjecture could produce the entire data"
+
+> 3.  a prior: "the initial plausibility of each conjectured cause of the data"
 
 ::: {.callout-note collapse="true"}
 ## Coding tip: `dbinom`, `pbinom`, `rbinom`, etc
@@ -251,6 +261,14 @@ plaus_globe_updates %>%
 :::
 
 > The distributions we assign to the observed variables typically have their own variables.
+
+::: {.callout-note collapse="true"}
+## (Comparing frameworks) Rethinking: A central role for likelihood.
+
+> A great deal of ink has been spilled focusing on how Bayesian and non-Bayesian data analyses differ. Focusing on differences is useful, but sometimes it distracts us from fundamental similarities. Notably, the most influential assumptions in both Bayesian and many non-Bayesian models are the distributions assigned to data, the likelihood functions. The likelihoods influence inference for every piece of data, and as sample size increases, the likelihood matters more and more. This helps to explain why Bayesian and non-Bayesian inferences are often so similar. If we had to explain Bayesian inference using only one aspect of it, we should describe likelihood, not priors.
+
+(DR: move this to our discussion of compring statistical frameworks?)
+:::
 
 ### What prior? {.unnumbered}
 
@@ -262,7 +280,17 @@ plaus_globe_updates %>%
 
 > because non-Bayesian procedures need to make choices that Bayesian ones do not, such as choice of estimator or likelihood penalty.
 
+*DR: I skip the construction of the 'multiply prior by likelihood to get posterior' graphs for now ...*
+
+*Below: flat, stepped, Laplace priors*
+
+![](images/paste-47A2FD04.png)
+
 ## 2.4 'Making the model go'
+
+::: callout-important
+DR: I think this section is particularly important. It's our first pass on 'how to actually do this stuff'. Reading group: I suggest we put some focus on it, maybe in the next session.
+:::
 
 ### 2.4.1 Bayes theorem {.unnumbered}
 
@@ -302,9 +330,53 @@ Dissing the 'HIV test false positive' thing
 
 > in most of your real modeling, grid approximation isn't practical. The reason is that it scales very poorly, as the number of parameters increases
 
-### Quadratic approximation (summary) {-}
+### Grid approximation
 
-> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance) 
+The code below makes a data frame with
+
+1.  20 Probabilities between 0 and 1
+2.  A 'flat' density (=1 everywhere) for these
+3.  The likelihood of "6 waters in 9" (the data) given each of the 20 probabilities (binomial distribution)
+4.  This likelihood $\times$ the prior for each `p_water`.
+
+-   Rem: this is likelihood of a particular `p_water` *and* the observed data given that `p_water`
+-   Given the flat prior it is simply the latter
+
+5.  Standardizing this by dividing by the probability of the data observed
+
+```{r}
+#| label: grid_approx_calcs
+#| code-summary: "Grid, computing posteriors"
+(
+  d <-
+    tibble(p_grid = seq(from = 0, to = 1, length.out = 20),      # define grid
+           prior  = 1) %>%                                       # define prior
+    mutate(likelihood = dbinom(6, size = 9, prob = p_grid)) %>%  # compute likelihood at each value in grid
+    mutate(unstd_posterior = likelihood * prior) %>%             # compute product of likelihood and prior
+    mutate(posterior = unstd_posterior / sum(unstd_posterior))   # standardize the posterior, so it sums to 1
+)
+```
+
+We then plot the posterior probabilities of each `p_water`:
+
+```{r}
+
+(
+  p1 <-
+  d %>% 
+  ggplot(aes(x = p_grid, y = posterior)) +
+  geom_point() +
+  geom_line() +
+  labs(subtitle = "20 points",
+       x = "probability of water",
+       y = "posterior probability") +
+  theme(panel.grid = element_blank())
+)
+```
+
+### Quadratic approximation (summary) {.unnumbered}
+
+> Under quite general conditions, the region near the peak of the posterior distribution will be nearly Gaussian-or "normal"---in shape. This means the posterior distribution can be usefully approximated by a Gaussian distribution. A Gaussian distribution is convenient, because it can be completely described by only two numbers: the location of its center (mean) and its spread (variance)
 
 > logarithm of a Gaussian distribution forms a parabola. And a parabola is a quadratic function
 
@@ -314,55 +386,145 @@ Dissing the 'HIV test false positive' thing
 
 > (1) Find the posterior mode
 
-some optimization algorithm, a procedure that virtually "climbs" the posterior distribution
+Some optimization algorithm, a procedure that virtually "climbs" the posterior distribution
 
-> (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically,  but... 
+> (2) estimate the curvature near the peak. This curvature is sufficient to compute a quadratic approximation of the entire posterior distribution. In some cases, these calculations can be done analytically, but...
 
-::: {.callout-note }
+::: callout-note
 ## DR question
 
 But how does it do this estimate of the curvature? Does it come out of many simulations, or the optimizing hill climbing thing, or??
-
 :::
 
+::: {.callout-note collapse="true"}
+## The Hession and quadratic approximation
+
+> Hessian is a square matrix of second derivatives. It is used for many purposes in mathematics, but in the quadratic approximation it is second derivatives of the log of posterior probability with respect to the parameters. It turns out that these derivatives are sufficient to describe a Gaussian distribution, because the logarithm of a Gaussian distribution is just a parabola. Parabolas have no derivatives beyond the second
+:::
+
+Applying the quadratic approximation to the globe tossing data with `rethinking::map()`.
 
 ::: {.callout-note collapse="true"}
-## The Hession and quadratic approximation 
+## `rethinking::map()` coding notes
 
-> Hessian is a square matrix of second derivatives. It is used for many purposes in mathematics, but in the quadratic approximation it is second derivatives of the log of posterior probability with respect to the parameters. It turns out that these derivatives are sufficient to describe a Gaussian distribution, because the logarithm of a Gaussian distribution is just a parabola. Parabolas have no derivatives beyond the second 
+Here the 'love letter' uses McElreath's rethinking package instead of brms ... I guess it's because quadratic approximation is more for learning than for real use?
 
+`quap` and `map`:
 
-::: 
+-   "Find mode of posterior distribution for arbitrary fixed effect models"
+-   "and then produce an approximation of the full posterior using the quadratic curvature at the mode."
 
-### Markov chain Monte Carlo (incomplete explanation) {-}
+(This has nothing to do with `purrr::map` iteration package thing.)
+:::
 
-DR:MCMC is not fully explained here. Somehow you 'sample from the posterior (over the parameter values)" and do some magic.  Maybe weighting these by how consistent they are with the prior and the data?
+```{r}
+#| label: quap_globetoss
+#| code-summary: "quap with `rethinking::map`"
 
-> Grid approximation routinely fails here, because it just takes too long—the Sun will go dark before your computer finishes the grid. Special forms of quadratic approximation might work, if everything is just right. But commonly, something is not just right. Furthermore, multilevel models do not always allow us to write down a single, unified function for the posterior distribution. This means that the function to maximize (when finding the MAP) is not known, but must be computed in pieces 
+library(rethinking)
+
+globe_qa <-
+  rethinking::map(
+    alist(
+      w ~ dbinom(9, p),  # binomial likelihood
+      p ~ dunif(0, 1)    # uniform prior
+    ), 
+    data = list(w = 6))
+
+# display summary of quadratic approximation
+precis(globe_qa)
+
+```
+
+::: {.callout-note collapse="true"}
+## Syntax of above code
+
+`alist` is a way of specifying a list (iirc) that preserves it as a 'name of the math we want to compute on' rather than it actually expanding/evaluating it.
+
+`precis` is just a handy tool for seeing data .
+
+The output `globe_qa` contains a lot of content (try `str(globe_qa)`).
+:::
+
+Above, the `precis` gives us some summary statistics on the estimated posterior.
+
+*DR: I will skip the code that produces the figure below showing how `quap` updates with more data, for now*.
+
+![](images/paste-B716044F.png)
+
+### Markov chain Monte Carlo (incomplete explanation) {.unnumbered}
+
+DR:MCMC is not fully explained here. Somehow you 'sample from the posterior (over the parameter values)" and do some magic. Maybe weighting these by how consistent they are with the prior and the data?
+
+> Grid approximation routinely fails here, because it just takes too long---the Sun will go dark before your computer finishes the grid. Special forms of quadratic approximation might work, if everything is just right. But commonly, something is not just right. Furthermore, multilevel models do not always allow us to write down a single, unified function for the posterior distribution. This means that the function to maximize (when finding the MAP) is not known, but must be computed in pieces
 
 > is fair to say that MCMC is largely responsible for the insurgence of Bayesian data analysis that began in the 1990s.
 
+> highly non-obvious strategy. Instead of attempting to compute or approximate the posterior distribution directly, MCMC techniques merely draw samples from the posterior. You end up with a collection of parameter values, and the frequencies of these values correspond to the posterior plausibilities. You can then build a picture of the posterior from the histogram of these samples. We nearly always work directly with these samples, rather than first constructing some mathematical estimate from them
 
-> highly non-obvious strategy. Instead of attempting to compute or approximate the posterior distribution directly, MCMC techniques merely draw samples from the posterior. You end up with a collection of parameter values, and the frequencies of these values correspond to the posterior plausibilities. You can then build a picture of the posterior from the histogram of these samples. We nearly always work directly with these samples, rather than first constructing some mathematical estimate from them 
+> , a working Markov chain for the globe tossing model does not require much code
 
-> , a working Markov chain for the globe tossing model does not require much code 
-
-
-He starts with $p=.5$, considers the likelihood of the data under this probability, adjusts p. 
+He starts with $p=.5$, considers the likelihood of the data under this probability, adjusts p.
 
 \
 
-::: {.callout-note }
+::: callout-note
 ## DR question
 
 I don't see how this MCMC works; anyone have more insight? And where does the prior come in here?)
-
 :::
+
 \
 
-### Practice questions {-}
+
+#### Kurz: Markov chain Monte Carlo {-}
+
+Bringing in `brms` 
+
+```{r, warning = F, message = F}
+library(brms)
+```
+
+> Here re-fit the last model from above, the one for which $w = 24$ and $n = 36$.
+
+```{r b2.01}
+
+b2.1 <-
+  brm(data = list(w = 24), 
+      family = binomial(link = "identity"),
+      w | trials(36) ~ 1,
+      prior(beta(1, 1), class = Intercept),
+      iter = 4000, warmup = 1000,
+      control = list(adapt_delta = .95),
+      seed = 2,
+      file = "b02.01")
+```
+
+*DR: Not sure why we save a file here*
+
+> The model output from brms looks like so.
+
+```{r}
+print(b2.1)
+```
+
+> There's a lot going on in that output, which we'll start to clarify in Chapter 4. For now, focus on the 'Intercept' line. As we'll also learn in Chapter 4, the intercept of a regression model with no predictors is the same as its mean. In the special case of a model using the binomial likelihood, the mean is the probability of a 1 in a given trial, $\theta$.
+
+Let's plot the results of our model and compare them with those from `rethinking::map()`, above.
+
+```{r, fig.width = 3, fig.height = 2.75}
+posterior_samples(b2.1) %>% 
+  mutate(n = "n = 36") %>%
+
+  ggplot(aes(x = b_Intercept)) +
+  geom_density(fill = "black") +
+  scale_x_continuous("proportion water", limits = c(0, 1)) +
+  theme(panel.grid = element_blank()) +
+  facet_wrap(~n)
+```
+
+> If you're still confused. Cool. This is just a preview. We'll start walking through fitting models in brms in \[Chapter 4\]\[A Gaussian model of height\] and we'll learn a lot about regression with the binomial likelihood in \[Chapter 10\]\[Counting and Classification\].
+
+### Practice questions {.unnumbered}
 
 > The target of inference in Bayesian inference is a posterior probability distribution. Posterior probabilities state the relative numbers of ways each conjectured cause of the data could have produced the data
-
-
-
