@@ -1,12 +1,19 @@
 # Chapter 3. Sampling the Imaginary (posterior) {#mcelreath_ch3}
 
+
+
+```{r}
+library(pacman)
+p_load(dplyr, magrittr, ggplot2, stringr, tidyr, install = FALSE)
+```
+
 ::: {.callout-note collapse="true"}
 ## DR note 28 Oct 2022: The notes below are incomplete
 
 I aim to return to do more soon.
 
 ::: 
->
+
 > This chapter teaches you basic skills for working with samples from the posterior distribution. 
 
 
