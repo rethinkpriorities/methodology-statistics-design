@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.113">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>RP: Methods - 22&nbsp; Chapter 3. Sampling the Imaginary (posterior)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: 1;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/5_spurious_waffles.html" rel="next">
+<link href="../chapters/2_small_large_worlds.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://hypothes.is/embed.js"></script>
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Chapter 3. Sampling the Imaginary (posterior)</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RP: Methods</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rethinkpriorities/methodology-statistics-design" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Intro., protocols, style</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction/overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/coding_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Coding, data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/presentation_method_discussion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Presentation/visualisation</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Surveys/trial design</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/survey_designs_methods.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Survey design, item dev.</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/experiments_trials_design.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Experiments: Qualitative design, implementation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/qualitative-design-issues_plus.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Practical issues</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exp_design_quant.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quant. issues/VOI</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Statistics/modeling</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/basic_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Frameworks, ‘models’, inference, tests</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/factor_analysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Factor analss: EFA/CFA, PCA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/mixed_multilevel_random.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Random/mixed fx, mlm</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ml_modeling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Prediction, &amp; ML</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/time_series_application.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Time Series (applied)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/classification_model_notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Classification models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/causal_inf.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Causal Inference</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Other, worked examples</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/fermi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">MonteCarlo ‘Fermi est.’</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../from_ea_market_testing/binary_trial_computations_redacted_ed.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inference/equivalence tests, (binomial)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/other_sections.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Other suggested sections</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">Bayes/Rethinking</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/rethinking_bayes_recoding.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Overview (McE/Bayes)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/1_golem.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ch 1. Golem of Prague</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/2_small_large_worlds.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ch 2. Small/Large Worlds</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/3_sampling_the_imaginary.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Chapter 3. Sampling the Imaginary (posterior)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#sampling-from-a-grid-approximate-posterior" id="toc-sampling-from-a-grid-approximate-posterior" class="nav-link active" data-scroll-target="#sampling-from-a-grid-approximate-posterior"><span class="toc-section-number">22.1</span>  3.1. Sampling from a grid-approximate posterior</a></li>
+  <li>
+<a href="#sampling-to-summarize" id="toc-sampling-to-summarize" class="nav-link" data-scroll-target="#sampling-to-summarize"><span class="toc-section-number">22.2</span>  3.2. Sampling to summarize</a>
+  <ul class="collapse">
+<li><a href="#intervals-of-defined-boundaries" id="toc-intervals-of-defined-boundaries" class="nav-link" data-scroll-target="#intervals-of-defined-boundaries">Intervals of defined boundaries</a></li>
+  <li><a href="#intervals-of-defined-mass" id="toc-intervals-of-defined-mass" class="nav-link" data-scroll-target="#intervals-of-defined-mass">Intervals of defined mass</a></li>
+  <li><a href="#point-estimates" id="toc-point-estimates" class="nav-link" data-scroll-target="#point-estimates">3.2.3. Point estimates</a></li>
+  </ul>
+</li>
+  <li><a href="#sampling-to-simulate-prediction" id="toc-sampling-to-simulate-prediction" class="nav-link" data-scroll-target="#sampling-to-simulate-prediction">3.3. Sampling to simulate prediction</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/3_sampling_the_imaginary.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="mcelreath_ch3" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Chapter 3. Sampling the Imaginary (posterior)</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+DR note 28 Oct 2022: The notes below are incomplete
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I aim to return to do more soon.</p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>This chapter teaches you basic skills for working with samples from the posterior distribution.</p>
+</blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+DR: emphasis on sampling from posterior because
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>the ‘best’ estimation approach, MCMC, doesn’t even give you an explicit analytical posterior, just a sample from it</p></li>
+<li><p>this approach also requires less math and yields more flexibility … easy to produce any object of interest.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+That ‘standard textbook Bayesian updating false positive surprise example’; critique
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>In a population of 100,000 people, 100 of them are vampires. (2) Of the 100 who are vampires, 95 of them will test positive for vampirism. (3) Of the 99,900 mortals, 999 of them will test positive for vampirism</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>counts rather than probabilities, is often called the frequency format or natural frequencies. Why a frequency format helps people intuit the correct approach remains contentious.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>vampirism example at the start of this chapter has the same logical structure as many different signal detection problems: (1) There is some binary state that is hidden from us; (2) we observe an imperfect cue of the hidden state; (3) we (should) use Bayes’ theorem to logically deduce the impact of the cue on our uncertainty</p>
+</blockquote>
+<p><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Critique of science with ‘low base rate true hypotheses’
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>Suppose that the probability of a positive finding, when an hypothesis is false, is Pr(sig|false) = 0.05. That’s the false-positive rate, like the 5% of conventional significance testing. Finally, we have to state the base rate at which hypotheses are true. Suppose for example that 1 in every 100 hypotheses turns out to be true -</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>So a positive finding corresponds to a 16% chance that the hypothesis is true</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>You can shrink the false-positive rate to 1% and get this posterior probability up to 0.5, only as good as a coin flip. The most important thing to do is to improve the base rate, Pr(true), and that requires thinking, not testing.</p>
+</blockquote>
+<p>DR: Or why not shrink the false positive rate even further? In principle you could demand more and more exacting standards, if worse and worse hypotheses are tested. This sort-of provides some justification for ‘strict standard NHST’.</p>
+<p>But personally, I suspect that in social science the base rate is much higher because people often test fairly obvious things. (And also, a lot is about measurement, not 0/1 testing in a sparse universe.)</p>
+</div>
+</div>
+</div>
+<section id="sampling-from-a-grid-approximate-posterior" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="sampling-from-a-grid-approximate-posterior">
+<span class="header-section-number">22.1</span> 3.1. Sampling from a grid-approximate posterior</h2>
+<p>Globe-tossing model. Analytically, we started with a prior, updated it on the data, and got a posterior; see extensive plots of this in the last chapter. We also did this (for demonstration) with the grid-approximation approach.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Grid-approximation … generating 1000 probabilities &amp; likelihoods
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is almost as in the last chapter, with slightly different naming of things, so I collapse it here</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># how many grid points would you like?</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1001</span></span>
+<span><span class="va">n_success</span> <span class="op">&lt;-</span> <span class="fl">6</span></span>
+<span><span class="va">n_trials</span>  <span class="op">&lt;-</span> <span class="fl">9</span></span>
+<span></span>
+<span><span class="op">(</span></span>
+<span>  <span class="va">d</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">tibble</span><span class="op">(</span>p_grid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">0</span>, to <span class="op">=</span> <span class="fl">1</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>,</span>
+<span>         <span class="co"># note we're still using a flat uniform prior</span></span>
+<span>         prior  <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>likelihood <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">dbinom</a></span><span class="op">(</span><span class="va">n_success</span>, size <span class="op">=</span> <span class="va">n_trials</span>, prob <span class="op">=</span> <span class="va">p_grid</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>posterior <span class="op">=</span> <span class="op">(</span><span class="va">likelihood</span> <span class="op">*</span> <span class="va">prior</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">likelihood</span> <span class="op">*</span> <span class="va">prior</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in tibble(p_grid = seq(from = 0, to = 1, length.out = n), prior = 1) %&gt;% : could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Next we sample from the 1000 probabilities in the grid <code>d</code> <em>with weights equal to the posteriors</em> (<code>d$posterior</code>), generating a tibble of 10,000 samples (<code>sample</code>).</p>
+<div class="cell">
+<details><summary>10k samples from the grid posterior</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># how many samples would you like?</span></span>
+<span><span class="va">n_samples</span> <span class="op">&lt;-</span> <span class="fl">1e4</span></span>
+<span></span>
+<span><span class="co"># make it reproducible</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">samples</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">d</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="va">n_samples</span>, weight <span class="op">=</span> <span class="va">posterior</span>, replace <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in d %&gt;% sample_n(size = n_samples, weight = posterior, replace = T): could not find function "%&gt;%"</code></pre>
+</div>
+<details><summary>10k samples from the grid posterior</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">glimpse</span><span class="op">(</span><span class="va">samples</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in glimpse(samples): could not find function "glimpse"</code></pre>
+</div>
+</div>
+<p>Next we plot the samples.</p>
+<p>*DR: I played around with this. Rather than getting the arbitrary zigzag, I first sort by probability of water (<code>p_grid</code>). This yields a smooth curve, where a shallower line and greater horizontal distance means ‘more samples in this area’.</p>
+<div class="cell">
+<details><summary>Numbering and plotting samples</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">samples</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">p_grid</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>sample_number <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">sample_number</span>, y <span class="op">=</span> <span class="va">p_grid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span><span class="st">"proportion of water (p)"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"sample number"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in samples %&gt;% arrange(p_grid) %&gt;% mutate(sample_number = 1:n()) %&gt;% : could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+<p>We’ll make the density in the right panel with <code>geom_density()</code>.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">samples</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">p_grid</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_density</span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span><span class="st">"proportion of water (p)"</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in samples %&gt;% ggplot(aes(x = p_grid)): could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+<p>:::</p>
+<p>It’s a bit lumpy because 10k samples isn’t enough. But I won’t bother with the larger number of samples here.</p>
+</section><section id="sampling-to-summarize" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="sampling-to-summarize">
+<span class="header-section-number">22.2</span> 3.2. Sampling to summarize</h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Terminology: ‘compatibility interval’
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>interval of posterior probability, such as the ones we are working with [below],</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>We’re going to call it a compatibility interval instead, in order to avoid the unwarranted implications of “confidence” and “credibility.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>a range of parameter values compatible with the model and data</p>
+</blockquote>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>All you’ve done so far is crudely replicate the posterior density you had already computed. … next it is time to use these samples to describe and understand the posterior.</p>
+</blockquote>
+<p>At least with 1 dimensional data, it’s easy to ask and answer very specific questions of the posterior:</p>
+<section id="intervals-of-defined-boundaries" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="intervals-of-defined-boundaries">Intervals of defined boundaries</h3>
+<blockquote class="blockquote">
+<p>Suppose I ask you for the posterior probability that the proportion of water is less than 0.5.</p>
+</blockquote>
+<p><em>Here</em>, you could do this simply from the grid approximation <em>calculation</em></p>
+<p><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">p_grid</span> <span class="op">&lt;</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">posterior</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in d %&gt;% filter(p_grid &lt; 0.5) %&gt;% summarise(sum = sum(posterior)): could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+<p>However: grid approximation isn’t used much</p>
+<blockquote class="blockquote">
+<p>since grid approximation isn’t practical in general, it won’t always be so easy. Once there is more than one parameter in the posterior distribution</p>
+</blockquote>
+<p>… so instead we will practice taking <em>samples from the posterior</em>.</p>
+<blockquote class="blockquote">
+<p>similarly add up all of the samples below 0.5, but also divide the resulting count by the total number of samples.</p>
+</blockquote>
+<p>Kurz offers three tidyverse ways of coding this calculation, which may be useful in different circumstances:</p>
+<div class="cell">
+<details><summary>filter and summarise</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">samples</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">p_grid</span> <span class="op">&lt;</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>sum <span class="op">=</span> <span class="fu">n</span><span class="op">(</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_samples</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in samples %&gt;% filter(p_grid &lt; 0.5) %&gt;% summarise(sum = n()/n_samples): could not find function "%&gt;%"</code></pre>
+</div>
+<details><summary>filter and summarise</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#note 'n_samples' was previously defined here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>count and mutate with divide</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">samples</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">count</span><span class="op">(</span><span class="va">p_grid</span> <span class="op">&lt;</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>probability <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in samples %&gt;% count(p_grid &lt; 0.5) %&gt;% mutate(probability = n/sum(n)): could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+<div class="cell">
+<details><summary>Summarize a logical condition</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#And an even trickier approach for the same is to insert the logical statement `p_grid &lt; .5` within the `mean()` function.</span></span>
+<span></span>
+<span><span class="va">samples</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">summarise</span><span class="op">(</span>sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">p_grid</span> <span class="op">&lt;</span> <span class="fl">.5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in samples %&gt;% summarise(sum = mean(p_grid &lt; 0.5)): could not find function "%&gt;%"</code></pre>
+</div>
+</div>
+<p>We can do similar for intervals (skipped here)</p>
+<blockquote class="blockquote">
+<p>To determine the posterior probability between 0.5 and 0.75, you can use <code>&amp;</code> within <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>.</p>
+</blockquote>
+</section><section id="intervals-of-defined-mass" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="intervals-of-defined-mass">Intervals of defined mass</h3>
+<p><strong>Percentile intervals (PI)</strong> “assign equal probability mass to each tail …”</p>
+<blockquote class="blockquote">
+<p>But in this example, it ends up excluding the most probable parameter values, near p = 1. So in terms of describing the shape of the posterior distribution-which is really all these intervals are asked to do—the percentile interval can be misleading.</p>
+</blockquote>
+<p><strong>highest posterior density interval (HPDI)</strong>: “the narrowest interval containing the specified probability mass”</p>
+<blockquote class="blockquote">
+<p>right-hand plot in Figure 3.3 displays the 50% HPDI is</p>
+</blockquote>
+<p><img src="images/paste-FDE37041.png" class="img-fluid"></p>
+<p><br></p>
+<p><strong>Which to use?</strong></p>
+<blockquote class="blockquote">
+<p>HPDI is more computationally intensive than PI and suffers from greater simulation variance, which is a fancy way of saying that it is sensitive to how many samples you draw from the posterior. It is also harder to understand and many scientific audiences will not appreciate its features, hile they will immediately understand a percentile interval, as ordinary non-Bayesian intervals are typically interpreted (incorrectly) as percentile intervals</p>
+</blockquote>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Small world caveats
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>But whether you use a Bayesian interpretation or not, a 95% interval does not contain the true value 95% of the time. The history of science teaches us that confidence intervals exhibit chronic overconfidence.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The 95% is a small world number</p>
+</blockquote>
+</div>
+</div>
+</div>
+<p>Kurz plots these intervals for our example, but the code he uses first is simply taking an arbitrary part of the computed distribution, not calculating anything. I’ll skip it.</p>
+<p>DR: Hmmm, how is HPDI computed? … I assume it iterates over intervals, draws observations from within this interval from the posterior sample and sums the probability mass until it settles on the ‘best one’?</p>
+</section><section id="point-estimates" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="point-estimates">3.2.3. Point estimates</h3>
+<blockquote class="blockquote">
+<p>Given the entire posterior distribution, what value should you report? The Bayesian parameter estimate is precisely the entire posterior distribution</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>it is very common for scientists to report the parameter value with highest posterior probability, a maximum a posteriori (MAP) estimate</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Why not report the posterior mean or median?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>repeating this calculation for every possible decision, using</p>
+</blockquote>
+<p><strong>Loss functions: very cool!</strong></p>
+<blockquote class="blockquote">
+<p>One principled way to go beyond using the entire posterior as the estimate is to choose a loss function. A loss function is a rule that tells you the cost associated with using any particular point estimate. While statisticians and game theorists have long been interested in loss functions, and how Bayesian inference supports them, scientists hardly ever use them explicitly. The key insight is that different loss functions imply different point estimates.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>loss &lt;- sapply( p_grid , function(d) sum( posterior*abs( d - p_grid ) ) )</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>p_grid[ which.min(loss) ]</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Different loss functions nominate different point estimates. The two most common examples are the absolute loss as above, which leads to the median as the point estimate, and the quadratic loss (d - p) 2 , which leads to the posterior mean (mean(samples)) as the point estimate</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Therefore the implied loss function is highly asymmetric, rising sharply as true wind speed exceeds our guess, but rising only slowly as</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>true wind speed falls below our guess. In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>order an evacuation. Producing a point estimate of wind speed may not be necessary at all.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to order an evacuation. Producing a point estimate of wind speed may not be necessary at all.<br></p>
+</blockquote>
+<p>DR: Reinforcement learning could be better still?</p>
+<blockquote class="blockquote">
+<p>You might argue that the decision to make is whether or not to accept an hypothesis. But the challenge then is to say what the relevant costs and benefits would be, in terms of the knowledge gained or lost</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Usually it’s better to communicate as much as you can about the posterior distribution, as well as the data and the model itself, so that others can build upon your work</p>
+</blockquote>
+</section></section><section id="sampling-to-simulate-prediction" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="sampling-to-simulate-prediction">3.3. Sampling to simulate prediction</h2>
+<blockquote class="blockquote">
+<p>combine sampling of simulated observations, as in the previous section, with sampling parameters from the posterior distribution.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>basic model checks</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><img src="images/paste-14D0ECDD.png" class="img-fluid"></p>
+</blockquote>
+<p><strong>Posterior predictive distribution</strong></p>
+<blockquote class="blockquote">
+<p>Combining simulated observation distributions for all parameter values (not just the ten shown), each weighted by its posterior probability, produces the posterior predictive distribution</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>This distribution propagates uncertainty about parameter to uncertainty about prediction</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>out. If instead you were to use only a single parameter value to compute implied predictions, say the most probable value at the peak of posterior distribution, you-d produce an overconfident distribution of predictions,</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>w &lt;- rbinom( 1e4 , size=9 , prob=samples ) The symbol samples above is the same list of random samples from the posterior distribution that you-ve used in previous sections. For each sampled value, a random binomial observation is generated</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Now the simulated predictions appear less consistent with the data, as the majority of simulated observations have fewer switches than were observed in the actual sample. This is consistent with lack of independence between tosses of the globe, in which each toss is negatively correlated with the last. Does this mean that the model is bad? That depends</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>In the long run, even the wrong model we’ve used throughout the chapter converge on the correct proportion. But it will do so more slowly than the posterior distribution may lead us to believe.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>posterior predictive checks</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>3.3.2.2. Is the model adequate?</p>
+</blockquote>
+<p>DR: I.e., Does the model and its estimates predict a reasonable (sampled) distribution</p>
+<p>Multilevel models</p>
+<blockquote class="blockquote">
+<p>multilevel model. Multilevel models-also known as hierarchical, random effects, varying effects, or mixed effects models</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Cross-validation and information criteria measure overfitting risk and help us to recognize it. Multilevel models actually do something about it. What they do is exploit an amazing trick known as partial pooling</p>
+</blockquote>
+<p>Model comparison and prediction.</p>
+<blockquote class="blockquote">
+<p>Bayesian data analysis provides a way for models to learn from data. But when there is more than one plausible model-and in most mature fields there should be-how should we choose among them? One answer is to prefer models that make good predictions. This answer creates a lot of new questions, since knowing which model will make the best predictions seems to require knowing the future. We’ll look at two related tools, neither of which knows the future: cross-validation and information criteria</p>
+</blockquote>
+
+
+<!-- -->
+
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>DR: (what did I mean here?) really a great [test?] for something that’s correlated with vampirism<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Kurz: “To get the proportion of water less than some value of <code>p_grid</code> within the tidyverse, you might first <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> by that value and then take the <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> within <code>summarise()</code>.”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../chapters/2_small_large_worlds.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Ch 2. Small/Large Worlds</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/5_spurious_waffles.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Chapter 3. Sampling the Imaginary (posterior) {#mcelreath_ch3}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR note 28 Oct 2022: The notes below are incomplete</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>I aim to return to do more soon.</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This chapter teaches you basic skills for working with samples from the posterior distribution. </span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">##   DR: emphasis on sampling from posterior because </span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>the 'best' estimation approach, MCMC, doesn't even give you an explicit analytical posterior, just a sample from it</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>this approach also requires less math and yields more flexibility ... easy to produce any object of interest.</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## That 'standard textbook Bayesian updating false positive surprise example'; critique </span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In a population of 100,000 people, 100 of them are vampires. (2) Of the 100 who are vampires, 95 of them will test positive for vampirism. (3) Of the 99,900 mortals, 999 of them will test positive for vampirism</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; counts rather than probabilities, is often called the frequency format or natural frequencies. Why a frequency format helps people intuit the correct approach remains contentious.</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="at">:::</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; vampirism example at the start of this chapter has the same logical structure as many different signal detection problems: (1) There is some binary state that is hidden from us; (2) we observe an imperfect cue of the hidden state; (3) we (should) use Bayes' theorem to logically deduce the impact of the cue on our uncertainty</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="ot">[^sampling_the_imaginary-1]</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="ot">[^sampling_the_imaginary-1]: </span>DR: (what did I mean here?) really a great <span class="sc">\[</span>test?<span class="sc">\]</span> for something that's correlated with vampirism</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Critique of science with 'low base rate true hypotheses'</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Suppose that the probability of a positive finding, when an hypothesis is false, is Pr(sig\|false) = 0.05. That's the false-positive rate, like the 5% of conventional significance testing. Finally, we have to state the base rate at which hypotheses are true. Suppose for example that 1 in every 100 hypotheses turns out to be true -</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So a positive finding corresponds to a 16% chance that the hypothesis is true</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; You can shrink the false-positive rate to 1% and get this posterior probability up to 0.5, only as good as a coin flip. The most important thing to do is to improve the base rate, Pr(true), and that requires thinking, not testing.</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>DR: Or why not shrink the false positive rate even further? In principle you could demand more and more exacting standards, if worse and worse hypotheses are tested. This sort-of provides some justification for 'strict standard NHST'.</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>But personally, I suspect that in social science the base rate is much higher because people often test fairly obvious things. (And also, a lot is about measurement, not 0/1 testing in a sparse universe.)</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1. Sampling from a grid-approximate posterior</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>Globe-tossing model. Analytically, we started with a prior, updated it on the data, and got a posterior; see extensive plots of this in the last chapter. We also did this (for demonstration) with the grid-approximation approach.  </span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grid-approximation ... generating 1000 probabilities &amp; likelihoods</span></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>This is almost as in the last chapter, with slightly different naming of things, so I collapse it here</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="co"># how many grid points would you like?</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1001</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>n_success <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>n_trials  <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">p_grid =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> n),</span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>         <span class="co"># note we're still using a flat uniform prior</span></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>         <span class="at">prior  =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">likelihood =</span> <span class="fu">dbinom</span>(n_success, <span class="at">size =</span> n_trials, <span class="at">prob =</span> p_grid)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">posterior =</span> (likelihood <span class="sc">*</span> prior) <span class="sc">/</span> <span class="fu">sum</span>(likelihood <span class="sc">*</span> prior))</span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>Next we sample from the 1000 probabilities in the grid <span class="in">`d`</span> *with weights equal to the posteriors* (<span class="in">`d$posterior`</span>), generating a tibble of 10,000 samples (<span class="in">`sample`</span>). </span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: 10kgridsamples</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "10k samples from the grid posterior"</span></span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="co"># how many samples would you like?</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="co"># make it reproducible</span></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span> </span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> n_samples, <span class="at">weight =</span> posterior, <span class="at">replace =</span> T)</span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(samples)</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>Next we plot the samples.</span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a>*DR: I played around with this. Rather than getting the arbitrary zigzag, I first sort by probability of water (<span class="in">`p_grid`</span>). This yields a smooth curve, where a shallower line and greater horizontal distance means 'more samples in this area'.</span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3.5, fig.height = 3}</span></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: numbersamples</span></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Numbering and plotting samples"</span></span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span> </span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(p_grid) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_number =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_number, <span class="at">y =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"proportion of water (p)"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"sample number"</span>)</span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>We'll make the density in the right panel with <span class="in">`geom_density()`</span>.</span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3.5, fig.height = 3}</span></span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span> </span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_grid)) <span class="sc">+</span></span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"proportion of water (p)"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>It's a bit lumpy because 10k samples isn't enough. But I won't bother with the larger number of samples here.</span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.2. Sampling to summarize</span></span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Terminology: 'compatibility interval'</span></span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; interval of posterior probability, such as the ones we are working with </span><span class="co">[</span><span class="ot">below</span><span class="co">]</span><span class="at">,</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We're going to call it a compatibility interval instead, in order to avoid the unwarranted implications of "confidence" and "credibility."</span></span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; a range of parameter values compatible with the model and data </span></span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; All you've done so far is crudely replicate the posterior density you had already computed. ...  next it is time to use these samples to describe and understand the posterior. </span></span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a>At least with 1 dimensional data, it's easy to ask and answer very specific questions of the posterior:</span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### Intervals of defined boundaries {-}</span></span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Suppose I ask you for the posterior probability that the proportion of water is less than 0.5.</span></span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a>*Here*, you could do this simply from the grid approximation *calculation*</span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">Kurz: "To get the proportion of water less than some value of `p_grid` within the tidyverse, you might first `filter()` by that value and then take the `sum()` within `summarise()`."</span><span class="co">]</span></span>
+<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> </span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p_grid <span class="sc">&lt;</span> .<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">sum</span>(posterior))</span>
+<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a>However: grid approximation isn't used much</span>
+<span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; since grid approximation isn't practical in general, it won't always be so easy. Once there is more than one parameter in the posterior distribution</span></span>
+<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a>... so instead we will practice taking *samples from the posterior*. </span>
+<span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; similarly add up all of the samples below 0.5, but also  divide the resulting count by the total number of samples. </span></span>
+<span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a>Kurz offers three tidyverse ways of coding this calculation, which may be useful in different circumstances:</span>
+<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filter_summarise</span></span>
+<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "filter and summarise"</span></span>
+<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span></span>
+<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(p_grid <span class="sc">&lt;</span> .<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">n</span>() <span class="sc">/</span> n_samples)</span>
+<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a><span class="co">#note 'n_samples' was previously defined here</span></span>
+<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: count_mutate</span></span>
+<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "count and mutate with divide"</span></span>
+<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span> </span>
+<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(p_grid <span class="sc">&lt;</span> .<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">probability =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: summarize_condition</span></span>
+<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Summarize a logical condition"</span></span>
+<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a><span class="co">#And an even trickier approach for the same is to insert the logical statement `p_grid &lt; .5` within the `mean()` function.</span></span>
+<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">%&gt;%</span></span>
+<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">mean</span>(p_grid <span class="sc">&lt;</span> .<span class="dv">5</span>))</span>
+<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>We can do similar for intervals (skipped here)</span>
+<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To determine the posterior probability between 0.5 and 0.75, you can use </span><span class="in">`&amp;`</span><span class="at"> within </span><span class="in">`filter()`</span><span class="at">.</span></span>
+<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a><span class="fu">### Intervals of defined mass {-}</span></span>
+<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>**Percentile intervals (PI)** "assign equal probability mass to each tail ..."  </span>
+<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; But in this example, it ends up excluding the most probable parameter values, near p = 1. So in terms of describing the shape of the posterior distribution-which is really all these intervals are asked to do---the percentile interval can be misleading. </span></span>
+<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a>**highest posterior density interval (HPDI)**: "the narrowest interval containing the specified probability mass"</span>
+<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; right-hand plot in Figure 3.3 displays the 50% HPDI is </span></span>
+<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-FDE37041.png)</span></span>
+<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a>**Which to use?**</span>
+<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; HPDI is more computationally intensive than PI and suffers from greater simulation variance, which is a fancy way of saying that it is sensitive to how many samples you draw from the posterior. It is also harder to understand and many scientific audiences will not appreciate its features, hile they will immediately understand a  percentile interval, as ordinary non-Bayesian intervals are typically interpreted (incorrectly) as percentile intervals </span></span>
+<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Small world caveats</span></span>
+<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; But whether you use a Bayesian interpretation or not, a 95% interval does not contain the true value 95% of the time. The history of science teaches us that confidence intervals exhibit chronic overconfidence.</span></span>
+<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The 95% is a small world number </span></span>
+<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a>Kurz plots these intervals for our example, but the code he uses first is simply taking an arbitrary part of the computed distribution, not calculating anything. I'll skip it. </span>
+<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>DR: Hmmm, how is HPDI computed? ... I assume it iterates over intervals, draws observations from within this interval from the posterior sample and sums the probability mass until it settles on the 'best one'?</span>
+<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3.2.3. Point estimates {-}</span></span>
+<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Given the entire posterior distribution, what value should you report? </span></span>
+<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The Bayesian parameter estimate is precisely the entire posterior distribution </span></span>
+<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; it is very common for scientists to report the parameter value with highest posterior probability, a maximum a posteriori (MAP) estimate </span></span>
+<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Why not report the posterior mean or median? </span></span>
+<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; repeating this calculation for every possible decision, using </span></span>
+<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a>**Loss functions: very cool!**</span>
+<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; One principled way to go beyond using the entire posterior as the estimate is to choose a loss function. A loss function is a rule that tells you the cost associated with using any particular point estimate. While statisticians and game theorists have long been interested in loss functions, and how Bayesian inference supports them, scientists hardly ever use them explicitly. The key insight is that different loss functions imply different point estimates.</span></span>
+<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; loss </span><span class="sc">\&lt;</span><span class="at">- sapply( p_grid , function(d) sum( posterior</span><span class="sc">\*</span><span class="at">abs( d - p_grid ) ) ) </span></span>
+<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; p_grid</span><span class="sc">\[</span><span class="at"> which.min(loss) </span><span class="sc">\]</span><span class="at"> </span></span>
+<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Different loss functions nominate different point estimates. The two most common examples are the absolute loss as above, which leads to the median as the point estimate, and the quadratic loss (d - p) 2 , which leads to the posterior mean (mean(samples)) as the point estimate </span></span>
+<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Therefore the implied loss function is highly asymmetric, rising sharply as true wind speed exceeds our guess, but rising only slowly as</span></span>
+<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; true wind speed falls below our guess. In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to</span></span>
+<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; order an evacuation. Producing a point estimate of wind speed may not be necessary at all.</span></span>
+<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to order an evacuation. Producing a point estimate of wind speed may not be necessary at all.\</span></span>
+<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a>DR: Reinforcement learning could be better still?</span>
+<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; You might argue that the decision to make is whether or not to accept an hypothesis. But the challenge then is to say what the relevant costs and benefits would be, in terms of the knowledge gained or lost</span></span>
+<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Usually it's better to communicate as much as you can about the posterior distribution, as well as the data and the model itself, so that others can build upon your work </span></span>
+<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-308"><a href="#cb20-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.3. Sampling to simulate prediction {-}</span></span>
+<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; combine sampling of simulated observations, as in the previous section, with sampling parameters from the posterior distribution. </span></span>
+<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; basic model checks </span></span>
+<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="al">![](images/paste-14D0ECDD.png)</span></span>
+<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a>**Posterior predictive distribution**</span>
+<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Combining simulated observation distributions for all parameter values (not just the ten shown), each weighted by its posterior probability, produces the posterior predictive distribution </span></span>
+<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This distribution propagates uncertainty about parameter to uncertainty about prediction </span></span>
+<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; out. If instead you were to use only a single parameter value to compute implied predictions, say the most probable value at the peak of posterior distribution, you-d produce an overconfident distribution of predictions, </span></span>
+<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; w </span><span class="sc">\&lt;</span><span class="at">- rbinom( 1e4 , size=9 , prob=samples ) The symbol samples above is the same list of random samples from the posterior distribution that you-ve used in previous sections. For each sampled value, a random binomial observation is generated </span></span>
+<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now the simulated predictions appear less consistent with the data, as the majority of simulated observations have fewer switches than were observed in the actual sample. This is consistent with lack of independence between tosses of the globe, in which each toss is negatively correlated with the last. Does this mean that the model is bad? That depends </span></span>
+<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In the long run, even the wrong model we’ve used throughout the chapter converge on the correct proportion. But it will do so more slowly than the posterior distribution may lead us to believe. </span></span>
+<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; posterior predictive checks </span></span>
+<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; 3.3.2.2. Is the model adequate?</span></span>
+<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>DR: I.e., Does the model and its estimates predict a reasonable (sampled) distribution</span>
+<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>Multilevel models </span>
+<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; multilevel model. Multilevel models-also known as hierarchical, random effects, varying effects, or mixed effects models</span></span>
+<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Cross-validation and information criteria measure overfitting risk and help us to recognize it. Multilevel models actually do something about it. What they do is exploit an amazing trick known as partial pooling </span></span>
+<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a>Model comparison and prediction.</span>
+<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Bayesian data analysis provides a way for models to learn from data. But when there is more than one plausible model-and in most mature fields there should be-how should we choose among them? One answer is to prefer models that make good predictions. This answer creates a lot of new questions, since knowing which model will make the best predictions seems to require knowing the future. We'll look at two related tools, neither of which knows the future: cross-validation and information criteria</span></span>
+<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
