@@ -51,7 +51,7 @@ Note that much 'experiment and trial' relevant content is covered in the [survey
 
 This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.
 
-## Value of information, optimal trial design
+## Value of information, optimal trial design {#voi_trials}
 
 ### Why VOI instead of Power? {.unnumbered}
 

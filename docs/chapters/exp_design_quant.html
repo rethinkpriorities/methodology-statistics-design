@@ -210,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></a>
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">| include: false</span></a>
   </div>
 </li>
       </ul>
@@ -346,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul>
 </li>
   <li>
-<a href="#value-of-information-optimal-trial-design" id="toc-value-of-information-optimal-trial-design" class="nav-link" data-scroll-target="#value-of-information-optimal-trial-design"><span class="toc-section-number">7.5</span>  Value of information, optimal trial design</a>
+<a href="#voi_trials" id="toc-voi_trials" class="nav-link" data-scroll-target="#voi_trials"><span class="toc-section-number">7.5</span>  Value of information, optimal trial design</a>
   <ul class="collapse">
 <li><a href="#why-voi-instead-of-power" id="toc-why-voi-instead-of-power" class="nav-link" data-scroll-target="#why-voi-instead-of-power">Why VOI instead of Power?</a></li>
   <li><a href="#voi-and-optimal-design-and-inference-framework" id="toc-voi-and-optimal-design-and-inference-framework" class="nav-link" data-scroll-target="#voi-and-optimal-design-and-inference-framework">VOI and Optimal Design and inference: framework</a></li>
@@ -416,9 +416,9 @@ Some quantitative issues
 <section id="key-resources-and-explainers" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="key-resources-and-explainers">Key resources and explainers</h3>
 <!-- ('Curate link' tools we found useful) -->
 <p><a href="https://daaronr.github.io/metrics_discussion/power.html">Reinstein notes and code</a></p>
-<p><a href="power_analysis_framework_2.html">Power analysis discussion and workflow</a> section</p>
+<p><a href="#power-workflow">Power analysis discussion and workflow</a> section</p>
 <p>This is a proposal and tools for a ‘path to do’ power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it’s likely to also introduce a Bayesian approach.</p>
-</section></section><section id="value-of-information-optimal-trial-design" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="value-of-information-optimal-trial-design">
+</section></section><section id="voi_trials" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="voi_trials">
 <span class="header-section-number">7.5</span> Value of information, optimal trial design</h2>
 <section id="why-voi-instead-of-power" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="why-voi-instead-of-power">Why VOI instead of Power?</h3>
 <blockquote class="blockquote">
@@ -676,8 +676,8 @@ Ways to extend this
 <span>              <span class="st">"pageLength"</span> <span class="op">=</span> <span class="fl">12</span>, info <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 
-<div id="htmlwidget-70190b5848f6c4584bdb" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-70190b5848f6c4584bdb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11"],[20,20,20,20,20,100,100,100,100,1000,1000],["a","b","c","d","e","a","c","d","e","d","e"],[157,34,70,259,480,57,5,217,721,11,989],[15.7,3.4,7,25.9,48,5.7,0.5,21.7,72.1,1.1,98.9]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n_per_group<\/th>\n      <th>selected<\/th>\n      <th>n<\/th>\n      <th>pct<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-184c2ea8f2c833691c0a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-184c2ea8f2c833691c0a">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11"],[20,20,20,20,20,100,100,100,100,1000,1000],["a","b","c","d","e","a","c","d","e","d","e"],[157,34,70,259,480,57,5,217,721,11,989],[15.7,3.4,7,25.9,48,5.7,0.5,21.7,72.1,1.1,98.9]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>n_per_group<\/th>\n      <th>selected<\/th>\n      <th>n<\/th>\n      <th>pct<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":12,"info":false,"columnDefs":[{"className":"dt-right","targets":[1,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Above, we see that the larger the trial sample size, the more often the best message is chosen. Note that with the 20-observation trials, even the worst message (b) is sometimes chosen. With the 1000-observation trials the best message (e) is chosen nearly all the time in our simulations, with only an occasional choice of the second-best message (d).</p>
@@ -781,27 +781,27 @@ Ways to extend this
 <tbody>
 <tr>
 <td style="text-align:left;"> 100 </td>
-   <td style="text-align:right;"> 221,095 </td>
-   <td style="text-align:right;"> 190,752 </td>
-   <td style="text-align:right;"> 232,364 </td>
+   <td style="text-align:right;"> 221,189 </td>
+   <td style="text-align:right;"> 191,672 </td>
+   <td style="text-align:right;"> 232,402 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> 1000 </td>
-   <td style="text-align:right;"> 227,904 </td>
-   <td style="text-align:right;"> 222,716 </td>
-   <td style="text-align:right;"> 232,842 </td>
+   <td style="text-align:right;"> 227,767 </td>
+   <td style="text-align:right;"> 222,760 </td>
+   <td style="text-align:right;"> 232,800 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> 20 </td>
    <td style="text-align:right;"> 210,261 </td>
-   <td style="text-align:right;"> 169,872 </td>
-   <td style="text-align:right;"> 231,922 </td>
+   <td style="text-align:right;"> 169,990 </td>
+   <td style="text-align:right;"> 231,800 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> guess </td>
-   <td style="text-align:right;"> 190,632 </td>
-   <td style="text-align:right;"> 155,036 </td>
-   <td style="text-align:right;"> 229,802 </td>
+   <td style="text-align:right;"> 190,780 </td>
+   <td style="text-align:right;"> 154,640 </td>
+   <td style="text-align:right;"> 229,844 </td>
   </tr>
 </tbody>
 </table>
@@ -846,35 +846,35 @@ Ways to extend this
 <tbody>
 <tr>
 <td style="text-align:left;"> 100 </td>
-   <td style="text-align:right;"> 220,095 </td>
-   <td style="text-align:right;"> 12,453 </td>
-   <td style="text-align:right;"> 10,100 </td>
-   <td style="text-align:right;"> 189,752 </td>
-   <td style="text-align:right;"> 231,364 </td>
+   <td style="text-align:right;"> 220,189 </td>
+   <td style="text-align:right;"> 12,390 </td>
+   <td style="text-align:right;"> 10,010 </td>
+   <td style="text-align:right;"> 190,672 </td>
+   <td style="text-align:right;"> 231,402 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> 1000 </td>
-   <td style="text-align:right;"> 217,904 </td>
-   <td style="text-align:right;"> 3,683 </td>
-   <td style="text-align:right;"> 2,622 </td>
-   <td style="text-align:right;"> 212,716 </td>
-   <td style="text-align:right;"> 222,842 </td>
+   <td style="text-align:right;"> 217,767 </td>
+   <td style="text-align:right;"> 3,705 </td>
+   <td style="text-align:right;"> 2,574 </td>
+   <td style="text-align:right;"> 212,760 </td>
+   <td style="text-align:right;"> 222,800 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> 20 </td>
    <td style="text-align:right;"> 210,061 </td>
-   <td style="text-align:right;"> 20,905 </td>
-   <td style="text-align:right;"> 17,286 </td>
-   <td style="text-align:right;"> 169,672 </td>
-   <td style="text-align:right;"> 231,722 </td>
+   <td style="text-align:right;"> 20,918 </td>
+   <td style="text-align:right;"> 17,229 </td>
+   <td style="text-align:right;"> 169,790 </td>
+   <td style="text-align:right;"> 231,600 </td>
   </tr>
 <tr>
 <td style="text-align:left;"> guess </td>
-   <td style="text-align:right;"> 190,632 </td>
-   <td style="text-align:right;"> 25,484 </td>
-   <td style="text-align:right;"> 21,990 </td>
-   <td style="text-align:right;"> 155,036 </td>
-   <td style="text-align:right;"> 229,802 </td>
+   <td style="text-align:right;"> 190,780 </td>
+   <td style="text-align:right;"> 25,471 </td>
+   <td style="text-align:right;"> 21,929 </td>
+   <td style="text-align:right;"> 154,640 </td>
+   <td style="text-align:right;"> 229,844 </td>
   </tr>
 </tbody>
 </table>
@@ -1079,7 +1079,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/power_analysis_framework_2.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">| include: false</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1136,7 +1136,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>This is a proposal and tools for a 'path to do' power testing (by Jamie Elsey; David Reinstein will weigh in too). I think this first focuses on a frequentist approach, but it's likely to also introduce a Bayesian approach.</span>
 <span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Value of information, optimal trial design</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Value of information, optimal trial design {#voi_trials}</span></span>
 <span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### Why VOI instead of Power? {.unnumbered}</span></span>
 <span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a></span>

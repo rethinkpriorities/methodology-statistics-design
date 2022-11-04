@@ -1,8 +1,6 @@
-# Power analysis & workflow {#power-workflow}
-
+m# Power analysis & workflow {#power-workflow}
 [^power_analysis_framework_2-1]
-
-[^power_analysis_framework_2-1]: By Jamie Elsey, incorporating some comments and suggestions from David Reinstein.
+[^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.
 
 ```{r}
 #| include: false
@@ -11,12 +9,14 @@ library(here)
 
 # 1.  Load packages, some setup definitions -- need to run it in every qmd
 source(here("code", "methods_setup.R"))
+options(knitr.duplicate.label = "allow")
+
 
 ```
 
 ## Discussion and framework
 
-### Introduction and goals
+### Introduction and goals {-}
 
 We propose the fundamentals for a workflow for power analyses, beginning with a standard frequentist analysis.[^power_analysis_framework_2-2]
 [^power_analysis_framework_2-2]:  Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach. Starting frequentist will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this.
@@ -40,13 +40,12 @@ We will focus solely on 'simulation-based' power analysis,[^power_analysis_frame
 
 [^power_analysis_framework_2-4]: Essentially, we draw many hypothetical versions of a data set with certain properties under certain conditions, compute our estimates and tests, and tally 'how often' it yields certain results.
 
-### Definition of power
+### Definition of power {-}
 
-In frequentist null hypothesis significance testing (NHST), power is typically defined as 'the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true' (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.[^power_analysis_framework_2-5]
-
+In frequentist null hypothesis significance testing (NHST), power is typically defined as 'the probability that we can reject the null hypothesis, if the alternative hypothesis is indeed true' (i.e., power is the 'true positive rate'). More precisely, we may express this as 'power against a *particular* alternative hypothesis'.
 
 ::: {.callout-note collapse="true"}
-## From wikipedia: The statistical power of a binary hypothesis test...
+## Wikipedia: The statistical power of a binary hypothesis test...
 
 The statistical power of a binary hypothesis test is the probability that the test correctly rejects the null hypothesis $H_0$ when a specific alternative hypothesis $H_{1}$ is true. It is commonly denoted by $1-\beta$, and represents the chances of a "true positive" detection conditional on the actual existence of an effect to detect. ... as the power of a test increases, the probability $\beta$ of making a type II error by wrongly failing to reject the null hypothesis decreases.
 
@@ -56,15 +55,15 @@ The statistical power of a binary hypothesis test is the probability that the te
 ::: {.callout-note collapse="true"}
 ##  However some Bayesians question this
 
-Some Bayesian statisticians question the validity and usefulness of this presentation of power analysis. This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - 'the true parameter is fixed and the data varies'. 
+Some Bayesian statisticians question the validity and usefulness of this presentation of power analysis. This engages deep issues in the conception of probability. From the frequentist perspective you imagine a fixed underlying true parameter and consider the many data sets that might hypothetically arise from it - 'the true parameter is fixed and the data varies'.
 
 In Bayesian reasoning you note that you have 'uncertainty about the underlying parameter' but you consider the data as fixed. A Bayesian approach does not tend to consider 'the probability that the data arises in a particular way under a null hypothesis'; however 'Bayesian hypothesis testing' is discussed in the literature. (Presumably, it envisions 'rejecting a hypothesis' where the posterior probability that the hypothesis holds is sufficiently small).
 
 :::
 
-Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask: 
+Before we conduct an experiment (or run a survey, or collect data for an analysis), there are many hypothetical future data sets we might observe. Whether we favor a frequentist or Bayesian approach, it seems reasonable to ask:
 
-> Given the range of data that I might observe, how likely is it that I can make certain conclusions?. 
+> Given the range of data that I might observe, how likely is it that I can make certain conclusions?.
 
 [^power_analysis_framework_2-7]
 
@@ -74,7 +73,7 @@ Before we conduct an experiment (or run a survey, or collect data for an analysi
 
     Bayesian: 'the posterior distribution puts most of the probability mass on there being a difference between groups greater than (some moderate amount).'
 
-We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.  Given a particular underlying effect (or range of effects, or lack thereof), and a particular sample size (or range of sample sizes), we may ask 'what is the probability of'... ?:[^power_analysis_framework_2-8]
+We can broaden the idea of power to indicate the probability that our proposed sample yields information that allows us to make some specific kind of inference about the data-generating process.^[These are examples of 'diagnosands' in the terminology of the DeclareDesign package.] Given a particular underlying effect (or range of effects, or lack thereof), and a particular sample size (or range of sample sizes), we may ask 'what is the probability of'... ?:[^power_analysis_framework_2-8]
 
 [^power_analysis_framework_2-8]: Note that these could all be either Bayesian or frequentist, depending on how you specify your goals/inferences.
 
@@ -97,22 +96,22 @@ We can broaden the idea of power to indicate the probability that our proposed s
 [^power_analysis_framework_2-11]: This is sometimes called 'equivalence testing'. In Bayesian estimation, you can consider a 'range of practical equivalence' (ROPE). Here, if a large enough proportion of the posterior (of the difference between two groups, say) falls in this range, you conclude that 'to all intents and purposes these groups are equivalent.'
 
     \
-    
+
 ::: {.callout-note collapse="true"}
 ## 'Power of an equivalence test' (key aside)
 
-We may wish to estimate the 'likelihood that we will determine that the effect is in a near-zero range', when the true effect size is in fact zero or very small. This is called an 'equivalence test'; thus we may want to compute the 'power of an equivalence test for a particular distribution of true effect sizes'. I'll call the latter the 'equivalence distribution' for now.
+We may wish to estimate the 'likelihood that we will determine that the effect is in a near-zero range', when the true effect size is in fact zero or very small. This is called an 'equivalence test'; thus we may want to compute the 'power of an equivalence test given a particular distribution of true effect sizes'. I'll call the latter the 'equivalence distribution' for now.
 
 0. Determine the equivalence bounds of interest ... the lower and higher bounds of 'an effect close to zero'
-1. Determine *how* we wish to compute our equivalence test (e.g., the 'two one-sided t-tests' advocated by Lakens_ given these equivalence bounds
+1. Determine *how* we wish to compute our equivalence test (e.g., the 'two one-sided t-tests' advocated by Lakens) given these equivalence bounds
 2. Set the 'equivalence distribution'
-2. Simulate a large number of data sets arising under the equivalence distribution 
-3. Compute the equivalence test for each simulated data set. 
+2. Simulate a large number of data sets arising under the equivalence distribution. (DR: in practice I think this is often stated as an exact zero effect, but this might be naive.)
+3. Compute the equivalence test for each simulated data set.
 4. Count the share of these that 'determine the effect is near zero'. This share is the 'power of our equivalence test against the equivalence distribution'
 
-See: One code example of this [here](https://jg-sponsorship.netlify.app/chapters/power_calcs.html) using resampling from previous comparable data, password required (ask David Reinstein), search for the `equiv_data` function and its use in the code. 
+See: One code example of this [here](https://jg-sponsorship.netlify.app/chapters/power_calcs.html) using resampling from previous comparable data, password required (ask David Reinstein), search for the `equiv_data` function and its use in the code.
 
-::: 
+:::
 
 Hence, a power analysis helps frame our prospective research project in relation to the goals we would like to achieve.[^power_analysis_framework_2-12] It provides us with an estimate (and it is indeed an estimate, not a certainty!) of the probability that we will be able to make the inference we wish to make, given various factors both inside and outside of our control. (See discussion in fold.)
 
@@ -121,10 +120,10 @@ Hence, a power analysis helps frame our prospective research project in relation
 ::: {.callout-note collapse="true"}
 ## What is 'in our control'?
 
-We might think of sample size as *in* our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered *out* of our control ; however we can sometimes increase the 'dosage' we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.
+We might think of sample size as *in* our control, which it generally is, but this is typically limited by practical considerations outside of our control (such as the availability of a sample or financial constraints). Conversely, effect size is often considered *out* of our control; however we can sometimes increase the 'dosage' we give, or try to select a particular group of participants who might be particularly susceptible to our effect of interest.
 :::
 
-### General workflow for simulation-based power analysis
+### General workflow for simulation-based power analysis {-}
 
 *Simulation-based power analysis proceeds in four primary steps:*
 
@@ -152,21 +151,34 @@ E.g., we might simulate 1000 data sets based on an effect size of 0.3 standard d
 <!-- Feel free to add other examples here. -->
 :::
 
-This can show the likelihood of achieving a range of goals (under various sample sizes and design and testing choices) including the rates of *misleading* conclusions. In frequentist analyses, steps 2 and 3 can often be done together (e.g., the p-value is returned along with the other output). In my experience with typical Bayesian designs, these stages are best kept separate so that we can first do the more time-consuming Step 2, and then more freely explore the various options in Step 3.
+This can show the likelihood of achieving a range of goals (under various sample sizes and design and testing choices) including the rates of *misleading* conclusions. In frequentist analyses, steps 2 and 3 can often be done together (e.g., the p-value is returned along with the other output). In my experience (JE) with typical Bayesian designs, these stages are best kept separate so that we can first do the more time-consuming Step 2, and then more freely explore the various inference goals in Step 3.
 
 4.  **Assess the output** and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. If not, consider alternative design or data-collection choices (including sample sizes, treatments, and treatment assignments) or inference goals, and return to Step 1.[^power_analysis_framework_2-17]
 
 [^power_analysis_framework_2-17]: We don't refer to this as 'new ways of generating data' because... It seems wrong to first say, e.g., 'we assumed the a standard normal distribution of outcomes with a standard deviation equal to that observed in prior trials'... and then say 'but that didn't have enough power so let's assume a more concentrated distribution'. What we mean is to consider other ways of actually *collecting* data or setting up the experiment that would lead to a reasonable expectation of a different data generating process, and then simulate and diagnose this *new* approach. Note that DD seems to have good tools for comparing and considering design variations. Of course, there might also be a time to 'know when to fold-em'.
+
+::: {.callout-note collapse="true"}
+## Computing and optimizing across a design space
+
+Typically, we are doing this exercise to diagnose the "best design" given our constraints^[Or assess the cost/benefit of relaxing these constraints; again see the [Value of Information](#voi_trials)], or to consider whether *any* trial is worth doing at all. The procedure above diagnoses a *particular* design, and it could be iterated across a range of designs until you find the reasonably best one. However, you may be able to assess a range of designs at once with a cleverly coded set of simulations. Even in the exercise below, When you run simulations for a "large" sample size, you will be able to also compute the power and other diagnosands for a *smaller* sample size. More generally, you may want to 1. Defined the space of designs you wish to explore, and 2. ask your code to produce simulations for all of these at the same time, 3. compute and display the power (etc.) across this space of designs, and finally 4. search this space for the 'best' design by some criterion. (DR: I'm working onthis approach [here](https://jg-sponsorship.netlify.app/chapters/power_calcs.html#power-calc-standard), ask me for the password.)
+
+::: 
 
 In the following sections, we present some generally useful packages and functions for power analyses. We give annotated code examples, highlighting useful aspects. We do this in the context of a frequentist power analysis for between-groups analysis.[^power_analysis_framework_2-18]
 
 [^power_analysis_framework_2-18]: We give this example is primarily because between-groups (aka 'between-subject') analyses run much more quickly than within- subjects analyses. Thus, these can be run without a time wasting headache on your own computer! We hope to add (and link or connect) further examples of common designs in future.
 
 [^power_analysis_framework_2-19]
-
 [^power_analysis_framework_2-19]: Willem has some nice procedures for generating repeated-measures data in [his walkthrough](https://willemsleegers.com/content/posts/9-simulation-based-power-analyses/simulation-based-power-analyses.html), see also his ['power curves'](https://willemsleegers.com/content/posts/10-simulation-based-power-curves/simulation-based-power-curves.html) using the library MASS.
 
-### Possible pitfalls/misunderstandings of power analysis
+::: {.callout-note collapse="true"}
+## 'But I want to know what *size* affect I have power to detect?'
+
+Instead of computing the power to detect in effect of a certain size, it can sometimes be more informative to understand the 'smallest effect size you have a certain (e.g., 80%) power to detect. This is called 'inverting the calculation'. My impression (DR) is that this is more difficult To-do through simulation, although some packages do offer this option.
+
+::: 
+
+### Possible pitfalls/misunderstandings of power analysis {-}
 
 Power analyses are a useful tool for considering the basic plausibility of achieving certain goals. But they are not an 'omniscient oracle', and may be somewhat of a blunt instrument. They might better be termed 'power projections' or 'power estimates'. Even if we *estimate* that we have 99.9% power for detecting some a particular effect, we may have specified our simulations in an unrealistic way. When we actually run an experiment, we might see (e.g.) far more underlying variation or measurement error than we predicted, leading our analyses to be fairly uninformative. Conversely, we might be overly conservative with our power analysis; perhaps a design we thought was 'underpowered' actually has a high probability of producing very compelling results.
 
@@ -184,9 +196,22 @@ When we see real data and real interesting patterns emerge, we are likely to go 
 We might want to give some consideration to how far we wish to go in the initial data simulation step to think about all sorts of hypothetical data sets. As models become more complex, the number of different parameters that might vary - with possible effects on power - starts to balloon. E.g., even in a simple repeated-measures example, do we wish to vary not only the effect size but all sorts of different correlations from pre- to post-treatment within subjects? If we are simulating ordinal data, then power might change depending on how we initially suggest binning the outcomes, but there are infinitely many ways we might think the data might look... Discussion and consideration of how far we should go with these things is welcome and could be useful! (DR: I'm not sure what you are getting at here. Are you saying that 'the space of designs and proposed analyses we can explore is extremely large, and we may need to make some ad-hoc choices to avoid this getting unmanageable'?)
 :::
 
+::: {.callout-note collapse="true"}
+## What 'effect size'? Not 'the effect size you are seeing so far'
+
+To do a single power calculation you have to specify an effect size (or a distribution). What effect size should you choose? 
+
+Researchers have been known to collect a small amount of data and measure the area of fact they seem to be observing, and then use this for their power calculations.  IMHO (DR) this is misguided. The effect size you compute in a small sample clearly may not be the true effect size (otherwise what's the point in doing statistical inference?). Even if this is the most likely effect size it does not justify why you would want to design your experiment to have the right amount of power to detect this particular sized effect.
+
+Another approach is to power it based on the 'smallest effect size of interest'  (SESOI) and there is some discussion of this in the methods literature.  This might be interpreted based on the notion that if we are powered to detect such a small effect size and we failed to detect it we might say 'ok there is no meaningful effect'. But this is not quite right; to make such statistical conclusions you would have to do an *equivalence test*, and thus you would focus your power calculation on that.  Perhaps a better justification for targeting a SESOI is based on a loose 'value of information approach': we should use our funds to detect 'interesting effects'; if any effect is below this, it's not worth spending the money to detect. But this just pushes the question backwards, and forces us to consider the cost and benefits of collecting data.
+
+We discussed the explicit 'value of information' (VOI) calculation for trial design [here](#voi_trials).
+
+::: 
+
 ## Concrete implementation of framework
 
-### Step 1: Generate a large number of data sets for the analysis
+### Step 1: Generate a large number of data sets for the analysis {-}
 
 #### Confirm that we can generate the basic data we want {.unnumbered}
 
@@ -194,7 +219,7 @@ In many simulations we end up generating some rather large data files: thus, we 
 
 [^power_analysis_framework_2-20]: I don't believe there is any real cost to increasing this memory limit, so it is wise to do so as to avoid a function iterating many times over for a long time, but ending up without sufficient space to store the outcome. DR: There must be some cost, otherwise why wouldn't it be a default? I guess it depends on the system/hardware.
 
-```{r change-memory-limit, message = FALSE, warning = FALSE, echo=FALSE}
+```{r change-memory-limit0, message = FALSE, warning = FALSE, echo=FALSE}
 
 memory.limit(100000)
 
@@ -333,17 +358,18 @@ Now, we have 500 simulated data sets representing our hypothetical outcome data,
 head(sim.data[[3]])
 ```
 
-### Step 2: Run the proposed analysis over the many data sets and return the estimands of interest
+### Step 2: Run the proposed analysis over the many data sets and return the estimands of interest {-}
 
-Before we run an analysis over the many simulated data sets, we should to check that our models can run on these, and that they will return the estimands we are looking for. For a Bayesian analysis, this step might involve dropping parts of the posterior that are not relevant[^power_analysis_framework_2-26] and ensuring we get the parts we care about (e.g., we might insert additional code to retrieve a posterior distribution for Cohen's d).[^power_analysis_framework_2-27]
+Before we run an analysis over the many simulated data sets, we should to check that our models can run on these, and that they will return the estimands we are looking for. 
 
-[^power_analysis_framework_2-26]: e.g., estimates of every participant intercept, which take too much space for what they are worth
+::: {.callout-note collapse="true"}
+## For a Bayesian analysis
 
-[^power_analysis_framework_2-27]: ...Or simply the parameter estimate for the interaction. (DR: what interaction?) For Bayesian analyses I err on the side of getting as many of the main parameters as possible, because this is a very time-consuming step.
+For a Bayesian analysis, this step might involve dropping parts of the posterior that are not relevant^[e.g., estimates of every participant intercept, which take too much space for what they are worth] and ensuring we get the parts we care about (e.g., we might insert additional code to retrieve a posterior distribution for Cohen's d).^[...Or simply the parameter estimate for the interaction. (DR: what interaction?) For Bayesian analyses I err on the side of getting as many of the main parameters as possible, because this is a very time-consuming step.]
 
-For frequentist analyses, there are also a range of estimands we might care about, depending on our estimation and inference goals. For example, we might consider returning a p-value, or the upper and lower bounds for confidence intervals, or r-squared estimates, etc.
+:::
 
-The key point: before you drop the large set of simulated data sets and the regression results for each, make sure you every estimated that might be of interest; you don't want to have to to re-run the entire analysis.
+There are a range of estimands we might care about, depending on our estimation and inference goals. For example, we might consider returning a p-value, or the upper and lower bounds for confidence intervals, or R-squared estimates, etc. *The key point:* before you drop the large set of simulated data sets and the regression results for each, make sure you every estimated that might be of interest; you don't want to have to to re-run the entire analysis.
 
 In addition, you want to run the analysis on different sample sizes of the data, to generate a *power curve plot*. I.e., a plot showing how your power increases as you increase the sample size.
 
@@ -427,7 +453,7 @@ t2 - t1
 
 The object `linreg.output` is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.
 
-### Step 3: Summarise the output returned in Step 2 to determine the likelihood of achieving various inferential goals
+### Step 3: Summarise the output returned in Step 2 to determine the likelihood of achieving various inferential goals {-}
 
 Now, we want to know how likely we are to achieve a range of inferential goals, depending on factors such as the sample size, the underlying effect sizes, or anything else we varied in simulating our data and running our models. For this example, this is as simple as generating a summary of the output from Step 2... ^[The code below groups the results by group (effect size), confidence interval, and sample size, summarizes the 'share of CI's that don't overlap zero, and cleans things a bit.]
 
@@ -478,8 +504,18 @@ power_curve_4_group_lin <- ggplot(data = four.group.lin.summary) +
 
 ```
 
-### Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results.
+### Step 4. Assess the output and determine whether the proposed analyses and inference goals are realistic and likely to yield informative results. {-}
 
 In Step 4, we use the information we have generated above to make substantive conclusions about the projected power of our experiment to detect particular effects, given particular underlying parameters. From this we can make recommendations as to experimental design.
 
 Based on the power curve plotted above, we can conclude that we would have a very high likelihood of detecting effects of .4 versus a control group at even quite low sample sizes, and also a good possibility of detecting effect sizes of .2 at quite modest sample sizes. On the other hand, for the very small effect size, we would not be likely to detect a difference from a control group even with 1500 participants per group. If effect sizes of this sizes are of interest, then we might consider going back to Step 1 and reconsidering our experimental design to include more participants.
+
+
+```{r}
+#| label: output_r_file_with_purl_power_anal
+#| code-summary: "output_r_file_with_purl"
+#| include: false
+
+knitr::purl(here("chapters", "power_analysis_framework_2.qmd"), here("chapters", "power_analysis_framework_2.R"))
+
+```

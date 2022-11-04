@@ -2,7 +2,6 @@
 
 'Predict the influence of discrete events' (and more) on web traffic, signups, etc
 
-
 ### The case at hand  (broad terms)
 
 Modeling what drives/effects/predicts ...
