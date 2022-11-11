@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.113">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RP: Methods - 8&nbsp; Discussion and framework</title>
+<title>RP: Methods - 8&nbsp; Power analysis &amp; workflow</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,9 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Discussion and framework</span>
-</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -207,7 +205,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">| include: false</span></a>
+  <a href="../chapters/power_analysis_framework_2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></a>
   </div>
 </li>
       </ul>
@@ -307,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/3_sampling_the_imaginary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Chapter 3. Sampling the Imaginary (posterior)</span></a>
+  <a href="../chapters/3_sampling_the_imaginary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ch 3. Sampling the Imaginary (posterior)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -323,12 +321,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction-and-goals" id="toc-introduction-and-goals" class="nav-link active" data-scroll-target="#introduction-and-goals">Introduction and goals</a></li>
+<li>
+<a href="#discussion-and-framework" id="toc-discussion-and-framework" class="nav-link active" data-scroll-target="#discussion-and-framework"><span class="toc-section-number">8.1</span>  Discussion and framework</a>
+  <ul class="collapse">
+<li><a href="#introduction-and-goals" id="toc-introduction-and-goals" class="nav-link" data-scroll-target="#introduction-and-goals">Introduction and goals</a></li>
   <li><a href="#definition-of-power" id="toc-definition-of-power" class="nav-link" data-scroll-target="#definition-of-power">Definition of power</a></li>
   <li><a href="#general-workflow-for-simulation-based-power-analysis" id="toc-general-workflow-for-simulation-based-power-analysis" class="nav-link" data-scroll-target="#general-workflow-for-simulation-based-power-analysis">General workflow for simulation-based power analysis</a></li>
   <li><a href="#possible-pitfallsmisunderstandings-of-power-analysis" id="toc-possible-pitfallsmisunderstandings-of-power-analysis" class="nav-link" data-scroll-target="#possible-pitfallsmisunderstandings-of-power-analysis">Possible pitfalls/misunderstandings of power analysis</a></li>
+  </ul>
+</li>
   <li>
-<a href="#concrete-implementation-of-framework" id="toc-concrete-implementation-of-framework" class="nav-link" data-scroll-target="#concrete-implementation-of-framework"><span class="toc-section-number">8.1</span>  Concrete implementation of framework</a>
+<a href="#concrete-implementation-of-framework" id="toc-concrete-implementation-of-framework" class="nav-link" data-scroll-target="#concrete-implementation-of-framework"><span class="toc-section-number">8.2</span>  Concrete implementation of framework</a>
   <ul class="collapse">
 <li><a href="#step-1-generate-a-large-number-of-data-sets-for-the-analysis" id="toc-step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="nav-link" data-scroll-target="#step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</a></li>
   <li><a href="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" id="toc-step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest" class="nav-link" data-scroll-target="#step-2-run-the-proposed-analysis-over-the-many-data-sets-and-return-the-estimands-of-interest">Step 2: Run the proposed analysis over the many data sets and return the estimands of interest</a></li>
@@ -340,9 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">
-<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Discussion and framework</span>
-</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span id="power-workflow" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Power analysis &amp; workflow</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -354,7 +355,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>m# Power analysis &amp; workflow {#power-workflow} [^power_analysis_framework_2-1] [^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.</p>
+</header><p>[^power_analysis_framework_2-1] [^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.</p>
+<section id="discussion-and-framework" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="discussion-and-framework">
+<span class="header-section-number">8.1</span> Discussion and framework</h2>
 <section id="introduction-and-goals" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="introduction-and-goals">Introduction and goals</h3>
 <p>We propose the fundamentals for a workflow for power analyses, beginning with a standard frequentist analysis.[^power_analysis_framework_2-2] [^power_analysis_framework_2-2]: Although this started from a Bayesian paradigm, the overarching framework is applicable to any analytic approach. Starting frequentist will make the code easier to run as well. Note that as Bayesian power analyses can be very time consuming (at the moment/with our current setup), in some cases even if you ultimately might perform a Bayesian analysis, it may make some sense to run frequentist approaches first. In many cases the estimates from Bayesian and frequentist approaches will tend to converge. I (Jamie) suspect general estimates from frequentist approaches would be quite similar to those of Bayesian approaches, if the goal of the analysis (what you want to make an inference about) is the same. I will make an accompanying document with an example of a Bayesian power analysis that should be computationally feasible to accompany this. The general approach laid out here can be the basis for developing and build a library of common analyses and inference goals.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
@@ -596,8 +599,8 @@ What ‘effect size’? Not ‘the effect size you are seeing so far’
 </div>
 </div>
 </div>
-</section><section id="concrete-implementation-of-framework" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="concrete-implementation-of-framework">
-<span class="header-section-number">8.1</span> Concrete implementation of framework</h2>
+</section></section><section id="concrete-implementation-of-framework" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="concrete-implementation-of-framework">
+<span class="header-section-number">8.2</span> Concrete implementation of framework</h2>
 <section id="step-1-generate-a-large-number-of-data-sets-for-the-analysis" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="step-1-generate-a-large-number-of-data-sets-for-the-analysis">Step 1: Generate a large number of data sets for the analysis</h3>
 <section id="confirm-that-we-can-generate-the-basic-data-we-want" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="confirm-that-we-can-generate-the-basic-data-we-want">Confirm that we can generate the basic data we want</h4>
 <p>In many simulations we end up generating some rather large data files: thus, we first increase the memory limit allotted to R.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></p>
@@ -866,7 +869,7 @@ For a Bayesian analysis
 <span><span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 17.46804 secs</code></pre>
+<pre><code>Time difference of 12.76182 secs</code></pre>
 </div>
 </div>
 <p>The object <code>linreg.output</code> is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
@@ -1124,7 +1127,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m# Power analysis &amp; workflow {#power-workflow}</span>
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Power analysis &amp; workflow {#power-workflow}</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[^power_analysis_framework_2-1]</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^power_analysis_framework_2-1]: </span>By Jamie Elsey, adapted and extended by David Reinstein.</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>

@@ -1,4 +1,4 @@
-# Chapter 3. Sampling the Imaginary (posterior) {#mcelreath_ch3}
+# Ch 3. Sampling the Imaginary (posterior) {#mcelreath_ch3}
 
 
 

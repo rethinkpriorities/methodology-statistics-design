@@ -1,4 +1,4 @@
-m# Power analysis & workflow {#power-workflow}
+# Power analysis & workflow {#power-workflow}
 [^power_analysis_framework_2-1]
 [^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.
 
