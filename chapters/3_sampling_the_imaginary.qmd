@@ -3,6 +3,9 @@
 
 
 ```{r}
+#| label: packages
+#| code-summary: "packages"
+
 library(pacman)
 p_load(dplyr, magrittr, ggplot2, stringr, tidyr, install = FALSE)
 ```
@@ -110,7 +113,7 @@ glimpse(samples)
 
 Next we plot the samples.
 
-*DR: I played around with this. Rather than getting the arbitrary zigzag, I first sort by probability of water (`p_grid`). This yields a smooth curve, where a shallower line and greater horizontal distance means 'more samples in this area'.
+> *DR:* I played around with this. Rather than getting the arbitrary zigzag, I first sort by probability of water (`p_grid`). This yields a smooth curve, where a shallower line and greater horizontal distance means 'more samples in this area'.
 
 ```{r, fig.width = 3.5, fig.height = 3}
 #| label: numbersamples
@@ -135,10 +138,7 @@ samples %>%
   scale_x_continuous("proportion of water (p)", limits = c(0, 1))
 ```
 
-::: 
-
 It's a bit lumpy because 10k samples isn't enough. But I won't bother with the larger number of samples here.
-
 
 
 ## 3.2. Sampling to summarize
@@ -165,7 +165,6 @@ At least with 1 dimensional data, it's easy to ask and answer very specific ques
 
 > Suppose I ask you for the posterior probability that the proportion of water is less than 0.5.
 
-
 *Here*, you could do this simply from the grid approximation *calculation*
 
 ^[Kurz: "To get the proportion of water less than some value of `p_grid` within the tidyverse, you might first `filter()` by that value and then take the `sum()` within `summarise()`."]
@@ -177,7 +176,7 @@ d %>%
 ```
 
 
-However: grid approximation isn't used much
+However: grid approximation isn't used much.
 
 > since grid approximation isn't practical in general, it won't always be so easy. Once there is more than one parameter in the posterior distribution
 
@@ -227,12 +226,38 @@ We can do similar for intervals (skipped here)
 
 ### Intervals of defined mass {-}
 
+We update to consider a base of '3 successes in 3 trials', to contrast HPDI from the 'percentile intervals' (and similar for point estimates). 
+
+DR: This is a pretty interesting case. I often am presented with 'a small amount of data all going in one direction' (e.g., 'of the 4 people who clicked on the web site, all chose the medium-level donation pledge') and want to consider what inferences I can make about the population -- for decision-relevant purposes. 
+
+
+```{r}
+# here we update the `dbinom()` parameters
+n_success <- 3
+n_trials  <- 3
+
+# update `d`
+d <-
+  d %>% 
+  mutate(likelihood = dbinom(n_success, size = n_trials, prob = p_grid)) %>% 
+  mutate(posterior  = (likelihood * prior) / sum(posterior))
+
+# make the next part reproducible
+set.seed(3)
+
+# here's our new samples tibble
+  samples <-
+    d %>% 
+    sample_n(size = n_samples, weight = posterior, replace = T)
+```
+
+
 **Percentile intervals (PI)** "assign equal probability mass to each tail ..."  
 
 
 > But in this example, it ends up excluding the most probable parameter values, near p = 1. So in terms of describing the shape of the posterior distribution-which is really all these intervals are asked to do---the percentile interval can be misleading. 
 
-**highest posterior density interval (HPDI)**: "the narrowest interval containing the specified probability mass"
+**Highest posterior density interval (HPDI)**: "the narrowest interval containing the specified probability mass"
 
 > right-hand plot in Figure 3.3 displays the 50% HPDI is 
 
@@ -255,36 +280,258 @@ We can do similar for intervals (skipped here)
 
 Kurz plots these intervals for our example, but the code he uses first is simply taking an arbitrary part of the computed distribution, not calculating anything. I'll skip it. 
 
-DR: Hmmm, how is HPDI computed? ... I assume it iterates over intervals, draws observations from within this interval from the posterior sample and sums the probability mass until it settles on the 'best one'?
+::: callout-note
+## DR question: 
+How is HPDI computed? ... I assume it iterates over intervals, draws observations from within this interval from the posterior sample and sums the probability mass until it settles on the 'best one'?
+:::
+
+::: {.callout-note collapse="true"}
+## Bringing in the `tidybayes` package
+
+> Matthew Kay's [tidybayes package](https://mjskay.github.io/tidybayes/), ...  offers an [array of convenience functions](https://cran.r-project.org/package=tidybayes/vignettes/tidy-brms.html) for summarizing Bayesian models 
+
+DR: these functions seem useful even outside of Bayesian work. 
+
+
+```{r, message = F, warning = F}
+library(tidybayes)
+
+median_qi(samples$p_grid, .width = .5)
+```
+
+>  With `.width = .5`, we indicated we wanted a quantile-based 50% interval, which was returned in the `ymin` and `ymax` columns. The tidybayes framework makes it easy to request multiple types of intervals. E.g., here we'll request 50%, 80%, and 99% intervals.
+
+```{r}
+median_qi(samples$p_grid, .width = c(.5, .8, .99))
+```
+
+The `.width` column in the output indexed which line presented which interval. The value in the `y` column remained constant across rows. That's because that column listed the measure of central tendency, the median in this case.
+
+
+::: 
 
 ### 3.2.3. Point estimates {-}
 
-> Given the entire posterior distribution, what value should you report? 
-> The Bayesian parameter estimate is precisely the entire posterior distribution 
 
+> We've been calling point estimates measures of central tendency. If we `arrange()` our `d` tibble in descending order by `posterior`, we'll see the corresponding `p_grid` value for its MAP estimate.
+
+```{r}
+d %>%
+  arrange(desc(posterior))
+```
+
+
+
+We can get the mode with `mode_hdi()` or `mode_qi()`.
+
+
+
+```{r, warning = F}
+
+samples %>% mode_hdi(p_grid)
+samples %>% mode_qi(p_grid)
+```
+
+
+*DR: I'm confused. What is the 'mode of the HDI" and why is it not place with the 'maximum posterior likelihood'?
+
+
+> Given the entire posterior distribution, what value should you report? ,...
+> The Bayesian parameter estimate is precisely the entire posterior distribution ...
 > it is very common for scientists to report the parameter value with highest posterior probability, a maximum a posteriori (MAP) estimate 
+> Why not report the posterior mean or median? ...
 
-> Why not report the posterior mean or median? 
 
-> repeating this calculation for every possible decision, using 
 
 
 **Loss functions: very cool!**
 
 > One principled way to go beyond using the entire posterior as the estimate is to choose a loss function. A loss function is a rule that tells you the cost associated with using any particular point estimate. While statisticians and game theorists have long been interested in loss functions, and how Bayesian inference supports them, scientists hardly ever use them explicitly. The key insight is that different loss functions imply different point estimates.
 
-> loss \<- sapply( p_grid , function(d) sum( posterior\*abs( d - p_grid ) ) ) 
+>  [something something computing the value after each decision a policymaker coudl make] ... repeating this calculation for every possible decision, using 
 
-> p_grid\[ which.min(loss) \] 
+
+Three types of point estimates (Kurz code) 
+
+```{r, warning = F}
+(
+  point_estimates <-
+  bind_rows(samples %>% mean_qi(p_grid),
+            samples %>% median_qi(p_grid),
+            samples %>% mode_qi(p_grid)) %>% 
+  select(p_grid, .point) %>% 
+  # these last two columns will help us annotate  
+  mutate(x = p_grid + c(-.03, .03, -.03),
+         y = c(.1, .25, .4))
+)
+```
+
+
+```{r, fig.width = 3.5, fig.height = 3}
+#| label: plotting_3_point_ests
+#| code-summary: "Kurz code: plotting 3 point estimates against posterior"
+ 
+
+d %>% 
+  ggplot(aes(x = p_grid)) +
+  geom_ribbon(aes(ymin = 0, ymax = posterior),
+              fill = "grey75") +
+  geom_vline(xintercept = point_estimates$p_grid) +
+  geom_text(data = point_estimates,
+            aes(x = x, y = y, label = .point),
+            angle = 90) +
+  labs(x = "proportion of water (p)",
+       y = "density") +
+  theme(panel.grid = element_blank())
+```
+
+McElreath:
 
 > Different loss functions nominate different point estimates. The two most common examples are the absolute loss as above, which leads to the median as the point estimate, and the quadratic loss (d - p) 2 , which leads to the posterior mean (mean(samples)) as the point estimate 
 
+Kurz:
 
-> Therefore the implied loss function is highly asymmetric, rising sharply as true wind speed exceeds our guess, but rising only slowly as
+> Let $p$ be the proportion of the Earth covered by water and $d$ be our guess. If McElreath pays us \$100 if we guess exactly right but subtracts money from the prize proportional to how far off we are, then our loss is proportional to $p - d$. If we decide $d = .5$, then our expected loss will be:
 
-> true wind speed falls below our guess. In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to
+```{r}
+#| label: loss_guess_half
+#| code-summary: "los if you guess half"
+ 
+d %>% 
+  mutate(loss = posterior * abs(0.5 - p_grid)) %>% 
+  summarise(`expected loss` = sum(loss))
+```
 
-> order an evacuation. Producing a point estimate of wind speed may not be necessary at all.
+This is  a simple expected value calculation over the grid of values. The code above computes the 'loss at each true value' multiplied by the 'posterior probability of that value' and sums these for all possible values.\
+
+
+Next we map (using `purrr::map`) and plot the loss function over essentially the full range of possible guesses.^[DR: If I had time I would prefer to adjust this to have a dataframe argument for slightly better coding practice, rather than 'hard coding in' the name of the data frame. Also not sure I would want to specify particular names of columns in the function itself.]
+
+
+
+```{r}
+#| label: abs_loss_function_and_mapping
+#| code-summary: "code: XXX"
+ 
+
+#a function of a 'bayes output data frame' that does the above computation for a *particular decision* `our_d`
+make_loss <- function(our_d){
+  d %>% 
+  mutate(loss = posterior * abs(our_d - p_grid)) %>% 
+  summarise(weighted_average_loss = sum(loss))
+}
+
+
+#mapping the above function over every element of the 'grid of possible choices' (which need to be in that data set of a particular format)
+
+(
+  l <-
+  d %>% 
+  select(p_grid) %>% 
+  rename(decision = p_grid) %>% #extract probability grid, label it as 'decision' to consider all possible decisions
+  mutate(weighted_average_loss = purrr::map(decision, make_loss)) %>%  
+    #wow, a map *inside* a mutate; not sure I understand the syntax of that. I guess `decision` on the previous line knows to refer to that particular column of the tibble we are 'currently working with', and creates a new column mapping each of these into the function `make_loss`
+    #for all 
+  unnest() %>% #'purr' gives us a weird list, even within mutates? so you need to expand these lists I guess
+    arrange(weighted_average_loss)
+)
+
+```
+
+Note I (DR) arranged the output tibble by the expected loss, from lowest to highest.
+
+
+*Plotting this:*
+
+```{r, fig.width = 3.5, fig.height = 3}
+# this will help us find the x and y coordinates for the minimum value
+
+# First find the minimum loss point, keeping both the guess and the loss
+min_loss <-
+  l %>% 
+  filter(weighted_average_loss == min(weighted_average_loss)) %>% 
+  as.numeric()
+
+# the plot
+l %>%   
+  ggplot(aes(x = decision, y = weighted_average_loss)) + 
+  #Kurz left out that second argument. I guess ggplot 'knows' to use the remaining column as the y feature?
+  geom_ribbon(aes(ymin = 0, ymax = weighted_average_loss), 
+              fill = "grey75") +
+  # Adding lines at that minimum loss point
+  geom_vline(xintercept = min_loss[1], color = "white", linetype = 3) +
+  geom_hline(yintercept = min_loss[2], color = "white", linetype = 3) +
+  ylab("expected proportional loss") +
+  theme(panel.grid = element_blank())
+```
+'Absolute value loss functions $\rightarrow$ the median is the best prediction' 
+
+We saved the exact minimum value as `min_loss[1]`, which is `r min_loss[1]`. Within sampling error, this is the posterior median as depicted by our `samples`.
+
+```{r}
+samples %>% 
+  summarise(posterior_median = median(p_grid))
+```
+
+
+*'Minimize a quadratic loss function by guessing the mean'* 
+
+
+^[DR: I prefer to make a 'new loss function' rather than amend it.]
+
+```{r, fig.width = 3.5, fig.height = 3}
+# DR: new  loss function
+make_loss_q <- function(our_d) {
+  d %>% 
+    mutate(loss = posterior * (our_d - p_grid)^2) %>% 
+    summarise(weighted_average_loss = sum(loss))
+}
+
+# remake our `l` data (DR: maybe better to add this on to the previous one?)
+l_q <-
+  d %>% 
+  select(p_grid) %>% 
+  rename(decision = p_grid) %>% 
+  mutate(weighted_average_loss = purrr::map(decision, make_loss_q)) %>% 
+  unnest(weighted_average_loss)
+
+# new minimum loss coordinates
+min_loss_q <-
+  l_q %>% 
+  filter(weighted_average_loss == min(weighted_average_loss)) %>% 
+  as.numeric()
+
+# update the plot
+l_q %>%   
+  ggplot(aes(x = decision)) +
+  geom_ribbon(aes(ymin = 0, ymax = weighted_average_loss),
+              fill = "grey75") +
+  geom_vline(xintercept = min_loss_q[1], color = "white", linetype = 3) +
+  geom_hline(yintercept = min_loss_q[2], color = "white", linetype = 3) +
+  ylab("expected proportional loss") +
+  theme(panel.grid = element_blank())
+```
+
+
+\
+
+
+Based on quadratic loss $(d - p)^2$, the exact minimum value is `r min_loss[1]`. Within sampling error, this is the posterior mean of our `samples`.
+
+```{r}
+samples %>% 
+  summarise(posterior_mean = mean(p_grid))
+```
+
+
+\
+
+
+
+
+**More interesting points from McElreath** 
+
+> Therefore the implied loss function is highly asymmetric, rising sharply as true wind speed exceeds our guess, but rising only slowly as  true wind speed falls below our guess. In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to order an evacuation. Producing a point estimate of wind speed may not be necessary at all.
 
 > In this context, the optimal point estimate would tend to be larger than posterior mean or median. Moreover, the real issue is whether or not to order an evacuation. Producing a point estimate of wind speed may not be necessary at all.\
 
@@ -292,9 +539,9 @@ DR: Reinforcement learning could be better still?
 
 
 
-
-
 > You might argue that the decision to make is whether or not to accept an hypothesis. But the challenge then is to say what the relevant costs and benefits would be, in terms of the knowledge gained or lost
+
+DR: Yeah, 'accept a hypothesis' seems weird  framed this way. Maybe it needs steelmanning.
 
 > Usually it's better to communicate as much as you can about the posterior distribution, as well as the data and the model itself, so that others can build upon your work 
 

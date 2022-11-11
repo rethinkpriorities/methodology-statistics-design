@@ -1,4 +1,4 @@
-# 3: Sampling the Imaginary (posterior) {#mcelreath_ch3}
+# 3: Sampling the Imaginary (posterior) {-#mcelreath_ch3}
 
 > This chapter teaches you basic skills for working with samples from the posterior distribution. 
 
