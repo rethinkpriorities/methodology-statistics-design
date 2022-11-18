@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.113">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>RP: Methods - 23&nbsp; Ch 5. The Many Variables &amp; The Spurious Waffles</title>
+<title>RP: Methods - 24&nbsp; Ch 5. The Many Variables &amp; The Spurious Waffles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/3_sampling_the_imaginary.html" rel="prev">
+<link href="../chapters/4_geocentric_linear_models.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -309,7 +309,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
+  <a href="../chapters/4_geocentric_linear_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Chapter 4. Geocentric (linear) Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/5_spurious_waffles.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></a>
   </div>
 </li>
       </ul>
@@ -321,17 +326,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
 <li>
-<a href="#spurious-association" id="toc-spurious-association" class="nav-link active" data-scroll-target="#spurious-association"><span class="toc-section-number">23.1</span>  5.1. Spurious association</a>
+<a href="#spurious-association" id="toc-spurious-association" class="nav-link active" data-scroll-target="#spurious-association"><span class="toc-section-number">24.1</span>  5.1. Spurious association</a>
   <ul class="collapse">
-<li><a href="#multiple-regression-notation" id="toc-multiple-regression-notation" class="nav-link" data-scroll-target="#multiple-regression-notation"><span class="toc-section-number">23.1.1</span>  5.1.3. Multiple regression notation</a></li>
-  <li><a href="#plotting-multivariate-posteriors." id="toc-plotting-multivariate-posteriors." class="nav-link" data-scroll-target="#plotting-multivariate-posteriors."><span class="toc-section-number">23.1.2</span>  5.1.5. Plotting multivariate posteriors.</a></li>
+<li><a href="#multiple-regression-notation" id="toc-multiple-regression-notation" class="nav-link" data-scroll-target="#multiple-regression-notation"><span class="toc-section-number">24.1.1</span>  5.1.3. Multiple regression notation</a></li>
+  <li><a href="#plotting-multivariate-posteriors." id="toc-plotting-multivariate-posteriors." class="nav-link" data-scroll-target="#plotting-multivariate-posteriors."><span class="toc-section-number">24.1.2</span>  5.1.5. Plotting multivariate posteriors.</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/5_spurious_waffles.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span id="mcelreath_ch5" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span id="mcelreath_ch5" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Ch 5. The Many Variables &amp; The Spurious Waffles</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -347,8 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Reasons given for multiple regression models include: (1) Statistical -control” for confounds</p>
 </blockquote>
 <p>DR: but endogenous controls can make this problem worse</p>
-<section id="spurious-association" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="spurious-association">
-<span class="header-section-number">23.1</span> 5.1. Spurious association</h2>
+<section id="spurious-association" class="level2" data-number="24.1"><h2 data-number="24.1" class="anchored" data-anchor-id="spurious-association">
+<span class="header-section-number">24.1</span> 5.1. Spurious association</h2>
 <blockquote class="blockquote">
 <p>But there’s no reason high marriage rate must cause more divorce</p>
 </blockquote>
@@ -419,13 +424,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>So for example once you fit a multiple regression to predict divorce using both marriage rate and age at marriage, the model addresses the questions: (1) After I already know marriage rate, what additional value is there in also knowing age at marriage? (2) After I already know age at marriage, what additional value is there in also knowing marriage rate</p>
 </blockquote>
 <p>DR: can we differentiate 1 from 2?</p>
-<section id="multiple-regression-notation" class="level3" data-number="23.1.1"><h3 data-number="23.1.1" class="anchored" data-anchor-id="multiple-regression-notation">
-<span class="header-section-number">23.1.1</span> 5.1.3. Multiple regression notation</h3>
+<section id="multiple-regression-notation" class="level3" data-number="24.1.1"><h3 data-number="24.1.1" class="anchored" data-anchor-id="multiple-regression-notation">
+<span class="header-section-number">24.1.1</span> 5.1.3. Multiple regression notation</h3>
 <p>Model with</p>
 <p><code>mu &lt;- a + bM*M + bA*A</code> &gt; Notice how bA doesn’t move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying: &gt; Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State. &gt; In that weird notation, <span class="math inline">\(D \perp M|A\)</span>. This tests the implication of the second DAG from earlier. Since the first DAG did not imply this result, it is out</p>
 <p>DR: This seems like a very weak test and a poor strategy for making inferences about causality (more so <em>running</em> with those inferences to underly future modeling). Even when age <em>is</em> present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.</p>
-</section><section id="plotting-multivariate-posteriors." class="level3" data-number="23.1.2"><h3 data-number="23.1.2" class="anchored" data-anchor-id="plotting-multivariate-posteriors.">
-<span class="header-section-number">23.1.2</span> 5.1.5. Plotting multivariate posteriors.</h3>
+</section><section id="plotting-multivariate-posteriors." class="level3" data-number="24.1.2"><h3 data-number="24.1.2" class="anchored" data-anchor-id="plotting-multivariate-posteriors.">
+<span class="header-section-number">24.1.2</span> 5.1.5. Plotting multivariate posteriors.</h3>
 <blockquote class="blockquote">
 <ol type="1">
 <li>Predictor residual plots. These plots show the outcome against residual predictor values. …</li>
@@ -620,8 +625,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../chapters/3_sampling_the_imaginary.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Ch 3. Sampling the Imaginary (posterior)</span></span>
+      <a href="../chapters/4_geocentric_linear_models.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Chapter 4. Geocentric (linear) Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

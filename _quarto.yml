@@ -42,6 +42,7 @@ book:
         - chapters/1_golem.qmd
         - chapters/2_small_large_worlds.qmd
         - chapters/3_sampling_the_imaginary.qmd
+        - chapters/4_geocentric_linear_models.qmd
         - chapters/5_spurious_waffles.qmd
   reader-mode: true
 
