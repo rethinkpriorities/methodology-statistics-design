@@ -7,6 +7,17 @@ options(width = 100)
 library(rethinking)
 library(tidyverse)
 library(patchwork)
+library(kableExtra)
+library(viridis)
+library(tidybayes)
+library(rethinkpriorities)
+
+
+# Set seed
+set.seed(4)
+
+# Set options
+theme_set(theme_minimal())
 ```
 
 > geocentric model continues to make useful predictions
@@ -317,7 +328,16 @@ d %>%
 
 ## A Gaussian model of height (4.3)
 
-> single measurement variable to model as a Gaussian distribution. There will be two parameters describing the distribution's shape, the mean - and the standard deviation -
+
+::: {.callout-note collapse="true"}
+## Willem Sleeger's ["Figuring out Bayesian statistics"](https://willemsleegers.com/content/posts/5-my-bayesian-workflow-and-tutorial/my-bayesian-workflow-and-tutorial.html) covers much of this same ground.
+
+His blog entry is better formatted and talks through some parts of the intuition more. You may find it more useful than the present notes. I incorporate some of it below (with acknowledgement)
+
+
+::: 
+
+> single measurement variable to model as a Gaussian distribution. There will be two parameters describing the distribution's shape, the mean - and the standard deviation 
 
 > the 'estimate' here will be the entire posterior distribution, not any point within it
 
@@ -338,7 +358,7 @@ d <- Howell1
 ::: {.callout-note collapse="true"}
 ## Code notes on brms
 
-Here we open our main statistical package, Bürkner's [brms](https://github.com/paul-buerkner/brms). But before we do, we'll want to detach the rethinking package. R will not allow users to use a function from one package that shares the same name as a different function from another package if both packages are open at the same time. The rethinking and brms packages are designed for similar purposes and, unsurprisingly, overlap in the names of their functions. To prevent problems, it is a good idea to make sure rethinking is detached before using brms. To learn more on the topic, see [this R-bloggers post](https://www.r-bloggers.com/r-and-package-masking-a-real-life-example/).
+> (Kurz) Here we open our main statistical package, Bürkner's [brms](https://github.com/paul-buerkner/brms). But before we do, we'll want to detach the rethinking package. R will not allow users to use a function from one package that shares the same name as a different function from another package if both packages are open at the same time. The rethinking and `brms` packages are designed for similar purposes and, unsurprisingly, overlap in the names of their functions. To prevent problems, it is a good idea to make sure rethinking is detached before using brms. To learn more on the topic, see [this R-bloggers post](https://www.r-bloggers.com/r-and-package-masking-a-real-life-example/).
 :::
 
 ```{r, message = F}
@@ -354,7 +374,7 @@ d %>%
   str()
 ```
 
-Here are the `height` values.
+Here are the `height` values
 
 ```{r}
 d %>%
@@ -415,7 +435,7 @@ ggplot(data = tibble(x = seq(from = 100, to = 250, by = .1)),
 ::: {.callout-note collapse="true"}
 ## Why these particular values?
 
-The prior for - is a broad Gaussian prior, centered on 178 cm, with 95% of probability between 178 - 40 cm. Why 178 cm? Your author is 178 cm tall. And the range from 138 cm to 218 cm encompasses a huge range of plausible mean heights for human populations. So domain-specific information has gone into this prior
+> The prior for $\mu$ is a broad Gaussian prior, centered on 178 cm, with 95% of probability between 178 - 40 cm. Why 178 cm? Your author is 178 cm tall. And the range from 138 cm to 218 cm encompasses a huge range of plausible mean heights for human populations. So domain-specific information has gone into this prior.
 :::
 
 ::: {.callout-note collapse="true"}
@@ -424,20 +444,41 @@ The prior for - is a broad Gaussian prior, centered on 178 cm, with 95% of proba
 I guess this is fixed later?
 :::
 
+::: {.callout-note collapse="true"}
+## brms's `get_prior` 
+
+At this point Sleegers' notes consider the `brms` function `get_prior` for the mean only model `height ~ 1`.  `get_prior`  peeks at the data to consider an (?appropriate) prior. 
+
+```{r}
+brms::get_prior(height ~ 1, data = d2)
+
+```
+
+It's not clear to me what `get_prior` is doing here, or what its logic is. It would seem to be using the data to suggest priors, which McElreath seems to be against (but the 'empirical bayes' people seem to like). What exactly is the justification for doing this? the people who designed this package must have had something in mind.
+
+
+Anyways, `get, suggesting_prior` suggests specific student=t distributions for the intercept (mean) and for sigma. These t-distributions have three parameters, one of which (the 'degrees of freedom') affects the skewness/fatness of tails relative to the normal distribution.
+
+::: 
+
 **Why simulate the prior probability distribution?**
 
-> The prior predictive simulation is an essential part of your modeling. Once you've chosen priors for h, ..., and ..., these imply a joint prior distribution of individual heights. By simulating from this distribution, you can see what your choices imply about observable height. This helps you diagnose bad choices
+> Once you've chosen priors for $h$, $\mu$ and $\sigma$,  these imply a joint prior distribution of individual heights. By simulating from this distribution, you can see what your choices imply about observable height. This helps you diagnose bad choices.
 
-> Prior predictive simulation is very useful for assigning sensible priors, because it can be quite hard to anticipate how priors influence the observable variables
+> ... it can be quite hard to anticipate how priors influence the observable variables
 
+
+The prior doesn't affect the results much if you have a reasonably diffuse prior and lots of data.  However: 
 > There are plenty of inference problems for which the data alone are not sufficient, no matter how numerous. Bayes lets us proceed in these cases. But only if we use our scientific knowledge to construct sensible priors. Using scientific knowledge to build priors is not cheating. The important thing is that your prior not be based on the values in the data, but only on what you know about the data before you see it.
 
-
-> so to get the joint likelihood across all the data, we have to compute the probability for each hi and then multiply all these likelihoods together
+...
+ 
+ 
+> so to get the joint likelihood across all the data, we have to compute the probability for each $h_i$ [observed height] and then multiply all these likelihoods together
 
 \
 
-ggplot  prior for $\sigma$, a uniform distribution with a minimum value of 0 and a maximum value of 50.^[We don't really need the y axis when looking at the shapes of a density, so we'll just remove it with `scale_y_continuous()`.]
+Below: ggplot of the prior for $\sigma$, a uniform distribution with a minimum value of 0 and a maximum value of 50.^[We don't really need the y axis when looking at the shapes of a density, so we'll just remove it with `scale_y_continuous()`.]
 
 ```{r, fig.width = 3, fig.height = 2.5}
 
@@ -472,6 +513,10 @@ As McElreath wrote, we've made a "vaguely bell-shaped density with thick tails. 
 ### Grid approximation of the posterior distribution {-}
 
 ```{r}
+#| label: grid_approx_height
+#| code-summary: "All mean and sd height values to consider"
+ 
+
 n <- 200
 
 d_grid <-
@@ -484,11 +529,78 @@ glimpse(d_grid)
 
 `d_grid` contains every combination of `mu` and `sigma` across their specified values. Instead of base R `sapply()`, we'll do the computations by making a custom function which we'll plug into `purrr::map2().`
 
+
+```{r}
+#| label: grid_function
+#| code-summary: "function computes & sums log of normal density for each value of d2$height, given a particular mu and sigma"
+ 
+
+grid_function <- function(mu, sigma) {
+  dnorm(d2$height, mean = mu, sd = sigma, log = T) %>% 
+    sum()
+}
+```
+
+```{r}
+#| label: d_grid_ll
+#| code-summary: "maps the log llhd of the data (and params) for each combination in d_grid, converts to a relative probability"
+ 
+d_grid <-
+  d_grid %>% 
+  mutate(log_likelihood = map2(mu, sigma, grid_function)) %>% #maps 
+  unnest(log_likelihood) %>% 
+  mutate(prior_mu    = dnorm(mu,    mean = 178, sd  = 20, log = T),
+         prior_sigma = dunif(sigma, min  = 0,   max = 50, log = T)) %>% 
+  mutate(product = log_likelihood + prior_mu + prior_sigma,
+    max_product =max(product)) %>%
+  mutate(probability = exp(product - max(product)) # exponentiate the log likelihood to get the probability; but the individual probability densities are meaningless. For computational reasons (I think) we state these relative to the max value
+    )
+  
+d_grid %>% arrange(-probability) %>% 
+  head() %>% kable(cap = 
+  "highest prob. rows") %>% kable_styling()
+
+d_grid %>% arrange(-probability) %>%  slice_sample(n = 10) %>% kable(cap = 
+  "random rows") %>% kable_styling()
+    ```
+
+
+Above, we compute the likelihood of each data point given each combination of parameters under consideration, and multiply these together (or 'add the log probabilities'). We compute the log probability of these parameters, and add these to the probability of the data under these parameters to get the joint (log) likelihood.  Erexponentiate the log likelihood to get the probability. However, with a continuous probabilityindividual probability density values  are meaningless; only the relative values matter. For computational reasons (I think) we state each of these relative to the max value of the probabilities.
+
+Above, we present the 'highest probability' values as well as some randomly chosen values.
+
+Following Kurz, we can plot 'where the model thinks the most likely values of our parameters lie', e.g., in a heatmap plot:
+
+```{r}
+#| label: heat_map
+#| code-summary: "Heatmap: "
+ 
+
+d_grid %>% 
+  ggplot(aes(x = mu, y = sigma)) + 
+  geom_raster(aes(fill = probability),
+              interpolate = T) +
+  scale_fill_viridis_c(option = "A") +
+  labs(x = expression(mu),
+       y = expression(sigma)) +
+  coord_cartesian(xlim = range(d_grid$mu)*.7+50,
+                  ylim = range(d_grid$sigma)*.7 + 3.5) +
+  theme(panel.grid = element_blank())
+```
+Note that the posterior distribution of parameters need not be a circle or even symmetric. They may be correlated. Certain parameters may be 'jointly more' or 'jointly less' likely, as the process that generated the data we see may (e.g.) only tend be likely to come from high mean values when the standard deviation tends to be large.  
+
 ### Sampling from the posterior (3.4) {-}
 
->  since there are two parameters, and we want to sample combinations of them, we first randomly sample row numbers in post in proportion to the values in post\$prob. Then we pull out the parameter values on those randomly sampled rows draw from grid in proportion to calculated likelihoods.
+> since there are two parameters, and we want to sample combinations of them, we first randomly sample row numbers in post in proportion to the values in `post$prob`. Then we pull out the parameter values on those randomly sampled rows draw from grid in proportion to calculated likelihoods.
 
-And this is quite typical. As sample size increases, posterior densities approach the normal distribution. If you why?
+> The jargon “marginal” here means “averaging over the other parameters.” 
+
+> And this is quite typical. As sample size increases, posterior densities approach the normal distribution. 
+
+DR: All posterior densities? When andhy?
+
+
+
 
 is the standard deviation - that causes problems. So if you care about --often people do not-you do need to be careful of abusing the quadratic approximation bc quap essentially plus a normal distribution
 
