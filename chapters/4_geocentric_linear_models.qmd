@@ -1087,10 +1087,9 @@ DR: which I did
 
 > Anyways, the effective samples improved.
 
-::: {.Callout-Note Collapse="True"}
-## DR Question: What's this 'effective samples' thing?
 
-::: 
+*DR Question: What's this 'effective samples' thing?*
+
 
 Here's the parameter correlation info.
 

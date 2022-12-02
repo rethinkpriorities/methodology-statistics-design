@@ -362,7 +362,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#kurz-tables-of-estimates" id="toc-kurz-tables-of-estimates" class="nav-link" data-scroll-target="#kurz-tables-of-estimates">Kurz: Tables of estimates</a></li>
   </ul>
 </li>
-  <li><a href="#dr-question-whats-this-effective-samples-thing" id="toc-dr-question-whats-this-effective-samples-thing" class="nav-link" data-scroll-target="#dr-question-whats-this-effective-samples-thing"><span class="toc-section-number">23.3</span>  DR Question: What’s this ‘effective samples’ thing?</a></li>
   <li><a href="#curves-from-lines-4.5" id="toc-curves-from-lines-4.5" class="nav-link" data-scroll-target="#curves-from-lines-4.5">Curves from lines (4.5)</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/4_geocentric_linear_models.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1411,7 +1410,7 @@ $ sigma &lt;dbl&gt; 4.000000, 4.025126, 4.050251, 4.075377, 4.100503, 4.125628, 
 <span><span class="op">(</span><span class="va">timer_b41</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">ptm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>   user  system elapsed 
-  0.172   0.001   0.174 </code></pre>
+  0.165   0.002   0.168 </code></pre>
 </div>
 </div>
 <p>Above: MCMC I think<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
@@ -1967,9 +1966,8 @@ sigma             -0.02     0.02  1.00</code></pre>
 <blockquote class="blockquote">
 <p>Anyways, the effective samples improved.</p>
 </blockquote>
-</section></section><section id="dr-question-whats-this-effective-samples-thing" class="level2 Callout-Note" data-number="23.3" data-collapse="True"><h2 data-number="23.3" class="anchored" data-anchor-id="dr-question-whats-this-effective-samples-thing">
-<span class="header-section-number">23.3</span> DR Question: What’s this ‘effective samples’ thing?</h2>
-</section><p>Here’s the parameter correlation info.</p>
+<p><em>DR Question: What’s this ‘effective samples’ thing?</em></p>
+<p>Here’s the parameter correlation info.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/brms/man/posterior_samples.brmsfit.html">posterior_samples</a></span><span class="op">(</span><span class="va">b4.4c</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">b_Intercept</span><span class="op">:</span><span class="va">sigma</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -2349,7 +2347,7 @@ Why simulate and not use analytic formulas here
 <p>For every distribution like <code>dnorm</code>, there is a companion simulation function</p>
 </blockquote>
 <p><code>dnorm</code>: specifies the density at any point (I guess) <code>rnorm</code>: randomly generates draws the normal distribution</p>
-</section><section id="curves-from-lines-4.5" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="curves-from-lines-4.5">Curves from lines (4.5)</h2>
+</section></section></section><section id="curves-from-lines-4.5" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="curves-from-lines-4.5">Curves from lines (4.5)</h2>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -3666,323 +3664,322 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb74-1133"><a href="#cb74-1133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1134"><a href="#cb74-1134" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Anyways, the effective samples improved.</span></span>
 <span id="cb74-1135"><a href="#cb74-1135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1136"><a href="#cb74-1136" aria-hidden="true" tabindex="-1"></a>::: {.Callout-Note Collapse="True"}</span>
-<span id="cb74-1137"><a href="#cb74-1137" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR Question: What's this 'effective samples' thing?</span></span>
+<span id="cb74-1136"><a href="#cb74-1136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1137"><a href="#cb74-1137" aria-hidden="true" tabindex="-1"></a>*DR Question: What's this 'effective samples' thing?*</span>
 <span id="cb74-1138"><a href="#cb74-1138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1139"><a href="#cb74-1139" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1140"><a href="#cb74-1140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1141"><a href="#cb74-1141" aria-hidden="true" tabindex="-1"></a>Here's the parameter correlation info.</span>
-<span id="cb74-1142"><a href="#cb74-1142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1145"><a href="#cb74-1145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1146"><a href="#cb74-1146" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_samples</span>(b4<span class="fl">.4</span>c) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1147"><a href="#cb74-1147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(b_Intercept<span class="sc">:</span>sigma) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1148"><a href="#cb74-1148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb74-1149"><a href="#cb74-1149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb74-1150"><a href="#cb74-1150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb74-1151"><a href="#cb74-1151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1152"><a href="#cb74-1152" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? Now all the correlations are quite low. </span></span>
+<span id="cb74-1139"><a href="#cb74-1139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1140"><a href="#cb74-1140" aria-hidden="true" tabindex="-1"></a>Here's the parameter correlation info.</span>
+<span id="cb74-1141"><a href="#cb74-1141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1144"><a href="#cb74-1144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1145"><a href="#cb74-1145" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_samples</span>(b4<span class="fl">.4</span>c) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1146"><a href="#cb74-1146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(b_Intercept<span class="sc">:</span>sigma) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1147"><a href="#cb74-1147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb74-1148"><a href="#cb74-1148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb74-1149"><a href="#cb74-1149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1150"><a href="#cb74-1150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1151"><a href="#cb74-1151" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? Now all the correlations are quite low. </span></span>
+<span id="cb74-1152"><a href="#cb74-1152" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1153"><a href="#cb74-1153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1154"><a href="#cb74-1154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1155"><a href="#cb74-1155" aria-hidden="true" tabindex="-1"></a>The 'pairs' plot function seems very useful!:</span>
-<span id="cb74-1156"><a href="#cb74-1156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1159"><a href="#cb74-1159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1160"><a href="#cb74-1160" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(b4<span class="fl">.4</span>c)</span>
-<span id="cb74-1161"><a href="#cb74-1161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1154"><a href="#cb74-1154" aria-hidden="true" tabindex="-1"></a>The 'pairs' plot function seems very useful!:</span>
+<span id="cb74-1155"><a href="#cb74-1155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1158"><a href="#cb74-1158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1159"><a href="#cb74-1159" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(b4<span class="fl">.4</span>c)</span>
+<span id="cb74-1160"><a href="#cb74-1160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1161"><a href="#cb74-1161" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1162"><a href="#cb74-1162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1163"><a href="#cb74-1163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1164"><a href="#cb74-1164" aria-hidden="true" tabindex="-1"></a>Putting these into tables ...  "how you might convert the <span class="in">`posterior_summary()`</span> output into a summary table roughly following APA style"</span>
-<span id="cb74-1165"><a href="#cb74-1165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1168"><a href="#cb74-1168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1169"><a href="#cb74-1169" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb74-1170"><a href="#cb74-1170" aria-hidden="true" tabindex="-1"></a>  sumtable_b4<span class="fl">.4</span>c <span class="ot">&lt;-</span> </span>
-<span id="cb74-1171"><a href="#cb74-1171" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(b4<span class="fl">.4</span>c,  <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.055</span>, .<span class="dv">895</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="sc">%&gt;%</span></span>
-<span id="cb74-1172"><a href="#cb74-1172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> <span class="co">#not tibble, because that wold lose the row names</span></span>
-<span id="cb74-1173"><a href="#cb74-1173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"parameter"</span>) <span class="sc">%&gt;%</span> <span class="co">#makes row names their own column. helpful!</span></span>
-<span id="cb74-1174"><a href="#cb74-1174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.double, round, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1175"><a href="#cb74-1175" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">mean =</span> Estimate,</span>
-<span id="cb74-1176"><a href="#cb74-1176" aria-hidden="true" tabindex="-1"></a>         <span class="at">sd   =</span> Est.Error) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1177"><a href="#cb74-1177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">89.5% CI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_c</span>(<span class="st">"["</span>, Q5<span class="fl">.5</span>, <span class="st">", "</span>, Q89<span class="fl">.5</span>, <span class="st">"]"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1178"><a href="#cb74-1178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Q"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb74-1179"><a href="#cb74-1179" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb74-1180"><a href="#cb74-1180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.kable_styling</span>()</span>
-<span id="cb74-1181"><a href="#cb74-1181" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb74-1182"><a href="#cb74-1182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1163"><a href="#cb74-1163" aria-hidden="true" tabindex="-1"></a>Putting these into tables ...  "how you might convert the <span class="in">`posterior_summary()`</span> output into a summary table roughly following APA style"</span>
+<span id="cb74-1164"><a href="#cb74-1164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1167"><a href="#cb74-1167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1168"><a href="#cb74-1168" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb74-1169"><a href="#cb74-1169" aria-hidden="true" tabindex="-1"></a>  sumtable_b4<span class="fl">.4</span>c <span class="ot">&lt;-</span> </span>
+<span id="cb74-1170"><a href="#cb74-1170" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(b4<span class="fl">.4</span>c,  <span class="at">probs=</span><span class="fu">c</span>(<span class="fl">0.055</span>, .<span class="dv">895</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="sc">%&gt;%</span></span>
+<span id="cb74-1171"><a href="#cb74-1171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> <span class="co">#not tibble, because that wold lose the row names</span></span>
+<span id="cb74-1172"><a href="#cb74-1172" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"parameter"</span>) <span class="sc">%&gt;%</span> <span class="co">#makes row names their own column. helpful!</span></span>
+<span id="cb74-1173"><a href="#cb74-1173" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.double, round, <span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1174"><a href="#cb74-1174" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">mean =</span> Estimate,</span>
+<span id="cb74-1175"><a href="#cb74-1175" aria-hidden="true" tabindex="-1"></a>         <span class="at">sd   =</span> Est.Error) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1176"><a href="#cb74-1176" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">89.5% CI</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">str_c</span>(<span class="st">"["</span>, Q5<span class="fl">.5</span>, <span class="st">", "</span>, Q89<span class="fl">.5</span>, <span class="st">"]"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1177"><a href="#cb74-1177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Q"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb74-1178"><a href="#cb74-1178" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb74-1179"><a href="#cb74-1179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.kable_styling</span>()</span>
+<span id="cb74-1180"><a href="#cb74-1180" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb74-1181"><a href="#cb74-1181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1182"><a href="#cb74-1182" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1183"><a href="#cb74-1183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1184"><a href="#cb74-1184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1185"><a href="#cb74-1185" aria-hidden="true" tabindex="-1"></a><span class="fu">####  Plotting posterior inference against the data {-}</span></span>
-<span id="cb74-1186"><a href="#cb74-1186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1187"><a href="#cb74-1187" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In truth, tables of estimates are usually insufficient for understanding the information contained in the posterior distribution. It's almost always much more useful to plot the posterior inference against the data. Not only does plotting help in interpreting the posterior, bit it also provides an informal check on model assumptions. (p. 100)</span></span>
+<span id="cb74-1184"><a href="#cb74-1184" aria-hidden="true" tabindex="-1"></a><span class="fu">####  Plotting posterior inference against the data {-}</span></span>
+<span id="cb74-1185"><a href="#cb74-1185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1186"><a href="#cb74-1186" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In truth, tables of estimates are usually insufficient for understanding the information contained in the posterior distribution. It's almost always much more useful to plot the posterior inference against the data. Not only does plotting help in interpreting the posterior, bit it also provides an informal check on model assumptions. (p. 100)</span></span>
+<span id="cb74-1187"><a href="#cb74-1187" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1188"><a href="#cb74-1188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1189"><a href="#cb74-1189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1190"><a href="#cb74-1190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 2.8}</span></span>
-<span id="cb74-1191"><a href="#cb74-1191" aria-hidden="true" tabindex="-1"></a>d2 <span class="sc">%&gt;%</span></span>
-<span id="cb74-1192"><a href="#cb74-1192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
-<span id="cb74-1193"><a href="#cb74-1193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">fixef</span>(b4<span class="fl">.3</span>c)[<span class="dv">1</span>],</span>
-<span id="cb74-1194"><a href="#cb74-1194" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> <span class="fu">fixef</span>(b4<span class="fl">.3</span>c)[<span class="dv">2</span>]) <span class="sc">+</span> <span class="co">#see docs -- could also select rows by name here </span></span>
-<span id="cb74-1195"><a href="#cb74-1195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb74-1196"><a href="#cb74-1196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb74-1197"><a href="#cb74-1197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb74-1198"><a href="#cb74-1198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb74-1199"><a href="#cb74-1199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1200"><a href="#cb74-1200" aria-hidden="true" tabindex="-1"></a>Above <span class="in">`fixef()`</span> basically 'extracts the regression parameters', (documentation: extracts the mean value of these by default)</span>
-<span id="cb74-1201"><a href="#cb74-1201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1202"><a href="#cb74-1202" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1203"><a href="#cb74-1203" aria-hidden="true" tabindex="-1"></a><span class="fu">## On fixef() and population-level 'fixed' effects</span></span>
-<span id="cb74-1204"><a href="#cb74-1204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1205"><a href="#cb74-1205" aria-hidden="true" tabindex="-1"></a> In the brms reference manual, Bürkner described the job of the<span class="in">`fixef()`</span> function as "extract<span class="co">[</span><span class="ot">ing</span><span class="co">]</span> the population-level ('fixed') effects from a brmsfit object". If you're new to multilevel models, it might not be clear what he meant by "population-level" or "fixed" effects. Don't worry. That'll all become clear starting around <span class="co">[</span><span class="ot">Chapter 12</span><span class="co">][Multilevel Models]</span>. In the meantime, just think of them as the typical regression parameters, minus $\sigma$.</span>
-<span id="cb74-1206"><a href="#cb74-1206" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1189"><a href="#cb74-1189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 2.8}</span></span>
+<span id="cb74-1190"><a href="#cb74-1190" aria-hidden="true" tabindex="-1"></a>d2 <span class="sc">%&gt;%</span></span>
+<span id="cb74-1191"><a href="#cb74-1191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
+<span id="cb74-1192"><a href="#cb74-1192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">fixef</span>(b4<span class="fl">.3</span>c)[<span class="dv">1</span>],</span>
+<span id="cb74-1193"><a href="#cb74-1193" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> <span class="fu">fixef</span>(b4<span class="fl">.3</span>c)[<span class="dv">2</span>]) <span class="sc">+</span> <span class="co">#see docs -- could also select rows by name here </span></span>
+<span id="cb74-1194"><a href="#cb74-1194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb74-1195"><a href="#cb74-1195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb74-1196"><a href="#cb74-1196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb74-1197"><a href="#cb74-1197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1198"><a href="#cb74-1198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1199"><a href="#cb74-1199" aria-hidden="true" tabindex="-1"></a>Above <span class="in">`fixef()`</span> basically 'extracts the regression parameters', (documentation: extracts the mean value of these by default)</span>
+<span id="cb74-1200"><a href="#cb74-1200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1201"><a href="#cb74-1201" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1202"><a href="#cb74-1202" aria-hidden="true" tabindex="-1"></a><span class="fu">## On fixef() and population-level 'fixed' effects</span></span>
+<span id="cb74-1203"><a href="#cb74-1203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1204"><a href="#cb74-1204" aria-hidden="true" tabindex="-1"></a> In the brms reference manual, Bürkner described the job of the<span class="in">`fixef()`</span> function as "extract<span class="co">[</span><span class="ot">ing</span><span class="co">]</span> the population-level ('fixed') effects from a brmsfit object". If you're new to multilevel models, it might not be clear what he meant by "population-level" or "fixed" effects. Don't worry. That'll all become clear starting around <span class="co">[</span><span class="ot">Chapter 12</span><span class="co">][Multilevel Models]</span>. In the meantime, just think of them as the typical regression parameters, minus $\sigma$.</span>
+<span id="cb74-1205"><a href="#cb74-1205" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1206"><a href="#cb74-1206" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1207"><a href="#cb74-1207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1208"><a href="#cb74-1208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1209"><a href="#cb74-1209" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Kurz:  Adding uncertainty around the mean {-}</span></span>
-<span id="cb74-1210"><a href="#cb74-1210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1211"><a href="#cb74-1211" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; By default, we extract all the posterior iterations with </span><span class="in">`posterior_samples()`</span><span class="at">. Because we had 4,000 posterior draws, our output will contain 4,000 rows.</span></span>
-<span id="cb74-1212"><a href="#cb74-1212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1215"><a href="#cb74-1215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1216"><a href="#cb74-1216" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>c)</span>
-<span id="cb74-1217"><a href="#cb74-1217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1218"><a href="#cb74-1218" aria-hidden="true" tabindex="-1"></a>post <span class="sc">%&gt;%</span></span>
-<span id="cb74-1219"><a href="#cb74-1219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span>
-<span id="cb74-1220"><a href="#cb74-1220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb74-1221"><a href="#cb74-1221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1222"><a href="#cb74-1222" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Each row is a correlated random sample from the point posterior of all three parameters, using the covariances provided by </span><span class="co">[</span><span class="ot">`cov(posterior_samples(b4.4)`</span><span class="co">]</span><span class="at">. The paired values of </span><span class="co">[</span><span class="ot">`b_Intercept`</span><span class="co">]</span><span class="at"> and </span><span class="co">[</span><span class="ot">`b_weight`</span><span class="co">]</span><span class="at"> on each row define the line. The average of very many of these lines is the MAP line. (p. 101)</span></span>
-<span id="cb74-1223"><a href="#cb74-1223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1224"><a href="#cb74-1224" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1225"><a href="#cb74-1225" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: the 'correlated ... sample'</span></span>
-<span id="cb74-1226"><a href="#cb74-1226" aria-hidden="true" tabindex="-1"></a>I thought the estimation *yielded* a sample from the posterior, these 4000 draws. But here it sounds like it is estimating a mean and covariance matrix and drawing from this distribution?  </span>
-<span id="cb74-1227"><a href="#cb74-1227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1228"><a href="#cb74-1228" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1229"><a href="#cb74-1229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1230"><a href="#cb74-1230" aria-hidden="true" tabindex="-1"></a>Modeling and plotting, with 4 different sample sizes </span>
-<span id="cb74-1231"><a href="#cb74-1231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1232"><a href="#cb74-1232" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here are the four models leading up to McElreath's Figure 4.5.</span>  </span>
-<span id="cb74-1233"><a href="#cb74-1233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1234"><a href="#cb74-1234" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1235"><a href="#cb74-1235" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question -- there must be a better way of automating the code below across the 4 sample sizes,  with a 'map'?</span></span>
-<span id="cb74-1236"><a href="#cb74-1236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1237"><a href="#cb74-1237" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1238"><a href="#cb74-1238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1239"><a href="#cb74-1239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b4.3_010}</span></span>
-<span id="cb74-1240"><a href="#cb74-1240" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb74-1241"><a href="#cb74-1241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1242"><a href="#cb74-1242" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_010 <span class="ot">&lt;-</span></span>
-<span id="cb74-1243"><a href="#cb74-1243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb74-1244"><a href="#cb74-1244" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),  <span class="co"># note our tricky use of `n` and `slice()`</span></span>
-<span id="cb74-1245"><a href="#cb74-1245" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb74-1246"><a href="#cb74-1246" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
-<span id="cb74-1247"><a href="#cb74-1247" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb74-1248"><a href="#cb74-1248" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb74-1249"><a href="#cb74-1249" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb74-1250"><a href="#cb74-1250" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1251"><a href="#cb74-1251" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1252"><a href="#cb74-1252" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_010"</span>)</span>
-<span id="cb74-1253"><a href="#cb74-1253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1254"><a href="#cb74-1254" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb74-1255"><a href="#cb74-1255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1256"><a href="#cb74-1256" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_050 <span class="ot">&lt;-</span></span>
-<span id="cb74-1257"><a href="#cb74-1257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb74-1258"><a href="#cb74-1258" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
-<span id="cb74-1259"><a href="#cb74-1259" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb74-1260"><a href="#cb74-1260" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
-<span id="cb74-1261"><a href="#cb74-1261" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb74-1262"><a href="#cb74-1262" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb74-1263"><a href="#cb74-1263" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb74-1264"><a href="#cb74-1264" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1265"><a href="#cb74-1265" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1266"><a href="#cb74-1266" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_050"</span>)</span>
-<span id="cb74-1267"><a href="#cb74-1267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1268"><a href="#cb74-1268" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">150</span></span>
-<span id="cb74-1269"><a href="#cb74-1269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1270"><a href="#cb74-1270" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_150 <span class="ot">&lt;-</span></span>
-<span id="cb74-1271"><a href="#cb74-1271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb74-1272"><a href="#cb74-1272" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
-<span id="cb74-1273"><a href="#cb74-1273" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb74-1274"><a href="#cb74-1274" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
-<span id="cb74-1275"><a href="#cb74-1275" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb74-1276"><a href="#cb74-1276" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb74-1277"><a href="#cb74-1277" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb74-1278"><a href="#cb74-1278" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1279"><a href="#cb74-1279" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1280"><a href="#cb74-1280" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_150"</span>)</span>
-<span id="cb74-1281"><a href="#cb74-1281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1282"><a href="#cb74-1282" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">352</span></span>
-<span id="cb74-1283"><a href="#cb74-1283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1284"><a href="#cb74-1284" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_352 <span class="ot">&lt;-</span></span>
-<span id="cb74-1285"><a href="#cb74-1285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb74-1286"><a href="#cb74-1286" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
-<span id="cb74-1287"><a href="#cb74-1287" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb74-1288"><a href="#cb74-1288" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
-<span id="cb74-1289"><a href="#cb74-1289" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb74-1290"><a href="#cb74-1290" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb74-1291"><a href="#cb74-1291" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb74-1292"><a href="#cb74-1292" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1293"><a href="#cb74-1293" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
-<span id="cb74-1294"><a href="#cb74-1294" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_352"</span>)</span>
-<span id="cb74-1295"><a href="#cb74-1295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1208"><a href="#cb74-1208" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Kurz:  Adding uncertainty around the mean {-}</span></span>
+<span id="cb74-1209"><a href="#cb74-1209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1210"><a href="#cb74-1210" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; By default, we extract all the posterior iterations with </span><span class="in">`posterior_samples()`</span><span class="at">. Because we had 4,000 posterior draws, our output will contain 4,000 rows.</span></span>
+<span id="cb74-1211"><a href="#cb74-1211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1214"><a href="#cb74-1214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1215"><a href="#cb74-1215" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>c)</span>
+<span id="cb74-1216"><a href="#cb74-1216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1217"><a href="#cb74-1217" aria-hidden="true" tabindex="-1"></a>post <span class="sc">%&gt;%</span></span>
+<span id="cb74-1218"><a href="#cb74-1218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span>
+<span id="cb74-1219"><a href="#cb74-1219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1220"><a href="#cb74-1220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1221"><a href="#cb74-1221" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Each row is a correlated random sample from the point posterior of all three parameters, using the covariances provided by </span><span class="co">[</span><span class="ot">`cov(posterior_samples(b4.4)`</span><span class="co">]</span><span class="at">. The paired values of </span><span class="co">[</span><span class="ot">`b_Intercept`</span><span class="co">]</span><span class="at"> and </span><span class="co">[</span><span class="ot">`b_weight`</span><span class="co">]</span><span class="at"> on each row define the line. The average of very many of these lines is the MAP line. (p. 101)</span></span>
+<span id="cb74-1222"><a href="#cb74-1222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1223"><a href="#cb74-1223" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1224"><a href="#cb74-1224" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: the 'correlated ... sample'</span></span>
+<span id="cb74-1225"><a href="#cb74-1225" aria-hidden="true" tabindex="-1"></a>I thought the estimation *yielded* a sample from the posterior, these 4000 draws. But here it sounds like it is estimating a mean and covariance matrix and drawing from this distribution?  </span>
+<span id="cb74-1226"><a href="#cb74-1226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1227"><a href="#cb74-1227" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1228"><a href="#cb74-1228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1229"><a href="#cb74-1229" aria-hidden="true" tabindex="-1"></a>Modeling and plotting, with 4 different sample sizes </span>
+<span id="cb74-1230"><a href="#cb74-1230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1231"><a href="#cb74-1231" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here are the four models leading up to McElreath's Figure 4.5.</span>  </span>
+<span id="cb74-1232"><a href="#cb74-1232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1233"><a href="#cb74-1233" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1234"><a href="#cb74-1234" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question -- there must be a better way of automating the code below across the 4 sample sizes,  with a 'map'?</span></span>
+<span id="cb74-1235"><a href="#cb74-1235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1236"><a href="#cb74-1236" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1237"><a href="#cb74-1237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1238"><a href="#cb74-1238" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b4.3_010}</span></span>
+<span id="cb74-1239"><a href="#cb74-1239" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb74-1240"><a href="#cb74-1240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1241"><a href="#cb74-1241" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_010 <span class="ot">&lt;-</span></span>
+<span id="cb74-1242"><a href="#cb74-1242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb74-1243"><a href="#cb74-1243" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),  <span class="co"># note our tricky use of `n` and `slice()`</span></span>
+<span id="cb74-1244"><a href="#cb74-1244" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb74-1245"><a href="#cb74-1245" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
+<span id="cb74-1246"><a href="#cb74-1246" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb74-1247"><a href="#cb74-1247" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb74-1248"><a href="#cb74-1248" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb74-1249"><a href="#cb74-1249" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1250"><a href="#cb74-1250" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1251"><a href="#cb74-1251" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_010"</span>)</span>
+<span id="cb74-1252"><a href="#cb74-1252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1253"><a href="#cb74-1253" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb74-1254"><a href="#cb74-1254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1255"><a href="#cb74-1255" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_050 <span class="ot">&lt;-</span></span>
+<span id="cb74-1256"><a href="#cb74-1256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb74-1257"><a href="#cb74-1257" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
+<span id="cb74-1258"><a href="#cb74-1258" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb74-1259"><a href="#cb74-1259" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
+<span id="cb74-1260"><a href="#cb74-1260" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb74-1261"><a href="#cb74-1261" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb74-1262"><a href="#cb74-1262" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb74-1263"><a href="#cb74-1263" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1264"><a href="#cb74-1264" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1265"><a href="#cb74-1265" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_050"</span>)</span>
+<span id="cb74-1266"><a href="#cb74-1266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1267"><a href="#cb74-1267" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">150</span></span>
+<span id="cb74-1268"><a href="#cb74-1268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1269"><a href="#cb74-1269" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_150 <span class="ot">&lt;-</span></span>
+<span id="cb74-1270"><a href="#cb74-1270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb74-1271"><a href="#cb74-1271" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
+<span id="cb74-1272"><a href="#cb74-1272" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb74-1273"><a href="#cb74-1273" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
+<span id="cb74-1274"><a href="#cb74-1274" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb74-1275"><a href="#cb74-1275" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb74-1276"><a href="#cb74-1276" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb74-1277"><a href="#cb74-1277" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1278"><a href="#cb74-1278" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1279"><a href="#cb74-1279" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_150"</span>)</span>
+<span id="cb74-1280"><a href="#cb74-1280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1281"><a href="#cb74-1281" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">352</span></span>
+<span id="cb74-1282"><a href="#cb74-1282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1283"><a href="#cb74-1283" aria-hidden="true" tabindex="-1"></a>b4<span class="fl">.3</span>_352 <span class="ot">&lt;-</span></span>
+<span id="cb74-1284"><a href="#cb74-1284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb74-1285"><a href="#cb74-1285" aria-hidden="true" tabindex="-1"></a>        <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span>n),</span>
+<span id="cb74-1286"><a href="#cb74-1286" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb74-1287"><a href="#cb74-1287" aria-hidden="true" tabindex="-1"></a>      height <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> weight,</span>
+<span id="cb74-1288"><a href="#cb74-1288" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">178</span>, <span class="dv">100</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb74-1289"><a href="#cb74-1289" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb74-1290"><a href="#cb74-1290" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb74-1291"><a href="#cb74-1291" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1292"><a href="#cb74-1292" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">4</span>,</span>
+<span id="cb74-1293"><a href="#cb74-1293" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b04.03_352"</span>)</span>
+<span id="cb74-1294"><a href="#cb74-1294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1295"><a href="#cb74-1295" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1296"><a href="#cb74-1296" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1297"><a href="#cb74-1297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1298"><a href="#cb74-1298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1299"><a href="#cb74-1299" aria-hidden="true" tabindex="-1"></a>DR: Note, this took surprisingly long even for N=10!</span>
-<span id="cb74-1300"><a href="#cb74-1300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1301"><a href="#cb74-1301" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll need to put the chains </span><span class="co">[</span><span class="ot">?</span><span class="co">]</span><span class="at">  of each model into data frames.</span></span>
-<span id="cb74-1302"><a href="#cb74-1302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1303"><a href="#cb74-1303" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1304"><a href="#cb74-1304" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: why are these called 'chains' here?</span></span>
-<span id="cb74-1305"><a href="#cb74-1305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1306"><a href="#cb74-1306" aria-hidden="true" tabindex="-1"></a>I thought the samples from the posterior were the result of the modeling 'after the chains had converged'?</span>
-<span id="cb74-1307"><a href="#cb74-1307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1308"><a href="#cb74-1308" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1309"><a href="#cb74-1309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1312"><a href="#cb74-1312" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1313"><a href="#cb74-1313" aria-hidden="true" tabindex="-1"></a>post010 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_010)</span>
-<span id="cb74-1314"><a href="#cb74-1314" aria-hidden="true" tabindex="-1"></a>post050 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_050)</span>
-<span id="cb74-1315"><a href="#cb74-1315" aria-hidden="true" tabindex="-1"></a>post150 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_150)</span>
-<span id="cb74-1316"><a href="#cb74-1316" aria-hidden="true" tabindex="-1"></a>post352 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_352)</span>
-<span id="cb74-1317"><a href="#cb74-1317" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb74-1318"><a href="#cb74-1318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1319"><a href="#cb74-1319" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here is the code for the four individual plots.</span></span>
-<span id="cb74-1320"><a href="#cb74-1320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1321"><a href="#cb74-1321" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1322"><a href="#cb74-1322" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: isn't there a more efficient code way to 'map' all these?</span></span>
-<span id="cb74-1323"><a href="#cb74-1323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1324"><a href="#cb74-1324" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1325"><a href="#cb74-1325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1328"><a href="#cb74-1328" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb74-1329"><a href="#cb74-1329" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span></span>
-<span id="cb74-1330"><a href="#cb74-1330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> , ], <span class="co">#first 10 obs; the ones used in fitting the model</span></span>
-<span id="cb74-1331"><a href="#cb74-1331" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
-<span id="cb74-1332"><a href="#cb74-1332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post010[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>], <span class="co">#20 lines for each to reduce clutter</span></span>
-<span id="cb74-1333"><a href="#cb74-1333" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post010[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
-<span id="cb74-1334"><a href="#cb74-1334" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb74-1335"><a href="#cb74-1335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb74-1336"><a href="#cb74-1336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
-<span id="cb74-1337"><a href="#cb74-1337" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
-<span id="cb74-1338"><a href="#cb74-1338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 10"</span>)</span>
-<span id="cb74-1339"><a href="#cb74-1339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1340"><a href="#cb74-1340" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span></span>
-<span id="cb74-1341"><a href="#cb74-1341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span> , ], <span class="co">#first 50 obs...</span></span>
-<span id="cb74-1342"><a href="#cb74-1342" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
-<span id="cb74-1343"><a href="#cb74-1343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post050[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
-<span id="cb74-1344"><a href="#cb74-1344" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post050[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
-<span id="cb74-1345"><a href="#cb74-1345" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb74-1346"><a href="#cb74-1346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb74-1347"><a href="#cb74-1347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
-<span id="cb74-1348"><a href="#cb74-1348" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
-<span id="cb74-1349"><a href="#cb74-1349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 50"</span>)</span>
-<span id="cb74-1350"><a href="#cb74-1350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1351"><a href="#cb74-1351" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span></span>
-<span id="cb74-1352"><a href="#cb74-1352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span> , ],</span>
-<span id="cb74-1353"><a href="#cb74-1353" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
-<span id="cb74-1354"><a href="#cb74-1354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post150[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
-<span id="cb74-1355"><a href="#cb74-1355" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post150[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
-<span id="cb74-1356"><a href="#cb74-1356" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb74-1357"><a href="#cb74-1357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb74-1358"><a href="#cb74-1358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
-<span id="cb74-1359"><a href="#cb74-1359" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
-<span id="cb74-1360"><a href="#cb74-1360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 150"</span>)</span>
-<span id="cb74-1361"><a href="#cb74-1361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1362"><a href="#cb74-1362" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span></span>
-<span id="cb74-1363"><a href="#cb74-1363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">352</span> , ],</span>
-<span id="cb74-1364"><a href="#cb74-1364" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
-<span id="cb74-1365"><a href="#cb74-1365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post352[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
-<span id="cb74-1366"><a href="#cb74-1366" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post352[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
-<span id="cb74-1367"><a href="#cb74-1367" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb74-1368"><a href="#cb74-1368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
-<span id="cb74-1369"><a href="#cb74-1369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
-<span id="cb74-1370"><a href="#cb74-1370" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
-<span id="cb74-1371"><a href="#cb74-1371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 352"</span>)</span>
-<span id="cb74-1372"><a href="#cb74-1372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb74-1373"><a href="#cb74-1373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1374"><a href="#cb74-1374" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note how we used the good old bracket syntax (e.g., </span><span class="in">` d2[1:10 , ]`</span><span class="at">) to index rows from our </span><span class="in">`d2`</span><span class="at"> data. With tidyverse-style syntax, we could have done </span><span class="in">`slice(d2, 1:10)`</span><span class="at"> or </span><span class="in">`d2 %&gt;% slice(1:10)`</span><span class="at"> instead.</span></span>
-<span id="cb74-1375"><a href="#cb74-1375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1376"><a href="#cb74-1376" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can combine the ggplots with patchwork syntax to make the full version of Figure 4.5.</span></span>
+<span id="cb74-1298"><a href="#cb74-1298" aria-hidden="true" tabindex="-1"></a>DR: Note, this took surprisingly long even for N=10!</span>
+<span id="cb74-1299"><a href="#cb74-1299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1300"><a href="#cb74-1300" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll need to put the chains </span><span class="co">[</span><span class="ot">?</span><span class="co">]</span><span class="at">  of each model into data frames.</span></span>
+<span id="cb74-1301"><a href="#cb74-1301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1302"><a href="#cb74-1302" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1303"><a href="#cb74-1303" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: why are these called 'chains' here?</span></span>
+<span id="cb74-1304"><a href="#cb74-1304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1305"><a href="#cb74-1305" aria-hidden="true" tabindex="-1"></a>I thought the samples from the posterior were the result of the modeling 'after the chains had converged'?</span>
+<span id="cb74-1306"><a href="#cb74-1306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1307"><a href="#cb74-1307" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1308"><a href="#cb74-1308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1311"><a href="#cb74-1311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1312"><a href="#cb74-1312" aria-hidden="true" tabindex="-1"></a>post010 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_010)</span>
+<span id="cb74-1313"><a href="#cb74-1313" aria-hidden="true" tabindex="-1"></a>post050 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_050)</span>
+<span id="cb74-1314"><a href="#cb74-1314" aria-hidden="true" tabindex="-1"></a>post150 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_150)</span>
+<span id="cb74-1315"><a href="#cb74-1315" aria-hidden="true" tabindex="-1"></a>post352 <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b4<span class="fl">.3</span>_352)</span>
+<span id="cb74-1316"><a href="#cb74-1316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1317"><a href="#cb74-1317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1318"><a href="#cb74-1318" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here is the code for the four individual plots.</span></span>
+<span id="cb74-1319"><a href="#cb74-1319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1320"><a href="#cb74-1320" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1321"><a href="#cb74-1321" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: isn't there a more efficient code way to 'map' all these?</span></span>
+<span id="cb74-1322"><a href="#cb74-1322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1323"><a href="#cb74-1323" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1324"><a href="#cb74-1324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1327"><a href="#cb74-1327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb74-1328"><a href="#cb74-1328" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span></span>
+<span id="cb74-1329"><a href="#cb74-1329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> , ], <span class="co">#first 10 obs; the ones used in fitting the model</span></span>
+<span id="cb74-1330"><a href="#cb74-1330" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
+<span id="cb74-1331"><a href="#cb74-1331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post010[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>], <span class="co">#20 lines for each to reduce clutter</span></span>
+<span id="cb74-1332"><a href="#cb74-1332" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post010[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
+<span id="cb74-1333"><a href="#cb74-1333" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb74-1334"><a href="#cb74-1334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb74-1335"><a href="#cb74-1335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
+<span id="cb74-1336"><a href="#cb74-1336" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
+<span id="cb74-1337"><a href="#cb74-1337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 10"</span>)</span>
+<span id="cb74-1338"><a href="#cb74-1338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1339"><a href="#cb74-1339" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span></span>
+<span id="cb74-1340"><a href="#cb74-1340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span> , ], <span class="co">#first 50 obs...</span></span>
+<span id="cb74-1341"><a href="#cb74-1341" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
+<span id="cb74-1342"><a href="#cb74-1342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post050[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
+<span id="cb74-1343"><a href="#cb74-1343" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post050[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
+<span id="cb74-1344"><a href="#cb74-1344" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb74-1345"><a href="#cb74-1345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb74-1346"><a href="#cb74-1346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
+<span id="cb74-1347"><a href="#cb74-1347" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
+<span id="cb74-1348"><a href="#cb74-1348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 50"</span>)</span>
+<span id="cb74-1349"><a href="#cb74-1349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1350"><a href="#cb74-1350" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span></span>
+<span id="cb74-1351"><a href="#cb74-1351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span> , ],</span>
+<span id="cb74-1352"><a href="#cb74-1352" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
+<span id="cb74-1353"><a href="#cb74-1353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post150[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
+<span id="cb74-1354"><a href="#cb74-1354" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post150[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
+<span id="cb74-1355"><a href="#cb74-1355" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb74-1356"><a href="#cb74-1356" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb74-1357"><a href="#cb74-1357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
+<span id="cb74-1358"><a href="#cb74-1358" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
+<span id="cb74-1359"><a href="#cb74-1359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 150"</span>)</span>
+<span id="cb74-1360"><a href="#cb74-1360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1361"><a href="#cb74-1361" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span></span>
+<span id="cb74-1362"><a href="#cb74-1362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data =</span>  d2[<span class="dv">1</span><span class="sc">:</span><span class="dv">352</span> , ],</span>
+<span id="cb74-1363"><a href="#cb74-1363" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> weight, <span class="at">y =</span> height)) <span class="sc">+</span></span>
+<span id="cb74-1364"><a href="#cb74-1364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> post352[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">1</span>],</span>
+<span id="cb74-1365"><a href="#cb74-1365" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope     =</span> post352[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">2</span>],</span>
+<span id="cb74-1366"><a href="#cb74-1366" aria-hidden="true" tabindex="-1"></a>              <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>, <span class="at">alpha =</span> .<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb74-1367"><a href="#cb74-1367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"royalblue"</span>) <span class="sc">+</span></span>
+<span id="cb74-1368"><a href="#cb74-1368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>weight),</span>
+<span id="cb74-1369"><a href="#cb74-1369" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d2<span class="sc">$</span>height)) <span class="sc">+</span></span>
+<span id="cb74-1370"><a href="#cb74-1370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"N = 352"</span>)</span>
+<span id="cb74-1371"><a href="#cb74-1371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1372"><a href="#cb74-1372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1373"><a href="#cb74-1373" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Note how we used the good old bracket syntax (e.g., </span><span class="in">` d2[1:10 , ]`</span><span class="at">) to index rows from our </span><span class="in">`d2`</span><span class="at"> data. With tidyverse-style syntax, we could have done </span><span class="in">`slice(d2, 1:10)`</span><span class="at"> or </span><span class="in">`d2 %&gt;% slice(1:10)`</span><span class="at"> instead.</span></span>
+<span id="cb74-1374"><a href="#cb74-1374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1375"><a href="#cb74-1375" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can combine the ggplots with patchwork syntax to make the full version of Figure 4.5.</span></span>
+<span id="cb74-1376"><a href="#cb74-1376" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1377"><a href="#cb74-1377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1378"><a href="#cb74-1378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1379"><a href="#cb74-1379" aria-hidden="true" tabindex="-1"></a>DR: I didn't know this syntax, I previously used this some combine plots function thing</span>
-<span id="cb74-1380"><a href="#cb74-1380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1381"><a href="#cb74-1381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 5, fig.height = 5}</span></span>
-<span id="cb74-1382"><a href="#cb74-1382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1383"><a href="#cb74-1383" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3 <span class="sc">+</span> p4) <span class="sc">&amp;</span></span>
-<span id="cb74-1384"><a href="#cb74-1384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">&amp;</span></span>
-<span id="cb74-1385"><a href="#cb74-1385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb74-1386"><a href="#cb74-1386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1387"><a href="#cb74-1387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1378"><a href="#cb74-1378" aria-hidden="true" tabindex="-1"></a>DR: I didn't know this syntax, I previously used this some combine plots function thing</span>
+<span id="cb74-1379"><a href="#cb74-1379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1380"><a href="#cb74-1380" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 5, fig.height = 5}</span></span>
+<span id="cb74-1381"><a href="#cb74-1381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1382"><a href="#cb74-1382" aria-hidden="true" tabindex="-1"></a>(p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3 <span class="sc">+</span> p4) <span class="sc">&amp;</span></span>
+<span id="cb74-1383"><a href="#cb74-1383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">&amp;</span></span>
+<span id="cb74-1384"><a href="#cb74-1384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb74-1385"><a href="#cb74-1385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1386"><a href="#cb74-1386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb74-1387"><a href="#cb74-1387" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1388"><a href="#cb74-1388" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1389"><a href="#cb74-1389" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1390"><a href="#cb74-1390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1391"><a href="#cb74-1391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1392"><a href="#cb74-1392" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prediction intervals {-}</span></span>
-<span id="cb74-1393"><a href="#cb74-1393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1394"><a href="#cb74-1394" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; generating an 89% prediction interval for actual heights, not just the average height, $\mu$ . This means we-ll incorporate the standard deviation $\sigma$ and its uncertainty as well</span></span>
-<span id="cb74-1395"><a href="#cb74-1395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1396"><a href="#cb74-1396" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For any unique weight value, you sample from a Gaussian distribution with the correct mean $\mu$ for that weight, using the correct value of $\sigma$ sampled from the same posterior distribution. </span></span>
-<span id="cb74-1397"><a href="#cb74-1397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1398"><a href="#cb74-1398" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1399"><a href="#cb74-1399" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: what does he mean by 'correct' here?</span></span>
-<span id="cb74-1400"><a href="#cb74-1400" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1401"><a href="#cb74-1401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1402"><a href="#cb74-1402" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; do this for every sample from the posterior, for every weight value of interest, you end up with a collection of simulated heights that embody the uncertainty in the posterior *as well as* the uncertainty in the Gaussian distribution of heights. There is a tool called sim which does this:</span></span>
-<span id="cb74-1403"><a href="#cb74-1403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1404"><a href="#cb74-1404" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This matrix is much like the earlier one, mu, but it contains simulated heights /// </span></span>
-<span id="cb74-1405"><a href="#cb74-1405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1406"><a href="#cb74-1406" aria-hidden="true" tabindex="-1"></a>A vector of simulated heights for each element in the weight sequence</span>
-<span id="cb74-1407"><a href="#cb74-1407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1408"><a href="#cb74-1408" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; You could plot the boundary for other percents, such as 67% and 97% (also both primes), and add those to the plot. it would be nice to plot several of these together, perhaps a gradual distribution/elevation plot of confidence</span></span>
+<span id="cb74-1391"><a href="#cb74-1391" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prediction intervals {-}</span></span>
+<span id="cb74-1392"><a href="#cb74-1392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1393"><a href="#cb74-1393" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; generating an 89% prediction interval for actual heights, not just the average height, $\mu$ . This means we-ll incorporate the standard deviation $\sigma$ and its uncertainty as well</span></span>
+<span id="cb74-1394"><a href="#cb74-1394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1395"><a href="#cb74-1395" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For any unique weight value, you sample from a Gaussian distribution with the correct mean $\mu$ for that weight, using the correct value of $\sigma$ sampled from the same posterior distribution. </span></span>
+<span id="cb74-1396"><a href="#cb74-1396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1397"><a href="#cb74-1397" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1398"><a href="#cb74-1398" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: what does he mean by 'correct' here?</span></span>
+<span id="cb74-1399"><a href="#cb74-1399" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1400"><a href="#cb74-1400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1401"><a href="#cb74-1401" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; do this for every sample from the posterior, for every weight value of interest, you end up with a collection of simulated heights that embody the uncertainty in the posterior *as well as* the uncertainty in the Gaussian distribution of heights. There is a tool called sim which does this:</span></span>
+<span id="cb74-1402"><a href="#cb74-1402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1403"><a href="#cb74-1403" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This matrix is much like the earlier one, mu, but it contains simulated heights /// </span></span>
+<span id="cb74-1404"><a href="#cb74-1404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1405"><a href="#cb74-1405" aria-hidden="true" tabindex="-1"></a>A vector of simulated heights for each element in the weight sequence</span>
+<span id="cb74-1406"><a href="#cb74-1406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1407"><a href="#cb74-1407" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; You could plot the boundary for other percents, such as 67% and 97% (also both primes), and add those to the plot. it would be nice to plot several of these together, perhaps a gradual distribution/elevation plot of confidence</span></span>
+<span id="cb74-1408"><a href="#cb74-1408" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1409"><a href="#cb74-1409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1410"><a href="#cb74-1410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1411"><a href="#cb74-1411" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1412"><a href="#cb74-1412" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why simulate and not use analytic formulas here</span></span>
-<span id="cb74-1413"><a href="#cb74-1413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1414"><a href="#cb74-1414" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; true that it is possible to use analytical formulas to compute intervals like this</span></span>
-<span id="cb74-1415"><a href="#cb74-1415" aria-hidden="true" tabindex="-1"></a><span class="at">... and there is some additional insight that comes from knowing the mathematics, </span><span class="co">[</span><span class="ot">however</span><span class="co">]</span><span class="at"> the pseudo-empirical approach presented here is very flexible and allows a much broader audience of scientists to pull insight from their statistical modeling. And again, when you start estimating models with MCMC (Chapter 9), this is really the only approach available</span></span>
-<span id="cb74-1416"><a href="#cb74-1416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1417"><a href="#cb74-1417" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1418"><a href="#cb74-1418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1419"><a href="#cb74-1419" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For every distribution like </span><span class="in">`dnorm`</span><span class="at">, there is a companion simulation function </span></span>
-<span id="cb74-1420"><a href="#cb74-1420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1421"><a href="#cb74-1421" aria-hidden="true" tabindex="-1"></a><span class="in">`dnorm`</span>: specifies the density at any point (I guess) </span>
-<span id="cb74-1422"><a href="#cb74-1422" aria-hidden="true" tabindex="-1"></a><span class="in">`rnorm`</span>: randomly generates draws the normal distribution</span>
-<span id="cb74-1423"><a href="#cb74-1423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1424"><a href="#cb74-1424" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curves from lines (4.5) {-}</span></span>
+<span id="cb74-1410"><a href="#cb74-1410" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1411"><a href="#cb74-1411" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why simulate and not use analytic formulas here</span></span>
+<span id="cb74-1412"><a href="#cb74-1412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1413"><a href="#cb74-1413" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; true that it is possible to use analytical formulas to compute intervals like this</span></span>
+<span id="cb74-1414"><a href="#cb74-1414" aria-hidden="true" tabindex="-1"></a><span class="at">... and there is some additional insight that comes from knowing the mathematics, </span><span class="co">[</span><span class="ot">however</span><span class="co">]</span><span class="at"> the pseudo-empirical approach presented here is very flexible and allows a much broader audience of scientists to pull insight from their statistical modeling. And again, when you start estimating models with MCMC (Chapter 9), this is really the only approach available</span></span>
+<span id="cb74-1415"><a href="#cb74-1415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1416"><a href="#cb74-1416" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1417"><a href="#cb74-1417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1418"><a href="#cb74-1418" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For every distribution like </span><span class="in">`dnorm`</span><span class="at">, there is a companion simulation function </span></span>
+<span id="cb74-1419"><a href="#cb74-1419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1420"><a href="#cb74-1420" aria-hidden="true" tabindex="-1"></a><span class="in">`dnorm`</span>: specifies the density at any point (I guess) </span>
+<span id="cb74-1421"><a href="#cb74-1421" aria-hidden="true" tabindex="-1"></a><span class="in">`rnorm`</span>: randomly generates draws the normal distribution</span>
+<span id="cb74-1422"><a href="#cb74-1422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1423"><a href="#cb74-1423" aria-hidden="true" tabindex="-1"></a><span class="fu">## Curves from lines (4.5) {-}</span></span>
+<span id="cb74-1424"><a href="#cb74-1424" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-1425"><a href="#cb74-1425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1426"><a href="#cb74-1426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1427"><a href="#cb74-1427" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb74-1428"><a href="#cb74-1428" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note: I don't think Kurz does the 'splines' coding</span></span>
-<span id="cb74-1429"><a href="#cb74-1429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1430"><a href="#cb74-1430" aria-hidden="true" tabindex="-1"></a>::: </span>
-<span id="cb74-1431"><a href="#cb74-1431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1432"><a href="#cb74-1432" aria-hidden="true" tabindex="-1"></a>Ways to 'build curves':</span>
-<span id="cb74-1433"><a href="#cb74-1433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1434"><a href="#cb74-1434" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The first is polynomial regression. The second is b-splines </span></span>
-<span id="cb74-1435"><a href="#cb74-1435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1436"><a href="#cb74-1436" aria-hidden="true" tabindex="-1"></a>DR: I need to know more about how to use the splines</span>
-<span id="cb74-1437"><a href="#cb74-1437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1438"><a href="#cb74-1438" aria-hidden="true" tabindex="-1"></a>Defines the parabolic model... </span>
-<span id="cb74-1439"><a href="#cb74-1439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1440"><a href="#cb74-1440" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ... Just modify the definition of mu so that it contains both the linear and quadratic terms. But in general it is better to pre-process any variable transformations-you don-t need the computer to recalculate the transformations on every iteration of the fitting procedure</span></span>
-<span id="cb74-1441"><a href="#cb74-1441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1442"><a href="#cb74-1442" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The parameter $\alpha$ (a) is still the intercept, so it tells us the expected value of height when weight is at its mean value. But it is no longer equal to the mean height in the sample, since there is no guarantee it should in a polynomial regression</span></span>
-<span id="cb74-1443"><a href="#cb74-1443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1444"><a href="#cb74-1444" aria-hidden="true" tabindex="-1"></a>We aren't learning any causal relationship between height and weight</span>
-<span id="cb74-1445"><a href="#cb74-1445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1446"><a href="#cb74-1446" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; B-splines do not directly transform the predictor by squaring or cubing it. Instead they invent a series of entirely new, synthetic predictor variables. Each of these synthetic variables exists only to gradually turn a specific parameter on and off within a specific range of the real predictor variable. Each of the synthetic variables is called a basis function</span></span>
-<span id="cb74-1447"><a href="#cb74-1447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1448"><a href="#cb74-1448" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The linear model ends up looking very familiar: -i = - + w1Bi,1 + w2Bi,2 + w3Bi,3 + ... where Bi,n is the n-th basis function-s value on row i, and the w parameters are corresponding weights for each</span></span>
-<span id="cb74-1449"><a href="#cb74-1449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1450"><a href="#cb74-1450" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; divide the full range of the horizontal axis into four parts, using pivot points called knots. The</span></span>
-<span id="cb74-1451"><a href="#cb74-1451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1452"><a href="#cb74-1452" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; These synthetic variables are used to gently transition from one region of the horizontal axis to the next. Essentially, these variables tell you which knot you are close to. Beginning on the left of the top plot, basis function 1 has value 1 and all of the others are set to zero. As we move rightwards towards the second knot, basis 1 declines and basis 2 increases. At knot 2, basis 2 has value 1, and all of the others are set to zero</span></span>
-<span id="cb74-1453"><a href="#cb74-1453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1454"><a href="#cb74-1454" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; they make the influence of each parameter quite local. At any point on the horizontal axis in Figure 4.12, only two basis functions have non-zero values</span></span>
-<span id="cb74-1455"><a href="#cb74-1455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1456"><a href="#cb74-1456" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Parameters called weights multiply the basis functions. The spline at any given point is the sum of these weighted basis functions</span></span>
-<span id="cb74-1457"><a href="#cb74-1457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1458"><a href="#cb74-1458" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; the knots are just values of year that serve as pivots for our spline. Where should the knots go?</span></span>
-<span id="cb74-1459"><a href="#cb74-1459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1460"><a href="#cb74-1460" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; simple example above, place the knots at different evenly spaced quantiles of the predictor variable. This gives you more knots where there are more observations. We</span></span>
-<span id="cb74-1461"><a href="#cb74-1461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1462"><a href="#cb74-1462" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; next choice is polynomial degree. This determines how basis functions combine, which determines how the parameters interact to produce the spline not fully explained</span></span>
-<span id="cb74-1463"><a href="#cb74-1463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-1464"><a href="#cb74-1464" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; the w priors influence how wiggly the spline can be</span></span>
+<span id="cb74-1426"><a href="#cb74-1426" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb74-1427"><a href="#cb74-1427" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note: I don't think Kurz does the 'splines' coding</span></span>
+<span id="cb74-1428"><a href="#cb74-1428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1429"><a href="#cb74-1429" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb74-1430"><a href="#cb74-1430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1431"><a href="#cb74-1431" aria-hidden="true" tabindex="-1"></a>Ways to 'build curves':</span>
+<span id="cb74-1432"><a href="#cb74-1432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1433"><a href="#cb74-1433" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The first is polynomial regression. The second is b-splines </span></span>
+<span id="cb74-1434"><a href="#cb74-1434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1435"><a href="#cb74-1435" aria-hidden="true" tabindex="-1"></a>DR: I need to know more about how to use the splines</span>
+<span id="cb74-1436"><a href="#cb74-1436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1437"><a href="#cb74-1437" aria-hidden="true" tabindex="-1"></a>Defines the parabolic model... </span>
+<span id="cb74-1438"><a href="#cb74-1438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1439"><a href="#cb74-1439" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ... Just modify the definition of mu so that it contains both the linear and quadratic terms. But in general it is better to pre-process any variable transformations-you don-t need the computer to recalculate the transformations on every iteration of the fitting procedure</span></span>
+<span id="cb74-1440"><a href="#cb74-1440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1441"><a href="#cb74-1441" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The parameter $\alpha$ (a) is still the intercept, so it tells us the expected value of height when weight is at its mean value. But it is no longer equal to the mean height in the sample, since there is no guarantee it should in a polynomial regression</span></span>
+<span id="cb74-1442"><a href="#cb74-1442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1443"><a href="#cb74-1443" aria-hidden="true" tabindex="-1"></a>We aren't learning any causal relationship between height and weight</span>
+<span id="cb74-1444"><a href="#cb74-1444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1445"><a href="#cb74-1445" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; B-splines do not directly transform the predictor by squaring or cubing it. Instead they invent a series of entirely new, synthetic predictor variables. Each of these synthetic variables exists only to gradually turn a specific parameter on and off within a specific range of the real predictor variable. Each of the synthetic variables is called a basis function</span></span>
+<span id="cb74-1446"><a href="#cb74-1446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1447"><a href="#cb74-1447" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The linear model ends up looking very familiar: -i = - + w1Bi,1 + w2Bi,2 + w3Bi,3 + ... where Bi,n is the n-th basis function-s value on row i, and the w parameters are corresponding weights for each</span></span>
+<span id="cb74-1448"><a href="#cb74-1448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1449"><a href="#cb74-1449" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; divide the full range of the horizontal axis into four parts, using pivot points called knots. The</span></span>
+<span id="cb74-1450"><a href="#cb74-1450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1451"><a href="#cb74-1451" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; These synthetic variables are used to gently transition from one region of the horizontal axis to the next. Essentially, these variables tell you which knot you are close to. Beginning on the left of the top plot, basis function 1 has value 1 and all of the others are set to zero. As we move rightwards towards the second knot, basis 1 declines and basis 2 increases. At knot 2, basis 2 has value 1, and all of the others are set to zero</span></span>
+<span id="cb74-1452"><a href="#cb74-1452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1453"><a href="#cb74-1453" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; they make the influence of each parameter quite local. At any point on the horizontal axis in Figure 4.12, only two basis functions have non-zero values</span></span>
+<span id="cb74-1454"><a href="#cb74-1454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1455"><a href="#cb74-1455" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Parameters called weights multiply the basis functions. The spline at any given point is the sum of these weighted basis functions</span></span>
+<span id="cb74-1456"><a href="#cb74-1456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1457"><a href="#cb74-1457" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; the knots are just values of year that serve as pivots for our spline. Where should the knots go?</span></span>
+<span id="cb74-1458"><a href="#cb74-1458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1459"><a href="#cb74-1459" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; simple example above, place the knots at different evenly spaced quantiles of the predictor variable. This gives you more knots where there are more observations. We</span></span>
+<span id="cb74-1460"><a href="#cb74-1460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1461"><a href="#cb74-1461" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; next choice is polynomial degree. This determines how basis functions combine, which determines how the parameters interact to produce the spline not fully explained</span></span>
+<span id="cb74-1462"><a href="#cb74-1462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-1463"><a href="#cb74-1463" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; the w priors influence how wiggly the spline can be</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
