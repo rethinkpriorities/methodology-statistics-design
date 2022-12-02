@@ -1,4 +1,4 @@
-# Chapter 4. Geocentric (linear) Models
+# Ch 4. Geocentric (linear) Models
 
 ```{r, echo = F, cache = F}
 knitr::opts_chunk$set(fig.retina = 2.5)
@@ -327,7 +327,7 @@ d %>%
 > The posterior is a combination of the prior and the likelihood. When the prior is flat across the parameter space, the posterior is just the likelihood re-expressed as a probability. As we go along, you'll see that we almost never use flat priors in practice.
 :::
 
-## A Gaussian model of height (4.3)
+## A Gaussian model of height (4.3) {-}
 
 
 ::: {.callout-note collapse="true"}
@@ -338,11 +338,11 @@ His blog entry is better formatted and talks through some parts of the intuition
 
 ::: 
 
-> single measurement variable to model as a Gaussian distribution. There will be two parameters describing the distribution's shape, the mean - and the standard deviation 
+> ...  single measurement variable to model as a Gaussian distribution. There will be two parameters describing the distribution's shape, the mean - and the standard deviation 
 
 > the 'estimate' here will be the entire posterior distribution, not any point within it
 
-> And as a result, the posterior distribution will be a distribution of Gaussian distributions. or of the parameters of these
+> And as a result, the posterior distribution will be a distribution of Gaussian distributions, or of the parameters of these
 
 > There are an infinite number of possible Gaussian distributions. Some have small means. Others have large means. Some are wide, with a large $\sigma$. Others are narrow. We want our Bayesian machine to consider every possible distribution, each defined by a combination of $\mu$ and $\sigma$, and rank them by posterior plausibility. (p. 79)
 
@@ -400,10 +400,11 @@ d2 %>%
 
 ### The model {.unnumbered}
 
-> as mentioned earlier in this chapter, the empirical distribution needn't be actually Gaussian in order to justify using a Gaussian probability distribution why not?
+> as mentioned earlier in this chapter, the empirical distribution needn't be actually Gaussian in order to justify using a Gaussian probability distribution.
 
 ::: {.callout-note collapse="true"}
-## DR question: Why? is this because we are considering *means*?
+## DR question: Why? 
+I think this is  because we are considering *means*?
 :::
 
 ::: {.callout-note collapse="true"}
@@ -445,6 +446,9 @@ ggplot(data = tibble(x = seq(from = 100, to = 250, by = .1)),
 I guess this is fixed later?
 :::
 
+
+[Gelman on priors](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)
+
 ::: {.callout-note collapse="true"}
 ## brms's `get_prior` 
 
@@ -470,10 +474,9 @@ Anyways, `get, suggesting_prior` suggests specific student=t distributions for t
 
 
 The prior doesn't affect the results much if you have a reasonably diffuse prior and lots of data.  However: 
+
 > There are plenty of inference problems for which the data alone are not sufficient, no matter how numerous. Bayes lets us proceed in these cases. But only if we use our scientific knowledge to construct sensible priors. Using scientific knowledge to build priors is not cheating. The important thing is that your prior not be based on the values in the data, but only on what you know about the data before you see it.
 
-...
- 
  
 > so to get the joint likelihood across all the data, we have to compute the probability for each $h_i$ [observed height] and then multiply all these likelihoods together
 
@@ -594,7 +597,6 @@ Note that the posterior distribution of parameters need not be a circle or even 
 
 ### Sampling from the posterior (3.4) {-}
 
-
 McElreath: 
 
 > since there are two parameters, and we want to sample combinations of them, we first randomly sample row numbers in post in proportion to the values in `post$prob`. Then we pull out the parameter values on those randomly sampled rows draw from grid in proportion to calculated likelihoods.
@@ -673,7 +675,7 @@ is the standard deviation - that causes problems. So if you care about --often p
 
 
 
-### Fitting the model with c... `brm()` (Kurz) {-}
+### Fitting the model with `brm()` (Kurz) {-}
 
 > but will jump straight to the primary brms modeling function, `brm()`. 
 
@@ -712,12 +714,11 @@ b4.1_hc <-
 
 ```
 
-Aargh -- so much message output above. How can I reduce it?
 
-Above:  MCMC I think (or maybe HMC = ‘Hamiltonian Monte Carlo?). But this is jumping ahead. QUAP should work faster here? MCMC (if that’s what it is) took about 22 seconds on my machine, which isn’t too bad, but could add up to a pain if you are running many models. I’m not sure why Kurz (and Willem) didn’t use QUAP at this point.
+Above:  MCMC I think^[(or maybe HMC = ‘Hamiltonian Monte Carlo?' -- are these the same?). But this is jumping ahead. QUAP should work faster here? MCMC (if that’s what it is) took about 22 seconds on my machine, which isn’t too bad, but could add up to a pain if you are running many models. I’m not sure why Kurz (and Willem) didn’t use QUAP at this point. ]
 
 
-Kurz goes into a discussion of 'inspecting the HMC chains here'. But so far we have no idea what this means. 
+Kurz goes into a discussion of 'inspecting the HMC chains here'. But so far we have no idea what this means. Takeaway from our discussion -- they should not show a trend or a cyclical pattern by the end.
 
 
 Here's how to get the model summary of our `brm()` object.
@@ -726,13 +727,20 @@ Here's how to get the model summary of our `brm()` object.
 print(b4.1_hc, prob=.89)
 ```
 
-> The `summary()` function works in a similar way. You can also get a [Stan-like summary](https://cran.r-project.org/package=rstan/vignettes/rstan.html) like this.
+*DR_question: Above -- is the CI for the 'centered interval' or the 'highest density' one?*
 
-Above -- is the CI the 'centered interval' or the 'highest density' one?
+
+::: {.callout-note collapse="true"}
+## Stan-like
+
+You can also get a [Stan-like summary](https://cran.r-project.org/package=rstan/vignettes/rstan.html) like this.
+
 
 ```{r}
 b4.1_hc$fit
 ```
+
+:::
 
 ```{r}
 summary(b4.1_hc, prob = .89)
@@ -744,7 +752,8 @@ Above: I adjusted to ask for 89% intervals, as in McElreath
 
 ### Misc notes from McElreath to integrate in {-}
 
-> Finding the posterior distribution with quap
+::: {.callout-note collapse="true"}
+##  Finding the posterior distribution with quap
 
 > quadratic approximation
 
@@ -758,8 +767,6 @@ Above: I adjusted to ask for 89% intervals, as in McElreath
 
 > These numbers provide Gaussian approximations for each parameter's *marginal* distribution. This means the plausibility of each value of $\mu$, after averaging over the plausibilities of each value of $\sigma$, is given by a Gaussian distribution with mean 154.6 and standard deviation 0.4
 
-> But I don't recommend 95% intervals, because readers will have a hard time not viewing them as significance tests
-
 >  Unless you tell it otherwise, quap starts at random values sampled from the prior. But it's also possible to specify a starting value for any parameter in the model. 
 
 ```
@@ -770,15 +777,25 @@ m4.1 <- quap( flist , data=d2 , start=start )
 
 > when you define a list of formulas, you should use alist, so the code isn't executed. But when you define a list of start values for parameters, you should use list... 
 
+:::
+
+> But I don't recommend 95% intervals, because readers will have a hard time not viewing them as significance tests
+
+
 > Once the golem is certain that the mean is near 178-as the prior insists-then the golem has to estimate $\sigma$ conditional on that fact. This results in a different posterior for $\sigma$, even though all we changed is prior information about the other parameter
 
-> a quadratic approximation to a posterior distribution with more than one parameter dimension-- nu and sigma each contribute one dimension-is just a multi-dimensional Gaussian distribution
 
-> hen R constructs a quadratic approximation, it calculates not only standard deviations for all parameters, but also the covariances among all pairs of parameters
+::: {.callout-note collapse="true"}
+## The quadratic approximation
+
+> a quadratic approximation to a posterior distribution with more than one parameter dimension-- mu and sigma each contribute one dimension-is just a multi-dimensional Gaussian distribution
+
+> When R constructs a quadratic approximation, it calculates not only standard deviations for all parameters, but also the covariances among all pairs of parameters
 
 >  a list of means and a matrix of variances and covariances are sufficient to describe a multi-dimensional Gaussian distribution. 
 
 > variance-covariance matrix can be factored into two elements: (1) a vector of variances for the parameters and (2) a correlation matrix that tells us how changes in any parameter lead to correlated changes in the others
+::: 
 
 [correlations]
 
@@ -800,7 +817,7 @@ ggplot(data = d2,
   theme(panel.grid = element_blank())
 ```
 
-> (Kurz) linear model strategy instructs the golem to assume that the predictor variable has a perfect constant and additive relationship to the mean of the outcome. The golem then computes the posterior distribution of this constant relationship. (p. 92, **emphasis** in the original)
+> (Kurz) linear model strategy instructs the golem to assume that the predictor variable has a perfect constant and additive relationship to the mean of the outcome. The golem then computes the posterior distribution of this constant relationship. (p. 92)
 
 > Our new univariable model will follow the formula
 
@@ -811,6 +828,9 @@ h_i & \sim \text{Normal}(\mu_i, \sigma) \\
 \beta & \sim \text{Normal}(0, 10) \\
 \sigma & \sim \text{Uniform}(0, 50).
 \end{align*}
+
+
+*We agreed that the prior distribution for sigma here could be improved.*
 
 #### Priors {-}
 
@@ -823,7 +843,7 @@ Our univariable model has three priors:
 \end{align*}
 
 
-> (L) Unlike with the rethinking package, our `brms::brm()` syntax won't perfectly mirror the formal statistical notation. But here are the analogues to the exposition at the bottom of page 95 (with the corrected $\alpha$ prior).
+> (L:) Unlike with the rethinking package, our `brms::brm()` syntax won't perfectly mirror the formal statistical notation. But here are the analogues to the exposition at the bottom of page 95 (with the corrected $\alpha$ prior).
 
 * $h_i \sim \text{Normal}(\mu_i, \sigma)$: `family = gaussian`
 * $\mu_i = \alpha + \beta x_i$: `height ~ 1 + weight`
@@ -833,12 +853,14 @@ Our univariable model has three priors:
 
 > Thus, to add a predictor you just the `+` operator in the model `formula`.
 
-```{r b4.3}
-
+```{r}
+#| label:  b4.3
+#| code-summary: "brms linear model of height in weight"
+ 
 b4.3 <-
   brm(data = d2,
       family = gaussian,
-      height ~ 1 + weight, #THIS is the new bit; we add the slop variable name to the model
+      height ~ 1 + weight, #THIS is the new bit; we add the slope variable name to the model
       prior = c(prior(normal(178, 100), class = Intercept),
                 prior(normal(0, 10), class = b),
                 prior(uniform(0, 50), class = sigma)),
@@ -847,135 +869,541 @@ b4.3 <-
       file = "fits/b04.03")
 ```
 
-> (K) This was another example of how using a uniform prior for $\sigma$ required we use an unusually large number of `warmup` iterations before the HMC chains converged on the posterior. Change the prior to `cauchy(0, 1)` and the chains converge with no problem, resulting in much better effective samples, too. Here are the trace plots.
+> (K:) This was another example of how using a uniform prior for $\sigma$ required we use an unusually large number of `warmup` iterations before the HMC chains converged on the posterior. Change the prior to `cauchy(0, 1)` and the chains converge with no problem, resulting in much better effective samples, too. Here are the trace plots.
 
 ```{r, fig.width = 6, fig.height = 3.5}
 plot(b4.3)
 ```
 
+```{r}
+#| label:  b4.3cauchy
+#| code-summary: "with Cauchy"
 
+b4.3c <-
+  brm(data = d2,
+      family = gaussian,
+      height ~ 1 + weight, #THIS is the new bit; we add the slope variable name to the model
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(uniform(0, 50), class = sigma)),
+      iter = 41000, warmup = 40000, chains = 4, cores = 4, #How do we know what values to set here?
+      seed = 4,
+      file = "fits/b04c.03")
 
-### More McElreath notes to incorporate
+plot(b4.3c)
 
 
+```
 
-> These samples also preserve the covariance between - and -.
+DR: I don't see how the Cauchy one looks better
 
-> make the parameter for the mean of a Gaussian distribution, -, into a linear function of the predictor variable and other, new parameters that we invent.
+### More McElreath notes on the linear model
 
-> The linear model strategy instructs the golem to assume that the predictor variable has a constant and additive relationship to the mean of the outcome. The golem then computes the posterior distribution of this constant relationship.
+> make the parameter for the mean of a Gaussian distribution, $\mu$, into a linear function of the predictor variable and other, new parameters that we invent...  The linear model strategy instructs the golem to assume that the predictor variable has a constant and additive relationship to the mean of the outcome. The golem then computes the posterior distribution of this constant relationship.
 
->  We ask the golem: -Consider all the lines that relate one variable to the other. Rank all of these lines by plausibility, given these data.- The golem answers with a posterior distribution.
+>  We ask the golem: 'Consider all the lines that relate one variable to the other. Rank all of these lines by plausibility, given these data.' The golem answers with a posterior distribution.
 
-> definition of -i is deterministic
+> definition of $\mu_i$ is deterministic ... once we know alpha and beta and $x_i$, we know $\mu_i$ with certainty
 
-> It is often called a -slope
+> [$\beta$] ...  is often called a 'slope'...   Better to think of it as a rate of change in expectation
 
-Better to think of it as a rate of change in expectation
+> Why have a Gaussian prior with mean zero? ...  To figure out what this prior implies, we have to simulate the prior predictive distribution
 
-Why have a Gaussian prior with mean zero
+> goal is to simulate heights from the model, using only the priors
 
-To figure out what this prior implies, we have to simulate the prior predictive distribution
+> simulate over. The range of observed weights
 
-goal is to simulate heights from the model, using only the priors
+> We know that average height increases with average weight, at least up to a point. Let's try restricting it to positive values. The easiest way to do this is to define the prior as Log-Normal instead
 
-simulate over. The range of observed weights
+> We don't pay any attention to p-values in this book. But the danger remains, if we choose our priors conditional on the observed sample, just to get some desired result. The procedure we've performed in this chapter is to choose priors conditional on pre-data knowledge of the variables: their constraints, ranges, and theoretical relationships. This is why the actual data are not shown in the earlier section. We are judging our priors against general facts, not the sample. 
 
-We know that average height increases with average weight, at least up to a point. Let-s try restricting it to positive values. The easiest way to do this is to define the prior as Log-Normal instead
+::: {.callout-note collapse="true"}
+## DR question -- Bayesian p hacking? 
 
-there are many analyses in which no amount of data makes the prior irrelevant
+this needs elaboration*
 
-nullWe don-t pay any attention to p-values in this book. But the danger remains, if we choose our priors conditional on the observed sample, just to get some desired result. The procedure we-ve performed in this chapter is to choose priors conditional on pre-data knowledge of the variables- their constraints, ranges, and theoretical relationships. This is why the actual data are not shown in the earlier section. We are judging our priors against general facts, not the sample. We bayesian p hacking? this needs elaboration
+*DR: This seems to be Jamie Elsey's point about reluctance to use any of the data/knowledg from the data in setting the priors, even over hyperparameters. The 'empirical Bayes' guy seems to disagree with this.*
 
-TDR: his seems to be Jamie Elsey's point about reluctance to use any of the data/knowledg from the data in setting the priors, even over hyperparameters. The 'empirical Bayes' guy seems to disagree with this.
+:::
 
-You can usefully think of $y = log(x)$ as assigning to y the order of magnitude of $x$. The function $x = exp(y)$ is the reverse, turning a magnitude into a value
+> You can usefully think of $y = log(x)$ as assigning to $y$ the order of magnitude of $x$. The function $x = exp(y)$ is the reverse, turning a magnitude into a value
 
-Note the exp(log_b) in the definition of mu. This what's the benefit of this substitution?
+DR: This is only approximate 
 
-There are two broad categories of processing: (1) reading tables and (2) plotting simulations.
+::: {.callout-note collapse="true"}
+## DR question
 
-emphasize plotting posterior distributions and posterior predictions, instead of attempting to understand a table
+Note the `exp(log_b)` in the definition of mu. Thus what's the benefit of this substitution?
 
-Plotting the implications of your models will allow you to inquire about things that are hard to read from tables: (1) Whether or not the model fitting procedure worked correctly (2) The absolute magnitude, rather than merely relative magnitude, of a relationship between outcome and predictor (3) The uncertainty surrounding an average relationship (4) The uncertainty surrounding the implied predictions of the model, as these are distinct from mere parameter uncertainty
+:::
 
-Posterior probabilities of parameter values describe the relative compatibility of different states of the world with the data, according to the model
+### Intepreting the model fit {-}
 
-marginal posterior distributions of the parameters 'marginal' bc we are integrating or summing across the other parameters when estimating these measures for each parameter
+> There are two broad categories of processing: (1) reading tables and (2) plotting simulations.
 
-. It is most certainly not evidence that the relationship between weight and height is linear, because the model only considered lines. It just says that, if you are committed to a line, then lines with a slope around 0.9 are plausible ones
+> emphasize plotting posterior distributions and posterior predictions, instead of attempting to understand a table
 
-to describe the quadratic posterior completely. For that, we also require the variance-covariance matrix We somehow estimated the (MAP?) values of the parameters in a series of simulations (I forgot how). Now we also consider the variance and covariance of these. Is this simply the empirical variance and covariance across simulations? (And then IIRC quap uses these to generate a more complete posterior and sample from it or something). I guess this is helpful because in each simulation I only need to derive a few things, the sort of max confidence values of the parameters, rather than the posterior probability for all possible values. We also can, in principle, use only a few simulations (shown later) and derive an estimate of that covariance matrix and then, assuming normality or something, draw from the joint posterior implied by that covariance matrix to plot things.
+> Plotting the implications of your models will allow you to inquire about things that are hard to read from tables: (1) Whether or not the model fitting procedure worked correctly (2) The absolute magnitude, rather than merely relative magnitude, of a relationship between outcome and predictor (3) The uncertainty surrounding an average relationship (4) The uncertainty surrounding the implied *predictions* of the model, as these are distinct from mere parameter uncertainty
 
-nullan informal check on model assumptions. When the model-s predictions don-t come close to key observations or patterns in the plotted data, then you might suspect the model either did not fit correctly or is rather badly specified we do something like this in our 80k work etc when we compare the results from a 'model' to mean differences across conditions
+> Posterior probabilities of parameter values describe the relative compatibility of different states of the world with the data, according to the model
 
-nullBut for even slightly more complex models, especially those that include interaction effects (Chapter 8), interpreting posterior distributions is hard
+> "we inspect the marginal posterior distributions of the parameters"
 
-nullposterior distribution considers every possible regression line connecting height to weight. It assigns a relative plausibility to each. This means that each combination of - and - has a posterior probability. It could be that there are many lines with nearly the same posterior probability as the average line. Or it could be instead that the posterior distribution is rather narrow near the average
+'marginal' bc we are integrating or summing across the other parameters when estimating these measures for each parameter
 
-we could sample a bunch of lines from the posterior distribution. Then we could display those lines on the plot, to visualize the uncertainty in the regression relationship. Drawing randomly from the posterior distributin will of course draw more 'likely' lines more often
+> It is most certainly not evidence that the relationship between weight and height is linear, because the model only considered lines. It just says that, if you are committed to a line, then lines with a slope around 0.9 are plausible ones
 
-Each row is a correlated random sample from the joint posterior of all three parameters, using the covariances provided by vcov(m4.3). The
+> to describe the quadratic posterior completely ... we also require the variance-covariance matrix 
 
-average of very many of these lines is the posterior mean line I don't understand ... is he implying that the MAP line will also be the "average" of the intercept and slope coefficients or something?
+::: {.callout-note collapse="true"}
+## DR question - estimating and interpreting the covariabce matrix
 
-The cloud of regression lines displays greater uncertainty at extreme values for weight
+We somehow estimated the (MAP?) values of the parameters in a series of simulations (I forgot how). 
 
-Notice that the cloud of regression lines grows more compact as the sample size increases. This is a result of the model growing more confident about the location of the mean. More confident about what mean? Does he mean 'more confident about the slope'?
+Now we also consider the variance and covariance of these. Is this simply the empirical variance and covariance across simulations? (And then IIRC quap uses these to generate a more complete posterior and sample from it or something). I guess this is helpful because in each simulation I only need to derive a few things, the sort of max confidence values of the parameters, rather than the posterior probability for all possible values. 
 
-I think he means "more confident about the slope of the mean height in weight, as well as about the intercept ... thus more confident about the mean height for wach weight
+We also can, in principle, use only a few simulations (shown later) and derive an estimate of that covariance matrix and then, assuming normality or something, draw from the joint posterior implied by that covariance matrix to plot things.
 
-take your quap approximation, sample from the posterior distribution, and then compute - for each case in the data and sample from the posterior distribution. Here
+:::
 
- We actually want something slightly different: a distribution of - for each unique weight value on the horizontal axis. It-s only slightly harder to compute that, by just passing link some new data:
 
-Read apply(mu,2,mean) as compute the mean of each column (dimension -2-) of the matrix mu. Nowmu.mean contains the average - at each weight value, and mu.PI contains 89% lower and upper bounds for each weight value
+> [plotting posterior inference is ] an informal check on model assumptions. When the model's predictions don't come close to key observations or patterns in the plotted data, then you might suspect the model either did not fit correctly or is rather badly specified 
 
-true that it is possible to use analytical formulas to compute intervals like this
+DR: we do something like this in our 80k work etc when we compare the results from a 'model' to mean differences across conditions
 
-approach, and there is some additional insight that comes from knowing the mathematics, the pseudo-empirical approach presented here is very flexible and allows a much broader audience of scientists to pull insight from their statistical modeling. And again, when you start estimating models with MCMC (Chapter 9), this is really the only approach available
+> But for even slightly more complex models, especially those that include interaction effects (Chapter 8), interpreting posterior distributions is hard
 
-Use link to generate distributions of posterior values for -. The default behavior of link is to use the original data, so you have to pass it a list of new horizontal axis values you want to plot posterior predictions across. (2) Use summary functions like mean or PI to find averages and lower and upper bounds of - for each value of the predictor variable. (3) Finally, use plotting functions like lines and shade to draw the lines and intervals. Or you might plot the distributions of the predictions, or do further numerical calculations with them. It-s really up to you. This recipe works for every model we fit in the book Is there a comparable 'universal recipe' in the tidy "love letter" adaptation?
+> posterior distribution considers every possible regression line connecting height to weight. It assigns a relative plausibility to each. This means that each combination of $\alpha$ and $\beta$ has a posterior probability. It could be that there are many lines with nearly the same posterior probability as the average line. Or it could be instead that the posterior distribution is rather narrow near the average line 
 
-generating an 89% prediction interval for actual heights, not just the average height, -. This means we-ll incorporate the standard deviation - and its uncertainty as well
+> we could sample a bunch of lines from the posterior distribution. Then we could display those lines on the plot, to visualize the uncertainty in the regression relationship. 
 
-For any unique weight value, you sample from a Gaussian distribution with the correct mean - for that weight, using the correct value of - sampled from the same posterior distribution. what does he mean by 'correct' here?
+Drawing randomly from the posterior distribution will of course draw more 'likely' lines more often
 
-nulldo this for every sample from the posterior, for every weight value of interest, you end up with a collection of simulated heights that embody the uncertainty in the posterior as well as the uncertainty in the Gaussian distribution of heights. There is a tool called sim which does this:
+> Each row is a correlated random sample from the joint posterior of all three parameters, using the covariances provided by `vcov(m4.3)` ... 
 
-This matrix is much like the earlier one, mu, but it contains simulated heights A vector of simulated heights for each element in the weight sequence
+> the paired values of `a` and `b` on each row define a line. The  average of very many of these lines is the posterior mean line 
 
-You could plot the boundary for other percents, such as 67% and 97% (also both primes), and add those to the plot. it would be nice to plot several of these together, perhaps a gradual distribution/elevation plot of confidence
 
-For every distribution like dnorm, there is a companion simulation function dnorm -- species the density at any point (I guess) rnorm -- randomly generates frmo the normal distribution
+::: {.callout-note collapse="true"}
+## DR question: what is this MAP line?
 
-## Curves from lines (4.5)
+I don't understand ... is he implying that the MAP line will also be the "average" of the intercept and slope coefficients or something? I thought these would be distingt
 
-The first is polynomial regression. The second is b-splines I need to know more about how to use the splines
+:::
 
-But in general it is better to pre-process any variable transformations-you don-t need the computer to recalculate the transformations on every iteration of the fitting procedure
+> The cloud of regression lines displays greater uncertainty at extreme values for weight
 
-The parameter - (a) is still the intercept, so it tells us the expected value of height when weight is at its mean value. But it is no longer equal to the mean height in the sample, since there is no guarantee it should in a polynomial regression
+> Notice that the cloud of regression lines grows more compact as the sample size increases. This is a result of the model growing more confident about the location of the mean.
 
-We aren-t learning any causal relationship between height and weight
 
-B-splines do not directly transform the predictor by squaring or cubing it. Instead they invent a series of entirely new, synthetic predictor variables. Each of these synthetic variables exists only to gradually turn a specific parameter on and off within a specific range of the real predictor variable. Each of the synthetic variables is called a basis function
+::: {.callout-note collapse="true"}
+## DR question: more confident 
 
-The linear model ends up looking very familiar: -i = - + w1Bi,1 + w2Bi,2 + w3Bi,3 + ... where Bi,n is the n-th basis function-s value on row i, and the w parameters are corresponding weights for each
+More confident about what mean? Does he mean 'more confident about the slope'?
 
-divide the full range of the horizontal axis into four parts, using pivot points called knots. The
+I think he means "more confident about the slope of the mean height in weight, as well as about the intercept" ... thus more confident about the mean height for each weight
 
-These synthetic variables are used to gently transition from one region of the horizontal axis to the next. Essentially, these variables tell you which knot you are close to. Beginning on the left of the top plot, basis function 1 has value 1 and all of the others are set to zero. As we move rightwards towards the second knot, basis 1 declines and basis 2 increases. At knot 2, basis 2 has value 1, and all of the others are set to zero
+:::
 
-they make the influence of each parameter quite local. At any point on the horizontal axis in Figure 4.12, only two basis functions have non-zero values
 
-Parameters called weights multiply the basis functions. The spline at any given point is the sum of these weighted basis functions
+::: {.callout-note collapse="true"}
+## Using the link function to compute the posterior distribution of mean weight height for each weight
 
-the knots are just values of year that serve as pivots for our spline. Where should the knots go?
 
-simple example above, place the knots at different evenlyspaced quantiles of the predictor variable. This gives you more knots where there are more observations. We
+> `link` will ... take your `quap` approximation, sample from the posterior distribution, and then compute $\mu` for each case in the data and sample from the posterior distribution. 
 
-next choice is polynomial degree. This determines how basis functions combine, which determines how the parameters interact to produce the spline not fully explained
+> We actually want something slightly different: a distribution of $\mu$ for each unique weight value on the horizontal axis. It's only slightly harder to compute that, by just passing link some new data:
 
-the w priors influence how wiggly the spline can be
+> Read `apply(mu,2,mean)` as *compute the mean of each column* (dimension '2') of the matrix mu. Now `mu.mean` contains the average $\mu$ at each weight value, and `mu.PI` contains 89% lower and upper bounds [of the mean] for each weight value
+
+:::
+
+::: {.callout-note collapse="true"}
+## Summary of using link to generate predictions and intervals from posterior
+
+> (1)  Use link to generate distributions of posterior values for $\mu$. The default behavior of link is to use the original data, so you have to pass it a list of new horizontal axis values you want to plot posterior predictions across. 
+> (2) Use summary functions like mean or PI to find averages and lower and upper bounds of $\mu$ for each value of the predictor variable.
+> (3) Finally, use plotting functions like lines and shade to draw the lines and intervals. Or you might plot the distributions of the predictions, or do further numerical calculations with them. It's really up to you. This recipe works for every model we fit in the book.
+
+DR: Is there a comparable 'universal recipe' in the tidy "love letter" adaptation?
+::: 
+
+
+
+### Kurz: Tables of estimates {-}
+
+> (K:) With a little `[]` subsetting we can exclude the log posterior from the `posterior_summary()` so we can fucus on the parameters.
+
+```{r}
+posterior_summary(b4.3, probs=c(0.055, .895))[1:3, ]
+```
+
+> Again, brms doesn't have a convenient `corr = TRUE` argument for `plot()` or `summary()`. But you can get that information after putting the chains in a data frame.
+
+```{r}
+posterior_samples(b4.3) %>% #deprecated, needs updating to `as_draws`
+  select(b_Intercept:sigma) %>%
+  cor() %>% #makes correlation matrix
+  round(digits = 2)
+```
+
+> Much like the results from McElreath's rethinking package, two of the parameters from our model fit with `brm()` are highly correlated, too. With centering, we can reduce that correlation.
+
+```{r}
+d2 <-
+  d2 %>%
+  mutate(weight_c = weight - mean(weight))
+```
+
+> Fit the `weight_c` model, `b4.4`.
+
+DR: let's 'Cauchy this' too...
+
+```{r b4.4c}
+b4.4c <-
+  brm(data = d2,
+      family = gaussian,
+      height ~ 1 + weight_c, #centering weight, not height here
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 46000, warmup = 45000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.04")
+```
+
+```{r, fig.width = 6, fig.height = 3.5}
+plot(b4.4c)
+posterior_summary(b4.4)[1:3, ]
+```
+
+> Like before, the uniform prior required extensive `warmup` iterations to produce a good posterior. 
+
+DR: where do I see this (in his page)?
+
+> This is easily fixed using a half Cauchy prior, instead. 
+
+DR: which I did
+
+> Anyways, the effective samples improved.
+
+::: {.Callout-Note Collapse="True"}
+## DR Question: What's this 'effective samples' thing?
+
+::: 
+
+Here's the parameter correlation info.
+
+```{r}
+
+posterior_samples(b4.4c) %>%
+  select(b_Intercept:sigma) %>%
+  cor() %>%
+  round(digits = 2)
+```
+
+> See? Now all the correlations are quite low. 
+
+
+The 'pairs' plot function seems very useful!:
+
+```{r}
+pairs(b4.4c)
+```
+
+
+Putting these into tables ...  "how you might convert the `posterior_summary()` output into a summary table roughly following APA style"
+
+```{r}
+
+(
+  sumtable_b4.4c <- 
+posterior_summary(b4.4c,  probs=c(0.055, .895))[1:3, ] %>%
+  data.frame() %>% #not tibble, because that wold lose the row names
+  rownames_to_column("parameter") %>% #makes row names their own column. helpful!
+  mutate_if(is.double, round, digits = 2) %>%
+  rename(mean = Estimate,
+         sd   = Est.Error) %>%
+  mutate(`89.5% CI` = str_c("[", Q5.5, ", ", Q89.5, "]")) %>%
+  select(-starts_with("Q")) %>%
+  knitr::kable() %>% 
+  .kable_styling()
+)
+```
+
+
+####  Plotting posterior inference against the data {-}
+
+> In truth, tables of estimates are usually insufficient for understanding the information contained in the posterior distribution. It's almost always much more useful to plot the posterior inference against the data. Not only does plotting help in interpreting the posterior, bit it also provides an informal check on model assumptions. (p. 100)
+
+
+```{r, fig.width = 3, fig.height = 2.8}
+d2 %>%
+  ggplot(aes(x = weight, y = height)) +
+  geom_abline(intercept = fixef(b4.3c)[1],
+              slope     = fixef(b4.3c)[2]) + #see docs -- could also select rows by name here 
+  geom_point(shape = 1, size = 2, color = "royalblue") +
+  theme_bw() +
+  theme(panel.grid = element_blank())
+```
+
+Above `fixef()` basically 'extracts the regression parameters', (documentation: extracts the mean value of these by default)
+
+::: {.callout-note collapse="true"}
+## On fixef() and population-level 'fixed' effects
+
+ In the brms reference manual, Bürkner described the job of the`fixef()` function as "extract[ing] the population-level ('fixed') effects from a brmsfit object". If you're new to multilevel models, it might not be clear what he meant by "population-level" or "fixed" effects. Don't worry. That'll all become clear starting around [Chapter 12][Multilevel Models]. In the meantime, just think of them as the typical regression parameters, minus $\sigma$.
+::: 
+
+
+#### Kurz:  Adding uncertainty around the mean {-}
+
+> By default, we extract all the posterior iterations with `posterior_samples()`. Because we had 4,000 posterior draws, our output will contain 4,000 rows.
+
+```{r}
+post <- posterior_samples(b4.3c)
+
+post %>%
+  glimpse()
+```
+
+> Each row is a correlated random sample from the point posterior of all three parameters, using the covariances provided by [`cov(posterior_samples(b4.4)`]. The paired values of [`b_Intercept`] and [`b_weight`] on each row define the line. The average of very many of these lines is the MAP line. (p. 101)
+
+::: {.callout-note collapse="true"}
+## DR question: the 'correlated ... sample'
+I thought the estimation *yielded* a sample from the posterior, these 4000 draws. But here it sounds like it is estimating a mean and covariance matrix and drawing from this distribution?  
+
+::: 
+
+Modeling and plotting, with 4 different sample sizes 
+
+> Here are the four models leading up to McElreath's Figure 4.5.  
+
+::: {.callout-note collapse="true"}
+## DR question -- there must be a better way of automating the code below across the 4 sample sizes,  with a 'map'?
+
+::: 
+
+```{r b4.3_010}
+n <- 10
+
+b4.3_010 <-
+  brm(data = d2 %>%
+        slice(1:n),  # note our tricky use of `n` and `slice()`
+      family = gaussian,
+      height ~ 1 + weight,
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 2000, warmup = 1000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.03_010")
+
+n <- 50
+
+b4.3_050 <-
+  brm(data = d2 %>%
+        slice(1:n),
+      family = gaussian,
+      height ~ 1 + weight,
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 2000, warmup = 1000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.03_050")
+
+n <- 150
+
+b4.3_150 <-
+  brm(data = d2 %>%
+        slice(1:n),
+      family = gaussian,
+      height ~ 1 + weight,
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 2000, warmup = 1000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.03_150")
+
+n <- 352
+
+b4.3_352 <-
+  brm(data = d2 %>%
+        slice(1:n),
+      family = gaussian,
+      height ~ 1 + weight,
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b),
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 2000, warmup = 1000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.03_352")
+```
+
+
+
+DR: Note, this took surprisingly long even for N=10!
+
+> We'll need to put the chains [?]  of each model into data frames.
+
+::: {.callout-note collapse="true"}
+## DR question: why are these called 'chains' here?
+
+I thought the samples from the posterior were the result of the modeling 'after the chains had converged'?
+
+::: 
+
+```{r}
+post010 <- posterior_samples(b4.3_010)
+post050 <- posterior_samples(b4.3_050)
+post150 <- posterior_samples(b4.3_150)
+post352 <- posterior_samples(b4.3_352)
+```
+
+> Here is the code for the four individual plots.
+
+::: {.callout-note collapse="true"}
+## DR question: isn't there a more efficient code way to 'map' all these?
+
+::: 
+
+```{r}
+p1 <-
+  ggplot(data =  d2[1:10 , ], #first 10 obs; the ones used in fitting the model
+         aes(x = weight, y = height)) +
+  geom_abline(intercept = post010[1:20, 1], #20 lines for each to reduce clutter
+              slope     = post010[1:20, 2],
+              size = 1/3, alpha = .3) +
+  geom_point(shape = 1, size = 2, color = "royalblue") +
+  coord_cartesian(xlim = range(d2$weight),
+                  ylim = range(d2$height)) +
+  labs(subtitle = "N = 10")
+
+p2 <-
+  ggplot(data =  d2[1:50 , ], #first 50 obs...
+         aes(x = weight, y = height)) +
+  geom_abline(intercept = post050[1:20, 1],
+              slope     = post050[1:20, 2],
+              size = 1/3, alpha = .3) +
+  geom_point(shape = 1, size = 2, color = "royalblue") +
+  coord_cartesian(xlim = range(d2$weight),
+                  ylim = range(d2$height)) +
+  labs(subtitle = "N = 50")
+
+p3 <-
+  ggplot(data =  d2[1:150 , ],
+         aes(x = weight, y = height)) +
+  geom_abline(intercept = post150[1:20, 1],
+              slope     = post150[1:20, 2],
+              size = 1/3, alpha = .3) +
+  geom_point(shape = 1, size = 2, color = "royalblue") +
+  coord_cartesian(xlim = range(d2$weight),
+                  ylim = range(d2$height)) +
+  labs(subtitle = "N = 150")
+
+p4 <-
+  ggplot(data =  d2[1:352 , ],
+         aes(x = weight, y = height)) +
+  geom_abline(intercept = post352[1:20, 1],
+              slope     = post352[1:20, 2],
+              size = 1/3, alpha = .3) +
+  geom_point(shape = 1, size = 2, color = "royalblue") +
+  coord_cartesian(xlim = range(d2$weight),
+                  ylim = range(d2$height)) +
+  labs(subtitle = "N = 352")
+```
+
+> Note how we used the good old bracket syntax (e.g., ` d2[1:10 , ]`) to index rows from our `d2` data. With tidyverse-style syntax, we could have done `slice(d2, 1:10)` or `d2 %>% slice(1:10)` instead.
+
+> Now we can combine the ggplots with patchwork syntax to make the full version of Figure 4.5.
+
+
+DR: I didn't know this syntax, I previously used this some combine plots function thing
+
+```{r, fig.width = 5, fig.height = 5}
+
+(p1 + p2 + p3 + p4) &
+  theme_bw() &
+  theme(panel.grid = element_blank())
+
+```
+
+
+
+
+#### Prediction intervals {-}
+
+> generating an 89% prediction interval for actual heights, not just the average height, $\mu$ . This means we-ll incorporate the standard deviation $\sigma$ and its uncertainty as well
+
+> For any unique weight value, you sample from a Gaussian distribution with the correct mean $\mu$ for that weight, using the correct value of $\sigma$ sampled from the same posterior distribution. 
+
+::: {.callout-note collapse="true"}
+## DR question: what does he mean by 'correct' here?
+::: 
+
+> do this for every sample from the posterior, for every weight value of interest, you end up with a collection of simulated heights that embody the uncertainty in the posterior *as well as* the uncertainty in the Gaussian distribution of heights. There is a tool called sim which does this:
+
+> This matrix is much like the earlier one, mu, but it contains simulated heights /// 
+
+A vector of simulated heights for each element in the weight sequence
+
+> You could plot the boundary for other percents, such as 67% and 97% (also both primes), and add those to the plot. it would be nice to plot several of these together, perhaps a gradual distribution/elevation plot of confidence
+
+
+::: {.callout-note collapse="true"}
+## Why simulate and not use analytic formulas here
+
+> true that it is possible to use analytical formulas to compute intervals like this
+... and there is some additional insight that comes from knowing the mathematics, [however] the pseudo-empirical approach presented here is very flexible and allows a much broader audience of scientists to pull insight from their statistical modeling. And again, when you start estimating models with MCMC (Chapter 9), this is really the only approach available
+
+::: 
+
+> For every distribution like `dnorm`, there is a companion simulation function 
+
+`dnorm`: specifies the density at any point (I guess) 
+`rnorm`: randomly generates draws the normal distribution
+
+## Curves from lines (4.5) {-}
+
+
+::: {.callout-note collapse="true"}
+## Note: I don't think Kurz does the 'splines' coding
+
+::: 
+
+Ways to 'build curves':
+
+> The first is polynomial regression. The second is b-splines 
+
+DR: I need to know more about how to use the splines
+
+Defines the parabolic model... 
+
+> ... Just modify the definition of mu so that it contains both the linear and quadratic terms. But in general it is better to pre-process any variable transformations-you don-t need the computer to recalculate the transformations on every iteration of the fitting procedure
+
+> The parameter $\alpha$ (a) is still the intercept, so it tells us the expected value of height when weight is at its mean value. But it is no longer equal to the mean height in the sample, since there is no guarantee it should in a polynomial regression
+
+We aren't learning any causal relationship between height and weight
+
+> B-splines do not directly transform the predictor by squaring or cubing it. Instead they invent a series of entirely new, synthetic predictor variables. Each of these synthetic variables exists only to gradually turn a specific parameter on and off within a specific range of the real predictor variable. Each of the synthetic variables is called a basis function
+
+> The linear model ends up looking very familiar: -i = - + w1Bi,1 + w2Bi,2 + w3Bi,3 + ... where Bi,n is the n-th basis function-s value on row i, and the w parameters are corresponding weights for each
+
+> divide the full range of the horizontal axis into four parts, using pivot points called knots. The
+
+> These synthetic variables are used to gently transition from one region of the horizontal axis to the next. Essentially, these variables tell you which knot you are close to. Beginning on the left of the top plot, basis function 1 has value 1 and all of the others are set to zero. As we move rightwards towards the second knot, basis 1 declines and basis 2 increases. At knot 2, basis 2 has value 1, and all of the others are set to zero
+
+> they make the influence of each parameter quite local. At any point on the horizontal axis in Figure 4.12, only two basis functions have non-zero values
+
+> Parameters called weights multiply the basis functions. The spline at any given point is the sum of these weighted basis functions
+
+> the knots are just values of year that serve as pivots for our spline. Where should the knots go?
+
+> simple example above, place the knots at different evenly spaced quantiles of the predictor variable. This gives you more knots where there are more observations. We
+
+> next choice is polynomial degree. This determines how basis functions combine, which determines how the parameters interact to produce the spline not fully explained
+
+> the w priors influence how wiggly the spline can be
 
