@@ -1,5 +1,9 @@
 # Other suggested sections
 
+## 'Conjoint analysis' 
+
+See end of [this Slack thread](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1670240321964009)
+
 
 ## (Open and robust science: RP attitudes, discussions, resources) {#opensci}
 

@@ -1,0 +1,89 @@
+# (RP Survey Team+: Typical project, questions, example data) {#rpprojects}
+
+In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team ('social science'), as well as the work of adjacent projects like the [EA Market Testing Team](https://bit.ly/eamtt).
+
+We will also extract, reference, and outline some example data, to use in the chapters below.
+
+9 Dec 2022: So far, the chapters below draw from the EA Survey data. However, as that data itself cannot be in the public domain, this is less useful for people who don't have access to our Github repo, and less than ideal in general. 
+
+Some sources of data and examples could include:
+
+1. Data from the [EA Market Testing Team](https://bit.ly/eamtt)'s public work, see [the data treatment here](https://daaronr.github.io/eamt_data_analysis/); simplifying this data might be helpful for our examples
+
+1. Other Reinstein projects, including data from the [ICRC chapter](https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design) of the 'impact of impact information' project.
+
+1. Simulated data like (a simplified version of) the EA Survey data
+
+1. Any RP or adjacent survey data that *has* been put in the public domain?
+
+1. Simulated data resembling that of other confidential EAMT and RP projects
+
+
+## Some common/typical cases and problems
+
+### Community Survey omnibus {-}
+
+
+Typical example: EA Survey (flesh this out)
+
+\
+Research questions:
+
+- Current community composition 
+- Actions taken and level of involvement
+- Retrospective 'how you got involved'
+- Relative preferences and attitudes
+- Changes in all of this over time
+- Actions vs intentions
+
+
+### Issue-oriented survey of the population {-}
+
+Typical examples: 
+
+- EA Pulse, 
+- surveys of awareness of EA; 
+- attitudes towards long-termism;  
+- polling on animal welfare legislation, etc. 
+
+\
+
+Research questions:
+
+- Awareness and knowledge of a subject
+- Attitude to an issue
+- Potential voting choices and other behavior 
+- Differences across personality, demographic traits, etc.
+- Clustering, dimension reduction, factor analysis: How do responses 'cohere'
+- Differences over time, particularly in response to campaigns (before-after)
+
+Data may include:
+
+- Ordered Likert responses and indices
+- Open-response
+- Hypothetical choices among a set of optinos 
+- Binary, continuous, other
+
+### Marketing trials/experiments and surveys {-}
+
+Typical examples: 
+
+- EAMT comparison of GWWC Facebook ads to encourage email signup
+- Prolific survey to helping an EA filmmaker choose a movie title and blurb 
+- An effective charity wants to know how to present their impact information in mail appeals, if at all
+
+\
+
+Research questions and goals:
+
+- Baseline response rates and cost per outcome
+- Find 'best approach within a large space' (reinforcement learning)
+- Test different categories of approaches in a limited set ('which works better')
+- Find most promising audiences (profiling)
+- Interaction (tailored messaging, etc.)
+
+Data could include
+
+- Attitudinal (Likert) response data
+- Suggestive outcome data (e.g., 'clicks on the web site')
+- Actual 'A/B testing' data for outcomes and responses of interest

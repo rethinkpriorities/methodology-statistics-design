@@ -12,6 +12,7 @@ book:
     - part: "Intro., protocols, style"
       chapters:
         - index.qmd
+        - chapters/rp_typical_examples_data.qmd
         - chapters/coding_data.qmd
         - chapters/presentation_method_discussion.qmd
     - part: "Surveys/trial design"
@@ -34,7 +35,7 @@ book:
     - part: "Other, worked examples"
       chapters:
         - chapters/fermi.qmd
-        - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd  
+        - from_ea_market_testing/binary_trial_computations_redacted_ed.qmd
         - chapters/other_sections.qmd
     - part: "Bayes/Rethinking"
       chapters:
@@ -62,6 +63,7 @@ format:
     code-fold: true
     code-link: true #note: this isn't working for me
     code-tools: true
+    code-overflow: wrap
     theme: cosmo
     citations-hover: true
     footnotes-hover: true

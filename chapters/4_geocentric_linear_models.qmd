@@ -966,7 +966,6 @@ We also can, in principle, use only a few simulations (shown later) and derive a
 
 :::
 
-
 > [plotting posterior inference is ] an informal check on model assumptions. When the model's predictions don't come close to key observations or patterns in the plotted data, then you might suspect the model either did not fit correctly or is rather badly specified 
 
 DR: we do something like this in our 80k work etc when we compare the results from a 'model' to mean differences across conditions
@@ -1089,7 +1088,6 @@ DR: which I did
 
 
 *DR Question: What's this 'effective samples' thing?*
-
 
 Here's the parameter correlation info.
 
