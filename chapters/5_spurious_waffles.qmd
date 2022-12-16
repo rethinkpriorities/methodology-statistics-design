@@ -5,6 +5,7 @@ Load the [Waffle House](https://www.snopes.com/fact-check/fema-waffle-house-inde
 
 ```{r, message = F, warning = F}
 library(rethinking)
+library(pacman)
 data(WaffleDivorce)
 d <- WaffleDivorce
 
@@ -14,9 +15,11 @@ p_load(daggity, install=FALSE)
 
 ```{r, message = F, warning = F}
 rm(WaffleDivorce)
+
 #detach(package:rethinking, unload = T)
 library(brms)
 library(tidyverse)
+library(dplyr)
 ```
 
 
@@ -28,7 +31,7 @@ DR: but endogenous controls can make this problem worse
 
 > But there’s no reason high marriage rate must cause more divorce
 
-DR: what would this even mean? ... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another. 
+DR: what would this even mean? ... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familiar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another. 
 
 > easy to imagine high marriage rate indicating high cultural valuation of marriage and therefore being associated with low divorce rate
 
@@ -306,7 +309,58 @@ values. ...
 > (2) Posterior prediction plots. These show model-based predictions against raw data,
 or otherwise display the error in prediction. They are tools for checking fit and
 assessing predictions. ...
-> (3) Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.
+> (3) Counterfactual plots. These show the impliTd predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.
+
+
+
+#### Predictor residual plots {-}
+
+> To get ready to make our residual plots, we'll predict `Marriage_s` with `MedianAgeMarriage_s`.
+
+DR: going for 'the surpriseing part of one explanatory variable once you already know another'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results such as the 'long and short regression' and 'omitted variable bias' formulae.
+
+```{r b5.4}
+b5.4 <- 
+  brm(data = d,
+      family = gaussian,
+      Marriage_s ~ 1 + MedianAgeMarriage_s,
+      prior = c(prior(normal(0, 10), class = Intercept),
+                prior(normal(0, 1), class = b),
+                prior(uniform(0, 10), class = sigma)),
+      iter = 2000, warmup = 500, chains = 4, cores = 4,
+      seed = 5,
+      file = "fits/b05.04")
+```
+
+```{r}
+print(b5.4)
+```
+
+> With `fitted()`, we compute the expected values for each state (with the exception of Nevada). Since the `MedianAgeMarriage_s` values for each state are in the date we used to fit the model, we'll omit the `newdata` argument.
+
+```{r}
+f <- 
+  fitted(b5.4) %>%
+  as_tibble() %>%
+  bind_cols(d)
+
+head(f)
+```
+
+After a little data processing, we can make Figure 5.3.
+
+```{r, fig.width = 3, fig.height = 3}
+f %>% 
+  ggplot(aes(x = MedianAgeMarriage_s, y = Marriage_s)) +
+  geom_point(size = 2, shape = 1, color = "firebrick4") +
+  geom_segment(aes(xend = MedianAgeMarriage_s, yend = Estimate), 
+               size = 1/4) +
+  geom_line(aes(y = Estimate), 
+            color = "firebrick4") +
+  coord_cartesian(ylim = range(d$Marriage_s)) +
+  theme_bw() +
+  theme(panel.grid = element_blank())     
+```
 
 
 
@@ -316,13 +370,15 @@ assessing predictions. ...
 
 > Now we can use `sim`, which you met in the previous chapter, to simulate observations from model `m5.3_A`. But this time we’ll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.
 
-```{r}
+
+
+```{r, eval=FALSE}
 # prep data 5.21
 sim_dat <- data.frame( A=A_seq )
 # simulate M and then D, using A_seq
 s <- sim( m5.3_A , data=sim_dat , vars=c("M","D") )
 ```
-```{r}
+```{r, eval = FALSE}
 plot( sim_dat$A , colMeans(s$D) , ylim=c(-2,2) , type="l" ,
 xlab="manipulated A" , ylab="counterfactual D" )
 shade( apply(s$D,2,PI) , sim_dat$A )
