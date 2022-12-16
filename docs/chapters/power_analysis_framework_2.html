@@ -365,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>[^power_analysis_framework_2-1] [^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.</p>
+</header><p><em>By Jamie Elsey, adapted and extended by David Reinstein</em></p>
 <section id="discussion-and-framework" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="discussion-and-framework">
 <span class="header-section-number">9.1</span> Discussion and framework</h2>
 <section id="introduction-and-goals" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="introduction-and-goals">Introduction and goals</h3>
@@ -856,7 +856,7 @@ For a Bayesian analysis
 <span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="st">'nonzero'</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">lower</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="fl">1</span>,</span>
 <span>                                   <span class="cn">TRUE</span> <span class="op">~</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>             <span class="st">'width'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span><span class="op">)</span>,</span>
-<span>             <span class="st">'sim'</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span>, <span class="st">'sim'</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>               <span class="st">'sim'</span> <span class="op">=</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span>, <span class="st">'sim'</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>             <span class="st">'cell.size'</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
@@ -879,7 +879,7 @@ For a Bayesian analysis
 <span><span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 12.76182 secs</code></pre>
+<pre><code>Time difference of 12.8577 secs</code></pre>
 </div>
 </div>
 <p>The object <code>linreg.output</code> is now a large dataframe, cataloguing whether or not certain inference thresholds were reached across the many simulations. In the third primary step, we can summarise and graphically display this information.</p>
@@ -1138,8 +1138,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Power analysis &amp; workflow {#power-workflow}</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ot">[^power_analysis_framework_2-1]</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ot">[^power_analysis_framework_2-1]: </span>By Jamie Elsey, adapted and extended by David Reinstein.</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>*By Jamie Elsey, adapted and extended by David Reinstein*</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
@@ -1561,7 +1561,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-424"><a href="#cb14-424" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="st">'nonzero'</span> <span class="ot">=</span> <span class="fu">case_when</span>(lower <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb14-425"><a href="#cb14-425" aria-hidden="true" tabindex="-1"></a>                                   <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>),</span>
 <span id="cb14-426"><a href="#cb14-426" aria-hidden="true" tabindex="-1"></a>             <span class="st">'width'</span> <span class="ot">=</span> <span class="fu">abs</span>(upper <span class="sc">-</span> lower),</span>
-<span id="cb14-427"><a href="#cb14-427" aria-hidden="true" tabindex="-1"></a>             <span class="st">'sim'</span> <span class="ot">=</span> data[[<span class="dv">1</span>, <span class="st">'sim'</span>]],</span>
+<span id="cb14-427"><a href="#cb14-427" aria-hidden="true" tabindex="-1"></a>               <span class="st">'sim'</span> <span class="ot">=</span> data[[<span class="dv">1</span>, <span class="st">'sim'</span>]],</span>
 <span id="cb14-428"><a href="#cb14-428" aria-hidden="true" tabindex="-1"></a>             <span class="st">'cell.size'</span> <span class="ot">=</span> <span class="fu">nrow</span>(data)<span class="sc">/</span><span class="dv">4</span>)</span>
 <span id="cb14-429"><a href="#cb14-429" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-430"><a href="#cb14-430" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(output)</span>

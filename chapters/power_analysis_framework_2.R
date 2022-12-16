@@ -160,7 +160,7 @@ linear.reg.maker <- function(data, breaks) { #runs a particular regression over 
       mutate('nonzero' = case_when(lower > 0 ~ 1,
                                    TRUE ~ 0),
              'width' = abs(upper - lower),
-             'sim' = data[[1, 'sim']],
+               'sim' = data[[1, 'sim']],
              'cell.size' = nrow(data)/4)
 
     return(output)

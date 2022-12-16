@@ -1,6 +1,6 @@
 # Power analysis & workflow {#power-workflow}
-[^power_analysis_framework_2-1]
-[^power_analysis_framework_2-1]: By Jamie Elsey, adapted and extended by David Reinstein.
+
+*By Jamie Elsey, adapted and extended by David Reinstein*
 
 ```{r}
 #| include: false
@@ -422,7 +422,7 @@ linear.reg.maker <- function(data, breaks) { #runs a particular regression over 
       mutate('nonzero' = case_when(lower > 0 ~ 1,
                                    TRUE ~ 0),
              'width' = abs(upper - lower),
-             'sim' = data[[1, 'sim']],
+               'sim' = data[[1, 'sim']],
              'cell.size' = nrow(data)/4)
 
     return(output)

@@ -1073,7 +1073,7 @@ b4.4c <-
 
 ```{r, fig.width = 6, fig.height = 3.5}
 plot(b4.4c)
-posterior_summary(b4.4)[1:3, ]
+posterior_summary(b4.4c)[1:3, ]
 ```
 
 > Like before, the uniform prior required extensive `warmup` iterations to produce a good posterior. 
@@ -1328,11 +1328,9 @@ DR: I didn't know this syntax, I previously used this some combine plots functio
 ```
 
 
-
-
 #### Prediction intervals {-}
 
-> generating an 89% prediction interval for actual heights, not just the average height, $\mu$ . This means we-ll incorporate the standard deviation $\sigma$ and its uncertainty as well
+> generating an 89% prediction interval for actual heights, not just the average height, $\mu$ . This means we'll incorporate the standard deviation $\sigma$ and its uncertainty as well
 
 > For any unique weight value, you sample from a Gaussian distribution with the correct mean $\mu$ for that weight, using the correct value of $\sigma$ sampled from the same posterior distribution. 
 
@@ -1350,7 +1348,7 @@ A vector of simulated heights for each element in the weight sequence
 
 
 ::: {.callout-note collapse="true"}
-## Why simulate and not use analytic formulas here
+## Why simulate and not use analytic formulas here?
 
 > true that it is possible to use analytical formulas to compute intervals like this
 ... and there is some additional insight that comes from knowing the mathematics, [however] the pseudo-empirical approach presented here is very flexible and allows a much broader audience of scientists to pull insight from their statistical modeling. And again, when you start estimating models with MCMC (Chapter 9), this is really the only approach available
@@ -1370,6 +1368,8 @@ A vector of simulated heights for each element in the weight sequence
 
 ::: 
 
+### Polynomial regression {-}
+
 Ways to 'build curves':
 
 > The first is polynomial regression. The second is b-splines 
@@ -1378,11 +1378,87 @@ DR: I need to know more about how to use the splines
 
 Defines the parabolic model... 
 
-> ... Just modify the definition of mu so that it contains both the linear and quadratic terms. But in general it is better to pre-process any variable transformations-you don-t need the computer to recalculate the transformations on every iteration of the fitting procedure
+> ... Just modify the definition of mu so that it contains both the linear and quadratic terms. But in general it is better to pre-process any variable transformations-you don't need the computer to recalculate the transformations on every iteration of the fitting procedure
 
 > The parameter $\alpha$ (a) is still the intercept, so it tells us the expected value of height when weight is at its mean value. But it is no longer equal to the mean height in the sample, since there is no guarantee it should in a polynomial regression
 
 We aren't learning any causal relationship between height and weight
+
+
+> The quadratic is probably the most commonly-used polynomial regression model. It follows the form
+
+$$\mu = \alpha + \beta_1 x_i + \beta_2 x_i^2.$$
+
+Standardizing the rhs variable to aid intepretation, and to help brm fit the model: 
+
+```{r}
+d <-
+  d %>%
+  mutate(weight_s = (weight - mean(weight)) / sd(weight))
+```
+
+Here's the quadratic model in brms.
+
+```{r b4.5}
+b4.5 <-
+  brm(data = d,
+      family = gaussian,
+      height ~ 1 + weight_s + I(weight_s^2),
+      prior = c(prior(normal(178, 100), class = Intercept),
+                prior(normal(0, 10), class = b), #I guess this is applied to *both* slope coefficients? -- yes, noted in next chapter
+                prior(cauchy(0, 1), class = sigma)),
+      iter = 2000, warmup = 1000, chains = 4, cores = 4,
+      seed = 4,
+      file = "fits/b04.05")
+```
+
+```{r, fig.width = 6, fig.height = 4.5}
+plot(b4.5)
+print(b4.5)
+```
+
+> Our quadratic plot requires new `fitted()`- and `predict()`-oriented wrangling.
+
+```{r}
+weight_seq <- tibble(weight_s = seq(from = -2.5, to = 2.5, length.out = 30)) #the normalized weights
+
+f <-
+  fitted(b4.5,
+         newdata = weight_seq) %>%
+  as_tibble() %>%
+  bind_cols(weight_seq)
+
+p <-
+  predict(b4.5,
+          newdata = weight_seq) %>%
+  as_tibble() %>%
+  bind_cols(weight_seq)
+#DR: Was this randomly drawing  'error terms'? I forget what the difference was here
+
+
+```
+
+> Behold the code for our version of Figure 4.9.a. 
+
+```{r, warning = F, fig.width = 3, fig.height = 3}
+ggplot(data = d,
+       aes(x = weight_s)) +
+  geom_ribbon(data = p,
+              aes(ymin = Q2.5, ymax = Q97.5),
+              fill = "grey83") +
+  geom_smooth(data = f,
+              aes(y = Estimate, ymin = Q2.5, ymax = Q97.5),
+              stat = "identity",
+              fill = "grey70", color = "black", alpha = 1, size = 1/2) +
+  geom_point(aes(y = height),
+             color = "navyblue", shape = 1, size = 1.5, alpha = 1/3) +
+  coord_cartesian(xlim = range(d$weight_s)) +
+  theme(text = element_text(family = "Times"),
+        panel.grid = element_blank())
+```
+
+
+### Splines {-}
 
 > B-splines do not directly transform the predictor by squaring or cubing it. Instead they invent a series of entirely new, synthetic predictor variables. Each of these synthetic variables exists only to gradually turn a specific parameter on and off within a specific range of the real predictor variable. Each of the synthetic variables is called a basis function
 
@@ -1403,4 +1479,7 @@ We aren't learning any causal relationship between height and weight
 > next choice is polynomial degree. This determines how basis functions combine, which determines how the parameters interact to produce the spline not fully explained
 
 > the w priors influence how wiggly the spline can be
+
+
+
 
