@@ -1,0 +1,61 @@
+---
+title: "mckenzie_giving"
+editor: visual
+---
+
+```{r}
+library(readr)
+gifts_2022_12_15_2017 <- read_csv("~/Downloads/gifts_2022-12-15_2017.csv")
+```
+
+```{r}
+# Load the stringr package
+library(stringr)
+
+
+# Create a string containing the abbreviations for all US states
+state_abbrevs <- str_c(c("AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID",
+                         "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND",
+                         "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX",
+                         "UM", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "US", "United States"), collapse = "|")
+
+# Use the str_detect() function to detect whether each row in the "ORG-REPORTED GEOGRAPHIES OF SERVICE" column
+# contains any of the state abbreviations
+gifts_2022_12_15_2017 %<>%
+  mutate(
+  in_usa = str_detect(`Org-reported geographies of service`, state_abbrevs),
+  don_amount = as.numeric(str_extract(`Gift Amount`, "[0-9]+"))
+  )
+
+(
+sum_don_by_year_USA <- gifts_2022_12_15_2017 %>% 
+  group_by(`Gift Year`, in_usa) %>% 
+  summarise(total_amount = sum(don_amount/1000000, na.rm=TRUE)) %>%  
+  pivot_wider(names_from = in_usa, values_from = total_amount) %>%  
+  rename("Serves USA" = "TRUE", 
+    "Abroad, not USA" = "FALSE") %>% 
+  .kable(digits=1, caption = "MacKenzie Scott donations by year and charity-geography") %>% 
+  .kable_styling
+)
+
+(
+largest_don <- 
+gifts_2022_12_15_2017 %>%  arrange(-don_amount) %>%  
+    mutate(`Don in millions`= don_amount/1000000) %>% 
+    select(Organization, `Gift Year`, `Don in millions`, `Org-reported geographies of service`) %>% 
+    .kable(digits=1,  format.args = list(big.mark = ""), caption = "MacKenzie Scott largest donations") %>% 
+    .kable_styling
+)
+
+(
+largest_don_collapse_year <- 
+gifts_2022_12_15_2017 %>% 
+  group_by(Organization) %>% 
+    summarise(total_amount = sum(don_amount/1000000, na.rm=TRUE)) %>%  
+  arrange(-total_amount) %>%  
+    .kable(digits=1,  format.args = list(big.mark = ""), caption = "MacKenzie Scott largest donations across years") %>%
+    .kable_styling
+)
+
+```
+
