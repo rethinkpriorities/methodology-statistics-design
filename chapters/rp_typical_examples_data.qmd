@@ -1,4 +1,4 @@
-# RP Surveys+: Example projects/qn's/data {#rpprojects}
+# RP Surveys+: Ex. projects/q's/data {#rpprojects}
 
 In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team ('social science'), as well as the work of adjacent projects like the [EA Market Testing Team](https://bit.ly/eamtt).
 
@@ -71,9 +71,9 @@ Typical examples:
 
 1.  [All fundraisers for effective charities started on JustGiving during a certain period, with donation amounts](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)
 
-This data is shared in the current github repo, and read in below
+This data is shared in the current github repo, and read in with code below ^[Not evaluated here atm]
 
-```{r}
+```{r, eval=FALSE}
 #| label: readJGsample
 #| code-summary: "read in Just Giving data"
 

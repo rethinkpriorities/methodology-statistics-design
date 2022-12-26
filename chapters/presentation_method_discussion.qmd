@@ -1,4 +1,4 @@
-# Presentation/visualisation {#presentation}
+# Presentation, data-viz {#presentation}
 
 ```{r}
 #| include: false

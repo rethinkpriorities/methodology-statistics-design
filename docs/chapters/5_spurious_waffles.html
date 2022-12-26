@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/rp_typical_examples_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">(RP Survey Team+: Typical project, questions, example data)</span></a>
+  <a href="../chapters/rp_typical_examples_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">RP Surveys+: Example projects/qn’s/data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -339,6 +339,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#plotting-multivariate-posteriors." id="toc-plotting-multivariate-posteriors." class="nav-link" data-scroll-target="#plotting-multivariate-posteriors.">Plotting multivariate posteriors.</a></li>
   </ul>
 </li>
+  <li>
+<a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"><span class="toc-section-number">25.1</span>  Categorical variables</a>
+  <ul class="collapse">
+<li><a href="#adding-regular-predictor-variables." id="toc-adding-regular-predictor-variables." class="nav-link" data-scroll-target="#adding-regular-predictor-variables."><span class="toc-section-number">25.1.1</span>  Adding regular predictor variables.</a></li>
+  <li><a href="#another-approach-unique-intercepts." id="toc-another-approach-unique-intercepts." class="nav-link" data-scroll-target="#another-approach-unique-intercepts."><span class="toc-section-number">25.1.2</span>  Another approach: Unique intercepts.</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/edit/main/chapters/5_spurious_waffles.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/rethinkpriorities/methodology-statistics-design/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -392,7 +399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>But there’s no reason high marriage rate must cause more divorce</p>
 </blockquote>
-<p>DR: what would this even mean? … the ‘causal’ part is ambiguous in this example, particularly when we are talking about aggregates like ‘rates for the whole population’. I’m familar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another.</p>
+<p>DR: what would this even mean? … the ‘causal’ part is ambiguous in this example, particularly when we are talking about aggregates like ‘rates for the whole population’. I’m familiar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another.</p>
 <blockquote class="blockquote">
 <p>easy to imagine high marriage rate indicating high cultural valuation of marriage and therefore being associated with low divorce rate</p>
 </blockquote>
@@ -708,14 +715,14 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <ol type="1">
 <li>Predictor residual plots. These plots show the outcome against residual predictor values. …</li>
 <li>Posterior prediction plots. These show model-based predictions against raw data, or otherwise display the error in prediction. They are tools for checking fit and assessing predictions. …</li>
-<li>Counterfactual plots. These show the impliTd predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</li>
+<li>Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</li>
 </ol>
 </blockquote>
 <section id="predictor-residual-plots" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="predictor-residual-plots">Predictor residual plots</h4>
 <blockquote class="blockquote">
 <p>To get ready to make our residual plots, we’ll predict <code>Marriage_s</code> with <code>MedianAgeMarriage_s</code>.</p>
 </blockquote>
-<p>DR: going for ‘the surpriseing part of one explanatory variable once you already know another’. Somehow I find it strange that we’re doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean ‘regression algebra’ results such as the ‘long and short regression’ and ‘omitted variable bias’ formulae.</p>
+<p><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">b5.4</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span>,</span>
@@ -817,14 +824,166 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span><span class="op">(</span> <span class="st">"Total counterfactual effect of A on D"</span> <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section></section></section><section id="categorical-variables" class="level2" data-number="25.1"><h2 data-number="25.1" class="anchored" data-anchor-id="categorical-variables">
+<span class="header-section-number">25.1</span> Categorical variables</h2>
+<p>DR: This section is rather straightforward. The key insight: <em>Remove the intercept when modeling with categorical features.</em></p>
+<p>This yields a specific estimate for each category or combination of categories. Why?</p>
+<ul>
+<li><p>There is no ‘base category’, making interpretation easier.</p></li>
+<li><p>It avoids the challenges (particular to Bayesian approaches) of including an ‘additive adjustment coefficient relative to the base group’, which naturally (and misleadingly) implies more variance in the non-base groups.</p></li>
+</ul>
+<p>Downside: the coefficients can’t be interpreted as ‘effects’ or adjustments, potentially making interpretation statistical inference more difficult in some contexts.</p>
+<p>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+DR question: Does this apply to frequentist analysis too?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Is it Bayesian specific? How does this relate to ‘contrast-coding’?</p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Many readers will already know that variables like this, routinely called <em>factors</em>, can easily be included in linear models. But what is not widely understood is how these variables are included in a model… Knowing how the machine works removes a lot of this difficulty. (p.&nbsp;153, <em>emphasis</em> in the original)</p>
+</blockquote>
+<p>We’ll practice with <code>milk</code>.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rethinking</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">milk</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">milk</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">milk</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/detach.html">detach</a></span><span class="op">(</span><span class="va">package</span><span class="op">:</span><span class="va">rethinking</span>, unload <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms">brms</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>With the tidyverse, we can peek at <code>clade</code> with <code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct()</a></code> in the place of base R <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">clade</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>             clade
+1    Strepsirrhine
+2 New World Monkey
+3 Old World Monkey
+4              Ape</code></pre>
+</div>
+</div>
+<p>As <code>clade</code> has 4 categories, let’s use <code><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else()</a></code> to convert these to 4 dummy variables.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>clade_nwm <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">clade</span> <span class="op">==</span> <span class="st">"New World Monkey"</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>         clade_owm <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">clade</span> <span class="op">==</span> <span class="st">"Old World Monkey"</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>         clade_s   <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">clade</span> <span class="op">==</span> <span class="st">"Strepsirrhine"</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>         clade_ape <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">clade</span> <span class="op">==</span> <span class="st">"Ape"</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now we’ll fit the model with three of the four dummies. In this model, <code>clade_ape</code> is the reference category captured by the intercept.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">b5.16</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span>, </span>
+<span>      family <span class="op">=</span> <span class="va">gaussian</span>,</span>
+<span>      <span class="va">kcal.per.g</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">clade_nwm</span> <span class="op">+</span> <span class="va">clade_owm</span> <span class="op">+</span> <span class="va">clade_s</span>,</span>
+<span>      prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior</a></span><span class="op">(</span><span class="fu">normal</span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">10</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">Intercept</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior</a></span><span class="op">(</span><span class="fu">normal</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">b</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior</a></span><span class="op">(</span><span class="fu">uniform</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      iter <span class="op">=</span> <span class="fl">2000</span>, warmup <span class="op">=</span> <span class="fl">500</span>, chains <span class="op">=</span> <span class="fl">4</span>, cores <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>      seed <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>      file <span class="op">=</span> <span class="st">"fits/b05.16"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">b5.16</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s 
+   Data: d (Number of observations: 29) 
+  Draws: 4 chains, each with iter = 2000; warmup = 500; thin = 1;
+         total post-warmup draws = 6000
+
+Population-Level Effects: 
+          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept     0.55      0.04     0.46     0.63 1.00     4607     4237
+clade_nwm     0.17      0.06     0.05     0.29 1.00     5072     4453
+clade_owm     0.24      0.07     0.10     0.37 1.00     5092     4527
+clade_s      -0.04      0.07    -0.18     0.10 1.00     5067     4500
+
+Family Specific Parameters: 
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.13      0.02     0.10     0.17 1.00     4846     4300
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<section id="adding-regular-predictor-variables." class="level3" data-number="25.1.1"><h3 data-number="25.1.1" class="anchored" data-anchor-id="adding-regular-predictor-variables.">
+<span class="header-section-number">25.1.1</span> Adding regular predictor variables.</h3>
+<p>If we wanted to fit the model including <code>perc.fat</code> as an additional predictor, the basic statistical formula would be</p>
+<p><span class="math display">\[
+\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.
+\]</span></p>
+<p>The corresponding <code>formula</code> argument within <code><a href="https://rdrr.io/pkg/brms/man/brm.html">brm()</a></code> would be <code>kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat</code>.</p>
+</section><section id="another-approach-unique-intercepts." class="level3" data-number="25.1.2"><h3 data-number="25.1.2" class="anchored" data-anchor-id="another-approach-unique-intercepts.">
+<span class="header-section-number">25.1.2</span> Another approach: Unique intercepts.</h3>
+<p>“Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category” (p.&nbsp;158). Using the code below, there’s no need to transform <code>d$clade</code> into <code>d$clade_id</code>. The advantage of this approach is the indices in the model summary are more descriptive than <code>a[1]</code> through <code>a[4]</code>.</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">b5.16_alt</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">d</span>, </span>
+<span>      family <span class="op">=</span> <span class="va">gaussian</span>,</span>
+<span>      <span class="va">kcal.per.g</span> <span class="op">~</span> <span class="fl">0</span> <span class="op">+</span> <span class="va">clade</span>,</span>
+<span>      prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior</a></span><span class="op">(</span><span class="fu">normal</span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">10</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">b</span><span class="op">)</span>,</span>
+<span>                <span class="fu"><a href="https://rdrr.io/pkg/brms/man/set_prior.html">prior</a></span><span class="op">(</span><span class="fu">uniform</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span><span class="op">)</span>, class <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      iter <span class="op">=</span> <span class="fl">2000</span>, warmup <span class="op">=</span> <span class="fl">500</span>, chains <span class="op">=</span> <span class="fl">4</span>, cores <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>      seed <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>      file <span class="op">=</span> <span class="st">"fits/b05.16_alt"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">b5.16_alt</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian 
+  Links: mu = identity; sigma = identity 
+Formula: kcal.per.g ~ 0 + clade 
+   Data: d (Number of observations: 29) 
+  Draws: 4 chains, each with iter = 2000; warmup = 500; thin = 1;
+         total post-warmup draws = 6000
+
+Population-Level Effects: 
+                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+cladeApe                0.54      0.04     0.46     0.63 1.00     6979     3927
+cladeNewWorldMonkey     0.71      0.04     0.63     0.80 1.00     7110     4200
+cladeOldWorldMonkey     0.79      0.05     0.69     0.89 1.00     7056     4131
+cladeStrepsirrhine      0.51      0.06     0.39     0.63 1.00     7116     4299
+
+Family Specific Parameters: 
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.13      0.02     0.10     0.18 1.00     4960     4064
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<p>See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</p>
 
 
 <!-- -->
 
-</section></section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p> Going forward, each chapter will have its own plot theme. In this chapter, we’ll characterize the plots with <code>theme_bw() + theme(panel.grid = element_rect())</code> and coloring based off of “firebrick”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>“Notice we’re using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we’d make two prior() statements and differentiate them with the coef argument.”<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>DR: going for ‘the surprising part of one explanatory variable once you already know another’. Somehow I find it strange that we’re doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean ‘regression algebra’ results such as the ‘long and short regression’ and ‘omitted variable bias’ formulae<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -981,391 +1140,501 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-next">
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Ch 5. The Many Variables &amp; The Spurious Waffles {#mcelreath_ch5}</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>Load the <span class="co">[</span><span class="ot">Waffle House</span><span class="co">](https://www.snopes.com/fact-check/fema-waffle-house-index/)</span> data.</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> WaffleDivorce</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(daggity, <span class="at">install=</span><span class="cn">FALSE</span>)</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(WaffleDivorce)</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co">#detach(package:rethinking, unload = T)</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Reasons given for multiple regression models include: (1) Statistical -control” for confounds</span></span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>DR: but endogenous controls can make this problem worse</span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5.1. Spurious association {-}</span></span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; But there’s no reason high marriage rate must cause more divorce</span></span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>DR: what would this even mean? ... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another. </span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; easy to imagine high marriage rate indicating high cultural valuation of marriage and therefore being associated with low divorce rate</span></span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>DR: but the latter is not causal</span>
-<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the outcome and the predictor are both standardized, the intercept - should end up very close to zero </span></span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>$\alpha ∼ Normal(0, 0.2)$</span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>DR: why not exactly 0? Is this a 'sample drawn from the population' issue?</span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So when $\beta_A = 1$, a change of 1.2 years in median age at marriage is associated with a full standard deviation change in the outcome variable  </span><span class="co">[</span><span class="ot">which he thinks is absurdly large</span><span class="co">]</span></span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>DR: But why are these 'absurdly large', maybe the sd in the outcome is small too?</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">a model</span><span class="co">]</span><span class="at"> that includes both age at marriage and marriage rate will help us. </span></span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>DR: maybe but these are aggregates. Casual thinking will be difficult.  Primitives are more like 'whether an individual of a.certain age gets married or divorced'</span>
-<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; causal impact</span></span>
-<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>DR: redundant language. All impacts are causal :)</span>
-<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DAG will tell you the consequences of intervening to change a variable. But only if the DAG is correct</span></span>
-<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Perhaps a direct effect would arise because younger people change faster than older people and are therefore more likely to grow incompatible with a partner. Second, it has an indirect effect by influencing the marriage rate, which then influences divorce, A $\rightarrow$  M $\rightarrow$  D</span></span>
-<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; these different arrows, we need more than one statistical model.</span></span>
-<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Model m5.1, the regression of D on A, tells us only that the total influence of age at marriage is strongly negative with divorce rate</span></span>
-<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a>DR: May not be *influence*... because unobserved factor could drive both</span>
-<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The 'total' here means we have to account for every path from A to D. There are two such paths in this graph: $A \rightarrow  D$, a direct path, and $A \rightarrow  M \rightarrow D$, an indirect path. In general, it is possible that a variable like A has no direct effect at all on an outcome like D. It could still be associated with D entirely through the indirect path. That type of relationship is known as mediation, and we'll have another example later.</span></span>
-<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This DAG is also consistent with the posterior distributions of models m5.1 and m5.2. Why? Because both M and D 'listen' to A</span></span>
-<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; conditional independencies  ... which variables become dis-associated when we condition on some other set of variables. D</span></span>
-<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>... that every pair of variables is correlated. This is because there is a causal arrow between every pair. These arrows create correlations.</span>
-<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DR: but effects could add up to zero by coincidence. (Actually, he has a case like this further down, he just fails to mention it here)</span></span>
-<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; They share a cause, and this leads them to be correlated with one another through that cause. But suppose we condition on A. All of the information in M that is relevant to predicting D is in A. So once we've conditioned on A, M tells us nothing more about D. So in the second DAG, a testable implication is that D is independent of M, conditional on A. In other words, $D \perp  M|A$.</span></span>
-<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here’s the code to define the second DAG and display the implied conditional independencies.</span></span>
-<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
-<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a>DMA_dag2 <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">'dag{ D &lt;- A -&gt; M }'</span>)</span>
-<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>( DMA_dag2 )</span>
-<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So for example once you fit a multiple regression to predict divorce using both marriage rate and age at marriage, the model addresses the questions: (1) After I already know marriage rate, what additional value is there in also knowing age at marriage? (2) After I already know age at marriage, what additional value is there in also knowing marriage rate?</span></span>
-<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a>DR: can we differentiate 1 from 2?</span>
-<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Coding data vis and univariate models  (Kurz) {-}</span></span>
-<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a>Kurz on themes and plots:^<span class="co">[</span><span class="ot"> Going forward, each chapter will have its own plot theme. In this chapter, we’ll characterize the plots with `theme_bw() + theme(panel.grid = element_rect())` and coloring based off of "firebrick".</span><span class="co">]</span></span>
-<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggrepel", dependencies = T)</span></span>
-<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb32-108"><a href="#cb32-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-109"><a href="#cb32-109" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb32-110"><a href="#cb32-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> WaffleHouses<span class="sc">/</span>Population, <span class="at">y =</span> Divorce)) <span class="sc">+</span> <span class="co">#note we can put transformations *within* the `aes`</span></span>
-<span id="cb32-111"><a href="#cb32-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">fullrange =</span> T, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>,</span>
-<span id="cb32-112"><a href="#cb32-112" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="co">#the linear plot and the shaded 'some sort of bounds' thing</span></span>
-<span id="cb32-113"><a href="#cb32-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb32-114"><a href="#cb32-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ME"</span>, <span class="st">"OK"</span>, <span class="st">"AR"</span>, <span class="st">"AL"</span>, <span class="st">"GA"</span>, <span class="st">"SC"</span>, <span class="st">"NJ"</span>)),  </span>
-<span id="cb32-115"><a href="#cb32-115" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">label =</span> Loc), </span>
-<span id="cb32-116"><a href="#cb32-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="dv">3</span>, <span class="at">seed =</span> <span class="dv">1042</span>) <span class="sc">+</span>  <span class="co"># this makes it reproducible</span></span>
-<span id="cb32-117"><a href="#cb32-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Waffle Houses per million"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">55</span>)) <span class="sc">+</span></span>
-<span id="cb32-118"><a href="#cb32-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce rate"</span>) <span class="sc">+</span></span>
-<span id="cb32-119"><a href="#cb32-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
-<span id="cb32-120"><a href="#cb32-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-121"><a href="#cb32-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())  <span class="co">#removes gridlines</span></span>
-<span id="cb32-122"><a href="#cb32-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-123"><a href="#cb32-123" aria-hidden="true" tabindex="-1"></a>*Note: I'm skipping the map plotting, for now, even though it's a cool vis.*</span>
-<span id="cb32-124"><a href="#cb32-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-127"><a href="#cb32-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-128"><a href="#cb32-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: standardize_mam</span></span>
-<span id="cb32-129"><a href="#cb32-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Standardize median age marriage"</span></span>
-<span id="cb32-130"><a href="#cb32-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-131"><a href="#cb32-131" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
-<span id="cb32-132"><a href="#cb32-132" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
-<span id="cb32-133"><a href="#cb32-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MedianAgeMarriage_s =</span> (MedianAgeMarriage <span class="sc">-</span> <span class="fu">mean</span>(MedianAgeMarriage)) <span class="sc">/</span></span>
-<span id="cb32-134"><a href="#cb32-134" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sd</span>(MedianAgeMarriage))</span>
-<span id="cb32-135"><a href="#cb32-135" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb32-136"><a href="#cb32-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-137"><a href="#cb32-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-138"><a href="#cb32-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-141"><a href="#cb32-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-142"><a href="#cb32-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "fit the first univariable model."</span></span>
-<span id="cb32-143"><a href="#cb32-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-144"><a href="#cb32-144" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.1</span> <span class="ot">&lt;-</span> </span>
-<span id="cb32-145"><a href="#cb32-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb32-146"><a href="#cb32-146" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb32-147"><a href="#cb32-147" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
-<span id="cb32-148"><a href="#cb32-148" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb32-149"><a href="#cb32-149" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb32-150"><a href="#cb32-150" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb32-151"><a href="#cb32-151" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb32-152"><a href="#cb32-152" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb32-153"><a href="#cb32-153" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.01"</span>)</span>
-<span id="cb32-154"><a href="#cb32-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-155"><a href="#cb32-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-156"><a href="#cb32-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-159"><a href="#cb32-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-160"><a href="#cb32-160" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.1</span>)</span>
-<span id="cb32-161"><a href="#cb32-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-162"><a href="#cb32-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-163"><a href="#cb32-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-164"><a href="#cb32-164" aria-hidden="true" tabindex="-1"></a>Below...</span>
-<span id="cb32-165"><a href="#cb32-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-166"><a href="#cb32-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create: <span class="in">`nd`</span> -- tibble of standardized predictor values to plot over</span>
-<span id="cb32-167"><a href="#cb32-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>apply <span class="in">`fitted`</span> to <span class="in">`nd`</span> with the <span class="in">`newdata`</span> argument to fit values over this range (rather than over the  data the model was fit on)</span>
-<span id="cb32-168"><a href="#cb32-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-169"><a href="#cb32-169" aria-hidden="true" tabindex="-1"></a>"to return model-implied expected values for <span class="in">`Divorce`</span>"</span>
-<span id="cb32-170"><a href="#cb32-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-171"><a href="#cb32-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
-<span id="cb32-172"><a href="#cb32-172" aria-hidden="true" tabindex="-1"></a><span class="co"># define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`</span></span>
-<span id="cb32-173"><a href="#cb32-173" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">MedianAgeMarriage_s =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="fl">3.5</span>, <span class="at">length.out =</span> <span class="dv">30</span>))</span>
-<span id="cb32-174"><a href="#cb32-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-175"><a href="#cb32-175" aria-hidden="true" tabindex="-1"></a><span class="co"># now use `fitted()` to get the model-implied trajectories</span></span>
-<span id="cb32-176"><a href="#cb32-176" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
-<span id="cb32-177"><a href="#cb32-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.1</span>, <span class="at">newdata =</span> nd) <span class="sc">%&gt;%</span></span>
-<span id="cb32-178"><a href="#cb32-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb32-179"><a href="#cb32-179" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tack the `nd` data onto the `fitted()` results</span></span>
-<span id="cb32-180"><a href="#cb32-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(nd)</span>
-<span id="cb32-181"><a href="#cb32-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-182"><a href="#cb32-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-183"><a href="#cb32-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-184"><a href="#cb32-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-185"><a href="#cb32-185" aria-hidden="true" tabindex="-1"></a>And plot this... </span>
-<span id="cb32-186"><a href="#cb32-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-187"><a href="#cb32-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
-<span id="cb32-188"><a href="#cb32-188" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb32-189"><a href="#cb32-189" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> f, </span>
-<span id="cb32-190"><a href="#cb32-190" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Estimate)) <span class="sc">+</span></span>
-<span id="cb32-191"><a href="#cb32-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Q2<span class="fl">.5</span>, <span class="at">ymax =</span> Q97<span class="fl">.5</span>),</span>
-<span id="cb32-192"><a href="#cb32-192" aria-hidden="true" tabindex="-1"></a>              <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
-<span id="cb32-193"><a href="#cb32-193" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb32-194"><a href="#cb32-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d, <span class="co">#overlaying the original data</span></span>
-<span id="cb32-195"><a href="#cb32-195" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> Divorce), </span>
-<span id="cb32-196"><a href="#cb32-196" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb32-197"><a href="#cb32-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce"</span>) <span class="sc">+</span></span>
-<span id="cb32-198"><a href="#cb32-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d<span class="sc">$</span>MedianAgeMarriage_s), </span>
-<span id="cb32-199"><a href="#cb32-199" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Divorce)) <span class="sc">+</span></span>
-<span id="cb32-200"><a href="#cb32-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-201"><a href="#cb32-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())                   </span>
-<span id="cb32-202"><a href="#cb32-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-203"><a href="#cb32-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-204"><a href="#cb32-204" aria-hidden="true" tabindex="-1"></a>Next   ... they do the same thing but with marriage rate as the predictor</span>
-<span id="cb32-207"><a href="#cb32-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-208"><a href="#cb32-208" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
-<span id="cb32-209"><a href="#cb32-209" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
-<span id="cb32-210"><a href="#cb32-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Marriage_s =</span> (Marriage <span class="sc">-</span> <span class="fu">mean</span>(Marriage)) <span class="sc">/</span> <span class="fu">sd</span>(Marriage))</span>
-<span id="cb32-211"><a href="#cb32-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-212"><a href="#cb32-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-215"><a href="#cb32-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-216"><a href="#cb32-216" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.2</span> <span class="ot">&lt;-</span> </span>
-<span id="cb32-217"><a href="#cb32-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb32-218"><a href="#cb32-218" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb32-219"><a href="#cb32-219" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s,</span>
-<span id="cb32-220"><a href="#cb32-220" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb32-221"><a href="#cb32-221" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb32-222"><a href="#cb32-222" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb32-223"><a href="#cb32-223" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb32-224"><a href="#cb32-224" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb32-225"><a href="#cb32-225" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.02"</span>)</span>
-<span id="cb32-226"><a href="#cb32-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-227"><a href="#cb32-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-228"><a href="#cb32-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-229"><a href="#cb32-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-232"><a href="#cb32-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-233"><a href="#cb32-233" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.2</span>)</span>
-<span id="cb32-234"><a href="#cb32-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-235"><a href="#cb32-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-236"><a href="#cb32-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-237"><a href="#cb32-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-238"><a href="#cb32-238" aria-hidden="true" tabindex="-1"></a>I'll skip plotting this for now</span>
-<span id="cb32-239"><a href="#cb32-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-240"><a href="#cb32-240" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression notation {-}</span></span>
-<span id="cb32-241"><a href="#cb32-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-242"><a href="#cb32-242" aria-hidden="true" tabindex="-1"></a>Model with</span>
-<span id="cb32-243"><a href="#cb32-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-244"><a href="#cb32-244" aria-hidden="true" tabindex="-1"></a><span class="in">`mu &lt;- a + bM*M + bA*A`</span></span>
-<span id="cb32-245"><a href="#cb32-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-246"><a href="#cb32-246" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Notice how bA doesn’t move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:</span></span>
-<span id="cb32-247"><a href="#cb32-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-248"><a href="#cb32-248" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State.</span></span>
-<span id="cb32-249"><a href="#cb32-249" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.</span></span>
-<span id="cb32-250"><a href="#cb32-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-251"><a href="#cb32-251" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the first DAG did not imply this result, it is out</span></span>
-<span id="cb32-252"><a href="#cb32-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-253"><a href="#cb32-253" aria-hidden="true" tabindex="-1"></a>DR: This seems like a very weak test and a poor strategy for making inferences about causality (more so *running* with those inferences to underly future modeling).  Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.</span>
-<span id="cb32-254"><a href="#cb32-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-255"><a href="#cb32-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-256"><a href="#cb32-256" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fitting the (multivariate) model {-}</span></span>
-<span id="cb32-257"><a href="#cb32-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-258"><a href="#cb32-258" aria-hidden="true" tabindex="-1"></a>'Priors for each slope'^<span class="co">[</span><span class="ot">"Notice we’re using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we’d make two prior() statements and differentiate them with the coef argument."</span><span class="co">]</span></span>
-<span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.3</span> <span class="ot">&lt;-</span> </span>
-<span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb32-266"><a href="#cb32-266" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s <span class="sc">+</span> MedianAgeMarriage_s,</span>
-<span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.03"</span>)</span>
-<span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-274"><a href="#cb32-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-275"><a href="#cb32-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-278"><a href="#cb32-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-279"><a href="#cb32-279" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.3</span>)</span>
-<span id="cb32-280"><a href="#cb32-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-281"><a href="#cb32-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-282"><a href="#cb32-282" aria-hidden="true" tabindex="-1"></a> <span class="in">`mcmc_plot(b5.3)`</span> seems to produce a ggplot object:</span>
-<span id="cb32-283"><a href="#cb32-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-286"><a href="#cb32-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-287"><a href="#cb32-287" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb32-288"><a href="#cb32-288" aria-hidden="true" tabindex="-1"></a>xxx <span class="ot">&lt;-</span> <span class="fu">mcmc_plot</span>(b5<span class="fl">.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
-<span id="cb32-289"><a href="#cb32-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-290"><a href="#cb32-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb32-291"><a href="#cb32-291" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb32-292"><a href="#cb32-292" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb32-293"><a href="#cb32-293" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb32-294"><a href="#cb32-294" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-295"><a href="#cb32-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-296"><a href="#cb32-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-297"><a href="#cb32-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-298"><a href="#cb32-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-299"><a href="#cb32-299" aria-hidden="true" tabindex="-1"></a>With the <span class="in">`bayesplot::mcmc_intervals`</span> function you can specify what you want more precisely. </span>
-<span id="cb32-300"><a href="#cb32-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-303"><a href="#cb32-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-304"><a href="#cb32-304" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("bayesplot", dependencies = T)</span></span>
-<span id="cb32-305"><a href="#cb32-305" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb32-306"><a href="#cb32-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-307"><a href="#cb32-307" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b5<span class="fl">.3</span>)</span>
-<span id="cb32-308"><a href="#cb32-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-309"><a href="#cb32-309" aria-hidden="true" tabindex="-1"></a><span class="fu">color_scheme_set</span>(<span class="st">"red"</span>)</span>
-<span id="cb32-310"><a href="#cb32-310" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(post[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
-<span id="cb32-311"><a href="#cb32-311" aria-hidden="true" tabindex="-1"></a>               <span class="at">prob =</span> .<span class="dv">7</span>,</span>
-<span id="cb32-312"><a href="#cb32-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_outer =</span> <span class="fl">0.99</span>,</span>
-<span id="cb32-313"><a href="#cb32-313" aria-hidden="true" tabindex="-1"></a>               <span class="at">point_est =</span> <span class="st">"mean"</span>) <span class="sc">+</span> <span class="co">#Kurz and the default use 'median'</span></span>
-<span id="cb32-314"><a href="#cb32-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
-<span id="cb32-315"><a href="#cb32-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-316"><a href="#cb32-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb32-317"><a href="#cb32-317" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb32-318"><a href="#cb32-318" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb32-319"><a href="#cb32-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-320"><a href="#cb32-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-321"><a href="#cb32-321" aria-hidden="true" tabindex="-1"></a>Note; this approach it required you to work with the <span class="in">`posterior_samples()`</span> instead of the brmsfit object. Just to be different, I set <span class="in">`point_est = "mean"`</span> instead of median, and <span class="in">`prob = .7`</span> for the 'inner interval' and <span class="in">`prob_outer = 0.99`</span>.</span>
-<span id="cb32-322"><a href="#cb32-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-323"><a href="#cb32-323" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The tidybaes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.</span></span>
-<span id="cb32-324"><a href="#cb32-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-325"><a href="#cb32-325" aria-hidden="true" tabindex="-1"></a>... I will return to that later, perhaps</span>
-<span id="cb32-326"><a href="#cb32-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-327"><a href="#cb32-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-328"><a href="#cb32-328" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plotting multivariate posteriors. {-}</span></span>
-<span id="cb32-329"><a href="#cb32-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-330"><a href="#cb32-330" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (1)  Predictor residual plots. These plots show the outcome against residual predictor</span></span>
-<span id="cb32-331"><a href="#cb32-331" aria-hidden="true" tabindex="-1"></a><span class="at">values. ...</span></span>
-<span id="cb32-332"><a href="#cb32-332" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Posterior prediction plots. These show model-based predictions against raw data,</span></span>
-<span id="cb32-333"><a href="#cb32-333" aria-hidden="true" tabindex="-1"></a><span class="at">or otherwise display the error in prediction. They are tools for checking fit and</span></span>
-<span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a><span class="at">assessing predictions. ...</span></span>
-<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) Counterfactual plots. These show the impliTd predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</span></span>
-<span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-339"><a href="#cb32-339" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Predictor residual plots {-}</span></span>
-<span id="cb32-340"><a href="#cb32-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-341"><a href="#cb32-341" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To get ready to make our residual plots, we'll predict </span><span class="in">`Marriage_s`</span><span class="at"> with </span><span class="in">`MedianAgeMarriage_s`</span><span class="at">.</span></span>
-<span id="cb32-342"><a href="#cb32-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-343"><a href="#cb32-343" aria-hidden="true" tabindex="-1"></a>DR: going for 'the surpriseing part of one explanatory variable once you already know another'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results such as the 'long and short regression' and 'omitted variable bias' formulae.</span>
-<span id="cb32-344"><a href="#cb32-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-345"><a href="#cb32-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.4}</span></span>
-<span id="cb32-346"><a href="#cb32-346" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
-<span id="cb32-347"><a href="#cb32-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d,</span>
-<span id="cb32-348"><a href="#cb32-348" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb32-349"><a href="#cb32-349" aria-hidden="true" tabindex="-1"></a>      Marriage_s <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
-<span id="cb32-350"><a href="#cb32-350" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb32-351"><a href="#cb32-351" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb32-352"><a href="#cb32-352" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb32-353"><a href="#cb32-353" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb32-354"><a href="#cb32-354" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb32-355"><a href="#cb32-355" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.04"</span>)</span>
-<span id="cb32-356"><a href="#cb32-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-357"><a href="#cb32-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-360"><a href="#cb32-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-361"><a href="#cb32-361" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.4</span>)</span>
-<span id="cb32-362"><a href="#cb32-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-363"><a href="#cb32-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-364"><a href="#cb32-364" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With </span><span class="in">`fitted()`</span><span class="at">, we compute the expected values for each state (with the exception of Nevada). Since the </span><span class="in">`MedianAgeMarriage_s`</span><span class="at"> values for each state are in the date we used to fit the model, we'll omit the </span><span class="in">`newdata`</span><span class="at"> argument.</span></span>
-<span id="cb32-365"><a href="#cb32-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-368"><a href="#cb32-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-369"><a href="#cb32-369" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
-<span id="cb32-370"><a href="#cb32-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-371"><a href="#cb32-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb32-372"><a href="#cb32-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(d)</span>
-<span id="cb32-373"><a href="#cb32-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-374"><a href="#cb32-374" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(f)</span>
-<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-376"><a href="#cb32-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-377"><a href="#cb32-377" aria-hidden="true" tabindex="-1"></a>After a little data processing, we can make Figure 5.3.</span>
-<span id="cb32-378"><a href="#cb32-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
-<span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
-<span id="cb32-381"><a href="#cb32-381" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Marriage_s)) <span class="sc">+</span></span>
-<span id="cb32-382"><a href="#cb32-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb32-383"><a href="#cb32-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> MedianAgeMarriage_s, <span class="at">yend =</span> Estimate), </span>
-<span id="cb32-384"><a href="#cb32-384" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb32-385"><a href="#cb32-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Estimate), </span>
-<span id="cb32-386"><a href="#cb32-386" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb32-387"><a href="#cb32-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Marriage_s)) <span class="sc">+</span></span>
-<span id="cb32-388"><a href="#cb32-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb32-389"><a href="#cb32-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())     </span>
-<span id="cb32-390"><a href="#cb32-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-391"><a href="#cb32-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-392"><a href="#cb32-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-393"><a href="#cb32-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-394"><a href="#cb32-394" aria-hidden="true" tabindex="-1"></a>**Skipped a bunch here; come back to it**</span>
-<span id="cb32-395"><a href="#cb32-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-396"><a href="#cb32-396" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.</span></span>
-<span id="cb32-397"><a href="#cb32-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-398"><a href="#cb32-398" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can use </span><span class="in">`sim`</span><span class="at">, which you met in the previous chapter, to simulate observations from model </span><span class="in">`m5.3_A`</span><span class="at">. But this time we’ll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
-<span id="cb32-399"><a href="#cb32-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-400"><a href="#cb32-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-401"><a href="#cb32-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-402"><a href="#cb32-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb32-403"><a href="#cb32-403" aria-hidden="true" tabindex="-1"></a><span class="co"># prep data 5.21</span></span>
-<span id="cb32-404"><a href="#cb32-404" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">A=</span>A_seq )</span>
-<span id="cb32-405"><a href="#cb32-405" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate M and then D, using A_seq</span></span>
-<span id="cb32-406"><a href="#cb32-406" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>( m5<span class="fl">.3</span>_A , <span class="at">data=</span>sim_dat , <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"D"</span>) )</span>
-<span id="cb32-407"><a href="#cb32-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-408"><a href="#cb32-408" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb32-409"><a href="#cb32-409" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( sim_dat<span class="sc">$</span>A , <span class="fu">colMeans</span>(s<span class="sc">$</span>D) , <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>) , <span class="at">type=</span><span class="st">"l"</span> ,</span>
-<span id="cb32-410"><a href="#cb32-410" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">"manipulated A"</span> , <span class="at">ylab=</span><span class="st">"counterfactual D"</span> )</span>
-<span id="cb32-411"><a href="#cb32-411" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( <span class="fu">apply</span>(s<span class="sc">$</span>D,<span class="dv">2</span>,PI) , sim_dat<span class="sc">$</span>A )</span>
-<span id="cb32-412"><a href="#cb32-412" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>( <span class="st">"Total counterfactual effect of A on D"</span> )</span>
-<span id="cb32-413"><a href="#cb32-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb42" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Ch 5. The Many Variables &amp; The Spurious Waffles {#mcelreath_ch5}</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>Load the <span class="co">[</span><span class="ot">Waffle House</span><span class="co">](https://www.snopes.com/fact-check/fema-waffle-house-index/)</span> data.</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(WaffleDivorce)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> WaffleDivorce</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(daggity, <span class="at">install=</span><span class="cn">FALSE</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F, warning = F}</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(WaffleDivorce)</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="co">#detach(package:rethinking, unload = T)</span></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Reasons given for multiple regression models include: (1) Statistical -control” for confounds</span></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>DR: but endogenous controls can make this problem worse</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5.1. Spurious association {-}</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; But there’s no reason high marriage rate must cause more divorce</span></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>DR: what would this even mean? ... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familiar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another. </span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; easy to imagine high marriage rate indicating high cultural valuation of marriage and therefore being associated with low divorce rate</span></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>DR: but the latter is not causal</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the outcome and the predictor are both standardized, the intercept - should end up very close to zero </span></span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>$\alpha ∼ Normal(0, 0.2)$</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>DR: why not exactly 0? Is this a 'sample drawn from the population' issue?</span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So when $\beta_A = 1$, a change of 1.2 years in median age at marriage is associated with a full standard deviation change in the outcome variable  </span><span class="co">[</span><span class="ot">which he thinks is absurdly large</span><span class="co">]</span></span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>DR: But why are these 'absurdly large', maybe the sd in the outcome is small too?</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="co">[</span><span class="ot">a model</span><span class="co">]</span><span class="at"> that includes both age at marriage and marriage rate will help us. </span></span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a>DR: maybe but these are aggregates. Casual thinking will be difficult.  Primitives are more like 'whether an individual of a.certain age gets married or divorced'</span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; causal impact</span></span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a>DR: redundant language. All impacts are causal :)</span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-60"><a href="#cb42-60" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DAG will tell you the consequences of intervening to change a variable. But only if the DAG is correct</span></span>
+<span id="cb42-61"><a href="#cb42-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-62"><a href="#cb42-62" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Perhaps a direct effect would arise because younger people change faster than older people and are therefore more likely to grow incompatible with a partner. Second, it has an indirect effect by influencing the marriage rate, which then influences divorce, A $\rightarrow$  M $\rightarrow$  D</span></span>
+<span id="cb42-63"><a href="#cb42-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-64"><a href="#cb42-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; these different arrows, we need more than one statistical model.</span></span>
+<span id="cb42-65"><a href="#cb42-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-66"><a href="#cb42-66" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Model m5.1, the regression of D on A, tells us only that the total influence of age at marriage is strongly negative with divorce rate</span></span>
+<span id="cb42-67"><a href="#cb42-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-68"><a href="#cb42-68" aria-hidden="true" tabindex="-1"></a>DR: May not be *influence*... because unobserved factor could drive both</span>
+<span id="cb42-69"><a href="#cb42-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-70"><a href="#cb42-70" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The 'total' here means we have to account for every path from A to D. There are two such paths in this graph: $A \rightarrow  D$, a direct path, and $A \rightarrow  M \rightarrow D$, an indirect path. In general, it is possible that a variable like A has no direct effect at all on an outcome like D. It could still be associated with D entirely through the indirect path. That type of relationship is known as mediation, and we'll have another example later.</span></span>
+<span id="cb42-71"><a href="#cb42-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-72"><a href="#cb42-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-73"><a href="#cb42-73" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; This DAG is also consistent with the posterior distributions of models m5.1 and m5.2. Why? Because both M and D 'listen' to A</span></span>
+<span id="cb42-74"><a href="#cb42-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-75"><a href="#cb42-75" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; conditional independencies  ... which variables become dis-associated when we condition on some other set of variables. D</span></span>
+<span id="cb42-76"><a href="#cb42-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-77"><a href="#cb42-77" aria-hidden="true" tabindex="-1"></a>... that every pair of variables is correlated. This is because there is a causal arrow between every pair. These arrows create correlations.</span>
+<span id="cb42-78"><a href="#cb42-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-79"><a href="#cb42-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; DR: but effects could add up to zero by coincidence. (Actually, he has a case like this further down, he just fails to mention it here)</span></span>
+<span id="cb42-80"><a href="#cb42-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-81"><a href="#cb42-81" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; They share a cause, and this leads them to be correlated with one another through that cause. But suppose we condition on A. All of the information in M that is relevant to predicting D is in A. So once we've conditioned on A, M tells us nothing more about D. So in the second DAG, a testable implication is that D is independent of M, conditional on A. In other words, $D \perp  M|A$.</span></span>
+<span id="cb42-82"><a href="#cb42-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-83"><a href="#cb42-83" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Here’s the code to define the second DAG and display the implied conditional independencies.</span></span>
+<span id="cb42-84"><a href="#cb42-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-87"><a href="#cb42-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-88"><a href="#cb42-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb42-89"><a href="#cb42-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-90"><a href="#cb42-90" aria-hidden="true" tabindex="-1"></a>DMA_dag2 <span class="ot">&lt;-</span> dagitty<span class="sc">::</span><span class="fu">dagitty</span>(<span class="st">'dag{ D &lt;- A -&gt; M }'</span>)</span>
+<span id="cb42-91"><a href="#cb42-91" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>( DMA_dag2 )</span>
+<span id="cb42-92"><a href="#cb42-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-93"><a href="#cb42-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-94"><a href="#cb42-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-95"><a href="#cb42-95" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So for example once you fit a multiple regression to predict divorce using both marriage rate and age at marriage, the model addresses the questions: (1) After I already know marriage rate, what additional value is there in also knowing age at marriage? (2) After I already know age at marriage, what additional value is there in also knowing marriage rate?</span></span>
+<span id="cb42-96"><a href="#cb42-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-97"><a href="#cb42-97" aria-hidden="true" tabindex="-1"></a>DR: can we differentiate 1 from 2?</span>
+<span id="cb42-98"><a href="#cb42-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-99"><a href="#cb42-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### Coding data vis and univariate models  (Kurz) {-}</span></span>
+<span id="cb42-100"><a href="#cb42-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-101"><a href="#cb42-101" aria-hidden="true" tabindex="-1"></a>Kurz on themes and plots:^<span class="co">[</span><span class="ot"> Going forward, each chapter will have its own plot theme. In this chapter, we’ll characterize the plots with `theme_bw() + theme(panel.grid = element_rect())` and coloring based off of "firebrick".</span><span class="co">]</span></span>
+<span id="cb42-102"><a href="#cb42-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-105"><a href="#cb42-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-106"><a href="#cb42-106" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("ggrepel", dependencies = T)</span></span>
+<span id="cb42-107"><a href="#cb42-107" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb42-108"><a href="#cb42-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-109"><a href="#cb42-109" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb42-110"><a href="#cb42-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> WaffleHouses<span class="sc">/</span>Population, <span class="at">y =</span> Divorce)) <span class="sc">+</span> <span class="co">#note we can put transformations *within* the `aes`</span></span>
+<span id="cb42-111"><a href="#cb42-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">fullrange =</span> T, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb42-112"><a href="#cb42-112" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>) <span class="sc">+</span> <span class="co">#the linear plot and the shaded 'some sort of bounds' thing</span></span>
+<span id="cb42-113"><a href="#cb42-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb42-114"><a href="#cb42-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Loc <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"ME"</span>, <span class="st">"OK"</span>, <span class="st">"AR"</span>, <span class="st">"AL"</span>, <span class="st">"GA"</span>, <span class="st">"SC"</span>, <span class="st">"NJ"</span>)),  </span>
+<span id="cb42-115"><a href="#cb42-115" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">label =</span> Loc), </span>
+<span id="cb42-116"><a href="#cb42-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">size =</span> <span class="dv">3</span>, <span class="at">seed =</span> <span class="dv">1042</span>) <span class="sc">+</span>  <span class="co"># this makes it reproducible</span></span>
+<span id="cb42-117"><a href="#cb42-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"Waffle Houses per million"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">55</span>)) <span class="sc">+</span></span>
+<span id="cb42-118"><a href="#cb42-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce rate"</span>) <span class="sc">+</span></span>
+<span id="cb42-119"><a href="#cb42-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb42-120"><a href="#cb42-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-121"><a href="#cb42-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())  <span class="co">#removes gridlines</span></span>
+<span id="cb42-122"><a href="#cb42-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-123"><a href="#cb42-123" aria-hidden="true" tabindex="-1"></a>*Note: I'm skipping the map plotting, for now, even though it's a cool vis.*</span>
+<span id="cb42-124"><a href="#cb42-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-127"><a href="#cb42-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-128"><a href="#cb42-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: standardize_mam</span></span>
+<span id="cb42-129"><a href="#cb42-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Standardize median age marriage"</span></span>
+<span id="cb42-130"><a href="#cb42-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-131"><a href="#cb42-131" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
+<span id="cb42-132"><a href="#cb42-132" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb42-133"><a href="#cb42-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MedianAgeMarriage_s =</span> (MedianAgeMarriage <span class="sc">-</span> <span class="fu">mean</span>(MedianAgeMarriage)) <span class="sc">/</span></span>
+<span id="cb42-134"><a href="#cb42-134" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sd</span>(MedianAgeMarriage))</span>
+<span id="cb42-135"><a href="#cb42-135" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb42-136"><a href="#cb42-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-137"><a href="#cb42-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-138"><a href="#cb42-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-141"><a href="#cb42-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-142"><a href="#cb42-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "fit the first univariable model."</span></span>
+<span id="cb42-143"><a href="#cb42-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-144"><a href="#cb42-144" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.1</span> <span class="ot">&lt;-</span> </span>
+<span id="cb42-145"><a href="#cb42-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb42-146"><a href="#cb42-146" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-147"><a href="#cb42-147" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
+<span id="cb42-148"><a href="#cb42-148" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb42-149"><a href="#cb42-149" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-150"><a href="#cb42-150" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-151"><a href="#cb42-151" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-152"><a href="#cb42-152" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-153"><a href="#cb42-153" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.01"</span>)</span>
+<span id="cb42-154"><a href="#cb42-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-155"><a href="#cb42-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-156"><a href="#cb42-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-159"><a href="#cb42-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-160"><a href="#cb42-160" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.1</span>)</span>
+<span id="cb42-161"><a href="#cb42-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-162"><a href="#cb42-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-163"><a href="#cb42-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-164"><a href="#cb42-164" aria-hidden="true" tabindex="-1"></a>Below...</span>
+<span id="cb42-165"><a href="#cb42-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-166"><a href="#cb42-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create: <span class="in">`nd`</span> -- tibble of standardized predictor values to plot over</span>
+<span id="cb42-167"><a href="#cb42-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>apply <span class="in">`fitted`</span> to <span class="in">`nd`</span> with the <span class="in">`newdata`</span> argument to fit values over this range (rather than over the  data the model was fit on)</span>
+<span id="cb42-168"><a href="#cb42-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-169"><a href="#cb42-169" aria-hidden="true" tabindex="-1"></a>"to return model-implied expected values for <span class="in">`Divorce`</span>"</span>
+<span id="cb42-170"><a href="#cb42-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-171"><a href="#cb42-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
+<span id="cb42-172"><a href="#cb42-172" aria-hidden="true" tabindex="-1"></a><span class="co"># define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`</span></span>
+<span id="cb42-173"><a href="#cb42-173" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">MedianAgeMarriage_s =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="fl">3.5</span>, <span class="at">length.out =</span> <span class="dv">30</span>))</span>
+<span id="cb42-174"><a href="#cb42-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-175"><a href="#cb42-175" aria-hidden="true" tabindex="-1"></a><span class="co"># now use `fitted()` to get the model-implied trajectories</span></span>
+<span id="cb42-176"><a href="#cb42-176" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
+<span id="cb42-177"><a href="#cb42-177" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.1</span>, <span class="at">newdata =</span> nd) <span class="sc">%&gt;%</span></span>
+<span id="cb42-178"><a href="#cb42-178" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-179"><a href="#cb42-179" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tack the `nd` data onto the `fitted()` results</span></span>
+<span id="cb42-180"><a href="#cb42-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(nd)</span>
+<span id="cb42-181"><a href="#cb42-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-182"><a href="#cb42-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-183"><a href="#cb42-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-184"><a href="#cb42-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-185"><a href="#cb42-185" aria-hidden="true" tabindex="-1"></a>And plot this... </span>
+<span id="cb42-186"><a href="#cb42-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-187"><a href="#cb42-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
+<span id="cb42-188"><a href="#cb42-188" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb42-189"><a href="#cb42-189" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> f, </span>
+<span id="cb42-190"><a href="#cb42-190" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Estimate)) <span class="sc">+</span></span>
+<span id="cb42-191"><a href="#cb42-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Q2<span class="fl">.5</span>, <span class="at">ymax =</span> Q97<span class="fl">.5</span>),</span>
+<span id="cb42-192"><a href="#cb42-192" aria-hidden="true" tabindex="-1"></a>              <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb42-193"><a href="#cb42-193" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb42-194"><a href="#cb42-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d, <span class="co">#overlaying the original data</span></span>
+<span id="cb42-195"><a href="#cb42-195" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> Divorce), </span>
+<span id="cb42-196"><a href="#cb42-196" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb42-197"><a href="#cb42-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce"</span>) <span class="sc">+</span></span>
+<span id="cb42-198"><a href="#cb42-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d<span class="sc">$</span>MedianAgeMarriage_s), </span>
+<span id="cb42-199"><a href="#cb42-199" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Divorce)) <span class="sc">+</span></span>
+<span id="cb42-200"><a href="#cb42-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-201"><a href="#cb42-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())                   </span>
+<span id="cb42-202"><a href="#cb42-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-203"><a href="#cb42-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-204"><a href="#cb42-204" aria-hidden="true" tabindex="-1"></a>Next   ... they do the same thing but with marriage rate as the predictor</span>
+<span id="cb42-207"><a href="#cb42-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-208"><a href="#cb42-208" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
+<span id="cb42-209"><a href="#cb42-209" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb42-210"><a href="#cb42-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Marriage_s =</span> (Marriage <span class="sc">-</span> <span class="fu">mean</span>(Marriage)) <span class="sc">/</span> <span class="fu">sd</span>(Marriage))</span>
+<span id="cb42-211"><a href="#cb42-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-212"><a href="#cb42-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-215"><a href="#cb42-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-216"><a href="#cb42-216" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.2</span> <span class="ot">&lt;-</span> </span>
+<span id="cb42-217"><a href="#cb42-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb42-218"><a href="#cb42-218" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-219"><a href="#cb42-219" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s,</span>
+<span id="cb42-220"><a href="#cb42-220" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb42-221"><a href="#cb42-221" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-222"><a href="#cb42-222" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-223"><a href="#cb42-223" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-224"><a href="#cb42-224" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-225"><a href="#cb42-225" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.02"</span>)</span>
+<span id="cb42-226"><a href="#cb42-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-227"><a href="#cb42-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-228"><a href="#cb42-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-229"><a href="#cb42-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-232"><a href="#cb42-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-233"><a href="#cb42-233" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.2</span>)</span>
+<span id="cb42-234"><a href="#cb42-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-235"><a href="#cb42-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-236"><a href="#cb42-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-237"><a href="#cb42-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-238"><a href="#cb42-238" aria-hidden="true" tabindex="-1"></a>I'll skip plotting this for now</span>
+<span id="cb42-239"><a href="#cb42-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-240"><a href="#cb42-240" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression notation {-}</span></span>
+<span id="cb42-241"><a href="#cb42-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-242"><a href="#cb42-242" aria-hidden="true" tabindex="-1"></a>Model with</span>
+<span id="cb42-243"><a href="#cb42-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-244"><a href="#cb42-244" aria-hidden="true" tabindex="-1"></a><span class="in">`mu &lt;- a + bM*M + bA*A`</span></span>
+<span id="cb42-245"><a href="#cb42-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-246"><a href="#cb42-246" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Notice how bA doesn’t move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:</span></span>
+<span id="cb42-247"><a href="#cb42-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-248"><a href="#cb42-248" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State.</span></span>
+<span id="cb42-249"><a href="#cb42-249" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.</span></span>
+<span id="cb42-250"><a href="#cb42-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-251"><a href="#cb42-251" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the first DAG did not imply this result, it is out</span></span>
+<span id="cb42-252"><a href="#cb42-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-253"><a href="#cb42-253" aria-hidden="true" tabindex="-1"></a>DR: This seems like a very weak test and a poor strategy for making inferences about causality (more so *running* with those inferences to underly future modeling).  Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.</span>
+<span id="cb42-254"><a href="#cb42-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-255"><a href="#cb42-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-256"><a href="#cb42-256" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fitting the (multivariate) model {-}</span></span>
+<span id="cb42-257"><a href="#cb42-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-258"><a href="#cb42-258" aria-hidden="true" tabindex="-1"></a>'Priors for each slope'^<span class="co">[</span><span class="ot">"Notice we’re using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we’d make two prior() statements and differentiate them with the coef argument."</span><span class="co">]</span></span>
+<span id="cb42-259"><a href="#cb42-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-262"><a href="#cb42-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-263"><a href="#cb42-263" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.3</span> <span class="ot">&lt;-</span> </span>
+<span id="cb42-264"><a href="#cb42-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb42-265"><a href="#cb42-265" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-266"><a href="#cb42-266" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s <span class="sc">+</span> MedianAgeMarriage_s,</span>
+<span id="cb42-267"><a href="#cb42-267" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb42-268"><a href="#cb42-268" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-269"><a href="#cb42-269" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-270"><a href="#cb42-270" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-271"><a href="#cb42-271" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-272"><a href="#cb42-272" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.03"</span>)</span>
+<span id="cb42-273"><a href="#cb42-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-274"><a href="#cb42-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-275"><a href="#cb42-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-278"><a href="#cb42-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-279"><a href="#cb42-279" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.3</span>)</span>
+<span id="cb42-280"><a href="#cb42-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-281"><a href="#cb42-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-282"><a href="#cb42-282" aria-hidden="true" tabindex="-1"></a> <span class="in">`mcmc_plot(b5.3)`</span> seems to produce a ggplot object:</span>
+<span id="cb42-283"><a href="#cb42-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-286"><a href="#cb42-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-287"><a href="#cb42-287" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb42-288"><a href="#cb42-288" aria-hidden="true" tabindex="-1"></a>xxx <span class="ot">&lt;-</span> <span class="fu">mcmc_plot</span>(b5<span class="fl">.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
+<span id="cb42-289"><a href="#cb42-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-290"><a href="#cb42-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb42-291"><a href="#cb42-291" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb42-292"><a href="#cb42-292" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb42-293"><a href="#cb42-293" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-294"><a href="#cb42-294" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-295"><a href="#cb42-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-296"><a href="#cb42-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-297"><a href="#cb42-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-298"><a href="#cb42-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-299"><a href="#cb42-299" aria-hidden="true" tabindex="-1"></a>With the <span class="in">`bayesplot::mcmc_intervals`</span> function you can specify what you want more precisely. </span>
+<span id="cb42-300"><a href="#cb42-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-303"><a href="#cb42-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-304"><a href="#cb42-304" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("bayesplot", dependencies = T)</span></span>
+<span id="cb42-305"><a href="#cb42-305" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb42-306"><a href="#cb42-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-307"><a href="#cb42-307" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b5<span class="fl">.3</span>)</span>
+<span id="cb42-308"><a href="#cb42-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-309"><a href="#cb42-309" aria-hidden="true" tabindex="-1"></a><span class="fu">color_scheme_set</span>(<span class="st">"red"</span>)</span>
+<span id="cb42-310"><a href="#cb42-310" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(post[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb42-311"><a href="#cb42-311" aria-hidden="true" tabindex="-1"></a>               <span class="at">prob =</span> .<span class="dv">7</span>,</span>
+<span id="cb42-312"><a href="#cb42-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_outer =</span> <span class="fl">0.99</span>,</span>
+<span id="cb42-313"><a href="#cb42-313" aria-hidden="true" tabindex="-1"></a>               <span class="at">point_est =</span> <span class="st">"mean"</span>) <span class="sc">+</span> <span class="co">#Kurz and the default use 'median'</span></span>
+<span id="cb42-314"><a href="#cb42-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
+<span id="cb42-315"><a href="#cb42-315" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-316"><a href="#cb42-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb42-317"><a href="#cb42-317" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb42-318"><a href="#cb42-318" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb42-319"><a href="#cb42-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-320"><a href="#cb42-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-321"><a href="#cb42-321" aria-hidden="true" tabindex="-1"></a>Note; this approach it required you to work with the <span class="in">`posterior_samples()`</span> instead of the brmsfit object. Just to be different, I set <span class="in">`point_est = "mean"`</span> instead of median, and <span class="in">`prob = .7`</span> for the 'inner interval' and <span class="in">`prob_outer = 0.99`</span>.</span>
+<span id="cb42-322"><a href="#cb42-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-323"><a href="#cb42-323" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The tidybaes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.</span></span>
+<span id="cb42-324"><a href="#cb42-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-325"><a href="#cb42-325" aria-hidden="true" tabindex="-1"></a>... I will return to that later, perhaps</span>
+<span id="cb42-326"><a href="#cb42-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-327"><a href="#cb42-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-328"><a href="#cb42-328" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plotting multivariate posteriors. {-}</span></span>
+<span id="cb42-329"><a href="#cb42-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-330"><a href="#cb42-330" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (1)  Predictor residual plots. These plots show the outcome against residual predictor</span></span>
+<span id="cb42-331"><a href="#cb42-331" aria-hidden="true" tabindex="-1"></a><span class="at">values. ...</span></span>
+<span id="cb42-332"><a href="#cb42-332" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Posterior prediction plots. These show model-based predictions against raw data,</span></span>
+<span id="cb42-333"><a href="#cb42-333" aria-hidden="true" tabindex="-1"></a><span class="at">or otherwise display the error in prediction. They are tools for checking fit and</span></span>
+<span id="cb42-334"><a href="#cb42-334" aria-hidden="true" tabindex="-1"></a><span class="at">assessing predictions. ...</span></span>
+<span id="cb42-335"><a href="#cb42-335" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</span></span>
+<span id="cb42-336"><a href="#cb42-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-337"><a href="#cb42-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-338"><a href="#cb42-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-339"><a href="#cb42-339" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Predictor residual plots {-}</span></span>
+<span id="cb42-340"><a href="#cb42-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-341"><a href="#cb42-341" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To get ready to make our residual plots, we'll predict </span><span class="in">`Marriage_s`</span><span class="at"> with </span><span class="in">`MedianAgeMarriage_s`</span><span class="at">.</span></span>
+<span id="cb42-342"><a href="#cb42-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-343"><a href="#cb42-343" aria-hidden="true" tabindex="-1"></a>^<span class="co">[</span><span class="ot">DR: going for 'the surprising part of one explanatory variable once you already know another'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results such as the 'long and short regression' and 'omitted variable bias' formulae</span><span class="co">]</span></span>
+<span id="cb42-344"><a href="#cb42-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-345"><a href="#cb42-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.4}</span></span>
+<span id="cb42-346"><a href="#cb42-346" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
+<span id="cb42-347"><a href="#cb42-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d,</span>
+<span id="cb42-348"><a href="#cb42-348" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-349"><a href="#cb42-349" aria-hidden="true" tabindex="-1"></a>      Marriage_s <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
+<span id="cb42-350"><a href="#cb42-350" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb42-351"><a href="#cb42-351" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-352"><a href="#cb42-352" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-353"><a href="#cb42-353" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-354"><a href="#cb42-354" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-355"><a href="#cb42-355" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.04"</span>)</span>
+<span id="cb42-356"><a href="#cb42-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-357"><a href="#cb42-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-360"><a href="#cb42-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-361"><a href="#cb42-361" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.4</span>)</span>
+<span id="cb42-362"><a href="#cb42-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-363"><a href="#cb42-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-364"><a href="#cb42-364" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With </span><span class="in">`fitted()`</span><span class="at">, we compute the expected values for each state (with the exception of Nevada). Since the </span><span class="in">`MedianAgeMarriage_s`</span><span class="at"> values for each state are in the date we used to fit the model, we'll omit the </span><span class="in">`newdata`</span><span class="at"> argument.</span></span>
+<span id="cb42-365"><a href="#cb42-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-368"><a href="#cb42-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-369"><a href="#cb42-369" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
+<span id="cb42-370"><a href="#cb42-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-371"><a href="#cb42-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-372"><a href="#cb42-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(d)</span>
+<span id="cb42-373"><a href="#cb42-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-374"><a href="#cb42-374" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(f)</span>
+<span id="cb42-375"><a href="#cb42-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-376"><a href="#cb42-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-377"><a href="#cb42-377" aria-hidden="true" tabindex="-1"></a>After a little data processing, we can make Figure 5.3.</span>
+<span id="cb42-378"><a href="#cb42-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-379"><a href="#cb42-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
+<span id="cb42-380"><a href="#cb42-380" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
+<span id="cb42-381"><a href="#cb42-381" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Marriage_s)) <span class="sc">+</span></span>
+<span id="cb42-382"><a href="#cb42-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb42-383"><a href="#cb42-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> MedianAgeMarriage_s, <span class="at">yend =</span> Estimate), </span>
+<span id="cb42-384"><a href="#cb42-384" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb42-385"><a href="#cb42-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Estimate), </span>
+<span id="cb42-386"><a href="#cb42-386" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb42-387"><a href="#cb42-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Marriage_s)) <span class="sc">+</span></span>
+<span id="cb42-388"><a href="#cb42-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb42-389"><a href="#cb42-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())     </span>
+<span id="cb42-390"><a href="#cb42-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-391"><a href="#cb42-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-392"><a href="#cb42-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-393"><a href="#cb42-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-394"><a href="#cb42-394" aria-hidden="true" tabindex="-1"></a>**Skipped a bunch here; come back to it**</span>
+<span id="cb42-395"><a href="#cb42-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-396"><a href="#cb42-396" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.</span></span>
+<span id="cb42-397"><a href="#cb42-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-398"><a href="#cb42-398" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can use </span><span class="in">`sim`</span><span class="at">, which you met in the previous chapter, to simulate observations from model </span><span class="in">`m5.3_A`</span><span class="at">. But this time we’ll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
+<span id="cb42-399"><a href="#cb42-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-400"><a href="#cb42-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-401"><a href="#cb42-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-402"><a href="#cb42-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb42-403"><a href="#cb42-403" aria-hidden="true" tabindex="-1"></a><span class="co"># prep data 5.21</span></span>
+<span id="cb42-404"><a href="#cb42-404" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">A=</span>A_seq )</span>
+<span id="cb42-405"><a href="#cb42-405" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate M and then D, using A_seq</span></span>
+<span id="cb42-406"><a href="#cb42-406" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>( m5<span class="fl">.3</span>_A , <span class="at">data=</span>sim_dat , <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"D"</span>) )</span>
+<span id="cb42-407"><a href="#cb42-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-408"><a href="#cb42-408" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb42-409"><a href="#cb42-409" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( sim_dat<span class="sc">$</span>A , <span class="fu">colMeans</span>(s<span class="sc">$</span>D) , <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>) , <span class="at">type=</span><span class="st">"l"</span> ,</span>
+<span id="cb42-410"><a href="#cb42-410" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">"manipulated A"</span> , <span class="at">ylab=</span><span class="st">"counterfactual D"</span> )</span>
+<span id="cb42-411"><a href="#cb42-411" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( <span class="fu">apply</span>(s<span class="sc">$</span>D,<span class="dv">2</span>,PI) , sim_dat<span class="sc">$</span>A )</span>
+<span id="cb42-412"><a href="#cb42-412" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>( <span class="st">"Total counterfactual effect of A on D"</span> )</span>
+<span id="cb42-413"><a href="#cb42-413" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-414"><a href="#cb42-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-415"><a href="#cb42-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-416"><a href="#cb42-416" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical variables</span></span>
+<span id="cb42-417"><a href="#cb42-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-418"><a href="#cb42-418" aria-hidden="true" tabindex="-1"></a>DR: This section is rather straightforward. The key insight:  *Remove the intercept when modeling with categorical features.*</span>
+<span id="cb42-419"><a href="#cb42-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-420"><a href="#cb42-420" aria-hidden="true" tabindex="-1"></a>This yields a specific estimate for each category or combination of categories.  Why?</span>
+<span id="cb42-421"><a href="#cb42-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-422"><a href="#cb42-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>There is no 'base category', making interpretation easier. </span>
+<span id="cb42-423"><a href="#cb42-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-424"><a href="#cb42-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups. </span>
+<span id="cb42-425"><a href="#cb42-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-426"><a href="#cb42-426" aria-hidden="true" tabindex="-1"></a>Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making interpretation statistical inference more difficult in some contexts. </span>
+<span id="cb42-427"><a href="#cb42-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-428"><a href="#cb42-428" aria-hidden="true" tabindex="-1"></a>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework </span>
+<span id="cb42-429"><a href="#cb42-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-430"><a href="#cb42-430" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb42-431"><a href="#cb42-431" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: Does this apply to frequentist analysis too?</span></span>
+<span id="cb42-432"><a href="#cb42-432" aria-hidden="true" tabindex="-1"></a>Is it Bayesian specific? </span>
+<span id="cb42-433"><a href="#cb42-433" aria-hidden="true" tabindex="-1"></a>How does this relate to 'contrast-coding'?</span>
+<span id="cb42-434"><a href="#cb42-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-435"><a href="#cb42-435" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb42-436"><a href="#cb42-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-437"><a href="#cb42-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-438"><a href="#cb42-438" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)</span></span>
+<span id="cb42-439"><a href="#cb42-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-440"><a href="#cb42-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-441"><a href="#cb42-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-442"><a href="#cb42-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-443"><a href="#cb42-443" aria-hidden="true" tabindex="-1"></a>We'll practice with <span class="in">`milk`</span>.</span>
+<span id="cb42-444"><a href="#cb42-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-445"><a href="#cb42-445" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F}</span></span>
+<span id="cb42-446"><a href="#cb42-446" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb42-447"><a href="#cb42-447" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb42-448"><a href="#cb42-448" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb42-449"><a href="#cb42-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-450"><a href="#cb42-450" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(milk)</span>
+<span id="cb42-451"><a href="#cb42-451" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>rethinking, <span class="at">unload =</span> T)</span>
+<span id="cb42-452"><a href="#cb42-452" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb42-453"><a href="#cb42-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-454"><a href="#cb42-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-455"><a href="#cb42-455" aria-hidden="true" tabindex="-1"></a>With the tidyverse, we can peek at <span class="in">`clade`</span> with <span class="in">`distinct()`</span> in the place of base R <span class="in">`unique()`</span>.</span>
+<span id="cb42-456"><a href="#cb42-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-459"><a href="#cb42-459" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-460"><a href="#cb42-460" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb42-461"><a href="#cb42-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(clade)</span>
+<span id="cb42-462"><a href="#cb42-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-463"><a href="#cb42-463" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-464"><a href="#cb42-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-465"><a href="#cb42-465" aria-hidden="true" tabindex="-1"></a>As <span class="in">`clade`</span> has 4 categories, let's use <span class="in">`if_else()`</span> to convert these to 4 dummy variables.</span>
+<span id="cb42-466"><a href="#cb42-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-469"><a href="#cb42-469" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-470"><a href="#cb42-470" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb42-471"><a href="#cb42-471" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb42-472"><a href="#cb42-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clade_nwm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"New World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb42-473"><a href="#cb42-473" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_owm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Old World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb42-474"><a href="#cb42-474" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_s   =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Strepsirrhine"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb42-475"><a href="#cb42-475" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_ape =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Ape"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb42-476"><a href="#cb42-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-477"><a href="#cb42-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-478"><a href="#cb42-478" aria-hidden="true" tabindex="-1"></a>Now we'll fit the model with three of the four dummies. In this model, <span class="in">`clade_ape`</span> is the reference category captured by the intercept.</span>
+<span id="cb42-479"><a href="#cb42-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-480"><a href="#cb42-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16}</span></span>
+<span id="cb42-481"><a href="#cb42-481" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span> <span class="ot">&lt;-</span> </span>
+<span id="cb42-482"><a href="#cb42-482" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb42-483"><a href="#cb42-483" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-484"><a href="#cb42-484" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> clade_nwm <span class="sc">+</span> clade_owm <span class="sc">+</span> clade_s,</span>
+<span id="cb42-485"><a href="#cb42-485" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb42-486"><a href="#cb42-486" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-487"><a href="#cb42-487" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-488"><a href="#cb42-488" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-489"><a href="#cb42-489" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-490"><a href="#cb42-490" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16"</span>)</span>
+<span id="cb42-491"><a href="#cb42-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-492"><a href="#cb42-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-495"><a href="#cb42-495" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-496"><a href="#cb42-496" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>)</span>
+<span id="cb42-497"><a href="#cb42-497" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-498"><a href="#cb42-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-499"><a href="#cb42-499" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding regular predictor variables.</span></span>
+<span id="cb42-500"><a href="#cb42-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-501"><a href="#cb42-501" aria-hidden="true" tabindex="-1"></a>If we wanted to fit the model including <span class="in">`perc.fat`</span> as an additional predictor, the basic statistical formula would be</span>
+<span id="cb42-502"><a href="#cb42-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-503"><a href="#cb42-503" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb42-504"><a href="#cb42-504" aria-hidden="true" tabindex="-1"></a>\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.</span>
+<span id="cb42-505"><a href="#cb42-505" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb42-506"><a href="#cb42-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-507"><a href="#cb42-507" aria-hidden="true" tabindex="-1"></a>The corresponding <span class="in">`formula`</span> argument within <span class="in">`brm()`</span> would be <span class="in">`kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`</span>.</span>
+<span id="cb42-508"><a href="#cb42-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-509"><a href="#cb42-509" aria-hidden="true" tabindex="-1"></a><span class="fu">### Another approach: Unique intercepts.</span></span>
+<span id="cb42-510"><a href="#cb42-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-511"><a href="#cb42-511" aria-hidden="true" tabindex="-1"></a>"Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform <span class="in">`d$clade`</span> into <span class="in">`d$clade_id`</span>. The advantage of this approach is the indices in the model summary are more descriptive than <span class="in">`a[1]`</span> through <span class="in">`a[4]`</span>.</span>
+<span id="cb42-512"><a href="#cb42-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-513"><a href="#cb42-513" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16_alt}</span></span>
+<span id="cb42-514"><a href="#cb42-514" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span>_alt <span class="ot">&lt;-</span> </span>
+<span id="cb42-515"><a href="#cb42-515" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb42-516"><a href="#cb42-516" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb42-517"><a href="#cb42-517" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> clade,</span>
+<span id="cb42-518"><a href="#cb42-518" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb42-519"><a href="#cb42-519" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb42-520"><a href="#cb42-520" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb42-521"><a href="#cb42-521" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb42-522"><a href="#cb42-522" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16_alt"</span>)</span>
+<span id="cb42-523"><a href="#cb42-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-524"><a href="#cb42-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-527"><a href="#cb42-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb42-528"><a href="#cb42-528" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>_alt)</span>
+<span id="cb42-529"><a href="#cb42-529" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb42-530"><a href="#cb42-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-531"><a href="#cb42-531" aria-hidden="true" tabindex="-1"></a>See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
