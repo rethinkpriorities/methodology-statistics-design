@@ -1,4 +1,4 @@
-# (RP Survey Team+: Typical project, questions, example data) {#rpprojects}
+# RP Surveys+: Example projects/qn's/data {#rpprojects}
 
 In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team ('social science'), as well as the work of adjacent projects like the [EA Market Testing Team](https://bit.ly/eamtt).
 
@@ -64,13 +64,46 @@ Data may include:
 - Hypothetical choices among a set of optinos 
 - Binary, continuous, other
 
+
+### Naturally occuring behavioral data (signups, donations, etc) {-#natural}
+
+Typical examples:
+
+1.  [All fundraisers for effective charities started on JustGiving during a certain period, with donation amounts](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)
+
+This data is shared in the current github repo, and read in below
+
+```{r}
+#| label: readJGsample
+#| code-summary: "read in Just Giving data"
+
+library(here)
+library(readr)
+
+jg_eff_sample <- readRDS(here::here("sample_data", "fdd_fd_sample_eff.rds"))
+
+```
+
+
+(read it in with ` )
+
+2.  Meat and animal product consumption data^[This may be more relevant for the Farmed Animal Welfare team]
+
+3.  A time series^[time series analysis will tend to use distinct approaches] of signups for 80,000 hours newsletter, particularly considering the difference before and after a report in the Guardian newspaper
+
+
+We share 
+
 ### Marketing trials/experiments and surveys {-}
+
+This is distinct from the ['naturally occuring' data](#natural) just mentioned, because we are intervening to 'do or test something' and measure the response.
+
 
 Typical examples: 
 
-- EAMT comparison of GWWC Facebook ads to encourage email signup
-- Prolific survey to helping an EA filmmaker choose a movie title and blurb 
-- An effective charity wants to know how to present their impact information in mail appeals, if at all
+- EA Market Testing comparison of GWWC Facebook ads to encourage email signup
+- A Prolific survey to helping an EA filmmaker choose a movie title and blurb^[A 'survey experiment' might present a different title to each participant ('between-subject variation'). An alternative approach might present a range of titles to each participant and compare 'within subject'.]
+- An effective charity wants to know how to present their impact information in mail appeals, if at all. They may test this with an actual set of appeals (field experiment, aka 'split test').
 
 \
 
