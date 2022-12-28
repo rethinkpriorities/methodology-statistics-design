@@ -10,7 +10,7 @@ We may add more technical and detailed material on these issues below (in the pr
 
 :::
 
-**'EA Market testing gitbook'**
+**'EA Market testing Gitbook'**
 
 
 ## Participant platforms

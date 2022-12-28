@@ -10,6 +10,7 @@ source(here("code", "methods_setup.R"))
 
 # 2. Get EAS data
 source(here("code", "get_eas_data.R"))
+
 ```
 
 ::: {.alert .alert-secondary}
@@ -94,7 +95,7 @@ Above: from [EAS engagement post, bookdown supplement](https://rethinkpriorities
 
 ### Issue: Dealing with scales and large differences in magnitudes {.unnumbered}
 
-If axes are cut and don't go to zero, mention this prominently in the plot.
+If axes are cut and don't go to zero, we should mention this prominently in the plot.^[But see that YouTube video, called 'shut up about the y axis' or something.]
 
 But what if we have a few values that are way above others, and 'mess up the scale'?
 
