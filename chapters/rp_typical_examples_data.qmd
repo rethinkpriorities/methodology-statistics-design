@@ -1,6 +1,6 @@
 # RP Surveys+: Ex. projects/q's/data {#rpprojects}
 
-In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team ('social science'), as well as the work of adjacent projects like the [EA Market Testing Team](https://bit.ly/eamtt).
+In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team^[DR: I have suggested we should rebrand as something involving 'quantitative social science'], as well as the work of adjacent projects like the [EA Market Testing Team](https://bit.ly/eamtt).
 
 We will also extract, reference, and outline some example data, to use in the chapters below.
 
@@ -10,11 +10,11 @@ Some sources of data and examples could include:
 
 1. Data from the [EA Market Testing Team](https://bit.ly/eamtt)'s public work, see [the data treatment here](https://daaronr.github.io/eamt_data_analysis/); simplifying this data might be helpful for our examples
 
-1. Other Reinstein projects, including data from the [ICRC chapter](https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design) of the 'impact of impact information' project.
+1. Other Reinstein projects, including data from the [ICRC chapter](https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design) of the 'impact of impact information' project, or JustGiving data [e.g., see codebook here](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)
 
 1. Simulated data like (a simplified version of) the EA Survey data
 
-1. Any RP or adjacent survey data that *has* been put in the public domain?
+1. Any RP or adjacent survey data that *has* been put in the public domain^[Are there any?]
 
 1. Simulated data resembling that of other confidential EAMT and RP projects
 
@@ -24,15 +24,15 @@ Some sources of data and examples could include:
 ### Community Survey omnibus {-}
 
 
-Typical example: EA Survey (flesh this out)
+Typical example: EA Survey^[flesh this out]
 
-\
-Research questions:
 
-- Current community composition 
+*Research questions:*
+
+- Current community composition (e.g., 'what share are non-male')
 - Actions taken and level of involvement
-- Retrospective 'how you got involved'
-- Relative preferences and attitudes
+- Retrospective 'how did you get involved?'
+- Relative preferences and attitudes (e.g., longtermist or non-longtermist)
 - Changes in all of this over time
 - Actions vs intentions
 
@@ -46,9 +46,8 @@ Typical examples:
 - attitudes towards long-termism;  
 - polling on animal welfare legislation, etc. 
 
-\
 
-Research questions:
+*Research questions:*
 
 - Awareness and knowledge of a subject
 - Attitude to an issue
@@ -85,7 +84,6 @@ jg_eff_sample <- readRDS(here::here("sample_data", "fdd_fd_sample_eff.rds"))
 ```
 
 
-(read it in with ` )
 
 2.  Meat and animal product consumption data^[This may be more relevant for the Farmed Animal Welfare team]
 
@@ -105,9 +103,8 @@ Typical examples:
 - A Prolific survey to helping an EA filmmaker choose a movie title and blurb^[A 'survey experiment' might present a different title to each participant ('between-subject variation'). An alternative approach might present a range of titles to each participant and compare 'within subject'.]
 - An effective charity wants to know how to present their impact information in mail appeals, if at all. They may test this with an actual set of appeals (field experiment, aka 'split test').
 
-\
 
-Research questions and goals:
+*Research questions and goals:*
 
 - Baseline response rates and cost per outcome
 - Find 'best approach within a large space' (reinforcement learning)

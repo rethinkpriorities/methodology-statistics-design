@@ -356,28 +356,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority’s Survey and Movement Building Team (‘social science’), as well as the work of adjacent projects like the <a href="https://bit.ly/eamtt">EA Market Testing Team</a>.</p>
+</header><p>In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority’s Survey and Movement Building Team<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, as well as the work of adjacent projects like the <a href="https://bit.ly/eamtt">EA Market Testing Team</a>.</p>
 <p>We will also extract, reference, and outline some example data, to use in the chapters below.</p>
 <p>9 Dec 2022: So far, the chapters below draw from the EA Survey data. However, as that data itself cannot be in the public domain, this is less useful for people who don’t have access to our Github repo, and less than ideal in general.</p>
 <p>Some sources of data and examples could include:</p>
 <ol type="1">
 <li><p>Data from the <a href="https://bit.ly/eamtt">EA Market Testing Team</a>’s public work, see <a href="https://daaronr.github.io/eamt_data_analysis/">the data treatment here</a>; simplifying this data might be helpful for our examples</p></li>
-<li><p>Other Reinstein projects, including data from the <a href="https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design">ICRC chapter</a> of the ‘impact of impact information’ project.</p></li>
+<li><p>Other Reinstein projects, including data from the <a href="https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design">ICRC chapter</a> of the ‘impact of impact information’ project, or JustGiving data <a href="https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html">e.g., see codebook here</a></p></li>
 <li><p>Simulated data like (a simplified version of) the EA Survey data</p></li>
-<li><p>Any RP or adjacent survey data that <em>has</em> been put in the public domain?</p></li>
+<li><p>Any RP or adjacent survey data that <em>has</em> been put in the public domain<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
 <li><p>Simulated data resembling that of other confidential EAMT and RP projects</p></li>
 </ol>
 <section id="some-commontypical-cases-and-problems" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="some-commontypical-cases-and-problems">
 <span class="header-section-number">2.1</span> Some common/typical cases and problems</h2>
 <section id="community-survey-omnibus" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="community-survey-omnibus">Community Survey omnibus</h3>
-<p>Typical example: EA Survey (flesh this out)</p>
-<p><br>
-Research questions:</p>
+<p>Typical example: EA Survey<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><em>Research questions:</em></p>
 <ul>
-<li>Current community composition</li>
+<li>Current community composition (e.g., ‘what share are non-male’)</li>
 <li>Actions taken and level of involvement</li>
-<li>Retrospective ‘how you got involved’</li>
-<li>Relative preferences and attitudes</li>
+<li>Retrospective ‘how did you get involved?’</li>
+<li>Relative preferences and attitudes (e.g., longtermist or non-longtermist)</li>
 <li>Changes in all of this over time</li>
 <li>Actions vs intentions</li>
 </ul></section><section id="issue-oriented-survey-of-the-population" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="issue-oriented-survey-of-the-population">Issue-oriented survey of the population</h3>
@@ -389,8 +388,7 @@ Research questions:</p>
 </li>
 <li>polling on animal welfare legislation, etc.</li>
 </ul>
-<p><br></p>
-<p>Research questions:</p>
+<p><em>Research questions:</em></p>
 <ul>
 <li>Awareness and knowledge of a subject</li>
 <li>Attitude to an issue</li>
@@ -410,7 +408,7 @@ Research questions:</p>
 <ol type="1">
 <li><a href="https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html">All fundraisers for effective charities started on JustGiving during a certain period, with donation amounts</a></li>
 </ol>
-<p>This data is shared in the current github repo, and read in with code below <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>This data is shared in the current github repo, and read in with code below <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
 <details><summary>read in Just Giving data</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
@@ -420,8 +418,8 @@ Research questions:</p>
 </div>
 <p>(read it in with ` )</p>
 <ol start="2" type="1">
-<li><p>Meat and animal product consumption data<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
-<li><p>A time series<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> of signups for 80,000 hours newsletter, particularly considering the difference before and after a report in the Guardian newspaper</p></li>
+<li><p>Meat and animal product consumption data<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p></li>
+<li><p>A time series<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> of signups for 80,000 hours newsletter, particularly considering the difference before and after a report in the Guardian newspaper</p></li>
 </ol>
 <p>We share</p>
 </section><section id="marketing-trialsexperiments-and-surveys" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="marketing-trialsexperiments-and-surveys">Marketing trials/experiments and surveys</h3>
@@ -429,7 +427,7 @@ Research questions:</p>
 <p>Typical examples:</p>
 <ul>
 <li>EA Market Testing comparison of GWWC Facebook ads to encourage email signup</li>
-<li>A Prolific survey to helping an EA filmmaker choose a movie title and blurb<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>
+<li>A Prolific survey to helping an EA filmmaker choose a movie title and blurb<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>
 </li>
 <li>An effective charity wants to know how to present their impact information in mail appeals, if at all. They may test this with an actual set of appeals (field experiment, aka ‘split test’).</li>
 </ul>
@@ -454,10 +452,13 @@ Research questions:</p>
 
 </section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>Not evaluated here atm<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>This may be more relevant for the Farmed Animal Welfare team<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>time series analysis will tend to use distinct approaches<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>A ‘survey experiment’ might present a different title to each participant (‘between-subject variation’). An alternative approach might present a range of titles to each participant and compare ‘within subject’.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>DR: I have suggested we should rebrand as something involving ‘quantitative social science’<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Are there any?<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>flesh this out<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Not evaluated here atm<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This may be more relevant for the Farmed Animal Welfare team<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>time series analysis will tend to use distinct approaches<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>A ‘survey experiment’ might present a different title to each participant (‘between-subject variation’). An alternative approach might present a range of titles to each participant and compare ‘within subject’.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -619,7 +620,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># RP Surveys+: Ex. projects/q's/data {#rpprojects}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team ('social science'), as well as the work of adjacent projects like the <span class="co">[</span><span class="ot">EA Market Testing Team</span><span class="co">](https://bit.ly/eamtt)</span>.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>In this section we aim to outline a set of projects and methodologically-relevant questions that typify the work of Rethink Priority's Survey and Movement Building Team^<span class="co">[</span><span class="ot">DR: I have suggested we should rebrand as something involving 'quantitative social science'</span><span class="co">]</span>, as well as the work of adjacent projects like the <span class="co">[</span><span class="ot">EA Market Testing Team</span><span class="co">](https://bit.ly/eamtt)</span>.</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>We will also extract, reference, and outline some example data, to use in the chapters below.</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -629,11 +630,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Data from the <span class="co">[</span><span class="ot">EA Market Testing Team</span><span class="co">](https://bit.ly/eamtt)</span>'s public work, see <span class="co">[</span><span class="ot">the data treatment here</span><span class="co">](https://daaronr.github.io/eamt_data_analysis/)</span>; simplifying this data might be helpful for our examples</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Other Reinstein projects, including data from the <span class="co">[</span><span class="ot">ICRC chapter</span><span class="co">](https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design)</span> of the 'impact of impact information' project.</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Other Reinstein projects, including data from the <span class="co">[</span><span class="ot">ICRC chapter</span><span class="co">](https://daaronr.github.io/dualprocess/icrc_design.html#icrc_design)</span> of the 'impact of impact information' project, or JustGiving data <span class="co">[</span><span class="ot">e.g., see codebook here</span><span class="co">](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Simulated data like (a simplified version of) the EA Survey data</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Any RP or adjacent survey data that *has* been put in the public domain?</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Any RP or adjacent survey data that *has* been put in the public domain^<span class="co">[</span><span class="ot">Are there any?</span><span class="co">]</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Simulated data resembling that of other confidential EAMT and RP projects</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -643,15 +644,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">### Community Survey omnibus {-}</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>Typical example: EA Survey (flesh this out)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>Typical example: EA Survey^<span class="co">[</span><span class="ot">flesh this out</span><span class="co">]</span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>Research questions:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>*Research questions:*</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Current community composition </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Current community composition (e.g., 'what share are non-male')</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Actions taken and level of involvement</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Retrospective 'how you got involved'</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Relative preferences and attitudes</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Retrospective 'how did you get involved?'</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Relative preferences and attitudes (e.g., longtermist or non-longtermist)</span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Changes in all of this over time</span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Actions vs intentions</span>
 <span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
@@ -665,80 +666,79 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>attitudes towards long-termism;  </span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>polling on animal welfare legislation, etc. </span>
 <span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>Research questions:</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Awareness and knowledge of a subject</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attitude to an issue</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Potential voting choices and other behavior </span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Differences across personality, demographic traits, etc.</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clustering, dimension reduction, factor analysis: How do responses 'cohere'</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Differences over time, particularly in response to campaigns (before-after)</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>Data may include:</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ordered Likert responses and indices</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Open-response</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hypothetical choices among a set of optinos </span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Binary, continuous, other</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>*Research questions:*</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Awareness and knowledge of a subject</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attitude to an issue</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Potential voting choices and other behavior </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Differences across personality, demographic traits, etc.</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Clustering, dimension reduction, factor analysis: How do responses 'cohere'</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Differences over time, particularly in response to campaigns (before-after)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>Data may include:</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ordered Likert responses and indices</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Open-response</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hypothetical choices among a set of optinos </span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Binary, continuous, other</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Naturally occuring behavioral data (signups, donations, etc) {-#natural}</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>Typical examples:</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="co">[</span><span class="ot">All fundraisers for effective charities started on JustGiving during a certain period, with donation amounts</span><span class="co">](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>This data is shared in the current github repo, and read in with code below ^<span class="co">[</span><span class="ot">Not evaluated here atm</span><span class="co">]</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: readJGsample</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "read in Just Giving data"</span></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>jg_eff_sample <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"sample_data"</span>, <span class="st">"fdd_fd_sample_eff.rds"</span>))</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### Naturally occuring behavioral data (signups, donations, etc) {-#natural}</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>Typical examples:</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span><span class="co">[</span><span class="ot">All fundraisers for effective charities started on JustGiving during a certain period, with donation amounts</span><span class="co">](https://daaronr.github.io/just-giving-public-prediction-/codebooks/codebook_uc_fdd_fd.html)</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>This data is shared in the current github repo, and read in with code below ^<span class="co">[</span><span class="ot">Not evaluated here atm</span><span class="co">]</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: readJGsample</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "read in Just Giving data"</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>jg_eff_sample <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"sample_data"</span>, <span class="st">"fdd_fd_sample_eff.rds"</span>))</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>(read it in with ` )</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Meat and animal product consumption data^<span class="co">[</span><span class="ot">This may be more relevant for the Farmed Animal Welfare team</span><span class="co">]</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>A time series^<span class="co">[</span><span class="ot">time series analysis will tend to use distinct approaches</span><span class="co">]</span> of signups for 80,000 hours newsletter, particularly considering the difference before and after a report in the Guardian newspaper</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>(read it in with ` )</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Meat and animal product consumption data^<span class="co">[</span><span class="ot">This may be more relevant for the Farmed Animal Welfare team</span><span class="co">]</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>A time series^<span class="co">[</span><span class="ot">time series analysis will tend to use distinct approaches</span><span class="co">]</span> of signups for 80,000 hours newsletter, particularly considering the difference before and after a report in the Guardian newspaper</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>We share </span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### Marketing trials/experiments and surveys {-}</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>This is distinct from the <span class="co">[</span><span class="ot">'naturally occuring' data</span><span class="co">](#natural)</span> just mentioned, because we are intervening to 'do or test something' and measure the response.</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>We share </span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="fu">### Marketing trials/experiments and surveys {-}</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>This is distinct from the <span class="co">[</span><span class="ot">'naturally occuring' data</span><span class="co">](#natural)</span> just mentioned, because we are intervening to 'do or test something' and measure the response.</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>Typical examples: </span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>EA Market Testing comparison of GWWC Facebook ads to encourage email signup</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A Prolific survey to helping an EA filmmaker choose a movie title and blurb^<span class="co">[</span><span class="ot">A 'survey experiment' might present a different title to each participant ('between-subject variation'). An alternative approach might present a range of titles to each participant and compare 'within subject'.</span><span class="co">]</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An effective charity wants to know how to present their impact information in mail appeals, if at all. They may test this with an actual set of appeals (field experiment, aka 'split test').</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>\</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>Research questions and goals:</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Baseline response rates and cost per outcome</span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Find 'best approach within a large space' (reinforcement learning)</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test different categories of approaches in a limited set ('which works better')</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Find most promising audiences (profiling)</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Interaction (tailored messaging, etc.)</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>Data could include</span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attitudinal (Likert) response data</span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Suggestive outcome data (e.g., 'clicks on the web site')</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Actual 'A/B testing' data for outcomes and responses of interest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>Typical examples: </span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>EA Market Testing comparison of GWWC Facebook ads to encourage email signup</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A Prolific survey to helping an EA filmmaker choose a movie title and blurb^<span class="co">[</span><span class="ot">A 'survey experiment' might present a different title to each participant ('between-subject variation'). An alternative approach might present a range of titles to each participant and compare 'within subject'.</span><span class="co">]</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An effective charity wants to know how to present their impact information in mail appeals, if at all. They may test this with an actual set of appeals (field experiment, aka 'split test').</span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>\</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>Research questions and goals:</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Baseline response rates and cost per outcome</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Find 'best approach within a large space' (reinforcement learning)</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test different categories of approaches in a limited set ('which works better')</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Find most promising audiences (profiling)</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Interaction (tailored messaging, etc.)</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>Data could include</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Attitudinal (Likert) response data</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Suggestive outcome data (e.g., 'clicks on the web site')</span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Actual 'A/B testing' data for outcomes and responses of interest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
