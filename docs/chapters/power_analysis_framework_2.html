@@ -820,7 +820,7 @@ For a Bayesian analysis
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">cut.data</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
-<span>  <span class="va">data.cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">breaks</span>, .f <span class="op">=</span> <span class="va">cut.samples</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span>  <span class="va">data.cuts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">breaks</span>, .f <span class="op">=</span> <span class="va">cut.samples</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># the data is split according to the sample size</span></span>
 <span>  <span class="co"># to feed to the regression model</span></span>
@@ -863,7 +863,7 @@ For a Bayesian analysis
 <span>  <span class="op">}</span></span>
 <span></span>
 <span>  <span class="co"># run the regression function over the different sample sizes</span></span>
-<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">data.cuts</span>, .f <span class="op">=</span> <span class="va">run.reg</span><span class="op">)</span></span>
+<span>  <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_df</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">data.cuts</span>, .f <span class="op">=</span> <span class="va">run.reg</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

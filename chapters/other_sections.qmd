@@ -18,3 +18,19 @@ Source: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&name=medium
 ## (Meta-analysis) {#meta}
 
 Incorporate and consolidate from [Reinsteins meta notes](https://daaronr.github.io/metrics_discussion/metaanalysis.html) and more
+
+### Relates to 'aggregating expert judgment' {-}
+
+Testing out the `AggreCAT` package on the ACX prediction contest
+
+```{r}
+install.packages("devtools")
+#install.packages("sessioninfo", dependencies = TRUE)
+
+devtools::install_github("metamelb-repliCATS/aggreCAT")
+#Note: this failed initially because dependent packages needed updating.  `update.packages()` nay solve it. Nope, it didn't but all sorts of errors in that update. 
+
+```
+
+
+

@@ -142,7 +142,211 @@ Here, I think the use of `%>% ggplotly` yields only one helpful feature (but it'
 ::: 
 
 
-### Case: Visualizing (regression) model coefficients and confidence intervals {.unnumbered}
+### Case: Visualizing ('regression') model coefficients and confidence intervals {.unnumbered}
+
+
+How should we report the result of a predictive, descriptive, or causal model (or set of models) in a digestable way? Consider 'Forest plots' ...
+
+With binary/categorical features (or binned continuous features), these can be useful for showing 
+
+- 'model predictions' for different groups and subsets, 
+- or estimates for 'differences between these groups',
+
+along with the uncertainty of these.
+
+With continuous features, we could either :
+- make predictions for bins or quantiles of the features (ages 18-35, 36-55, etc), even if these are entered into the model as continuous variables.. 
+- report on the relevant 'slopes' or 'effects'^[But I recommend being careful not to call them 'effects' unless you have a clear case for causal identification.]
+
+Note: In reporting slopes for both continuous and categorical features, Gelman recommends a particular  standardization of the former, to put these on the same scale.
+
+
+We run four models below. 
+
+```{r}
+# A simple (but nonlinear) model
+don_2020_qp <- 
+eas_all %>% 
+  glm(donation_2020_c ~ log(income_c_imp)  + log(2020-year_involved_n +1)   + d_student, family=quasipoisson, data =.)
+
+#note: this seems to drop people involved for less than 1 year
+
+#As in the first model, but for nonstudents only'
+don_2020_ns_qp <- eas_all %>% 
+  filter(!d_student) %>% 
+  glm(donation_2020_c ~ log(income_c_imp)  + log(2020-year_involved_n +1)  , family=quasipoisson, data =.)
+
+# similar model but with first-heard lumped 'feature'
+don_2020_fh_qp <- 
+eas_all %>% 
+  glm(donation_2020_c ~ log(income_c_imp)  + log(2020-year_involved_n +1)   + d_student + first_hear_ea_lump, family=quasipoisson, data =.)
+
+
+# first-heard lumped 'feature' and referrer control
+don_2020_fh_ref_qp <- 
+eas_all %>% 
+  glm(donation_2020_c ~ log(income_c_imp)  + log(years_involved_norm)  + d_student + first_hear_ea_lump + referrer_cat, family=quasipoisson, data =.)
+
+
+#here we are predicting a different outcome ('share of income'); so we cannot the compare predictions to those above easily, only slopes, if normalized perhaps
+# don_share_2020_ns_qp <- eas_all %>%  
+#   glm(don_share_inc_19_imp ~ log(income_c_imp)  + log(years_involved_norm)  + d_live_usa, family = quasibinomial('logit'), data = .)
+
+huxtable::huxreg("Simple" = don_2020_qp,
+  "Nonstudents" = don_2020_ns_qp,
+  "First-hear" = don_2020_fh_qp, 
+  "First-hear and referrer" = don_2020_fh_ref_qp,
+  omit_coefs = c("(Intercept)"),
+        statistics = c("N. obs." = "nobs"),
+  tidy_args = list(exponentiate = TRUE), 
+       error_format = "[{conf.low}-{conf.high}]", ci_level = 0.95
+  ) %>%
+  set_caption("Quasi-poisson models of 2020 donation amounts") %>%
+  set_caption_pos("top") %>% 
+  rethinkpriorities::huxreg_opts() 
+
+```
+ Above, we see a bunch of coefficients from each model.^[Note that for binary features we have only one coefficient reported, which can be interpreted as (e.g.) 'the relative (proportional) donation difference for being a student, versus a non-student. For features with $k$ categories, we report $k-1$ differences from the excluded base group. Particularly if the base group tends to have outcomes far from the average, this can make interpretation difficult.] This model is nonlinear; we exponentiate the coefficients and report the confidence intervals. I believe these can be interpreted as proportional differentials ('impacts' if causal).^[This seems rather large, at least if we interpret these as causal: this would suggest that donations virtually triple as imputed income doubles. It's more plausible if we consider being in EA, (reporting) income, and (reporting) donations as arising out of a joint system of life choices and events. For example, committed EAs who care most about global health may tend to decide to work to "earn to give", while other EAs (perhaps those concerned with X-risks) may choose to take lower paying jobs doing direct work and donating less.]
+ 
+Next, we want to plot predictions; perhaps we simply want to compare the donations of the different groups ("everything else equal") according to where they 'first heard of EA'. To do this for a single model, we need to extract the model predictions, converting them to a data frame, and then plot these with `ggplot`.
+
+How can we extract the predictions? It's easier if we first make these model objects into tidy tibbles using `broom`. 
+
+First 
+1. generate a list of 'named model names', 
+ 
+```{r}
+
+
+models_list <- list("Base" = don_2020_qp, "Nonstudent" = don_2020_ns_qp, "First heard" = don_2020_fh_qp, "First heard, Referrer" = don_2020_fh_ref_qp) #do this across a list, to save lines of code and have better control
+
+
+```
+
+
+::: {.callout-note collapse="true"}
+## This approach didn't seem to work here
+
+Extract the predicted values and standard errors from each model, appending it to the data with `broom::augment`. This gives us a list of 4 tibbles of this, 1 for each model.
+
+```{r}
+# extract the predicted values and standard errors from each model, as a list
+
+library(broom)
+
+augmented_models <-  purrr::map(models_list, ~augment(.x))
+
+
+```
+
+
+But to plot this, we want to ...
+
+3. Make it a single data frame, differentiating by model (add a column to the dataframe that contains the model name)
+
+
+```{r}
+ 
+# convert the list of predicted values to a data frame
+
+augmented_models_df <- bind_rows(augmented_models, .id = "model") 
+
+```
+
+ 
+4. Now we can ggplot
+
+```{r}
+
+augmented_models_df %>% 
+ggplot(data =., aes(x = model, y = .fitted, fill = model)) +
+    geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+    scale_y_continuous(limits = c(0, 1))+ 
+    coord_flip()
+
+  
+```
+
+No, that's not what we wanted. This seems to be giving us something about overall predictions for each model, scaled on some normalized axis (quantiles of outcome?).
+
+
+::: 
+
+We want plots for the predicted donations for each of the *first heard* (FH) categories, e.g., first heard from Less Wrong. But what exactly does that mean? We do *not* want the average prediction for a person who first heard of EA from LW; this person may tend to have 'non-average' values of the other features, such as income and time in EA. 
+
+Do we simply want the 'predicted value for a person coming from LW with 'average values of the other features'? With a linear model this is probably what we want, but our model is *nonlinear*. What we want is something like the average over *all observations* for their predicted donation *if they had first heard of EA from LW*. We can then compare it to the prediction for the same survey population 'if they had first heard from GiveWell', etc.  
+
+*These are called the Estimated Marginal Means*. I believe the 'estimated marginal means' package `emmmeans` gets us this.
+
+
+What about the confidence intervals or other bounds? We are not focused on the bounds of the predicted *donations* for an individual from the  (hypothetical) population discussed above, but instead, on the bounds on the  *mean donation* for this population. We want to state bounds with a procedure such that the  *true value* is captured, say, 95% of the time. We have analytic (or other valid) procedures that tell us the bounds on the relevant model *parameters* (or 'coefficients'). But we are stating this in terms of predicted mean *outcomes*. One approach might be to simply apply these 95% bound coefficients to the data, again, averaged over all observations for all the other features.
+
+
+```{r}
+library(emmeans)
+
+counts <- c(18, 17, 15, 20, 10, 20, 25, 13, 12)
+team <- gl(3, 1, 9, labels  = c("Boston", "NY", "Texas"))
+treatment <- gl(3, 3, labels  = c("low", "medium", "hi"))
+skill <- runif(9)
+
+data <- tibble(treatment, team, counts, skill)
+model <- glm(counts ~ team + treatment, family = poisson(), data = data)
+#summary(model)
+
+model2 <- glm(counts ~ team + skill, family = poisson(), data = data)
+
+emm <- emmeans(
+  model,
+  specs = "team",
+  type = "response"
+)
+
+emm2 <- emmeans(
+  model2,
+  specs = "team",
+  type = "response"
+)
+
+emm2_cont <- emmeans(
+  model2,
+  specs = "skill",
+  at = list(skill = c(0.25, 0.75))
+  ,
+  type = "response",
+) %>% 
+  as_tibble() 
+
+df <- bind_rows(
+  list("base" = as_tibble(emm),
+  "multi" = as_tibble(emm2),
+    "multi" = emm2_cont),
+  .id = "modelnum",
+) %>% 
+  mutate(
+    skill = paste("Skill: ", as.character(skill)), 
+    group= as.factor(coalesce(team, skill)),
+    ordering = as.numeric(is.na(team))*1000+rate,
+    group= fct_reorder(as.factor(group), ordering, .desc = T),
+  ) %>% 
+      select(-ordering)
+
+
+ggplot(df, aes(x = group, y = rate, color = modelnum)) +
+  geom_pointrange(
+    aes(ymin = asymp.LCL, ymax = asymp.UCL),
+    position = position_dodge(.5)
+  ) +
+  geom_point(position = position_dodge(.5)) +
+  coord_flip()
+
+```
+
+
+
+::: {.callout-note collapse="true"}
+## Example from fancier code... adapt in? 
+
 
 Forest plots as seen [in donation post here](https://rethinkpriorities.github.io/ea_data_public/eas_donations.html#predictive-models)
 
@@ -157,3 +361,5 @@ See how we group the coefficients into plots by 'theme'
 In some contexts, lines for 'base rates' can be helpful
 
 ![](https://daaronr.github.io/dualprocess/impact_of_impact_multi_experiment_files/figure-html/Bayesian_Forest_Plots-2.png) ... context, scroll up from [here](https://daaronr.github.io/dualprocess/donor-voice-questions-and-tests.html#q-does-including-impact-information-affect-the-amount-raised-1)
+
+:::
