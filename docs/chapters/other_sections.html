@@ -374,16 +374,290 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="relates-to-aggregating-expert-judgment" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="relates-to-aggregating-expert-judgment">Relates to ‘aggregating expert judgment’</h3>
 <p>Testing out the <code>AggreCAT</code> package on the ACX prediction contest</p>
 <div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Install aggreCAT</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Installing devtools [2.4.5] ...
     OK [linked cache]</code></pre>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("sessioninfo", dependencies = TRUE)</span></span>
+<details><summary>Install aggreCAT</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("sessioninfo", dependencies = TRUE)</span></span>
 <span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"metamelb-repliCATS/aggreCAT"</span><span class="op">)</span></span>
-<span><span class="co">#Note: this failed initially because dependent packages needed updating.  `update.packages()` nay solve it. Nope, it didn't but all sorts of errors in that update. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">#Note: this failed initially because dependent packages needed updating.  `update.packages()` nay solve it. Nope, it didn't but all sorts of errors in that update</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://replicats.research.unimelb.edu.au/">aggreCAT</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<div class="cell">
+<details><summary>input_acx_prediction_data</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"sample_data"</span>, <span class="st">"acx_2023blindmode_predictions.csv"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in read_csv(here("sample_data", "acx_2023blindmode_predictions.csv")): could not find function "read_csv"</code></pre>
+</div>
+</div>
+<div class="cell">
+<details><summary>identify my own predictions</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx</span>  <span class="op">%&lt;&gt;%</span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>  d_reinstein <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
+<span>    <span class="va">`@1.WillVladimirPutinbePresidentofRussia`</span><span class="op">==</span><span class="fl">82</span> <span class="op">&amp;</span> <span class="va">`@2.WillUkrainecontrolthecityofSevastopol`</span><span class="op">==</span><span class="fl">54</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in acx %&lt;&gt;% mutate(d_reinstein = ifelse(`@1.WillVladimirPutinbePresidentofRussia` == : could not find function "%&lt;&gt;%"</code></pre>
+</div>
+</div>
+<p>What can <code>aggreCAT</code> do for us?</p>
+<p>First testing with their built-in data</p>
+<blockquote class="blockquote">
+<p>Below we demonstrate how to use the most simple commonly implemented aggregation method ArMean, which takes the arithmetic mean of participant Best Estimates. We first use a small subset of 5 participants for a single claim, 28</p>
+</blockquote>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">data_ratings</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">participant_subset</span> <span class="op">&lt;-</span> <span class="va">data_ratings</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#just 5 users with names</span></span>
+<span>  <span class="fu">distinct</span><span class="op">(</span><span class="va">user_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">sample_n</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>participant_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"participant"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu">n</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#numbers rather than id codenames</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in mutate(., participant_name = paste("participant", rep(1:n()))): could not find function "mutate"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">single_claim</span> <span class="op">&lt;-</span> <span class="va">data_ratings</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">paper_id</span> <span class="op">==</span> <span class="st">"28"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#all data on a single claim</span></span>
+<span>  <span class="fu">right_join</span><span class="op">(</span><span class="va">participant_subset</span>, by <span class="op">=</span> <span class="st">"user_name"</span><span class="op">)</span> <span class="co">#join to the above 5 users (keeping only these 5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in right_join(., participant_subset, by = "user_name"): could not find function "right_join"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#note this stat only uses the rows with element == `three_point_best`</span></span>
+<span><span class="va">single_claim</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">element</span> <span class="op">==</span> <span class="st">"three_point_best"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"ArMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in as.ts(x): object 'single_claim' not found</code></pre>
+</div>
+</div>
+<p>Can we do similar across multiple claims with this package?</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_claims</span> <span class="op">&lt;-</span> <span class="va">data_ratings</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">right_join</span><span class="op">(</span><span class="va">participant_subset</span>, by <span class="op">=</span> <span class="st">"user_name"</span><span class="op">)</span>   <span class="co">#join to the above 5 users (keeping only these 5) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in right_join(., participant_subset, by = "user_name"): could not find function "right_join"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_claims</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">element</span> <span class="op">==</span> <span class="st">"three_point_best"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"ArMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in as.ts(x): object 'all_claims' not found</code></pre>
+</div>
+</div>
+<p>This seems to work, at least with the data structured as they have it. Now what if we want multiple aggregation methods?</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">three_aggregations</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">AverageWAgg</span>, <span class="va">IntervalWAgg</span>, <span class="va">ShiftingWAgg</span><span class="op">)</span>,</span>
+<span>                                .f <span class="op">=</span> <span class="op">~</span> <span class="fu">.x</span><span class="op">(</span><span class="va">data_ratings</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">three_aggregations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="fu">tabyl</span><span class="op">(</span><span class="va">method</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in tabyl(., method): could not find function "tabyl"</code></pre>
+</div>
+</div>
+<p>Now let’s see what can be done with our ACX dataset. As they don’t ask for CIs, I’d either have to estimate these arbitrarily (e.g., make them larger for people with less experience), or only use a subset of their measures. First I’ll check which ones might work, using <em>their</em> data for all aggregations (with baseline settings for each)</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">all_aggsOK</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">AverageWAgg</span>,  <span class="va">IntervalWAgg</span>, <span class="va">ShiftingWAgg</span>, <span class="va">ExtremisationWAgg</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">all_aggs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">LinearWAgg</span>, <span class="va">AverageWAgg</span>, <span class="va">BayesianWAgg</span>, <span class="va">IntervalWAgg</span>, <span class="va">ShiftingWAgg</span>, <span class="va">ReasoningWAgg</span>, <span class="va">DistributionWAgg</span>, <span class="va">ExtremisationWAgg</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">three_aggs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">LinearWAgg</span>, <span class="va">AverageWAgg</span>, <span class="va">BayesianWAgg</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">all_claims</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">element</span> <span class="op">==</span> <span class="st">"three_point_best"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">all_aggsOK</span>,</span>
+<span>                                .f <span class="op">=</span> <span class="op">~</span> <span class="fu">.x</span><span class="op">(</span><span class="va">data_ratings</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">tabsums</span><span class="op">(</span><span class="va">cs</span>, <span class="va">method</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in tabsums(., cs, method): could not find function "tabsums"</code></pre>
+</div>
+</div>
+<p>All of the aggregators seemed computable even without having elements other than ‘three_point_best’ What’s going on here? E.g,. <code>IntervalWAgg</code> says ‘the weights are dependent on the lower and upper bounds of three-point elicitation’ … but I left those out. ‘ShiftingWAgg’ is meant to depend on discussion; but here I have no indicators of that. Yet still, these all seem to come up with different means. <code>BetaARMean</code> which is meant to do some extremisation wotks rather strangely; shifting everything to 1, apparently.</p>
+<p>Focusing in on some key interesting methods.</p>
+<p>I’ve been told ‘Geometric Mean’ is good in these sorts of situations</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_ratings</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">element</span> <span class="op">==</span> <span class="st">"three_point_best"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"GeoMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in filter(., element == "three_point_best"): object 'element' not found</code></pre>
+</div>
+</div>
+<p><code>LinearWAgg</code> seems interesting, either suppliying some sort of weights by <code>Participant</code> (e.g., downweight those who haven’t done forecasting), or with the supplied <code>GranWAgg</code> – “granularity of best estimates”</p>
+<p>Let’s move to trying to use these on the ACX data. First I adjust the data to make it more compatible with the aggreCAT package.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note – it cannot deal with NAs:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_ratings2</span> <span class="op">&lt;-</span> <span class="va">data_ratings</span></span>
+<span><span class="va">data_ratings2</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA_real_</span></span>
+<span></span>
+<span><span class="va">data_ratings2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"GeoMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in `preprocess_judgements()`:
+! NAs Found in Values</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Upweights and downweighting people – ad-hoc</p>
+<p>Now, I have little time left, so I’ll come up with some ad-hoc weights. We have some idea of how different characteristics predicted success in previous prediction contests. But how should we map those into weights? I’m not sure, and it would take me some time to figure this out.</p>
+<p>I guess I will do something lame and ad-hoc.</p>
+<p>Everyone starts out with weight 1.</p>
+<ol type="1">
+<li>Anyone who has no forecasting experience is downweighted fivefold (x0.2),</li>
+<li>Superforecasters are upweighted 20x</li>
+<li>SAT math uprated if above average (unless already a superforecaster)</li>
+<li>PHd upweighted 1.5x</li>
+<li>Downweight x 0.1 if you put 98+ or lt 4% chance of Putin being in power</li>
+<li>Downweight by quantile of share of ‘exact 50% predictions’ (up to about 90% downweighting)</li>
+</ol>
+<p>Also, replace all ‘50% predictions’ with the arithmetic average (done later)</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># get column names starting with "@"</span></span>
+<span><span class="va">pred_cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">acx</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">startsWith</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">acx</span><span class="op">)</span>, <span class="st">"@"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in is.data.frame(x): object 'acx' not found</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts</span> <span class="op">&lt;-</span> <span class="va">acx</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in eval(expr, envir, enclos): object 'acx' not found</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts</span><span class="op">$</span><span class="va">share50</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">acx</span><span class="op">[</span><span class="va">pred_cols</span><span class="op">]</span><span class="op">==</span><span class="fl">50</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">50</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in is.data.frame(x): object 'acx' not found</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># subset data based on column names and calculate row sums</span></span>
+<span></span>
+<span><span class="va">acx_for_ag_wts</span> <span class="op">%&lt;&gt;%</span></span>
+<span>   <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    user_name <span class="op">=</span> <span class="fu">row_number</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu">mutate</span><span class="op">(</span></span>
+<span>   SATscoremath <span class="op">=</span>  <span class="fu">case_when</span><span class="op">(</span></span>
+<span>     <span class="op">(</span><span class="va">SATscoremath</span><span class="op">&gt;</span><span class="fl">800</span><span class="op">|</span><span class="va">SATscoremath</span><span class="op">&lt;</span><span class="fl">100</span><span class="op">)</span> <span class="op">~</span> <span class="cn">NA_real_</span>, </span>
+<span>     <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">SATscoremath</span><span class="op">)</span>,</span>
+<span>   SAT_math_rank <span class="op">=</span> <span class="fu">percent_rank</span><span class="op">(</span><span class="va">SATscoremath</span><span class="op">)</span>,</span>
+<span>    SAT_math_rank<span class="op">=</span></span>
+<span>     <span class="fu">case_when</span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">SAT_math_rank</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fl">0.5</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">SAT_math_rank</span><span class="op">)</span>,</span>
+<span>   share50_qtl <span class="op">=</span> <span class="fu">percent_rank</span><span class="op">(</span><span class="va">share50</span><span class="op">)</span> </span>
+<span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="fu">mutate</span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ForecastingExperience</span>, <span class="va">Superforecaster</span>, <span class="va">Degree</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="va">.</span>, <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="st">"No"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu">mutate</span><span class="op">(</span></span>
+<span>  weight <span class="op">=</span> </span>
+<span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">ForecastingExperience</span><span class="op">==</span><span class="st">"No"</span>,<span class="fl">0.2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span></span>
+<span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Superforecaster</span><span class="op">==</span><span class="st">"Yes"</span>,<span class="fl">20</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span></span>
+<span>    <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="op">(</span><span class="va">SAT_math_rank</span><span class="op">&gt;</span><span class="fl">0.5</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">Superforecaster</span><span class="op">!=</span><span class="st">"Yes"</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">SAT_math_rank</span><span class="op">-</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">4</span><span class="op">)</span><span class="op">*</span></span>
+<span>    <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="op">(</span><span class="va">Degree</span><span class="op">==</span><span class="st">"Ph D."</span><span class="op">)</span><span class="op">*</span><span class="fl">.5</span><span class="op">)</span><span class="op">*</span></span>
+<span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">`@1.WillVladimirPutinbePresidentofRussia`</span><span class="op">&gt;=</span><span class="fl">99</span>,<span class="fl">0.1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span></span>
+<span>    <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">`@1.WillVladimirPutinbePresidentofRussia`</span><span class="op">&lt;</span> <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span></span>
+<span>  <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">share50_qtl</span><span class="op">)</span><span class="op">/</span><span class="fl">1.2</span><span class="op">)</span> </span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in mutate(., weight = (ifelse(ForecastingExperience == "No", 0.2, : could not find function "mutate"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_only</span> <span class="op">&lt;-</span> <span class="va">acx_for_ag_wts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">user_name</span>, <span class="va">weight</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in select(., user_name, weight): could not find function "select"</code></pre>
+</div>
+</div>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_long</span> <span class="op">&lt;-</span> <span class="va">acx_for_ag_wts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>   <span class="fu">select</span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span><span class="fu">n_distinct</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co">#delete columns that are identical everywhere</span></span>
+<span>  <span class="fu">pivot_longer</span><span class="op">(</span> <span class="co">#each 'question' needs it's own row for each 'user'</span></span>
+<span>    <span class="fu">contains</span><span class="op">(</span><span class="st">"@"</span><span class="op">)</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"paper_id"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"value"</span></span>
+<span>    <span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in pivot_longer(., contains("@"), names_to = "paper_id", values_to = "value"): could not find function "pivot_longer"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_long</span> <span class="op">%&lt;&gt;%</span>  <span class="fu">select</span><span class="op">(</span><span class="va">user_name</span>, <span class="va">paper_id</span>, <span class="va">value</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co">#make all predictions (for an individual) into a row </span></span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>element <span class="op">=</span> <span class="st">"three_point_best"</span>,</span>
+<span>    round <span class="op">=</span> <span class="st">"round_2"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co">#aggreCAT needs these things </span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">paper_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    value <span class="op">=</span> </span>
+<span>    <span class="fu">case_when</span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">value</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, <span class="co">#Sadly the package can't deal with NAs so I cheaply set them to the arithmetic average</span></span>
+<span>      <span class="va">value</span> <span class="op">==</span> <span class="fl">0.5</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">value</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">value</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">ungroup</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in ungroup(.): could not find function "ungroup"</code></pre>
+</div>
+</div>
+<p>Let’s see if it works</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">paper_id</span><span class="op">==</span><span class="st">"@1.WillVladimirPutinbePresidentofRussia"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">user_name</span><span class="op">&lt;=</span><span class="fl">154</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"GeoMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in ungroup(.): could not find function "ungroup"</code></pre>
+</div>
+<details><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">paper_id</span><span class="op">==</span><span class="st">"@1.WillVladimirPutinbePresidentofRussia"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">user_name</span><span class="op">&lt;=</span><span class="fl">155</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/AverageWAgg.html">AverageWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"GeoMean"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in ungroup(.): could not find function "ungroup"</code></pre>
+</div>
+</div>
+<p>Strangely, this seems to only work here with 155 or less rows!</p>
+<p>Now to do some funny calculations and blend them with my own predictions</p>
+<p><code>acx_for_ag_wts_results</code>: The weighted arithmetic means</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">acx_for_ag_wts_results</span> <span class="op">&lt;-</span> <span class="va">acx_for_ag_wts_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span> <span class="fu"><a href="https://rdrr.io/pkg/aggreCAT/man/LinearWAgg.html">LinearWAgg</a></span><span class="op">(</span>expert_judgements <span class="op">=</span> <span class="va">.</span>, </span>
+<span>            type <span class="op">=</span> <span class="st">"Participant"</span>, </span>
+<span>   weights <span class="op">=</span> <span class="va">acx_for_ag_wts_only</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in preprocess_judgements(., percent_toggle = {: object 'acx_for_ag_wts_long' not found</code></pre>
+</div>
+</div>
+<p>Now weighted geometric means</p>
+<div class="cell">
+<details><summary>Code</summary><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weighted.geomean</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">w</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">x</span><span class="op">^</span><span class="va">w</span>, <span class="va">...</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">w</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">acx_for_ag_geom_wt</span> <span class="op">&lt;-</span> <span class="va">acx_for_ag_wts_long</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">paper_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu">summarize</span><span class="op">(</span></span>
+<span>      w_geom_mean <span class="op">=</span> <span class="fu">weighted.geomean</span><span class="op">(</span><span class="va">value</span>, <span class="va">weight</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-error">
+<pre><code>Error in summarize(., w_geom_mean = weighted.geomean(value, weight)): could not find function "summarize"</code></pre>
+</div>
 </div>
 
 
@@ -548,41 +822,307 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Other suggested sections</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Conjoint analysis' </span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>See end of <span class="co">[</span><span class="ot">this Slack thread</span><span class="co">](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1670240321964009)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Open and robust science: RP attitudes, discussions, resources) {#opensci}</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>Integrate from:</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Reinstein discussions here</span><span class="co">](https://daaronr.github.io/metrics_discussion/robust-diag.html)</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>Code to do <span class="co">[</span><span class="ot">Robustness checks as a 'specification chart'</span><span class="co">](https://github.com/ArielOrtizBobea/spec_chart)</span>, and sensitivity analysis</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>Source: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&amp;name=medium</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Meta-analysis) {#meta}</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>Incorporate and consolidate from <span class="co">[</span><span class="ot">Reinsteins meta notes</span><span class="co">](https://daaronr.github.io/metrics_discussion/metaanalysis.html)</span> and more</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relates to 'aggregating expert judgment' {-}</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>Testing out the <span class="in">`AggreCAT`</span> package on the ACX prediction contest</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("sessioninfo", dependencies = TRUE)</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"metamelb-repliCATS/aggreCAT"</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#Note: this failed initially because dependent packages needed updating.  `update.packages()` nay solve it. Nope, it didn't but all sorts of errors in that update. </span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb48" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Other suggested sections</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 'Conjoint analysis' </span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>See end of <span class="co">[</span><span class="ot">this Slack thread</span><span class="co">](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1670240321964009)</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Open and robust science: RP attitudes, discussions, resources) {#opensci}</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>Integrate from:</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Reinstein discussions here</span><span class="co">](https://daaronr.github.io/metrics_discussion/robust-diag.html)</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>Code to do <span class="co">[</span><span class="ot">Robustness checks as a 'specification chart'</span><span class="co">](https://github.com/ArielOrtizBobea/spec_chart)</span>, and sensitivity analysis</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>Source: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&amp;name=medium</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Meta-analysis) {#meta}</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>Incorporate and consolidate from <span class="co">[</span><span class="ot">Reinsteins meta notes</span><span class="co">](https://daaronr.github.io/metrics_discussion/metaanalysis.html)</span> and more</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relates to 'aggregating expert judgment' {-}</span></span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>Testing out the <span class="in">`AggreCAT`</span> package on the ACX prediction contest</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: install aggrecat</span></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Install aggreCAT"</span></span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("sessioninfo", dependencies = TRUE)</span></span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"metamelb-repliCATS/aggreCAT"</span>)</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a><span class="co">#Note: this failed initially because dependent packages needed updating.  `update.packages()` nay solve it. Nope, it didn't but all sorts of errors in that update</span></span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aggreCAT)</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: input_acx_prediction</span></span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "input_acx_prediction_data"</span></span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a>acx <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"sample_data"</span>, <span class="st">"acx_2023blindmode_predictions.csv"</span>))</span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: my_row</span></span>
+<span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "identify my own predictions"</span></span>
+<span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a>acx  <span class="sc">%&lt;&gt;%</span>  <span class="fu">mutate</span>(</span>
+<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">d_reinstein =</span>  <span class="fu">ifelse</span>(</span>
+<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">@1.WillVladimirPutinbePresidentofRussia</span><span class="st">`</span><span class="sc">==</span><span class="dv">82</span> <span class="sc">&amp;</span> <span class="st">`</span><span class="at">@2.WillUkrainecontrolthecityofSevastopol</span><span class="st">`</span><span class="sc">==</span><span class="dv">54</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-65"><a href="#cb48-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-67"><a href="#cb48-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-68"><a href="#cb48-68" aria-hidden="true" tabindex="-1"></a>What can <span class="in">`aggreCAT`</span> do for us? </span>
+<span id="cb48-69"><a href="#cb48-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-70"><a href="#cb48-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-71"><a href="#cb48-71" aria-hidden="true" tabindex="-1"></a>First testing with their built-in data</span>
+<span id="cb48-72"><a href="#cb48-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-73"><a href="#cb48-73" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Below we demonstrate how to use the most simple commonly implemented aggregation method ArMean, which takes the arithmetic mean of participant Best Estimates. We first use a small subset of 5 participants for a single claim, 28</span></span>
+<span id="cb48-74"><a href="#cb48-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-77"><a href="#cb48-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-78"><a href="#cb48-78" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data_ratings)</span>
+<span id="cb48-79"><a href="#cb48-79" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb48-80"><a href="#cb48-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-81"><a href="#cb48-81" aria-hidden="true" tabindex="-1"></a>participant_subset <span class="ot">&lt;-</span> data_ratings <span class="sc">%&gt;%</span> <span class="co">#just 5 users with names</span></span>
+<span id="cb48-82"><a href="#cb48-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(user_name) <span class="sc">%&gt;%</span></span>
+<span id="cb48-83"><a href="#cb48-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-84"><a href="#cb48-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">participant_name =</span> <span class="fu">paste</span>(<span class="st">"participant"</span>, <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()))) <span class="co">#numbers rather than id codenames</span></span>
+<span id="cb48-85"><a href="#cb48-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-86"><a href="#cb48-86" aria-hidden="true" tabindex="-1"></a>single_claim <span class="ot">&lt;-</span> data_ratings <span class="sc">%&gt;%</span> </span>
+<span id="cb48-87"><a href="#cb48-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(paper_id <span class="sc">==</span> <span class="st">"28"</span>) <span class="sc">%&gt;%</span> <span class="co">#all data on a single claim</span></span>
+<span id="cb48-88"><a href="#cb48-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(participant_subset, <span class="at">by =</span> <span class="st">"user_name"</span>) <span class="co">#join to the above 5 users (keeping only these 5)</span></span>
+<span id="cb48-89"><a href="#cb48-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-90"><a href="#cb48-90" aria-hidden="true" tabindex="-1"></a><span class="co">#note this stat only uses the rows with element == `three_point_best`</span></span>
+<span id="cb48-91"><a href="#cb48-91" aria-hidden="true" tabindex="-1"></a>single_claim <span class="sc">%&gt;%</span> </span>
+<span id="cb48-92"><a href="#cb48-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(element <span class="sc">==</span> <span class="st">"three_point_best"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-93"><a href="#cb48-93" aria-hidden="true" tabindex="-1"></a><span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-94"><a href="#cb48-94" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"ArMean"</span>)</span>
+<span id="cb48-95"><a href="#cb48-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-96"><a href="#cb48-96" aria-hidden="true" tabindex="-1"></a>Can we do similar across multiple claims with this package?</span>
+<span id="cb48-97"><a href="#cb48-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-100"><a href="#cb48-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-101"><a href="#cb48-101" aria-hidden="true" tabindex="-1"></a>all_claims <span class="ot">&lt;-</span> data_ratings <span class="sc">%&gt;%</span> </span>
+<span id="cb48-102"><a href="#cb48-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(participant_subset, <span class="at">by =</span> <span class="st">"user_name"</span>)   <span class="co">#join to the above 5 users (keeping only these 5) </span></span>
+<span id="cb48-103"><a href="#cb48-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-104"><a href="#cb48-104" aria-hidden="true" tabindex="-1"></a>all_claims <span class="sc">%&gt;%</span> </span>
+<span id="cb48-105"><a href="#cb48-105" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(element <span class="sc">==</span> <span class="st">"three_point_best"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-106"><a href="#cb48-106" aria-hidden="true" tabindex="-1"></a><span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-107"><a href="#cb48-107" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"ArMean"</span>)</span>
+<span id="cb48-108"><a href="#cb48-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-109"><a href="#cb48-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-110"><a href="#cb48-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-111"><a href="#cb48-111" aria-hidden="true" tabindex="-1"></a>This seems to work, at least with the data structured as they have it. Now what if we want multiple aggregation methods?</span>
+<span id="cb48-112"><a href="#cb48-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-115"><a href="#cb48-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-116"><a href="#cb48-116" aria-hidden="true" tabindex="-1"></a>three_aggregations <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_dfr</span>(<span class="at">.x =</span> <span class="fu">list</span>(AverageWAgg, IntervalWAgg, ShiftingWAgg),</span>
+<span id="cb48-117"><a href="#cb48-117" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> <span class="sc">~</span> <span class="fu">.x</span>(data_ratings))</span>
+<span id="cb48-118"><a href="#cb48-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-119"><a href="#cb48-119" aria-hidden="true" tabindex="-1"></a>three_aggregations <span class="sc">%&gt;%</span>  <span class="fu">tabyl</span>(method)</span>
+<span id="cb48-120"><a href="#cb48-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-121"><a href="#cb48-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-122"><a href="#cb48-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-123"><a href="#cb48-123" aria-hidden="true" tabindex="-1"></a>Now let's see what can be done with our ACX dataset. As they don't ask for CIs, I'd either have to estimate these arbitrarily (e.g., make them larger for people with less experience), or only use a subset of their measures.  First I'll check which ones might work, using *their* data for all aggregations (with baseline settings for each)</span>
+<span id="cb48-124"><a href="#cb48-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-127"><a href="#cb48-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-128"><a href="#cb48-128" aria-hidden="true" tabindex="-1"></a>all_aggsOK <span class="ot">&lt;-</span> <span class="fu">list</span>(AverageWAgg,  IntervalWAgg, ShiftingWAgg, ExtremisationWAgg)</span>
+<span id="cb48-129"><a href="#cb48-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-130"><a href="#cb48-130" aria-hidden="true" tabindex="-1"></a>all_aggs <span class="ot">&lt;-</span> <span class="fu">list</span>(LinearWAgg, AverageWAgg, BayesianWAgg, IntervalWAgg, ShiftingWAgg, ReasoningWAgg, DistributionWAgg, ExtremisationWAgg)</span>
+<span id="cb48-131"><a href="#cb48-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-132"><a href="#cb48-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-133"><a href="#cb48-133" aria-hidden="true" tabindex="-1"></a>three_aggs <span class="ot">&lt;-</span> <span class="fu">list</span>(LinearWAgg, AverageWAgg, BayesianWAgg)</span>
+<span id="cb48-134"><a href="#cb48-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-135"><a href="#cb48-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-136"><a href="#cb48-136" aria-hidden="true" tabindex="-1"></a>all_claims <span class="sc">%&gt;%</span> </span>
+<span id="cb48-137"><a href="#cb48-137" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(element <span class="sc">==</span> <span class="st">"three_point_best"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-138"><a href="#cb48-138" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dfr</span>(<span class="at">.x =</span> all_aggsOK,</span>
+<span id="cb48-139"><a href="#cb48-139" aria-hidden="true" tabindex="-1"></a>                                <span class="at">.f =</span> <span class="sc">~</span> <span class="fu">.x</span>(data_ratings)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-140"><a href="#cb48-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabsums</span>(cs, method)</span>
+<span id="cb48-141"><a href="#cb48-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-142"><a href="#cb48-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-143"><a href="#cb48-143" aria-hidden="true" tabindex="-1"></a>All of the aggregators  seemed computable even without having elements other than 'three_point_best' What's going on here? E.g,. <span class="in">`IntervalWAgg`</span> says 'the weights are dependent on the lower and upper bounds of three-point elicitation' ... but I left those out. 'ShiftingWAgg' is meant to depend on discussion; but here I have no indicators of that. Yet still, these all seem to come up with different means. <span class="in">`BetaARMean`</span> which is meant to do some extremisation wotks rather strangely; shifting everything to 1, apparently.</span>
+<span id="cb48-144"><a href="#cb48-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-145"><a href="#cb48-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-146"><a href="#cb48-146" aria-hidden="true" tabindex="-1"></a>Focusing in on some key interesting methods.</span>
+<span id="cb48-147"><a href="#cb48-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-148"><a href="#cb48-148" aria-hidden="true" tabindex="-1"></a>I've been told 'Geometric Mean' is good in these sorts of situations</span>
+<span id="cb48-151"><a href="#cb48-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-152"><a href="#cb48-152" aria-hidden="true" tabindex="-1"></a>data_ratings <span class="sc">%&gt;%</span> </span>
+<span id="cb48-153"><a href="#cb48-153" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(element <span class="sc">==</span> <span class="st">"three_point_best"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-154"><a href="#cb48-154" aria-hidden="true" tabindex="-1"></a><span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-155"><a href="#cb48-155" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"GeoMean"</span>)</span>
+<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-157"><a href="#cb48-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-158"><a href="#cb48-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-159"><a href="#cb48-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-160"><a href="#cb48-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-161"><a href="#cb48-161" aria-hidden="true" tabindex="-1"></a><span class="in">`LinearWAgg`</span> seems interesting, either suppliying some sort of weights by <span class="in">`Participant`</span> (e.g., downweight those who haven't done forecasting), or with the supplied <span class="in">`GranWAgg`</span> -- "granularity of best estimates"</span>
+<span id="cb48-162"><a href="#cb48-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-163"><a href="#cb48-163" aria-hidden="true" tabindex="-1"></a>Let's move to trying to use these on the ACX data. First I adjust the data to make it more compatible with the aggreCAT package.</span>
+<span id="cb48-164"><a href="#cb48-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-165"><a href="#cb48-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-166"><a href="#cb48-166" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb48-167"><a href="#cb48-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note -- it cannot deal with NAs:</span></span>
+<span id="cb48-168"><a href="#cb48-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-171"><a href="#cb48-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-172"><a href="#cb48-172" aria-hidden="true" tabindex="-1"></a>data_ratings2 <span class="ot">&lt;-</span> data_ratings</span>
+<span id="cb48-173"><a href="#cb48-173" aria-hidden="true" tabindex="-1"></a>data_ratings2[<span class="dv">4</span>,<span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="cn">NA_real_</span></span>
+<span id="cb48-174"><a href="#cb48-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-175"><a href="#cb48-175" aria-hidden="true" tabindex="-1"></a>data_ratings2 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-176"><a href="#cb48-176" aria-hidden="true" tabindex="-1"></a><span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-177"><a href="#cb48-177" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"GeoMean"</span>)</span>
+<span id="cb48-178"><a href="#cb48-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-179"><a href="#cb48-179" aria-hidden="true" tabindex="-1"></a>::: </span>
+<span id="cb48-180"><a href="#cb48-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-181"><a href="#cb48-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-182"><a href="#cb48-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-183"><a href="#cb48-183" aria-hidden="true" tabindex="-1"></a>Upweights and downweighting people -- ad-hoc</span>
+<span id="cb48-184"><a href="#cb48-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-185"><a href="#cb48-185" aria-hidden="true" tabindex="-1"></a>Now, I have little time left, so I'll come up with some ad-hoc weights. We have some idea of how different characteristics predicted success in previous prediction contests. But how should we map those into weights? I'm not sure, and it would take me some time to figure this out. </span>
+<span id="cb48-186"><a href="#cb48-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-187"><a href="#cb48-187" aria-hidden="true" tabindex="-1"></a>I guess I will do something lame and ad-hoc. </span>
+<span id="cb48-188"><a href="#cb48-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-189"><a href="#cb48-189" aria-hidden="true" tabindex="-1"></a>Everyone starts out with weight 1. </span>
+<span id="cb48-190"><a href="#cb48-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-191"><a href="#cb48-191" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Anyone who has no forecasting experience is downweighted fivefold (x0.2),</span>
+<span id="cb48-192"><a href="#cb48-192" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Superforecasters are upweighted 20x</span>
+<span id="cb48-193"><a href="#cb48-193" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>SAT math uprated if above average (unless already a superforecaster)</span>
+<span id="cb48-194"><a href="#cb48-194" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>PHd upweighted 1.5x</span>
+<span id="cb48-195"><a href="#cb48-195" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Downweight x 0.1 if you put 98+ or lt 4% chance of Putin being in power</span>
+<span id="cb48-196"><a href="#cb48-196" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Downweight by quantile of share of 'exact 50% predictions' (up to about 90% downweighting)</span>
+<span id="cb48-197"><a href="#cb48-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-198"><a href="#cb48-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-199"><a href="#cb48-199" aria-hidden="true" tabindex="-1"></a>Also, replace all '50% predictions' with the arithmetic average  (done later)</span>
+<span id="cb48-200"><a href="#cb48-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-201"><a href="#cb48-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-204"><a href="#cb48-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-205"><a href="#cb48-205" aria-hidden="true" tabindex="-1"></a><span class="co"># get column names starting with "@"</span></span>
+<span id="cb48-206"><a href="#cb48-206" aria-hidden="true" tabindex="-1"></a>pred_cols <span class="ot">&lt;-</span> <span class="fu">colnames</span>(acx)[<span class="fu">startsWith</span>(<span class="fu">colnames</span>(acx), <span class="st">"@"</span>)]</span>
+<span id="cb48-207"><a href="#cb48-207" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts <span class="ot">&lt;-</span> acx </span>
+<span id="cb48-208"><a href="#cb48-208" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts<span class="sc">$</span>share50 <span class="ot">&lt;-</span> (<span class="fu">rowSums</span>(acx[pred_cols]<span class="sc">==</span><span class="dv">50</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>))<span class="sc">/</span><span class="dv">50</span></span>
+<span id="cb48-209"><a href="#cb48-209" aria-hidden="true" tabindex="-1"></a><span class="co"># subset data based on column names and calculate row sums</span></span>
+<span id="cb48-210"><a href="#cb48-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-211"><a href="#cb48-211" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb48-212"><a href="#cb48-212" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(</span>
+<span id="cb48-213"><a href="#cb48-213" aria-hidden="true" tabindex="-1"></a>    <span class="at">user_name =</span> <span class="fu">row_number</span>()</span>
+<span id="cb48-214"><a href="#cb48-214" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-215"><a href="#cb48-215" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(</span>
+<span id="cb48-216"><a href="#cb48-216" aria-hidden="true" tabindex="-1"></a>   <span class="at">SATscoremath =</span>  <span class="fu">case_when</span>(</span>
+<span id="cb48-217"><a href="#cb48-217" aria-hidden="true" tabindex="-1"></a>     (SATscoremath<span class="sc">&gt;</span><span class="dv">800</span><span class="sc">|</span>SATscoremath<span class="sc">&lt;</span><span class="dv">100</span>) <span class="sc">~</span> <span class="cn">NA_real_</span>, </span>
+<span id="cb48-218"><a href="#cb48-218" aria-hidden="true" tabindex="-1"></a>     <span class="cn">TRUE</span> <span class="sc">~</span> SATscoremath),</span>
+<span id="cb48-219"><a href="#cb48-219" aria-hidden="true" tabindex="-1"></a>   <span class="at">SAT_math_rank =</span> <span class="fu">percent_rank</span>(SATscoremath),</span>
+<span id="cb48-220"><a href="#cb48-220" aria-hidden="true" tabindex="-1"></a>    <span class="at">SAT_math_rank=</span></span>
+<span id="cb48-221"><a href="#cb48-221" aria-hidden="true" tabindex="-1"></a>     <span class="fu">case_when</span>(</span>
+<span id="cb48-222"><a href="#cb48-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(SAT_math_rank) <span class="sc">~</span> <span class="fu">mean</span>(<span class="fl">0.5</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb48-223"><a href="#cb48-223" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> SAT_math_rank),</span>
+<span id="cb48-224"><a href="#cb48-224" aria-hidden="true" tabindex="-1"></a>   <span class="at">share50_qtl =</span> <span class="fu">percent_rank</span>(share50) </span>
+<span id="cb48-225"><a href="#cb48-225" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-226"><a href="#cb48-226" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(ForecastingExperience, Superforecaster, Degree), <span class="sc">~</span><span class="fu">replace</span>(., <span class="fu">is.na</span>(.), <span class="st">"No"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-227"><a href="#cb48-227" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb48-228"><a href="#cb48-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight =</span> </span>
+<span id="cb48-229"><a href="#cb48-229" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">ifelse</span>(ForecastingExperience<span class="sc">==</span><span class="st">"No"</span>,<span class="fl">0.2</span>,<span class="dv">1</span>))<span class="sc">*</span></span>
+<span id="cb48-230"><a href="#cb48-230" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">ifelse</span>(Superforecaster<span class="sc">==</span><span class="st">"Yes"</span>,<span class="dv">20</span>,<span class="dv">1</span>))<span class="sc">*</span></span>
+<span id="cb48-231"><a href="#cb48-231" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span><span class="sc">+</span>((SAT_math_rank<span class="sc">&gt;</span><span class="fl">0.5</span>)<span class="sc">*</span>(Superforecaster<span class="sc">!=</span><span class="st">"Yes"</span>)<span class="sc">*</span>(SAT_math_rank<span class="fl">-0.5</span>))<span class="sc">*</span><span class="dv">4</span>)<span class="sc">*</span></span>
+<span id="cb48-232"><a href="#cb48-232" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span><span class="sc">+</span>(Degree<span class="sc">==</span><span class="st">"Ph D."</span>)<span class="sc">*</span>.<span class="dv">5</span>)<span class="sc">*</span></span>
+<span id="cb48-233"><a href="#cb48-233" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">ifelse</span>(<span class="st">`</span><span class="at">@1.WillVladimirPutinbePresidentofRussia</span><span class="st">`</span><span class="sc">&gt;=</span><span class="dv">99</span>,<span class="fl">0.1</span>,<span class="dv">1</span>))<span class="sc">*</span></span>
+<span id="cb48-234"><a href="#cb48-234" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">ifelse</span>(<span class="st">`</span><span class="at">@1.WillVladimirPutinbePresidentofRussia</span><span class="st">`</span><span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">0.1</span>,<span class="dv">1</span>))<span class="sc">*</span></span>
+<span id="cb48-235"><a href="#cb48-235" aria-hidden="true" tabindex="-1"></a>  (<span class="dv">1</span><span class="sc">-</span>(share50_qtl)<span class="sc">/</span><span class="fl">1.2</span>) </span>
+<span id="cb48-236"><a href="#cb48-236" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-237"><a href="#cb48-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-238"><a href="#cb48-238" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_only <span class="ot">&lt;-</span> acx_for_ag_wts <span class="sc">%&gt;%</span> </span>
+<span id="cb48-239"><a href="#cb48-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(user_name, weight)</span>
+<span id="cb48-240"><a href="#cb48-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-241"><a href="#cb48-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-242"><a href="#cb48-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-243"><a href="#cb48-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-246"><a href="#cb48-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-247"><a href="#cb48-247" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_long <span class="ot">&lt;-</span> acx_for_ag_wts <span class="sc">%&gt;%</span>  </span>
+<span id="cb48-248"><a href="#cb48-248" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span><span class="fu">n_distinct</span>(.) <span class="sc">&gt;</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span>  <span class="co">#delete columns that are identical everywhere</span></span>
+<span id="cb48-249"><a href="#cb48-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>( <span class="co">#each 'question' needs it's own row for each 'user'</span></span>
+<span id="cb48-250"><a href="#cb48-250" aria-hidden="true" tabindex="-1"></a>    <span class="fu">contains</span>(<span class="st">"@"</span>),</span>
+<span id="cb48-251"><a href="#cb48-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"paper_id"</span>,</span>
+<span id="cb48-252"><a href="#cb48-252" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb48-253"><a href="#cb48-253" aria-hidden="true" tabindex="-1"></a>    ) </span>
+<span id="cb48-254"><a href="#cb48-254" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-255"><a href="#cb48-255" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-256"><a href="#cb48-256" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_long <span class="sc">%&lt;&gt;%</span>  <span class="fu">select</span>(user_name, paper_id, value, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span>  <span class="co">#make all predictions (for an individual) into a row </span></span>
+<span id="cb48-257"><a href="#cb48-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">element =</span> <span class="st">"three_point_best"</span>,</span>
+<span id="cb48-258"><a href="#cb48-258" aria-hidden="true" tabindex="-1"></a>    <span class="at">round =</span> <span class="st">"round_2"</span>) <span class="sc">%&gt;%</span> <span class="co">#aggreCAT needs these things </span></span>
+<span id="cb48-259"><a href="#cb48-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(paper_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-260"><a href="#cb48-260" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb48-261"><a href="#cb48-261" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> </span>
+<span id="cb48-262"><a href="#cb48-262" aria-hidden="true" tabindex="-1"></a>    <span class="fu">case_when</span>(</span>
+<span id="cb48-263"><a href="#cb48-263" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(value) <span class="sc">~</span> <span class="fu">mean</span>(value, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="co">#Sadly the package can't deal with NAs so I cheaply set them to the arithmetic average</span></span>
+<span id="cb48-264"><a href="#cb48-264" aria-hidden="true" tabindex="-1"></a>      value <span class="sc">==</span> <span class="fl">0.5</span> <span class="sc">~</span> <span class="fu">mean</span>(value, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb48-265"><a href="#cb48-265" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> value</span>
+<span id="cb48-266"><a href="#cb48-266" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb48-267"><a href="#cb48-267" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> ungroup  </span>
+<span id="cb48-268"><a href="#cb48-268" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-269"><a href="#cb48-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-270"><a href="#cb48-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-271"><a href="#cb48-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-272"><a href="#cb48-272" aria-hidden="true" tabindex="-1"></a>Let's see if it works</span>
+<span id="cb48-273"><a href="#cb48-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-276"><a href="#cb48-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-277"><a href="#cb48-277" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_long <span class="sc">%&gt;%</span>  </span>
+<span id="cb48-278"><a href="#cb48-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb48-279"><a href="#cb48-279" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(paper_id<span class="sc">==</span><span class="st">"@1.WillVladimirPutinbePresidentofRussia"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-280"><a href="#cb48-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user_name<span class="sc">&lt;=</span><span class="dv">154</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb48-281"><a href="#cb48-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-282"><a href="#cb48-282" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"GeoMean"</span>)</span>
+<span id="cb48-283"><a href="#cb48-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-284"><a href="#cb48-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-285"><a href="#cb48-285" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_long <span class="sc">%&gt;%</span>  </span>
+<span id="cb48-286"><a href="#cb48-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb48-287"><a href="#cb48-287" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(paper_id<span class="sc">==</span><span class="st">"@1.WillVladimirPutinbePresidentofRussia"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-288"><a href="#cb48-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user_name<span class="sc">&lt;=</span><span class="dv">155</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb48-289"><a href="#cb48-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AverageWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-290"><a href="#cb48-290" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"GeoMean"</span>)</span>
+<span id="cb48-291"><a href="#cb48-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-292"><a href="#cb48-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-293"><a href="#cb48-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-294"><a href="#cb48-294" aria-hidden="true" tabindex="-1"></a>Strangely, this seems to only work here  with 155 or less rows!</span>
+<span id="cb48-295"><a href="#cb48-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-296"><a href="#cb48-296" aria-hidden="true" tabindex="-1"></a>Now to do some funny calculations and blend them with my own predictions</span>
+<span id="cb48-297"><a href="#cb48-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-298"><a href="#cb48-298" aria-hidden="true" tabindex="-1"></a><span class="in">`acx_for_ag_wts_results`</span>: The weighted arithmetic means</span>
+<span id="cb48-299"><a href="#cb48-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-302"><a href="#cb48-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-303"><a href="#cb48-303" aria-hidden="true" tabindex="-1"></a>acx_for_ag_wts_results <span class="ot">&lt;-</span> acx_for_ag_wts_long <span class="sc">%&gt;%</span></span>
+<span id="cb48-304"><a href="#cb48-304" aria-hidden="true" tabindex="-1"></a> <span class="fu">LinearWAgg</span>(<span class="at">expert_judgements =</span> ., </span>
+<span id="cb48-305"><a href="#cb48-305" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"Participant"</span>, </span>
+<span id="cb48-306"><a href="#cb48-306" aria-hidden="true" tabindex="-1"></a>   <span class="at">weights =</span> acx_for_ag_wts_only</span>
+<span id="cb48-307"><a href="#cb48-307" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb48-308"><a href="#cb48-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-309"><a href="#cb48-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-310"><a href="#cb48-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-311"><a href="#cb48-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-312"><a href="#cb48-312" aria-hidden="true" tabindex="-1"></a>Now weighted geometric means</span>
+<span id="cb48-313"><a href="#cb48-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-316"><a href="#cb48-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb48-317"><a href="#cb48-317" aria-hidden="true" tabindex="-1"></a>weighted.geomean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, w, ...)</span>
+<span id="cb48-318"><a href="#cb48-318" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb48-319"><a href="#cb48-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">prod</span>(x<span class="sc">^</span>w, ...)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">sum</span>(w, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb48-320"><a href="#cb48-320" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-321"><a href="#cb48-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-322"><a href="#cb48-322" aria-hidden="true" tabindex="-1"></a>acx_for_ag_geom_wt <span class="ot">&lt;-</span> acx_for_ag_wts_long <span class="sc">%&gt;%</span></span>
+<span id="cb48-323"><a href="#cb48-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(paper_id) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-324"><a href="#cb48-324" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb48-325"><a href="#cb48-325" aria-hidden="true" tabindex="-1"></a>      <span class="at">w_geom_mean =</span> <span class="fu">weighted.geomean</span>(value, weight)</span>
+<span id="cb48-326"><a href="#cb48-326" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb48-327"><a href="#cb48-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-328"><a href="#cb48-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb48-329"><a href="#cb48-329" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

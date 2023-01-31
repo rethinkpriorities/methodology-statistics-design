@@ -327,7 +327,7 @@ df <- bind_rows(
     skill = paste("Skill: ", as.character(skill)), 
     group= as.factor(coalesce(team, skill)),
     ordering = as.numeric(is.na(team))*1000+rate,
-    group= fct_reorder(as.factor(group), ordering, .desc = T),
+    group= fct_reorder(group, ordering, .desc = T),
   ) %>% 
       select(-ordering)
 

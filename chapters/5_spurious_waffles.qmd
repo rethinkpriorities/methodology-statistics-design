@@ -1,6 +1,5 @@
 # Ch 5. The Many Variables & The Spurious Waffles {#mcelreath_ch5}
 
-
 Load the [Waffle House](https://www.snopes.com/fact-check/fema-waffle-house-index/) data.
 
 ```{r, message = F, warning = F}
@@ -12,7 +11,6 @@ d <- WaffleDivorce
 p_load(daggity, install=FALSE)
 ```
 
-
 ```{r, message = F, warning = F}
 rm(WaffleDivorce)
 
@@ -21,70 +19,79 @@ library(brms)
 library(dplyr)
 ```
 
+> Reasons given for multiple regression models include: (1) Statistical -control" for confounds[^spurious_waffles-1]
 
-> Reasons given for multiple regression models include: (1) Statistical -control” for confounds
+[^spurious_waffles-1]: DR: but endogenous controls can make this problem worse
 
-DR: but endogenous controls can make this problem worse
+## 5.1. Spurious association {.unnumbered}
 
-## 5.1. Spurious association {-}
-
-> But there’s no reason high marriage rate must cause more divorce
+> But there's no reason high marriage rate must cause more divorce
 
 ::: {.callout-note collapse="true"}
-## DR: what would this even mean? 
+## DR: what would this even mean?
 
-... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familiar with the framework of the Rubin Causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another. 
-
-::: 
-
+... the 'causal' part is ambiguous in this example, particularly when we are talking about aggregates like 'rates for the whole population'. I'm familiar with the framework of the Rubin causal model, where we consider the counterfactual state of some real-world outcome, when another real-world outcome would be set at one level or another.
+:::
 
 > easy to imagine high marriage rate indicating high cultural valuation of marriage and therefore being associated with low divorce rate
 
-DR:^[but the latter is not causal]
+DR:[^spurious_waffles-2]
 
-> Since the outcome and the predictor are both standardized, the intercept - should end up very close to zero 
+[^spurious_waffles-2]: but the latter is not causal
+
+> Since the outcome and the predictor are both standardized, the intercept - should end up very close to zero
 
 $\alpha ∼ Normal(0, 0.2)$
 
-DR:^[Why not exactly 0? Is this a 'sample drawn from the population' issue?]
+DR:[^spurious_waffles-3]
 
+[^spurious_waffles-3]: Why not exactly 0? Is this a 'sample drawn from the population' issue?
 
-> So when $\beta_A = 1$, a change of 1.2 years in median age at marriage is associated with a full standard deviation change in the outcome variable  [which he thinks is absurdly large]
+> So when $\beta_A = 1$, a change of 1.2 years in median age at marriage is associated with a full standard deviation change in the outcome variable \[which he thinks is absurdly large\]
 
-DR:^[But why are these 'absurdly large', maybe the sd in the outcome is small too?]
+DR:[^spurious_waffles-4]
 
-> [a model] that includes both age at marriage and marriage rate will help us. 
+[^spurious_waffles-4]: But why are these 'absurdly large', maybe the sd in the outcome is small too?
 
-DR:^[ ]maybe but these are aggregates. Casual thinking will be difficult.  Primitives are more like 'whether an individual of a certain age gets married or divorced']
+> \[a model\] that includes both age at marriage and marriage rate will help us.
+
+DR:[^spurious_waffles-5]
+
+[^spurious_waffles-5]: Maybe, but these are aggregates. Casual thinking will be difficult. Primitives are more like 'whether an individual of a certain age gets married or divorced'
 
 > causal impact
 
-DR:^[redundant language. All impacts are causal :)]
+DR:[^spurious_waffles-6]
+
+[^spurious_waffles-6]: redundant language. All impacts are causal :)
 
 > DAG will tell you the consequences of intervening to change a variable. But only if the DAG is correct
 
-> Perhaps a direct effect would arise because younger people change faster than older people and are therefore more likely to grow incompatible with a partner. Second, it has an indirect effect by influencing the marriage rate, which then influences divorce, A $\rightarrow$  M $\rightarrow$  D
+> Perhaps a direct effect would arise because younger people change faster than older people and are therefore more likely to grow incompatible with a partner. Second, it has an indirect effect by influencing the marriage rate, which then influences divorce, A $\rightarrow$ M $\rightarrow$ D
 
 > these different arrows, we need more than one statistical model.
 
 > Model m5.1, the regression of D on A, tells us only that the total influence of age at marriage is strongly negative with divorce rate
 
-DR:^[May not be *influence*... because unobserved factor could drive both]
+DR:[^spurious_waffles-7]
 
-> The 'total' here means we have to account for every path from A to D. There are two such paths in this graph: $A \rightarrow  D$, a direct path, and $A \rightarrow  M \rightarrow D$, an indirect path. In general, it is possible that a variable like A has no direct effect at all on an outcome like D. It could still be associated with D entirely through the indirect path. That type of relationship is known as mediation, and we'll have another example later.
+[^spurious_waffles-7]: May not be *influence*... because unobserved factor could drive both
 
+> The 'total' here means we have to account for every path from A to D. There are two such paths in this graph: $A \rightarrow D$, a direct path, and $A \rightarrow M \rightarrow D$, an indirect path. In general, it is possible that a variable like A has no direct effect at all on an outcome like D. It could still be associated with D entirely through the indirect path. That type of relationship is known as mediation, and we'll have another example later.
 
 > This DAG is also consistent with the posterior distributions of models m5.1 and m5.2. Why? Because both M and D 'listen' to A
 
-> conditional independencies  ... which variables become dis-associated when we condition on some other set of variables. 
+> conditional independencies ... which variables become dis-associated when we condition on some other set of variables.
 
 ... that every pair of variables is correlated. This is because there is a causal arrow between every pair. These arrows create correlations.
 
-DR:^[ ]but effects could add up to zero by coincidence. (Actually, he has a case like this further down, he just fails to mention it here.)]
+DR:[^spurious_waffles-8]
 
-> They share a cause, and this leads them to be correlated with one another through that cause. But suppose we condition on A. All of the information in M that is relevant to predicting D is in A. So once we've conditioned on A, M tells us nothing more about D. So in the second DAG, a testable implication is that D is independent of M, conditional on A. In other words, $D \perp  M|A$.
+[^spurious_waffles-8]: but effects could add up to zero by coincidence. (Actually, he has a case like this further down, he just fails to mention it here.)
 
-> Here’s the code to define the second DAG and display the implied conditional independencies.
+> They share a cause, and this leads them to be correlated with one another through that cause. But suppose we condition on A. All of the information in M that is relevant to predicting D is in A. So once we've conditioned on A, M tells us nothing more about D. So in the second DAG, a testable implication is that D is independent of M, conditional on A. In other words, $D \perp M|A$.
+
+> Here's the code to define the second DAG and display the implied conditional independencies.
 
 ```{r}
 library(dagitty)
@@ -96,11 +103,15 @@ impliedConditionalIndependencies( DMA_dag2 )
 
 > So for example once you fit a multiple regression to predict divorce using both marriage rate and age at marriage, the model addresses the questions: (1) After I already know marriage rate, what additional value is there in also knowing age at marriage? (2) After I already know age at marriage, what additional value is there in also knowing marriage rate?
 
-^[DR: can we differentiate 1 from 2? Yes, we see this below in the simulated examples. One column may be redundant after you know another ... e.g., an individual forecaster's prediction once you see the market price in an efficient prediction market. However, in practice this is challenging because of additional unobservables, and 'showing a lack of effect' requires a more sophisticated equivalence-testing approach than the one he gives below.]
+DR: how can we differentiate 1 from 2:[^spurious_waffles-9]
 
-### Coding data vis and univariate models  (Kurz) {-}
+[^spurious_waffles-9]: We see this below in the simulated examples. One column may be redundant after you know another ... e.g., an individual forecaster's prediction is redundant once you see the market price in an efficient prediction market. But the reverse may not hold; the market price is still informative after knowing a single forecaster's prediction, because the former has *more information*. However, in practice this is challenging because of additional unobservables, and 'showing a lack of effect' requires a more sophisticated equivalence-testing approach than the one he gives below.
 
-Kurz on themes and plots:^[ Going forward, each chapter will have its own plot theme. In this chapter, we’ll characterize the plots with `theme_bw() + theme(panel.grid = element_rect())` and coloring based off of "firebrick".]
+### Coding data vis and univariate models (Kurz) {.unnumbered}
+
+Kurz on themes and plots:[^spurious_waffles-10]
+
+[^spurious_waffles-10]: Going forward, each chapter will have its own plot theme. In this chapter, we'll characterize the plots with `theme_bw() + theme(panel.grid = element_rect())` and coloring based off of "firebrick".
 
 ```{r}
 # install.packages("ggrepel", dependencies = T)
@@ -110,10 +121,10 @@ d %>%
   ggplot(aes(x = WaffleHouses/Population, y = Divorce)) + #note we can put transformations *within* the `aes`
   
   stat_smooth(method = "lm", fullrange = T, size = 1/2,
-              color = "firebrick4", fill = "firebrick", alpha = 1/5) + #the linear plot and the shaded 'some sort of bounds' thing
+              color = "firebrick4", fill = "firebrick", alpha = 1/5) + #the linear plot and the shaded 'some sort of bounds' thing (what bound?)
   
   geom_point(size = 1.5, color = "firebrick4", alpha = 1/2) +
-  geom_text_repel(data = d %>% filter(Loc %in% c("ME", "OK", "AR", "AL", "GA", "SC", "NJ")),  
+  geom_text_repel(data = d %>% filter(Loc %in% c("ME", "OK", "AR", "AL", "GA", "SC", "NJ")),  #only for key US states of interest
                   aes(label = Loc), 
                   size = 3, seed = 1042) +  # this makes it reproducible
   
@@ -123,6 +134,7 @@ d %>%
   theme_bw() +
   theme(panel.grid = element_blank())  #removes gridlines
 ```
+
 *DR note: I'm skipping the map plotting, for now, even though it's a cool vis.*
 
 ```{r}
@@ -136,9 +148,8 @@ d <-
  
 ```
 
-
 ```{r}
-#| code-summary: "fit the first univariable model."
+#| code-summary: "fit the first univariable model, print it"
 
 b5.1 <- 
   brm(data = d, 
@@ -151,21 +162,23 @@ b5.1 <-
       seed = 5,
       file = "fits/b05.01")
 
-```
-
-```{r}
 print(b5.1)
+
 
 ```
 
 Below...
 
-- Create: `nd` -- tibble of standardized predictor values to plot over
-- apply `fitted` to `nd` with the `newdata` argument to fit values over this range (rather than over the  data the model was fit on)
+-   Create: `nd` -- tibble of standardized predictor values to plot over
+-   apply `fitted` to `nd` with the `newdata` argument to fit values over this range (rather than over the data the model was fit on)
 
 "to return model-implied expected values for `Divorce`"
 
 ```{r, fig.width = 3, fig.height = 3}
+#| code-summary: "Range to plot over, predict for this range"
+
+
+
 # define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`
 nd <- tibble(MedianAgeMarriage_s = seq(from = -3, to = 3.5, length.out = 30))
 
@@ -178,10 +191,9 @@ f <-
 
 ```
 
-
-And plot this... 
-
 ```{r, fig.width = 3, fig.height = 3}
+#| code-summary: "Plot predictions"
+
 # plot
 ggplot(data = f, 
        aes(x = MedianAgeMarriage_s, y = Estimate)) +
@@ -198,7 +210,8 @@ ggplot(data = f,
   theme(panel.grid = element_blank())                   
 ```
 
-Next   ... they do the same thing but with marriage rate as the predictor
+Next ... they do the same thing but with marriage rate as the predictor
+
 ```{r}
 d <-
   d %>%
@@ -225,28 +238,27 @@ print(b5.2)
 
 ```
 
-
 I'll skip plotting this for now
 
-### Multiple regression notation {-}
+### Multiple regression notation {.unnumbered}
 
 Model with
 
 `mu <- a + bM*M + bA*A`
 
-> Notice how bA doesn’t move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:
+> Notice how bA doesn't move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:
 
-> Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State.
-> In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.
+> Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State. In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.
 
 > Since the first DAG did not imply this result, it is out
 
-DR: This seems like a very weak test and a poor strategy for making inferences about causality (more so *running* with those inferences to underly future modeling).  Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.
+**DR: This seems like a very weak test and a poor strategy for making inferences about causality** (more so *running* with those inferences to underly future modeling). Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.
 
+### Fitting the (multivariate) model {.unnumbered}
 
-### Fitting the (multivariate) model {-}
+'Priors for each slope'[^spurious_waffles-11]
 
-'Priors for each slope'^["Notice we’re using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we’d make two prior() statements and differentiate them with the coef argument."]
+[^spurious_waffles-11]: "Notice we're using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we'd make two prior() statements and differentiate them with the coef argument."
 
 ```{r}
 b5.3 <- 
@@ -261,12 +273,11 @@ b5.3 <-
       file = "fits/b05.03")
 ```
 
-
 ```{r}
 print(b5.3)
 ```
 
- `mcmc_plot(b5.3)` seems to produce a ggplot object:
+`mcmc_plot(b5.3)` seems to produce a ggplot object:
 
 ```{r}
 
@@ -282,7 +293,8 @@ xxx <- mcmc_plot(b5.3) + ggtitle("My fancy bayesplot-based coefficient plot") +
 
 
 ```
-With the `bayesplot::mcmc_intervals` function you can specify what you want more precisely. 
+
+With the `bayesplot::mcmc_intervals` function you can specify what you want more precisely.
 
 ```{r}
 # install.packages("bayesplot", dependencies = T)
@@ -292,8 +304,8 @@ post <- posterior_samples(b5.3)
 
 color_scheme_set("red")
 mcmc_intervals(post[, 1:4], 
-               prob = .7,
-  prob_outer = 0.99,
+               prob = .65,
+  prob_outer = 0.95,
                point_est = "mean") + #Kurz and the default use 'median'
   ggtitle("My fancy bayesplot-based coefficient plot") +
   theme_bw() +
@@ -302,30 +314,36 @@ mcmc_intervals(post[, 1:4],
         panel.grid = element_blank())
 ```
 
-Note; this approach required you to work with the `posterior_samples()` instead of the brmsfit object. Just to be different, I set `point_est = "mean"` instead of median, and `prob = .7` for the 'inner interval' and `prob_outer = 0.99`.
+Note; this approach required you to work with the `posterior_samples()` instead of the brmsfit object. Just to be different, I set `point_est = "mean"` instead of median, and `prob = .65` for the 'inner interval' and `prob_outer = 0.95`.
 
-> The tidybaes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.
+> The tidybayes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.
 
-... I will return to that later, perhaps
+... I will return to that later, perhaps. I think Willem would prefer the control that 'doing it yourself with ggplot' offers
 
+### Plotting multivariate posteriors. {.unnumbered}
 
-### Plotting multivariate posteriors. {-}
-
-> (1)  Predictor residual plots. These plots show the outcome against residual predictor values. ...
+> (1) Predictor residual plots. These plots show the outcome against residual predictor values. ...
 
 > (2) Posterior prediction plots. These show model-based predictions against raw data, or otherwise display the error in prediction. They are tools for checking fit and assessing predictions. ...
 
 > (3) Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.
 
+#### Predictor residual plots {.unnumbered}
 
+**Predictions and residuals: outcomes vs**
 
-#### Predictor residual plots {-}
+*'How well does the "surprise part"*[^spurious_waffles-12] *of one feature predict the outcome'"?*
+
+[^spurious_waffles-12]: The residual after modeling it as a function of the other features
 
 > To get ready to make our residual plots, we'll predict `Marriage_s` with `MedianAgeMarriage_s`.
 
-^[DR: going for 'the surprising part of one explanatory variable once you already know another'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results such as the 'long and short regression' and 'omitted variable bias' formulae]
+[^spurious_waffles-13]
+
+[^spurious_waffles-13]: DR: going for 'the surprising part of one explanatory variable once you already know another variable'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results from econometrics such as the 'long and short regression' and 'omitted variable bias' formulae.
 
 ```{r b5.4}
+
 b5.4 <- 
   brm(data = d,
       family = gaussian,
@@ -336,13 +354,13 @@ b5.4 <-
       iter = 2000, warmup = 500, chains = 4, cores = 4,
       seed = 5,
       file = "fits/b05.04")
-```
 
-```{r}
 print(b5.4)
 ```
 
-> With `fitted()`, we compute the expected values for each state (with the exception of Nevada). Since the `MedianAgeMarriage_s` values for each state are in the date we used to fit the model, we'll omit the `newdata` argument.
+> With `fitted()`, we compute the expected values for each state (with the exception of Nevada).[^spurious_waffles-14]
+
+[^spurious_waffles-14]: "Since the `MedianAgeMarriage_s` values for each state are in the data we used to fit the model, we'll omit the `newdata` argument.
 
 ```{r}
 f <- 
@@ -368,15 +386,11 @@ f %>%
   theme(panel.grid = element_blank())     
 ```
 
-
-
 **Skipped a bunch here; come back to it**
 
 > The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.
 
-> Now we can use `sim`, which you met in the previous chapter, to simulate observations from model `m5.3_A`. But this time we’ll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.
-
-
+> Now we can use `sim`, which you met in the previous chapter, to simulate observations from model `m5.3_A`. But this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.
 
 ```{r, eval=FALSE}
 # prep data 5.21
@@ -384,6 +398,7 @@ sim_dat <- data.frame( A=A_seq )
 # simulate M and then D, using A_seq
 s <- sim( m5.3_A , data=sim_dat , vars=c("M","D") )
 ```
+
 ```{r, eval = FALSE}
 plot( sim_dat$A , colMeans(s$D) , ylim=c(-2,2) , type="l" ,
 xlab="manipulated A" , ylab="counterfactual D" )
@@ -391,35 +406,92 @@ shade( apply(s$D,2,PI) , sim_dat$A )
 mtext( "Total counterfactual effect of A on D" )
 ```
 
+#### Counterfactual plots {.unnumbered}
 
-## Categorical variables
+-   *Plot the model predicted outcome for a range of 'possible' values of predictors* (which may not occur in the data)
+-   E.g. plot predicted divorce rates against the median age of marriage in a state, assuming all these states have the average marriage rate
+    -   (This is sort of like the 'estimated marginal means' thing we often plot)
 
-DR: This section is rather straightforward. The key insight:  *Remove the intercept when modeling with categorical features.*
+![](images/paste-5ACB9072.png){width="437"}
 
-This yields a specific estimate for each category or combination of categories.  Why?
+#### We can also plot 'direct and indirect effects' {.unnumbered}
 
-- There is no 'base category', making interpretation easier. 
+If we really believe the causal structure we laid out...
 
-- It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups. 
+> \(1\) Pick a variable to manipulate, the intervention variable.\
+> (2) Define the range of values to set the intervention variable to.\
+> (3) For each value of the intervention variable, and for each sample in posterior, use the causal model to simulate the values of other variables, including the outcome.
 
-Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making interpretation statistical inference more difficult in some contexts. 
+> To estimate the influence of A on M, all we need is to regress A on M. There are no other variables in the DAG creating an association between A and M. We can just add this regression to the quap model
 
-Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework 
+> define a range of values for A ... this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.
+
+![](images/paste-4D024FB3.png)
+
+#### Posterior prediction plots {.unnumbered}
+
+*"Check the model fit against the observed data"*
+
+DR: And do what with this? Couldn't any such response run the risk of overfitting?
+
+## (Simulating) the various problems (Spurious association, masking, ...)
+
+DR: This seems like an important check on our work. Such simulations may have a high type-1 error, yielding 'false negatives' (where we see 'hmm, the results look fine, no bias here') by coincidence. But they should have a low or zero type-2 error, if done right. Where we can simulate a 'biased case', we know such a bias is a potential threat.
+
+### Masked relationship {.unnumbered}
+
+> tends to arise when there are two predictor variables that are correlated with one another. However, one of these is positively correlated with the outcome and the other is negatively correlated with it
+
+E.g.,
+
+-   Outcome: `ENGAGE` 'self-reported engagement'
+
+-   `time_in_EA`: Positive relation to `ENGAGE`
+
+-   `Interest_Global_health`: Negative relation to `ENGAGE`
+
+-   `time_in_EA`, `Interest_Global_health`: Positive relationships
+
+So, a simple model of `ENGAGE ~ time_in_EA` might find a zero (or 'too small') relationship, suggesting `time_in_EA` has little or no (causal) impact on engagement. However in a model like `ENGAGE ~ time_in_EA + Interest_Global_health` we might see the latter has a negative relationship to the outcome and the former a positive one.
+
+![](images/paste-6C1F2D9A.png)
+
+> Why did adding neocortex and body mass to the same model lead to stronger associations for both? This is a context in which there are two variables correlated with the outcome, but one is positively correlated with it and the other is negatively correlated with it. In addition, both of the explanatory variables are positively correlated with one another. Try a simple `pairs(~K + M + N , dcc )` plot to appreciate this pattern of correlation. The result of this pattern is that the variables tend to cancel one another out.
+
+![](images/paste-EA5FA8F8.png)
+
+				
+
+> Beginning on the left, the first possibility is that body mass (M) influences neocortex percent (N). Both then influence kilocalories in milk (K). Second, in the middle, neocortex could instead influence body mass. The two variables still end up correlated in the sample. Finally, on the right, there could be an unobserved variable U that influences both M and N, producing a correlation between them. In this book, I'll circle variables that are unobserved. One of the threats to causal inference is that there are potentially many unobserved variables thatinfluence an outcome or the predictors.
+> 					
+>
+> Which of these graphs is right? We can't tell from the data alone, because these graphs imply the same set of conditional independencies. In this case, there are no conditional independencies---each DAG above implies that all pairs of variables are associated, regardless of what we condition on. A set of DAGs with the same conditional independencies is known as a Markov equivalence set.			
+>
+> *the data alone can never tell you which causal model is correct*
+
+## Categorical variables {.unnumbered}
+
+DR: This section is rather straightforward. The key -- *and highly useful* -- insight: *Remove the intercept when modeling with categorical features.*
+
+This yields a specific estimate for each category or combination of categories. Why?
+
+-   There is no 'base category', making interpretation easier.
+
+-   It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups.
+
+Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making (direct) interpretation statistical inference more difficult in some contexts.
+
+Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework
 
 ::: {.callout-note collapse="true"}
 ## DR question: Does this apply to frequentist analysis too?
-Is it Bayesian specific? 
-How does this relate to 'contrast-coding'?
 
-::: 
-
+Is it Bayesian specific? How does this relate to 'contrast-coding'?
+:::
 
 > Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)
 
-
-
-
-We'll practice with `milk`.
+> We'll practice with `milk`.
 
 ```{r, message = F}
 library(rethinking)
@@ -431,7 +503,7 @@ detach(package:rethinking, unload = T)
 library(brms)
 ```
 
-With the tidyverse, we can peek at `clade` with `distinct()` in the place of base R `unique()`.
+> With the tidyverse, we can peek at `clade` with `distinct()` in the place of base R `unique()`.
 
 ```{r}
 d %>%
@@ -439,7 +511,7 @@ d %>%
 
 ```
 
-As `clade` has 4 categories, let's use `if_else()` to convert these to 4 dummy variables.
+> As `clade` has 4 categories, let's use `if_else()` to convert these to 4 dummy variables.
 
 ```{r}
 d <- 
@@ -450,7 +522,7 @@ d <-
          clade_ape = if_else(clade == "Ape", 1, 0))
 ```
 
-Now we'll fit the model with three of the four dummies. In this model, `clade_ape` is the reference category captured by the intercept.
+> Now we'll fit the model with three of the four dummies. In this model, `clade_ape` is the reference category captured by the intercept.
 
 ```{r b5.16}
 b5.16 <- 
@@ -471,17 +543,17 @@ print(b5.16)
 
 ### Adding regular predictor variables.
 
-If we wanted to fit the model including `perc.fat` as an additional predictor, the basic statistical formula would be
+> If we wanted to fit the model including `perc.fat` as an additional predictor, the basic statistical formula would be
 
 $$
 \mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.
 $$
 
-The corresponding `formula` argument within `brm()` would be `kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`.
+> The corresponding `formula` argument within `brm()` would be `kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`.
 
 ### Another approach: Unique intercepts.
 
-"Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform `d$clade` into `d$clade_id`. The advantage of this approach is the indices in the model summary are more descriptive than `a[1]` through `a[4]`.
+> "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform `d$clade` into `d$clade_id`. The advantage of this approach is the indices in the model summary are more descriptive than `a[1]` through `a[4]`.
 
 ```{r b5.16_alt}
 b5.16_alt <- 
@@ -499,4 +571,8 @@ b5.16_alt <-
 print(b5.16_alt)
 ```
 
-See? This is much easier than trying to remember which one was which in an arbitrary numeric index.
+> See? This is much easier than trying to remember which one was which in an arbitrary numeric index.
+
+**Rethinking: Continuous countries.** --  DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model. 
+
+## Further notes on the use of DAGS etc {.unnumbered}
