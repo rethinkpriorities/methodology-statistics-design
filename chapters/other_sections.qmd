@@ -1,6 +1,7 @@
 # Other suggested sections
 
 ```{r}
+library("here")
 source(here("code", "methods_setup.R"))
 ```
 
@@ -390,4 +391,10 @@ write_csv(aggregates, here("sample_data", "aggregates.csv"))
 
 
 Fixed some stuff at end and cleaned it and made some ad-hoc extremizing around a few correlated events
+
+
+```{r}
+read_csv(here("sample_data", "aggregates.csv")) %>%  DT::datatable()
+
+```
 
