@@ -2,6 +2,7 @@
 
 ```{r}
 library(rethinkpriorities)
+source(here("code", "methods_setup.R"))
 
 ```
 

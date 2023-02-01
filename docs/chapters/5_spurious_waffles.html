@@ -1416,404 +1416,402 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb37-185"><a href="#cb37-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
 <span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Range to plot over, predict for this range"</span></span>
 <span id="cb37-187"><a href="#cb37-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a><span class="co"># define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`</span></span>
-<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">MedianAgeMarriage_s =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="fl">3.5</span>, <span class="at">length.out =</span> <span class="dv">30</span>))</span>
-<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a><span class="co"># now use `fitted()` to get the model-implied trajectories</span></span>
-<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
-<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.1</span>, <span class="at">newdata =</span> nd) <span class="sc">%&gt;%</span></span>
-<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tack the `nd` data onto the `fitted()` results</span></span>
-<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(nd)</span>
+<span id="cb37-188"><a href="#cb37-188" aria-hidden="true" tabindex="-1"></a><span class="co"># define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`</span></span>
+<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a>nd <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">MedianAgeMarriage_s =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">to =</span> <span class="fl">3.5</span>, <span class="at">length.out =</span> <span class="dv">30</span>))</span>
+<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a><span class="co"># now use `fitted()` to get the model-implied trajectories</span></span>
+<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
+<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.1</span>, <span class="at">newdata =</span> nd) <span class="sc">%&gt;%</span></span>
+<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tack the `nd` data onto the `fitted()` results</span></span>
+<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(nd)</span>
+<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-199"><a href="#cb37-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
-<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot predictions"</span></span>
-<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> f, </span>
-<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Estimate)) <span class="sc">+</span></span>
-<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Q2<span class="fl">.5</span>, <span class="at">ymax =</span> Q97<span class="fl">.5</span>),</span>
-<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a>              <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
-<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d, <span class="co">#overlaying the original data</span></span>
-<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> Divorce), </span>
-<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce"</span>) <span class="sc">+</span></span>
-<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d<span class="sc">$</span>MedianAgeMarriage_s), </span>
-<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Divorce)) <span class="sc">+</span></span>
-<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())                   </span>
-<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
+<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Plot predictions"</span></span>
+<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> f, </span>
+<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Estimate)) <span class="sc">+</span></span>
+<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Q2<span class="fl">.5</span>, <span class="at">ymax =</span> Q97<span class="fl">.5</span>),</span>
+<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a>              <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"firebrick"</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5</span>, <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> d, <span class="co">#overlaying the original data</span></span>
+<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> Divorce), </span>
+<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Divorce"</span>) <span class="sc">+</span></span>
+<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(d<span class="sc">$</span>MedianAgeMarriage_s), </span>
+<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Divorce)) <span class="sc">+</span></span>
+<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())                   </span>
+<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a>Next ... they do the same thing but with marriage rate as the predictor</span>
 <span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-221"><a href="#cb37-221" aria-hidden="true" tabindex="-1"></a>Next ... they do the same thing but with marriage rate as the predictor</span>
-<span id="cb37-222"><a href="#cb37-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
-<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
-<span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Marriage_s =</span> (Marriage <span class="sc">-</span> <span class="fu">mean</span>(Marriage)) <span class="sc">/</span> <span class="fu">sd</span>(Marriage))</span>
-<span id="cb37-229"><a href="#cb37-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.2</span> <span class="ot">&lt;-</span> </span>
-<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s,</span>
-<span id="cb37-238"><a href="#cb37-238" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb37-239"><a href="#cb37-239" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.02"</span>)</span>
-<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span></span>
+<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Marriage_s =</span> (Marriage <span class="sc">-</span> <span class="fu">mean</span>(Marriage)) <span class="sc">/</span> <span class="fu">sd</span>(Marriage))</span>
+<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-228"><a href="#cb37-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.2</span> <span class="ot">&lt;-</span> </span>
+<span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s,</span>
+<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb37-238"><a href="#cb37-238" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb37-239"><a href="#cb37-239" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.02"</span>)</span>
+<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-247"><a href="#cb37-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.2</span>)</span>
+<span id="cb37-248"><a href="#cb37-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.2</span>)</span>
+<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a>I'll skip plotting this for now</span>
 <span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a>I'll skip plotting this for now</span>
+<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression notation {.unnumbered}</span></span>
 <span id="cb37-256"><a href="#cb37-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression notation {.unnumbered}</span></span>
+<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a>Model with</span>
 <span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a>Model with</span>
+<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a><span class="in">`mu &lt;- a + bM*M + bA*A`</span></span>
 <span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a><span class="in">`mu &lt;- a + bM*M + bA*A`</span></span>
+<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Notice how bA doesn't move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:</span></span>
 <span id="cb37-262"><a href="#cb37-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Notice how bA doesn't move, only grows a bit more uncertain, while bM is only associated with divorce when age at marriage is missing from the model. You can interpret these distributions as saying:</span></span>
+<span id="cb37-263"><a href="#cb37-263" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State. In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.</span></span>
 <span id="cb37-264"><a href="#cb37-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-265"><a href="#cb37-265" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Once we know median age at marriage for a State, there is little or no additional predictive power in also knowing the rate of marriage in that State. In that weird notation, $D \perp M|A$. This tests the implication of the second DAG from earlier.</span></span>
+<span id="cb37-265"><a href="#cb37-265" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the first DAG did not imply this result, it is out</span></span>
 <span id="cb37-266"><a href="#cb37-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-267"><a href="#cb37-267" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Since the first DAG did not imply this result, it is out</span></span>
+<span id="cb37-267"><a href="#cb37-267" aria-hidden="true" tabindex="-1"></a>**DR: This seems like a very weak test and a poor strategy for making inferences about causality** (more so *running* with those inferences to underly future modeling). Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.</span>
 <span id="cb37-268"><a href="#cb37-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a>**DR: This seems like a very weak test and a poor strategy for making inferences about causality** (more so *running* with those inferences to underly future modeling). Even when age *is* present in the model, the compatibility intervals for the marriage rate coefficient include rather large coefficients in either direction.</span>
+<span id="cb37-269"><a href="#cb37-269" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fitting the (multivariate) model {.unnumbered}</span></span>
 <span id="cb37-270"><a href="#cb37-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fitting the (multivariate) model {.unnumbered}</span></span>
+<span id="cb37-271"><a href="#cb37-271" aria-hidden="true" tabindex="-1"></a>'Priors for each slope'<span class="ot">[^spurious_waffles-11]</span></span>
 <span id="cb37-272"><a href="#cb37-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a>'Priors for each slope'<span class="ot">[^spurious_waffles-11]</span></span>
+<span id="cb37-273"><a href="#cb37-273" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-11]: </span>"Notice we're using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we'd make two prior() statements and differentiate them with the coef argument."</span>
 <span id="cb37-274"><a href="#cb37-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-275"><a href="#cb37-275" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-11]: </span>"Notice we're using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we'd make two prior() statements and differentiate them with the coef argument."</span>
-<span id="cb37-276"><a href="#cb37-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.3</span> <span class="ot">&lt;-</span> </span>
-<span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s <span class="sc">+</span> MedianAgeMarriage_s,</span>
-<span id="cb37-284"><a href="#cb37-284" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb37-285"><a href="#cb37-285" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb37-289"><a href="#cb37-289" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.03"</span>)</span>
-<span id="cb37-290"><a href="#cb37-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-291"><a href="#cb37-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.3</span>)</span>
-<span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-277"><a href="#cb37-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-278"><a href="#cb37-278" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.3</span> <span class="ot">&lt;-</span> </span>
+<span id="cb37-279"><a href="#cb37-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb37-280"><a href="#cb37-280" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb37-281"><a href="#cb37-281" aria-hidden="true" tabindex="-1"></a>      Divorce <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> Marriage_s <span class="sc">+</span> MedianAgeMarriage_s,</span>
+<span id="cb37-282"><a href="#cb37-282" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">10</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb37-283"><a href="#cb37-283" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb37-284"><a href="#cb37-284" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb37-285"><a href="#cb37-285" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb37-286"><a href="#cb37-286" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb37-287"><a href="#cb37-287" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.03"</span>)</span>
+<span id="cb37-288"><a href="#cb37-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-289"><a href="#cb37-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-292"><a href="#cb37-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-293"><a href="#cb37-293" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.3</span>)</span>
+<span id="cb37-294"><a href="#cb37-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-295"><a href="#cb37-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-296"><a href="#cb37-296" aria-hidden="true" tabindex="-1"></a><span class="in">`mcmc_plot(b5.3)`</span> seems to produce a ggplot object:</span>
 <span id="cb37-297"><a href="#cb37-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-298"><a href="#cb37-298" aria-hidden="true" tabindex="-1"></a><span class="in">`mcmc_plot(b5.3)`</span> seems to produce a ggplot object:</span>
-<span id="cb37-299"><a href="#cb37-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-302"><a href="#cb37-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-303"><a href="#cb37-303" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb37-304"><a href="#cb37-304" aria-hidden="true" tabindex="-1"></a>xxx <span class="ot">&lt;-</span> <span class="fu">mcmc_plot</span>(b5<span class="fl">.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
-<span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-306"><a href="#cb37-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb37-307"><a href="#cb37-307" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb37-308"><a href="#cb37-308" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb37-309"><a href="#cb37-309" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb37-310"><a href="#cb37-310" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-300"><a href="#cb37-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-301"><a href="#cb37-301" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb37-302"><a href="#cb37-302" aria-hidden="true" tabindex="-1"></a>xxx <span class="ot">&lt;-</span> <span class="fu">mcmc_plot</span>(b5<span class="fl">.3</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
+<span id="cb37-303"><a href="#cb37-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb37-304"><a href="#cb37-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb37-305"><a href="#cb37-305" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb37-306"><a href="#cb37-306" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb37-307"><a href="#cb37-307" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-308"><a href="#cb37-308" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-309"><a href="#cb37-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-310"><a href="#cb37-310" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-311"><a href="#cb37-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-312"><a href="#cb37-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-312"><a href="#cb37-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-313"><a href="#cb37-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-314"><a href="#cb37-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-314"><a href="#cb37-314" aria-hidden="true" tabindex="-1"></a>With the <span class="in">`bayesplot::mcmc_intervals`</span> function you can specify what you want more precisely.</span>
 <span id="cb37-315"><a href="#cb37-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-316"><a href="#cb37-316" aria-hidden="true" tabindex="-1"></a>With the <span class="in">`bayesplot::mcmc_intervals`</span> function you can specify what you want more precisely.</span>
-<span id="cb37-317"><a href="#cb37-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("bayesplot", dependencies = T)</span></span>
-<span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb37-318"><a href="#cb37-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-319"><a href="#cb37-319" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("bayesplot", dependencies = T)</span></span>
+<span id="cb37-320"><a href="#cb37-320" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb37-321"><a href="#cb37-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-322"><a href="#cb37-322" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b5<span class="fl">.3</span>)</span>
 <span id="cb37-323"><a href="#cb37-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(b5<span class="fl">.3</span>)</span>
-<span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a><span class="fu">color_scheme_set</span>(<span class="st">"red"</span>)</span>
-<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(post[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
-<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a>               <span class="at">prob =</span> .<span class="dv">65</span>,</span>
-<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_outer =</span> <span class="fl">0.95</span>,</span>
-<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a>               <span class="at">point_est =</span> <span class="st">"mean"</span>) <span class="sc">+</span> <span class="co">#Kurz and the default use 'median'</span></span>
-<span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
-<span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb37-336"><a href="#cb37-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-324"><a href="#cb37-324" aria-hidden="true" tabindex="-1"></a><span class="fu">color_scheme_set</span>(<span class="st">"red"</span>)</span>
+<span id="cb37-325"><a href="#cb37-325" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_intervals</span>(post[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb37-326"><a href="#cb37-326" aria-hidden="true" tabindex="-1"></a>               <span class="at">prob =</span> .<span class="dv">65</span>,</span>
+<span id="cb37-327"><a href="#cb37-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob_outer =</span> <span class="fl">0.95</span>,</span>
+<span id="cb37-328"><a href="#cb37-328" aria-hidden="true" tabindex="-1"></a>               <span class="at">point_est =</span> <span class="st">"mean"</span>) <span class="sc">+</span> <span class="co">#Kurz and the default use 'median'</span></span>
+<span id="cb37-329"><a href="#cb37-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"My fancy bayesplot-based coefficient plot"</span>) <span class="sc">+</span></span>
+<span id="cb37-330"><a href="#cb37-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb37-331"><a href="#cb37-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb37-332"><a href="#cb37-332" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb37-333"><a href="#cb37-333" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb37-334"><a href="#cb37-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-335"><a href="#cb37-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-336"><a href="#cb37-336" aria-hidden="true" tabindex="-1"></a>Note; this approach required you to work with the <span class="in">`posterior_samples()`</span> instead of the brmsfit object. Just to be different, I set <span class="in">`point_est = "mean"`</span> instead of median, and <span class="in">`prob = .65`</span> for the 'inner interval' and <span class="in">`prob_outer = 0.95`</span>.</span>
 <span id="cb37-337"><a href="#cb37-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a>Note; this approach required you to work with the <span class="in">`posterior_samples()`</span> instead of the brmsfit object. Just to be different, I set <span class="in">`point_est = "mean"`</span> instead of median, and <span class="in">`prob = .65`</span> for the 'inner interval' and <span class="in">`prob_outer = 0.95`</span>.</span>
+<span id="cb37-338"><a href="#cb37-338" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The tidybayes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.</span></span>
 <span id="cb37-339"><a href="#cb37-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The tidybayes::stat_pointinterval() function offers a third way, this time with a more ground-up ggplot2 workflow.</span></span>
+<span id="cb37-340"><a href="#cb37-340" aria-hidden="true" tabindex="-1"></a>... I will return to that later, perhaps. I think Willem would prefer the control that 'doing it yourself with ggplot' offers</span>
 <span id="cb37-341"><a href="#cb37-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-342"><a href="#cb37-342" aria-hidden="true" tabindex="-1"></a>... I will return to that later, perhaps. I think Willem would prefer the control that 'doing it yourself with ggplot' offers</span>
+<span id="cb37-342"><a href="#cb37-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plotting multivariate posteriors. {.unnumbered}</span></span>
 <span id="cb37-343"><a href="#cb37-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plotting multivariate posteriors. {.unnumbered}</span></span>
+<span id="cb37-344"><a href="#cb37-344" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (1) Predictor residual plots. These plots show the outcome against residual predictor values. ...</span></span>
 <span id="cb37-345"><a href="#cb37-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (1) Predictor residual plots. These plots show the outcome against residual predictor values. ...</span></span>
+<span id="cb37-346"><a href="#cb37-346" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Posterior prediction plots. These show model-based predictions against raw data, or otherwise display the error in prediction. They are tools for checking fit and assessing predictions. ...</span></span>
 <span id="cb37-347"><a href="#cb37-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-348"><a href="#cb37-348" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Posterior prediction plots. These show model-based predictions against raw data, or otherwise display the error in prediction. They are tools for checking fit and assessing predictions. ...</span></span>
+<span id="cb37-348"><a href="#cb37-348" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</span></span>
 <span id="cb37-349"><a href="#cb37-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) Counterfactual plots. These show the implied predictions for imaginary experiments. These plots allow you to explore the causal implications of manipulating one or more variables.</span></span>
+<span id="cb37-350"><a href="#cb37-350" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Predictor residual plots {.unnumbered}</span></span>
 <span id="cb37-351"><a href="#cb37-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Predictor residual plots {.unnumbered}</span></span>
+<span id="cb37-352"><a href="#cb37-352" aria-hidden="true" tabindex="-1"></a>**Predictions and residuals: outcomes vs**</span>
 <span id="cb37-353"><a href="#cb37-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-354"><a href="#cb37-354" aria-hidden="true" tabindex="-1"></a>**Predictions and residuals: outcomes vs**</span>
+<span id="cb37-354"><a href="#cb37-354" aria-hidden="true" tabindex="-1"></a>*'How well does the "surprise part"*[^spurious_waffles-12] *of one feature predict the outcome'"?*</span>
 <span id="cb37-355"><a href="#cb37-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a>*'How well does the "surprise part"*[^spurious_waffles-12] *of one feature predict the outcome'"?*</span>
+<span id="cb37-356"><a href="#cb37-356" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-12]: </span>The residual after modeling it as a function of the other features</span>
 <span id="cb37-357"><a href="#cb37-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-12]: </span>The residual after modeling it as a function of the other features</span>
+<span id="cb37-358"><a href="#cb37-358" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To get ready to make our residual plots, we'll predict </span><span class="in">`Marriage_s`</span><span class="at"> with </span><span class="in">`MedianAgeMarriage_s`</span><span class="at">.</span></span>
 <span id="cb37-359"><a href="#cb37-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To get ready to make our residual plots, we'll predict </span><span class="in">`Marriage_s`</span><span class="at"> with </span><span class="in">`MedianAgeMarriage_s`</span><span class="at">.</span></span>
+<span id="cb37-360"><a href="#cb37-360" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-13]</span></span>
 <span id="cb37-361"><a href="#cb37-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-13]</span></span>
+<span id="cb37-362"><a href="#cb37-362" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-13]: </span>DR: going for 'the surprising part of one explanatory variable once you already know another variable'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results from econometrics such as the 'long and short regression' and 'omitted variable bias' formulae.</span>
 <span id="cb37-363"><a href="#cb37-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-364"><a href="#cb37-364" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-13]: </span>DR: going for 'the surprising part of one explanatory variable once you already know another variable'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results from econometrics such as the 'long and short regression' and 'omitted variable bias' formulae.</span>
+<span id="cb37-364"><a href="#cb37-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.4}</span></span>
 <span id="cb37-365"><a href="#cb37-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-366"><a href="#cb37-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.4}</span></span>
-<span id="cb37-367"><a href="#cb37-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-368"><a href="#cb37-368" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
-<span id="cb37-369"><a href="#cb37-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d,</span>
-<span id="cb37-370"><a href="#cb37-370" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a>      Marriage_s <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
-<span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb37-375"><a href="#cb37-375" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb37-376"><a href="#cb37-376" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb37-377"><a href="#cb37-377" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.04"</span>)</span>
-<span id="cb37-378"><a href="#cb37-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-379"><a href="#cb37-379" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.4</span>)</span>
-<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-366"><a href="#cb37-366" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.4</span> <span class="ot">&lt;-</span> </span>
+<span id="cb37-367"><a href="#cb37-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d,</span>
+<span id="cb37-368"><a href="#cb37-368" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb37-369"><a href="#cb37-369" aria-hidden="true" tabindex="-1"></a>      Marriage_s <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> MedianAgeMarriage_s,</span>
+<span id="cb37-370"><a href="#cb37-370" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb37-371"><a href="#cb37-371" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb37-372"><a href="#cb37-372" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb37-373"><a href="#cb37-373" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb37-374"><a href="#cb37-374" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb37-375"><a href="#cb37-375" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.04"</span>)</span>
+<span id="cb37-376"><a href="#cb37-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-377"><a href="#cb37-377" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.4</span>)</span>
+<span id="cb37-378"><a href="#cb37-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-379"><a href="#cb37-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-380"><a href="#cb37-380" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With </span><span class="in">`fitted()`</span><span class="at">, we compute the expected values for each state (with the exception of Nevada).</span><span class="ot">[^spurious_waffles-14]</span></span>
 <span id="cb37-381"><a href="#cb37-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-382"><a href="#cb37-382" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With </span><span class="in">`fitted()`</span><span class="at">, we compute the expected values for each state (with the exception of Nevada).</span><span class="ot">[^spurious_waffles-14]</span></span>
+<span id="cb37-382"><a href="#cb37-382" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-14]: </span>"Since the <span class="in">`MedianAgeMarriage_s`</span> values for each state are in the data we used to fit the model, we'll omit the <span class="in">`newdata`</span> argument.</span>
 <span id="cb37-383"><a href="#cb37-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-384"><a href="#cb37-384" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-14]: </span>"Since the <span class="in">`MedianAgeMarriage_s`</span> values for each state are in the data we used to fit the model, we'll omit the <span class="in">`newdata`</span> argument.</span>
-<span id="cb37-385"><a href="#cb37-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-388"><a href="#cb37-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
-<span id="cb37-390"><a href="#cb37-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.4</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb37-391"><a href="#cb37-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-392"><a href="#cb37-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(d)</span>
-<span id="cb37-393"><a href="#cb37-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-394"><a href="#cb37-394" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(f)</span>
-<span id="cb37-395"><a href="#cb37-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-386"><a href="#cb37-386" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-387"><a href="#cb37-387" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> </span>
+<span id="cb37-388"><a href="#cb37-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(b5<span class="fl">.4</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-389"><a href="#cb37-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-390"><a href="#cb37-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(d)</span>
+<span id="cb37-391"><a href="#cb37-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-392"><a href="#cb37-392" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(f)</span>
+<span id="cb37-393"><a href="#cb37-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-394"><a href="#cb37-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-395"><a href="#cb37-395" aria-hidden="true" tabindex="-1"></a>After a little data processing, we can make Figure 5.3.</span>
 <span id="cb37-396"><a href="#cb37-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-397"><a href="#cb37-397" aria-hidden="true" tabindex="-1"></a>After a little data processing, we can make Figure 5.3.</span>
-<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-399"><a href="#cb37-399" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
-<span id="cb37-400"><a href="#cb37-400" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
-<span id="cb37-401"><a href="#cb37-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Marriage_s)) <span class="sc">+</span></span>
-<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb37-403"><a href="#cb37-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> MedianAgeMarriage_s, <span class="at">yend =</span> Estimate), </span>
-<span id="cb37-404"><a href="#cb37-404" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb37-405"><a href="#cb37-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Estimate), </span>
-<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
-<span id="cb37-407"><a href="#cb37-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Marriage_s)) <span class="sc">+</span></span>
-<span id="cb37-408"><a href="#cb37-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb37-409"><a href="#cb37-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())     </span>
-<span id="cb37-410"><a href="#cb37-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-397"><a href="#cb37-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig.width = 3, fig.height = 3}</span></span>
+<span id="cb37-398"><a href="#cb37-398" aria-hidden="true" tabindex="-1"></a>f <span class="sc">%&gt;%</span> </span>
+<span id="cb37-399"><a href="#cb37-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> MedianAgeMarriage_s, <span class="at">y =</span> Marriage_s)) <span class="sc">+</span></span>
+<span id="cb37-400"><a href="#cb37-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb37-401"><a href="#cb37-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">xend =</span> MedianAgeMarriage_s, <span class="at">yend =</span> Estimate), </span>
+<span id="cb37-402"><a href="#cb37-402" aria-hidden="true" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb37-403"><a href="#cb37-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Estimate), </span>
+<span id="cb37-404"><a href="#cb37-404" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"firebrick4"</span>) <span class="sc">+</span></span>
+<span id="cb37-405"><a href="#cb37-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">range</span>(d<span class="sc">$</span>Marriage_s)) <span class="sc">+</span></span>
+<span id="cb37-406"><a href="#cb37-406" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb37-407"><a href="#cb37-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())     </span>
+<span id="cb37-408"><a href="#cb37-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-409"><a href="#cb37-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-410"><a href="#cb37-410" aria-hidden="true" tabindex="-1"></a>**Skipped a bunch here; come back to it**</span>
 <span id="cb37-411"><a href="#cb37-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-412"><a href="#cb37-412" aria-hidden="true" tabindex="-1"></a>**Skipped a bunch here; come back to it**</span>
+<span id="cb37-412"><a href="#cb37-412" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.</span></span>
 <span id="cb37-413"><a href="#cb37-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.</span></span>
+<span id="cb37-414"><a href="#cb37-414" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can use </span><span class="in">`sim`</span><span class="at">, which you met in the previous chapter, to simulate observations from model </span><span class="in">`m5.3_A`</span><span class="at">. But this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
 <span id="cb37-415"><a href="#cb37-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-416"><a href="#cb37-416" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we can use </span><span class="in">`sim`</span><span class="at">, which you met in the previous chapter, to simulate observations from model </span><span class="in">`m5.3_A`</span><span class="at">. But this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
-<span id="cb37-417"><a href="#cb37-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-418"><a href="#cb37-418" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb37-419"><a href="#cb37-419" aria-hidden="true" tabindex="-1"></a><span class="co"># prep data 5.21</span></span>
-<span id="cb37-420"><a href="#cb37-420" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">A=</span>A_seq )</span>
-<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate M and then D, using A_seq</span></span>
-<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>( m5<span class="fl">.3</span>_A , <span class="at">data=</span>sim_dat , <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"D"</span>) )</span>
-<span id="cb37-423"><a href="#cb37-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-424"><a href="#cb37-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-425"><a href="#cb37-425" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb37-426"><a href="#cb37-426" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( sim_dat<span class="sc">$</span>A , <span class="fu">colMeans</span>(s<span class="sc">$</span>D) , <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>) , <span class="at">type=</span><span class="st">"l"</span> ,</span>
-<span id="cb37-427"><a href="#cb37-427" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">"manipulated A"</span> , <span class="at">ylab=</span><span class="st">"counterfactual D"</span> )</span>
-<span id="cb37-428"><a href="#cb37-428" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( <span class="fu">apply</span>(s<span class="sc">$</span>D,<span class="dv">2</span>,PI) , sim_dat<span class="sc">$</span>A )</span>
-<span id="cb37-429"><a href="#cb37-429" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>( <span class="st">"Total counterfactual effect of A on D"</span> )</span>
-<span id="cb37-430"><a href="#cb37-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-416"><a href="#cb37-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb37-417"><a href="#cb37-417" aria-hidden="true" tabindex="-1"></a><span class="co"># prep data 5.21</span></span>
+<span id="cb37-418"><a href="#cb37-418" aria-hidden="true" tabindex="-1"></a>sim_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">A=</span>A_seq )</span>
+<span id="cb37-419"><a href="#cb37-419" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate M and then D, using A_seq</span></span>
+<span id="cb37-420"><a href="#cb37-420" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sim</span>( m5<span class="fl">.3</span>_A , <span class="at">data=</span>sim_dat , <span class="at">vars=</span><span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"D"</span>) )</span>
+<span id="cb37-421"><a href="#cb37-421" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-422"><a href="#cb37-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-423"><a href="#cb37-423" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb37-424"><a href="#cb37-424" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( sim_dat<span class="sc">$</span>A , <span class="fu">colMeans</span>(s<span class="sc">$</span>D) , <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>) , <span class="at">type=</span><span class="st">"l"</span> ,</span>
+<span id="cb37-425"><a href="#cb37-425" aria-hidden="true" tabindex="-1"></a><span class="at">xlab=</span><span class="st">"manipulated A"</span> , <span class="at">ylab=</span><span class="st">"counterfactual D"</span> )</span>
+<span id="cb37-426"><a href="#cb37-426" aria-hidden="true" tabindex="-1"></a><span class="fu">shade</span>( <span class="fu">apply</span>(s<span class="sc">$</span>D,<span class="dv">2</span>,PI) , sim_dat<span class="sc">$</span>A )</span>
+<span id="cb37-427"><a href="#cb37-427" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>( <span class="st">"Total counterfactual effect of A on D"</span> )</span>
+<span id="cb37-428"><a href="#cb37-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-429"><a href="#cb37-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-430"><a href="#cb37-430" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Counterfactual plots {.unnumbered}</span></span>
 <span id="cb37-431"><a href="#cb37-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-432"><a href="#cb37-432" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Counterfactual plots {.unnumbered}</span></span>
-<span id="cb37-433"><a href="#cb37-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-434"><a href="#cb37-434" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>*Plot the model predicted outcome for a range of 'possible' values of predictors* (which may not occur in the data)</span>
-<span id="cb37-435"><a href="#cb37-435" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>E.g. plot predicted divorce rates against the median age of marriage in a state, assuming all these states have the average marriage rate</span>
-<span id="cb37-436"><a href="#cb37-436" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>(This is sort of like the 'estimated marginal means' thing we often plot)</span>
+<span id="cb37-432"><a href="#cb37-432" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>*Plot the model predicted outcome for a range of 'possible' values of predictors* (which may not occur in the data)</span>
+<span id="cb37-433"><a href="#cb37-433" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>E.g. plot predicted divorce rates against the median age of marriage in a state, assuming all these states have the average marriage rate</span>
+<span id="cb37-434"><a href="#cb37-434" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>(This is sort of like the 'estimated marginal means' thing we often plot)</span>
+<span id="cb37-435"><a href="#cb37-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-436"><a href="#cb37-436" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-5ACB9072.png)</span>{width="437"}</span>
 <span id="cb37-437"><a href="#cb37-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-438"><a href="#cb37-438" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-5ACB9072.png)</span>{width="437"}</span>
+<span id="cb37-438"><a href="#cb37-438" aria-hidden="true" tabindex="-1"></a><span class="fu">#### We can also plot 'direct and indirect effects' {.unnumbered}</span></span>
 <span id="cb37-439"><a href="#cb37-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-440"><a href="#cb37-440" aria-hidden="true" tabindex="-1"></a><span class="fu">#### We can also plot 'direct and indirect effects' {.unnumbered}</span></span>
+<span id="cb37-440"><a href="#cb37-440" aria-hidden="true" tabindex="-1"></a>If we really believe the causal structure we laid out...</span>
 <span id="cb37-441"><a href="#cb37-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-442"><a href="#cb37-442" aria-hidden="true" tabindex="-1"></a>If we really believe the causal structure we laid out...</span>
-<span id="cb37-443"><a href="#cb37-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-444"><a href="#cb37-444" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="sc">\(</span><span class="at">1</span><span class="sc">\)</span><span class="at"> Pick a variable to manipulate, the intervention variable.\</span></span>
-<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Define the range of values to set the intervention variable to.\</span></span>
-<span id="cb37-446"><a href="#cb37-446" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) For each value of the intervention variable, and for each sample in posterior, use the causal model to simulate the values of other variables, including the outcome.</span></span>
+<span id="cb37-442"><a href="#cb37-442" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="sc">\(</span><span class="at">1</span><span class="sc">\)</span><span class="at"> Pick a variable to manipulate, the intervention variable.\</span></span>
+<span id="cb37-443"><a href="#cb37-443" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (2) Define the range of values to set the intervention variable to.\</span></span>
+<span id="cb37-444"><a href="#cb37-444" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; (3) For each value of the intervention variable, and for each sample in posterior, use the causal model to simulate the values of other variables, including the outcome.</span></span>
+<span id="cb37-445"><a href="#cb37-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-446"><a href="#cb37-446" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To estimate the influence of A on M, all we need is to regress A on M. There are no other variables in the DAG creating an association between A and M. We can just add this regression to the quap model</span></span>
 <span id="cb37-447"><a href="#cb37-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-448"><a href="#cb37-448" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; To estimate the influence of A on M, all we need is to regress A on M. There are no other variables in the DAG creating an association between A and M. We can just add this regression to the quap model</span></span>
+<span id="cb37-448"><a href="#cb37-448" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; define a range of values for A ... this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
 <span id="cb37-449"><a href="#cb37-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-450"><a href="#cb37-450" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; define a range of values for A ... this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.</span></span>
+<span id="cb37-450"><a href="#cb37-450" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-4D024FB3.png)</span></span>
 <span id="cb37-451"><a href="#cb37-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-452"><a href="#cb37-452" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-4D024FB3.png)</span></span>
+<span id="cb37-452"><a href="#cb37-452" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Posterior prediction plots {.unnumbered}</span></span>
 <span id="cb37-453"><a href="#cb37-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-454"><a href="#cb37-454" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Posterior prediction plots {.unnumbered}</span></span>
+<span id="cb37-454"><a href="#cb37-454" aria-hidden="true" tabindex="-1"></a>*"Check the model fit against the observed data"*</span>
 <span id="cb37-455"><a href="#cb37-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-456"><a href="#cb37-456" aria-hidden="true" tabindex="-1"></a>*"Check the model fit against the observed data"*</span>
+<span id="cb37-456"><a href="#cb37-456" aria-hidden="true" tabindex="-1"></a>DR: And do what with this? Couldn't any such response run the risk of overfitting?</span>
 <span id="cb37-457"><a href="#cb37-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-458"><a href="#cb37-458" aria-hidden="true" tabindex="-1"></a>DR: And do what with this? Couldn't any such response run the risk of overfitting?</span>
+<span id="cb37-458"><a href="#cb37-458" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Simulating) the various problems (Spurious association, masking, ...)</span></span>
 <span id="cb37-459"><a href="#cb37-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-460"><a href="#cb37-460" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Simulating) the various problems (Spurious association, masking, ...)</span></span>
+<span id="cb37-460"><a href="#cb37-460" aria-hidden="true" tabindex="-1"></a>DR: This seems like an important check on our work. Such simulations may have a high type-1 error, yielding 'false negatives' (where we see 'hmm, the results look fine, no bias here') by coincidence. But they should have a low or zero type-2 error, if done right. Where we can simulate a 'biased case', we know such a bias is a potential threat.</span>
 <span id="cb37-461"><a href="#cb37-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-462"><a href="#cb37-462" aria-hidden="true" tabindex="-1"></a>DR: This seems like an important check on our work. Such simulations may have a high type-1 error, yielding 'false negatives' (where we see 'hmm, the results look fine, no bias here') by coincidence. But they should have a low or zero type-2 error, if done right. Where we can simulate a 'biased case', we know such a bias is a potential threat.</span>
+<span id="cb37-462"><a href="#cb37-462" aria-hidden="true" tabindex="-1"></a><span class="fu">### Masked relationship {.unnumbered}</span></span>
 <span id="cb37-463"><a href="#cb37-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-464"><a href="#cb37-464" aria-hidden="true" tabindex="-1"></a><span class="fu">### Masked relationship {.unnumbered}</span></span>
+<span id="cb37-464"><a href="#cb37-464" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; tends to arise when there are two predictor variables that are correlated with one another. However, one of these is positively correlated with the outcome and the other is negatively correlated with it</span></span>
 <span id="cb37-465"><a href="#cb37-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-466"><a href="#cb37-466" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; tends to arise when there are two predictor variables that are correlated with one another. However, one of these is positively correlated with the outcome and the other is negatively correlated with it</span></span>
+<span id="cb37-466"><a href="#cb37-466" aria-hidden="true" tabindex="-1"></a>E.g.,</span>
 <span id="cb37-467"><a href="#cb37-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-468"><a href="#cb37-468" aria-hidden="true" tabindex="-1"></a>E.g.,</span>
+<span id="cb37-468"><a href="#cb37-468" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Outcome: <span class="in">`ENGAGE`</span> 'self-reported engagement'</span>
 <span id="cb37-469"><a href="#cb37-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-470"><a href="#cb37-470" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Outcome: <span class="in">`ENGAGE`</span> 'self-reported engagement'</span>
+<span id="cb37-470"><a href="#cb37-470" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`time_in_EA`</span>: Positive relation to <span class="in">`ENGAGE`</span></span>
 <span id="cb37-471"><a href="#cb37-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-472"><a href="#cb37-472" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`time_in_EA`</span>: Positive relation to <span class="in">`ENGAGE`</span></span>
+<span id="cb37-472"><a href="#cb37-472" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Interest_Global_health`</span>: Negative relation to <span class="in">`ENGAGE`</span></span>
 <span id="cb37-473"><a href="#cb37-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-474"><a href="#cb37-474" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`Interest_Global_health`</span>: Negative relation to <span class="in">`ENGAGE`</span></span>
+<span id="cb37-474"><a href="#cb37-474" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`time_in_EA`</span>, <span class="in">`Interest_Global_health`</span>: Positive relationships</span>
 <span id="cb37-475"><a href="#cb37-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-476"><a href="#cb37-476" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`time_in_EA`</span>, <span class="in">`Interest_Global_health`</span>: Positive relationships</span>
+<span id="cb37-476"><a href="#cb37-476" aria-hidden="true" tabindex="-1"></a>So, a simple model of <span class="in">`ENGAGE ~ time_in_EA`</span> might find a zero (or 'too small') relationship, suggesting <span class="in">`time_in_EA`</span> has little or no (causal) impact on engagement. However in a model like <span class="in">`ENGAGE ~ time_in_EA + Interest_Global_health`</span> we might see the latter has a negative relationship to the outcome and the former a positive one.</span>
 <span id="cb37-477"><a href="#cb37-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-478"><a href="#cb37-478" aria-hidden="true" tabindex="-1"></a>So, a simple model of <span class="in">`ENGAGE ~ time_in_EA`</span> might find a zero (or 'too small') relationship, suggesting <span class="in">`time_in_EA`</span> has little or no (causal) impact on engagement. However in a model like <span class="in">`ENGAGE ~ time_in_EA + Interest_Global_health`</span> we might see the latter has a negative relationship to the outcome and the former a positive one.</span>
+<span id="cb37-478"><a href="#cb37-478" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-6C1F2D9A.png)</span></span>
 <span id="cb37-479"><a href="#cb37-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-480"><a href="#cb37-480" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-6C1F2D9A.png)</span></span>
+<span id="cb37-480"><a href="#cb37-480" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Why did adding neocortex and body mass to the same model lead to stronger associations for both? This is a context in which there are two variables correlated with the outcome, but one is positively correlated with it and the other is negatively correlated with it. In addition, both of the explanatory variables are positively correlated with one another. Try a simple </span><span class="in">`pairs(~K + M + N , dcc )`</span><span class="at"> plot to appreciate this pattern of correlation. The result of this pattern is that the variables tend to cancel one another out.</span></span>
 <span id="cb37-481"><a href="#cb37-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-482"><a href="#cb37-482" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Why did adding neocortex and body mass to the same model lead to stronger associations for both? This is a context in which there are two variables correlated with the outcome, but one is positively correlated with it and the other is negatively correlated with it. In addition, both of the explanatory variables are positively correlated with one another. Try a simple </span><span class="in">`pairs(~K + M + N , dcc )`</span><span class="at"> plot to appreciate this pattern of correlation. The result of this pattern is that the variables tend to cancel one another out.</span></span>
+<span id="cb37-482"><a href="#cb37-482" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-EA5FA8F8.png)</span></span>
 <span id="cb37-483"><a href="#cb37-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-484"><a href="#cb37-484" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-EA5FA8F8.png)</span></span>
+<span id="cb37-484"><a href="#cb37-484" aria-hidden="true" tabindex="-1"></a><span class="in">                </span></span>
 <span id="cb37-485"><a href="#cb37-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-486"><a href="#cb37-486" aria-hidden="true" tabindex="-1"></a><span class="in">                </span></span>
-<span id="cb37-487"><a href="#cb37-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-488"><a href="#cb37-488" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Beginning on the left, the first possibility is that body mass (M) influences neocortex percent (N). Both then influence kilocalories in milk (K). Second, in the middle, neocortex could instead influence body mass. The two variables still end up correlated in the sample. Finally, on the right, there could be an unobserved variable U that influences both M and N, producing a correlation between them. In this book, I'll circle variables that are unobserved. One of the threats to causal inference is that there are potentially many unobserved variables thatinfluence an outcome or the predictors.</span></span>
-<span id="cb37-489"><a href="#cb37-489" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;                   </span></span>
+<span id="cb37-486"><a href="#cb37-486" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Beginning on the left, the first possibility is that body mass (M) influences neocortex percent (N). Both then influence kilocalories in milk (K). Second, in the middle, neocortex could instead influence body mass. The two variables still end up correlated in the sample. Finally, on the right, there could be an unobserved variable U that influences both M and N, producing a correlation between them. In this book, I'll circle variables that are unobserved. One of the threats to causal inference is that there are potentially many unobserved variables thatinfluence an outcome or the predictors.</span></span>
+<span id="cb37-487"><a href="#cb37-487" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;                   </span></span>
+<span id="cb37-488"><a href="#cb37-488" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
+<span id="cb37-489"><a href="#cb37-489" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Which of these graphs is right? We can't tell from the data alone, because these graphs imply the same set of conditional independencies. In this case, there are no conditional independencies---each DAG above implies that all pairs of variables are associated, regardless of what we condition on. A set of DAGs with the same conditional independencies is known as a Markov equivalence set.         </span></span>
 <span id="cb37-490"><a href="#cb37-490" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
-<span id="cb37-491"><a href="#cb37-491" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Which of these graphs is right? We can't tell from the data alone, because these graphs imply the same set of conditional independencies. In this case, there are no conditional independencies---each DAG above implies that all pairs of variables are associated, regardless of what we condition on. A set of DAGs with the same conditional independencies is known as a Markov equivalence set.         </span></span>
-<span id="cb37-492"><a href="#cb37-492" aria-hidden="true" tabindex="-1"></a><span class="at">&gt;</span></span>
-<span id="cb37-493"><a href="#cb37-493" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *the data alone can never tell you which causal model is correct*</span></span>
+<span id="cb37-491"><a href="#cb37-491" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *the data alone can never tell you which causal model is correct*</span></span>
+<span id="cb37-492"><a href="#cb37-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-493"><a href="#cb37-493" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical variables {.unnumbered}</span></span>
 <span id="cb37-494"><a href="#cb37-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-495"><a href="#cb37-495" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical variables {.unnumbered}</span></span>
+<span id="cb37-495"><a href="#cb37-495" aria-hidden="true" tabindex="-1"></a>DR: This section is rather straightforward. The key -- *and highly useful* -- insight: *Remove the intercept when modeling with categorical features.*</span>
 <span id="cb37-496"><a href="#cb37-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-497"><a href="#cb37-497" aria-hidden="true" tabindex="-1"></a>DR: This section is rather straightforward. The key -- *and highly useful* -- insight: *Remove the intercept when modeling with categorical features.*</span>
+<span id="cb37-497"><a href="#cb37-497" aria-hidden="true" tabindex="-1"></a>This yields a specific estimate for each category or combination of categories. Why?</span>
 <span id="cb37-498"><a href="#cb37-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-499"><a href="#cb37-499" aria-hidden="true" tabindex="-1"></a>This yields a specific estimate for each category or combination of categories. Why?</span>
+<span id="cb37-499"><a href="#cb37-499" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>There is no 'base category', making interpretation easier.</span>
 <span id="cb37-500"><a href="#cb37-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-501"><a href="#cb37-501" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>There is no 'base category', making interpretation easier.</span>
+<span id="cb37-501"><a href="#cb37-501" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups.</span>
 <span id="cb37-502"><a href="#cb37-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-503"><a href="#cb37-503" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups.</span>
+<span id="cb37-503"><a href="#cb37-503" aria-hidden="true" tabindex="-1"></a>Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making (direct) interpretation statistical inference more difficult in some contexts.</span>
 <span id="cb37-504"><a href="#cb37-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-505"><a href="#cb37-505" aria-hidden="true" tabindex="-1"></a>Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making (direct) interpretation statistical inference more difficult in some contexts.</span>
+<span id="cb37-505"><a href="#cb37-505" aria-hidden="true" tabindex="-1"></a>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework</span>
 <span id="cb37-506"><a href="#cb37-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-507"><a href="#cb37-507" aria-hidden="true" tabindex="-1"></a>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework</span>
-<span id="cb37-508"><a href="#cb37-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-509"><a href="#cb37-509" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb37-510"><a href="#cb37-510" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: Does this apply to frequentist analysis too?</span></span>
-<span id="cb37-511"><a href="#cb37-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-512"><a href="#cb37-512" aria-hidden="true" tabindex="-1"></a>Is it Bayesian specific? How does this relate to 'contrast-coding'?</span>
-<span id="cb37-513"><a href="#cb37-513" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb37-507"><a href="#cb37-507" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb37-508"><a href="#cb37-508" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: Does this apply to frequentist analysis too?</span></span>
+<span id="cb37-509"><a href="#cb37-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-510"><a href="#cb37-510" aria-hidden="true" tabindex="-1"></a>Is it Bayesian specific? How does this relate to 'contrast-coding'?</span>
+<span id="cb37-511"><a href="#cb37-511" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb37-512"><a href="#cb37-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-513"><a href="#cb37-513" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)</span></span>
 <span id="cb37-514"><a href="#cb37-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-515"><a href="#cb37-515" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)</span></span>
+<span id="cb37-515"><a href="#cb37-515" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll practice with </span><span class="in">`milk`</span><span class="at">.</span></span>
 <span id="cb37-516"><a href="#cb37-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-517"><a href="#cb37-517" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll practice with </span><span class="in">`milk`</span><span class="at">.</span></span>
-<span id="cb37-518"><a href="#cb37-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-519"><a href="#cb37-519" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F}</span></span>
-<span id="cb37-520"><a href="#cb37-520" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
-<span id="cb37-521"><a href="#cb37-521" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
-<span id="cb37-522"><a href="#cb37-522" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
-<span id="cb37-523"><a href="#cb37-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-524"><a href="#cb37-524" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(milk)</span>
-<span id="cb37-525"><a href="#cb37-525" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>rethinking, <span class="at">unload =</span> T)</span>
-<span id="cb37-526"><a href="#cb37-526" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb37-527"><a href="#cb37-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-517"><a href="#cb37-517" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F}</span></span>
+<span id="cb37-518"><a href="#cb37-518" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb37-519"><a href="#cb37-519" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb37-520"><a href="#cb37-520" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb37-521"><a href="#cb37-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-522"><a href="#cb37-522" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(milk)</span>
+<span id="cb37-523"><a href="#cb37-523" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>rethinking, <span class="at">unload =</span> T)</span>
+<span id="cb37-524"><a href="#cb37-524" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb37-525"><a href="#cb37-525" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-526"><a href="#cb37-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-527"><a href="#cb37-527" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With the tidyverse, we can peek at </span><span class="in">`clade`</span><span class="at"> with </span><span class="in">`distinct()`</span><span class="at"> in the place of base R </span><span class="in">`unique()`</span><span class="at">.</span></span>
 <span id="cb37-528"><a href="#cb37-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-529"><a href="#cb37-529" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With the tidyverse, we can peek at </span><span class="in">`clade`</span><span class="at"> with </span><span class="in">`distinct()`</span><span class="at"> in the place of base R </span><span class="in">`unique()`</span><span class="at">.</span></span>
-<span id="cb37-530"><a href="#cb37-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-533"><a href="#cb37-533" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-534"><a href="#cb37-534" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb37-535"><a href="#cb37-535" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(clade)</span>
+<span id="cb37-531"><a href="#cb37-531" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-532"><a href="#cb37-532" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb37-533"><a href="#cb37-533" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(clade)</span>
+<span id="cb37-534"><a href="#cb37-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-535"><a href="#cb37-535" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb37-536"><a href="#cb37-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-537"><a href="#cb37-537" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-537"><a href="#cb37-537" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; As </span><span class="in">`clade`</span><span class="at"> has 4 categories, let's use </span><span class="in">`if_else()`</span><span class="at"> to convert these to 4 dummy variables.</span></span>
 <span id="cb37-538"><a href="#cb37-538" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-539"><a href="#cb37-539" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; As </span><span class="in">`clade`</span><span class="at"> has 4 categories, let's use </span><span class="in">`if_else()`</span><span class="at"> to convert these to 4 dummy variables.</span></span>
-<span id="cb37-540"><a href="#cb37-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-543"><a href="#cb37-543" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-544"><a href="#cb37-544" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
-<span id="cb37-545"><a href="#cb37-545" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
-<span id="cb37-546"><a href="#cb37-546" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clade_nwm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"New World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb37-547"><a href="#cb37-547" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_owm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Old World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb37-548"><a href="#cb37-548" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_s   =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Strepsirrhine"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb37-549"><a href="#cb37-549" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_ape =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Ape"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb37-550"><a href="#cb37-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-541"><a href="#cb37-541" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-542"><a href="#cb37-542" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb37-543"><a href="#cb37-543" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb37-544"><a href="#cb37-544" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clade_nwm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"New World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb37-545"><a href="#cb37-545" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_owm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Old World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb37-546"><a href="#cb37-546" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_s   =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Strepsirrhine"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb37-547"><a href="#cb37-547" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_ape =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Ape"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb37-548"><a href="#cb37-548" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-549"><a href="#cb37-549" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-550"><a href="#cb37-550" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we'll fit the model with three of the four dummies. In this model, </span><span class="in">`clade_ape`</span><span class="at"> is the reference category captured by the intercept.</span></span>
 <span id="cb37-551"><a href="#cb37-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-552"><a href="#cb37-552" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we'll fit the model with three of the four dummies. In this model, </span><span class="in">`clade_ape`</span><span class="at"> is the reference category captured by the intercept.</span></span>
-<span id="cb37-553"><a href="#cb37-553" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-554"><a href="#cb37-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16}</span></span>
-<span id="cb37-555"><a href="#cb37-555" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span> <span class="ot">&lt;-</span> </span>
-<span id="cb37-556"><a href="#cb37-556" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb37-557"><a href="#cb37-557" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb37-558"><a href="#cb37-558" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> clade_nwm <span class="sc">+</span> clade_owm <span class="sc">+</span> clade_s,</span>
-<span id="cb37-559"><a href="#cb37-559" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb37-560"><a href="#cb37-560" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb37-561"><a href="#cb37-561" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb37-562"><a href="#cb37-562" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb37-563"><a href="#cb37-563" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb37-564"><a href="#cb37-564" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16"</span>)</span>
-<span id="cb37-565"><a href="#cb37-565" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-566"><a href="#cb37-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-569"><a href="#cb37-569" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-570"><a href="#cb37-570" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>)</span>
-<span id="cb37-571"><a href="#cb37-571" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-552"><a href="#cb37-552" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16}</span></span>
+<span id="cb37-553"><a href="#cb37-553" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span> <span class="ot">&lt;-</span> </span>
+<span id="cb37-554"><a href="#cb37-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb37-555"><a href="#cb37-555" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb37-556"><a href="#cb37-556" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> clade_nwm <span class="sc">+</span> clade_owm <span class="sc">+</span> clade_s,</span>
+<span id="cb37-557"><a href="#cb37-557" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb37-558"><a href="#cb37-558" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb37-559"><a href="#cb37-559" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb37-560"><a href="#cb37-560" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb37-561"><a href="#cb37-561" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb37-562"><a href="#cb37-562" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16"</span>)</span>
+<span id="cb37-563"><a href="#cb37-563" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-564"><a href="#cb37-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-567"><a href="#cb37-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-568"><a href="#cb37-568" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>)</span>
+<span id="cb37-569"><a href="#cb37-569" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-570"><a href="#cb37-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-571"><a href="#cb37-571" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding regular predictor variables.</span></span>
 <span id="cb37-572"><a href="#cb37-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-573"><a href="#cb37-573" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding regular predictor variables.</span></span>
+<span id="cb37-573"><a href="#cb37-573" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; If we wanted to fit the model including </span><span class="in">`perc.fat`</span><span class="at"> as an additional predictor, the basic statistical formula would be</span></span>
 <span id="cb37-574"><a href="#cb37-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-575"><a href="#cb37-575" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; If we wanted to fit the model including </span><span class="in">`perc.fat`</span><span class="at"> as an additional predictor, the basic statistical formula would be</span></span>
-<span id="cb37-576"><a href="#cb37-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-575"><a href="#cb37-575" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb37-576"><a href="#cb37-576" aria-hidden="true" tabindex="-1"></a>\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.</span>
 <span id="cb37-577"><a href="#cb37-577" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-578"><a href="#cb37-578" aria-hidden="true" tabindex="-1"></a>\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.</span>
-<span id="cb37-579"><a href="#cb37-579" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb37-578"><a href="#cb37-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-579"><a href="#cb37-579" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The corresponding </span><span class="in">`formula`</span><span class="at"> argument within </span><span class="in">`brm()`</span><span class="at"> would be </span><span class="in">`kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`</span><span class="at">.</span></span>
 <span id="cb37-580"><a href="#cb37-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-581"><a href="#cb37-581" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The corresponding </span><span class="in">`formula`</span><span class="at"> argument within </span><span class="in">`brm()`</span><span class="at"> would be </span><span class="in">`kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`</span><span class="at">.</span></span>
+<span id="cb37-581"><a href="#cb37-581" aria-hidden="true" tabindex="-1"></a><span class="fu">### Another approach: Unique intercepts.</span></span>
 <span id="cb37-582"><a href="#cb37-582" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-583"><a href="#cb37-583" aria-hidden="true" tabindex="-1"></a><span class="fu">### Another approach: Unique intercepts.</span></span>
+<span id="cb37-583"><a href="#cb37-583" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform </span><span class="in">`d$clade`</span><span class="at"> into </span><span class="in">`d$clade_id`</span><span class="at">. The advantage of this approach is the indices in the model summary are more descriptive than </span><span class="in">`a[1]`</span><span class="at"> through </span><span class="in">`a[4]`</span><span class="at">.</span></span>
 <span id="cb37-584"><a href="#cb37-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-585"><a href="#cb37-585" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform </span><span class="in">`d$clade`</span><span class="at"> into </span><span class="in">`d$clade_id`</span><span class="at">. The advantage of this approach is the indices in the model summary are more descriptive than </span><span class="in">`a[1]`</span><span class="at"> through </span><span class="in">`a[4]`</span><span class="at">.</span></span>
-<span id="cb37-586"><a href="#cb37-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-587"><a href="#cb37-587" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16_alt}</span></span>
-<span id="cb37-588"><a href="#cb37-588" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span>_alt <span class="ot">&lt;-</span> </span>
-<span id="cb37-589"><a href="#cb37-589" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb37-590"><a href="#cb37-590" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb37-591"><a href="#cb37-591" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> clade,</span>
-<span id="cb37-592"><a href="#cb37-592" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb37-593"><a href="#cb37-593" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb37-594"><a href="#cb37-594" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb37-595"><a href="#cb37-595" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb37-596"><a href="#cb37-596" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16_alt"</span>)</span>
-<span id="cb37-597"><a href="#cb37-597" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-598"><a href="#cb37-598" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-601"><a href="#cb37-601" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb37-602"><a href="#cb37-602" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>_alt)</span>
-<span id="cb37-603"><a href="#cb37-603" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-585"><a href="#cb37-585" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16_alt}</span></span>
+<span id="cb37-586"><a href="#cb37-586" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span>_alt <span class="ot">&lt;-</span> </span>
+<span id="cb37-587"><a href="#cb37-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb37-588"><a href="#cb37-588" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb37-589"><a href="#cb37-589" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> clade,</span>
+<span id="cb37-590"><a href="#cb37-590" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb37-591"><a href="#cb37-591" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb37-592"><a href="#cb37-592" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb37-593"><a href="#cb37-593" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb37-594"><a href="#cb37-594" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16_alt"</span>)</span>
+<span id="cb37-595"><a href="#cb37-595" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-596"><a href="#cb37-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-599"><a href="#cb37-599" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb37-600"><a href="#cb37-600" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>_alt)</span>
+<span id="cb37-601"><a href="#cb37-601" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb37-602"><a href="#cb37-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-603"><a href="#cb37-603" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</span></span>
 <span id="cb37-604"><a href="#cb37-604" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-605"><a href="#cb37-605" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</span></span>
+<span id="cb37-605"><a href="#cb37-605" aria-hidden="true" tabindex="-1"></a>**Rethinking: Continuous countries.** --  DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model. </span>
 <span id="cb37-606"><a href="#cb37-606" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-607"><a href="#cb37-607" aria-hidden="true" tabindex="-1"></a>**Rethinking: Continuous countries.** --  DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model. </span>
-<span id="cb37-608"><a href="#cb37-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-609"><a href="#cb37-609" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further notes on the use of DAGS etc {.unnumbered}</span></span>
+<span id="cb37-607"><a href="#cb37-607" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further notes on the use of DAGS etc {.unnumbered}</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

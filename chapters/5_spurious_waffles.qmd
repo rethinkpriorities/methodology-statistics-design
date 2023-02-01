@@ -177,8 +177,6 @@ Below...
 ```{r, fig.width = 3, fig.height = 3}
 #| code-summary: "Range to plot over, predict for this range"
 
-
-
 # define the range of `MedianAgeMarriage_s` values we'd like to feed into `fitted()`
 nd <- tibble(MedianAgeMarriage_s = seq(from = -3, to = 3.5, length.out = 30))
 

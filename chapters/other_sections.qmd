@@ -1,5 +1,10 @@
 # Other suggested sections
 
+```{r}
+source(here("code", "methods_setup.R"))
+```
+
+
 ## 'Conjoint analysis' 
 
 See end of [this Slack thread](https://rethinkpriorities.slack.com/archives/G01962YABHB/p1670240321964009)
@@ -19,7 +24,7 @@ Source: https://pbs.twimg.com/media/ESyDHGjUYAYHfva?format=jpg&name=medium
 
 Incorporate and consolidate from [Reinsteins meta notes](https://daaronr.github.io/metrics_discussion/metaanalysis.html) and more
 
-### Relates to 'aggregating expert judgment' {-}
+## Related:  'aggregating expert judgment' {-}
 
 Testing out the `AggreCAT` package on the ACX prediction contest
 
@@ -45,6 +50,7 @@ library(aggreCAT)
 #| code-summary: "input_acx_prediction_data"
 
 acx <- read_csv(here("sample_data", "acx_2023blindmode_predictions.csv"))
+#Improve: source from a hosted file or API
 
 ```
 
@@ -61,8 +67,7 @@ acx  %<>%  mutate(
 
 What can `aggreCAT` do for us? 
 
-
-First testing with their built-in data
+First testing this package with their built-in data.
 
 > Below we demonstrate how to use the most simple commonly implemented aggregation method ArMean, which takes the arithmetic mean of participant Best Estimates. We first use a small subset of 5 participants for a single claim, 28
 
@@ -86,6 +91,7 @@ single_claim %>%
 AverageWAgg(expert_judgements = ., 
             type = "ArMean")
 ```
+
 Can we do similar across multiple claims with this package?
 
 ```{r}
@@ -111,7 +117,7 @@ three_aggregations %>%  tabyl(method)
 
 ```
 
-Now let's see what can be done with our ACX dataset. As they don't ask for CIs, I'd either have to estimate these arbitrarily (e.g., make them larger for people with less experience), or only use a subset of their measures.  First I'll check which ones might work, using *their* data for all aggregations (with baseline settings for each)
+Now let's see what can be done with our ACX dataset. As ACX doesn't ask for CIs (and doesn't have multiple rounds of expert revisions), `aggreCAT` may be of limited use here.^[I'd  have to estimate these bounds arbitrarily (e.g., make them larger for people with less experience). Only a subset of their measures may be informative.  First I'll check which ones might work, using *their* data for all aggregations (with baseline settings for each), but only keeping this 'best prediction' for each. 
 
 ```{r}
 
@@ -123,19 +129,17 @@ all_aggs <- list(LinearWAgg, AverageWAgg, BayesianWAgg, IntervalWAgg, ShiftingWA
 three_aggs <- list(LinearWAgg, AverageWAgg, BayesianWAgg)
 
 
-all_claims %>% 
+data_ratings %>% 
  filter(element == "three_point_best") %>% 
   purrr::map_dfr(.x = all_aggsOK,
                                 .f = ~ .x(data_ratings)) %>%
   tabsums(cs, method)
 
 ```
-All of the aggregators  seemed computable even without having elements other than 'three_point_best' What's going on here? E.g,. `IntervalWAgg` says 'the weights are dependent on the lower and upper bounds of three-point elicitation' ... but I left those out. 'ShiftingWAgg' is meant to depend on discussion; but here I have no indicators of that. Yet still, these all seem to come up with different means. `BetaARMean` which is meant to do some extremisation wotks rather strangely; shifting everything to 1, apparently.
+All of the aggregators seemed computable even without having elements other than 'three_point_best' What's going on here? E.g,. `IntervalWAgg` says 'the weights are dependent on the lower and upper bounds of three-point elicitation' ... but I left those out. 'ShiftingWAgg' is meant to depend on discussion; but here I have no indicators of that. Yet still, these all seem to come up with different means. `BetaARMean` which is meant to do some extremisation wotks rather strangely; shifting everything to 1, apparently.
 
 
-Focusing in on some key interesting methods.
-
-I've been told 'Geometric Mean' is good in these sorts of situations
+Focusing in on some key interesting methods... I've been told 'Geometric Means' are good in these sorts of situations
 ```{r}
 
 data_ratings %>% 
@@ -167,14 +171,22 @@ AverageWAgg(expert_judgements = .,
 ::: 
 
 
+Upweighting and downweighting people -- ad-hoc.
 
-Upweights and downweighting people -- ad-hoc
+Now, I have little time left, so I'll come up with some ad-hoc weights. 
 
-Now, I have little time left, so I'll come up with some ad-hoc weights. We have some idea of how different characteristics predicted success in previous prediction contests. But how should we map those into weights? I'm not sure, and it would take me some time to figure this out. 
 
-I guess I will do something lame and ad-hoc. 
+::: {.callout-note collapse="false"}
+## How to use what we know/what ACX suggested in aggregation
 
-Everyone starts out with weight 1. 
+We have some idea of how different characteristics predicted success in previous prediction contests. Suppose I had a model that was good at predict in the accuracy of an individual's prediction, as a function of their demography, their other prediction, etc. How would I then use that (along with everyone's predictions), to come up with a good prediction aggregation?
+
+E.g., how should we map those into the 'weights' suggested? I'm not sure, and it would take me some time to figure this out. 
+
+
+::: 
+
+I guess I will do something lame and ad-hoc.  Everyone starts out with weight 1. 
 
 1. Anyone who has no forecasting experience is downweighted fivefold (x0.2),
 2. Superforecasters are upweighted 20x
@@ -218,9 +230,11 @@ mutate(
     (1+((SAT_math_rank>0.5)*(Superforecaster!="Yes")*(SAT_math_rank-0.5))*4)*
     (1+(Degree=="Ph D.")*.5)*
     (ifelse(`@1.WillVladimirPutinbePresidentofRussia`>=99,0.1,1))*
-    (ifelse(`@1.WillVladimirPutinbePresidentofRussia`< -0.05, 0.1,1))*
+    (ifelse(`@1.WillVladimirPutinbePresidentofRussia`< 5, 0.1,1))*
   (1-(share50_qtl)/1.2) 
 )
+
+#the code above is kind of crappy; better to convert it to logs to allow simple addition?
 
 acx_for_ag_wts_only <- acx_for_ag_wts %>% 
   select(user_name, weight)
@@ -237,7 +251,6 @@ acx_for_ag_wts_long <- acx_for_ag_wts %>%
     names_to = "paper_id",
     values_to = "value"
     ) 
-  
   
 acx_for_ag_wts_long %<>%  select(user_name, paper_id, value, everything()) %>%  #make all predictions (for an individual) into a row 
   mutate(element = "three_point_best",
@@ -288,12 +301,16 @@ acx_for_ag_wts_results <- acx_for_ag_wts_long %>%
  LinearWAgg(expert_judgements = ., 
             type = "Participant", 
    weights = acx_for_ag_wts_only
-    )
+    ) %>%  
+    mutate(agg = "linear_wt", 
+      value = cs)
+  
+
 
 ```
 
 
-Now weighted geometric means
+Now (weighted?) geometric means
 
 ```{r}
 
@@ -302,12 +319,75 @@ weighted.geomean <- function(x, w, ...)
   return(prod(x^w, ...)^(1/sum(w, na.rm = TRUE)))
 }
 
+weighted.geomean <- function(x, w, ...) exp(weighted.mean(log(x), w, ...))
+
+
+sumwt <- sum(acx_for_ag_wts_long$weight[acx_for_ag_wts_long$weight>1], na.rm=TRUE)
+
+reg.geomean <- function(x, ...)
+{
+  return(prod(x, ...))
+}
+
 acx_for_ag_geom_wt <- acx_for_ag_wts_long %>%
+  filter(!is.na(weight)  & !is.na(value))  %>%
   group_by(paper_id) %>% 
+  mutate(
+    sumwt = sum(weight, na.rm=TRUE)
+   ) %>% 
     summarize(
-      w_geom_mean = weighted.geomean(value, weight)
-    )
+      weighted_geomean = weighted.geomean(value, weight),
+    ) %>% 
+  mutate(agg = "geom_wt",
+    value = weighted_geomean)
 
 ```
 
+
+OK, looks like I forgot about the prediction market data in [metaculus HERE](https://www.metaculus.com/project/2023-contest/) on the same thing.
+
+I'll make a tibble of the weighted linear mean, weighted geometric mean, metaculus data, my own predictions) 
+
+```{r}
+
+#p_load(DataEditR)
+#metaculus_data <- acx_for_ag_wts_results %>% 
+ # select(paper_id)  %>% 
+  #mutate(value=50)
+  
+
+#data_edit(metaculus_data)
+
+
+metaculus_data <- read_csv(here("sample_data", "metaculus.csv")) %>% 
+  mutate(agg = "metaculus")
+
+
+#and me
+
+reinstein_pred <- acx %>%  
+  filter(d_reinstein) %>% 
+  select(starts_with("@")) %>% 
+  pivot_longer(col=everything()) %>% 
+  rename(paper_id = name) %>% 
+  mutate(agg = 'reinstein_pred')
+
+
+aggregates <- bind_rows(reinstein_pred, metaculus_data, acx_for_ag_geom_wt, acx_for_ag_wts_results) %>%  
+  select(-method, -cs, -n_experts, -weighted_geomean) %>%  
+  pivot_wider(names_from=agg, id_cols = paper_id, values_from=value) %>% 
+  mutate(guided_weight = 0.2*reinstein_pred + 0.4*metaculus + 0.2*linear_wt +  0.2*geom_wt,
+    final_impulsive_choice = guided_weight)
+
+write_csv(aggregates, here("sample_data", "aggregates.csv"))
+
+
+
+#data_edit(aggregates)
+
+
+```
+
+
+Fixed some stuff at end and cleaned it and made some ad-hoc extremizing around a few correlated events
 
