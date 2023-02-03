@@ -394,7 +394,12 @@ Fixed some stuff at end and cleaned it and made some ad-hoc extremizing around a
 
 
 ```{r}
-read_csv(here("sample_data", "aggregates.csv")) %>%  DT::datatable()
+
+final_ad_hoc <- read_csv(here("sample_data", "aggregates.csv")) 
+
+final_ad_hoc %>%  DT::datatable()
+
+#final_ad_hoc %<>%  mutate(dif_meta = reinstein_pred/metaculus)
 
 ```
 
