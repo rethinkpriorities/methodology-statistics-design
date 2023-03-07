@@ -1191,10 +1191,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span class="header-section-number">25.1.1</span> DR: Simulating the fork, considering if ‘random effects control’ addresses it</h3>
 <p>Here is an example relevant to my recent/ongoing work.</p>
 <p>Let</p>
-<p><span class="math inline">\(Z\)</span>: A measure of ’which “chunk” (recruitment group) people are in <span class="math inline">\(X\)</span>: … ’Which treatment (video) they got” <span class="math inline">\(Y\)</span>: Their attitude towards 80k</p>
+<p><span class="math inline">\(Z\)</span>: A measure of ’which “chunk” (recruitment group) people are in</p>
+<p><span class="math inline">\(X\)</span>: … ’Which treatment (video) they got”</p>
+<p><span class="math inline">\(Y\)</span>: Their attitude towards 80k</p>
 <p>We are interested in the <em>impact</em> of the treatment on their attitude, i.e., whether <span class="math inline">\(X \rightarrow Y\)</span> is ‘part of the causal model.’</p>
 <p>But suppose the true causal model is ‘the fork’, as seen in the picture below (from McElreath):</p>
-<p><img src="images/paste-70645BC1.png" class="img-fluid" width="277"></p>
 <p>Here, if we ‘stratify on’ <span class="math inline">\(Z\)</span>, i.e., we look ‘within each chunk’, we should see no relationship between treatments and 80k-attitudes (as <span class="math inline">\(X \perp Y | Z\)</span>). However, if we pool across all chunks, and some chunks tend to have some treatments more than others, we may falsely diagnose an ‘impact of X on Y’.</p>
 <p>But what if we ‘control for X’ in a (linear or generalized linear) model:</p>
 <ol type="1">
@@ -1234,9 +1235,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span>  <span class="fu">gg_dag</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fork_descendant</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu">ggdag</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggdag/man/dagify.html">dagify</a></span><span class="op">(</span><span class="va">Y</span> <span class="op">~</span> <span class="va">u</span>,</span>
-<span>         <span class="va">Z</span> <span class="op">~</span> <span class="va">u</span>,</span>
-<span>    <span class="va">X</span> <span class="op">~</span><span class="va">Z</span>,</span>
+<span>  <span class="fu">ggdag</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggdag/man/dagify.html">dagify</a></span><span class="op">(</span></span>
+<span>    <span class="va">Y</span> <span class="op">~</span> <span class="va">u</span>,</span>
+<span>    <span class="va">Z</span> <span class="op">~</span> <span class="va">u</span>,</span>
+<span>    <span class="va">X</span> <span class="op">~</span> <span class="va">Z</span>,</span>
 <span>         coords <span class="op">=</span> <span class="va">dag_coords</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">gg_dag</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -1296,14 +1298,16 @@ The DAG on the right is probably closer to what we really mean but it seems equi
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">chunks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">fork_sample</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>   <span class="co">#latent love of 80k thing</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    Z <span class="op">=</span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
-<span>      <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.2</span> <span class="op">~</span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      <span class="va">u</span> <span class="op">&gt;</span> <span class="fl">0.2</span> <span class="op">&amp;</span> <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.4</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      <span class="va">u</span> <span class="op">&gt;</span> <span class="fl">0.4</span> <span class="op">&amp;</span> <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.8</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>      <span class="va">u</span> <span class="op">&gt;</span> <span class="fl">0.8</span> <span class="op">~</span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.2</span> <span class="op">~</span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">chunks</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.4</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">chunks</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="va">u</span> <span class="op">&lt;</span> <span class="fl">0.8</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">chunks</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="va">u</span> <span class="op">&gt;</span> <span class="fl">0.8</span> <span class="op">~</span>  <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">chunks</span>, <span class="fl">1</span>, prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">1.5</span><span class="op">*</span><span class="va">Z</span><span class="op">-</span><span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  </span>
@@ -1317,6 +1321,7 @@ The DAG on the right is probably closer to what we really mean but it seems equi
 <p><img src="5_spurious_waffles_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>The pairwise scatterplots show a positive pairwise association between <em>all</em> of the features.</p>
 <p>Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z.</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">naive_on_fork</span> <span class="op">&lt;-</span> </span>
@@ -1339,13 +1344,6 @@ The DAG on the right is probably closer to what we really mean but it seems equi
 <span>         file <span class="op">=</span> <span class="st">"fits/fe_control_on_fork"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
-<span><span class="va">fe_control_on_fork</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/update.html">update</a></span><span class="op">(</span><span class="va">naive_on_fork</span>, </span>
-<span>    newdata <span class="op">=</span> <span class="va">fork_sample</span>,</span>
-<span>         formula <span class="op">=</span> <span class="va">Y</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">X</span> <span class="op">+</span> <span class="va">Z</span>,</span>
-<span>         seed <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>         file <span class="op">=</span> <span class="st">"fits/fe_control_on_fork"</span><span class="op">)</span></span>
-<span></span>
 <span></span>
 <span><span class="va">re_control_on_fork</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brms/man/brm.html">brm</a></span><span class="op">(</span></span>
 <span>  formula <span class="op">=</span> <span class="va">Y</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">X</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Z</span><span class="op">)</span>,</span>
@@ -1366,7 +1364,7 @@ The DAG on the right is probably closer to what we really mean but it seems equi
 <span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Compare the coefficients.</p>
+<p>Comparing the coefficients</p>
 <div class="cell">
 <details><summary>Code</summary><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/fixed.effects.html">fixef</a></span><span class="op">(</span><span class="va">naive_on_fork</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
@@ -1388,6 +1386,7 @@ Intercept     0.66      0.20  0.26  1.05
 X             0.01      0.01 -0.01  0.03</code></pre>
 </div>
 </div>
+<p>While the naive model picks up the non-causal relationship, the models with either fixed or random-effects controls both produce ‘tightly bounded near zero effect sizes’.</p>
 </section></section><section id="categorical-variables" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="categorical-variables">Categorical variables</h2>
 <p>DR: This section is rather straightforward. The key – <em>and highly useful</em> – insight: <em>Remove the intercept when modeling with categorical features.</em></p>
 <p>This yields a specific estimate for each category or combination of categories. Why?</p>
@@ -2460,311 +2459,309 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb71-757"><a href="#cb71-757" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-758"><a href="#cb71-758" aria-hidden="true" tabindex="-1"></a>Let</span>
 <span id="cb71-759"><a href="#cb71-759" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-760"><a href="#cb71-760" aria-hidden="true" tabindex="-1"></a>$Z$: A measure of 'which "chunk" (recruitment group) people are in $X$: ... 'Which treatment (video) they got" $Y$: Their attitude towards 80k</span>
+<span id="cb71-760"><a href="#cb71-760" aria-hidden="true" tabindex="-1"></a>$Z$: A measure of 'which "chunk" (recruitment group) people are in</span>
 <span id="cb71-761"><a href="#cb71-761" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-762"><a href="#cb71-762" aria-hidden="true" tabindex="-1"></a>We are interested in the *impact* of the treatment on their attitude, i.e., whether $X \rightarrow Y$ is 'part of the causal model.'</span>
+<span id="cb71-762"><a href="#cb71-762" aria-hidden="true" tabindex="-1"></a>$X$: ... 'Which treatment (video) they got"</span>
 <span id="cb71-763"><a href="#cb71-763" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-764"><a href="#cb71-764" aria-hidden="true" tabindex="-1"></a>But suppose the true causal model is 'the fork', as seen in the picture below (from McElreath):</span>
+<span id="cb71-764"><a href="#cb71-764" aria-hidden="true" tabindex="-1"></a>$Y$: Their attitude towards 80k</span>
 <span id="cb71-765"><a href="#cb71-765" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-766"><a href="#cb71-766" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-70645BC1.png)</span>{width="277"}</span>
+<span id="cb71-766"><a href="#cb71-766" aria-hidden="true" tabindex="-1"></a>We are interested in the *impact* of the treatment on their attitude, i.e., whether $X \rightarrow Y$ is 'part of the causal model.'</span>
 <span id="cb71-767"><a href="#cb71-767" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-768"><a href="#cb71-768" aria-hidden="true" tabindex="-1"></a>Here, if we 'stratify on' $Z$, i.e., we look 'within each chunk', we should see no relationship between treatments and 80k-attitudes (as $X \perp Y | Z$). However, if we pool across all chunks, and some chunks tend to have some treatments more than others, we may falsely diagnose an 'impact of X on Y'.</span>
+<span id="cb71-768"><a href="#cb71-768" aria-hidden="true" tabindex="-1"></a>But suppose the true causal model is 'the fork', as seen in the picture below (from McElreath):</span>
 <span id="cb71-769"><a href="#cb71-769" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-770"><a href="#cb71-770" aria-hidden="true" tabindex="-1"></a>But what if we 'control for X' in a (linear or generalized linear) model:</span>
+<span id="cb71-770"><a href="#cb71-770" aria-hidden="true" tabindex="-1"></a>Here, if we 'stratify on' $Z$, i.e., we look 'within each chunk', we should see no relationship between treatments and 80k-attitudes (as $X \perp Y | Z$). However, if we pool across all chunks, and some chunks tend to have some treatments more than others, we may falsely diagnose an 'impact of X on Y'.</span>
 <span id="cb71-771"><a href="#cb71-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-772"><a href="#cb71-772" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>With 'fixed effect' adjustments ('dummies') for each chunk? *or*</span>
-<span id="cb71-773"><a href="#cb71-773" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>With 'chunk' as a random effect?</span>
-<span id="cb71-774"><a href="#cb71-774" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-775"><a href="#cb71-775" aria-hidden="true" tabindex="-1"></a>(DR: I'm pretty sure this is equivalent, for our inferential purposes, to a simulation of a model where $X$ *does* impact Y, but $Z$ impacts both, leading to what econometricians call 'omitted variable bias' if we leave out $Z$.)</span>
+<span id="cb71-772"><a href="#cb71-772" aria-hidden="true" tabindex="-1"></a>But what if we 'control for X' in a (linear or generalized linear) model:</span>
+<span id="cb71-773"><a href="#cb71-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-774"><a href="#cb71-774" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>With 'fixed effect' adjustments ('dummies') for each chunk? *or*</span>
+<span id="cb71-775"><a href="#cb71-775" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>With 'chunk' as a random effect?</span>
 <span id="cb71-776"><a href="#cb71-776" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-777"><a href="#cb71-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-780"><a href="#cb71-780" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-781"><a href="#cb71-781" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: "fork_dag"</span></span>
-<span id="cb71-782"><a href="#cb71-782" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Drawing and setting up the 'fork' DAG"</span></span>
-<span id="cb71-783"><a href="#cb71-783" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb71-784"><a href="#cb71-784" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb71-785"><a href="#cb71-785" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-777"><a href="#cb71-777" aria-hidden="true" tabindex="-1"></a>(DR: I'm pretty sure this is equivalent, for our inferential purposes, to a simulation of a model where $X$ *does* impact Y, but $Z$ impacts both, leading to what econometricians call 'omitted variable bias' if we leave out $Z$.)</span>
+<span id="cb71-778"><a href="#cb71-778" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-781"><a href="#cb71-781" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-782"><a href="#cb71-782" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: "fork_dag"</span></span>
+<span id="cb71-783"><a href="#cb71-783" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Drawing and setting up the 'fork' DAG"</span></span>
+<span id="cb71-784"><a href="#cb71-784" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb71-785"><a href="#cb71-785" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb71-786"><a href="#cb71-786" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-787"><a href="#cb71-787" aria-hidden="true" tabindex="-1"></a>gg_dag <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
-<span id="cb71-788"><a href="#cb71-788" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb71-789"><a href="#cb71-789" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span> </span>
-<span id="cb71-790"><a href="#cb71-790" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend)) <span class="sc">+</span></span>
-<span id="cb71-791"><a href="#cb71-791" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_point</span>(<span class="at">color =</span> <span class="st">"firebrick"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb71-792"><a href="#cb71-792" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_text</span>(<span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
-<span id="cb71-793"><a href="#cb71-793" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_edges</span>(<span class="at">edge_color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
-<span id="cb71-794"><a href="#cb71-794" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb71-795"><a href="#cb71-795" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>)) <span class="sc">+</span></span>
-<span id="cb71-796"><a href="#cb71-796" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb71-797"><a href="#cb71-797" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb71-798"><a href="#cb71-798" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb71-799"><a href="#cb71-799" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb71-800"><a href="#cb71-800" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-787"><a href="#cb71-787" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-788"><a href="#cb71-788" aria-hidden="true" tabindex="-1"></a>gg_dag <span class="ot">&lt;-</span> <span class="cf">function</span>(d) {</span>
+<span id="cb71-789"><a href="#cb71-789" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb71-790"><a href="#cb71-790" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span> </span>
+<span id="cb71-791"><a href="#cb71-791" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend)) <span class="sc">+</span></span>
+<span id="cb71-792"><a href="#cb71-792" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_point</span>(<span class="at">color =</span> <span class="st">"firebrick"</span>, <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb71-793"><a href="#cb71-793" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_text</span>(<span class="at">color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb71-794"><a href="#cb71-794" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_dag_edges</span>(<span class="at">edge_color =</span> <span class="st">"firebrick"</span>) <span class="sc">+</span></span>
+<span id="cb71-795"><a href="#cb71-795" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb71-796"><a href="#cb71-796" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="cn">NULL</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>)) <span class="sc">+</span></span>
+<span id="cb71-797"><a href="#cb71-797" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb71-798"><a href="#cb71-798" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb71-799"><a href="#cb71-799" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb71-800"><a href="#cb71-800" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb71-801"><a href="#cb71-801" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-802"><a href="#cb71-802" aria-hidden="true" tabindex="-1"></a>dag_coords <span class="ot">&lt;-</span></span>
-<span id="cb71-803"><a href="#cb71-803" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, <span class="st">"u"</span>),</span>
-<span id="cb71-804"><a href="#cb71-804" aria-hidden="true" tabindex="-1"></a>         <span class="at">x    =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb71-805"><a href="#cb71-805" aria-hidden="true" tabindex="-1"></a>         <span class="at">y    =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb71-806"><a href="#cb71-806" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-807"><a href="#cb71-807" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span></span>
-<span id="cb71-808"><a href="#cb71-808" aria-hidden="true" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">dagify</span>(X <span class="sc">~</span> Z,</span>
-<span id="cb71-809"><a href="#cb71-809" aria-hidden="true" tabindex="-1"></a>         Y <span class="sc">~</span> Z,</span>
-<span id="cb71-810"><a href="#cb71-810" aria-hidden="true" tabindex="-1"></a>         <span class="at">coords =</span> dag_coords) <span class="sc">%&gt;%</span></span>
-<span id="cb71-811"><a href="#cb71-811" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_dag</span>()</span>
-<span id="cb71-812"><a href="#cb71-812" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-813"><a href="#cb71-813" aria-hidden="true" tabindex="-1"></a>fork_descendant <span class="ot">&lt;-</span></span>
-<span id="cb71-814"><a href="#cb71-814" aria-hidden="true" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">dagify</span>(Y <span class="sc">~</span> u,</span>
-<span id="cb71-815"><a href="#cb71-815" aria-hidden="true" tabindex="-1"></a>         Z <span class="sc">~</span> u,</span>
-<span id="cb71-816"><a href="#cb71-816" aria-hidden="true" tabindex="-1"></a>    X <span class="sc">~</span>Z,</span>
-<span id="cb71-817"><a href="#cb71-817" aria-hidden="true" tabindex="-1"></a>         <span class="at">coords =</span> dag_coords) <span class="sc">%&gt;%</span></span>
-<span id="cb71-818"><a href="#cb71-818" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_dag</span>()</span>
-<span id="cb71-819"><a href="#cb71-819" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-820"><a href="#cb71-820" aria-hidden="true" tabindex="-1"></a>fork <span class="sc">+</span> fork_descendant</span>
+<span id="cb71-802"><a href="#cb71-802" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-803"><a href="#cb71-803" aria-hidden="true" tabindex="-1"></a>dag_coords <span class="ot">&lt;-</span></span>
+<span id="cb71-804"><a href="#cb71-804" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>, <span class="st">"u"</span>),</span>
+<span id="cb71-805"><a href="#cb71-805" aria-hidden="true" tabindex="-1"></a>         <span class="at">x    =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb71-806"><a href="#cb71-806" aria-hidden="true" tabindex="-1"></a>         <span class="at">y    =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb71-807"><a href="#cb71-807" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-808"><a href="#cb71-808" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span></span>
+<span id="cb71-809"><a href="#cb71-809" aria-hidden="true" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">dagify</span>(X <span class="sc">~</span> Z,</span>
+<span id="cb71-810"><a href="#cb71-810" aria-hidden="true" tabindex="-1"></a>         Y <span class="sc">~</span> Z,</span>
+<span id="cb71-811"><a href="#cb71-811" aria-hidden="true" tabindex="-1"></a>         <span class="at">coords =</span> dag_coords) <span class="sc">%&gt;%</span></span>
+<span id="cb71-812"><a href="#cb71-812" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_dag</span>()</span>
+<span id="cb71-813"><a href="#cb71-813" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-814"><a href="#cb71-814" aria-hidden="true" tabindex="-1"></a>fork_descendant <span class="ot">&lt;-</span></span>
+<span id="cb71-815"><a href="#cb71-815" aria-hidden="true" tabindex="-1"></a>  ggdag<span class="sc">::</span><span class="fu">dagify</span>(</span>
+<span id="cb71-816"><a href="#cb71-816" aria-hidden="true" tabindex="-1"></a>    Y <span class="sc">~</span> u,</span>
+<span id="cb71-817"><a href="#cb71-817" aria-hidden="true" tabindex="-1"></a>    Z <span class="sc">~</span> u,</span>
+<span id="cb71-818"><a href="#cb71-818" aria-hidden="true" tabindex="-1"></a>    X <span class="sc">~</span> Z,</span>
+<span id="cb71-819"><a href="#cb71-819" aria-hidden="true" tabindex="-1"></a>         <span class="at">coords =</span> dag_coords) <span class="sc">%&gt;%</span></span>
+<span id="cb71-820"><a href="#cb71-820" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gg_dag</span>()</span>
 <span id="cb71-821"><a href="#cb71-821" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-822"><a href="#cb71-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-823"><a href="#cb71-823" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-822"><a href="#cb71-822" aria-hidden="true" tabindex="-1"></a>fork <span class="sc">+</span> fork_descendant</span>
+<span id="cb71-823"><a href="#cb71-823" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-824"><a href="#cb71-824" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-825"><a href="#cb71-825" aria-hidden="true" tabindex="-1"></a>Suppose the DAG above on the left holds, as described above.</span>
+<span id="cb71-825"><a href="#cb71-825" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb71-826"><a href="#cb71-826" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-827"><a href="#cb71-827" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb71-828"><a href="#cb71-828" aria-hidden="true" tabindex="-1"></a><span class="fu">## The DAG on the right is probably closer to what we really mean but it seems equivalent.</span></span>
-<span id="cb71-829"><a href="#cb71-829" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-830"><a href="#cb71-830" aria-hidden="true" tabindex="-1"></a>The DAG on the right is probably closer to what we really mean; the 'recruit chunk' ($Z$) is not itself causing attitudes to 80k ($Y$); recruitment into this chunk is driven by some unobservable term $u$, which has a direct impact on this attitude. But I suspect this will be equivalent, with $Z$ thus acting as a 'proxy for $u$'.</span>
+<span id="cb71-827"><a href="#cb71-827" aria-hidden="true" tabindex="-1"></a>Suppose the DAG above on the left holds, as described above.</span>
+<span id="cb71-828"><a href="#cb71-828" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-829"><a href="#cb71-829" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb71-830"><a href="#cb71-830" aria-hidden="true" tabindex="-1"></a><span class="fu">## The DAG on the right is probably closer to what we really mean but it seems equivalent.</span></span>
 <span id="cb71-831"><a href="#cb71-831" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-832"><a href="#cb71-832" aria-hidden="true" tabindex="-1"></a>We should explore this with <span class="in">`daggitty`</span> below</span>
+<span id="cb71-832"><a href="#cb71-832" aria-hidden="true" tabindex="-1"></a>The DAG on the right is probably closer to what we really mean; the 'recruit chunk' ($Z$) is not itself causing attitudes to 80k ($Y$); recruitment into this chunk is driven by some unobservable term $u$, which has a direct impact on this attitude. But I suspect this will be equivalent, with $Z$ thus acting as a 'proxy for $u$'.</span>
 <span id="cb71-833"><a href="#cb71-833" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-834"><a href="#cb71-834" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-837"><a href="#cb71-837" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-838"><a href="#cb71-838" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">dagitty</span>( <span class="st">"dag {</span></span>
-<span id="cb71-839"><a href="#cb71-839" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; X</span></span>
-<span id="cb71-840"><a href="#cb71-840" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; Y</span></span>
-<span id="cb71-841"><a href="#cb71-841" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span>
-<span id="cb71-842"><a href="#cb71-842" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-843"><a href="#cb71-843" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>( fork , <span class="at">exposure=</span><span class="st">"X"</span> , <span class="at">outcome=</span><span class="st">"Y"</span> )</span>
-<span id="cb71-844"><a href="#cb71-844" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-834"><a href="#cb71-834" aria-hidden="true" tabindex="-1"></a>We should explore this with <span class="in">`daggitty`</span> below</span>
+<span id="cb71-835"><a href="#cb71-835" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-838"><a href="#cb71-838" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-839"><a href="#cb71-839" aria-hidden="true" tabindex="-1"></a>fork <span class="ot">&lt;-</span> <span class="fu">dagitty</span>( <span class="st">"dag {</span></span>
+<span id="cb71-840"><a href="#cb71-840" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; X</span></span>
+<span id="cb71-841"><a href="#cb71-841" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; Y</span></span>
+<span id="cb71-842"><a href="#cb71-842" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span>
+<span id="cb71-843"><a href="#cb71-843" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-844"><a href="#cb71-844" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>( fork , <span class="at">exposure=</span><span class="st">"X"</span> , <span class="at">outcome=</span><span class="st">"Y"</span> )</span>
 <span id="cb71-845"><a href="#cb71-845" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-846"><a href="#cb71-846" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-847"><a href="#cb71-847" aria-hidden="true" tabindex="-1"></a>fork_descendant <span class="ot">&lt;-</span></span>
-<span id="cb71-848"><a href="#cb71-848" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dagitty</span>( <span class="st">"dag {</span></span>
-<span id="cb71-849"><a href="#cb71-849" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; X</span></span>
-<span id="cb71-850"><a href="#cb71-850" aria-hidden="true" tabindex="-1"></a><span class="st">u -&gt; Y</span></span>
-<span id="cb71-851"><a href="#cb71-851" aria-hidden="true" tabindex="-1"></a><span class="st">u -&gt; Z</span></span>
-<span id="cb71-852"><a href="#cb71-852" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span>
-<span id="cb71-853"><a href="#cb71-853" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-854"><a href="#cb71-854" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>( fork_descendant , <span class="at">exposure=</span><span class="st">"X"</span> , <span class="at">outcome=</span><span class="st">"Y"</span> )</span>
-<span id="cb71-855"><a href="#cb71-855" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-856"><a href="#cb71-856" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-857"><a href="#cb71-857" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-858"><a href="#cb71-858" aria-hidden="true" tabindex="-1"></a>Note the adjustment set <span class="in">`{Z}`</span> works in both cases. </span>
-<span id="cb71-859"><a href="#cb71-859" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-847"><a href="#cb71-847" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-848"><a href="#cb71-848" aria-hidden="true" tabindex="-1"></a>fork_descendant <span class="ot">&lt;-</span></span>
+<span id="cb71-849"><a href="#cb71-849" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dagitty</span>( <span class="st">"dag {</span></span>
+<span id="cb71-850"><a href="#cb71-850" aria-hidden="true" tabindex="-1"></a><span class="st">Z -&gt; X</span></span>
+<span id="cb71-851"><a href="#cb71-851" aria-hidden="true" tabindex="-1"></a><span class="st">u -&gt; Y</span></span>
+<span id="cb71-852"><a href="#cb71-852" aria-hidden="true" tabindex="-1"></a><span class="st">u -&gt; Z</span></span>
+<span id="cb71-853"><a href="#cb71-853" aria-hidden="true" tabindex="-1"></a><span class="st">}"</span>)</span>
+<span id="cb71-854"><a href="#cb71-854" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-855"><a href="#cb71-855" aria-hidden="true" tabindex="-1"></a><span class="fu">adjustmentSets</span>( fork_descendant , <span class="at">exposure=</span><span class="st">"X"</span> , <span class="at">outcome=</span><span class="st">"Y"</span> )</span>
+<span id="cb71-856"><a href="#cb71-856" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-857"><a href="#cb71-857" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-858"><a href="#cb71-858" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-859"><a href="#cb71-859" aria-hidden="true" tabindex="-1"></a>Note the adjustment set <span class="in">`{Z}`</span> works in both cases.</span>
 <span id="cb71-860"><a href="#cb71-860" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb71-861"><a href="#cb71-861" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-862"><a href="#cb71-862" aria-hidden="true" tabindex="-1"></a>Following the code structure  <span class="co">[</span><span class="ot">Kurz</span><span class="co">](https://bookdown.org/content/4857/the-many-variables-the-spurious-waffles.html#masked-relationship)</span> for the present case. I'll treat the outcome '$Y$' (attitude to 80k) and the video treatment ($X$) as continuous for now.^<span class="co">[</span><span class="ot">The latter might should be adjusted.</span><span class="co">]</span> However, to enable meaningful random-effects mixed models, we need to make the 'recruitment chunk' ($Z$) categorical.</span>
+<span id="cb71-862"><a href="#cb71-862" aria-hidden="true" tabindex="-1"></a>Following the code structure <span class="co">[</span><span class="ot">Kurz</span><span class="co">](https://bookdown.org/content/4857/the-many-variables-the-spurious-waffles.html#masked-relationship)</span> for the present case. I'll treat the outcome '$Y$' (attitude to 80k) and the video treatment ($X$) as continuous for now.<span class="ot">[^spurious_waffles-17]</span> However, to enable meaningful random-effects mixed models, we need to make the 'recruitment chunk' ($Z$) categorical.</span>
 <span id="cb71-863"><a href="#cb71-863" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-864"><a href="#cb71-864" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now simulate data consistent with that DAG.</span></span>
+<span id="cb71-864"><a href="#cb71-864" aria-hidden="true" tabindex="-1"></a><span class="ot">[^spurious_waffles-17]: </span>The latter might should be adjusted.</span>
 <span id="cb71-865"><a href="#cb71-865" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-866"><a href="#cb71-866" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-869"><a href="#cb71-869" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-870"><a href="#cb71-870" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#DR: I increased this to be a more reliable simulation</span></span>
-<span id="cb71-871"><a href="#cb71-871" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-872"><a href="#cb71-872" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
-<span id="cb71-873"><a href="#cb71-873" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-874"><a href="#cb71-874" aria-hidden="true" tabindex="-1"></a>fork_sample <span class="ot">&lt;-</span> </span>
-<span id="cb71-875"><a href="#cb71-875" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">u =</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span>   <span class="co">#latent love of 80k thing</span></span>
-<span id="cb71-876"><a href="#cb71-876" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb71-877"><a href="#cb71-877" aria-hidden="true" tabindex="-1"></a>    <span class="at">Z =</span>  <span class="fu">case_when</span>(</span>
-<span id="cb71-878"><a href="#cb71-878" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&lt;</span> <span class="fl">0.2</span> <span class="sc">~</span>  <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>)),</span>
-<span id="cb71-879"><a href="#cb71-879" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&gt;</span> <span class="fl">0.2</span> <span class="sc">&amp;</span> u <span class="sc">&lt;</span> <span class="fl">0.4</span> <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>)),</span>
-<span id="cb71-880"><a href="#cb71-880" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&gt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> u <span class="sc">&lt;</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>)),</span>
-<span id="cb71-881"><a href="#cb71-881" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&gt;</span> <span class="fl">0.8</span> <span class="sc">~</span>  <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>))</span>
-<span id="cb71-882"><a href="#cb71-882" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb71-883"><a href="#cb71-883" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb71-884"><a href="#cb71-884" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">X =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">1.5</span><span class="sc">*</span>Z<span class="dv">-2</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span>  </span>
-<span id="cb71-885"><a href="#cb71-885" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Y =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">1.5</span><span class="sc">*</span>u, <span class="at">sd =</span> <span class="dv">1</span>))  </span>
-<span id="cb71-886"><a href="#cb71-886" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb71-887"><a href="#cb71-887" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-888"><a href="#cb71-888" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-889"><a href="#cb71-889" aria-hidden="true" tabindex="-1"></a>Pairs plots</span>
-<span id="cb71-892"><a href="#cb71-892" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-893"><a href="#cb71-893" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(fork_sample, <span class="at">col =</span> <span class="st">"firebrick4"</span>)</span>
-<span id="cb71-894"><a href="#cb71-894" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-895"><a href="#cb71-895" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-896"><a href="#cb71-896" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-897"><a href="#cb71-897" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-898"><a href="#cb71-898" aria-hidden="true" tabindex="-1"></a>Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z. </span>
-<span id="cb71-899"><a href="#cb71-899" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-902"><a href="#cb71-902" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-903"><a href="#cb71-903" aria-hidden="true" tabindex="-1"></a>naive_on_fork <span class="ot">&lt;-</span> </span>
-<span id="cb71-904"><a href="#cb71-904" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> fork_sample, </span>
-<span id="cb71-905"><a href="#cb71-905" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb71-906"><a href="#cb71-906" aria-hidden="true" tabindex="-1"></a>      Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X,</span>
-<span id="cb71-907"><a href="#cb71-907" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb71-908"><a href="#cb71-908" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">class =</span> b),</span>
-<span id="cb71-909"><a href="#cb71-909" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">exponential</span>(<span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb71-910"><a href="#cb71-910" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb71-911"><a href="#cb71-911" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb71-912"><a href="#cb71-912" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_prior =</span> T,</span>
-<span id="cb71-913"><a href="#cb71-913" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/naive_on_fork"</span>)</span>
-<span id="cb71-914"><a href="#cb71-914" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-915"><a href="#cb71-915" aria-hidden="true" tabindex="-1"></a>fe_control_on_fork <span class="ot">&lt;-</span> </span>
-<span id="cb71-916"><a href="#cb71-916" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(naive_on_fork, </span>
-<span id="cb71-917"><a href="#cb71-917" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> fork_sample,</span>
-<span id="cb71-918"><a href="#cb71-918" aria-hidden="true" tabindex="-1"></a>         <span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X <span class="sc">+</span> Z,</span>
-<span id="cb71-919"><a href="#cb71-919" aria-hidden="true" tabindex="-1"></a>         <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb71-920"><a href="#cb71-920" aria-hidden="true" tabindex="-1"></a>         <span class="at">file =</span> <span class="st">"fits/fe_control_on_fork"</span>)</span>
-<span id="cb71-921"><a href="#cb71-921" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-922"><a href="#cb71-922" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-923"><a href="#cb71-923" aria-hidden="true" tabindex="-1"></a>fe_control_on_fork <span class="ot">&lt;-</span> </span>
-<span id="cb71-924"><a href="#cb71-924" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(naive_on_fork, </span>
-<span id="cb71-925"><a href="#cb71-925" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> fork_sample,</span>
-<span id="cb71-926"><a href="#cb71-926" aria-hidden="true" tabindex="-1"></a>         <span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X <span class="sc">+</span> Z,</span>
-<span id="cb71-927"><a href="#cb71-927" aria-hidden="true" tabindex="-1"></a>         <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb71-928"><a href="#cb71-928" aria-hidden="true" tabindex="-1"></a>         <span class="at">file =</span> <span class="st">"fits/fe_control_on_fork"</span>)</span>
-<span id="cb71-929"><a href="#cb71-929" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-930"><a href="#cb71-930" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-931"><a href="#cb71-931" aria-hidden="true" tabindex="-1"></a>re_control_on_fork <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
-<span id="cb71-932"><a href="#cb71-932" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Z),</span>
-<span id="cb71-933"><a href="#cb71-933" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
-<span id="cb71-934"><a href="#cb71-934" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> fork_sample,</span>
-<span id="cb71-935"><a href="#cb71-935" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> .<span class="dv">99</span>, <span class="at">max_treedepth =</span> <span class="dv">15</span>),</span>
-<span id="cb71-936"><a href="#cb71-936" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span>  <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(0, 1)"</span>, <span class="at">class =</span> <span class="st">"Intercept"</span>),</span>
-<span id="cb71-937"><a href="#cb71-937" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">set_prior</span>(<span class="st">"normal(0, 1)"</span>, <span class="at">class =</span> <span class="st">"b"</span>),</span>
-<span id="cb71-938"><a href="#cb71-938" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">set_prior</span>(<span class="st">"exponential(10)"</span>, <span class="at">class =</span> <span class="st">"sd"</span>)),</span>
-<span id="cb71-939"><a href="#cb71-939" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
-<span id="cb71-940"><a href="#cb71-940" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb71-941"><a href="#cb71-941" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
-<span id="cb71-942"><a href="#cb71-942" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">500</span>,</span>
-<span id="cb71-943"><a href="#cb71-943" aria-hidden="true" tabindex="-1"></a>       <span class="co">#backend = "cmdstanr",</span></span>
-<span id="cb71-944"><a href="#cb71-944" aria-hidden="true" tabindex="-1"></a>       <span class="co">#threads = threading(4),</span></span>
-<span id="cb71-945"><a href="#cb71-945" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1010</span>,</span>
-<span id="cb71-946"><a href="#cb71-946" aria-hidden="true" tabindex="-1"></a>  <span class="at">silent =</span> <span class="dv">2</span> <span class="co">#cmdstanr seems to ignore requests for silence</span></span>
-<span id="cb71-947"><a href="#cb71-947" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb71-948"><a href="#cb71-948" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-866"><a href="#cb71-866" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now simulate data consistent with that DAG.</span></span>
+<span id="cb71-867"><a href="#cb71-867" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-870"><a href="#cb71-870" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-871"><a href="#cb71-871" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#DR: I increased this to be a more reliable simulation</span></span>
+<span id="cb71-872"><a href="#cb71-872" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-873"><a href="#cb71-873" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb71-874"><a href="#cb71-874" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-875"><a href="#cb71-875" aria-hidden="true" tabindex="-1"></a>chunks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb71-876"><a href="#cb71-876" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-877"><a href="#cb71-877" aria-hidden="true" tabindex="-1"></a>fork_sample <span class="ot">&lt;-</span> </span>
+<span id="cb71-878"><a href="#cb71-878" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">u =</span> <span class="fu">runif</span>(n, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span>   <span class="co">#latent love of 80k thing</span></span>
+<span id="cb71-879"><a href="#cb71-879" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb71-880"><a href="#cb71-880" aria-hidden="true" tabindex="-1"></a>    <span class="at">Z =</span>  <span class="fu">case_when</span>(</span>
+<span id="cb71-881"><a href="#cb71-881" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&lt;</span> <span class="fl">0.2</span> <span class="sc">~</span>  <span class="fu">sample</span>(chunks, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>)),</span>
+<span id="cb71-882"><a href="#cb71-882" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&lt;</span> <span class="fl">0.4</span> <span class="sc">~</span> <span class="fu">sample</span>(chunks, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>)),</span>
+<span id="cb71-883"><a href="#cb71-883" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&lt;</span> <span class="fl">0.8</span> <span class="sc">~</span> <span class="fu">sample</span>(chunks, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>, <span class="fl">0.05</span>)),</span>
+<span id="cb71-884"><a href="#cb71-884" aria-hidden="true" tabindex="-1"></a>      u <span class="sc">&gt;</span> <span class="fl">0.8</span> <span class="sc">~</span>  <span class="fu">sample</span>(chunks, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.85</span>))</span>
+<span id="cb71-885"><a href="#cb71-885" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb71-886"><a href="#cb71-886" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-887"><a href="#cb71-887" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">X =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">1.5</span><span class="sc">*</span>Z<span class="dv">-2</span>, <span class="at">sd =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb71-888"><a href="#cb71-888" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Y =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="fl">1.5</span><span class="sc">*</span>u, <span class="at">sd =</span> <span class="dv">1</span>))  </span>
+<span id="cb71-889"><a href="#cb71-889" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb71-890"><a href="#cb71-890" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-891"><a href="#cb71-891" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-892"><a href="#cb71-892" aria-hidden="true" tabindex="-1"></a>Pairs plots</span>
+<span id="cb71-893"><a href="#cb71-893" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-896"><a href="#cb71-896" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-897"><a href="#cb71-897" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(fork_sample, <span class="at">col =</span> <span class="st">"firebrick4"</span>)</span>
+<span id="cb71-898"><a href="#cb71-898" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-899"><a href="#cb71-899" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-900"><a href="#cb71-900" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-901"><a href="#cb71-901" aria-hidden="true" tabindex="-1"></a>The pairwise scatterplots show a positive pairwise association between *all* of the features.</span>
+<span id="cb71-902"><a href="#cb71-902" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-903"><a href="#cb71-903" aria-hidden="true" tabindex="-1"></a>Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z.</span>
+<span id="cb71-904"><a href="#cb71-904" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-907"><a href="#cb71-907" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-908"><a href="#cb71-908" aria-hidden="true" tabindex="-1"></a>naive_on_fork <span class="ot">&lt;-</span> </span>
+<span id="cb71-909"><a href="#cb71-909" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> fork_sample, </span>
+<span id="cb71-910"><a href="#cb71-910" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb71-911"><a href="#cb71-911" aria-hidden="true" tabindex="-1"></a>      Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X,</span>
+<span id="cb71-912"><a href="#cb71-912" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb71-913"><a href="#cb71-913" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="fl">0.5</span>), <span class="at">class =</span> b),</span>
+<span id="cb71-914"><a href="#cb71-914" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">exponential</span>(<span class="dv">1</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb71-915"><a href="#cb71-915" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb71-916"><a href="#cb71-916" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb71-917"><a href="#cb71-917" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_prior =</span> T,</span>
+<span id="cb71-918"><a href="#cb71-918" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/naive_on_fork"</span>)</span>
+<span id="cb71-919"><a href="#cb71-919" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-920"><a href="#cb71-920" aria-hidden="true" tabindex="-1"></a>fe_control_on_fork <span class="ot">&lt;-</span> </span>
+<span id="cb71-921"><a href="#cb71-921" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(naive_on_fork, </span>
+<span id="cb71-922"><a href="#cb71-922" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> fork_sample,</span>
+<span id="cb71-923"><a href="#cb71-923" aria-hidden="true" tabindex="-1"></a>         <span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X <span class="sc">+</span> Z,</span>
+<span id="cb71-924"><a href="#cb71-924" aria-hidden="true" tabindex="-1"></a>         <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb71-925"><a href="#cb71-925" aria-hidden="true" tabindex="-1"></a>         <span class="at">file =</span> <span class="st">"fits/fe_control_on_fork"</span>)</span>
+<span id="cb71-926"><a href="#cb71-926" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-927"><a href="#cb71-927" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-928"><a href="#cb71-928" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-929"><a href="#cb71-929" aria-hidden="true" tabindex="-1"></a>re_control_on_fork <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb71-930"><a href="#cb71-930" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> X <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Z),</span>
+<span id="cb71-931"><a href="#cb71-931" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb71-932"><a href="#cb71-932" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> fork_sample,</span>
+<span id="cb71-933"><a href="#cb71-933" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> .<span class="dv">99</span>, <span class="at">max_treedepth =</span> <span class="dv">15</span>),</span>
+<span id="cb71-934"><a href="#cb71-934" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span>  <span class="fu">c</span>(<span class="fu">set_prior</span>(<span class="st">"normal(0, 1)"</span>, <span class="at">class =</span> <span class="st">"Intercept"</span>),</span>
+<span id="cb71-935"><a href="#cb71-935" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">set_prior</span>(<span class="st">"normal(0, 1)"</span>, <span class="at">class =</span> <span class="st">"b"</span>),</span>
+<span id="cb71-936"><a href="#cb71-936" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">set_prior</span>(<span class="st">"exponential(10)"</span>, <span class="at">class =</span> <span class="st">"sd"</span>)),</span>
+<span id="cb71-937"><a href="#cb71-937" aria-hidden="true" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">4</span>,</span>
+<span id="cb71-938"><a href="#cb71-938" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb71-939"><a href="#cb71-939" aria-hidden="true" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">2000</span>,</span>
+<span id="cb71-940"><a href="#cb71-940" aria-hidden="true" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">500</span>,</span>
+<span id="cb71-941"><a href="#cb71-941" aria-hidden="true" tabindex="-1"></a>       <span class="co">#backend = "cmdstanr",</span></span>
+<span id="cb71-942"><a href="#cb71-942" aria-hidden="true" tabindex="-1"></a>       <span class="co">#threads = threading(4),</span></span>
+<span id="cb71-943"><a href="#cb71-943" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1010</span>,</span>
+<span id="cb71-944"><a href="#cb71-944" aria-hidden="true" tabindex="-1"></a>  <span class="at">silent =</span> <span class="dv">2</span> <span class="co">#cmdstanr seems to ignore requests for silence</span></span>
+<span id="cb71-945"><a href="#cb71-945" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb71-946"><a href="#cb71-946" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-947"><a href="#cb71-947" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-948"><a href="#cb71-948" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb71-949"><a href="#cb71-949" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-950"><a href="#cb71-950" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-950"><a href="#cb71-950" aria-hidden="true" tabindex="-1"></a>Comparing the coefficients</span>
 <span id="cb71-951"><a href="#cb71-951" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-952"><a href="#cb71-952" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-953"><a href="#cb71-953" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-954"><a href="#cb71-954" aria-hidden="true" tabindex="-1"></a>Compare the coefficients.</span>
-<span id="cb71-955"><a href="#cb71-955" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-958"><a href="#cb71-958" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-959"><a href="#cb71-959" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(naive_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb71-954"><a href="#cb71-954" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-955"><a href="#cb71-955" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(naive_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb71-956"><a href="#cb71-956" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-957"><a href="#cb71-957" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-958"><a href="#cb71-958" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fe_control_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb71-959"><a href="#cb71-959" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-960"><a href="#cb71-960" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-961"><a href="#cb71-961" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-962"><a href="#cb71-962" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(fe_control_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb71-963"><a href="#cb71-963" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-961"><a href="#cb71-961" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(re_control_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb71-962"><a href="#cb71-962" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-963"><a href="#cb71-963" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb71-964"><a href="#cb71-964" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-965"><a href="#cb71-965" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(re_control_on_fork) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb71-965"><a href="#cb71-965" aria-hidden="true" tabindex="-1"></a>While the naive model picks up the non-causal relationship, the models with either fixed or random-effects controls both produce 'tightly bounded near zero effect sizes'.</span>
 <span id="cb71-966"><a href="#cb71-966" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-967"><a href="#cb71-967" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-968"><a href="#cb71-968" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-967"><a href="#cb71-967" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-968"><a href="#cb71-968" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical variables {.unnumbered}</span></span>
 <span id="cb71-969"><a href="#cb71-969" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-970"><a href="#cb71-970" aria-hidden="true" tabindex="-1"></a><span class="fu">## Categorical variables {.unnumbered}</span></span>
+<span id="cb71-970"><a href="#cb71-970" aria-hidden="true" tabindex="-1"></a>DR: This section is rather straightforward. The key -- *and highly useful* -- insight: *Remove the intercept when modeling with categorical features.*</span>
 <span id="cb71-971"><a href="#cb71-971" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-972"><a href="#cb71-972" aria-hidden="true" tabindex="-1"></a>DR: This section is rather straightforward. The key -- *and highly useful* -- insight: *Remove the intercept when modeling with categorical features.*</span>
+<span id="cb71-972"><a href="#cb71-972" aria-hidden="true" tabindex="-1"></a>This yields a specific estimate for each category or combination of categories. Why?</span>
 <span id="cb71-973"><a href="#cb71-973" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-974"><a href="#cb71-974" aria-hidden="true" tabindex="-1"></a>This yields a specific estimate for each category or combination of categories. Why?</span>
+<span id="cb71-974"><a href="#cb71-974" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>There is no 'base category', making interpretation easier.</span>
 <span id="cb71-975"><a href="#cb71-975" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-976"><a href="#cb71-976" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>There is no 'base category', making interpretation easier.</span>
+<span id="cb71-976"><a href="#cb71-976" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups.</span>
 <span id="cb71-977"><a href="#cb71-977" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-978"><a href="#cb71-978" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>It avoids the challenges (particular to Bayesian approaches) of including an 'additive adjustment coefficient relative to the base group', which naturally (and misleadingly) implies more variance in the non-base groups.</span>
+<span id="cb71-978"><a href="#cb71-978" aria-hidden="true" tabindex="-1"></a>Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making (direct) interpretation statistical inference more difficult in some contexts.</span>
 <span id="cb71-979"><a href="#cb71-979" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-980"><a href="#cb71-980" aria-hidden="true" tabindex="-1"></a>Downside: the coefficients can't be interpreted as 'effects' or adjustments, potentially making (direct) interpretation statistical inference more difficult in some contexts.</span>
+<span id="cb71-980"><a href="#cb71-980" aria-hidden="true" tabindex="-1"></a>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework</span>
 <span id="cb71-981"><a href="#cb71-981" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-982"><a href="#cb71-982" aria-hidden="true" tabindex="-1"></a>Remedy to this: Explicitly model/test these differences through simulation, easily done in a Bayesian framework</span>
-<span id="cb71-983"><a href="#cb71-983" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-984"><a href="#cb71-984" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb71-985"><a href="#cb71-985" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: Does this apply to frequentist analysis too?</span></span>
-<span id="cb71-986"><a href="#cb71-986" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-987"><a href="#cb71-987" aria-hidden="true" tabindex="-1"></a>Is it Bayesian specific? How does this relate to 'contrast-coding'?</span>
-<span id="cb71-988"><a href="#cb71-988" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb71-982"><a href="#cb71-982" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb71-983"><a href="#cb71-983" aria-hidden="true" tabindex="-1"></a><span class="fu">## DR question: Does this apply to frequentist analysis too?</span></span>
+<span id="cb71-984"><a href="#cb71-984" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-985"><a href="#cb71-985" aria-hidden="true" tabindex="-1"></a>Is it Bayesian specific? How does this relate to 'contrast-coding'?</span>
+<span id="cb71-986"><a href="#cb71-986" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb71-987"><a href="#cb71-987" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-988"><a href="#cb71-988" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)</span></span>
 <span id="cb71-989"><a href="#cb71-989" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-990"><a href="#cb71-990" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Many readers will already know that variables like this, routinely called *factors*, can easily be included in linear models. But what is not widely understood is how these variables are included in a model... Knowing how the machine works removes a lot of this difficulty. (p. 153, *emphasis* in the original)</span></span>
+<span id="cb71-990"><a href="#cb71-990" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll practice with </span><span class="in">`milk`</span><span class="at">.</span></span>
 <span id="cb71-991"><a href="#cb71-991" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-992"><a href="#cb71-992" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We'll practice with </span><span class="in">`milk`</span><span class="at">.</span></span>
-<span id="cb71-993"><a href="#cb71-993" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-994"><a href="#cb71-994" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F}</span></span>
-<span id="cb71-995"><a href="#cb71-995" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
-<span id="cb71-996"><a href="#cb71-996" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
-<span id="cb71-997"><a href="#cb71-997" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
-<span id="cb71-998"><a href="#cb71-998" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-999"><a href="#cb71-999" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(milk)</span>
-<span id="cb71-1000"><a href="#cb71-1000" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>rethinking, <span class="at">unload =</span> T)</span>
-<span id="cb71-1001"><a href="#cb71-1001" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb71-1002"><a href="#cb71-1002" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-992"><a href="#cb71-992" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message = F}</span></span>
+<span id="cb71-993"><a href="#cb71-993" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rethinking)</span>
+<span id="cb71-994"><a href="#cb71-994" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(milk)</span>
+<span id="cb71-995"><a href="#cb71-995" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> milk</span>
+<span id="cb71-996"><a href="#cb71-996" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-997"><a href="#cb71-997" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(milk)</span>
+<span id="cb71-998"><a href="#cb71-998" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>rethinking, <span class="at">unload =</span> T)</span>
+<span id="cb71-999"><a href="#cb71-999" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
+<span id="cb71-1000"><a href="#cb71-1000" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1001"><a href="#cb71-1001" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1002"><a href="#cb71-1002" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With the tidyverse, we can peek at </span><span class="in">`clade`</span><span class="at"> with </span><span class="in">`distinct()`</span><span class="at"> in the place of base R </span><span class="in">`unique()`</span><span class="at">.</span></span>
 <span id="cb71-1003"><a href="#cb71-1003" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1004"><a href="#cb71-1004" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; With the tidyverse, we can peek at </span><span class="in">`clade`</span><span class="at"> with </span><span class="in">`distinct()`</span><span class="at"> in the place of base R </span><span class="in">`unique()`</span><span class="at">.</span></span>
-<span id="cb71-1005"><a href="#cb71-1005" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1008"><a href="#cb71-1008" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-1009"><a href="#cb71-1009" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
-<span id="cb71-1010"><a href="#cb71-1010" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(clade)</span>
+<span id="cb71-1006"><a href="#cb71-1006" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-1007"><a href="#cb71-1007" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb71-1008"><a href="#cb71-1008" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(clade)</span>
+<span id="cb71-1009"><a href="#cb71-1009" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1010"><a href="#cb71-1010" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb71-1011"><a href="#cb71-1011" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1012"><a href="#cb71-1012" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1012"><a href="#cb71-1012" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; As </span><span class="in">`clade`</span><span class="at"> has 4 categories, let's use </span><span class="in">`if_else()`</span><span class="at"> to convert these to 4 dummy variables.</span></span>
 <span id="cb71-1013"><a href="#cb71-1013" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1014"><a href="#cb71-1014" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; As </span><span class="in">`clade`</span><span class="at"> has 4 categories, let's use </span><span class="in">`if_else()`</span><span class="at"> to convert these to 4 dummy variables.</span></span>
-<span id="cb71-1015"><a href="#cb71-1015" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1018"><a href="#cb71-1018" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-1019"><a href="#cb71-1019" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
-<span id="cb71-1020"><a href="#cb71-1020" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
-<span id="cb71-1021"><a href="#cb71-1021" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clade_nwm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"New World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb71-1022"><a href="#cb71-1022" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_owm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Old World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb71-1023"><a href="#cb71-1023" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_s   =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Strepsirrhine"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb71-1024"><a href="#cb71-1024" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_ape =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Ape"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb71-1025"><a href="#cb71-1025" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1016"><a href="#cb71-1016" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-1017"><a href="#cb71-1017" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> </span>
+<span id="cb71-1018"><a href="#cb71-1018" aria-hidden="true" tabindex="-1"></a>  d <span class="sc">%&gt;%</span></span>
+<span id="cb71-1019"><a href="#cb71-1019" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clade_nwm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"New World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb71-1020"><a href="#cb71-1020" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_owm =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Old World Monkey"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb71-1021"><a href="#cb71-1021" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_s   =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Strepsirrhine"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb71-1022"><a href="#cb71-1022" aria-hidden="true" tabindex="-1"></a>         <span class="at">clade_ape =</span> <span class="fu">if_else</span>(clade <span class="sc">==</span> <span class="st">"Ape"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb71-1023"><a href="#cb71-1023" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1024"><a href="#cb71-1024" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1025"><a href="#cb71-1025" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we'll fit the model with three of the four dummies. In this model, </span><span class="in">`clade_ape`</span><span class="at"> is the reference category captured by the intercept.</span></span>
 <span id="cb71-1026"><a href="#cb71-1026" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1027"><a href="#cb71-1027" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Now we'll fit the model with three of the four dummies. In this model, </span><span class="in">`clade_ape`</span><span class="at"> is the reference category captured by the intercept.</span></span>
-<span id="cb71-1028"><a href="#cb71-1028" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1029"><a href="#cb71-1029" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16}</span></span>
-<span id="cb71-1030"><a href="#cb71-1030" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span> <span class="ot">&lt;-</span> </span>
-<span id="cb71-1031"><a href="#cb71-1031" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb71-1032"><a href="#cb71-1032" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb71-1033"><a href="#cb71-1033" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> clade_nwm <span class="sc">+</span> clade_owm <span class="sc">+</span> clade_s,</span>
-<span id="cb71-1034"><a href="#cb71-1034" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb71-1035"><a href="#cb71-1035" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
-<span id="cb71-1036"><a href="#cb71-1036" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb71-1037"><a href="#cb71-1037" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb71-1038"><a href="#cb71-1038" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb71-1039"><a href="#cb71-1039" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16"</span>)</span>
-<span id="cb71-1040"><a href="#cb71-1040" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-1041"><a href="#cb71-1041" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1044"><a href="#cb71-1044" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-1045"><a href="#cb71-1045" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>)</span>
-<span id="cb71-1046"><a href="#cb71-1046" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1027"><a href="#cb71-1027" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16}</span></span>
+<span id="cb71-1028"><a href="#cb71-1028" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span> <span class="ot">&lt;-</span> </span>
+<span id="cb71-1029"><a href="#cb71-1029" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb71-1030"><a href="#cb71-1030" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb71-1031"><a href="#cb71-1031" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> clade_nwm <span class="sc">+</span> clade_owm <span class="sc">+</span> clade_s,</span>
+<span id="cb71-1032"><a href="#cb71-1032" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb71-1033"><a href="#cb71-1033" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">class =</span> b),</span>
+<span id="cb71-1034"><a href="#cb71-1034" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb71-1035"><a href="#cb71-1035" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb71-1036"><a href="#cb71-1036" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb71-1037"><a href="#cb71-1037" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16"</span>)</span>
+<span id="cb71-1038"><a href="#cb71-1038" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1039"><a href="#cb71-1039" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1042"><a href="#cb71-1042" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-1043"><a href="#cb71-1043" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>)</span>
+<span id="cb71-1044"><a href="#cb71-1044" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1045"><a href="#cb71-1045" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1046"><a href="#cb71-1046" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding regular predictor variables.</span></span>
 <span id="cb71-1047"><a href="#cb71-1047" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1048"><a href="#cb71-1048" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding regular predictor variables.</span></span>
+<span id="cb71-1048"><a href="#cb71-1048" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; If we wanted to fit the model including </span><span class="in">`perc.fat`</span><span class="at"> as an additional predictor, the basic statistical formula would be</span></span>
 <span id="cb71-1049"><a href="#cb71-1049" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1050"><a href="#cb71-1050" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; If we wanted to fit the model including </span><span class="in">`perc.fat`</span><span class="at"> as an additional predictor, the basic statistical formula would be</span></span>
-<span id="cb71-1051"><a href="#cb71-1051" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1050"><a href="#cb71-1050" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb71-1051"><a href="#cb71-1051" aria-hidden="true" tabindex="-1"></a>\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.</span>
 <span id="cb71-1052"><a href="#cb71-1052" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb71-1053"><a href="#cb71-1053" aria-hidden="true" tabindex="-1"></a>\mu_i = \alpha + \beta_\text{clade_nwm} \text{clade_nwm}_i + \beta_\text{clade_owm} \text{clade_owm}_i + \beta_\text{clade_s} \text{clade_s}_i + \beta_\text{perc.fat} \text{perc.fat}_i.</span>
-<span id="cb71-1054"><a href="#cb71-1054" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb71-1053"><a href="#cb71-1053" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1054"><a href="#cb71-1054" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The corresponding </span><span class="in">`formula`</span><span class="at"> argument within </span><span class="in">`brm()`</span><span class="at"> would be </span><span class="in">`kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`</span><span class="at">.</span></span>
 <span id="cb71-1055"><a href="#cb71-1055" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1056"><a href="#cb71-1056" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The corresponding </span><span class="in">`formula`</span><span class="at"> argument within </span><span class="in">`brm()`</span><span class="at"> would be </span><span class="in">`kcal.per.g ~ 1 + clade_nwm + clade_owm + clade_s + perc.fat`</span><span class="at">.</span></span>
+<span id="cb71-1056"><a href="#cb71-1056" aria-hidden="true" tabindex="-1"></a><span class="fu">### Another approach: Unique intercepts.</span></span>
 <span id="cb71-1057"><a href="#cb71-1057" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1058"><a href="#cb71-1058" aria-hidden="true" tabindex="-1"></a><span class="fu">### Another approach: Unique intercepts.</span></span>
+<span id="cb71-1058"><a href="#cb71-1058" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform </span><span class="in">`d$clade`</span><span class="at"> into </span><span class="in">`d$clade_id`</span><span class="at">. The advantage of this approach is the indices in the model summary are more descriptive than </span><span class="in">`a[1]`</span><span class="at"> through </span><span class="in">`a[4]`</span><span class="at">.</span></span>
 <span id="cb71-1059"><a href="#cb71-1059" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1060"><a href="#cb71-1060" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform </span><span class="in">`d$clade`</span><span class="at"> into </span><span class="in">`d$clade_id`</span><span class="at">. The advantage of this approach is the indices in the model summary are more descriptive than </span><span class="in">`a[1]`</span><span class="at"> through </span><span class="in">`a[4]`</span><span class="at">.</span></span>
-<span id="cb71-1061"><a href="#cb71-1061" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1062"><a href="#cb71-1062" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16_alt}</span></span>
-<span id="cb71-1063"><a href="#cb71-1063" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span>_alt <span class="ot">&lt;-</span> </span>
-<span id="cb71-1064"><a href="#cb71-1064" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
-<span id="cb71-1065"><a href="#cb71-1065" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
-<span id="cb71-1066"><a href="#cb71-1066" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> clade,</span>
-<span id="cb71-1067"><a href="#cb71-1067" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
-<span id="cb71-1068"><a href="#cb71-1068" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
-<span id="cb71-1069"><a href="#cb71-1069" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb71-1070"><a href="#cb71-1070" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
-<span id="cb71-1071"><a href="#cb71-1071" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16_alt"</span>)</span>
-<span id="cb71-1072"><a href="#cb71-1072" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb71-1073"><a href="#cb71-1073" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1076"><a href="#cb71-1076" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb71-1077"><a href="#cb71-1077" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>_alt)</span>
-<span id="cb71-1078"><a href="#cb71-1078" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1060"><a href="#cb71-1060" aria-hidden="true" tabindex="-1"></a><span class="in">```{r b5.16_alt}</span></span>
+<span id="cb71-1061"><a href="#cb71-1061" aria-hidden="true" tabindex="-1"></a>b5<span class="fl">.16</span>_alt <span class="ot">&lt;-</span> </span>
+<span id="cb71-1062"><a href="#cb71-1062" aria-hidden="true" tabindex="-1"></a>  <span class="fu">brm</span>(<span class="at">data =</span> d, </span>
+<span id="cb71-1063"><a href="#cb71-1063" aria-hidden="true" tabindex="-1"></a>      <span class="at">family =</span> gaussian,</span>
+<span id="cb71-1064"><a href="#cb71-1064" aria-hidden="true" tabindex="-1"></a>      kcal.per.g <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> clade,</span>
+<span id="cb71-1065"><a href="#cb71-1065" aria-hidden="true" tabindex="-1"></a>      <span class="at">prior =</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">6</span>, <span class="dv">10</span>), <span class="at">class =</span> b),</span>
+<span id="cb71-1066"><a href="#cb71-1066" aria-hidden="true" tabindex="-1"></a>                <span class="fu">prior</span>(<span class="fu">uniform</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> sigma)),</span>
+<span id="cb71-1067"><a href="#cb71-1067" aria-hidden="true" tabindex="-1"></a>      <span class="at">iter =</span> <span class="dv">2000</span>, <span class="at">warmup =</span> <span class="dv">500</span>, <span class="at">chains =</span> <span class="dv">4</span>, <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb71-1068"><a href="#cb71-1068" aria-hidden="true" tabindex="-1"></a>      <span class="at">seed =</span> <span class="dv">5</span>,</span>
+<span id="cb71-1069"><a href="#cb71-1069" aria-hidden="true" tabindex="-1"></a>      <span class="at">file =</span> <span class="st">"fits/b05.16_alt"</span>)</span>
+<span id="cb71-1070"><a href="#cb71-1070" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1071"><a href="#cb71-1071" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1074"><a href="#cb71-1074" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb71-1075"><a href="#cb71-1075" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(b5<span class="fl">.16</span>_alt)</span>
+<span id="cb71-1076"><a href="#cb71-1076" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb71-1077"><a href="#cb71-1077" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-1078"><a href="#cb71-1078" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</span></span>
 <span id="cb71-1079"><a href="#cb71-1079" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1080"><a href="#cb71-1080" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See? This is much easier than trying to remember which one was which in an arbitrary numeric index.</span></span>
+<span id="cb71-1080"><a href="#cb71-1080" aria-hidden="true" tabindex="-1"></a>**Rethinking: Continuous countries.** -- DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model.</span>
 <span id="cb71-1081"><a href="#cb71-1081" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1082"><a href="#cb71-1082" aria-hidden="true" tabindex="-1"></a>**Rethinking: Continuous countries.** -- DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model.</span>
-<span id="cb71-1083"><a href="#cb71-1083" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-1084"><a href="#cb71-1084" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further notes on the use of DAGS etc {.unnumbered}</span></span>
+<span id="cb71-1082"><a href="#cb71-1082" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further notes on the use of DAGS etc {.unnumbered}</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

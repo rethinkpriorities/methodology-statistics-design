@@ -724,13 +724,15 @@ Here is an example relevant to my recent/ongoing work.
 
 Let
 
-$Z$: A measure of 'which "chunk" (recruitment group) people are in $X$: ... 'Which treatment (video) they got" $Y$: Their attitude towards 80k
+$Z$: A measure of 'which "chunk" (recruitment group) people are in
+
+$X$: ... 'Which treatment (video) they got"
+
+$Y$: Their attitude towards 80k
 
 We are interested in the *impact* of the treatment on their attitude, i.e., whether $X \rightarrow Y$ is 'part of the causal model.'
 
 But suppose the true causal model is 'the fork', as seen in the picture below (from McElreath):
-
-![](images/paste-70645BC1.png){width="277"}
 
 Here, if we 'stratify on' $Z$, i.e., we look 'within each chunk', we should see no relationship between treatments and 80k-attitudes (as $X \perp Y | Z$). However, if we pool across all chunks, and some chunks tend to have some treatments more than others, we may falsely diagnose an 'impact of X on Y'.
 
@@ -740,7 +742,6 @@ But what if we 'control for X' in a (linear or generalized linear) model:
 2.  With 'chunk' as a random effect?
 
 (DR: I'm pretty sure this is equivalent, for our inferential purposes, to a simulation of a model where $X$ *does* impact Y, but $Z$ impacts both, leading to what econometricians call 'omitted variable bias' if we leave out $Z$.)
-
 
 ```{r}
 #| label: "fork_dag"
@@ -776,9 +777,10 @@ fork <-
   gg_dag()
 
 fork_descendant <-
-  ggdag::dagify(Y ~ u,
-         Z ~ u,
-    X ~Z,
+  ggdag::dagify(
+    Y ~ u,
+    Z ~ u,
+    X ~ Z,
          coords = dag_coords) %>%
   gg_dag()
 
@@ -795,7 +797,6 @@ Suppose the DAG above on the left holds, as described above.
 The DAG on the right is probably closer to what we really mean; the 'recruit chunk' ($Z$) is not itself causing attitudes to 80k ($Y$); recruitment into this chunk is driven by some unobservable term $u$, which has a direct impact on this attitude. But I suspect this will be equivalent, with $Z$ thus acting as a 'proxy for $u$'.
 
 We should explore this with `daggitty` below
-
 
 ```{r}
 fork <- dagitty( "dag {
@@ -818,28 +819,30 @@ adjustmentSets( fork_descendant , exposure="X" , outcome="Y" )
 
 ```
 
-Note the adjustment set `{Z}` works in both cases. 
-
+Note the adjustment set `{Z}` works in both cases.
 :::
 
-Following the code structure  [Kurz](https://bookdown.org/content/4857/the-many-variables-the-spurious-waffles.html#masked-relationship) for the present case. I'll treat the outcome '$Y$' (attitude to 80k) and the video treatment ($X$) as continuous for now.^[The latter might should be adjusted.] However, to enable meaningful random-effects mixed models, we need to make the 'recruitment chunk' ($Z$) categorical.
+Following the code structure [Kurz](https://bookdown.org/content/4857/the-many-variables-the-spurious-waffles.html#masked-relationship) for the present case. I'll treat the outcome '$Y$' (attitude to 80k) and the video treatment ($X$) as continuous for now.[^spurious_waffles-17] However, to enable meaningful random-effects mixed models, we need to make the 'recruitment chunk' ($Z$) categorical.
+
+[^spurious_waffles-17]: The latter might should be adjusted.
 
 > Now simulate data consistent with that DAG.
-
 
 ```{r}
 n <- 10000 #DR: I increased this to be a more reliable simulation
 
 set.seed(5)
 
+chunks <- c(1,2,3,4)
+
 fork_sample <- 
   tibble(u = runif(n, min = 0, max = 1)) %>%   #latent love of 80k thing
   mutate(
     Z =  case_when(
-      u < 0.2 ~  sample(c(1,2,3,4), 1, prob = c(0.85, 0.05, 0.05, 0.05)),
-      u > 0.2 & u < 0.4 ~ sample(c(1,2,3,4), 1, prob = c(0.05, 0.85, 0.05, 0.05)),
-      u > 0.4 & u < 0.8 ~ sample(c(1,2,3,4), 1, prob = c(0.05, 0.05, 0.85, 0.05)),
-      u > 0.8 ~  sample(c(1,2,3,4), 1, prob = c(0.05, 0.05, 0.05, 0.85))
+      u < 0.2 ~  sample(chunks, 1, prob = c(0.85, 0.05, 0.05, 0.05)),
+      u < 0.4 ~ sample(chunks, 1, prob = c(0.05, 0.85, 0.05, 0.05)),
+      u < 0.8 ~ sample(chunks, 1, prob = c(0.05, 0.05, 0.85, 0.05)),
+      u > 0.8 ~  sample(chunks, 1, prob = c(0.05, 0.05, 0.05, 0.85))
     )
   ) %>% 
   mutate(X = rnorm(n, mean = 1.5*Z-2, sd = 1)) %>%  
@@ -848,14 +851,16 @@ fork_sample <-
 ```
 
 Pairs plots
+
 ```{r}
 
 pairs(fork_sample, col = "firebrick4")
 
-
 ```
 
-Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z. 
+The pairwise scatterplots show a positive pairwise association between *all* of the features.
+
+Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z.
 
 ```{r}
 
@@ -879,13 +884,6 @@ fe_control_on_fork <-
          file = "fits/fe_control_on_fork")
 
 
-fe_control_on_fork <- 
-  update(naive_on_fork, 
-    newdata = fork_sample,
-         formula = Y ~ 1 + X + Z,
-         seed = 5,
-         file = "fits/fe_control_on_fork")
-
 
 re_control_on_fork <- brm(
   formula = Y ~ 1 + X + (1 | Z),
@@ -906,11 +904,9 @@ re_control_on_fork <- brm(
   )
 
 
-
-
 ```
 
-Compare the coefficients.
+Comparing the coefficients
 
 ```{r}
 
@@ -923,6 +919,8 @@ fixef(fe_control_on_fork) %>% round(digits = 2)
 fixef(re_control_on_fork) %>% round(digits = 2)
 
 ```
+
+While the naive model picks up the non-causal relationship, the models with either fixed or random-effects controls both produce 'tightly bounded near zero effect sizes'.
 
 
 ## Categorical variables {.unnumbered}
