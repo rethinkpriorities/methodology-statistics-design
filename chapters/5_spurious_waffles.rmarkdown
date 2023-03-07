@@ -2,6 +2,7 @@
 
 Load the [Waffle House](https://www.snopes.com/fact-check/fema-waffle-house-index/) data.
 
+
 ```{r, message = F, warning = F}
 library(dplyr)
 library(rethinking)
@@ -22,6 +23,7 @@ rm(WaffleDivorce)
 library(brms)
 library(dplyr)
 ```
+
 
 > Reasons given for multiple regression models include: (1) Statistical -control" for confounds[^spurious_waffles-1]
 
@@ -97,6 +99,7 @@ DR:[^spurious_waffles-8]
 
 > Here's the code to define the second DAG and display the implied conditional independencies.
 
+
 ```{r}
 library(dagitty)
 
@@ -104,6 +107,7 @@ DMA_dag2 <- dagitty::dagitty('dag{ D <- A -> M }')
 impliedConditionalIndependencies( DMA_dag2 )
 
 ```
+
 
 > So for example once you fit a multiple regression to predict divorce using both marriage rate and age at marriage, the model addresses the questions: (1) After I already know marriage rate, what additional value is there in also knowing age at marriage? (2) After I already know age at marriage, what additional value is there in also knowing marriage rate?
 
@@ -116,6 +120,7 @@ DR: how can we differentiate 1 from 2:[^spurious_waffles-9]
 Kurz on themes and plots:[^spurious_waffles-10]
 
 [^spurious_waffles-10]: Going forward, each chapter will have its own plot theme. In this chapter, we'll characterize the plots with `theme_bw() + theme(panel.grid = element_rect())` and coloring based off of "firebrick".
+
 
 ```{r}
 # install.packages("ggrepel", dependencies = T)
@@ -139,7 +144,9 @@ d %>%
   theme(panel.grid = element_blank())  #removes gridlines
 ```
 
+
 *DR note: I'm skipping the map plotting, for now, even though it's a cool vis.*
+
 
 ```{r}
 #| label: standardize_mam
@@ -171,12 +178,14 @@ print(b5.1)
 
 ```
 
+
 Below...
 
 -   Create: `nd` -- tibble of standardized predictor values to plot over
 -   apply `fitted` to `nd` with the `newdata` argument to fit values over this range (rather than over the data the model was fit on)
 
 "to return model-implied expected values for `Divorce`"
+
 
 ```{r, fig.width = 3, fig.height = 3}
 #| code-summary: "Range to plot over, predict for this range"
@@ -212,7 +221,9 @@ ggplot(data = f,
   theme(panel.grid = element_blank())                   
 ```
 
+
 Next ... they do the same thing but with marriage rate as the predictor
+
 
 ```{r}
 d <-
@@ -240,6 +251,7 @@ print(b5.2)
 
 ```
 
+
 I'll skip plotting this for now
 
 ### Multiple regression notation {.unnumbered}
@@ -262,6 +274,7 @@ Model with
 
 [^spurious_waffles-11]: "Notice we're using the same prior prior(normal(0, 1), class = b) for both predictors. Within the brms framework, they are both of class = b. But if we wanted their priors to differ, we'd make two prior() statements and differentiate them with the coef argument."
 
+
 ```{r}
 b5.3 <- 
   brm(data = d, 
@@ -279,7 +292,9 @@ b5.3 <-
 print(b5.3)
 ```
 
+
 `mcmc_plot(b5.3)` seems to produce a ggplot object:
+
 
 ```{r}
 
@@ -296,7 +311,9 @@ xxx <- mcmc_plot(b5.3) + ggtitle("My fancy bayesplot-based coefficient plot") +
 
 ```
 
+
 With the `bayesplot::mcmc_intervals` function you can specify what you want more precisely.
+
 
 ```{r}
 # install.packages("bayesplot", dependencies = T)
@@ -315,6 +332,7 @@ mcmc_intervals(post[, 1:4],
         axis.ticks.y = element_blank(),
         panel.grid = element_blank())
 ```
+
 
 Note; this approach required you to work with the `posterior_samples()` instead of the brmsfit object. Just to be different, I set `point_est = "mean"` instead of median, and `prob = .65` for the 'inner interval' and `prob_outer = 0.95`.
 
@@ -344,6 +362,7 @@ Note; this approach required you to work with the `posterior_samples()` instead 
 
 [^spurious_waffles-13]: DR: going for 'the surprising part of one explanatory variable once you already know another variable'. Somehow I find it strange that we're doing a Bayesian estimate to get this object too, rather than just doing a simple least-squares linear fit. In the context of the latter I recall some clean 'regression algebra' results from econometrics such as the 'long and short regression' and 'omitted variable bias' formulae.
 
+
 ```{r b5.4}
 
 b5.4 <- 
@@ -360,9 +379,11 @@ b5.4 <-
 print(b5.4)
 ```
 
+
 > With `fitted()`, we compute the expected values for each state (with the exception of Nevada).[^spurious_waffles-14]
 
 [^spurious_waffles-14]: "Since the `MedianAgeMarriage_s` values for each state are in the data we used to fit the model, we'll omit the `newdata` argument.
+
 
 ```{r}
 f <- 
@@ -373,7 +394,9 @@ f <-
 head(f)
 ```
 
+
 After a little data processing, we can make Figure 5.3.
+
 
 ```{r, fig.width = 3, fig.height = 3}
 f %>% 
@@ -388,11 +411,13 @@ f %>%
   theme(panel.grid = element_blank())     
 ```
 
+
 **Skipped a bunch here; come back to it**
 
 > The trick with simulating counterfactuals is to realize that when we manipulate some variable X, we break the causal influence of other variables on X.
 
 > Now we can use `sim`, which you met in the previous chapter, to simulate observations from model `m5.3_A`. But this time we'll tell it to simulate both M and D, in that order. Why in that order? Because we have to simulate the influence of A on M before we simulate the joint influence of A and M on D. The vars argument to sim tells it both which observables to simulate and in which order.
+
 
 ```{r, eval=FALSE}
 # prep data 5.21
@@ -407,6 +432,7 @@ xlab="manipulated A" , ylab="counterfactual D" )
 shade( apply(s$D,2,PI) , sim_dat$A )
 mtext( "Total counterfactual effect of A on D" )
 ```
+
 
 #### Counterfactual plots {.unnumbered}
 
@@ -472,6 +498,7 @@ So, a simple model of `ENGAGE ~ time_in_EA` might find a zero (or 'too small') r
 
 Let's load the [Hindle and Milligan (2011)](https://www.researchgate.net/publication/51751742_Primate_milk_Proximate_mechanisms_and_ultimate_perspectives) `milk` data.
 
+
 ```{r, message = F}
 library(rethinking)
 data(milk)
@@ -479,7 +506,9 @@ d <- milk
 
 ```
 
+
 Unload rethinking and load brms.
+
 
 ```{r, message = F, warning = F}
 rm(milk)
@@ -487,7 +516,9 @@ detach(package:rethinking, unload = T)
 library(brms)
 ```
 
+
 You might inspect the data like this.
+
 
 ```{r, fig.width = 4.5, fig.height = 4.5}
 d %>% 
@@ -495,9 +526,11 @@ d %>%
   pairs(col = "firebrick4")
 ```
 
+
 Hard to make out the relationship
 
 Simple univariable `milk` model, with 'realistic priors'
+
 
 ```{r b5.5, echo=FALSE}
 b5.5 <- 
@@ -512,6 +545,7 @@ b5.5 <-
       file = "fits/b05.05")
 ```
 
+
 Priors[^spurious_waffles-15] NAs: [^spurious_waffles-16]
 
 [^spurious_waffles-15]: The uniform prior was difficult on Stan. After playing around a bit, I just switched to a unit-scale half Cauchy.
@@ -520,17 +554,21 @@ Priors[^spurious_waffles-15] NAs: [^spurious_waffles-16]
 
 <!-- To compliment how McElreath removed cases with missing values on our variables of interest with base R `complete.cases()`, here we'll do so with `tidyr::drop_na()` and a little help with `ends_with()`. -->
 
+
 ```{r}
 dcc <- 
   d %>%
   tidyr::drop_na(ends_with("perc"))              
 ```
 
+
 But anyway, let's inspect the parameter summary.
+
 
 ```{r}
 print(b5.5, digits = 3)
 ```
+
 
 <!-- Did you notice now we set `digits = 3` within `print()` much the way McElreath set `digits=3` within `precis()`?-->
 
@@ -538,13 +576,16 @@ print(b5.5, digits = 3)
 
 I guess this considers the estimated difference in predicted `kcal.per.g` for a species with 76 vs 55 `neocortex.perc`; these are the extreme values in the data perhaps?
 
+
 ```{r, warning = F, message = F}
 fixef(b5.5)[2] * (76 - 55)
 ```
 
+
 Yes, indeed, "that's less than 0.1 kilocalories" (p. 137).
 
 Just for kicks, we'll superimpose 50% intervals atop 95% intervals for the next few plots. Here's Figure 5.7, top left.
+
 
 ```{r, fig.width = 3, fig.height = 2.75, message = F}
 nd <- tibble(neocortex.perc = 54:80)
@@ -571,7 +612,9 @@ fitted(b5.5,
   theme(panel.grid = element_blank())
 ```
 
+
 Let's make the `log_mass` variable.
+
 
 ```{r}
 dcc <-
@@ -579,7 +622,9 @@ dcc <-
   mutate(log_mass = log(mass))
 ```
 
+
 Now we use `log_mass` as the new sole predictor.
+
 
 ```{r b5.6}
 b5.6 <- 
@@ -599,7 +644,9 @@ b5.6 <-
 print(b5.6, digits = 3)
 ```
 
+
 Make Figure 5.7, top right.
+
 
 ```{r, fig.width = 3, fig.height = 2.75, warning = F, message = F}
 nd <- tibble(log_mass = seq(from = -2.5, to = 5, length.out = 30))
@@ -626,7 +673,9 @@ fitted(b5.6,
   theme(panel.grid = element_blank())
 ```
 
+
 Finally, we're ready to fit with both predictors included in the "joint model." Here's the statistical formula:
+
 
 ```{=tex}
 \begin{align*}
@@ -638,6 +687,7 @@ Finally, we're ready to fit with both predictors included in the "joint model." 
 \sigma  & \sim \operatorname{Cauchy}(0, 1).
 \end{align*}
 ```
+
 ```{r b5.7}
 b5.7 <- 
   brm(data = dcc, 
@@ -656,7 +706,9 @@ b5.7 <-
 print(b5.7, digits = 3)
 ```
 
+
 Make Figure 5.7, bottom left.
+
 
 ```{r, fig.width = 3, fig.height = 2.5, warning = F, message = F}
 nd <- 
@@ -684,7 +736,9 @@ p1 <-
                   ylim = range(dcc$kcal.per.g))
 ```
 
+
 Now make Figure 5.7, bottom right, and combine.
+
 
 ```{r, fig.width = 6, fig.height = 2.75, warning = F, message = F}
 nd <- 
@@ -716,6 +770,7 @@ p2 <-
   theme(panel.grid = element_blank())
 ```
 
+
 > What \[this regression model did was\] ask if species that have high neocortex percent *for their body mass* have higher milk energy. Likewise, the model \[asked\] if species with high body mass *for their neocortex percent* have higher milk energy. Bigger species, like apes, have milk with less energy. But species with more neocortex tend to have richer milk. The fact that these two variables, body size and neocortex, are correlated across species makes it hard to see these relationships, unless we statistically account for both. (pp. 140--141, *emphasis* in the original)
 
 ### DR: Simulating the fork, considering if 'random effects control' addresses it
@@ -740,6 +795,7 @@ But what if we 'control for X' in a (linear or generalized linear) model:
 2.  With 'chunk' as a random effect?
 
 (DR: I'm pretty sure this is equivalent, for our inferential purposes, to a simulation of a model where $X$ *does* impact Y, but $Z$ impacts both, leading to what econometricians call 'omitted variable bias' if we leave out $Z$.)
+
 
 
 ```{r}
@@ -787,6 +843,7 @@ fork + fork_descendant
 
 ```
 
+
 Suppose the DAG above on the left holds, as described above.
 
 ::: {.callout-note collapse="true"}
@@ -795,6 +852,7 @@ Suppose the DAG above on the left holds, as described above.
 The DAG on the right is probably closer to what we really mean; the 'recruit chunk' ($Z$) is not itself causing attitudes to 80k ($Y$); recruitment into this chunk is driven by some unobservable term $u$, which has a direct impact on this attitude. But I suspect this will be equivalent, with $Z$ thus acting as a 'proxy for $u$'.
 
 We should explore this with `daggitty` below
+
 
 
 ```{r}
@@ -818,6 +876,7 @@ adjustmentSets( fork_descendant , exposure="X" , outcome="Y" )
 
 ```
 
+
 Note the adjustment set `{Z}` works in both cases. 
 
 :::
@@ -825,6 +884,7 @@ Note the adjustment set `{Z}` works in both cases.
 Following the code structure  [Kurz](https://bookdown.org/content/4857/the-many-variables-the-spurious-waffles.html#masked-relationship) for the present case. I'll treat the outcome '$Y$' (attitude to 80k) and the video treatment ($X$) as continuous for now.^[The latter might should be adjusted.] However, to enable meaningful random-effects mixed models, we need to make the 'recruitment chunk' ($Z$) categorical.
 
 > Now simulate data consistent with that DAG.
+
 
 
 ```{r}
@@ -847,7 +907,9 @@ fork_sample <-
  
 ```
 
+
 Pairs plots
+
 ```{r}
 
 pairs(fork_sample, col = "firebrick4")
@@ -855,7 +917,9 @@ pairs(fork_sample, col = "firebrick4")
 
 ```
 
+
 Next we estimate three models: the naive model, the model with a fixed-effect for Z, and the model with a random effect for Z. 
+
 
 ```{r}
 
@@ -910,7 +974,9 @@ re_control_on_fork <- brm(
 
 ```
 
+
 Compare the coefficients.
+
 
 ```{r}
 
@@ -923,6 +989,7 @@ fixef(fe_control_on_fork) %>% round(digits = 2)
 fixef(re_control_on_fork) %>% round(digits = 2)
 
 ```
+
 
 
 ## Categorical variables {.unnumbered}
@@ -949,6 +1016,7 @@ Is it Bayesian specific? How does this relate to 'contrast-coding'?
 
 > We'll practice with `milk`.
 
+
 ```{r, message = F}
 library(rethinking)
 data(milk)
@@ -959,7 +1027,9 @@ detach(package:rethinking, unload = T)
 library(brms)
 ```
 
+
 > With the tidyverse, we can peek at `clade` with `distinct()` in the place of base R `unique()`.
+
 
 ```{r}
 d %>%
@@ -967,7 +1037,9 @@ d %>%
 
 ```
 
+
 > As `clade` has 4 categories, let's use `if_else()` to convert these to 4 dummy variables.
+
 
 ```{r}
 d <- 
@@ -978,7 +1050,9 @@ d <-
          clade_ape = if_else(clade == "Ape", 1, 0))
 ```
 
+
 > Now we'll fit the model with three of the four dummies. In this model, `clade_ape` is the reference category captured by the intercept.
+
 
 ```{r b5.16}
 b5.16 <- 
@@ -997,6 +1071,7 @@ b5.16 <-
 print(b5.16)
 ```
 
+
 ### Adding regular predictor variables.
 
 > If we wanted to fit the model including `perc.fat` as an additional predictor, the basic statistical formula would be
@@ -1010,6 +1085,7 @@ $$
 ### Another approach: Unique intercepts.
 
 > "Another way to conceptualize categorical variables is to construct a vector of intercept parameters, one parameter for each category" (p. 158). Using the code below, there's no need to transform `d$clade` into `d$clade_id`. The advantage of this approach is the indices in the model summary are more descriptive than `a[1]` through `a[4]`.
+
 
 ```{r b5.16_alt}
 b5.16_alt <- 
@@ -1027,8 +1103,10 @@ b5.16_alt <-
 print(b5.16_alt)
 ```
 
+
 > See? This is much easier than trying to remember which one was which in an arbitrary numeric index.
 
 **Rethinking: Continuous countries.** -- DR: See the famous 'log NAICs' case in economics, where a prominent (?) paper's results used the logarithm of an arbitrary ('North American Industry Classification System') code in the model.
 
 ## Further notes on the use of DAGS etc {.unnumbered}
+

@@ -1,0 +1,4 @@
+- source: bayesian_power_analysis_independent_groups.qmd
+  netlify:
+    - id: e65b9157-e092-4839-8630-89572fe9aa90
+      url: 'https://stately-sorbet-6337b4.netlify.app'

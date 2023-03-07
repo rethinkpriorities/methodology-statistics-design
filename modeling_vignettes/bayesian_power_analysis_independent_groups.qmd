@@ -221,9 +221,9 @@ posterior <- as_tibble(posterior_samples(base.reg)) %>%
 
 ```
 
-We can see that our model run smoothly (decent effect sample sizes, Rhat of 1), and that we can return the parameters of interest. This approach can apply to essentially any Bayesian model - all one needs to do is know which part (or parts) of the posterior they are interested in and extract it. We can now move on to running the analysis over the many data sets. On my computer, this set of analyses took about 10 minutes to complete.
+We can see that our model run smoothly (decent effect sample sizes, Rhat of 1), and that we can return the parameters of interest. This approach can apply to essentially any Bayesian model - all one needs to do is know which part (or parts) of the posterior they are interested in and extract it. We can now move on to running the analysis over the many data sets. On my computer, this set of analyses took about 10 minutes to complete. (3 Feb 2023 update -- seems faster now)
 
-```{r run-many-regressions, message = FALSE, warning = FALSE}
+```{r run-many-regressions, message = FALSE, warning = FALSE, output=FALSE}
 
 reg.maker <- function(simulated.data, base.reg = base.reg,
                       breaks = seq(from = 100, to = 1500, by = 100)) {
@@ -406,3 +406,106 @@ ggplot(data = precision25) +
 ```
 
 Note that, as would be expected, the chance that we achieve our goal of rejecting a non-zero effect varies with the true effect size. When we consider the precision of our estimates, the actual effect size is not relevant: the more data we gather, the more precise our estimates become, irrespective of the size true effect.^[DR: Is this getting at the desired goal we discussed earlier of 'power to have a precise interval estimate?'  Also, does the statement about 'actual effect size is irrelevant for this' hold modeling frameworks, or only for simple and linear ones?]
+
+
+
+## Discussion: VOI things we would want from a 'Bayesian power test' in a broad sense
+
+I really want is something where I can quickly check things like:
+
+- I have a 0/1 outcome
+- I have 2 ‘treatment arms’
+- I want to impose a prior belief about the rate of outcome (in control and treatment; make my priors symmetric)  centered at p=0.8 incidence 
+- 90% of the mass of each is between p=0.6 and p=0.9
+- 75% of the mass of the joint distribution has a difference of 5 percentage points or less. (I.e., $Pr_{prior}(|p_t - p_c|<0.05)>0.75$
+
+- Some reasonable shape of the distribution
+
+I want to know value of information things like... 
+
+if I observe N outcomes split between treatment and control...
+
+1. How much more dense can I expect my posterior to be relative to my prior
+2. If the true difference $(p_t - p_c)$ is 0, what is the expected probability that at least 80% of my posterior mass excludes a difference of 5 pp or more? I.e,. $Pr_{posterior}(|p_t - p_c|<0.05) = ?$
+
+
+3. If the true difference (p_t - p_c) is larger than 0.05, given the prior distribution, what is the probability that my posterior belief sets p_t>p_c?
+
+4. How does this vary in N?/What is the minimum N to achieve desired thresholds for 1-3?
+
+
+### I could just 'try out some values and simple tests' to explore this space
+
+
+```{r}
+install.packages("devtools")
+devtools::install_github("rasmusab/bayesian_first_aid")
+library(BayesianFirstAid)
+
+N <- 100
+share <- 0.5
+
+no_cases <- c(as.integer(N*share), as.integer(N*(1-share)))
+no_conversions <- as.integer(c(no_cases[1]*0.80, no_cases[2]*0.85))
+
+bayes.prop.test(no_conversions, no_cases, cred.mass=0.8)
+
+```
+
+But this is just for one instance and one observation of the data ... which could come from many true values of the parameters. But we know (or can simulate) the likelihood of each data draw given a particular exact set of probabilities, or given a draw from this distribution. Thus, we could try to simulate/plot the answers for the diagnosands of interest above. (Or would there also be analytical solutions for some of these?) 
+
+> 1. How much more dense can I expect my posterior to be relative to my prior
+
+We see the density of the posteriors above, at least for one case of observed data. This will vary with different draws, and we should derive or simulate  this.  (But I don't expect the spread of this to vary much in this range of success rates? Maybe I'm wrong.)
+
+So what was the assumed density of the prior here? From the documentation, we see it was very (perhaps overly) flat and dispersed: it was Uniform(0,1).  The 80% central interval for each probability would have been simply 0.1 to 0.9.
+
+For the differences (I looked this up, hope it's correct),
+
+::: {.callout-note collapse="true"}
+## From CahtGPT, check its work
+
+
+The probability density function for the difference between two independent uniformly distributed random variables X and Y, where X ~ Uniform(0,1) and Y ~ Uniform(0,1), is given by the convolution of their individual density functions:
+
+$f_{X-Y}(z) = \int_{-\infty}^{\infty} f_X(x) f_Y(x-z) dx$
+
+where $f_X(x) = 1$ for 0 < x < 1 and 0 otherwise, and $f_Y(y) = 1 for 0 < y < 1$ and 0 otherwise.
+
+Evaluating this integral, we get:
+
+$$
+f_{X-Y}(z) = \begin{cases}
+0 & \text{for } z < -1 \\
+2z + 1 & \text{for } -1 < z < 0 \\
+2 - 2z & \text{for } 0 < z < 1 \\
+0 & \text{for } z > 1 \\
+\end{cases}
+$$
+
+Using the cumulative distribution function (CDF) for the difference of two Uniform(0,1) distributions, we can find the 10th and 90th percentiles as the solutions to the following equations:
+
+$F_{X-Y}(z) = 0.1 \quad \text{and} \quad F_{X-Y}(z) = 0.9$
+
+where $F_{X-Y}(z)$ is the cumulative distribution function for the difference of X and Y.
+
+Solving for z in these equations, we get:
+
+$z = -0.45 \quad \text{and} \quad z = 0.45$
+
+So the 80% central credible interval is given by:
+
+$(-0.45, 0.45)$ 
+
+::: 
+
+
+
+The prior for the difference would have a triangular distribution with 80% central mass between -0.45 and +0.45. ... a range of 0.9 ... which has been narrowed to a range of about 0.2. 
+
+What about for a more reasonable (denser) prior? (to do).
+
+
+
+
+

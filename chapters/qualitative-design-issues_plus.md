@@ -16,7 +16,7 @@ We may add more technical and detailed material on these issues below (in the pr
 ## Participant platforms
 
 
-## Implementation/survey construction platforms and issues
+## Implementation/survey construction platforms and issues 
 
 ## Survey design tools (IT)
 

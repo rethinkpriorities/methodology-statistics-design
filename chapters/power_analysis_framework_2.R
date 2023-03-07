@@ -1,4 +1,5 @@
-## ----r------------------------------------------------------------------------
+#| include: false
+
 library(here)
 
 # 1.  Load packages, some setup definitions -- need to run it in every qmd
@@ -8,20 +9,20 @@ options(knitr.duplicate.label = "allow")
 
 
 
-## ----r change-memory-limit0, message = FALSE, warning = FALSE, echo=FALSE-----
+
 
 memory.limit(100000)
 
 
 
-## ----r load-tidyverse, message = FALSE, warning = FALSE-----------------------
+
 
 # tidyverse simply used for data wrangling and plotting
 library(tidyverse)
 
 
 
-## ----r datamaker-function, message = FALSE, warning = FALSE-------------------
+
 four.group.datamaker <- function(sim = 1, a = 0, b = .1, c = .2, d = .4, ppg=1500) {
 
 #DR I renamed it `ppg` for 'population per group' because `pop` confused me
@@ -55,7 +56,7 @@ four.group.datamaker <- function(sim = 1, a = 0, b = .1, c = .2, d = .4, ppg=150
  }
 
 
-## ----r datamaker-test, message = FALSE, warning = FALSE-----------------------
+
 
 # test that the function works to make one data set before making many!
 test.data <- four.group.datamaker()
@@ -78,7 +79,7 @@ ggplot(data = test.data) +
 
 
 
-## ----r load-furr, message = FALSE, warning = FALSE----------------------------
+
 
 p_load(furrr)
 library(furrr)
@@ -87,7 +88,7 @@ plan(multisession)
 options <- furrr_options(seed = 48238)
 
 
-## ----r run-datamaker-function, message = FALSE, warning = FALSE---------------
+
 
 # we will pass N = 500 simulations to the map function
 nsims <- 1:500
@@ -109,11 +110,11 @@ sim.data <- sim.data %>% group_by(sim) %>% group_split()
 
 
 
-## ----r check-data, message = FALSE, warning = FALSE---------------------------
+
 head(sim.data[[3]])
 
 
-## ----r regression-function, message = FALSE, warning = FALSE------------------
+
 
 linear.reg.maker <- function(data, breaks) { #runs a particular regression over a set of cuts of larger and larger subsets of  multiple data sets
 
@@ -174,7 +175,7 @@ linear.reg.maker <- function(data, breaks) { #runs a particular regression over 
 
 
 
-## ----r run-regression, message = FALSE, warning = FALSE-----------------------
+
 
 t1 <- Sys.time()
 linreg.output <- future_map_dfr(.x = sim.data,
@@ -185,7 +186,7 @@ t2 - t1
 
 
 
-## ----r summarise-output, message = FALSE, warning = FALSE---------------------
+
 
 # group the data according to group, confidence interval, and size per group
 four.group.lin.summary <- linreg.output %>% group_by(group, interval, cell.size) %>%
@@ -200,7 +201,7 @@ four.group.lin.summary <- linreg.output %>% group_by(group, interval, cell.size)
 
 
 
-## ----r plot-power-curve, message=FALSE, warning=FALSE-------------------------
+
 (
 power_curve_4_group_lin <- ggplot(data = four.group.lin.summary) +
   scale_x_continuous(limits = c(100, 1550), breaks = seq(from = 150, to = 1500, by = 150)) +
@@ -230,7 +231,10 @@ power_curve_4_group_lin <- ggplot(data = four.group.lin.summary) +
 
 
 
-## ----r------------------------------------------------------------------------
+#| label: output_r_file_with_purl_power_anal
+#| code-summary: "output_r_file_with_purl"
+#| include: false
+
 knitr::purl(here("chapters", "power_analysis_framework_2.qmd"), here("chapters", "power_analysis_framework_2.R"))
 
 
